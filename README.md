@@ -208,7 +208,7 @@ Read [PUBLISHING.md](PUBLISHING.md) for owner setup, license and citation gates,
 manifest rebuilding, GitHub upload, `gh skill publish`, and public install/update
 smoke tests.
 
-Version `0.4.1` makes managed release upgrades discoverable and verifiable. `VERSION`, package
+Version `0.4.2` completes live validation of the managed replacement path. `VERSION`, package
 metadata, the package manifest, and citation metadata must remain synchronized.
 
 ## Citation and license

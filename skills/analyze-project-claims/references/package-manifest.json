@@ -34,7 +34,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "f2fd81026e5b440789991ea79e332314e19becd1ca2abe1709ce18e0f44d62fb"
+      "sha256": "8577f28f062c5d12f58a4a6c5c665459be0a2fe9a0010010933235c61c570422"
     },
     {
       "path": "references/scan-record.schema.json",
