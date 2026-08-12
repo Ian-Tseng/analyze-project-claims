@@ -125,7 +125,7 @@ The development pilot has a separate selection and annotation gate. First,
 validate the metadata-only sample without inspecting project outcomes:
 
 ```powershell
-py evaluation/scripts/natural_project_pilot.py preflight \`
+py evaluation/scripts/natural_project_pilot.py preflight `
   --selection evaluation/configs/natural-development-pilot.selection.json
 ```
 
@@ -135,9 +135,9 @@ and add a `.apc-source.json` provenance record matching
 annotation packet sets:
 
 ```powershell
-py evaluation/scripts/natural_project_pilot.py prepare-annotations \`
-  --selection evaluation/configs/natural-development-pilot.selection.json \`
-  --snapshot-root <non-public-snapshot-root> \`
+py evaluation/scripts/natural_project_pilot.py prepare-annotations `
+  --selection evaluation/configs/natural-development-pilot.selection.json `
+  --snapshot-root <non-public-snapshot-root> `
   --output-root <non-public-run-root>
 ```
 
@@ -209,5 +209,4 @@ repeats, findings, or elements as independent project replications.
 See `protocol.md` for metrics, gates, and the claim boundary. Exchange formats
 are documented in `schemas/` and are also enforced by the standard-library
 harness.
-
 

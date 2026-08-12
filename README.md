@@ -213,8 +213,8 @@ metadata, the package manifest, and citation metadata must remain synchronized.
 
 ## Citation and license
 
-`CITATION.cff.template` remains a template because the public owner, author
-identity, license, and release DOI have not been supplied. Complete it and
+`CITATION.cff.template` remains a template because the author identity and
+license have not been supplied. Complete it and
 rename it to `CITATION.cff` before the identified public release.
 
 No software license has been selected. Add an author-approved `LICENSE` before
