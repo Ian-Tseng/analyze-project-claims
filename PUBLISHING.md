@@ -47,7 +47,7 @@ Verify the owner in these files, and update it if the repository is transferred:
 
 - `README.md`;
 - `CITATION.cff.template`;
-- `skill/analyze-project-claims/references/update-policy.schema.json`.
+- `skills/analyze-project-claims/references/update-policy.schema.json`.
 
 Complete the author and license fields in `CITATION.cff.template`, rename it to
 `CITATION.cff`, and add the matching `LICENSE` file.
@@ -58,13 +58,13 @@ Changing the schema owner changes the packaged bytes. Rebuild the package
 manifest before committing:
 
 ```powershell
-py -3 .\skill\analyze-project-claims\scripts\update_policy.py `
-  --skill-root .\skill\analyze-project-claims `
+py -3 .\skills\analyze-project-claims\scripts\update_policy.py `
+  --skill-root .\skills\analyze-project-claims `
   --state-dir .\.release-doctor-state `
   build-manifest --write
 
-py -3 .\skill\analyze-project-claims\scripts\update_policy.py `
-  --skill-root .\skill\analyze-project-claims `
+py -3 .\skills\analyze-project-claims\scripts\update_policy.py `
+  --skill-root .\skills\analyze-project-claims `
   --state-dir .\.release-doctor-state `
   verify-package
 
@@ -116,11 +116,11 @@ reviewed `git push` instead of running `gh repo create` again.
 
 ## 4. Validate and publish the skill release
 
-The installable source currently lives under `skill/`, so pass that directory
+The installable source currently lives under `skills/`, so pass that directory
 to GitHub CLI discovery:
 
 ```powershell
-gh skill publish .\skill --dry-run
+gh skill publish .\skills --dry-run
 ```
 
 The final line should be:
@@ -133,7 +133,7 @@ Review every warning even when the command exits successfully. Then publish the
 tagged release exactly once:
 
 ```powershell
-gh skill publish .\skill --tag "v$Version"
+gh skill publish .\skills --tag "v$Version"
 gh release view "v$Version"
 ```
 
@@ -148,10 +148,10 @@ Preview the package before installing it:
 
 ```powershell
 gh skill preview "$Owner/$Repository" `
-  skill/analyze-project-claims/SKILL.md
+  skills/analyze-project-claims/SKILL.md
 
 gh skill install "$Owner/$Repository" `
-  skill/analyze-project-claims/SKILL.md `
+  skills/analyze-project-claims/SKILL.md `
   --agent codex `
   --scope user
 

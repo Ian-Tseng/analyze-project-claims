@@ -8,7 +8,7 @@
   "claim_boundary": "This deterministic two-project fixture validates the evaluation workflow and metric arithmetic only. It does not estimate skill performance, cross-project reliability, agent-family robustness, or publication-grade effectiveness.",
   "paper_table_eligible": false,
   "general_reliability_proved": false,
-  "skill_path": "../skill/analyze-project-claims/SKILL.md",
+  "skill_path": "../skills/analyze-project-claims/SKILL.md",
   "conditions": [
     {
       "id": "agent_only",

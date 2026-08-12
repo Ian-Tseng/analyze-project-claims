@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / "skill" / "analyze-project-claims"
+SKILL = ROOT / "skills" / "analyze-project-claims"
 MAPPER = SKILL / "scripts" / "reconcile_component_map.py"
 RECORDER = SKILL / "scripts" / "record_scan.py"
 

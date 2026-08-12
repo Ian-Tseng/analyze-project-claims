@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_ROOT = ROOT / "skill" / "analyze-project-claims"
+SKILL_ROOT = ROOT / "skills" / "analyze-project-claims"
 LOGGER = SKILL_ROOT / "scripts" / "record_scan.py"
 EXAMPLE = ROOT / "examples" / "scan-input.example.json"
 
@@ -58,6 +58,7 @@ class RecordScanTests(unittest.TestCase):
             self.assertEqual(len(list(history.glob("*.json"))), 2)
 
     def test_public_package_contract(self) -> None:
+        self.assertFalse((ROOT / "skill").exists(), "Use the GitHub CLI-discoverable skills/ publisher layout.")
         required = [
             ROOT / "README.md",
             ROOT / "PUBLISHING.md",
@@ -106,7 +107,7 @@ class RecordScanTests(unittest.TestCase):
         self.assertLess(readme.index("## Install"), readme.index("## Quickstart"))
         publishing = (ROOT / "PUBLISHING.md").read_text(encoding="utf-8")
         self.assertIn("gh repo create", publishing)
-        self.assertIn("gh skill publish .\\skill --dry-run", publishing)
+        self.assertIn("gh skill publish .\\skills --dry-run", publishing)
         self.assertIn("gh skill update analyze-project-claims --dry-run", publishing)
         evaluation = (ROOT / "evaluation" / "README.md").read_text(encoding="utf-8")
         self.assertIn("## Claim-expansion plan", evaluation)

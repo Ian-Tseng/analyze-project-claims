@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_ROOT = ROOT / "skill" / "analyze-project-claims"
+SKILL_ROOT = ROOT / "skills" / "analyze-project-claims"
 MAPPER = SKILL_ROOT / "scripts" / "reconcile_component_map.py"
 
 

@@ -13,7 +13,7 @@ from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_ROOT = ROOT / "skill" / "analyze-project-claims"
+SKILL_ROOT = ROOT / "skills" / "analyze-project-claims"
 MODULE_PATH = SKILL_ROOT / "scripts" / "update_policy.py"
 SPEC = importlib.util.spec_from_file_location("analyze_project_claims_update_policy", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
@@ -79,7 +79,7 @@ def inject_metadata(root: Path, *, repository: str, tree: str) -> None:
         text = text.replace(
             "---\n",
             "---\nmetadata:\n"
-            "  github-path: skill/analyze-project-claims\n"
+            "  github-path: skills/analyze-project-claims\n"
             f"  github-repo: {repository}\n"
             "  github-ref: v0.4.0\n"
             f"  github-tree-sha: {tree}\n",
@@ -120,6 +120,25 @@ class UpdatePolicyTests(unittest.TestCase):
             with self.assertRaises(update_policy.PolicyError) as raised:
                 update_policy.verify_package_manifest(root)
             self.assertEqual(raised.exception.code, "PACKAGE_MODIFIED")
+
+    def test_manifest_normalizes_current_gh_frontmatter_rewrite(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
+            root = make_skill(Path(temporary))
+            (root / "SKILL.md").write_text(
+                "---\n"
+                "description: Test fixture.\n"
+                "metadata:\n"
+                "    github-path: skills/analyze-project-claims\n"
+                "    github-ref: refs/tags/v0.4.0\n"
+                "    github-repo: https://github.com/owner/repository\n"
+                f"    github-tree-sha: {TREE_A}\n"
+                "name: analyze-project-claims\n"
+                "---\n"
+                "# Fixture\n",
+                encoding="utf-8",
+                newline="\n",
+            )
+            self.assertRegex(update_policy.verify_package_manifest(root), r"^[0-9a-f]{64}$")
 
     def test_first_substantive_use_prompts_once_without_update_action(self) -> None:
         with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:

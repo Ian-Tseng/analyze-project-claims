@@ -29,19 +29,19 @@ The canonical owner is `Ian-Tseng`. For a private repository, the installing acc
 
 ```powershell
 gh skill install Ian-Tseng/analyze-project-claims `
-  skill/analyze-project-claims/SKILL.md `
+  skills/analyze-project-claims/SKILL.md `
   --agent codex `
   --scope user
 ```
 
-The exact `SKILL.md` path is required because the installable package currently
-lives in the repository's `skill/` directory. `gh skill` is in public preview.
+The explicit canonical path makes the selected package unambiguous; the
+`skills/` layout also lets `gh skill update` rediscover it. `gh skill` is in public preview.
 
 For a manual installation without managed updates:
 
 ```powershell
 Copy-Item -Recurse -Force `
-  .\skill\analyze-project-claims `
+  .\skills\analyze-project-claims `
   "$env:USERPROFILE\.codex\skills\analyze-project-claims"
 ```
 
@@ -142,15 +142,15 @@ exact skill bytes and keep check status separate from claim status.
 
 Start with these files:
 
-- `skill/analyze-project-claims/assets/component-map-observation.template.json`;
-- `skill/analyze-project-claims/references/component-map-observation.schema.json`;
-- `skill/analyze-project-claims/assets/scan-record.template.json`;
-- `skill/analyze-project-claims/references/scan-record.schema.json`.
+- `skills/analyze-project-claims/assets/component-map-observation.template.json`;
+- `skills/analyze-project-claims/references/component-map-observation.schema.json`;
+- `skills/analyze-project-claims/assets/scan-record.template.json`;
+- `skills/analyze-project-claims/references/scan-record.schema.json`.
 
 Create or reconcile a component map:
 
 ```powershell
-py -3 .\skill\analyze-project-claims\scripts\reconcile_component_map.py reconcile `
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile `
   --observation .\component-map-observation.json `
   --map-root .\.claim-audit\component-map `
   --project-root .
@@ -159,7 +159,7 @@ py -3 .\skill\analyze-project-claims\scripts\reconcile_component_map.py reconcil
 After human review, accept the exact returned candidate:
 
 ```powershell
-py -3 .\skill\analyze-project-claims\scripts\reconcile_component_map.py accept `
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py accept `
   --candidate .\.claim-audit\component-map\candidates\<candidate>.json `
   --map-root .\.claim-audit\component-map
 ```
@@ -167,7 +167,7 @@ py -3 .\skill\analyze-project-claims\scripts\reconcile_component_map.py accept `
 Persist a validated append-only scan record:
 
 ```powershell
-py -3 .\skill\analyze-project-claims\scripts\record_scan.py `
+py -3 .\skills\analyze-project-claims\scripts\record_scan.py `
   --record .\examples\scan-input.example.json `
   --log-dir .\validation\history
 ```
@@ -208,7 +208,7 @@ Read [PUBLISHING.md](PUBLISHING.md) for owner setup, license and citation gates,
 manifest rebuilding, GitHub upload, `gh skill publish`, and public install/update
 smoke tests.
 
-Version `0.4.0` adds consent-gated automatic upgrades. `VERSION`, package
+Version `0.4.1` makes managed release upgrades discoverable and verifiable. `VERSION`, package
 metadata, the package manifest, and citation metadata must remain synchronized.
 
 ## Citation and license

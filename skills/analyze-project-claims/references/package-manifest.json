@@ -2,7 +2,7 @@
   "schema_version": 1,
   "skill_name": "analyze-project-claims",
   "algorithm": "sha256",
-  "skill_normalization": "strip-metadata.github-*",
+  "skill_normalization": "canonical-frontmatter-v1-without-github-metadata",
   "files": [
     {
       "path": "SKILL.md",
@@ -34,7 +34,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "68dfa4e4bc7558ec762cd3a111815f31181f6a4a5996d3a5e94b5b0249cff76c"
+      "sha256": "f2fd81026e5b440789991ea79e332314e19becd1ca2abe1709ce18e0f44d62fb"
     },
     {
       "path": "references/scan-record.schema.json",
@@ -54,7 +54,7 @@
     },
     {
       "path": "scripts/update_policy.py",
-      "sha256": "26c87e537cbf5041b3c674a69714cfe0d74cdac10b8e3705eaa772b17fa23244"
+      "sha256": "a18c355e9fd7caa809c3fb28b83f77c49abedb5f55a16cf1e1c6aeeb81fc1342"
     }
   ]
 }

@@ -28,6 +28,7 @@ SCHEMA_VERSION = 1
 SKILL_NAME = "analyze-project-claims"
 MANIFEST_RELATIVE_PATH = "references/package-manifest.json"
 PACKAGE_VERSION_RELATIVE_PATH = "references/package-version.json"
+SKILL_NORMALIZATION = "canonical-frontmatter-v1-without-github-metadata"
 SUCCESS_LEASE_SECONDS = 24 * 60 * 60
 TRANSIENT_BACKOFF_SECONDS = 60 * 60
 DEFAULT_TIMEOUT_SECONDS = 20.0
@@ -400,35 +401,56 @@ def normalized_skill_bytes(skill_path: Path) -> bytes:
         raise PolicyError("PACKAGE_MANIFEST_INVALID", "SKILL.md frontmatter is not closed.") from exc
 
     frontmatter = lines[1:frontmatter_end]
-    normalized: list[str] = []
+    blocks: list[tuple[str | None, list[str]]] = []
     index = 0
     while index < len(frontmatter):
         line = frontmatter[index]
-        if line.strip() == "metadata:" and not line[:1].isspace():
-            children: list[str] = []
+        if not line.strip():
             index += 1
-            while index < len(frontmatter):
-                child = frontmatter[index]
-                if child.strip() and not child[:1].isspace():
-                    break
-                children.append(child)
-                index += 1
-            filtered = []
-            for child in children:
-                match = re.match(r"^\s+([a-zA-Z0-9-]+):", child)
-                if match and GITHUB_METADATA_PATTERN.fullmatch(match.group(1)):
+            continue
+        if line[:1].isspace():
+            raise PolicyError("PACKAGE_MANIFEST_INVALID", "SKILL.md frontmatter contains an orphaned value.")
+
+        key_match = re.match(r"^([A-Za-z0-9_-]+)\s*:", line)
+        key = key_match.group(1) if key_match else None
+        block = [line]
+        index += 1
+        while index < len(frontmatter):
+            child = frontmatter[index]
+            if child.strip() and not child[:1].isspace():
+                break
+            block.append(child)
+            index += 1
+
+        if key == "metadata":
+            filtered: list[str] = []
+            for child in block[1:]:
+                child_match = re.match(r"^\s+([A-Za-z0-9-]+):", child)
+                if child_match and GITHUB_METADATA_PATTERN.fullmatch(child_match.group(1)):
                     continue
                 filtered.append(child)
-            if any(item.strip() for item in filtered):
-                normalized.append(line)
-                normalized.extend(filtered)
+            block = [line, *filtered]
+            if not any(item.strip() for item in filtered):
+                continue
+        elif key and GITHUB_METADATA_PATTERN.fullmatch(key):
             continue
-        match = re.match(r"^(github-[a-z0-9-]+):", line)
-        if not match:
-            normalized.append(line)
-        index += 1
+        blocks.append((key, block))
 
-    rebuilt = ["---", *normalized, "---", *lines[frontmatter_end + 1 :]]
+    priority = {"name": 0, "description": 1}
+    ordered = sorted(
+        enumerate(blocks),
+        key=lambda item: (priority.get(item[1][0] or "", 2), item[0]),
+    )
+    normalized = [line for _, (_, block) in ordered for line in block]
+    while normalized and not normalized[-1].strip():
+        normalized.pop()
+
+    body = lines[frontmatter_end + 1 :]
+    while body and not body[0].strip():
+        body.pop(0)
+    rebuilt = ["---", *normalized, "---"]
+    if body:
+        rebuilt.extend(["", *body])
     result = "\n".join(rebuilt)
     if keep_ending:
         result += "\n"
@@ -481,7 +503,7 @@ def build_package_manifest(skill_root: Path) -> dict[str, object]:
         "schema_version": 1,
         "skill_name": SKILL_NAME,
         "algorithm": "sha256",
-        "skill_normalization": "strip-metadata.github-*",
+        "skill_normalization": SKILL_NORMALIZATION,
         "files": files,
     }
 
@@ -500,7 +522,7 @@ def verify_package_manifest(skill_root: Path) -> str:
         manifest["schema_version"] != 1
         or manifest["skill_name"] != SKILL_NAME
         or manifest["algorithm"] != "sha256"
-        or manifest["skill_normalization"] != "strip-metadata.github-*"
+        or manifest["skill_normalization"] != SKILL_NORMALIZATION
         or not isinstance(manifest["files"], list)
     ):
         raise PolicyError("PACKAGE_MANIFEST_INVALID", "Package manifest metadata is invalid.")
