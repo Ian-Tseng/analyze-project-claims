@@ -1,0 +1,49 @@
+{
+  "accepted_map_id": "component-map-5cbb02d6e7a7",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260810T035310515019Z-13d86ffc-component-map-594d68663e67.json",
+    "delta": "deltas/20260810T035310515019Z-13d86ffc.json"
+  },
+  "candidate_map_id": "component-map-594d68663e67",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/scripts/calibration_ui.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/ui/calibration-console.html"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_calibration_ui.py"
+      }
+    ]
+  },
+  "event_id": "20260810T035310515019Z-13d86ffc",
+  "integrity": {
+    "canonical_payload_sha256": "2688359644b90194df7b1a65cbded7fc65ed5b73fb431e0769fc106eb9c46f2c"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-10T03:53:10.515019Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

@@ -1,0 +1,129 @@
+{
+  "accepted_map_id": "component-map-441a870f9e64",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-251b2efa782b",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "drift-and-conflict-preservation",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "missing-map-bootstrap",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "observation-template-roundtrip",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "unchanged-map-reuse",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "active-rag-claim-consistency",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "scan-logging",
+        "element_id": "hierarchical-scan-record",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_EXPERIMENT_LOG.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_GENERALIZATION_CHECK_TABLE.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/scripts/record_scan.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "9029ecf3beac7ba62a6db113739283816641b4fa9c2df92a568e74abaa3b6e15"
+  },
+  "recorded_at_utc": "2026-08-08T14:39:56.696671Z",
+  "scan_id": "20260808T143956696671Z-0bd693c2",
+  "schema_version": "1.0"
+}

@@ -1,0 +1,60 @@
+{
+  "accepted_map_id": "component-map-251b2efa782b",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-bbaeff7f1256",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "distribution",
+        "element_id": "github-wrapper-mirror-parity",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/references/scan-record.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/scripts/record_scan.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "d608ae83d1b26e7db82687fccad81bbb55792dc8e306692eb13362451cd1ad03"
+  },
+  "recorded_at_utc": "2026-08-08T15:14:02.900496Z",
+  "scan_id": "20260808T151402900496Z-a566de1c",
+  "schema_version": "1.0"
+}

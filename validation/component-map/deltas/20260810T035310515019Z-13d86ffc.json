@@ -1,0 +1,40 @@
+{
+  "accepted_map_id": "component-map-5cbb02d6e7a7",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-594d68663e67",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/scripts/calibration_ui.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/ui/calibration-console.html"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_calibration_ui.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "bf391333270dadb34d6eca696e55ed869d2aa4bd07d7e17b1acbc0b47108faaf"
+  },
+  "recorded_at_utc": "2026-08-10T03:53:10.515019Z",
+  "scan_id": "20260810T035310515019Z-13d86ffc",
+  "schema_version": "1.0"
+}

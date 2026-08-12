@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/natural-adjudicated-gold.schema.json",
+  "title": "Blinded adjudicated gold for one natural project",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "selection_sha256",
+    "project_id",
+    "snapshot_sha256",
+    "source_annotation_sha256",
+    "adjudicator_id",
+    "gold_frozen",
+    "adjudication_attestation",
+    "element_inventory",
+    "gold_findings"
+  ],
+  "properties": {
+    "schema_version": {"const": "APC_BLINDED_ADJUDICATED_GOLD_V1"},
+    "selection_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "project_id": {"type": "string", "minLength": 1},
+    "snapshot_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_annotation_sha256": {
+      "type": "object",
+      "minProperties": 2,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "adjudicator_id": {"type": "string", "minLength": 1},
+    "gold_frozen": {"const": true},
+    "adjudication_attestation": {
+      "type": "object",
+      "required": [
+        "human_adjudicator",
+        "independent_of_annotators",
+        "condition_blinded",
+        "no_agent_outputs_reviewed",
+        "attested_at"
+      ],
+      "properties": {
+        "human_adjudicator": {"const": true},
+        "independent_of_annotators": {"const": true},
+        "condition_blinded": {"const": true},
+        "no_agent_outputs_reviewed": {"const": true},
+        "attested_at": {"type": "string", "format": "date-time"}
+      },
+      "additionalProperties": false
+    },
+    "element_inventory": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "independent-annotation.schema.json#/$defs/element"}
+    },
+    "gold_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "gold_id",
+          "element_id",
+          "inconsistency_class",
+          "claim_status",
+          "severity",
+          "summary",
+          "evidence",
+          "safest_interpretation",
+          "required_repair",
+          "source_candidate_finding_ids"
+        ],
+        "properties": {
+          "gold_id": {"type": "string", "minLength": 1},
+          "element_id": {"type": "string", "minLength": 1},
+          "inconsistency_class": {
+            "enum": ["definition", "type_or_flow", "scope", "claim_evidence", "goal_metric", "lifecycle", "monitor", "document", "provenance"]
+          },
+          "claim_status": {
+            "enum": ["partially_supported", "contradicted", "untested", "invalidly_specified"]
+          },
+          "severity": {"enum": ["low", "moderate", "severe"]},
+          "summary": {"type": "string", "minLength": 1},
+          "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "safest_interpretation": {"type": "string", "minLength": 1},
+          "required_repair": {"type": "string", "minLength": 1},
+          "source_candidate_finding_ids": {
+            "type": "object",
+            "minProperties": 2,
+            "additionalProperties": {
+              "type": "array",
+              "items": {"type": "string", "minLength": 1},
+              "uniqueItems": true
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "adjudication_notes": {"type": "string"}
+  },
+  "additionalProperties": false
+}

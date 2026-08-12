@@ -1,0 +1,188 @@
+{
+  "objective": "Audit the v0.2.0 public package for component-map lifecycle safety, append-only scan logging, distribution parity, and bounded paper-facing claims.",
+  "scope": [
+    "README.md",
+    "VERSION",
+    "CITATION.cff.template",
+    "skill/analyze-project-claims",
+    "tests/test_component_map.py",
+    "tests/test_record_scan.py"
+  ],
+  "authority": [
+    "skill/analyze-project-claims/SKILL.md",
+    "skill/analyze-project-claims/references/component-map.schema.json",
+    "skill/analyze-project-claims/references/scan-record.schema.json",
+    "tests/test_component_map.py",
+    "tests/test_record_scan.py"
+  ],
+  "components": [
+    {
+      "component_id": "component-map-lifecycle",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "missing-map-bootstrap",
+          "target": "A missing accepted map produces only a provisional candidate and an append-only history event.",
+          "method": "executed_test",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "tests/test_component_map.py",
+              "locator": "test_missing_map_bootstraps_provisional",
+              "observed": "The candidate was created; accepted-map.json was absent."
+            }
+          ],
+          "safe_interpretation": "Discovery cannot silently establish the accepted structural authority.",
+          "required_repair": null
+        },
+        {
+          "element_id": "unchanged-map-reuse",
+          "target": "An unchanged accepted map is checked and reused without a replacement candidate or delta.",
+          "method": "executed_test",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "tests/test_component_map.py",
+              "locator": "test_valid_map_is_checked_without_rebuild",
+              "observed": "Reconciliation returned checked_unchanged with no candidate or delta."
+            }
+          ],
+          "safe_interpretation": "Existing accepted structure is verified rather than rebuilt on every scan.",
+          "required_repair": null
+        },
+        {
+          "element_id": "drift-and-conflict-preservation",
+          "target": "Source drift or same-ID semantic conflict emits candidate/delta evidence while preserving the accepted map.",
+          "method": "executed_test",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "tests/test_component_map.py",
+              "locator": "test_stale_source_produces_delta and test_conflict_produces_candidate_without_overwrite",
+              "observed": "Both cases produced append-only evidence and left accepted-map.json byte-identical."
+            }
+          ],
+          "safe_interpretation": "The tested drift and conflict paths fail safe against silent authority replacement.",
+          "required_repair": null
+        }
+      ]
+    },
+    {
+      "component_id": "scan-logging",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "hierarchical-scan-record",
+          "target": "Element-level evidence method, check status, claim status, interpretation, and repair are persisted hierarchically.",
+          "method": "executed_test",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "tests/test_record_scan.py",
+              "locator": "py -m unittest discover -s tests -v",
+              "observed": "8 public package tests passed."
+            }
+          ],
+          "safe_interpretation": "The tested component-to-element map and append-only scan-record invariants pass locally.",
+          "required_repair": null
+        },
+        {
+          "element_id": "repository-regression",
+          "target": "The expanded package does not break active repository contracts.",
+          "method": "executed_test",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "tests/test_component_map.py",
+              "locator": "py -m pytest -q",
+              "observed": "178 repository tests passed."
+            }
+          ],
+          "safe_interpretation": "All currently collected repository regression tests pass with the v0.2.0 package.",
+          "required_repair": null
+        }
+      ]
+    },
+    {
+      "component_id": "distribution",
+      "component_type": "artifact",
+      "elements": [
+        {
+          "element_id": "official-skill-validation",
+          "target": "Skill metadata and referenced resources in staging, export, Downloads, and installed copies.",
+          "method": "executed_test",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "skill/analyze-project-claims",
+              "locator": "skill-creator/scripts/quick_validate.py on four roots",
+              "observed": "All four invocations returned Skill is valid."
+            }
+          ],
+          "safe_interpretation": "Each distributed installable skill copy passes the official structural validator.",
+          "required_repair": null
+        }
+      ]
+    },
+    {
+      "component_id": "paper-facing-boundaries",
+      "component_type": "claim",
+      "elements": [
+        {
+          "element_id": "bounded-readme-claims",
+          "target": "README distinguishes deterministic behavior evidence from cross-project reliability and general RAG benefit.",
+          "method": "inspected",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "README.md",
+              "locator": "Research status and Paper-facing evaluation plan",
+              "observed": "General reliability and general RAG improvement remain explicitly unclaimed."
+            }
+          ],
+          "safe_interpretation": "The public claims remain bounded to tested behavior and one outcome-known project.",
+          "required_repair": null
+        },
+        {
+          "element_id": "cross-project-reliability",
+          "target": "General reliability across projects, agents, models, and domains.",
+          "method": "not_tested",
+          "check_status": "PENDING",
+          "claim_status": "untested",
+          "evidence": [],
+          "safe_interpretation": "Deterministic fixtures and one outcome-known project do not establish general reliability.",
+          "required_repair": "Run a frozen, independently labelled, multi-project comparative evaluation."
+        },
+        {
+          "element_id": "identified-release-metadata",
+          "target": "Final authorship, repository URL, DOI, and author-approved software license.",
+          "method": "not_tested",
+          "check_status": "PENDING",
+          "claim_status": "invalidly_specified",
+          "evidence": [
+            {
+              "source": "CITATION.cff.template",
+              "locator": "placeholder fields",
+              "observed": "Release identity and license remain unresolved."
+            }
+          ],
+          "safe_interpretation": "The package is paper-facing but not yet an identified open-source release.",
+          "required_repair": "Supply release metadata and add an author-approved LICENSE."
+        }
+      ]
+    }
+  ],
+  "strongest_safe_claim": "The v0.2.0 skill is structurally valid, and deterministic tests establish the tested component-map lifecycle and append-only element-level logging invariants.",
+  "claim_boundary": "Cross-project reliability, independent scientific replication, and general RAG improvement remain unestablished.",
+  "unresolved_uncertainties": [
+    "Cross-project reliability remains untested.",
+    "Final authorship, repository, DOI, and license metadata are pending."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/annotation-calibration-discussion.schema.json",
+  "title": "Completed two-human annotation-calibration discussion",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "selection_sha256",
+    "codebook_initial_sha256",
+    "status",
+    "independent_annotation_sha256",
+    "disagreement_items",
+    "codebook_decisions",
+    "codebook_revised",
+    "codebook_final_sha256",
+    "completed_at",
+    "reuse_in_development_or_confirmation_prohibited",
+    "paper_table_eligible",
+    "general_reliability_proved"
+  ],
+  "properties": {
+    "schema_version": {"const": "APC_ANNOTATION_CALIBRATION_DISCUSSION_V1"},
+    "selection_sha256": {"$ref": "#/$defs/sha256"},
+    "codebook_initial_sha256": {"$ref": "#/$defs/sha256"},
+    "status": {"const": "complete"},
+    "independent_annotation_sha256": {
+      "type": "object",
+      "minProperties": 2,
+      "maxProperties": 2,
+      "additionalProperties": {"$ref": "#/$defs/sha256"}
+    },
+    "disagreement_items": {"type": "array"},
+    "codebook_decisions": {"type": "array"},
+    "codebook_revised": {"type": "boolean"},
+    "codebook_final_sha256": {"$ref": "#/$defs/sha256"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "reuse_in_development_or_confirmation_prohibited": {"const": true},
+    "paper_table_eligible": {"const": false},
+    "general_reliability_proved": {"const": false}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "additionalProperties": false
+}

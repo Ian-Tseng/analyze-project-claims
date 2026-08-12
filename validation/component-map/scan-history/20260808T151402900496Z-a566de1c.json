@@ -1,0 +1,69 @@
+{
+  "accepted_map_id": "component-map-251b2efa782b",
+  "action": "conflict_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260808T151402900496Z-a566de1c-component-map-bbaeff7f1256.json",
+    "delta": "deltas/20260808T151402900496Z-a566de1c.json"
+  },
+  "candidate_map_id": "component-map-bbaeff7f1256",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "distribution",
+        "element_id": "github-wrapper-mirror-parity",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/references/scan-record.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/scripts/record_scan.py"
+      }
+    ]
+  },
+  "event_id": "20260808T151402900496Z-a566de1c",
+  "integrity": {
+    "canonical_payload_sha256": "394b19cdd14c49aed4b73cc85aeee7d81662b1743068eab710ccd970ad7dcba5"
+  },
+  "map_state_after": "conflict_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-08T15:14:02.900496Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

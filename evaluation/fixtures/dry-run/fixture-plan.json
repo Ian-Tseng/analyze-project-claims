@@ -1,0 +1,102 @@
+{
+  "schema_version": "APC_SCRIPTED_FIXTURE_PLAN_V1",
+  "purpose": "Exercise complete, missing, false-positive, repair, provenance, time, and token metric paths. Values are scripted and are not model observations.",
+  "specs": [
+    {
+      "spec_id": "lifecycle_fixture__agent_only__scripted_family_a__r1",
+      "detected_gold_ids": ["LC-001"],
+      "false_positives": [{"element_id": "historical_log", "summary": "Historical wording should be deleted.", "evidence": ["HISTORY.md"], "proposed_repair": "Delete the history."}],
+      "repair_correct": true,
+      "provenance_preserved": false,
+      "usage": {"elapsed_seconds": 10, "input_tokens": 800, "output_tokens": 180}
+    },
+    {
+      "spec_id": "lifecycle_fixture__agent_only__scripted_family_b__r1",
+      "detected_gold_ids": ["LC-001", "LC-002"],
+      "false_positives": [],
+      "repair_correct": true,
+      "provenance_preserved": true,
+      "usage": {"elapsed_seconds": 12, "input_tokens": 820, "output_tokens": 210}
+    },
+    {
+      "spec_id": "lifecycle_fixture__generic_checklist__scripted_family_a__r1",
+      "detected_gold_ids": ["LC-001", "LC-002"],
+      "false_positives": [],
+      "repair_correct": true,
+      "provenance_preserved": true,
+      "usage": {"elapsed_seconds": 14, "input_tokens": 940, "output_tokens": 240}
+    },
+    {
+      "spec_id": "lifecycle_fixture__generic_checklist__scripted_family_b__r1",
+      "detected_gold_ids": ["LC-002"],
+      "false_positives": [{"element_id": "historical_log", "summary": "The history file is itself contradictory.", "evidence": ["HISTORY.md"], "proposed_repair": "Rewrite the historical record."}],
+      "repair_correct": false,
+      "provenance_preserved": false,
+      "usage": {"elapsed_seconds": 15, "input_tokens": 960, "output_tokens": 220}
+    },
+    {
+      "spec_id": "lifecycle_fixture__skill_assisted__scripted_family_a__r1",
+      "detected_gold_ids": ["LC-001", "LC-002"],
+      "false_positives": [],
+      "repair_correct": true,
+      "provenance_preserved": true,
+      "usage": {"elapsed_seconds": 19, "input_tokens": 1500, "output_tokens": 320}
+    },
+    {
+      "spec_id": "lifecycle_fixture__skill_assisted__scripted_family_b__r1",
+      "detected_gold_ids": ["LC-001"],
+      "false_positives": [{"element_id": "historical_log", "summary": "The retained failure log blocks completion.", "evidence": ["HISTORY.md"], "proposed_repair": "Remove the failed record."}],
+      "repair_correct": false,
+      "provenance_preserved": false,
+      "usage": {"elapsed_seconds": 20, "input_tokens": 1540, "output_tokens": 300}
+    },
+    {
+      "spec_id": "provenance_fixture__agent_only__scripted_family_a__r1",
+      "detected_gold_ids": ["PV-001"],
+      "false_positives": [],
+      "repair_correct": true,
+      "provenance_preserved": true,
+      "usage": {"elapsed_seconds": 11, "input_tokens": 840, "output_tokens": 190}
+    },
+    {
+      "spec_id": "provenance_fixture__agent_only__scripted_family_b__r1",
+      "detected_gold_ids": ["PV-002"],
+      "false_positives": [{"element_id": "historical_record", "summary": "The historical note contradicts the report.", "evidence": ["HISTORY.md"], "proposed_repair": "Delete the note."}],
+      "repair_correct": true,
+      "provenance_preserved": false,
+      "usage": {"elapsed_seconds": 13, "input_tokens": 860, "output_tokens": 200}
+    },
+    {
+      "spec_id": "provenance_fixture__generic_checklist__scripted_family_a__r1",
+      "detected_gold_ids": ["PV-001", "PV-002"],
+      "false_positives": [],
+      "repair_correct": true,
+      "provenance_preserved": true,
+      "usage": {"elapsed_seconds": 16, "input_tokens": 980, "output_tokens": 250}
+    },
+    {
+      "spec_id": "provenance_fixture__generic_checklist__scripted_family_b__r1",
+      "detected_gold_ids": ["PV-001"],
+      "false_positives": [],
+      "repair_correct": true,
+      "provenance_preserved": true,
+      "usage": {"elapsed_seconds": 17, "input_tokens": 990, "output_tokens": 230}
+    },
+    {
+      "spec_id": "provenance_fixture__skill_assisted__scripted_family_a__r1",
+      "detected_gold_ids": ["PV-002"],
+      "false_positives": [{"element_id": "historical_record", "summary": "The history is stale and should be removed.", "evidence": ["HISTORY.md"], "proposed_repair": "Delete the history."}],
+      "repair_correct": true,
+      "provenance_preserved": false,
+      "usage": {"elapsed_seconds": 21, "input_tokens": 1580, "output_tokens": 310}
+    },
+    {
+      "spec_id": "provenance_fixture__skill_assisted__scripted_family_b__r1",
+      "detected_gold_ids": ["PV-001", "PV-002"],
+      "false_positives": [],
+      "repair_correct": true,
+      "provenance_preserved": true,
+      "usage": {"elapsed_seconds": 22, "input_tokens": 1600, "output_tokens": 340}
+    }
+  ]
+}

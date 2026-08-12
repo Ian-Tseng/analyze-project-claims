@@ -1,0 +1,39 @@
+{
+  "accepted_map_id": "component-map-1f1721933996",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-10baa42140d2",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "scope"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "f36099b3f4c8303c9f313c25f1759df3fcd2fb00f483a5ac14b05a7d56cdcf82"
+  },
+  "recorded_at_utc": "2026-08-08T13:25:39.929683Z",
+  "scan_id": "20260808T132539929683Z-c9cac0ad",
+  "schema_version": "1.0"
+}

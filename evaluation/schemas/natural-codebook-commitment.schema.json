@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/natural-codebook-commitment.schema.json",
+  "title": "Frozen calibration-to-study codebook binding",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "binding_state",
+    "calibration_completed",
+    "calibration_evidence_role",
+    "calibration_evidence_excluded_from_study",
+    "run_group_id",
+    "selection_sha256",
+    "calibration_run_group_id",
+    "calibration_selection_sha256",
+    "calibration_set_sha256",
+    "calibration_commitment_sha256",
+    "annotation_codebook_sha256",
+    "study_codebook_binding_sha256",
+    "bound_at",
+    "paper_table_eligible",
+    "general_reliability_proved"
+  ],
+  "properties": {
+    "schema_version": {"const": "APC_NATURAL_PROJECT_CODEBOOK_COMMITMENT_V1"},
+    "binding_state": {"const": "frozen"},
+    "calibration_completed": {"const": true},
+    "calibration_evidence_role": {"const": "training_only"},
+    "calibration_evidence_excluded_from_study": {"const": true},
+    "run_group_id": {"type": "string", "minLength": 1},
+    "selection_sha256": {"$ref": "#/$defs/sha256"},
+    "calibration_run_group_id": {"type": "string", "minLength": 1},
+    "calibration_selection_sha256": {"$ref": "#/$defs/sha256"},
+    "calibration_set_sha256": {"$ref": "#/$defs/sha256"},
+    "calibration_commitment_sha256": {"$ref": "#/$defs/sha256"},
+    "annotation_codebook_sha256": {"$ref": "#/$defs/sha256"},
+    "study_codebook_binding_sha256": {"$ref": "#/$defs/sha256"},
+    "bound_at": {"type": "string", "format": "date-time"},
+    "paper_table_eligible": {"const": false},
+    "general_reliability_proved": {"const": false}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "additionalProperties": false
+}

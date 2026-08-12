@@ -1,0 +1,12 @@
+{
+  "schema_version": "APC_PINNED_PROJECT_SOURCE_V1",
+  "project_id": "replace-with-selection-project-id",
+  "repository_url": "https://github.com/owner/repository",
+  "commit_sha": "replace-with-40-lowercase-hex-commit",
+  "archive_url": "https://codeload.github.com/owner/repository/zip/replace-with-commit",
+  "archive_sha256": "replace-with-64-lowercase-hex-archive-sha256",
+  "acquired_at": "replace-with-UTC-timestamp",
+  "license_file_sha256": {
+    "LICENSE": "replace-with-64-lowercase-hex-license-sha256"
+  }
+}

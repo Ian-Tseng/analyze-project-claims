@@ -1,0 +1,105 @@
+{
+  "accepted_map_id": "component-map-10baa42140d2",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260808T132701297205Z-bd520e4f-component-map-441a870f9e64.json",
+    "delta": "deltas/20260808T132701297205Z-bd520e4f.json"
+  },
+  "candidate_map_id": "component-map-441a870f9e64",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "scope"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/fixtures/dry-run/fixture-plan.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/labels/dry-run/lifecycle_fixture.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/labels/dry-run/provenance_fixture.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/projects/dry-run/lifecycle_fixture"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/projects/dry-run/provenance_fixture"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/prompts"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas"
+      }
+    ]
+  },
+  "event_id": "20260808T132701297205Z-bd520e4f",
+  "integrity": {
+    "canonical_payload_sha256": "588bd841ad2b49a645c8a4e8effda8266277113df9e9d0d643cf9086dd124f6a"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.0.0",
+  "recorded_at_utc": "2026-08-08T13:27:01.297205Z",
+  "schema_version": "1.0",
+  "skill_sha256": "4a4b6f033efa8301102858997208398dcbadaba584fef86108492285eac70be6"
+}

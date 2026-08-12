@@ -1,0 +1,89 @@
+{
+  "accepted_map_id": "component-map-e479c101e653",
+  "action": "conflict_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260809T142419551123Z-d710393b-component-map-1efb13e2e552.json",
+    "delta": "deltas/20260809T142419551123Z-d710393b.json"
+  },
+  "candidate_map_id": "component-map-1efb13e2e552",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "cross-project-evaluation",
+        "element_id": "zero-finding-metric-policy"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/annotation-codebook.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/schemas"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/gold-labels.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/scripts/cross_project_reliability.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_zero_finding_gold.py"
+      }
+    ]
+  },
+  "event_id": "20260809T142419551123Z-d710393b",
+  "integrity": {
+    "canonical_payload_sha256": "0bbe1394d6fbfb6cce824b631c1eb838fae28232d83a6ce25ff1a7680df6542e"
+  },
+  "map_state_after": "conflict_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-09T14:24:19.551123Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

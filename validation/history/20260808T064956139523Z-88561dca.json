@@ -1,0 +1,190 @@
+{
+  "components": [
+    {
+      "component_id": "skill-package",
+      "component_status": "PASS",
+      "component_type": "artifact",
+      "element_counts": {
+        "PASS": 1
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "official-skill-validation",
+          "evidence": [
+            {
+              "locator": "skill-creator/scripts/quick_validate.py exit code 0",
+              "observed": "Skill is valid!",
+              "source": "skill/analyze-project-claims"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The installable skill passes the official structural validator.",
+          "target": "Skill frontmatter, naming, and package structure"
+        }
+      ]
+    },
+    {
+      "component_id": "scan-logging",
+      "component_status": "PASS",
+      "component_type": "code",
+      "element_counts": {
+        "PASS": 2
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "public-repository-tests",
+          "evidence": [
+            {
+              "locator": "py -m unittest discover -s tests -v",
+              "observed": "3 tests passed",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The tested component-to-element logging and append-only invariants pass locally.",
+          "target": "Hierarchical record shape, skill-hash binding, and append-only repeated scans"
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "python-compilation",
+          "evidence": [
+            {
+              "locator": "py -m py_compile",
+              "observed": "Exit code 0",
+              "source": "skill/analyze-project-claims/scripts/record_scan.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The checked Python sources compile in the local interpreter.",
+          "target": "Recorder and public test Python syntax"
+        }
+      ]
+    },
+    {
+      "component_id": "paper-facing-package",
+      "component_status": "PARTIAL",
+      "component_type": "document",
+      "element_counts": {
+        "PASS": 1,
+        "PENDING": 2
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "bounded-readme-claims",
+          "evidence": [
+            {
+              "locator": "Research status and Paper-facing evaluation plan",
+              "observed": "General reliability and general RAG improvement are explicitly not claimed.",
+              "source": "README.md"
+            }
+          ],
+          "method": "inspected",
+          "required_repair": null,
+          "safe_interpretation": "The README presents the artifact as an actively evaluated workflow with bounded claims.",
+          "target": "README evidence and publication claim boundaries"
+        },
+        {
+          "check_status": "PENDING",
+          "claim_status": "invalidly_specified",
+          "element_id": "identified-citation-metadata",
+          "evidence": [
+            {
+              "locator": "placeholder fields",
+              "observed": "Author, owner, and license values are intentionally unresolved.",
+              "source": "CITATION.cff.template"
+            }
+          ],
+          "method": "not_tested",
+          "required_repair": "Supply author names, repository URL, and final release identifier.",
+          "safe_interpretation": "Citation structure is prepared, but identified citation metadata is not final.",
+          "target": "Final author names, repository URL, DOI, and release citation"
+        },
+        {
+          "check_status": "PENDING",
+          "claim_status": "invalidly_specified",
+          "element_id": "software-license",
+          "evidence": [
+            {
+              "locator": "Citation and license",
+              "observed": "No software license has been selected.",
+              "source": "README.md"
+            }
+          ],
+          "method": "not_tested",
+          "required_repair": "Obtain author approval for a license and add LICENSE.",
+          "safe_interpretation": "The repository is not yet an open-source release.",
+          "target": "Author-approved software license"
+        }
+      ]
+    },
+    {
+      "component_id": "scientific-evaluation",
+      "component_status": "PARTIAL",
+      "component_type": "claim",
+      "element_counts": {
+        "PENDING": 1
+      },
+      "elements": [
+        {
+          "check_status": "PENDING",
+          "claim_status": "untested",
+          "element_id": "cross-project-reliability",
+          "evidence": [],
+          "method": "not_tested",
+          "required_repair": "Run a frozen, independently labelled, multi-project comparative evaluation.",
+          "safe_interpretation": "One outcome-known project and deterministic fixtures do not establish general reliability.",
+          "target": "General reliability across projects, agents, models, and domains"
+        }
+      ]
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "635a3fadff2e74604fe175b5fb023e9190e27ae2f039074e0f6e1e8f0ea5f9c2"
+  },
+  "scan": {
+    "authority": [
+      "skill/analyze-project-claims/SKILL.md",
+      "skill/analyze-project-claims/references/scan-record.schema.json",
+      "tests/test_record_scan.py"
+    ],
+    "logger_version": "1.0.0",
+    "objective": "Audit the public repository package for structural validity, append-only scan logging, paper-facing claim boundaries, and unresolved release gates.",
+    "recorded_at_utc": "2026-08-08T06:49:56.139523Z",
+    "scan_id": "20260808T064956139523Z-88561dca",
+    "scope": [
+      "README.md",
+      "CITATION.cff.template",
+      "skill/analyze-project-claims",
+      "tests/test_record_scan.py"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "2be2d1c4b06c0d5aa12d928fe74870be3702acb7d293df081f5e884530b6e68b"
+  },
+  "schema_version": "1.0",
+  "summary": {
+    "claim_boundary": "General reliability, independent scientific replication, and general RAG improvement are not established.",
+    "component_count": 4,
+    "element_count": 7,
+    "element_counts": {
+      "PASS": 4,
+      "PENDING": 3
+    },
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "The installable skill is structurally valid, and the tested hierarchical append-only logging invariants pass locally.",
+    "unresolved_uncertainties": [
+      "Cross-project reliability remains untested.",
+      "Final author and repository citation metadata are pending.",
+      "No author-approved software license has been selected."
+    ]
+  }
+}

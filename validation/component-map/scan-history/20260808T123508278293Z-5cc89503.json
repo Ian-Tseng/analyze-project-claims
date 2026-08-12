@@ -1,0 +1,196 @@
+{
+  "accepted_map_id": "component-map-2ab151e98fc8",
+  "action": "conflict_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260808T123508278293Z-5cc89503-component-map-1f1721933996.json",
+    "delta": "deltas/20260808T123508278293Z-5cc89503.json"
+  },
+  "candidate_map_id": "component-map-1f1721933996",
+  "changes": {
+    "added_components": [
+      "cross-project-evaluation"
+    ],
+    "added_elements": [
+      {
+        "component_id": "cross-project-evaluation",
+        "element_id": "blinded-packet-boundary"
+      },
+      {
+        "component_id": "cross-project-evaluation",
+        "element_id": "complete-comparison-grid"
+      },
+      {
+        "component_id": "cross-project-evaluation",
+        "element_id": "lifecycle-and-claim-gates"
+      },
+      {
+        "component_id": "cross-project-evaluation",
+        "element_id": "pilot-and-confirmatory-stages"
+      },
+      {
+        "component_id": "cross-project-evaluation",
+        "element_id": "project-unit-metrics"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "bounded-readme-claims",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "cross-project-reliability",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/README.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/configs/confirmatory.template.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/configs/development-pilot.template.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/configs/dry-run.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/protocol.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/scripts/cross_project_reliability.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_cross_project_reliability.py"
+      }
+    ]
+  },
+  "event_id": "20260808T123508278293Z-5cc89503",
+  "integrity": {
+    "canonical_payload_sha256": "c0f188c7e486f6035581811a1f762fb033c95b71620e127cc08f6e6552e14350"
+  },
+  "map_state_after": "conflict_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.0.0",
+  "recorded_at_utc": "2026-08-08T12:35:08.278293Z",
+  "schema_version": "1.0",
+  "skill_sha256": "4a4b6f033efa8301102858997208398dcbadaba584fef86108492285eac70be6"
+}

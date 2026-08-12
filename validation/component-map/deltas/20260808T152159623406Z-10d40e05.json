@@ -1,0 +1,83 @@
+{
+  "accepted_map_id": "component-map-bbaeff7f1256",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-645a260f922b",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "direct-dependency-evidence-contract"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "active-rag-claim-consistency",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\configs\\rag_external_v55_manifest_monitor.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_EXPERIMENT_LOG.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_EXTERNAL_V55_MANIFEST_RESULTS.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_GENERALIZATION_CHECK_TABLE.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_strict_evidence_contract.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "a18b3f94fa69a0e9dda1e242eb9279299be81db635d8eba3dda777a8aa502f3b"
+  },
+  "recorded_at_utc": "2026-08-08T15:21:59.623406Z",
+  "scan_id": "20260808T152159623406Z-10d40e05",
+  "schema_version": "1.0"
+}

@@ -1,0 +1,24 @@
+{
+  "accepted_map_id": "component-map-e8944d63370c",
+  "action": "accepted_candidate",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "archived_previous": "accepted-history/20260809T142519771075Z-fcad59f0-component-map-1efb13e2e552.json",
+    "candidate": "candidates/20260809T142513388316Z-f7b242b3-component-map-e8944d63370c.json"
+  },
+  "candidate_map_id": "component-map-e8944d63370c",
+  "changes": {
+    "accepted_candidate": "component-map-e8944d63370c",
+    "archived_previous": "component-map-1efb13e2e552"
+  },
+  "event_id": "20260809T142519771075Z-fcad59f0",
+  "integrity": {
+    "canonical_payload_sha256": "a43da900a6f927bcd7096fa0233085f16bfef91aeff7d9e43b1121e4bdb6128e"
+  },
+  "map_state_after": "accepted",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-09T14:25:19.771075Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

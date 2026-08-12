@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/component-map-observation.schema.json",
+  "title": "Analyze Project Claims Component-Map Observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["objective", "scope", "authority", "components"],
+  "properties": {
+    "objective": {"type": "string", "minLength": 1},
+    "scope": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "authority": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["component_id", "component_type", "elements"],
+        "properties": {
+          "component_id": {"type": "string", "minLength": 1},
+          "component_type": {"type": "string", "minLength": 1},
+          "elements": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["element_id", "target", "evidence"],
+              "properties": {
+                "element_id": {"type": "string", "minLength": 1},
+                "target": {"type": "string", "minLength": 1},
+                "relation_type": {"type": "string", "minLength": 1},
+                "method": {
+                  "enum": [
+                    "inspected",
+                    "schema_validated",
+                    "executed_test",
+                    "replayed",
+                    "inferred",
+                    "not_tested"
+                  ]
+                },
+                "check_status": {
+                  "enum": ["PASS", "FAIL", "PARTIAL", "PENDING", "NA", "BLOCKED"]
+                },
+                "claim_status": {
+                  "enum": [
+                    "supported",
+                    "partially_supported",
+                    "contradicted",
+                    "untested",
+                    "invalidly_specified",
+                    "not_applicable"
+                  ]
+                },
+                "evidence": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["source", "locator"],
+                    "properties": {
+                      "source": {"type": "string", "minLength": 1},
+                      "locator": {"type": "string", "minLength": 1},
+                      "observed": {}
+                    }
+                  }
+                },
+                "safe_interpretation": {"type": "string"},
+                "required_repair": {"type": ["string", "null"]}
+              }
+            }
+          }
+        }
+      }
+    },
+    "strongest_safe_claim": {"type": "string"},
+    "claim_boundary": {"type": "string"},
+    "unresolved_uncertainties": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}

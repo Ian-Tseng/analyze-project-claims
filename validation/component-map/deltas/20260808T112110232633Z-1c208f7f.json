@@ -1,0 +1,144 @@
+{
+  "accepted_map_id": "component-map-027d84f8587e",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-2ab151e98fc8",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "observation-template-roundtrip"
+      },
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "runtime-schema-enforcement"
+      },
+      {
+        "component_id": "distribution",
+        "element_id": "github-wrapper-mirror-parity"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "active-rag-claim-consistency"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "legacy-self-scan-authority"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "readme-validation-layout"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff.template"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/assets/component-map-observation.template.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/references/component-map.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_component_map.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_record_scan.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "validation/README.md"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "0b15c4d890dafd4482a8ded4ba9311f1f92a66a50457a209c37c0d28b5b19f90"
+  },
+  "recorded_at_utc": "2026-08-08T11:21:10.232633Z",
+  "scan_id": "20260808T112110232633Z-1c208f7f",
+  "schema_version": "1.0"
+}

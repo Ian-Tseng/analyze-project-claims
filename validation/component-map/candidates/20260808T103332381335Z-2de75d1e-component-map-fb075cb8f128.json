@@ -1,0 +1,311 @@
+{
+  "accepted_at_utc": null,
+  "authority": [
+    "skill/analyze-project-claims/SKILL.md",
+    "skill/analyze-project-claims/references/component-map.schema.json",
+    "skill/analyze-project-claims/references/scan-record.schema.json",
+    "tests/test_component_map.py",
+    "tests/test_record_scan.py"
+  ],
+  "components": [
+    {
+      "component_id": "component-map-lifecycle",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "drift-and-conflict-preservation",
+          "evidence_locators": [
+            {
+              "locator": "test_stale_source_produces_delta and test_conflict_produces_candidate_without_overwrite",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Source drift or same-ID semantic conflict emits candidate/delta evidence while preserving the accepted map."
+        },
+        {
+          "element_id": "missing-map-bootstrap",
+          "evidence_locators": [
+            {
+              "locator": "test_missing_map_bootstraps_provisional",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A missing accepted map produces only a provisional candidate and an append-only history event."
+        },
+        {
+          "element_id": "observation-template-roundtrip",
+          "evidence_locators": [
+            {
+              "locator": "Build or reconcile the component-to-element map",
+              "source": "skill/analyze-project-claims/SKILL.md"
+            },
+            {
+              "locator": "components[0].elements[0].evidence_locators",
+              "source": "skill/analyze-project-claims/assets/component-map.template.json"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The documented observation template preserves declared evidence locators when passed through reconciliation."
+        },
+        {
+          "element_id": "runtime-schema-enforcement",
+          "evidence_locators": [
+            {
+              "locator": "/properties/components/items/properties/elements/items/required",
+              "source": "skill/analyze-project-claims/references/component-map.schema.json"
+            },
+            {
+              "locator": "_validate_map and _accept",
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Candidate acceptance enforces every required field in the published component-map schema."
+        },
+        {
+          "element_id": "unchanged-map-reuse",
+          "evidence_locators": [
+            {
+              "locator": "test_valid_map_is_checked_without_rebuild",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "An unchanged accepted map is checked and reused without a replacement candidate or delta."
+        }
+      ]
+    },
+    {
+      "component_id": "distribution",
+      "component_type": "artifact",
+      "elements": [
+        {
+          "element_id": "github-wrapper-mirror-parity",
+          "evidence_locators": [
+            {
+              "locator": "recursive manifest comparison against github/analyze-project-claims",
+              "source": "C:\\Users\\chois\\Downloads\\analyze-project-claims-github"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The workspace GitHub wrapper and Downloads mirror remain synchronized after append-only audits."
+        },
+        {
+          "element_id": "official-skill-validation",
+          "evidence_locators": [
+            {
+              "locator": "skill-creator/scripts/quick_validate.py on four roots",
+              "source": "skill/analyze-project-claims"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Skill metadata and referenced resources in staging, export, Downloads, and installed copies."
+        }
+      ]
+    },
+    {
+      "component_id": "paper-facing-boundaries",
+      "component_type": "claim",
+      "elements": [
+        {
+          "element_id": "active-rag-claim-consistency",
+          "evidence_locators": [
+            {
+              "locator": "py -m pytest -q and focused active-consistency suite",
+              "source": "docs/RAG_GENERALIZATION_CHECK_TABLE.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Active RAG claim, lifecycle, audit-independence, and paper-table boundaries remain internally consistent after the skill change."
+        },
+        {
+          "element_id": "bounded-readme-claims",
+          "evidence_locators": [
+            {
+              "locator": "Research status and Paper-facing evaluation plan",
+              "source": "README.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "README distinguishes deterministic behavior evidence from cross-project reliability and general RAG benefit."
+        },
+        {
+          "element_id": "cross-project-reliability",
+          "evidence_locators": [],
+          "relation_type": "contains",
+          "target": "General reliability across projects, agents, models, and domains."
+        },
+        {
+          "element_id": "identified-release-metadata",
+          "evidence_locators": [
+            {
+              "locator": "placeholder fields",
+              "source": "CITATION.cff.template"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Final authorship, repository URL, DOI, and author-approved software license."
+        },
+        {
+          "element_id": "legacy-self-scan-authority",
+          "evidence_locators": [
+            {
+              "locator": "generic filename and public-repository-tests observation",
+              "source": "validation/self-scan-input.json"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Current and historical self-scan inputs have unambiguous authority and lifecycle labels."
+        },
+        {
+          "element_id": "readme-validation-layout",
+          "evidence_locators": [
+            {
+              "locator": "Repository layout",
+              "source": "README.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The README repository tree represents the current validation artifacts introduced by v0.2.0."
+        }
+      ]
+    },
+    {
+      "component_id": "scan-logging",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "hierarchical-scan-record",
+          "evidence_locators": [
+            {
+              "locator": "py -m unittest discover -s tests -v",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Element-level evidence method, check status, claim status, interpretation, and repair are persisted hierarchically."
+        },
+        {
+          "element_id": "repository-regression",
+          "evidence_locators": [
+            {
+              "locator": "py -m pytest -q",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The expanded package does not break active repository contracts."
+        }
+      ]
+    }
+  ],
+  "created_at_utc": "2026-08-08T10:33:32.381335Z",
+  "integrity": {
+    "canonical_payload_sha256": "b47984d467343f6c69d42cef6eecc8d4fb13ba8303ede9a8a55f88231cad38bb"
+  },
+  "map_id": "component-map-fb075cb8f128",
+  "map_state": "drift_candidate",
+  "mapper_version": "1.0.0",
+  "objective": "Audit the v0.2.0 public package for component-map lifecycle safety, append-only scan logging, distribution parity, and bounded paper-facing claims.",
+  "origin_scan_id": "20260808T103332381335Z-2de75d1e",
+  "previous_map_id": "component-map-027d84f8587e",
+  "schema_version": "1.0",
+  "scope": [
+    "README.md",
+    "VERSION",
+    "CITATION.cff.template",
+    "skill/analyze-project-claims",
+    "tests/test_component_map.py",
+    "tests/test_record_scan.py"
+  ],
+  "skill_name": "analyze-project-claims",
+  "skill_sha256": "60565e2e98dc2b9f65de1517d2afda9fc636edeab5ecf640ed1731592764d80c",
+  "source_snapshot": [
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "178c8203c475b4d69b1554b5e27377d78d5dc22494c43aff75e2b608c17a3e73",
+      "source": "C:\\Users\\chois\\Downloads\\analyze-project-claims-github"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "500ed7a11bb3f7d07806eb3053d7d956ee6dd042a351254a7d35cf3ec39fbd1f",
+      "source": "CITATION.cff.template"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "bfb693d0adf0eac534ed6cc81be0ab614b2caa39a2f0df193245e7a089ba2ac9",
+      "source": "README.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9",
+      "source": "VERSION"
+    },
+    {
+      "exists": false,
+      "kind": "missing",
+      "sha256": null,
+      "source": "docs/RAG_GENERALIZATION_CHECK_TABLE.md"
+    },
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "73cf76e3af129502efe21dca45f4ecb1d800cfa3b32419b2b0f526309129495b",
+      "source": "skill/analyze-project-claims"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "60565e2e98dc2b9f65de1517d2afda9fc636edeab5ecf640ed1731592764d80c",
+      "source": "skill/analyze-project-claims/SKILL.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "8d14d5c04fc154c9a0f6b751e7e0e6cff331e64d325c210608c6d1d29523e2fc",
+      "source": "skill/analyze-project-claims/assets/component-map.template.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "5192711cfaf15015d3b634505423b872baf807818ec64c0a4571f5eb69053789",
+      "source": "skill/analyze-project-claims/references/component-map.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "20cc271522ceeeecb6a4e3ebf3e81721c7542d2dfdef6398af8162c88cf6101c",
+      "source": "skill/analyze-project-claims/references/scan-record.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "664d0df47b5aea8b7edfca151a5a3a4bae974a43e3e1874df70e28cde6d4a1e9",
+      "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "2e9e5fa6639834e2b855657951afd3871817056b87a58c30563ac3f27b6e2452",
+      "source": "tests/test_component_map.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "dc0d007188570416b657082f371eb80beb0fc3df645869ea06cd84763636a39b",
+      "source": "tests/test_record_scan.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "84ab1b1ba50b17b24b655f7e98ba0577aae4c97a7f2aef11a2068e030ad792a3",
+      "source": "validation/self-scan-input.json"
+    }
+  ]
+}

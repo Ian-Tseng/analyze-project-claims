@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <title>Calibration Console</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --canvas: #f4f1ea;
+      --surface: #fffdf8;
+      --surface-strong: #ffffff;
+      --ink: #18201f;
+      --muted: #60706c;
+      --line: #cbd3cd;
+      --line-strong: #7c8d87;
+      --accent: #087f6b;
+      --accent-dark: #045e50;
+      --accent-soft: #d9eee8;
+      --pending: #94651d;
+      --pending-soft: #f5e7c9;
+      --danger: #a4372e;
+      --danger-soft: #f6dfdc;
+      --radius: 8px;
+      --space-1: .375rem;
+      --space-2: .75rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+      --space-5: 2rem;
+      --max: 96rem;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { min-width: 320px; background: var(--canvas); }
+    body { margin: 0; color: var(--ink); background: var(--canvas); line-height: 1.5; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button, input, select { min-height: 44px; }
+    button, input, select, textarea { border: 1px solid var(--line-strong); border-radius: 5px; background: var(--surface-strong); }
+    input, select, textarea { width: 100%; padding: .65rem .75rem; }
+    textarea { min-height: 8rem; resize: vertical; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .875rem; }
+    button { padding: .6rem 1rem; cursor: pointer; font-weight: 700; }
+    button:hover { border-color: var(--accent); }
+    button:disabled { cursor: not-allowed; opacity: .55; }
+    :focus-visible { outline: 3px solid #d28b18; outline-offset: 2px; }
+    h1, h2, h3 { line-height: 1.15; margin: 0; letter-spacing: -.02em; }
+    h1 { font-size: clamp(1.5rem, 3vw, 2.4rem); }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1rem; }
+    p { margin: 0; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+
+    .skip-link { position: fixed; left: .75rem; top: -5rem; z-index: 20; padding: .6rem .8rem; color: white; background: var(--ink); }
+    .skip-link:focus { top: .75rem; }
+    .app-header { border-bottom: 1px solid var(--line); background: var(--surface); }
+    .header-inner { max-width: var(--max); margin: auto; padding: var(--space-3); display: flex; gap: var(--space-3); align-items: center; justify-content: space-between; }
+    .brand-kicker { color: var(--accent-dark); font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .role-badge { padding: .4rem .65rem; border: 1px solid var(--line-strong); border-radius: 999px; font-size: .8rem; font-weight: 800; background: var(--surface-strong); }
+    .layout { max-width: var(--max); min-height: calc(100vh - 77px); margin: auto; display: grid; grid-template-columns: 1fr; }
+    .phase-nav { border-bottom: 1px solid var(--line); background: var(--surface); padding: var(--space-3); }
+    .phase-nav ol { display: flex; overflow-x: auto; gap: .5rem; list-style: none; margin: 0; padding: 0; }
+    .phase { min-width: max-content; display: flex; align-items: center; gap: .5rem; padding: .55rem .7rem; color: var(--muted); border-left: 3px solid transparent; }
+    .phase strong { color: var(--ink); }
+    .phase[data-state="current"] { color: var(--accent-dark); background: var(--accent-soft); border-color: var(--accent); }
+    .phase[data-state="blocked"] { color: var(--pending); }
+    .phase-number { display: inline-grid; width: 1.7rem; height: 1.7rem; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-size: .75rem; font-weight: 800; }
+    main { min-width: 0; padding: var(--space-3); }
+    .stack { display: grid; gap: var(--space-3); }
+    .panel { border-top: 3px solid var(--ink); background: var(--surface); padding: var(--space-3); }
+    .panel.accent { border-color: var(--accent); }
+    .panel.pending { border-color: var(--pending); }
+    .panel.danger { border-color: var(--danger); }
+    .panel-head { display: flex; flex-wrap: wrap; gap: .75rem; align-items: baseline; justify-content: space-between; margin-bottom: var(--space-3); }
+    .muted { color: var(--muted); }
+    .eyebrow { color: var(--muted); font-size: .75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .status-grid { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+    .status-item { padding: .8rem; border: 1px solid var(--line); background: var(--surface-strong); }
+    .status-item[data-state="committed"], .status-item[data-state="complete"] { border-left: 4px solid var(--accent); }
+    .status-item[data-state="pending"], .status-item[data-state="draft"] { border-left: 4px solid var(--pending); }
+    .status-label { display: block; color: var(--muted); font-size: .75rem; font-weight: 800; text-transform: uppercase; }
+    .workspace { display: grid; grid-template-columns: 1fr; gap: var(--space-3); }
+    .source-list { max-height: 19rem; overflow: auto; border: 1px solid var(--line); }
+    .source-list button { width: 100%; min-height: 38px; padding: .45rem .6rem; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; text-align: left; background: var(--surface-strong); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .78rem; font-weight: 500; }
+    .source-list button:hover, .source-list button[aria-current="true"] { color: var(--accent-dark); background: var(--accent-soft); }
+    .source-view { min-height: 20rem; max-height: 34rem; overflow: auto; margin: 0; padding: var(--space-3); white-space: pre-wrap; word-break: break-word; color: #e6efeb; background: #17201e; border-radius: 4px; font-size: .8rem; line-height: 1.55; }
+    .field { display: grid; gap: .35rem; }
+    .field label, .field-label { font-size: .82rem; font-weight: 800; }
+    .help { color: var(--muted); font-size: .8rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+    .collection { display: grid; gap: .75rem; }
+    .collection-row { position: relative; display: grid; grid-template-columns: 1fr; gap: .65rem; padding: .9rem; border: 1px solid var(--line); background: var(--surface-strong); }
+    .row-actions, .actions { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+    .button-primary { color: white; border-color: var(--accent-dark); background: var(--accent-dark); }
+    .button-danger { color: var(--danger); border-color: var(--danger); background: transparent; }
+    .button-quiet { color: var(--accent-dark); border-color: var(--accent); background: transparent; }
+    .attestations { display: grid; gap: .6rem; padding: .8rem; border: 1px solid var(--line); }
+    .check { display: grid; grid-template-columns: 1.4rem 1fr; gap: .6rem; align-items: start; }
+    .check input { width: 1.2rem; min-height: 1.2rem; margin-top: .2rem; accent-color: var(--accent); }
+    .compare { display: grid; grid-template-columns: 1fr; gap: .75rem; }
+    .compare pre { max-height: 26rem; overflow: auto; margin: 0; padding: .8rem; border: 1px solid var(--line); background: var(--surface-strong); white-space: pre-wrap; font-size: .75rem; }
+    .boundary { padding: .75rem; border-left: 4px solid var(--pending); background: var(--pending-soft); color: #51370f; }
+    .error { padding: .75rem; border-left: 4px solid var(--danger); background: var(--danger-soft); color: #64231d; }
+    .success { padding: .75rem; border-left: 4px solid var(--accent); background: var(--accent-soft); color: #063f36; }
+    .toast { position: fixed; right: 1rem; bottom: 1rem; z-index: 10; max-width: min(28rem, calc(100vw - 2rem)); padding: .8rem 1rem; color: white; background: var(--ink); border-radius: 5px; opacity: 0; transform: translateY(1rem); pointer-events: none; transition: .18s ease; }
+    .toast[data-open="true"] { opacity: 1; transform: translateY(0); }
+    .empty { padding: 1.25rem; border: 1px dashed var(--line-strong); color: var(--muted); text-align: center; }
+    footer { max-width: var(--max); margin: auto; padding: var(--space-3); color: var(--muted); font-size: .78rem; }
+
+    @media (min-width: 375px) { .header-inner, main, .phase-nav { padding-left: var(--space-4); padding-right: var(--space-4); } }
+    @media (min-width: 768px) { .status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .form-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); } .compare { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1024px) { .layout { grid-template-columns: 16rem minmax(0, 1fr); } .phase-nav { border-right: 1px solid var(--line); border-bottom: 0; } .phase-nav ol { position: sticky; top: 1rem; display: grid; overflow: visible; } .workspace { grid-template-columns: minmax(18rem, .8fr) minmax(0, 1.8fr); } main { padding: var(--space-4); } }
+    @media (min-width: 1440px) { .layout { grid-template-columns: 18rem minmax(0, 1fr); } main { padding: var(--space-5); } .status-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    @media (prefers-color-scheme: dark) {
+      :root { --canvas: #111715; --surface: #17201e; --surface-strong: #1e2926; --ink: #edf4f0; --muted: #a3b5af; --line: #34443f; --line-strong: #758a83; --accent: #50cbb4; --accent-dark: #86e3d1; --accent-soft: #163d35; --pending: #e8bd73; --pending-soft: #3e3018; --danger: #ef958d; --danger-soft: #432420; }
+      .boundary { color: #f3d9a7; } .error { color: #ffd1cd; } .success { color: #c5f2e8; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .001ms !important; animation-duration: .001ms !important; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to workflow</a>
+  <header class="app-header">
+    <div class="header-inner">
+      <div>
+        <p class="brand-kicker">Analyze Project Claims</p>
+        <h1>Calibration Console</h1>
+      </div>
+      <span id="role-badge" class="role-badge">Connecting</span>
+    </div>
+  </header>
+  <div class="layout">
+    <nav class="phase-nav" aria-label="Calibration phases">
+      <ol>
+        <li class="phase" id="phase-annotate"><span class="phase-number">1</span><span><strong>Independent annotation</strong><br><small>Two isolated passes</small></span></li>
+        <li class="phase" id="phase-discuss"><span class="phase-number">2</span><span><strong>Compare &amp; discuss</strong><br><small>Only after both hashes</small></span></li>
+        <li class="phase" id="phase-freeze"><span class="phase-number">3</span><span><strong>Freeze &amp; bind</strong><br><small>Final codebook identity</small></span></li>
+      </ol>
+    </nav>
+    <main id="content" tabindex="-1">
+      <div id="message" role="status" aria-live="polite"></div>
+      <div id="app" class="stack" aria-busy="true">
+        <section class="panel pending"><h2>Loading the lifecycle state</h2><p class="muted">The console is checking your role and the committed artifacts.</p></section>
+      </div>
+    </main>
+  </div>
+  <footer>Local-only workflow. Preparation, human evidence, scientific support, and paper eligibility remain separate states.</footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    'use strict';
+    const token = new URLSearchParams(location.hash.slice(1)).get('token') || '';
+    const app = document.querySelector('#app');
+    const badge = document.querySelector('#role-badge');
+    const toast = document.querySelector('#toast');
+    let state = null;
+    let annotation = null;
+    let sourceFiles = [];
+
+    const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    const lines = value => String(value || '').split(/\r?\n/).map(item => item.trim()).filter(Boolean);
+    const isoNow = () => new Date().toISOString();
+    const draftKey = () => `apc-calibration-draft:${state.run_group_id}:${state.slot_id}`;
+
+    async function api(path, options = {}) {
+      const response = await fetch(path, {
+        ...options,
+        headers: {'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', ...(options.headers || {})}
+      });
+      const body = await response.json();
+      if (!response.ok) throw new Error(body.error || `Request failed (${response.status})`);
+      return body;
+    }
+
+    function notify(text) {
+      toast.textContent = text;
+      toast.dataset.open = 'true';
+      clearTimeout(notify.timer);
+      notify.timer = setTimeout(() => { toast.dataset.open = 'false'; }, 3600);
+    }
+
+    function setPhases(current, blocked = []) {
+      for (const id of ['annotate', 'discuss', 'freeze']) {
+        const node = document.querySelector(`#phase-${id}`);
+        node.dataset.state = id === current ? 'current' : blocked.includes(id) ? 'blocked' : 'available';
+      }
+    }
+
+    function field(label, value, key, type = 'text', help = '') {
+      return `<div class="field"><label for="${key}">${escapeHtml(label)}</label><input id="${key}" data-field="${key}" type="${type}" value="${escapeHtml(value)}">${help ? `<span class="help">${escapeHtml(help)}</span>` : ''}</div>`;
+    }
+
+    function renderElements(items) {
+      const rows = items.map((item, index) => `<div class="collection-row" data-element="${index}">
+        <div class="form-grid two">
+          ${field('Element ID', item.element_id, `element-id-${index}`)}
+          ${field('Component ID', item.component_id, `element-component-${index}`)}
+          ${field('Repository path', item.path, `element-path-${index}`)}
+          ${field('Element type', item.element_type, `element-type-${index}`)}
+        </div>
+        <div class="field"><label for="element-state-${index}">Observed state</label><select id="element-state-${index}" data-field="element-state-${index}">
+          ${['inspected','schema_validated','executed_test','replayed','inferred','not_tested'].map(value => `<option ${value === item.observed_state ? 'selected' : ''}>${value}</option>`).join('')}
+        </select></div>
+        <div class="row-actions"><button type="button" class="button-danger" data-remove-element="${index}">Remove element</button></div>
+      </div>`).join('');
+      document.querySelector('#elements').innerHTML = rows || '<p class="empty">Add at least one inspected element.</p>';
+    }
+
+    function renderFindings(items) {
+      const rows = items.map((item, index) => `<div class="collection-row" data-finding="${index}">
+        <div class="form-grid two">
+          ${field('Finding ID', item.finding_id, `finding-id-${index}`)}
+          ${field('Primary element ID', item.element_id, `finding-element-${index}`)}
+          <div class="field"><label for="finding-class-${index}">Inconsistency class</label><select id="finding-class-${index}">${['definition','type_or_flow','scope','claim_evidence','goal_metric','lifecycle','monitor','document','provenance'].map(value => `<option ${value === item.inconsistency_class ? 'selected' : ''}>${value}</option>`).join('')}</select></div>
+          <div class="field"><label for="finding-status-${index}">Claim status</label><select id="finding-status-${index}">${['partially_supported','contradicted','untested','invalidly_specified'].map(value => `<option ${value === item.claim_status ? 'selected' : ''}>${value}</option>`).join('')}</select></div>
+          <div class="field"><label for="finding-severity-${index}">Severity</label><select id="finding-severity-${index}">${['low','moderate','severe'].map(value => `<option ${value === item.severity ? 'selected' : ''}>${value}</option>`).join('')}</select></div>
+          ${field('Conflicting element IDs', (item.conflicting_element_ids || []).join(', '), `finding-conflicts-${index}`, 'text', 'Comma-separated; at least two distinct IDs.')}
+        </div>
+        <div class="field"><label for="finding-why-${index}">Why these elements conflict</label><textarea id="finding-why-${index}">${escapeHtml(item.why_conflict)}</textarea></div>
+        <div class="form-grid two">
+          <div class="field"><label for="finding-evidence-${index}">Evidence</label><textarea id="finding-evidence-${index}">${escapeHtml((item.evidence || []).join('\n'))}</textarea><span class="help">One evidence statement per line.</span></div>
+          <div class="field"><label for="finding-counter-${index}">Counterevidence</label><textarea id="finding-counter-${index}">${escapeHtml((item.counterevidence || []).join('\n'))}</textarea><span class="help">One statement per line; may be empty.</span></div>
+        </div>
+        <div class="form-grid two">
+          <div class="field"><label for="finding-safe-${index}">Safest interpretation</label><textarea id="finding-safe-${index}">${escapeHtml(item.safest_interpretation)}</textarea></div>
+          <div class="field"><label for="finding-repair-${index}">Required repair</label><textarea id="finding-repair-${index}">${escapeHtml(item.required_repair)}</textarea></div>
+        </div>
+        <div class="row-actions"><button type="button" class="button-danger" data-remove-finding="${index}">Remove finding</button></div>
+      </div>`).join('');
+      document.querySelector('#findings').innerHTML = rows || '<p class="empty">No candidate inconsistency recorded. Zero findings are allowed.</p>';
+    }
+
+    function collectElements() {
+      return [...document.querySelectorAll('[data-element]')].map(row => {
+        const i = row.dataset.element;
+        return {element_id: document.querySelector(`#element-id-${i}`).value.trim(), component_id: document.querySelector(`#element-component-${i}`).value.trim(), path: document.querySelector(`#element-path-${i}`).value.trim(), element_type: document.querySelector(`#element-type-${i}`).value.trim(), observed_state: document.querySelector(`#element-state-${i}`).value};
+      });
+    }
+
+    function collectFindings() {
+      return [...document.querySelectorAll('[data-finding]')].map(row => {
+        const i = row.dataset.finding;
+        return {finding_id: document.querySelector(`#finding-id-${i}`).value.trim(), element_id: document.querySelector(`#finding-element-${i}`).value.trim(), inconsistency_class: document.querySelector(`#finding-class-${i}`).value, claim_status: document.querySelector(`#finding-status-${i}`).value, severity: document.querySelector(`#finding-severity-${i}`).value, conflicting_element_ids: document.querySelector(`#finding-conflicts-${i}`).value.split(',').map(value => value.trim()).filter(Boolean), why_conflict: document.querySelector(`#finding-why-${i}`).value.trim(), evidence: lines(document.querySelector(`#finding-evidence-${i}`).value), counterevidence: lines(document.querySelector(`#finding-counter-${i}`).value), safest_interpretation: document.querySelector(`#finding-safe-${i}`).value.trim(), required_repair: document.querySelector(`#finding-repair-${i}`).value.trim()};
+      });
+    }
+
+    function currentDraft() {
+      return {...annotation, annotator_id: document.querySelector('#annotator-id').value.trim(), completed: true, human_attestation: {human_annotator: document.querySelector('#attest-human').checked, independent: document.querySelector('#attest-independent').checked, condition_blinded: document.querySelector('#attest-blinded').checked, no_agent_outputs_reviewed: document.querySelector('#attest-no-agent').checked, attested_at: isoNow()}, element_inventory: collectElements(), candidate_findings: collectFindings(), notes: document.querySelector('#notes').value.trim()};
+    }
+
+    async function renderAnnotator() {
+      setPhases('annotate', ['discuss', 'freeze']);
+      badge.textContent = `Annotator · ${state.slot_id}`;
+      annotation = await api('/api/annotation');
+      if (state.submission_state !== 'committed') {
+        const stored = localStorage.getItem(draftKey());
+        if (stored) { try { annotation = {...annotation, ...JSON.parse(stored)}; } catch (_) {} }
+      }
+      const locked = state.submission_state === 'committed';
+      app.innerHTML = `<section class="panel accent"><div class="panel-head"><div><p class="eyebrow">Phase 1 of 3</p><h2>Independent annotation</h2></div><strong>${locked ? 'Committed' : 'Draft stays in this browser'}</strong></div><p class="boundary">Do not open the other annotator’s URL or discuss findings before both final submissions are hash-committed. The server never exposes the other draft to this role.</p></section>
+      <div class="workspace"><section class="panel"><div class="panel-head"><div><p class="eyebrow">Frozen packet</p><h2>Source browser</h2></div><input id="source-filter" aria-label="Filter source files" placeholder="Filter paths"></div><div id="source-list" class="source-list" aria-label="Source files"></div></section><section class="panel"><div class="panel-head"><div><p class="eyebrow" id="source-path">Select a source file</p><h2>Evidence view</h2></div></div><pre id="source-view" class="source-view" tabindex="0">Choose a file from the source browser.</pre></section></div>
+      <form id="annotation-form" class="stack"><section class="panel"><div class="panel-head"><div><p class="eyebrow">Human identity</p><h2>Attested first pass</h2></div></div><div class="form-grid two">${field('Stable annotator ID', annotation.annotator_id, 'annotator-id', 'text', 'Use your assigned stable identity. It is hashed in the commitment.')}<div class="field"><label for="notes">Annotation notes</label><textarea id="notes">${escapeHtml(annotation.notes)}</textarea></div></div></section>
+      <section class="panel"><div class="panel-head"><div><p class="eyebrow">Complete coverage</p><h2>Element inventory</h2></div><button id="add-element" type="button" class="button-quiet">Add element</button></div><div id="elements" class="collection"></div></section>
+      <section class="panel"><div class="panel-head"><div><p class="eyebrow">Atomic claims</p><h2>Candidate findings</h2></div><button id="add-finding" type="button" class="button-quiet">Add finding</button></div><p class="help">Record only same-scope conflicts with evidence. An empty finding list is valid.</p><div id="findings" class="collection"></div></section>
+      <section class="panel pending"><div class="panel-head"><div><p class="eyebrow">One-way submission</p><h2>Human attestations</h2></div></div><div class="attestations"><label class="check"><input id="attest-human" type="checkbox"><span>I am a human annotator and personally completed this record.</span></label><label class="check"><input id="attest-independent" type="checkbox"><span>I completed this first pass independently, before discussion.</span></label><label class="check"><input id="attest-blinded" type="checkbox"><span>I was blinded to study conditions and comparative outputs.</span></label><label class="check"><input id="attest-no-agent" type="checkbox"><span>I did not review agent outputs while creating this record.</span></label></div><div class="actions" style="margin-top:1rem"><button id="save-draft" type="button" class="button-quiet">Save private browser draft</button><button id="submit-final" type="submit" class="button-primary">Commit final annotation</button></div></section></form>`;
+      renderElements(annotation.element_inventory || []); renderFindings(annotation.candidate_findings || []);
+      const attestation = annotation.human_attestation || {};
+      document.querySelector('#attest-human').checked = attestation.human_annotator === true;
+      document.querySelector('#attest-independent').checked = attestation.independent === true;
+      document.querySelector('#attest-blinded').checked = attestation.condition_blinded === true;
+      document.querySelector('#attest-no-agent').checked = attestation.no_agent_outputs_reviewed === true;
+      if (locked) document.querySelectorAll('#annotation-form input, #annotation-form textarea, #annotation-form select, #annotation-form button').forEach(node => node.disabled = true);
+      sourceFiles = (await api('/api/source-index')).files;
+      renderSourceList('');
+      document.querySelector('#source-filter').addEventListener('input', event => renderSourceList(event.target.value));
+      document.querySelector('#add-element').addEventListener('click', () => { annotation.element_inventory = collectElements(); annotation.element_inventory.push({element_id:'',component_id:'',path:'',element_type:'document',observed_state:'inspected'}); renderElements(annotation.element_inventory); });
+      document.querySelector('#add-finding').addEventListener('click', () => { annotation.candidate_findings = collectFindings(); annotation.candidate_findings.push({finding_id:'',element_id:'',inconsistency_class:'document',claim_status:'untested',severity:'moderate',conflicting_element_ids:[],why_conflict:'',evidence:[],counterevidence:[],safest_interpretation:'',required_repair:''}); renderFindings(annotation.candidate_findings); });
+      document.querySelector('#elements').addEventListener('click', event => { const i = event.target.dataset.removeElement; if (i !== undefined) { annotation.element_inventory = collectElements(); annotation.element_inventory.splice(Number(i),1); renderElements(annotation.element_inventory); } });
+      document.querySelector('#findings').addEventListener('click', event => { const i = event.target.dataset.removeFinding; if (i !== undefined) { annotation.candidate_findings = collectFindings(); annotation.candidate_findings.splice(Number(i),1); renderFindings(annotation.candidate_findings); } });
+      document.querySelector('#save-draft').addEventListener('click', () => { localStorage.setItem(draftKey(), JSON.stringify(currentDraft())); notify('Private draft saved in this browser.'); });
+      document.querySelector('#annotation-form').addEventListener('submit', submitFinal);
+    }
+
+    function renderSourceList(filter) {
+      const needle = filter.toLowerCase();
+      const list = document.querySelector('#source-list');
+      list.innerHTML = '';
+      sourceFiles.filter(file => file.path.toLowerCase().includes(needle)).forEach(file => { const button = document.createElement('button'); button.type='button'; button.textContent=`${file.path} · ${file.bytes} B`; button.addEventListener('click', () => openSource(file.path, button)); list.appendChild(button); });
+      if (!list.children.length) list.innerHTML = '<p class="empty">No matching source files.</p>';
+    }
+
+    async function openSource(path, button) {
+      try { const source = await api(`/api/source?path=${encodeURIComponent(path)}`); document.querySelectorAll('#source-list button').forEach(node => node.removeAttribute('aria-current')); button.setAttribute('aria-current','true'); document.querySelector('#source-path').textContent = source.path; document.querySelector('#source-view').textContent = source.content; } catch (error) { notify(error.message); }
+    }
+
+    async function submitFinal(event) {
+      event.preventDefault();
+      if (!confirm('Commit this annotation as your immutable independent first pass? You cannot edit it after submission.')) return;
+      const button = document.querySelector('#submit-final'); button.disabled = true;
+      try { await api('/api/annotation', {method:'POST', body:JSON.stringify(currentDraft())}); localStorage.removeItem(draftKey()); notify('Annotation committed and hash-bound.'); await boot(); } catch (error) { notify(error.message); button.disabled = false; }
+    }
+
+    async function renderCoordinator() {
+      badge.textContent = 'Calibration coordinator';
+      const complete = state.calibration_state === 'complete';
+      setPhases(complete ? 'freeze' : state.discussion_enabled ? 'discuss' : 'annotate', complete ? [] : state.discussion_enabled ? ['freeze'] : ['discuss','freeze']);
+      const gate = state.pilot_gate;
+      app.innerHTML = `<section class="panel ${complete ? 'accent' : 'pending'}"><div class="panel-head"><div><p class="eyebrow">Lifecycle authority</p><h2>${complete ? 'Calibration frozen' : state.discussion_enabled ? 'Independent passes validated' : 'Waiting for human first passes'}</h2></div><strong>${escapeHtml(state.calibration_state)}</strong></div><p class="boundary">Coordinator access reports submission state only until both first passes validate. Practice evidence is training-only and never becomes a manuscript result.</p></section>
+      <section class="panel"><div class="panel-head"><div><p class="eyebrow">Current evidence</p><h2>Gate status</h2></div></div><div class="status-grid">${state.slots.map(slot => `<div class="status-item" data-state="${slot.submission_state}"><span class="status-label">${escapeHtml(slot.slot_id)}</span><strong>${escapeHtml(slot.submission_state)}</strong></div>`).join('')}<div class="status-item" data-state="${complete ? 'complete':'pending'}"><span class="status-label">Final codebook</span><strong>${complete ? 'frozen':'pending'}</strong></div><div class="status-item" data-state="${gate && !gate.missing_gates.includes('frozen_annotation_codebook') ? 'complete':'pending'}"><span class="status-label">Study binding</span><strong>${!state.pilot_available ? 'not configured' : gate && !gate.missing_gates.includes('frozen_annotation_codebook') ? 'bound':'pending'}</strong></div></div></section>
+      <section class="panel"><div class="panel-head"><div><p class="eyebrow">Private handoff</p><h2>Annotator access</h2></div></div><div class="stack">${state.annotator_access.map(access => { const url = `${location.origin}${location.pathname}${access.fragment}`; return `<div class="field"><label for="access-${escapeHtml(access.slot_id)}">${escapeHtml(access.slot_id)}</label><div class="actions"><input id="access-${escapeHtml(access.slot_id)}" value="${escapeHtml(url)}" readonly><button type="button" class="button-quiet" data-copy-link="${escapeHtml(url)}">Copy private link</button></div></div>`; }).join('')}</div><p class="help">Send each URL only to its assigned human. Restarting the server invalidates these access tokens.</p></section>
+      <div id="coordinator-action" class="stack"></div>`;
+      document.querySelectorAll('[data-copy-link]').forEach(button => button.addEventListener('click', async () => { try { await navigator.clipboard.writeText(button.dataset.copyLink); notify('Private annotator link copied.'); } catch (_) { notify('Clipboard access was blocked; select and copy the URL manually.'); } }));
+      if (complete) return renderBinding();
+      if (!state.discussion_enabled) { document.querySelector('#coordinator-action').innerHTML = '<section class="panel"><h2>Share the isolated annotator links</h2><p class="muted">Each assigned human uses only their private URL. Refresh this page after both final submissions are committed.</p></section>'; return; }
+      const context = await api('/api/discussion-context'); const codebook = await api('/api/codebook');
+      document.querySelector('#coordinator-action').innerHTML = `<section class="panel accent"><div class="panel-head"><div><p class="eyebrow">Phase 2 of 3</p><h2>Compare the committed records</h2></div><strong>${context.preflight.raw_annotation_count} hashes validated</strong></div><div class="compare">${Object.entries(context.annotations).map(([slot,value]) => `<div><h3>${escapeHtml(slot)}</h3><pre>${escapeHtml(JSON.stringify(value,null,2))}</pre></div>`).join('')}</div></section>
+      <form id="freeze-form" class="stack"><section class="panel"><div class="panel-head"><div><p class="eyebrow">Human discussion</p><h2>Record decisions</h2></div></div><div class="form-grid two"><div class="field"><label for="disagreements">Disagreement items</label><textarea id="disagreements"></textarea><span class="help">One concise disagreement per line. Empty is allowed when both records agree.</span></div><div class="field"><label for="decisions">Codebook decisions</label><textarea id="decisions"></textarea><span class="help">One retained or revised rule per line.</span></div></div></section><section class="panel pending"><div class="panel-head"><div><p class="eyebrow">Phase 3 of 3</p><h2>Final codebook bytes</h2></div><strong>${escapeHtml(codebook.sha256.slice(0,12))}</strong></div><div class="field"><label for="final-codebook">Final annotation codebook</label><textarea id="final-codebook" style="min-height:30rem">${escapeHtml(codebook.content)}</textarea></div><label class="check" style="margin-top:1rem"><input id="confirm-discussion" type="checkbox"><span>The two humans discussed only after both independent hashes existed, and this final codebook reflects the recorded decisions.</span></label><div class="actions" style="margin-top:1rem"><button type="submit" class="button-primary">Freeze calibration</button></div></section></form>`;
+      document.querySelector('#freeze-form').addEventListener('submit', freezeCalibration);
+    }
+
+    async function freezeCalibration(event) {
+      event.preventDefault();
+      if (!document.querySelector('#confirm-discussion').checked) { notify('Complete the human discussion confirmation first.'); return; }
+      if (!confirm('Freeze both human records, the discussion, and these exact final codebook bytes?')) return;
+      const button = event.target.querySelector('button[type=submit]'); button.disabled = true;
+      try { await api('/api/freeze', {method:'POST', body:JSON.stringify({final_codebook:document.querySelector('#final-codebook').value, disagreement_items:lines(document.querySelector('#disagreements').value), codebook_decisions:lines(document.querySelector('#decisions').value)})}); notify('Calibration frozen. The practice evidence remains training-only.'); await boot(); } catch (error) { notify(error.message); button.disabled = false; }
+    }
+
+    function renderBinding() {
+      const target = document.querySelector('#coordinator-action');
+      if (!state.pilot_available) { target.innerHTML = '<section class="panel pending"><h2>Study binding not configured</h2><p class="muted">Restart this console with a pilot run directory to bind the frozen codebook.</p></section>'; return; }
+      const already = state.pilot_gate && !state.pilot_gate.missing_gates.includes('frozen_annotation_codebook');
+      target.innerHTML = `<section class="panel accent"><div class="panel-head"><div><p class="eyebrow">Study handoff</p><h2>${already ? 'Final codebook is bound' : 'Bind the frozen identity'}</h2></div></div><p class="${already ? 'success':'boundary'}">${already ? 'The pilot revalidates the copied calibration commitment and final codebook bytes.' : 'This copies the frozen training-only commitment and final codebook into the prepared study. It does not authorize agent execution.'}</p><div class="actions" style="margin-top:1rem"><button id="bind-study" class="button-primary" ${already ? 'disabled':''}>${already ? 'Study binding complete':'Bind to prepared pilot'}</button></div>${state.pilot_gate ? `<pre style="white-space:pre-wrap">${escapeHtml(JSON.stringify(state.pilot_gate,null,2))}</pre>`:''}</section>`;
+      if (!already) document.querySelector('#bind-study').addEventListener('click', async event => { if (!confirm('Bind this exact frozen calibration and codebook into the prepared development pilot?')) return; event.target.disabled=true; try { await api('/api/bind',{method:'POST',body:'{}'}); notify('Study codebook binding committed.'); await boot(); } catch(error) { notify(error.message); event.target.disabled=false; } });
+    }
+
+    async function boot() {
+      app.setAttribute('aria-busy','true');
+      try { if (!token) throw new Error('This URL has no role token. Use one of the private URLs printed by the server.'); state = await api('/api/state'); if (state.role === 'annotator') await renderAnnotator(); else await renderCoordinator(); } catch (error) { badge.textContent='Access blocked'; setPhases('annotate',['discuss','freeze']); app.innerHTML=`<section class="panel danger"><div class="error"><strong>Cannot open the calibration workflow.</strong><br>${escapeHtml(error.message)}</div></section>`; } finally { app.setAttribute('aria-busy','false'); }
+    }
+    boot();
+  </script>
+</body>
+</html>

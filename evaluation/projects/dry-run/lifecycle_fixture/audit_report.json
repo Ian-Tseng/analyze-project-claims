@@ -1,0 +1,7 @@
+{
+  "audit_passed": false,
+  "failed_checks": [
+    "result_hash_matches_manifest"
+  ],
+  "paper_table_eligible": false
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/natural-label-commitment.schema.json",
+  "title": "Frozen natural-project human-label commitment",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_group_id",
+    "selection_sha256",
+    "annotation_codebook_sha256",
+    "calibration_set_sha256",
+    "study_codebook_binding_sha256",
+    "commitment_state",
+    "condition_blinded",
+    "gold_frozen",
+    "independent_human_annotators",
+    "adjudicator_count",
+    "annotation_count",
+    "project_count",
+    "source_snapshot_sha256",
+    "raw_label_sha256",
+    "adjudicated_gold_sha256",
+    "annotator_identity_sha256",
+    "adjudicator_identity_sha256",
+    "label_set_sha256",
+    "frozen_at",
+    "paper_table_eligible",
+    "general_reliability_proved"
+  ],
+  "properties": {
+    "schema_version": {"const": "APC_NATURAL_PROJECT_LABEL_COMMITMENT_V1"},
+    "run_group_id": {"type": "string", "minLength": 1},
+    "selection_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "annotation_codebook_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "calibration_set_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "study_codebook_binding_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "commitment_state": {"const": "frozen"},
+    "condition_blinded": {"const": true},
+    "gold_frozen": {"const": true},
+    "independent_human_annotators": {"type": "integer", "minimum": 2},
+    "adjudicator_count": {"const": 1},
+    "annotation_count": {"type": "integer", "minimum": 8},
+    "project_count": {"type": "integer", "minimum": 4},
+    "source_snapshot_sha256": {"$ref": "#/$defs/hash_map"},
+    "raw_label_sha256": {"$ref": "#/$defs/hash_map"},
+    "adjudicated_gold_sha256": {"$ref": "#/$defs/hash_map"},
+    "annotator_identity_sha256": {"$ref": "#/$defs/hash_map"},
+    "adjudicator_identity_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "label_set_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "frozen_at": {"type": "string", "format": "date-time"},
+    "paper_table_eligible": {"const": false},
+    "general_reliability_proved": {"const": false}
+  },
+  "$defs": {
+    "hash_map": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,4 @@
+Audit the supplied project packet for inconsistent claims. Return a structured
+list of findings with the affected element, evidence, and proposed repair.
+Do not infer success from file existence, and do not inspect paths outside the
+supplied packet.

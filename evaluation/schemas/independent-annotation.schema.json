@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/independent-annotation.schema.json",
+  "title": "Completed independent blinded natural-project annotation",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "selection_sha256",
+    "project_id",
+    "annotator_slot_id",
+    "snapshot_sha256",
+    "annotator_id",
+    "completed",
+    "human_attestation",
+    "element_inventory",
+    "candidate_findings"
+  ],
+  "properties": {
+    "schema_version": {"const": "APC_INDEPENDENT_ANNOTATION_V1"},
+    "selection_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "project_id": {"type": "string", "minLength": 1},
+    "annotator_slot_id": {"type": "string", "minLength": 1},
+    "snapshot_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "annotator_id": {"type": "string", "minLength": 1},
+    "completed": {"const": true},
+    "human_attestation": {
+      "type": "object",
+      "required": [
+        "human_annotator",
+        "independent",
+        "condition_blinded",
+        "no_agent_outputs_reviewed",
+        "attested_at"
+      ],
+      "properties": {
+        "human_annotator": {"const": true},
+        "independent": {"const": true},
+        "condition_blinded": {"const": true},
+        "no_agent_outputs_reviewed": {"const": true},
+        "attested_at": {"type": "string", "format": "date-time"}
+      },
+      "additionalProperties": false
+    },
+    "element_inventory": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/element"}
+    },
+    "candidate_findings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/candidate_finding"}
+    },
+    "notes": {"type": "string"}
+  },
+  "$defs": {
+    "element": {
+      "type": "object",
+      "required": ["element_id", "component_id", "path", "element_type", "observed_state"],
+      "properties": {
+        "element_id": {"type": "string", "minLength": 1},
+        "component_id": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "element_type": {"type": "string", "minLength": 1},
+        "observed_state": {
+          "enum": ["inspected", "schema_validated", "executed_test", "replayed", "inferred", "not_tested"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "candidate_finding": {
+      "type": "object",
+      "required": [
+        "finding_id",
+        "element_id",
+        "inconsistency_class",
+        "claim_status",
+        "severity",
+        "conflicting_element_ids",
+        "why_conflict",
+        "evidence",
+        "counterevidence",
+        "safest_interpretation",
+        "required_repair"
+      ],
+      "properties": {
+        "finding_id": {"type": "string", "minLength": 1},
+        "element_id": {"type": "string", "minLength": 1},
+        "inconsistency_class": {
+          "enum": ["definition", "type_or_flow", "scope", "claim_evidence", "goal_metric", "lifecycle", "monitor", "document", "provenance"]
+        },
+        "claim_status": {
+          "enum": ["partially_supported", "contradicted", "untested", "invalidly_specified"]
+        },
+        "severity": {"enum": ["low", "moderate", "severe"]},
+        "conflicting_element_ids": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "why_conflict": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "counterevidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "safest_interpretation": {"type": "string", "minLength": 1},
+        "required_repair": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

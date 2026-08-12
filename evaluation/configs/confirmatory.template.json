@@ -1,0 +1,45 @@
+{
+  "schema_version": "APC_CROSS_PROJECT_RELIABILITY_CONFIG_V1",
+  "study_id": "replace-with-preregistered-confirmatory-id",
+  "protocol_version": "APC_CROSS_PROJECT_PROTOCOL_V1",
+  "phase": "confirmatory",
+  "execution_mode": "live_agents",
+  "evidence_role": "confirmatory_evaluation",
+  "claim_boundary": "Any supported claim is limited to the frozen sampled projects, task strata, conditions, agent families, versions, and evaluation protocol.",
+  "paper_table_eligible": false,
+  "general_reliability_proved": false,
+  "conditions": [
+    {"id": "agent_only", "prompt_path": "prompts/agent_only.txt"},
+    {"id": "generic_checklist", "prompt_path": "prompts/generic_checklist.txt"},
+    {"id": "skill_assisted", "prompt_path": "prompts/skill_assisted.txt"}
+  ],
+  "agent_families": [
+    {"id": "replace-family-a", "kind": "live_agent", "version": "freeze-exact-version"},
+    {"id": "replace-family-b", "kind": "live_agent", "version": "freeze-exact-version"}
+  ],
+  "repeats": [{"id": "r1", "seed": 2001}, {"id": "r2", "seed": 2002}],
+  "projects": [],
+  "project_sampling": {
+    "minimum_projects": 8,
+    "selection": "powered, preregistered, unseen natural projects sampled by frozen strata",
+    "independent_projects": true,
+    "originating_project_excluded": true
+  },
+  "labels": {
+    "independent_human_annotators": 2,
+    "condition_blinded": true,
+    "adjudication": "two independent labels followed by a third blinded adjudicator"
+  },
+  "analysis": {
+    "primary_unit": "project",
+    "reported_unit": "project_condition_family_repeat",
+    "uncertainty": "project-clustered confidence intervals and preregistered paired contrasts",
+    "multiplicity": "predeclare primary outcomes and correction family",
+    "power_plan": "replace with pilot-informed project-level power calculation"
+  },
+  "preregistration": {
+    "frozen_identifier": "replace-before-run",
+    "frozen_at": "replace-before-run"
+  },
+  "runtime": {"project_root": "../../..", "output_root": "runs/analyze_project_claims_reliability"}
+}

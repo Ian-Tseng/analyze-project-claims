@@ -1,0 +1,161 @@
+{
+  "accepted_map_id": "component-map-e8944d63370c",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260809T163533314918Z-232f589c-component-map-b923db98f5b9.json",
+    "delta": "deltas/20260809T163533314918Z-232f589c.json"
+  },
+  "candidate_map_id": "component-map-b923db98f5b9",
+  "changes": {
+    "added_components": [
+      "annotation-codebook-calibration"
+    ],
+    "added_elements": [
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-human-only-lifecycle"
+      },
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-selection-isolation"
+      },
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-source-and-packet-integrity"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\data\\analyze_project_claims_annotation_calibration\\artifact_registry.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\calibration_manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/annotation-codebook.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/configs/annotation-calibration.selection.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/schemas"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/annotation-calibration-selection.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/scripts/annotation_calibration.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_annotation_calibration.py"
+      }
+    ]
+  },
+  "event_id": "20260809T163533314918Z-232f589c",
+  "integrity": {
+    "canonical_payload_sha256": "1fd58137fc0d527e9f7c24e3b0eb97b26570d7cb2a9424fb5f3b127f2c13b597"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-09T16:35:33.314918Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

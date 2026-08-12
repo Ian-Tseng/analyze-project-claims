@@ -1,0 +1,554 @@
+{
+  "components": [
+    {
+      "component_id": "component-map-lifecycle",
+      "component_status": "PASS",
+      "component_type": "code",
+      "element_counts": {
+        "PASS": 6
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "direct-dependency-evidence-contract",
+          "evidence": [
+            {
+              "locator": "Build or reconcile the component-to-element map",
+              "observed": "Three new red-green regressions now reject empty element evidence, test-only evidence, and unknown scan fields; the component-map focused suite passed 16 tests.",
+              "source": "skill/analyze-project-claims/SKILL.md"
+            },
+            {
+              "locator": "required evidence with minItems 1",
+              "observed": "Three new red-green regressions now reject empty element evidence, test-only evidence, and unknown scan fields; the component-map focused suite passed 16 tests.",
+              "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
+            },
+            {
+              "locator": "_is_test_source and test-only evidence rejection",
+              "observed": "Three new red-green regressions now reject empty element evidence, test-only evidence, and unknown scan fields; the component-map focused suite passed 16 tests.",
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_mapper_rejects_element_without_evidence and test_mapper_rejects_test_only_element_evidence",
+              "observed": "Three new red-green regressions now reject empty element evidence, test-only evidence, and unknown scan fields; the component-map focused suite passed 16 tests.",
+              "source": "tests/test_strict_evidence_contract.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Every mapped element has nonempty evidence, and any test-backed element also names a direct non-test dependency."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "drift-and-conflict-preservation",
+          "evidence": [
+            {
+              "locator": "_compare and reconcile candidate preservation",
+              "observed": "The component-map suite passed drift/conflict candidate preservation tests.",
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_stale_source_produces_delta and test_conflict_produces_candidate_without_overwrite",
+              "observed": "The component-map suite passed drift/conflict candidate preservation tests.",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Source drift or same-ID semantic conflict emits candidate/delta evidence while preserving the accepted map."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "missing-map-bootstrap",
+          "evidence": [
+            {
+              "locator": "missing accepted-map branch",
+              "observed": "The component-map suite passed provisional bootstrap without implicit acceptance.",
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_missing_map_bootstraps_provisional",
+              "observed": "The component-map suite passed provisional bootstrap without implicit acceptance.",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "A missing accepted map produces only a provisional candidate and an append-only history event."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "observation-template-roundtrip",
+          "evidence": [
+            {
+              "locator": "observation element evidence field",
+              "observed": "The component-map suite passed observation evidence round-trip checks.",
+              "source": "skill/analyze-project-claims/assets/component-map-observation.template.json"
+            },
+            {
+              "locator": "observation evidence contract",
+              "observed": "The component-map suite passed observation evidence round-trip checks.",
+              "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
+            },
+            {
+              "locator": "test_observation_template_preserves_evidence_locators",
+              "observed": "The component-map suite passed observation evidence round-trip checks.",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "The documented observation template preserves declared evidence locators when passed through reconciliation."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "runtime-schema-enforcement",
+          "evidence": [
+            {
+              "locator": "_validate_map and _accept",
+              "observed": "The component-map suite passed schema enforcement and malformed-candidate rejection.",
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_accept_rejects_candidate_missing_schema_required_target",
+              "observed": "The component-map suite passed schema enforcement and malformed-candidate rejection.",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Candidate acceptance enforces every required field in the published component-map schema."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "unchanged-map-reuse",
+          "evidence": [
+            {
+              "locator": "checked_unchanged branch",
+              "observed": "Final reconciliation returned checked_unchanged with no candidate or delta.",
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_valid_map_is_checked_without_rebuild",
+              "observed": "Final reconciliation returned checked_unchanged with no candidate or delta.",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "An unchanged accepted map is checked and reused without a replacement candidate or delta."
+        }
+      ]
+    },
+    {
+      "component_id": "cross-project-evaluation",
+      "component_status": "PASS",
+      "component_type": "experiment",
+      "element_counts": {
+        "PASS": 5
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "blinded-packet-boundary",
+          "evidence": [
+            {
+              "locator": "_copy_packets and collect_study",
+              "observed": "The dry-run audit and regression verified that packets contain neither gold.json nor fixture-plan.json.",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            },
+            {
+              "locator": "test_dry_run_completes_without_authorizing_reliability",
+              "observed": "The dry-run audit and regression verified that packets contain neither gold.json nor fixture-plan.json.",
+              "source": "tests/test_cross_project_reliability.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Prepared agent packets exclude gold labels, fixture plans, adjudications, and prior condition outputs."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "complete-comparison-grid",
+          "evidence": [
+            {
+              "locator": "test_missing_submission_blocks_collection",
+              "observed": "All 12 required project-condition-family-repeat specs produced submissions, adjudications, and valid completion markers; deletion of one submission fails closed.",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py"
+            },
+            {
+              "locator": "_spec_rows and collect_study",
+              "observed": "All 12 required project-condition-family-repeat specs produced submissions, adjudications, and valid completion markers; deletion of one submission fails closed.",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Every declared project-condition-agent-family-repeat cell is required and missing submissions fail closed."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "lifecycle-and-claim-gates",
+          "evidence": [
+            {
+              "locator": "RESEARCH_ARCHITECTURE_MONITOR_V2 completion_evidence",
+              "observed": "The V2 monitor reported 3/3 aligned views ready, runner complete, audit passed, scientific untested, and acceptance not eligible.",
+              "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json"
+            },
+            {
+              "locator": "State dimensions",
+              "observed": "The V2 monitor reported 3/3 aligned views ready, runner complete, audit passed, scientific untested, and acceptance not eligible.",
+              "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+            },
+            {
+              "locator": "collect_study and audit_study",
+              "observed": "The V2 monitor reported 3/3 aligned views ready, runner complete, audit passed, scientific untested, and acceptance not eligible.",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Runner completion, audit completion, scientific support, and paper acceptance remain separate, and the scripted dry run cannot authorize reliability."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "pilot-and-confirmatory-stages",
+          "evidence": [
+            {
+              "locator": "project_sampling, labels, analysis, and preregistration",
+              "observed": "The public templates require 4-6 natural projects for development and a powered preregistered unseen-project confirmation with two independent annotators.",
+              "source": "evaluation/configs/confirmatory.template.json"
+            },
+            {
+              "locator": "project_sampling, labels, and analysis",
+              "observed": "The public templates require 4-6 natural projects for development and a powered preregistered unseen-project confirmation with two independent annotators.",
+              "source": "evaluation/configs/development-pilot.template.json"
+            }
+          ],
+          "method": "inspected",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Development and confirmatory templates require natural projects, multiple live agent families, independent labels, project-level analysis, and frozen claim boundaries."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "project-unit-metrics",
+          "evidence": [
+            {
+              "locator": "Metrics",
+              "observed": "The collector produced finding/element, severe-recall, false-positive, repair, provenance, time, and token metrics with project_condition_family_repeat cells and project-level macro aggregation.",
+              "source": "evaluation/protocol.md"
+            },
+            {
+              "locator": "_score_spec, _aggregate_conditions, and _comparison_deltas",
+              "observed": "The collector produced finding/element, severe-recall, false-positive, repair, provenance, time, and token metrics with project_condition_family_repeat cells and project-level macro aggregation.",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Finding, element, severe-recall, false-positive, repair, provenance, time, and token metrics are aggregated with project as the primary independent unit."
+        }
+      ]
+    },
+    {
+      "component_id": "distribution",
+      "component_status": "PASS",
+      "component_type": "artifact",
+      "element_counts": {
+        "PASS": 2
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "github-wrapper-mirror-parity",
+          "evidence": [
+            {
+              "locator": "test_github_wrapper_downloads_copy_is_exact",
+              "observed": "The cache-filtered source and Downloads wrapper manifests and SHA-256 values matched.",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+            },
+            {
+              "locator": "public wrapper content and evaluation references",
+              "observed": "The cache-filtered source and Downloads wrapper manifests and SHA-256 values matched.",
+              "source": "README.md"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "The workspace GitHub wrapper and Downloads mirror remain synchronized after append-only audits."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "official-skill-validation",
+          "evidence": [
+            {
+              "locator": "skill-creator/scripts/quick_validate.py on four roots",
+              "observed": "The official quick validator returned 'Skill is valid!' for staging, project export, Downloads, and active installation.",
+              "source": "skill/analyze-project-claims"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Skill metadata and referenced resources in staging, export, Downloads, and installed copies."
+        }
+      ]
+    },
+    {
+      "component_id": "paper-facing-boundaries",
+      "component_status": "PARTIAL",
+      "component_type": "claim",
+      "element_counts": {
+        "PASS": 4,
+        "PENDING": 2
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "active-rag-claim-consistency",
+          "evidence": [
+            {
+              "locator": "active accepted-run monitor declaration",
+              "observed": "The 21 focused claim, lifecycle, package, map, and cross-project checks passed without changing RAG scientific outcomes.",
+              "source": "F:\\logic_guided_rag_experiment\\configs\\rag_external_v55_manifest_monitor.json"
+            },
+            {
+              "locator": "bounded lifecycle and audit-independence result claims",
+              "observed": "The 21 focused claim, lifecycle, package, map, and cross-project checks passed without changing RAG scientific outcomes.",
+              "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_EXTERNAL_V55_MANIFEST_RESULTS.md"
+            },
+            {
+              "locator": "focused active-consistency tests",
+              "observed": "The 21 focused claim, lifecycle, package, map, and cross-project checks passed without changing RAG scientific outcomes.",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Active RAG claim, lifecycle, audit-independence, and paper-table boundaries remain internally consistent after the skill change."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "bounded-readme-claims",
+          "evidence": [
+            {
+              "locator": "Research status and Paper-facing evaluation plan",
+              "observed": "README states the workflow dry run is complete while cross-project reliability remains not established.",
+              "source": "README.md"
+            },
+            {
+              "locator": "workflow-dry-run and natural-project boundaries",
+              "observed": "README states the workflow dry run is complete while cross-project reliability remains not established.",
+              "source": "evaluation/README.md"
+            }
+          ],
+          "method": "inspected",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "README distinguishes deterministic behavior evidence from cross-project reliability and general RAG benefit."
+        },
+        {
+          "check_status": "PENDING",
+          "claim_status": "untested",
+          "element_id": "cross-project-reliability",
+          "evidence": [
+            {
+              "locator": "State dimensions and next gate",
+              "observed": "The 12-cell two-project run uses synthetic packages and scripted fixture families; no natural unseen project or live agent family was evaluated.",
+              "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+            },
+            {
+              "locator": "Stage gates and claim boundary",
+              "observed": "The 12-cell two-project run uses synthetic packages and scripted fixture families; no natural unseen project or live agent family was evaluated.",
+              "source": "evaluation/protocol.md"
+            }
+          ],
+          "method": "not_tested",
+          "required_repair": "Run the frozen 4-6 natural-project development pilot, power a preregistered unseen-project confirmation, and use at least two live agent/model families with independent blinded labels.",
+          "safe_interpretation": "The evaluation lifecycle is exercised, but general reliability across projects, agents, models, or domains remains untested.",
+          "target": "General reliability across projects, agents, models, and domains."
+        },
+        {
+          "check_status": "PENDING",
+          "claim_status": "invalidly_specified",
+          "element_id": "identified-release-metadata",
+          "evidence": [
+            {
+              "locator": "placeholder fields",
+              "observed": "CITATION.cff remains a template and no author-approved LICENSE exists.",
+              "source": "CITATION.cff.template"
+            }
+          ],
+          "method": "not_tested",
+          "required_repair": "Supply author identity, repository URL, release identifier or DOI, and an author-approved license.",
+          "safe_interpretation": "The research artifact is not yet an identified open-source release.",
+          "target": "Final authorship, repository URL, DOI, and author-approved software license."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "legacy-self-scan-authority",
+          "evidence": [
+            {
+              "locator": "Validation authority",
+              "observed": "validation/README.md distinguishes accepted map authority from historical inputs and append-only scan records.",
+              "source": "validation/README.md"
+            }
+          ],
+          "method": "inspected",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Current and historical self-scan inputs have unambiguous authority and lifecycle labels."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "readme-validation-layout",
+          "evidence": [
+            {
+              "locator": "Repository layout and validation authority paragraph",
+              "observed": "README lists the evaluation package, public tests, and validation hierarchy.",
+              "source": "README.md"
+            }
+          ],
+          "method": "inspected",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "The README repository tree represents the current validation artifacts introduced by v0.2.0."
+        }
+      ]
+    },
+    {
+      "component_id": "scan-logging",
+      "component_status": "PASS",
+      "component_type": "code",
+      "element_counts": {
+        "PASS": 2
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "hierarchical-scan-record",
+          "evidence": [
+            {
+              "locator": "hierarchical scan exchange contract",
+              "observed": "Public recorder and package regressions passed within the 18-test public suite.",
+              "source": "skill/analyze-project-claims/references/scan-record.schema.json"
+            },
+            {
+              "locator": "record derivation and append-only write",
+              "observed": "Public recorder and package regressions passed within the 18-test public suite.",
+              "source": "skill/analyze-project-claims/scripts/record_scan.py"
+            },
+            {
+              "locator": "public recorder regressions",
+              "observed": "Public recorder and package regressions passed within the 18-test public suite.",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "Element-level evidence method, check status, claim status, interpretation, and repair are persisted hierarchically."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "repository-regression",
+          "evidence": [
+            {
+              "locator": "focused repository regressions",
+              "observed": "The full repository regression completed with 194 passing tests.",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py"
+            },
+            {
+              "locator": "cross-project lifecycle implementation",
+              "observed": "The full repository regression completed with 194 passing tests.",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            },
+            {
+              "locator": "public dry-run regressions",
+              "observed": "The full repository regression completed with 194 passing tests.",
+              "source": "tests/test_cross_project_reliability.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The mapped element satisfies its bounded structural, behavioral, documentation, or lifecycle contract in the tested scope.",
+          "target": "The expanded package does not break active repository contracts."
+        }
+      ]
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "a4b17ab83f67e108c22f1fa1373d04a020090c0f73f19aef9ba9154cc225e63b"
+  },
+  "scan": {
+    "authority": [
+      "validation/component-map/accepted-map.json",
+      "skill/analyze-project-claims/SKILL.md",
+      "evaluation/configs/dry-run.json",
+      "evaluation/protocol.md",
+      "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_reliability\\apc-cross-project-dryrun-v1-ff3546880c31\\summaries\\metrics.json",
+      "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json",
+      "F:\\logic_guided_rag_experiment\\docs\\RAG_GENERALIZATION_CHECK_TABLE.md"
+    ],
+    "logger_version": "1.0.0",
+    "objective": "Formally scan the synchronized v0.3.0 analyze-project-claims package and its cross-project reliability evaluation lifecycle without treating scripted fixtures as empirical reliability evidence.",
+    "recorded_at_utc": "2026-08-08T15:59:39.195295Z",
+    "scan_id": "20260808T155939195295Z-083fc563",
+    "scope": [
+      "component-map-8be48ee34256",
+      "evaluation dry-run apc-cross-project-dryrun-v1-ff3546880c31",
+      "four installable skill copies",
+      "workspace and Downloads public wrappers",
+      "active RAG claim-boundary surfaces"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+  },
+  "schema_version": "1.0",
+  "summary": {
+    "claim_boundary": "Cross-project empirical reliability, live agent/model-family robustness, independent scientific replication, general RAG improvement, and paper-table eligibility remain unestablished.",
+    "component_count": 5,
+    "element_count": 21,
+    "element_counts": {
+      "PASS": 19,
+      "PENDING": 2
+    },
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "The synchronized public kit enforces direct-dependency component mapping, strict append-only scan records, and a complete project-condition-family-repeat evaluation lifecycle; its two-project scripted run validates workflow behavior only.",
+    "unresolved_uncertainties": [
+      "Natural-project cross-project reliability remains untested.",
+      "Final author, repository, release identifier or DOI, and author-approved license remain pending."
+    ]
+  }
+}

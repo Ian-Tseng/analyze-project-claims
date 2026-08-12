@@ -1,0 +1,144 @@
+{
+  "accepted_map_id": "component-map-f49709970216",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-9287c9fc151e",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-to-study-codebook-binding",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\execution_gate.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/schemas"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/annotation-calibration-commitment.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/natural-codebook-commitment.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/schemas/natural-label-commitment.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/scripts/annotation_calibration.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/scripts/natural_project_pilot.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_annotation_calibration_freeze.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_natural_project_codebook_binding.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_natural_project_label_freeze.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_natural_project_label_schemas.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_natural_project_pilot.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "102979c5d591f036813195a7fd55af054f54db47e722f3a9aec5b200025d594c"
+  },
+  "recorded_at_utc": "2026-08-09T17:11:58.669803Z",
+  "scan_id": "20260809T171158669803Z-64dd16af",
+  "schema_version": "1.0"
+}

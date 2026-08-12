@@ -1,0 +1,482 @@
+{
+  "accepted_at_utc": "2026-08-08T12:35:30.327320Z",
+  "authority": [
+    "skill/analyze-project-claims/SKILL.md",
+    "skill/analyze-project-claims/references/component-map-observation.schema.json",
+    "skill/analyze-project-claims/references/component-map.schema.json",
+    "skill/analyze-project-claims/references/scan-record.schema.json",
+    "evaluation/protocol.md",
+    "evaluation/configs/dry-run.json",
+    "evaluation/scripts/cross_project_reliability.py",
+    "tests/test_cross_project_reliability.py",
+    "validation/README.md"
+  ],
+  "components": [
+    {
+      "component_id": "component-map-lifecycle",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "drift-and-conflict-preservation",
+          "evidence_locators": [
+            {
+              "locator": "test_stale_source_produces_delta and test_conflict_produces_candidate_without_overwrite",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Source drift or same-ID semantic conflict emits candidate/delta evidence while preserving the accepted map."
+        },
+        {
+          "element_id": "missing-map-bootstrap",
+          "evidence_locators": [
+            {
+              "locator": "test_missing_map_bootstraps_provisional",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A missing accepted map produces only a provisional candidate and an append-only history event."
+        },
+        {
+          "element_id": "observation-template-roundtrip",
+          "evidence_locators": [
+            {
+              "locator": "test_observation_template_preserves_evidence_locators",
+              "source": "skill/analyze-project-claims/assets/component-map-observation.template.json"
+            },
+            {
+              "locator": "observation element evidence contract",
+              "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The documented observation template preserves declared evidence locators when passed through reconciliation."
+        },
+        {
+          "element_id": "runtime-schema-enforcement",
+          "evidence_locators": [
+            {
+              "locator": "_validate_map and _accept",
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_accept_rejects_candidate_missing_schema_required_target",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Candidate acceptance enforces every required field in the published component-map schema."
+        },
+        {
+          "element_id": "unchanged-map-reuse",
+          "evidence_locators": [
+            {
+              "locator": "test_valid_map_is_checked_without_rebuild",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "An unchanged accepted map is checked and reused without a replacement candidate or delta."
+        }
+      ]
+    },
+    {
+      "component_id": "cross-project-evaluation",
+      "component_type": "experiment",
+      "elements": [
+        {
+          "element_id": "blinded-packet-boundary",
+          "evidence_locators": [
+            {
+              "locator": "_copy_packets and collect_study",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            },
+            {
+              "locator": "test_dry_run_completes_without_authorizing_reliability",
+              "source": "tests/test_cross_project_reliability.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Prepared agent packets exclude gold labels, fixture plans, adjudications, and prior condition outputs."
+        },
+        {
+          "element_id": "complete-comparison-grid",
+          "evidence_locators": [
+            {
+              "locator": "test_missing_submission_blocks_collection",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py"
+            },
+            {
+              "locator": "_spec_rows and collect_study",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Every declared project-condition-agent-family-repeat cell is required and missing submissions fail closed."
+        },
+        {
+          "element_id": "lifecycle-and-claim-gates",
+          "evidence_locators": [
+            {
+              "locator": "RESEARCH_ARCHITECTURE_MONITOR_V2 completion_evidence",
+              "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json"
+            },
+            {
+              "locator": "State dimensions",
+              "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+            },
+            {
+              "locator": "collect_study and audit_study",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Runner completion, audit completion, scientific support, and paper acceptance remain separate, and the scripted dry run cannot authorize reliability."
+        },
+        {
+          "element_id": "pilot-and-confirmatory-stages",
+          "evidence_locators": [
+            {
+              "locator": "project_sampling, labels, analysis, and preregistration",
+              "source": "evaluation/configs/confirmatory.template.json"
+            },
+            {
+              "locator": "project_sampling, labels, and analysis",
+              "source": "evaluation/configs/development-pilot.template.json"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Development and confirmatory templates require natural projects, multiple live agent families, independent labels, project-level analysis, and frozen claim boundaries."
+        },
+        {
+          "element_id": "project-unit-metrics",
+          "evidence_locators": [
+            {
+              "locator": "Metrics",
+              "source": "evaluation/protocol.md"
+            },
+            {
+              "locator": "_score_spec, _aggregate_conditions, and _comparison_deltas",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Finding, element, severe-recall, false-positive, repair, provenance, time, and token metrics are aggregated with project as the primary independent unit."
+        }
+      ]
+    },
+    {
+      "component_id": "distribution",
+      "component_type": "artifact",
+      "elements": [
+        {
+          "element_id": "github-wrapper-mirror-parity",
+          "evidence_locators": [
+            {
+              "locator": "test_github_wrapper_downloads_copy_is_exact",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The workspace GitHub wrapper and Downloads mirror remain synchronized after append-only audits."
+        },
+        {
+          "element_id": "official-skill-validation",
+          "evidence_locators": [
+            {
+              "locator": "skill-creator/scripts/quick_validate.py on four roots",
+              "source": "skill/analyze-project-claims"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Skill metadata and referenced resources in staging, export, Downloads, and installed copies."
+        }
+      ]
+    },
+    {
+      "component_id": "paper-facing-boundaries",
+      "component_type": "claim",
+      "elements": [
+        {
+          "element_id": "active-rag-claim-consistency",
+          "evidence_locators": [
+            {
+              "locator": "focused active-consistency tests and full repository regression",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Active RAG claim, lifecycle, audit-independence, and paper-table boundaries remain internally consistent after the skill change."
+        },
+        {
+          "element_id": "bounded-readme-claims",
+          "evidence_locators": [
+            {
+              "locator": "Research status and Paper-facing evaluation plan",
+              "source": "README.md"
+            },
+            {
+              "locator": "workflow-dry-run and natural-project boundaries",
+              "source": "evaluation/README.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "README distinguishes deterministic behavior evidence from cross-project reliability and general RAG benefit."
+        },
+        {
+          "element_id": "cross-project-reliability",
+          "evidence_locators": [
+            {
+              "locator": "State dimensions and next gate",
+              "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+            },
+            {
+              "locator": "Stage gates and claim boundary",
+              "source": "evaluation/protocol.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "General reliability across projects, agents, models, and domains."
+        },
+        {
+          "element_id": "identified-release-metadata",
+          "evidence_locators": [
+            {
+              "locator": "placeholder fields",
+              "source": "CITATION.cff.template"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Final authorship, repository URL, DOI, and author-approved software license."
+        },
+        {
+          "element_id": "legacy-self-scan-authority",
+          "evidence_locators": [
+            {
+              "locator": "Validation authority",
+              "source": "validation/README.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Current and historical self-scan inputs have unambiguous authority and lifecycle labels."
+        },
+        {
+          "element_id": "readme-validation-layout",
+          "evidence_locators": [
+            {
+              "locator": "Repository layout and validation authority paragraph",
+              "source": "README.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The README repository tree represents the current validation artifacts introduced by v0.2.0."
+        }
+      ]
+    },
+    {
+      "component_id": "scan-logging",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "hierarchical-scan-record",
+          "evidence_locators": [
+            {
+              "locator": "py -m unittest discover -s tests -v",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Element-level evidence method, check status, claim status, interpretation, and repair are persisted hierarchically."
+        },
+        {
+          "element_id": "repository-regression",
+          "evidence_locators": [
+            {
+              "locator": "py -m pytest -q",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The expanded package does not break active repository contracts."
+        }
+      ]
+    }
+  ],
+  "created_at_utc": "2026-08-08T12:35:08.278293Z",
+  "integrity": {
+    "canonical_payload_sha256": "9dcab61047a1a2e46e97173eedd4c890172ec4808f017a4842d951b549d23865"
+  },
+  "map_id": "component-map-1f1721933996",
+  "map_state": "accepted",
+  "mapper_version": "1.0.0",
+  "objective": "Map the v0.3.0 public package plus the new cross-project reliability evaluation lifecycle without expanding the empirical reliability claim.",
+  "origin_scan_id": "20260808T123508278293Z-5cc89503",
+  "previous_map_id": "component-map-2ab151e98fc8",
+  "schema_version": "1.0",
+  "scope": [
+    "README.md",
+    "CITATION.cff.template",
+    "skill/analyze-project-claims",
+    "tests",
+    "validation/README.md",
+    "evaluation",
+    "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py",
+    "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json",
+    "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+  ],
+  "skill_name": "analyze-project-claims",
+  "skill_sha256": "4a4b6f033efa8301102858997208398dcbadaba584fef86108492285eac70be6",
+  "source_snapshot": [
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "58d5ed65822ac864200f1f321b25b70a2e7492fe9ca4788d33735ec74711079a",
+      "source": "CITATION.cff.template"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "cb297e627c002a44f8f794717d6d93c508dea260c0672cf1e870aafba79e5e6d",
+      "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "6f01e5c9d5e4da9f1bd5ed3ce0357f862e083dae77c52e3af2003ffc80cd6e8e",
+      "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "ede58e93356a7eb207e8f9a25184e61d6b78441dc0ee8e514c4651285f0c0941",
+      "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "fc9b577d322e85ea909a20f5ae746b41fee45c618145b7537b72d4cf82336331",
+      "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "27861eb3c3f95ed767278f30ea5de01e7e81b5eead2909331ff2db0314bf1407",
+      "source": "README.md"
+    },
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "fcc308c1b82bbba465d35e714a92392fa939665fc9634824848698cb69c14a4f",
+      "source": "evaluation"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "acf187affe120da64f97208365b5e9c602a71ea33a02a763234c142a2560e394",
+      "source": "evaluation/README.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "5f7dc84b2b59808401fe5c5a27f210d08b8bdf1dae409adf54c692b33a0ba08a",
+      "source": "evaluation/configs/confirmatory.template.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "fa254096c6b515fc76e35ec42f9d890f0973ca92fd46ebfb3ee6aaf0170dab82",
+      "source": "evaluation/configs/development-pilot.template.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "78c8e5f3bba9e6e4b3c2dcfae97fedc89dc346e3e06a07d036397c8ce8fdffa7",
+      "source": "evaluation/configs/dry-run.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "cc53c002b04fb849111509d86574d9773accfd936dbfc8e29f53b52b93ba39a6",
+      "source": "evaluation/protocol.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "66129ab7f1c40bdf3a3818a1de0a09d9105864e83c3d0394704802b43697a597",
+      "source": "evaluation/scripts/cross_project_reliability.py"
+    },
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "724f0e13c73d5fd325c79ec4d7efd04485d4dacc3c5879628d535731fa58b829",
+      "source": "skill/analyze-project-claims"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "4a4b6f033efa8301102858997208398dcbadaba584fef86108492285eac70be6",
+      "source": "skill/analyze-project-claims/SKILL.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "76496fa1ec32920c07241a5c8819d19bf0e541f9be24f5c303a1887f4e20df57",
+      "source": "skill/analyze-project-claims/assets/component-map-observation.template.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "78ba3fdc1ea7e4e615b63d52c0915bc592166953df995d35c5ee00020c579987",
+      "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "33128e872845b8c6b08906b62ae98093915f5a15d5f85445ba13f1177848fe82",
+      "source": "skill/analyze-project-claims/references/component-map.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "20cc271522ceeeecb6a4e3ebf3e81721c7542d2dfdef6398af8162c88cf6101c",
+      "source": "skill/analyze-project-claims/references/scan-record.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "f1beec159906e6cbc7256f773cd06ba6f917181783531b2071dbebd60ee6ef1c",
+      "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+    },
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "2f7e9bf3199b90ecddc52e48323bae24ed5d1eaee1881f4686d3a759b705ea41",
+      "source": "tests"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "65d0f46c6e47bb015052ed1e29ae8030531aaf101800a8a09ac32485ea6c6170",
+      "source": "tests/test_component_map.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "ffefc4bca69716d201fd4a79c73fdadee8511998fabae30e28c5fcf6fdf77917",
+      "source": "tests/test_cross_project_reliability.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "ccdc164736a0f70ae9049d6608cde1a979a4c14a6d42aedd742b13f02cf084bb",
+      "source": "tests/test_record_scan.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "a9221fbd8b49157e1bad700f77eaa920c24fe0367fd1625f0673863adcb9aa72",
+      "source": "validation/README.md"
+    }
+  ]
+}

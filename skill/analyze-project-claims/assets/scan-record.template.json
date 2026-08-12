@@ -1,0 +1,36 @@
+{
+  "objective": "State the audit question and success condition.",
+  "scope": [
+    "path/or/artifact/in/scope"
+  ],
+  "authority": [
+    "authoritative/source/path"
+  ],
+  "components": [
+    {
+      "component_id": "component-stable-id",
+      "component_type": "claim|protocol|code|artifact|document|lifecycle|monitor",
+      "elements": [
+        {
+          "element_id": "element-stable-id",
+          "target": "Exact field, claim, file, or behavior checked",
+          "method": "inspected",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "relative/path/to/evidence",
+              "locator": "line, JSON pointer, test name, or artifact key",
+              "observed": "Concise observation"
+            }
+          ],
+          "safe_interpretation": "The narrow conclusion supported by this evidence.",
+          "required_repair": null
+        }
+      ]
+    }
+  ],
+  "strongest_safe_claim": "The strongest claim supported by all same-scope evidence.",
+  "claim_boundary": "What this scan does not establish.",
+  "unresolved_uncertainties": []
+}

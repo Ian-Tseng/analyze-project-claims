@@ -1,0 +1,29 @@
+{
+  "schema_version": "APC_GOLD_LABELS_V1",
+  "project_id": "lifecycle_fixture",
+  "element_inventory": [
+    {"element_id": "status_completion_claim", "path": "STATUS.md"},
+    {"element_id": "runner_marker", "path": "controller/runner_complete.json"},
+    {"element_id": "audit_report", "path": "audit_report.json"},
+    {"element_id": "paper_acceptance_claim", "path": "STATUS.md"},
+    {"element_id": "historical_log", "path": "HISTORY.md"}
+  ],
+  "gold_findings": [
+    {
+      "gold_id": "LC-001",
+      "element_id": "status_completion_claim",
+      "severity": "severe",
+      "summary": "Runner completion is incorrectly treated as accepted completion despite a failed audit.",
+      "evidence": ["STATUS.md", "controller/runner_complete.json", "audit_report.json"],
+      "required_repair": "Separate runner and audit states and withhold accepted completion until a passing audit and audit-completion marker exist."
+    },
+    {
+      "gold_id": "LC-002",
+      "element_id": "paper_acceptance_claim",
+      "severity": "severe",
+      "summary": "Paper-table eligibility is claimed although the audit failed and the report explicitly sets it false.",
+      "evidence": ["STATUS.md", "audit_report.json"],
+      "required_repair": "Set acceptance to not eligible and retain the failed audit as counterevidence."
+    }
+  ]
+}

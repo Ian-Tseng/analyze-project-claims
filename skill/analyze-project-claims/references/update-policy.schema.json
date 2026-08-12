@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/schemas/update-policy.schema.json",
+  "title": "Analyze Project Claims update policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mode",
+    "prompted",
+    "installation_id",
+    "source_fingerprint",
+    "last_attempt_at",
+    "last_success_at",
+    "next_check_at",
+    "suspended",
+    "last_outcome"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "mode": {"enum": ["unconfigured", "off", "notify", "auto"]},
+    "prompted": {"type": "boolean"},
+    "installation_id": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_fingerprint": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "last_attempt_at": {"type": ["integer", "null"], "minimum": 0},
+    "last_success_at": {"type": ["integer", "null"], "minimum": 0},
+    "next_check_at": {"type": ["integer", "null"], "minimum": 0},
+    "suspended": {"type": "boolean"},
+    "last_outcome": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]{0,63}$"
+    }
+  }
+}

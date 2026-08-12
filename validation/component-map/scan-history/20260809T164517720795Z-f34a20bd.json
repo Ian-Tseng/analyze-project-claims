@@ -1,0 +1,35 @@
+{
+  "accepted_map_id": "component-map-4f56dab1ed7f",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260809T164517720795Z-f34a20bd-component-map-f49709970216.json",
+    "delta": "deltas/20260809T164517720795Z-f34a20bd.json"
+  },
+  "candidate_map_id": "component-map-f49709970216",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-to-study-codebook-binding"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": []
+  },
+  "event_id": "20260809T164517720795Z-f34a20bd",
+  "integrity": {
+    "canonical_payload_sha256": "c64c9a3a033448b0e721d50615042a6386b2a4a8905187bb56c4d9b48491eaae"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-09T16:45:17.720795Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

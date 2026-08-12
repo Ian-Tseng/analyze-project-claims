@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/submission.schema.json",
+  "title": "Agent finding submission",
+  "type": "object",
+  "required": ["schema_version", "spec_id", "project_id", "condition_id", "agent_family_id", "repeat_id", "scientific_config_hash", "elapsed_seconds", "input_tokens", "output_tokens", "findings"],
+  "properties": {
+    "schema_version": {"const": "APC_CROSS_PROJECT_SUBMISSION_V1"},
+    "spec_id": {"type": "string", "minLength": 1},
+    "scientific_config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "elapsed_seconds": {"type": "number", "minimum": 0},
+    "input_tokens": {"type": "integer", "minimum": 0},
+    "output_tokens": {"type": "integer", "minimum": 0},
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["finding_id", "element_id", "summary", "evidence", "proposed_repair"]
+      }
+    }
+  },
+  "additionalProperties": true
+}

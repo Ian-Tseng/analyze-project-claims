@@ -1,0 +1,120 @@
+{
+  "accepted_map_id": "component-map-3679479cf27c",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-c15888914ee5",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "natural-pilot-preparation",
+        "element_id": "human-label-freeze-integrity"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "natural-pilot-preparation",
+        "element_id": "pre-execution-scientific-boundary",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/README.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/annotation-codebook.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/schemas"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/schemas/independent-annotation.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/natural-adjudicated-gold.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/natural-label-commitment.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/scripts/natural_project_pilot.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_natural_project_label_freeze.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_natural_project_label_schemas.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "92d2deda0b8993fa4ea7cb8872dc9f95284ae1d649aae4d70d8956485fdccf9b"
+  },
+  "recorded_at_utc": "2026-08-09T13:29:48.756484Z",
+  "scan_id": "20260809T132948756484Z-07a65d16",
+  "schema_version": "1.0"
+}

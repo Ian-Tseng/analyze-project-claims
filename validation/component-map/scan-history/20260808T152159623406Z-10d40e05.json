@@ -1,0 +1,92 @@
+{
+  "accepted_map_id": "component-map-bbaeff7f1256",
+  "action": "conflict_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260808T152159623406Z-10d40e05-component-map-645a260f922b.json",
+    "delta": "deltas/20260808T152159623406Z-10d40e05.json"
+  },
+  "candidate_map_id": "component-map-645a260f922b",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "direct-dependency-evidence-contract"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "active-rag-claim-consistency",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\configs\\rag_external_v55_manifest_monitor.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_EXPERIMENT_LOG.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_EXTERNAL_V55_MANIFEST_RESULTS.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_GENERALIZATION_CHECK_TABLE.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_strict_evidence_contract.py"
+      }
+    ]
+  },
+  "event_id": "20260808T152159623406Z-10d40e05",
+  "integrity": {
+    "canonical_payload_sha256": "f744c576d9d92ba7c80ed03f6bac008fcb7cc0c1c2ad8d65ee3c17695a786903"
+  },
+  "map_state_after": "conflict_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-08T15:21:59.623406Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

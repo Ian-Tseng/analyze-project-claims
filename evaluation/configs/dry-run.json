@@ -1,0 +1,95 @@
+{
+  "schema_version": "APC_CROSS_PROJECT_RELIABILITY_CONFIG_V1",
+  "study_id": "apc-cross-project-dryrun-v1",
+  "protocol_version": "APC_CROSS_PROJECT_PROTOCOL_V1",
+  "phase": "workflow_dry_run",
+  "execution_mode": "deterministic_fixture_replay",
+  "evidence_role": "workflow_validation",
+  "claim_boundary": "This deterministic two-project fixture validates the evaluation workflow and metric arithmetic only. It does not estimate skill performance, cross-project reliability, agent-family robustness, or publication-grade effectiveness.",
+  "paper_table_eligible": false,
+  "general_reliability_proved": false,
+  "skill_path": "../skill/analyze-project-claims/SKILL.md",
+  "conditions": [
+    {
+      "id": "agent_only",
+      "prompt_path": "prompts/agent_only.txt"
+    },
+    {
+      "id": "generic_checklist",
+      "prompt_path": "prompts/generic_checklist.txt"
+    },
+    {
+      "id": "skill_assisted",
+      "prompt_path": "prompts/skill_assisted.txt"
+    }
+  ],
+  "agent_families": [
+    {
+      "id": "scripted_family_a",
+      "kind": "scripted_fixture",
+      "version": "fixture-v1"
+    },
+    {
+      "id": "scripted_family_b",
+      "kind": "scripted_fixture",
+      "version": "fixture-v1"
+    }
+  ],
+  "repeats": [
+    {
+      "id": "r1",
+      "seed": 101
+    }
+  ],
+  "projects": [
+    {
+      "id": "lifecycle_fixture",
+      "origin": "synthetic",
+      "outcome_known": true,
+      "snapshot_root": "projects/dry-run/lifecycle_fixture",
+      "gold_labels": "labels/dry-run/lifecycle_fixture.json"
+    },
+    {
+      "id": "provenance_fixture",
+      "origin": "synthetic",
+      "outcome_known": true,
+      "snapshot_root": "projects/dry-run/provenance_fixture",
+      "gold_labels": "labels/dry-run/provenance_fixture.json"
+    }
+  ],
+  "project_sampling": {
+    "minimum_projects": 2,
+    "selection": "two synthetic packages chosen to exercise lifecycle and provenance scoring paths",
+    "independent_projects": false
+  },
+  "labels": {
+    "independent_human_annotators": 0,
+    "condition_blinded": false,
+    "adjudication": "scripted fixture mappings"
+  },
+  "analysis": {
+    "primary_unit": "project",
+    "reported_unit": "project_condition_family_repeat",
+    "metrics": [
+      "finding_precision",
+      "finding_recall",
+      "finding_f1",
+      "element_precision",
+      "element_recall",
+      "element_f1",
+      "severe_finding_recall",
+      "false_positive_element_rate",
+      "repair_correct_rate",
+      "provenance_preservation_rate",
+      "elapsed_seconds",
+      "input_tokens",
+      "output_tokens"
+    ],
+    "uncertainty": "none for deterministic workflow fixture"
+  },
+  "fixture_plan": "fixtures/dry-run/fixture-plan.json",
+  "runtime": {
+    "project_root": "../../..",
+    "output_root": "runs/analyze_project_claims_reliability"
+  }
+}

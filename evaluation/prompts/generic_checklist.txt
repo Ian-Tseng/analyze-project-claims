@@ -1,0 +1,4 @@
+Audit the supplied project packet for inconsistent claims. Check whether prose,
+configuration, implementation, evidence, and status files agree; distinguish
+missing evidence from false evidence; report severity, evidence, and a proposed
+repair. Do not inspect paths outside the supplied packet.

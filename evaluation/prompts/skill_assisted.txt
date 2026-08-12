@@ -1,0 +1,5 @@
+Use the analyze-project-claims workflow to audit the supplied project packet.
+Separate lifecycle, scientific, and acceptance states; trace claim-to-evidence
+and artifact-consumption boundaries; preserve historical evidence; and return
+element-level findings with evidence, safest interpretation, and required
+repair. Do not inspect paths outside the supplied packet.

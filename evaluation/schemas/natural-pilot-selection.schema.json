@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/natural-pilot-selection.schema.json",
+  "title": "Metadata-frozen natural-project development-pilot selection",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "selection_id",
+    "phase",
+    "evidence_role",
+    "claim_boundary",
+    "paper_table_eligible",
+    "general_reliability_proved",
+    "selection_frozen_before_outcome_review",
+    "sampling_rule",
+    "excluded_repositories",
+    "packet_limits",
+    "annotator_slots",
+    "projects"
+  ],
+  "properties": {
+    "schema_version": {"const": "APC_NATURAL_PROJECT_SELECTION_V1"},
+    "selection_id": {"type": "string", "minLength": 1},
+    "phase": {"const": "development_pilot"},
+    "evidence_role": {"const": "development_evaluation"},
+    "claim_boundary": {"type": "string", "minLength": 1},
+    "paper_table_eligible": {"const": false},
+    "general_reliability_proved": {"const": false},
+    "selection_frozen_before_outcome_review": {"const": true},
+    "sampling_rule": {
+      "type": "object",
+      "required": [
+        "outcome_fields_inspected",
+        "selection_basis",
+        "minimum_projects",
+        "maximum_projects"
+      ],
+      "properties": {
+        "outcome_fields_inspected": {"const": false},
+        "selection_basis": {"type": "string", "minLength": 1},
+        "minimum_projects": {"const": 4},
+        "maximum_projects": {"const": 6}
+      },
+      "additionalProperties": true
+    },
+    "excluded_repositories": {"type": "array", "minItems": 1, "uniqueItems": true},
+    "packet_limits": {
+      "type": "object",
+      "required": ["maximum_files_per_project", "maximum_bytes_per_project"],
+      "properties": {
+        "maximum_files_per_project": {"type": "integer", "minimum": 1},
+        "maximum_bytes_per_project": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "annotator_slots": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "independent", "condition_blinded", "identity_status"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "kind": {"const": "human"},
+          "independent": {"const": true},
+          "condition_blinded": {"const": true},
+          "identity_status": {"enum": ["unassigned", "committed"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "projects": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "repository_url",
+          "commit_sha",
+          "origin",
+          "outcome_known",
+          "used_in_skill_development",
+          "primary_language",
+          "task_stratum",
+          "license",
+          "public_distribution"
+        ],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "repository_url": {"type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+$"},
+          "commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+          "origin": {"const": "natural_external"},
+          "outcome_known": {"const": false},
+          "used_in_skill_development": {"const": false},
+          "primary_language": {"type": "string", "minLength": 1},
+          "task_stratum": {"type": "string", "minLength": 1},
+          "license": {
+            "type": "object",
+            "required": ["spdx_ids", "file_paths", "evidence_urls"]
+          },
+          "public_distribution": {
+            "type": "object",
+            "required": ["include_source_snapshot"],
+            "properties": {"include_source_snapshot": {"const": false}},
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

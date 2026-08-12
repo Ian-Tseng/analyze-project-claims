@@ -1,0 +1,138 @@
+{
+  "accepted_map_id": "component-map-441a870f9e64",
+  "action": "conflict_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260808T143956696671Z-0bd693c2-component-map-251b2efa782b.json",
+    "delta": "deltas/20260808T143956696671Z-0bd693c2.json"
+  },
+  "candidate_map_id": "component-map-251b2efa782b",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "drift-and-conflict-preservation",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "missing-map-bootstrap",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "observation-template-roundtrip",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "unchanged-map-reuse",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "active-rag-claim-consistency",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "scan-logging",
+        "element_id": "hierarchical-scan-record",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_EXPERIMENT_LOG.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_GENERALIZATION_CHECK_TABLE.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/scripts/record_scan.py"
+      }
+    ]
+  },
+  "event_id": "20260808T143956696671Z-0bd693c2",
+  "integrity": {
+    "canonical_payload_sha256": "5b39d1a7d8d8a398e5a2ef17317975da95d15d76d9d66a54efb03a52ac3d5d3c"
+  },
+  "map_state_after": "conflict_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.0.0",
+  "recorded_at_utc": "2026-08-08T14:39:56.696671Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

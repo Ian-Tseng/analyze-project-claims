@@ -1,0 +1,609 @@
+{
+    "objective":  "Map the public package, deterministic dry-run lifecycle, and metadata-frozen natural-project pilot preparation without treating selection or annotation-packet readiness as empirical reliability evidence.",
+    "scope":  [
+                  "README.md",
+                  "CITATION.cff.template",
+                  "skill/analyze-project-claims",
+                  "tests/test_component_map.py",
+                  "tests/test_cross_project_reliability.py",
+                  "tests/test_record_scan.py",
+                  "validation/README.md",
+                  "evaluation/README.md",
+                  "evaluation/protocol.md",
+                  "evaluation/configs/confirmatory.template.json",
+                  "evaluation/configs/development-pilot.template.json",
+                  "evaluation/configs/dry-run.json",
+                  "evaluation/fixtures/dry-run/fixture-plan.json",
+                  "evaluation/labels/dry-run/lifecycle_fixture.json",
+                  "evaluation/labels/dry-run/provenance_fixture.json",
+                  "evaluation/projects/dry-run/lifecycle_fixture",
+                  "evaluation/projects/dry-run/provenance_fixture",
+                  "evaluation/prompts",
+                  "evaluation/schemas",
+                  "evaluation/scripts/cross_project_reliability.py",
+                  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py",
+                  "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json",
+                  "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md",
+                  "tests/test_strict_evidence_contract.py",
+                  "evaluation/configs/natural-development-pilot.selection.json",
+                  "evaluation/schemas/natural-pilot-selection.schema.json",
+                  "evaluation/schemas/independent-annotation.schema.json",
+                  "evaluation/schemas/pinned-project-source.schema.json",
+                  "evaluation/templates/pinned-project-source.template.json",
+                  "evaluation/scripts/natural_project_pilot.py",
+                  "tests/test_natural_project_pilot.py",
+                  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py",
+                  "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_natural_pilot_monitor.json",
+                  "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller",
+                  "evaluation/annotation-codebook.md",
+                  "evaluation/schemas/natural-adjudicated-gold.schema.json",
+                  "evaluation/schemas/natural-label-commitment.schema.json",
+                  "tests/test_natural_project_label_freeze.py",
+                  "tests/test_natural_project_label_schemas.py",
+                  "tests/test_zero_finding_gold.py"
+              ],
+    "authority":  [
+                      "skill/analyze-project-claims/SKILL.md",
+                      "skill/analyze-project-claims/references/component-map-observation.schema.json",
+                      "skill/analyze-project-claims/references/component-map.schema.json",
+                      "skill/analyze-project-claims/references/scan-record.schema.json",
+                      "evaluation/protocol.md",
+                      "evaluation/configs/dry-run.json",
+                      "evaluation/scripts/cross_project_reliability.py",
+                      "tests/test_cross_project_reliability.py",
+                      "validation/README.md",
+                      "tests/test_strict_evidence_contract.py",
+                      "evaluation/configs/natural-development-pilot.selection.json",
+                      "evaluation/scripts/natural_project_pilot.py",
+                      "tests/test_natural_project_pilot.py",
+                      "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\selection_manifest.json",
+                      "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\source_manifest.json",
+                      "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\execution_gate.json",
+                      "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_natural_pilot_monitor.json",
+                      "evaluation/annotation-codebook.md",
+                      "evaluation/schemas/independent-annotation.schema.json",
+                      "evaluation/schemas/natural-adjudicated-gold.schema.json",
+                      "evaluation/schemas/natural-label-commitment.schema.json",
+                      "tests/test_natural_project_label_freeze.py",
+                      "tests/test_zero_finding_gold.py"
+                  ],
+    "components":  [
+                       {
+                           "component_id":  "component-map-lifecycle",
+                           "component_type":  "code",
+                           "elements":  [
+                                            {
+                                                "element_id":  "drift-and-conflict-preservation",
+                                                "target":  "Source drift or same-ID semantic conflict emits candidate/delta evidence while preserving the accepted map.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/reconcile_component_map.py",
+                                                                     "locator":  "_compare and reconcile candidate preservation"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_component_map.py",
+                                                                     "locator":  "test_stale_source_produces_delta and test_conflict_produces_candidate_without_overwrite"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "missing-map-bootstrap",
+                                                "target":  "A missing accepted map produces only a provisional candidate and an append-only history event.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/reconcile_component_map.py",
+                                                                     "locator":  "missing accepted-map branch"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_component_map.py",
+                                                                     "locator":  "test_missing_map_bootstraps_provisional"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "observation-template-roundtrip",
+                                                "target":  "The documented observation template preserves declared evidence locators when passed through reconciliation.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/assets/component-map-observation.template.json",
+                                                                     "locator":  "observation element evidence field"
+                                                                 },
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/references/component-map-observation.schema.json",
+                                                                     "locator":  "observation evidence contract"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_component_map.py",
+                                                                     "locator":  "test_observation_template_preserves_evidence_locators"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "runtime-schema-enforcement",
+                                                "target":  "Candidate acceptance enforces every required field in the published component-map schema.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/reconcile_component_map.py",
+                                                                     "locator":  "_validate_map and _accept"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_component_map.py",
+                                                                     "locator":  "test_accept_rejects_candidate_missing_schema_required_target"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "unchanged-map-reuse",
+                                                "target":  "An unchanged accepted map is checked and reused without a replacement candidate or delta.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/reconcile_component_map.py",
+                                                                     "locator":  "checked_unchanged branch"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_component_map.py",
+                                                                     "locator":  "test_valid_map_is_checked_without_rebuild"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "direct-dependency-evidence-contract",
+                                                "target":  "Every mapped element has nonempty evidence, and any test-backed element also names a direct non-test dependency.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/SKILL.md",
+                                                                     "locator":  "Build or reconcile the component-to-element map"
+                                                                 },
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/references/component-map-observation.schema.json",
+                                                                     "locator":  "required evidence with minItems 1"
+                                                                 },
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/reconcile_component_map.py",
+                                                                     "locator":  "_is_test_source and test-only evidence rejection"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_strict_evidence_contract.py",
+                                                                     "locator":  "test_mapper_rejects_element_without_evidence and test_mapper_rejects_test_only_element_evidence"
+                                                                 }
+                                                             ]
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "distribution",
+                           "component_type":  "artifact",
+                           "elements":  [
+                                            {
+                                                "element_id":  "github-wrapper-mirror-parity",
+                                                "target":  "The workspace GitHub wrapper and Downloads mirror remain synchronized after append-only audits.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "README.md",
+                                                                     "locator":  "public wrapper content and evaluation references"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py",
+                                                                     "locator":  "test_github_wrapper_downloads_copy_is_exact"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "official-skill-validation",
+                                                "target":  "Skill metadata and referenced resources in staging, export, Downloads, and installed copies.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims",
+                                                                     "locator":  "skill-creator/scripts/quick_validate.py on four roots"
+                                                                 }
+                                                             ]
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "paper-facing-boundaries",
+                           "component_type":  "claim",
+                           "elements":  [
+                                            {
+                                                "element_id":  "active-rag-claim-consistency",
+                                                "target":  "Active RAG claim, lifecycle, audit-independence, and paper-table boundaries remain internally consistent after the skill change.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py",
+                                                                     "locator":  "focused active-consistency tests"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\docs\\RAG_EXTERNAL_V55_MANIFEST_RESULTS.md",
+                                                                     "locator":  "bounded lifecycle and audit-independence result claims"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\configs\\rag_external_v55_manifest_monitor.json",
+                                                                     "locator":  "active accepted-run monitor declaration"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "bounded-readme-claims",
+                                                "target":  "README distinguishes deterministic behavior evidence from cross-project reliability and general RAG benefit.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "README.md",
+                                                                     "locator":  "Research status and Paper-facing evaluation plan"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/README.md",
+                                                                     "locator":  "workflow-dry-run and natural-project boundaries"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "cross-project-reliability",
+                                                "target":  "General reliability across projects, agents, models, and domains.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/protocol.md",
+                                                                     "locator":  "Stage gates and claim boundary"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md",
+                                                                     "locator":  "State dimensions and next gate"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "identified-release-metadata",
+                                                "target":  "Final authorship, repository URL, DOI, and author-approved software license.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "CITATION.cff.template",
+                                                                     "locator":  "placeholder fields"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "legacy-self-scan-authority",
+                                                "target":  "Current and historical self-scan inputs have unambiguous authority and lifecycle labels.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "validation/README.md",
+                                                                     "locator":  "Validation authority"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "readme-validation-layout",
+                                                "target":  "The README repository tree represents the current validation artifacts introduced by v0.2.0.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "README.md",
+                                                                     "locator":  "Repository layout and validation authority paragraph"
+                                                                 }
+                                                             ]
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "scan-logging",
+                           "component_type":  "code",
+                           "elements":  [
+                                            {
+                                                "element_id":  "hierarchical-scan-record",
+                                                "target":  "Element-level evidence method, check status, claim status, interpretation, and repair are persisted hierarchically.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/record_scan.py",
+                                                                     "locator":  "record derivation and append-only write"
+                                                                 },
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/references/scan-record.schema.json",
+                                                                     "locator":  "hierarchical scan exchange contract"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_record_scan.py",
+                                                                     "locator":  "public recorder regressions"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "repository-regression",
+                                                "target":  "The expanded package does not break active repository contracts.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "cross-project lifecycle implementation"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_cross_project_reliability.py",
+                                                                     "locator":  "public dry-run regressions"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py",
+                                                                     "locator":  "focused repository regressions"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "selection, snapshot, annotation-packet, and execution-gate contracts"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_pilot.py",
+                                                                     "locator":  "public natural-pilot regressions"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py",
+                                                                     "locator":  "prepared-artifact and V2 monitor regressions"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_label_freeze.py",
+                                                                     "locator":  "public label-freeze lifecycle regressions"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_label_schemas.py",
+                                                                     "locator":  "public human-label schema and codebook regressions"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_zero_finding_gold.py",
+                                                                     "locator":  "zero-finding gold collector regressions"
+                                                                 }
+                                                             ]
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "cross-project-evaluation",
+                           "component_type":  "experiment",
+                           "elements":  [
+                                            {
+                                                "element_id":  "blinded-packet-boundary",
+                                                "target":  "Prepared agent packets exclude gold labels, fixture plans, adjudications, and prior condition outputs.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "_copy_packets and collect_study"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_cross_project_reliability.py",
+                                                                     "locator":  "test_dry_run_completes_without_authorizing_reliability"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "complete-comparison-grid",
+                                                "target":  "Every declared project-condition-agent-family-repeat cell is required and missing submissions fail closed.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "_spec_rows and collect_study"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py",
+                                                                     "locator":  "test_missing_submission_blocks_collection"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "project-unit-metrics",
+                                                "target":  "Finding, element, severe-recall, false-positive, repair, provenance, time, and token metrics are aggregated with project as the primary independent unit.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/protocol.md",
+                                                                     "locator":  "Metrics"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "_score_spec, _aggregate_conditions, and _comparison_deltas"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "lifecycle-and-claim-gates",
+                                                "target":  "Runner completion, audit completion, scientific support, and paper acceptance remain separate, and the scripted dry run cannot authorize reliability.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "collect_study and audit_study"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json",
+                                                                     "locator":  "RESEARCH_ARCHITECTURE_MONITOR_V2 completion_evidence"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md",
+                                                                     "locator":  "State dimensions"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "pilot-and-confirmatory-stages",
+                                                "target":  "Development and confirmatory templates require natural projects, multiple live agent families, independent labels, project-level analysis, and frozen claim boundaries.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/configs/development-pilot.template.json",
+                                                                     "locator":  "project_sampling, labels, and analysis"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/configs/confirmatory.template.json",
+                                                                     "locator":  "project_sampling, labels, analysis, and preregistration"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "zero-finding-metric-policy",
+                                                "target":  "A project with zero adjudicated gold findings remains valid: undefined detection metrics and matched deltas remain null and are excluded from macro means, while submitted false positives and false-positive element rate remain penalized.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/protocol.md",
+                                                                     "locator":  "zero-gold metric policy under Metrics"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/schemas/gold-labels.schema.json",
+                                                                     "locator":  "gold_findings permits an empty array"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "_load_gold, _ratio, _f1, _difference, _aggregate_conditions, and _comparison_deltas"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_zero_finding_gold.py",
+                                                                     "locator":  "empty-gold acceptance, false-positive penalty, and undefined-delta regressions"
+                                                                 }
+                                                             ]
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "natural-pilot-preparation",
+                           "component_type":  "experiment",
+                           "elements":  [
+                                            {
+                                                "element_id":  "metadata-only-selection-freeze",
+                                                "target":  "A diverse 4-6-project natural sample is bound to exact repositories and commits before inconsistency outcomes are inspected.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/configs/natural-development-pilot.selection.json",
+                                                                     "locator":  "sampling_rule and four pinned project identities"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "validate_selection"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_pilot.py",
+                                                                     "locator":  "selection diversity and outcome-known rejection tests"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "source-provenance-and-distribution-boundary",
+                                                "target":  "Every natural snapshot has commit-bound acquisition and license hashes, respects frozen size caps, and remains outside the public distribution.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "validate_snapshot_root and _validate_project_snapshot"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/schemas/pinned-project-source.schema.json",
+                                                                     "locator":  "commit, archive, and license hash contract"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_pilot.py",
+                                                                     "locator":  "public-tree rejection and snapshot validation paths"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\source_manifest.json",
+                                                                     "locator":  "four validated source rows"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "independent-blinded-annotation-packets",
+                                                "target":  "Two human annotator slots receive snapshot-identical packets that exclude condition prompts, agent outputs, gold labels, and the other annotator\u0027s labels.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "prepare_annotation_workspace packet construction"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/schemas/independent-annotation.schema.json",
+                                                                     "locator":  "human independence and blinding attestations"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_pilot.py",
+                                                                     "locator":  "test_prepares_two_identical_blinded_annotation_packets"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\selection_manifest.json",
+                                                                     "locator":  "annotation_packet_count and pending annotation state"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "pre-execution-scientific-boundary",
+                                                "target":  "Agent execution remains blocked until independent labels, blinded adjudicated gold, and two exact live agent/model families exist; preparation cannot authorize scientific or paper claims.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "execution_gate_status"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/configs/development-pilot.template.json",
+                                                                     "locator":  "selection_contract and pre_execution_gate"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_natural_pilot_monitor.json",
+                                                                     "locator":  "V2 partial experiment without completion, scientific, or acceptance evidence"
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py",
+                                                                     "locator":  "blocked gate and monitor-state regressions"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_label_freeze.py",
+                                                                     "locator":  "test_gate_rejects_a_forged_summary_only_commitment and tamper revalidation"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "human-label-freeze-integrity",
+                                                "target":  "The controller freezes human evidence only after exact project-slot coverage, distinct stable human identities, selection and snapshot binding, blinded third-human adjudication, source-candidate validation, and raw/gold hash verification; forged summaries and post-freeze tampering fail closed.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "label_preflight, freeze_labels, _validate_label_commitment, and execution_gate_status"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/annotation-codebook.md",
+                                                                     "locator":  "roles, component-to-element units, finding semantics, operator definition, and file workflow"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/schemas/independent-annotation.schema.json",
+                                                                     "locator":  "completed annotation identity, snapshot, attestation, element, and finding contract"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/schemas/natural-adjudicated-gold.schema.json",
+                                                                     "locator":  "third-human adjudication and source annotation hash contract"
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/schemas/natural-label-commitment.schema.json",
+                                                                     "locator":  "frozen label-set and SHA-256 commitment contract"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_label_freeze.py",
+                                                                     "locator":  "coverage, forged-summary, successful freeze, and post-freeze tamper regressions"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_label_schemas.py",
+                                                                     "locator":  "machine-readable schema and claim/operator-boundary regressions"
+                                                                 }
+                                                             ]
+                                            }
+                                        ]
+                       }
+                   ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/gold-labels.schema.json",
+  "title": "Project element inventory and gold findings",
+  "type": "object",
+  "required": ["schema_version", "project_id", "element_inventory", "gold_findings"],
+  "properties": {
+    "schema_version": {"const": "APC_GOLD_LABELS_V1"},
+    "project_id": {"type": "string", "minLength": 1},
+    "element_inventory": {"type": "array", "minItems": 1},
+    "gold_findings": {"type": "array"}
+  },
+  "additionalProperties": true
+}

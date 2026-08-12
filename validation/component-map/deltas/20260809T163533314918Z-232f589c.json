@@ -1,0 +1,152 @@
+{
+  "accepted_map_id": "component-map-e8944d63370c",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-b923db98f5b9",
+  "changes": {
+    "added_components": [
+      "annotation-codebook-calibration"
+    ],
+    "added_elements": [
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-human-only-lifecycle"
+      },
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-selection-isolation"
+      },
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-source-and-packet-integrity"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\data\\analyze_project_claims_annotation_calibration\\artifact_registry.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\calibration_manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/annotation-codebook.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/configs/annotation-calibration.selection.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/schemas"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/annotation-calibration-selection.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/scripts/annotation_calibration.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_annotation_calibration.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "2cd91764cd5f3ead8b869935c84a00fcf5f3f30d14cb6dc8eb0225a537e81ee0"
+  },
+  "recorded_at_utc": "2026-08-09T16:35:33.314918Z",
+  "scan_id": "20260809T163533314918Z-232f589c",
+  "schema_version": "1.0"
+}

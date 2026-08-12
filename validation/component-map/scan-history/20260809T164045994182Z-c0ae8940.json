@@ -1,0 +1,37 @@
+{
+  "accepted_map_id": "component-map-ff5f237d2b82",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260809T164045994182Z-c0ae8940-component-map-4f56dab1ed7f.json",
+    "delta": "deltas/20260809T164045994182Z-c0ae8940.json"
+  },
+  "candidate_map_id": "component-map-4f56dab1ed7f",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      }
+    ]
+  },
+  "event_id": "20260809T164045994182Z-c0ae8940",
+  "integrity": {
+    "canonical_payload_sha256": "dbe5501d9e55e74e968ce2260492f6c43dcdd4f76c891cee0eaadda194a45aca"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-09T16:40:45.994182Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

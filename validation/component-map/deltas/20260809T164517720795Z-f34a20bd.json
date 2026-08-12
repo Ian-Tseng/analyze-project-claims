@@ -1,0 +1,26 @@
+{
+  "accepted_map_id": "component-map-4f56dab1ed7f",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-f49709970216",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-to-study-codebook-binding"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": []
+  },
+  "integrity": {
+    "canonical_payload_sha256": "d2681df3ff1b90ade663270c9313f856020b0f302342fd71f2add65db6215ac1"
+  },
+  "recorded_at_utc": "2026-08-09T16:45:17.720795Z",
+  "scan_id": "20260809T164517720795Z-f34a20bd",
+  "schema_version": "1.0"
+}

@@ -1,0 +1,36 @@
+{
+  "accepted_map_id": "component-map-b923db98f5b9",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-ff5f237d2b82",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-human-completion"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\review\\calibration_discussion.template.json"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "d431fdb53eb530b4f2eab0101404f5309d830206af7a24ad23768bf2e9958a61"
+  },
+  "recorded_at_utc": "2026-08-09T16:39:26.629629Z",
+  "scan_id": "20260809T163926629629Z-ea686ed4",
+  "schema_version": "1.0"
+}

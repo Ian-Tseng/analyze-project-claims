@@ -1,0 +1,80 @@
+{
+  "accepted_map_id": "component-map-e479c101e653",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-1efb13e2e552",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "cross-project-evaluation",
+        "element_id": "zero-finding-metric-policy"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/annotation-codebook.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/schemas"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/gold-labels.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/scripts/cross_project_reliability.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_zero_finding_gold.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "69639a85c7793b35119539682478fb18733935aea79b01b871cb8241282277aa"
+  },
+  "recorded_at_utc": "2026-08-09T14:24:19.551123Z",
+  "scan_id": "20260809T142419551123Z-d710393b",
+  "schema_version": "1.0"
+}

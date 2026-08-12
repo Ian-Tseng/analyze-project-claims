@@ -1,0 +1,92 @@
+{
+  "accepted_map_id": "component-map-027d84f8587e",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-de670ca2ed28",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "observation-template-roundtrip"
+      },
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "runtime-schema-enforcement"
+      },
+      {
+        "component_id": "distribution",
+        "element_id": "github-wrapper-mirror-parity"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "active-rag-claim-consistency"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "legacy-self-scan-authority"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "readme-validation-layout"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "C:\\Users\\chois\\Downloads\\analyze-project-claims-github"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_GENERALIZATION_CHECK_TABLE.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/assets/component-map.template.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "validation/self-scan-input.json"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "a765f860f5b641d4d9abd80eb6a7bea296716c4f58f748d286c087f8673d3c94"
+  },
+  "recorded_at_utc": "2026-08-08T10:34:37.782428Z",
+  "scan_id": "20260808T103437782428Z-62e135e4",
+  "schema_version": "1.0"
+}

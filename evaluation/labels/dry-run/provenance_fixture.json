@@ -1,0 +1,30 @@
+{
+  "schema_version": "APC_GOLD_LABELS_V1",
+  "project_id": "provenance_fixture",
+  "element_inventory": [
+    {"element_id": "consumption_claim", "path": "REPORT.md"},
+    {"element_id": "declared_manifest", "path": "config.json"},
+    {"element_id": "prediction_provenance", "path": "predictions.jsonl"},
+    {"element_id": "audit_independence_claim", "path": "REPORT.md"},
+    {"element_id": "audit_implementation", "path": "audit.py"},
+    {"element_id": "historical_record", "path": "HISTORY.md"}
+  ],
+  "gold_findings": [
+    {
+      "gold_id": "PV-001",
+      "element_id": "prediction_provenance",
+      "severity": "severe",
+      "summary": "The report claims exact manifest consumption, but predictions do not bind the consumed manifest hash.",
+      "evidence": ["REPORT.md", "config.json", "predictions.jsonl"],
+      "required_repair": "Bound the pre-fit manifest hash in each run and prediction artifact, or narrow the claim to a declared split."
+    },
+    {
+      "gold_id": "PV-002",
+      "element_id": "audit_independence_claim",
+      "severity": "moderate",
+      "summary": "The audit is called independent even though it imports the production scoring and summary functions.",
+      "evidence": ["REPORT.md", "audit.py", "runner.py"],
+      "required_repair": "Describe this as a separately invoked deterministic replay that uses the same implementation."
+    }
+  ]
+}

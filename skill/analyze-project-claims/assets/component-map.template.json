@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "map_id": "component-map-0123456789ab",
+  "map_state": "bootstrapped_provisional",
+  "created_at_utc": "2026-01-01T00:00:00Z",
+  "accepted_at_utc": null,
+  "origin_scan_id": "20260101T000000000000Z-example",
+  "previous_map_id": null,
+  "skill_name": "analyze-project-claims",
+  "skill_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "mapper_version": "1.0.0",
+  "objective": "Map authoritative project components to their elements.",
+  "scope": [
+    "relative/path/in/scope"
+  ],
+  "authority": [
+    "authoritative/source/path"
+  ],
+  "source_snapshot": [
+    {
+      "source": "authoritative/source/path",
+      "exists": true,
+      "kind": "file",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "components": [
+    {
+      "component_id": "stable-component-id",
+      "component_type": "module",
+      "elements": [
+        {
+          "element_id": "stable-element-id",
+          "target": "Exact field, behavior, claim, or artifact represented",
+          "relation_type": "contains",
+          "evidence_locators": [
+            {
+              "source": "authoritative/source/path",
+              "locator": "line, JSON pointer, test, or artifact key"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  }
+}

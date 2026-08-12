@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/annotation-calibration-selection.schema.json",
+  "title": "Non-study annotation calibration selection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "selection_id",
+    "phase",
+    "evidence_role",
+    "claim_boundary",
+    "paper_table_eligible",
+    "general_reliability_proved",
+    "reuse_in_development_or_confirmation_prohibited",
+    "excluded_study_selection_ids",
+    "sampling_rule",
+    "codebook",
+    "packet_limits",
+    "annotator_slots",
+    "project"
+  ],
+  "properties": {
+    "schema_version": {"const": "APC_ANNOTATION_CALIBRATION_SELECTION_V1"},
+    "selection_id": {"type": "string", "minLength": 1},
+    "phase": {"const": "annotation_calibration"},
+    "evidence_role": {"const": "training_only"},
+    "claim_boundary": {"type": "string", "minLength": 1},
+    "paper_table_eligible": {"const": false},
+    "general_reliability_proved": {"const": false},
+    "reuse_in_development_or_confirmation_prohibited": {"const": true},
+    "excluded_study_selection_ids": {
+      "type": "array",
+      "contains": {"const": "apc-natural-development-pilot-v1"}
+    },
+    "sampling_rule": {
+      "type": "object",
+      "required": ["selection_basis", "outcome_fields_inspected", "selected_at", "head_verification_method"],
+      "properties": {
+        "selection_basis": {"type": "string", "minLength": 1},
+        "outcome_fields_inspected": {"const": false},
+        "selected_at": {"type": "string", "minLength": 1},
+        "head_verification_method": {"type": "string", "minLength": 1}
+      }
+    },
+    "codebook": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "packet_limits": {
+      "type": "object",
+      "required": ["maximum_files_per_project", "maximum_bytes_per_project"],
+      "properties": {
+        "maximum_files_per_project": {"type": "integer", "minimum": 1},
+        "maximum_bytes_per_project": {"type": "integer", "minimum": 1}
+      }
+    },
+    "annotator_slots": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "independent_first_pass", "condition_blinded"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "kind": {"const": "human"},
+          "independent_first_pass": {"const": true},
+          "condition_blinded": {"const": true}
+        }
+      }
+    },
+    "project": {
+      "type": "object",
+      "required": ["id", "repository_url", "commit_sha", "origin", "primary_language", "task_stratum", "license", "public_distribution"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "repository_url": {"type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+$"},
+        "metadata_evidence_url": {"type": "string", "minLength": 1},
+        "commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "origin": {"const": "natural_external"},
+        "primary_language": {"type": "string", "minLength": 1},
+        "task_stratum": {"type": "string", "minLength": 1},
+        "license": {"type": "object"},
+        "public_distribution": {
+          "type": "object",
+          "required": ["include_source_snapshot"],
+          "properties": {"include_source_snapshot": {"const": false}}
+        }
+      }
+    }
+  }
+}

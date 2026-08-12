@@ -1,0 +1,28 @@
+{
+  "accepted_map_id": "component-map-c15888914ee5",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-e479c101e653",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "a4533a735b4b90d644a4079bab32ee3321281812511b6d2b6624798035798d1b"
+  },
+  "recorded_at_utc": "2026-08-09T13:33:53.036435Z",
+  "scan_id": "20260809T133353036435Z-fc7398e6",
+  "schema_version": "1.0"
+}

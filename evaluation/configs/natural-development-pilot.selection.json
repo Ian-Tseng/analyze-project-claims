@@ -1,0 +1,122 @@
+{
+  "schema_version": "APC_NATURAL_PROJECT_SELECTION_V1",
+  "selection_id": "apc-natural-development-pilot-v1",
+  "phase": "development_pilot",
+  "evidence_role": "development_evaluation",
+  "claim_boundary": "This metadata-frozen four-project development sample can test protocol feasibility and estimate project-level variance only. It is not a probability sample, confirmatory evidence, proof of general reliability, or a manuscript effectiveness table.",
+  "paper_table_eligible": false,
+  "general_reliability_proved": false,
+  "selection_frozen_before_outcome_review": true,
+  "sampling_rule": {
+    "outcome_fields_inspected": false,
+    "selection_basis": "Purposive metadata-only stratification over four languages and four engineering task strata, restricted to public GitHub repositories with pinned commits and permissive licenses. Repository inconsistency outcomes were not inspected before selection.",
+    "minimum_projects": 4,
+    "maximum_projects": 6,
+    "probability_sample": false,
+    "selected_at": "2026-08-09T00:00:00Z",
+    "head_verification_method": "git ls-remote <repository>.git HEAD"
+  },
+  "excluded_repositories": [
+    "local://logic_guided_rag_experiment",
+    "local://analyze-project-claims-skill-development"
+  ],
+  "packet_limits": {
+    "maximum_files_per_project": 2500,
+    "maximum_bytes_per_project": 26214400
+  },
+  "annotator_slots": [
+    {
+      "id": "human_annotator_a",
+      "kind": "human",
+      "independent": true,
+      "condition_blinded": true,
+      "identity_status": "unassigned"
+    },
+    {
+      "id": "human_annotator_b",
+      "kind": "human",
+      "independent": true,
+      "condition_blinded": true,
+      "identity_status": "unassigned"
+    }
+  ],
+  "projects": [
+    {
+      "id": "itsdangerous_python_security",
+      "repository_url": "https://github.com/pallets/itsdangerous",
+      "metadata_evidence_url": "https://github.com/pallets/itsdangerous",
+      "commit_sha": "672971d66a2ef9f85151e53283113f33d642dabd",
+      "origin": "natural_external",
+      "outcome_known": false,
+      "used_in_skill_development": false,
+      "primary_language": "Python",
+      "task_stratum": "security_serialization_library",
+      "license": {
+        "spdx_ids": ["BSD-3-Clause"],
+        "file_paths": ["LICENSE.txt"],
+        "evidence_urls": [
+          "https://github.com/pallets/itsdangerous/blob/672971d66a2ef9f85151e53283113f33d642dabd/LICENSE.txt"
+        ]
+      },
+      "public_distribution": {"include_source_snapshot": false}
+    },
+    {
+      "id": "p_map_javascript_async",
+      "repository_url": "https://github.com/sindresorhus/p-map",
+      "metadata_evidence_url": "https://github.com/sindresorhus/p-map",
+      "commit_sha": "bc26cf03f81292325236a1188063dac8e7a4de0f",
+      "origin": "natural_external",
+      "outcome_known": false,
+      "used_in_skill_development": false,
+      "primary_language": "JavaScript",
+      "task_stratum": "asynchronous_concurrency_library",
+      "license": {
+        "spdx_ids": ["MIT"],
+        "file_paths": ["license"],
+        "evidence_urls": [
+          "https://github.com/sindresorhus/p-map/blob/bc26cf03f81292325236a1188063dac8e7a4de0f/license"
+        ]
+      },
+      "public_distribution": {"include_source_snapshot": false}
+    },
+    {
+      "id": "hyperfine_rust_cli",
+      "repository_url": "https://github.com/sharkdp/hyperfine",
+      "metadata_evidence_url": "https://github.com/sharkdp/hyperfine",
+      "commit_sha": "f12f3d9f86f3643b3b7deace5e160b1f0f44d2b7",
+      "origin": "natural_external",
+      "outcome_known": false,
+      "used_in_skill_development": false,
+      "primary_language": "Rust",
+      "task_stratum": "benchmarking_cli_application",
+      "license": {
+        "spdx_ids": ["Apache-2.0", "MIT"],
+        "file_paths": ["LICENSE-APACHE", "LICENSE-MIT"],
+        "evidence_urls": [
+          "https://github.com/sharkdp/hyperfine/blob/f12f3d9f86f3643b3b7deace5e160b1f0f44d2b7/LICENSE-APACHE",
+          "https://github.com/sharkdp/hyperfine/blob/f12f3d9f86f3643b3b7deace5e160b1f0f44d2b7/LICENSE-MIT"
+        ]
+      },
+      "public_distribution": {"include_source_snapshot": false}
+    },
+    {
+      "id": "chi_go_router",
+      "repository_url": "https://github.com/go-chi/chi",
+      "metadata_evidence_url": "https://github.com/go-chi/chi",
+      "commit_sha": "8b258c7bb28f97a5f2a856ff7ef962578fec9215",
+      "origin": "natural_external",
+      "outcome_known": false,
+      "used_in_skill_development": false,
+      "primary_language": "Go",
+      "task_stratum": "http_router_library",
+      "license": {
+        "spdx_ids": ["MIT"],
+        "file_paths": ["LICENSE"],
+        "evidence_urls": [
+          "https://github.com/go-chi/chi/blob/8b258c7bb28f97a5f2a856ff7ef962578fec9215/LICENSE"
+        ]
+      },
+      "public_distribution": {"include_source_snapshot": false}
+    }
+  ]
+}

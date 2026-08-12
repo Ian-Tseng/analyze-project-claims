@@ -1,0 +1,72 @@
+{
+  "accepted_map_id": "component-map-c545fd5bcd49",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-5cbb02d6e7a7",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "human-calibration-ui"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/README.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/scripts/calibration_ui.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/ui/calibration-console.html"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_calibration_ui.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "6a182c57deaf2d72069276e71a7993097da15312e7c72147380b22e3a220c5b5"
+  },
+  "recorded_at_utc": "2026-08-10T03:46:18.477298Z",
+  "scan_id": "20260810T034618477298Z-d22058d7",
+  "schema_version": "1.0"
+}

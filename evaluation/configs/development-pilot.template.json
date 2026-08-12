@@ -1,0 +1,76 @@
+{
+  "schema_version": "APC_CROSS_PROJECT_RELIABILITY_CONFIG_V1",
+  "study_id": "replace-with-frozen-development-pilot-id",
+  "protocol_version": "APC_CROSS_PROJECT_PROTOCOL_V1",
+  "phase": "development_pilot",
+  "execution_mode": "live_agents",
+  "evidence_role": "development_evaluation",
+  "claim_boundary": "A 4-6 project development pilot may refine the protocol and estimate variance. Its outcomes are outcome-known development evidence and cannot confirm general reliability.",
+  "paper_table_eligible": false,
+  "general_reliability_proved": false,
+  "conditions": [
+    {
+      "id": "agent_only",
+      "prompt_path": "prompts/agent_only.txt"
+    },
+    {
+      "id": "generic_checklist",
+      "prompt_path": "prompts/generic_checklist.txt"
+    },
+    {
+      "id": "skill_assisted",
+      "prompt_path": "prompts/skill_assisted.txt"
+    }
+  ],
+  "agent_families": [
+    {
+      "id": "replace-family-a",
+      "kind": "live_agent",
+      "version": "freeze-exact-version"
+    },
+    {
+      "id": "replace-family-b",
+      "kind": "live_agent",
+      "version": "freeze-exact-version"
+    }
+  ],
+  "repeats": [
+    {
+      "id": "r1",
+      "seed": 1001
+    }
+  ],
+  "projects": [],
+  "project_sampling": {
+    "minimum_projects": 4,
+    "maximum_projects": 6,
+    "selection": "predeclared natural research or engineering repositories excluded from skill development",
+    "independent_projects": true
+  },
+  "labels": {
+    "independent_human_annotators": 2,
+    "condition_blinded": true,
+    "adjudication": "two independent labels followed by blinded resolution"
+  },
+  "analysis": {
+    "primary_unit": "project",
+    "reported_unit": "project_condition_family_repeat",
+    "uncertainty": "project-clustered intervals; use pilot variance only for confirmatory power planning"
+  },
+  "runtime": {
+    "project_root": "../../..",
+    "output_root": "runs/analyze_project_claims_reliability"
+  },
+  "selection_contract": {
+    "frozen_selection": "natural-development-pilot.selection.json",
+    "selection_frozen_before_outcome_review": true,
+    "source_snapshots_outside_public_bundle": true
+  },
+  "pre_execution_gate": {
+    "independent_human_labels_required": true,
+    "blinded_adjudicated_gold_required": true,
+    "minimum_live_agent_families": 2,
+    "scripted_families_prohibited": true
+  }
+}
+

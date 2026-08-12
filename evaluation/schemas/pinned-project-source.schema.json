@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/pinned-project-source.schema.json",
+  "title": "Commit-pinned natural-project source provenance",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "project_id",
+    "repository_url",
+    "commit_sha",
+    "archive_url",
+    "archive_sha256",
+    "acquired_at",
+    "license_file_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": "APC_PINNED_PROJECT_SOURCE_V1"},
+    "project_id": {"type": "string", "minLength": 1},
+    "repository_url": {"type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+$"},
+    "commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "archive_url": {"type": "string", "minLength": 1},
+    "archive_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "acquired_at": {"type": "string", "minLength": 1},
+    "license_file_sha256": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    }
+  },
+  "additionalProperties": false
+}

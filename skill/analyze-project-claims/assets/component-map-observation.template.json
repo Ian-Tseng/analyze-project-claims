@@ -1,0 +1,28 @@
+{
+  "objective": "Map authoritative project components to their elements.",
+  "scope": [
+    "source.txt"
+  ],
+  "authority": [
+    "source.txt"
+  ],
+  "components": [
+    {
+      "component_id": "stable-component-id",
+      "component_type": "module",
+      "elements": [
+        {
+          "element_id": "stable-element-id",
+          "target": "Exact field, behavior, claim, or artifact represented",
+          "relation_type": "contains",
+          "evidence": [
+            {
+              "source": "source.txt",
+              "locator": "line:1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

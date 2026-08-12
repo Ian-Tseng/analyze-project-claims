@@ -1,0 +1,51 @@
+{
+  "objective": "Check whether the accepted experiment state is supported by lifecycle and scientific evidence.",
+  "scope": [
+    "docs/check-table.md",
+    "runs/example/audit_report.json"
+  ],
+  "authority": [
+    "docs/frozen-protocol.md",
+    "runs/example/scientific_config.canonical.json"
+  ],
+  "components": [
+    {
+      "component_id": "lifecycle",
+      "component_type": "lifecycle",
+      "elements": [
+        {
+          "element_id": "audit-report-state",
+          "target": "audit_report.audit_passed",
+          "method": "schema_validated",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "runs/example/audit_report.json",
+              "locator": "/audit_passed",
+              "observed": true
+            }
+          ],
+          "safe_interpretation": "The stored audit report passed the declared structural gate.",
+          "required_repair": null
+        },
+        {
+          "element_id": "independent-replication",
+          "target": "independent scientific replication",
+          "method": "not_tested",
+          "check_status": "PENDING",
+          "claim_status": "untested",
+          "evidence": [],
+          "safe_interpretation": "No independent replication was evaluated.",
+          "required_repair": "Run an independent implementation or evaluation before claiming replication."
+        }
+      ]
+    }
+  ],
+  "strongest_safe_claim": "The stored audit report passed its declared structural gate.",
+  "claim_boundary": "No independent replication or scientific benefit is established.",
+  "unresolved_uncertainties": [
+    "Independent replication remains untested."
+  ]
+}
+

@@ -1,0 +1,877 @@
+{
+    "objective":  "Formally scan the synchronized analyze-project-claims package after preparing a separate human codebook-calibration exercise, while preserving the frozen natural-pilot identity and excluding all practice artifacts from scientific evidence.",
+    "scope":  [
+                  "component-map-f49709970216",
+                  "evaluation dry-run apc-cross-project-dryrun-v1-ff3546880c31",
+                  "annotation calibration apc-annotation-calibration-v1-71658a8eb720",
+                  "natural-pilot preparation apc-natural-development-pilot-v1-e02e94c6ac82",
+                  "workspace and Downloads public wrappers",
+                  "active RAG claim-boundary surfaces"
+              ],
+    "authority":  [
+                      "validation/component-map/accepted-map.json",
+                      "evaluation/configs/annotation-calibration.selection.json",
+                      "evaluation/scripts/annotation_calibration.py",
+                      "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\calibration_manifest.json",
+                      "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json",
+                      "evaluation/configs/natural-development-pilot.selection.json",
+                      "evaluation/scripts/natural_project_pilot.py",
+                      "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\selection_manifest.json",
+                      "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\source_manifest.json",
+                      "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\execution_gate.json",
+                      "F:\\logic_guided_rag_experiment\\docs\\RAG_GENERALIZATION_CHECK_TABLE.md",
+                      "evaluation/annotation-codebook.md",
+                      "tests/test_annotation_calibration.py",
+                      "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py"
+                  ],
+    "components":  [
+                       {
+                           "component_id":  "annotation-codebook-calibration",
+                           "component_type":  "experiment",
+                           "elements":  [
+                                            {
+                                                "element_id":  "calibration-human-completion",
+                                                "target":  "Two distinct humans complete and hash independent practice annotations before a recorded disagreement discussion and any codebook revision decision.",
+                                                "method":  "not_tested",
+                                                "check_status":  "PENDING",
+                                                "claim_status":  "untested",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\calibration_manifest.json",
+                                                                     "locator":  "calibration_state",
+                                                                     "observed":  "State is pending_human_practice."
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\review\\calibration_discussion.template.json",
+                                                                     "locator":  "template and absent completed record",
+                                                                     "observed":  "A blank discussion template exists; calibration_discussion.json does not exist."
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py",
+                                                                     "locator":  "human state regression",
+                                                                     "observed":  "The reproducibility test confirms zero raw human label JSON files and no completed discussion record."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The human exercise is prepared but has not been performed; no statement about annotator agreement or codebook usability is supported yet.",
+                                                "required_repair":  "Assign two distinct humans, collect independent completed practice annotations, hash both files, discuss disagreements, record decisions, and bind the final codebook hash before study labeling."
+                                            },
+                                            {
+                                                "element_id":  "calibration-human-only-lifecycle",
+                                                "target":  "Preparation creates no human labels and no agent-execution gate; two humans must complete independent first passes before discussion, and any resulting codebook change starts a new hash-bound study label identity.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/annotation_calibration.py",
+                                                                     "locator":  "prepare_calibration_workspace and calibration_status",
+                                                                     "observed":  "The controller creates blank practice templates, reports human_action_required=true, sets agent_execution_authorized=false, and creates no execution_gate.json."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/annotation-codebook.md",
+                                                                     "locator":  "Non-study calibration exercise",
+                                                                     "observed":  "The codebook requires independent first passes before discussion and a new hash-bound study identity after revision."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_annotation_calibration.py",
+                                                                     "locator":  "test_prepares_two_practice_packets_and_never_an_execution_gate",
+                                                                     "observed":  "The controller regression passed without manufacturing labels or an agent gate."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The tested controller enforces a human-only practice handoff and cannot itself turn preparation into scientific execution or evidence.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "calibration-selection-isolation",
+                                                "target":  "One commit-pinned natural practice repository is bound to the codebook hash, dynamically checked against the current frozen development repositories, and prohibited from development, confirmation, paper-table, or general-reliability evidence.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/configs/annotation-calibration.selection.json",
+                                                                     "locator":  "selection and exclusion fields",
+                                                                     "observed":  "The selection binds PrettyTable commit 3c80d392, codebook SHA-256 c91cd7c8, training_only evidence, and explicit study-reuse prohibition."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/annotation_calibration.py",
+                                                                     "locator":  "validate_calibration_selection",
+                                                                     "observed":  "Preflight passed at selection SHA-256 71658a8e and compares the practice URL with the current frozen development selection."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_annotation_calibration.py",
+                                                                     "locator":  "selection isolation regressions",
+                                                                     "observed":  "3/3 public calibration tests passed, including rejection of a current development-pilot repository."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The practice identity is structurally isolated from the current study selections; this does not establish that humans completed calibration.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "calibration-source-and-packet-integrity",
+                                                "target":  "The practice source is acquired at one exact commit with archive and license hashes under frozen caps, remains outside the public wrapper, and yields two snapshot-identical independent human packets.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json",
+                                                                     "locator":  "single validated source row",
+                                                                     "observed":  "The validated snapshot contains 45 files and 360003 bytes at commit 3c80d392, with archive and per-file identity bound."
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\data\\analyze_project_claims_annotation_calibration\\artifact_registry.json",
+                                                                     "locator":  "raw, interim, review, and validated lifecycle roots",
+                                                                     "observed":  "Archive, snapshot, packets, and manifest have explicit authority, provenance, retention, and non-migration boundaries."
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py",
+                                                                     "locator":  "prepared artifact regressions",
+                                                                     "observed":  "2/2 root calibration tests passed; archive SHA-256 is 7d57420c, two packet manifests exist, and third-party source remains outside the public wrapper."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The exact practice input and two independent packet views are reproducible in the current local workspace.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "calibration-to-study-codebook-binding",
+                                                "target":  "Before development labels begin, the final post-calibration codebook SHA-256 is consumed by and enforced in the study label identity and tamper-validation path.",
+                                                "method":  "inspected",
+                                                "check_status":  "PENDING",
+                                                "claim_status":  "partially_supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/configs/annotation-calibration.selection.json",
+                                                                     "locator":  "codebook.sha256",
+                                                                     "observed":  "The calibration identity binds codebook SHA-256 c91cd7c8, so the practice side is hash-bound."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/configs/natural-development-pilot.selection.json",
+                                                                     "locator":  "top-level study identity fields",
+                                                                     "observed":  "The current frozen development selection has no codebook SHA-256 field."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "_label_set_material and _validate_label_commitment",
+                                                                     "observed":  "The current study label-set material binds selection, snapshots, human identities, raw labels, and gold, but not the annotation codebook hash."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_label_freeze.py",
+                                                                     "locator":  "label commitment regressions",
+                                                                     "observed":  "Existing tests enforce label and snapshot tamper detection but contain no calibration-to-study codebook binding assertion."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The practice codebook is hash-bound inside calibration, but a later codebook revision could not yet be proven to be the exact codebook used for development labels.",
+                                                "required_repair":  "Add a fail-closed final-codebook commitment to the natural-pilot label identity and tamper-validation path, with red/green tests, before assigning development annotators."
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "component-map-lifecycle",
+                           "component_type":  "code",
+                           "elements":  [
+                                            {
+                                                "element_id":  "direct-dependency-evidence-contract",
+                                                "target":  "Every mapped element has nonempty evidence, and any test-backed element also names a direct non-test dependency.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/SKILL.md",
+                                                                     "locator":  "Build or reconcile the component-to-element map",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/references/component-map-observation.schema.json",
+                                                                     "locator":  "required evidence with minItems 1",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/reconcile_component_map.py",
+                                                                     "locator":  "_is_test_source and test-only evidence rejection",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_strict_evidence_contract.py",
+                                                                     "locator":  "test_mapper_rejects_element_without_evidence and test_mapper_rejects_test_only_element_evidence",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "drift-and-conflict-preservation",
+                                                "target":  "Source drift or same-ID semantic conflict emits candidate/delta evidence while preserving the accepted map.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/reconcile_component_map.py",
+                                                                     "locator":  "_compare and reconcile candidate preservation",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_component_map.py",
+                                                                     "locator":  "test_stale_source_produces_delta and test_conflict_produces_candidate_without_overwrite",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "missing-map-bootstrap",
+                                                "target":  "A missing accepted map produces only a provisional candidate and an append-only history event.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/reconcile_component_map.py",
+                                                                     "locator":  "missing accepted-map branch",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_component_map.py",
+                                                                     "locator":  "test_missing_map_bootstraps_provisional",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "observation-template-roundtrip",
+                                                "target":  "The documented observation template preserves declared evidence locators when passed through reconciliation.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/assets/component-map-observation.template.json",
+                                                                     "locator":  "observation element evidence field",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/references/component-map-observation.schema.json",
+                                                                     "locator":  "observation evidence contract",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_component_map.py",
+                                                                     "locator":  "test_observation_template_preserves_evidence_locators",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "runtime-schema-enforcement",
+                                                "target":  "Candidate acceptance enforces every required field in the published component-map schema.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/reconcile_component_map.py",
+                                                                     "locator":  "_validate_map and _accept",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_component_map.py",
+                                                                     "locator":  "test_accept_rejects_candidate_missing_schema_required_target",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "unchanged-map-reuse",
+                                                "target":  "An unchanged accepted map is checked and reused without a replacement candidate or delta.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/reconcile_component_map.py",
+                                                                     "locator":  "checked_unchanged branch",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_component_map.py",
+                                                                     "locator":  "test_valid_map_is_checked_without_rebuild",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "cross-project-evaluation",
+                           "component_type":  "experiment",
+                           "elements":  [
+                                            {
+                                                "element_id":  "blinded-packet-boundary",
+                                                "target":  "Prepared agent packets exclude gold labels, fixture plans, adjudications, and prior condition outputs.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "_copy_packets and collect_study",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_cross_project_reliability.py",
+                                                                     "locator":  "test_dry_run_completes_without_authorizing_reliability",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "complete-comparison-grid",
+                                                "target":  "Every declared project-condition-agent-family-repeat cell is required and missing submissions fail closed.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py",
+                                                                     "locator":  "test_missing_submission_blocks_collection",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "_spec_rows and collect_study",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "lifecycle-and-claim-gates",
+                                                "target":  "Runner completion, audit completion, scientific support, and paper acceptance remain separate, and the scripted dry run cannot authorize reliability.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json",
+                                                                     "locator":  "RESEARCH_ARCHITECTURE_MONITOR_V2 completion_evidence",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md",
+                                                                     "locator":  "State dimensions",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "collect_study and audit_study",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "pilot-and-confirmatory-stages",
+                                                "target":  "Development and confirmatory templates require natural projects, multiple live agent families, independent labels, project-level analysis, and frozen claim boundaries.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/configs/confirmatory.template.json",
+                                                                     "locator":  "project_sampling, labels, analysis, and preregistration",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/configs/development-pilot.template.json",
+                                                                     "locator":  "project_sampling, labels, and analysis",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "project-unit-metrics",
+                                                "target":  "Finding, element, severe-recall, false-positive, repair, provenance, time, and token metrics are aggregated with project as the primary independent unit.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/protocol.md",
+                                                                     "locator":  "Metrics",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "_score_spec, _aggregate_conditions, and _comparison_deltas",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "zero-finding-metric-policy",
+                                                "target":  "A project with zero adjudicated gold findings remains valid: undefined detection metrics and matched deltas remain null and are excluded from macro means, while submitted false positives and false-positive element rate remain penalized.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/protocol.md",
+                                                                     "locator":  "zero-gold metric policy under Metrics",
+                                                                     "observed":  "The protocol declares null for undefined detection metrics and paired deltas, exclusion from macro means, and continued false-positive scoring."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "_load_gold, _difference, _aggregate_conditions, and _comparison_deltas",
+                                                                     "observed":  "The collector accepts an empty gold array, preserves undefined values, and never subtracts null metrics."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_zero_finding_gold.py",
+                                                                     "locator":  "three zero-finding gold regressions",
+                                                                     "observed":  "3/3 tests passed: empty gold with no prediction preserves null metrics, a false positive is penalized, and matched deltas remain null."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The zero-finding edge case is structurally specified and tested without forcing a positive gold finding or fabricating a perfect score.",
+                                                "required_repair":  null
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "distribution",
+                           "component_type":  "artifact",
+                           "elements":  [
+                                            {
+                                                "element_id":  "github-wrapper-mirror-parity",
+                                                "target":  "The workspace GitHub wrapper and Downloads mirror remain synchronized after append-only audits.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py",
+                                                                     "locator":  "test_github_wrapper_downloads_copy_is_exact",
+                                                                     "observed":  "The cache-filtered workspace and Downloads wrapper manifests matched after synchronizing the calibration controller, accepted map, and formal scan input."
+                                                                 },
+                                                                 {
+                                                                     "source":  "README.md",
+                                                                     "locator":  "public wrapper content and evaluation references",
+                                                                     "observed":  "The cache-filtered workspace and Downloads wrapper manifests matched after synchronizing the calibration controller, accepted map, and formal scan input."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "official-skill-validation",
+                                                "target":  "Skill metadata and referenced resources in staging, export, Downloads, and installed copies.",
+                                                "method":  "inspected",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims",
+                                                                     "locator":  "skill-creator/scripts/quick_validate.py on four roots",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "natural-pilot-preparation",
+                           "component_type":  "experiment",
+                           "elements":  [
+                                            {
+                                                "element_id":  "human-label-freeze-integrity",
+                                                "target":  "The controller freezes human evidence only after exact project-slot coverage, distinct stable human identities, selection and snapshot binding, blinded third-human adjudication, source-candidate validation, and raw/gold hash verification; forged summaries and post-freeze tampering fail closed.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "label_preflight, freeze_labels, _validate_label_commitment, and execution_gate_status",
+                                                                     "observed":  "The controller derives a canonical label-set hash from validated raw labels, adjudicated gold, snapshot identities, and hashed human identities, then revalidates every bound byte at the execution gate."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_label_freeze.py",
+                                                                     "locator":  "three label-freeze lifecycle regressions",
+                                                                     "observed":  "3/3 focused tests passed: missing coverage is rejected, a complete synthetic 8-label/4-gold set freezes, post-freeze tampering blocks the gate, and a forged summary-only commitment cannot report ready."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_label_schemas.py",
+                                                                     "locator":  "schema and codebook regressions",
+                                                                     "observed":  "2/2 contract tests passed for machine-readable identity/hash fields, claim semantics, no-finding allowance, and the exact finite-state complement wording."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/annotation-codebook.md",
+                                                                     "locator":  "roles, annotation units, finding semantics, operator definition, and file workflow",
+                                                                     "observed":  "The guide requires two independent annotators, a distinct third blinded adjudicator, component-to-element inventories, same-scope contradiction evidence, and no forced positive findings."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "This proves the tested structural and lifecycle guardrails for label freezing. It does not prove that human labels exist, that adjudication is valid in the current run, or that the skill improves project analysis.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "independent-blinded-annotation-packets",
+                                                "target":  "Two human annotator slots receive snapshot-identical packets that exclude condition prompts, agent outputs, gold labels, and the other annotator\u0027s labels.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\selection_manifest.json",
+                                                                     "locator":  "annotation_packet_count and pending annotation state",
+                                                                     "observed":  "Eight packet manifests validate; paired annotator packets bind identical snapshot hashes and exclude condition prompts, agent outputs, gold, and other labels."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/schemas/independent-annotation.schema.json",
+                                                                     "locator":  "human independence and blinding attestations",
+                                                                     "observed":  "Eight packet manifests validate; paired annotator packets bind identical snapshot hashes and exclude condition prompts, agent outputs, gold, and other labels."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "prepare_annotation_workspace packet construction",
+                                                                     "observed":  "Eight packet manifests validate; paired annotator packets bind identical snapshot hashes and exclude condition prompts, agent outputs, gold, and other labels."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_pilot.py",
+                                                                     "locator":  "test_prepares_two_identical_blinded_annotation_packets",
+                                                                     "observed":  "Eight packet manifests validate; paired annotator packets bind identical snapshot hashes and exclude condition prompts, agent outputs, gold, and other labels."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "metadata-only-selection-freeze",
+                                                "target":  "A diverse 4-6-project natural sample is bound to exact repositories and commits before inconsistency outcomes are inspected.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "evaluation/configs/natural-development-pilot.selection.json",
+                                                                     "locator":  "sampling_rule and four pinned project identities",
+                                                                     "observed":  "The preflight accepted four unique exact-commit projects spanning four languages and four task strata and rejected outcome-known inputs."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "validate_selection",
+                                                                     "observed":  "The preflight accepted four unique exact-commit projects spanning four languages and four task strata and rejected outcome-known inputs."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_pilot.py",
+                                                                     "locator":  "selection diversity and outcome-known rejection tests",
+                                                                     "observed":  "The preflight accepted four unique exact-commit projects spanning four languages and four task strata and rejected outcome-known inputs."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "pre-execution-scientific-boundary",
+                                                "target":  "Agent execution remains blocked until independent labels, blinded adjudicated gold, and two exact live agent/model families exist; preparation cannot authorize scientific or paper claims.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_natural_pilot_monitor.json",
+                                                                     "locator":  "V2 partial experiment without completion, scientific, or acceptance evidence",
+                                                                     "observed":  "The gate reports blocked on independent labels, blinded gold, and two live families; V2 reports experiment stopped, scientific untested, acceptance not eligible."
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py",
+                                                                     "locator":  "blocked gate and monitor-state regressions",
+                                                                     "observed":  "The gate reports blocked on independent labels, blinded gold, and two live families; V2 reports experiment stopped, scientific untested, acceptance not eligible."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/configs/development-pilot.template.json",
+                                                                     "locator":  "selection_contract and pre_execution_gate",
+                                                                     "observed":  "The gate reports blocked on independent labels, blinded gold, and two live families; V2 reports experiment stopped, scientific untested, acceptance not eligible."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "execution_gate_status",
+                                                                     "observed":  "The gate reports blocked on independent labels, blinded gold, and two live families; V2 reports experiment stopped, scientific untested, acceptance not eligible."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_label_freeze.py",
+                                                                     "locator":  "forged commitment and tamper regressions",
+                                                                     "observed":  "The prior summary-only bypass was reproduced as ready before repair; the updated gate rejects it and rechecks raw/gold hashes on every invocation."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "source-provenance-and-distribution-boundary",
+                                                "target":  "Every natural snapshot has commit-bound acquisition and license hashes, respects frozen size caps, and remains outside the public distribution.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\source_manifest.json",
+                                                                     "locator":  "four validated source rows",
+                                                                     "observed":  "All four external snapshots passed commit-bound archive/license hash and frozen size-cap validation; public-tree rejection is regression tested."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/schemas/pinned-project-source.schema.json",
+                                                                     "locator":  "commit, archive, and license hash contract",
+                                                                     "observed":  "All four external snapshots passed commit-bound archive/license hash and frozen size-cap validation; public-tree rejection is regression tested."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "validate_snapshot_root and _validate_project_snapshot",
+                                                                     "observed":  "All four external snapshots passed commit-bound archive/license hash and frozen size-cap validation; public-tree rejection is regression tested."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_pilot.py",
+                                                                     "locator":  "public-tree rejection and snapshot validation paths",
+                                                                     "observed":  "All four external snapshots passed commit-bound archive/license hash and frozen size-cap validation; public-tree rejection is regression tested."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "paper-facing-boundaries",
+                           "component_type":  "claim",
+                           "elements":  [
+                                            {
+                                                "element_id":  "active-rag-claim-consistency",
+                                                "target":  "Active RAG claim, lifecycle, audit-independence, and paper-table boundaries remain internally consistent after the skill change.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\configs\\rag_external_v55_manifest_monitor.json",
+                                                                     "locator":  "active accepted-run monitor declaration",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\docs\\RAG_EXTERNAL_V55_MANIFEST_RESULTS.md",
+                                                                     "locator":  "bounded lifecycle and audit-independence result claims",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py",
+                                                                     "locator":  "focused active-consistency tests",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "bounded-readme-claims",
+                                                "target":  "README distinguishes deterministic behavior evidence from cross-project reliability and general RAG benefit.",
+                                                "method":  "inspected",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "README.md",
+                                                                     "locator":  "Research status and Paper-facing evaluation plan",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/README.md",
+                                                                     "locator":  "workflow-dry-run and natural-project boundaries",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "cross-project-reliability",
+                                                "target":  "General reliability across projects, agents, models, and domains.",
+                                                "method":  "not_tested",
+                                                "check_status":  "PENDING",
+                                                "claim_status":  "untested",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md",
+                                                                     "locator":  "State dimensions and next gate",
+                                                                     "observed":  "Four natural projects and eight blinded annotation packets are prepared, but no independent human labels, blinded gold, or live agent/model-family outputs exist."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/protocol.md",
+                                                                     "locator":  "Stage gates and claim boundary",
+                                                                     "observed":  "Four natural projects and eight blinded annotation packets are prepared, but no independent human labels, blinded gold, or live agent/model-family outputs exist."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "Protocol preparation is complete, but empirical cross-project reliability remains untested.",
+                                                "required_repair":  "Complete two independent human labels per project, freeze blinded adjudicated gold and two live families, run the development grid, then power an unseen-project confirmation."
+                                            },
+                                            {
+                                                "element_id":  "identified-release-metadata",
+                                                "target":  "Final authorship, repository URL, DOI, and author-approved software license.",
+                                                "method":  "not_tested",
+                                                "check_status":  "PENDING",
+                                                "claim_status":  "invalidly_specified",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "CITATION.cff.template",
+                                                                     "locator":  "placeholder fields",
+                                                                     "observed":  "CITATION.cff remains a template and no author-approved public software license, final repository URL, or release DOI is present."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The research artifact is not yet an identified open-source release.",
+                                                "required_repair":  "Supply author identity, repository URL, release identifier or DOI, and an author-approved license."
+                                            },
+                                            {
+                                                "element_id":  "legacy-self-scan-authority",
+                                                "target":  "Current and historical self-scan inputs have unambiguous authority and lifecycle labels.",
+                                                "method":  "inspected",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "validation/README.md",
+                                                                     "locator":  "Validation authority",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "readme-validation-layout",
+                                                "target":  "The README repository tree represents the current validation artifacts introduced by v0.2.0.",
+                                                "method":  "inspected",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "README.md",
+                                                                     "locator":  "Repository layout and validation authority paragraph",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            }
+                                        ]
+                       },
+                       {
+                           "component_id":  "scan-logging",
+                           "component_type":  "code",
+                           "elements":  [
+                                            {
+                                                "element_id":  "hierarchical-scan-record",
+                                                "target":  "Element-level evidence method, check status, claim status, interpretation, and repair are persisted hierarchically.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/references/scan-record.schema.json",
+                                                                     "locator":  "hierarchical scan exchange contract",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "skill/analyze-project-claims/scripts/record_scan.py",
+                                                                     "locator":  "record derivation and append-only write",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_record_scan.py",
+                                                                     "locator":  "public recorder regressions",
+                                                                     "observed":  "The cited implementation, schema, documentation, artifact, or deterministic regression was inspected or executed in the current synchronized package."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            },
+                                            {
+                                                "element_id":  "repository-regression",
+                                                "target":  "The expanded package does not break active repository contracts.",
+                                                "method":  "executed_test",
+                                                "check_status":  "PASS",
+                                                "claim_status":  "supported",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py",
+                                                                     "locator":  "focused repository regressions",
+                                                                     "observed":  "Public source and Downloads suites passed 33/33 each; the focused package/cross-project/calibration suite passed 44/44; Downloads parity passed; the full repository suite passed 215/215."
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py",
+                                                                     "locator":  "prepared-artifact and V2 monitor regressions",
+                                                                     "observed":  "Public source and Downloads suites passed 33/33 each; the focused package/cross-project/calibration suite passed 44/44; Downloads parity passed; the full repository suite passed 215/215."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/cross_project_reliability.py",
+                                                                     "locator":  "cross-project lifecycle implementation",
+                                                                     "observed":  "Public source and Downloads suites passed 33/33 each; the focused package/cross-project/calibration suite passed 44/44; Downloads parity passed; the full repository suite passed 215/215."
+                                                                 },
+                                                                 {
+                                                                     "source":  "evaluation/scripts/natural_project_pilot.py",
+                                                                     "locator":  "selection, snapshot, annotation-packet, and execution-gate contracts",
+                                                                     "observed":  "Public source and Downloads suites passed 33/33 each; the focused package/cross-project/calibration suite passed 44/44; Downloads parity passed; the full repository suite passed 215/215."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_cross_project_reliability.py",
+                                                                     "locator":  "public dry-run regressions",
+                                                                     "observed":  "Public source and Downloads suites passed 33/33 each; the focused package/cross-project/calibration suite passed 44/44; Downloads parity passed; the full repository suite passed 215/215."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_natural_project_pilot.py",
+                                                                     "locator":  "public natural-pilot regressions",
+                                                                     "observed":  "Public source and Downloads suites passed 33/33 each; the focused package/cross-project/calibration suite passed 44/44; Downloads parity passed; the full repository suite passed 215/215."
+                                                                 },
+                                                                 {
+                                                                     "source":  "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py",
+                                                                     "locator":  "full repository suite and Downloads parity",
+                                                                     "observed":  "Public source and Downloads suites passed 33/33 each; the focused package/cross-project/calibration suite passed 44/44; Downloads parity passed; the full repository suite passed 215/215."
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_zero_finding_gold.py",
+                                                                     "locator":  "zero-gold collector regressions",
+                                                                     "observed":  "Public source and Downloads suites passed 33/33 each; the focused package/cross-project/calibration suite passed 44/44; Downloads parity passed; the full repository suite passed 215/215."
+                                                                 }
+                                                             ],
+                                                "safe_interpretation":  "The mapped element satisfies its bounded structural, behavioral, documentation, artifact, or lifecycle contract in the tested scope.",
+                                                "required_repair":  null
+                                            }
+                                        ]
+                       }
+                   ],
+    "strongest_safe_claim":  "The synchronized kit prepares a commit- and codebook-hash-bound, two-human practice exercise that is fail-closed against direct study reuse, while preserving the tested natural-pilot selection, provenance, blinded-review, label-freeze, and zero-finding contracts. The calibration-to-study codebook-hash gate, human practice, and development evaluation remain incomplete.",
+    "claim_boundary":  "The current development-pilot label identity does not yet consume the final post-calibration codebook hash. No human has completed the calibration packets, and the frozen four-project pilot still has no independent human labels, blinded adjudicated gold, or live comparative outputs. Empirical effectiveness, confirmatory support, universal RAG performance, and paper-table eligibility remain unestablished.",
+    "unresolved_uncertainties":  [
+                                     "The final post-calibration codebook SHA-256 is not yet enforced by the natural-pilot selection or label commitment; study labeling must remain blocked until that gate is implemented.",
+                                     "Two distinct humans must complete independent practice annotations and record their disagreement discussion before study labeling begins.",
+                                     "Independent human annotations and blinded adjudicated gold are pending for all four development projects.",
+                                     "Two exact live agent/model-family identities and all comparative outputs are pending.",
+                                     "Final author, repository, release identifier or DOI, and author-approved license remain pending."
+                                 ]
+}

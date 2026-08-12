@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/component-map.schema.json",
+  "title": "Analyze Project Claims Component-to-Element Map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "map_id",
+    "map_state",
+    "created_at_utc",
+    "accepted_at_utc",
+    "origin_scan_id",
+    "previous_map_id",
+    "skill_name",
+    "skill_sha256",
+    "mapper_version",
+    "objective",
+    "scope",
+    "authority",
+    "source_snapshot",
+    "components",
+    "integrity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "map_id": {
+      "type": "string",
+      "pattern": "^component-map-[0-9a-f]{12}$"
+    },
+    "map_state": {
+      "enum": [
+        "bootstrapped_provisional",
+        "drift_candidate",
+        "conflict_candidate",
+        "recovery_candidate",
+        "accepted"
+      ]
+    },
+    "created_at_utc": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accepted_at_utc": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "origin_scan_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previous_map_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^component-map-[0-9a-f]{12}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "skill_name": {
+      "const": "analyze-project-claims"
+    },
+    "skill_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "mapper_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "authority": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "source_snapshot": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source",
+          "exists",
+          "kind",
+          "sha256"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "exists": {
+            "type": "boolean"
+          },
+          "kind": {
+            "enum": [
+              "file",
+              "directory",
+              "missing",
+              "external_uri",
+              "other"
+            ]
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "component_id",
+          "component_type",
+          "elements"
+        ],
+        "properties": {
+          "component_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "component_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "elements": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "element_id",
+                "target",
+                "relation_type",
+                "evidence_locators"
+              ],
+              "properties": {
+                "element_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "target": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "relation_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "evidence_locators": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "source",
+                      "locator"
+                    ],
+                    "properties": {
+                      "source": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "locator": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_payload_sha256"
+      ],
+      "properties": {
+        "canonical_payload_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

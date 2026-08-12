@@ -1,0 +1,64 @@
+{
+  "schema_version": "APC_ANNOTATION_CALIBRATION_SELECTION_V1",
+  "selection_id": "apc-annotation-calibration-v1",
+  "phase": "annotation_calibration",
+  "evidence_role": "training_only",
+  "claim_boundary": "This one-project exercise may calibrate human use of the annotation codebook only. Its repository, labels, discussions, and decisions are excluded from development and confirmation evidence, manuscript tables, and claims of general reliability.",
+  "paper_table_eligible": false,
+  "general_reliability_proved": false,
+  "reuse_in_development_or_confirmation_prohibited": true,
+  "excluded_study_selection_ids": [
+    "apc-natural-development-pilot-v1"
+  ],
+  "sampling_rule": {
+    "selection_basis": "One small public Python library selected from repository metadata for annotation practice; no inconsistency scan or candidate-finding outcome was used for selection.",
+    "outcome_fields_inspected": false,
+    "selected_at": "2026-08-10T00:00:00Z",
+    "head_verification_method": "git ls-remote <repository>.git HEAD"
+  },
+  "codebook": {
+    "path": "evaluation/annotation-codebook.md",
+    "sha256": "c91cd7c8e6b75b7570efe6a91ebd4a754aa07da194f61130bbd240596443fb47"
+  },
+  "packet_limits": {
+    "maximum_files_per_project": 2500,
+    "maximum_bytes_per_project": 26214400
+  },
+  "annotator_slots": [
+    {
+      "id": "human_calibrator_a",
+      "kind": "human",
+      "independent_first_pass": true,
+      "condition_blinded": true
+    },
+    {
+      "id": "human_calibrator_b",
+      "kind": "human",
+      "independent_first_pass": true,
+      "condition_blinded": true
+    }
+  ],
+  "project": {
+    "id": "prettytable_python_formatting",
+    "repository_url": "https://github.com/prettytable/prettytable",
+    "metadata_evidence_url": "https://github.com/prettytable/prettytable",
+    "commit_sha": "3c80d392d32f48b0ab1e368793ddb751dbe41807",
+    "origin": "natural_external",
+    "primary_language": "Python",
+    "task_stratum": "tabular_formatting_library",
+    "license": {
+      "spdx_ids": [
+        "BSD-3-Clause"
+      ],
+      "file_paths": [
+        "LICENSE"
+      ],
+      "evidence_urls": [
+        "https://github.com/prettytable/prettytable/blob/3c80d392d32f48b0ab1e368793ddb751dbe41807/LICENSE"
+      ]
+    },
+    "public_distribution": {
+      "include_source_snapshot": false
+    }
+  }
+}

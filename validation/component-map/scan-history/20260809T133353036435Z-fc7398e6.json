@@ -1,0 +1,37 @@
+{
+  "accepted_map_id": "component-map-c15888914ee5",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260809T133353036435Z-fc7398e6-component-map-e479c101e653.json",
+    "delta": "deltas/20260809T133353036435Z-fc7398e6.json"
+  },
+  "candidate_map_id": "component-map-e479c101e653",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+      }
+    ]
+  },
+  "event_id": "20260809T133353036435Z-fc7398e6",
+  "integrity": {
+    "canonical_payload_sha256": "4a863101fd3bc20b5241dcea2c188906e102dfa05a42a116b7502958dfe8083c"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-09T13:33:53.036435Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

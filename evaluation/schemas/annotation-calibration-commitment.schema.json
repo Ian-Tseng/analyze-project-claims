@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/annotation-calibration-commitment.schema.json",
+  "title": "Frozen two-human annotation-calibration commitment",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "commitment_state",
+    "calibration_completed",
+    "evidence_role",
+    "raw_annotation_count",
+    "independent_human_annotators",
+    "calibration_run_group_id",
+    "calibration_selection_sha256",
+    "project_id",
+    "snapshot_sha256",
+    "codebook_initial_sha256",
+    "codebook_final_sha256",
+    "raw_label_sha256",
+    "annotator_identity_sha256",
+    "discussion_sha256",
+    "calibration_set_sha256",
+    "frozen_at",
+    "reuse_in_development_or_confirmation_prohibited",
+    "paper_table_eligible",
+    "general_reliability_proved"
+  ],
+  "properties": {
+    "schema_version": {"const": "APC_ANNOTATION_CALIBRATION_COMMITMENT_V1"},
+    "commitment_state": {"const": "frozen"},
+    "calibration_completed": {"const": true},
+    "evidence_role": {"const": "training_only"},
+    "raw_annotation_count": {"const": 2},
+    "independent_human_annotators": {"const": 2},
+    "calibration_run_group_id": {"type": "string", "minLength": 1},
+    "calibration_selection_sha256": {"$ref": "#/$defs/sha256"},
+    "project_id": {"type": "string", "minLength": 1},
+    "snapshot_sha256": {"$ref": "#/$defs/sha256"},
+    "codebook_initial_sha256": {"$ref": "#/$defs/sha256"},
+    "codebook_final_sha256": {"$ref": "#/$defs/sha256"},
+    "raw_label_sha256": {"$ref": "#/$defs/two_hash_map"},
+    "annotator_identity_sha256": {"$ref": "#/$defs/two_hash_map"},
+    "discussion_sha256": {"$ref": "#/$defs/sha256"},
+    "calibration_set_sha256": {"$ref": "#/$defs/sha256"},
+    "frozen_at": {"type": "string", "format": "date-time"},
+    "reuse_in_development_or_confirmation_prohibited": {"const": true},
+    "paper_table_eligible": {"const": false},
+    "general_reliability_proved": {"const": false}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "two_hash_map": {
+      "type": "object",
+      "minProperties": 2,
+      "maxProperties": 2,
+      "additionalProperties": {"$ref": "#/$defs/sha256"}
+    }
+  },
+  "additionalProperties": false
+}

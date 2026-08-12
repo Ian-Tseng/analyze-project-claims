@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/analyze-project-claims/adjudication.schema.json",
+  "title": "Blinded finding adjudication",
+  "type": "object",
+  "required": ["schema_version", "spec_id", "scientific_config_hash", "reviewer_id", "independent_human_review", "matches"],
+  "properties": {
+    "schema_version": {"const": "APC_CROSS_PROJECT_ADJUDICATION_V1"},
+    "spec_id": {"type": "string", "minLength": 1},
+    "scientific_config_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "independent_human_review": {"type": "boolean"},
+    "matches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["finding_id", "gold_finding_id", "repair_correct", "provenance_preserved"]
+      }
+    }
+  },
+  "additionalProperties": true
+}

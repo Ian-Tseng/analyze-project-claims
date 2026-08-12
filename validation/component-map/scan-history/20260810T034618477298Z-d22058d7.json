@@ -1,0 +1,81 @@
+{
+  "accepted_map_id": "component-map-c545fd5bcd49",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260810T034618477298Z-d22058d7-component-map-5cbb02d6e7a7.json",
+    "delta": "deltas/20260810T034618477298Z-d22058d7.json"
+  },
+  "candidate_map_id": "component-map-5cbb02d6e7a7",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "human-calibration-ui"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/README.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/scripts/calibration_ui.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/ui/calibration-console.html"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_calibration_ui.py"
+      }
+    ]
+  },
+  "event_id": "20260810T034618477298Z-d22058d7",
+  "integrity": {
+    "canonical_payload_sha256": "9615f4bfcc8f277fedc94639a2e00e92b05539cb0597300d3937664a6395be6c"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-10T03:46:18.477298Z",
+  "schema_version": "1.0",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52"
+}

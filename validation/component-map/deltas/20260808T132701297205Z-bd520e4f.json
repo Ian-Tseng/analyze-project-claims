@@ -1,0 +1,96 @@
+{
+  "accepted_map_id": "component-map-10baa42140d2",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-441a870f9e64",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "scope"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/fixtures/dry-run/fixture-plan.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/labels/dry-run/lifecycle_fixture.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/labels/dry-run/provenance_fixture.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/projects/dry-run/lifecycle_fixture"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/projects/dry-run/provenance_fixture"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/prompts"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "891dc02ef598864ca1f7d43a044dda614defa08cebf5fd46e632ab2171b7c0dd"
+  },
+  "recorded_at_utc": "2026-08-08T13:27:01.297205Z",
+  "scan_id": "20260808T132701297205Z-bd520e4f",
+  "schema_version": "1.0"
+}

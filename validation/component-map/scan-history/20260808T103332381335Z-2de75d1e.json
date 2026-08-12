@@ -1,0 +1,100 @@
+{
+  "accepted_map_id": "component-map-027d84f8587e",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260808T103332381335Z-2de75d1e-component-map-fb075cb8f128.json",
+    "delta": "deltas/20260808T103332381335Z-2de75d1e.json"
+  },
+  "candidate_map_id": "component-map-fb075cb8f128",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "observation-template-roundtrip"
+      },
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "runtime-schema-enforcement"
+      },
+      {
+        "component_id": "distribution",
+        "element_id": "github-wrapper-mirror-parity"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "active-rag-claim-consistency"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "legacy-self-scan-authority"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "readme-validation-layout"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "C:\\Users\\chois\\Downloads\\analyze-project-claims-github"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "source"
+        ],
+        "source": "docs/RAG_GENERALIZATION_CHECK_TABLE.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/assets/component-map.template.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "validation/self-scan-input.json"
+      }
+    ]
+  },
+  "event_id": "20260808T103332381335Z-2de75d1e",
+  "integrity": {
+    "canonical_payload_sha256": "adac00f23af530ad0d58fb987e99a610c2c2ba5f26cf14dbd9f3c46daa04028b"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.0.0",
+  "recorded_at_utc": "2026-08-08T10:33:32.381335Z",
+  "schema_version": "1.0",
+  "skill_sha256": "60565e2e98dc2b9f65de1517d2afda9fc636edeab5ecf640ed1731592764d80c"
+}

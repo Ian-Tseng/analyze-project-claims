@@ -1,0 +1,206 @@
+{
+  "accepted_map_id": "component-map-8be48ee34256",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-3679479cf27c",
+  "changes": {
+    "added_components": [
+      "natural-pilot-preparation"
+    ],
+    "added_elements": [
+      {
+        "component_id": "natural-pilot-preparation",
+        "element_id": "independent-blinded-annotation-packets"
+      },
+      {
+        "component_id": "natural-pilot-preparation",
+        "element_id": "metadata-only-selection-freeze"
+      },
+      {
+        "component_id": "natural-pilot-preparation",
+        "element_id": "pre-execution-scientific-boundary"
+      },
+      {
+        "component_id": "natural-pilot-preparation",
+        "element_id": "source-provenance-and-distribution-boundary"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_natural_pilot_monitor.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\execution_gate.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\selection_manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\source_manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/configs/development-pilot.template.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/configs/natural-development-pilot.selection.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/schemas"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/independent-annotation.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/natural-pilot-selection.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/schemas/pinned-project-source.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/scripts/natural_project_pilot.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/templates/pinned-project-source.template.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_natural_project_pilot.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "2a5af6493c5a1fd0db5e2a56aad87101ab6468b27ce31be68b94b4e411db47dc"
+  },
+  "recorded_at_utc": "2026-08-09T03:08:56.945747Z",
+  "scan_id": "20260809T030856945747Z-7035ffc4",
+  "schema_version": "1.0"
+}

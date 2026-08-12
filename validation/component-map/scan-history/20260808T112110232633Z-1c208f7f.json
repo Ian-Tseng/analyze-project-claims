@@ -1,0 +1,153 @@
+{
+  "accepted_map_id": "component-map-027d84f8587e",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260808T112110232633Z-1c208f7f-component-map-2ab151e98fc8.json",
+    "delta": "deltas/20260808T112110232633Z-1c208f7f.json"
+  },
+  "candidate_map_id": "component-map-2ab151e98fc8",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "observation-template-roundtrip"
+      },
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "runtime-schema-enforcement"
+      },
+      {
+        "component_id": "distribution",
+        "element_id": "github-wrapper-mirror-parity"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "active-rag-claim-consistency"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "legacy-self-scan-authority"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "readme-validation-layout"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff.template"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/assets/component-map-observation.template.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skill/analyze-project-claims/references/component-map.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_component_map.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_record_scan.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "validation/README.md"
+      }
+    ]
+  },
+  "event_id": "20260808T112110232633Z-1c208f7f",
+  "integrity": {
+    "canonical_payload_sha256": "560e635e28ebf85e7d1a6e75727b16f954c310391328d5d47a01ab8c93f37234"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.0.0",
+  "recorded_at_utc": "2026-08-08T11:21:10.232633Z",
+  "schema_version": "1.0",
+  "skill_sha256": "4a4b6f033efa8301102858997208398dcbadaba584fef86108492285eac70be6"
+}
