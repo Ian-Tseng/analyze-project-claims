@@ -369,6 +369,14 @@ class UpdatePolicyTests(unittest.TestCase):
         self.assertEqual(package["version"], (ROOT / "VERSION").read_text(encoding="utf-8").strip())
         self.assertRegex(update_policy.verify_package_manifest(SKILL_ROOT), r"^[0-9a-f]{64}$")
 
+    def test_repository_package_text_uses_canonical_lf_bytes(self) -> None:
+        manifest = json.loads((SKILL_ROOT / "references" / "package-manifest.json").read_text(encoding="utf-8"))
+        text_suffixes = {".json", ".md", ".py", ".txt", ".yaml", ".yml"}
+        for entry in manifest["files"]:
+            relative = Path(entry["path"])
+            if relative.suffix.lower() in text_suffixes:
+                self.assertNotIn(b"\r", (SKILL_ROOT / relative).read_bytes(), entry["path"])
+
     @unittest.skipIf(os.name == "nt", "Creating symlinks is privilege-dependent on Windows.")
     def test_manifest_rejects_symbolic_links(self) -> None:
         with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:

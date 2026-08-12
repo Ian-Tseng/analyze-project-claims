@@ -10,7 +10,7 @@
     },
     {
       "path": "agents/openai.yaml",
-      "sha256": "8abfc9e5decda334294f1185fb03e160cc94dd53bc3ef25eaa279512c6fa2c4b"
+      "sha256": "340151a27a835d7cd331d9e4da4d382c4f5a92641ba915b30156833c978a215a"
     },
     {
       "path": "assets/component-map-observation.template.json",
