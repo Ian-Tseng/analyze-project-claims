@@ -208,6 +208,11 @@ Read [PUBLISHING.md](PUBLISHING.md) for owner setup, license and citation gates,
 manifest rebuilding, GitHub upload, `gh skill publish`, and public install/update
 smoke tests.
 
+For the reusable design and release procedure, read
+[How to Build Safe Managed Updates for a GitHub Skill](docs/MANAGED_SKILL_UPDATE_GUIDE.md).
+For the exact v0.4.1 to v0.4.2 validation record and the limits of that evidence,
+read [Managed Update End-to-End Evidence Log](docs/MANAGED_UPDATE_E2E_LOG.md).
+
 Version `0.4.2` completes live validation of the managed replacement path. `VERSION`, package
 metadata, the package manifest, and citation metadata must remain synchronized.
 
