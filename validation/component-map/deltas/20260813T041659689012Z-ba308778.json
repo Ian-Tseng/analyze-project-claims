@@ -1,0 +1,37 @@
+{
+  "accepted_map_id": "component-map-bb925016d58d",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-b61ff30070f9",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "public-security-guidance",
+        "fields": [
+          "target",
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "045b5d5940374b6c0d2b7c033fa4342d321d0d21a5ec781bffe763625263cab6"
+  },
+  "recorded_at_utc": "2026-08-13T04:16:59.689012Z",
+  "scan_id": "20260813T041659689012Z-ba308778",
+  "schema_version": "1.0"
+}

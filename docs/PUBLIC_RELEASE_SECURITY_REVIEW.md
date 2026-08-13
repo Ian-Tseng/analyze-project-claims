@@ -3,9 +3,10 @@
 ## Executive summary
 
 The 2026-08-13 review found no live credential or private machine-path material
-in reachable source history. Publication remains conditional on an explicit
-owner decision about the legacy commit-author email and successful validation
-of v0.6.0. Repository visibility must remain private until those gates pass.
+in reachable source history. The owner accepted the legacy commit-author email
+exposure, v0.6.0 passed validation, and the repository was made public without
+rewriting the published history. The post-public controls below were verified
+on the same date.
 
 ## High priority
 
@@ -25,19 +26,29 @@ the appropriate automatic-reporting transport for a public product.
 Impact: making the repository public exposes the author email embedded in ten
 existing commits.
 
-Status: owner decision required. Future commits use the GitHub no-reply
-identity. Rewriting existing commits would replace published commit and tag
-identities, invalidating the recorded release evidence; preserving history
-accepts the email exposure.
+Status: accepted by the owner. Future commits use the GitHub no-reply identity.
+The published commit and tag identities were preserved, so the personal author
+email remains visible in the ten historical commits.
 
 ## Medium priority
 
 ### PUB-003: Private vulnerability reporting requires public visibility
 
-Status: staged. `SECURITY.md` directs reporters to GitHub private vulnerability
-reporting. The owner must enable that repository feature immediately after the
-visibility switch and verify that the **Report a vulnerability** action is
-available.
+Status: enabled and API-verified after the public visibility switch.
+`SECURITY.md` directs reporters to GitHub private vulnerability reporting.
+
+## Publication postconditions
+
+- GitHub reports the repository as public and private vulnerability reporting
+  as enabled.
+- An unauthenticated `git ls-remote` resolved both `main` and `v0.6.0` to
+  `7a2dd15d27c0776b2d4fca15fb79747076feb6c7`.
+- `gh skill preview Ian-Tseng/analyze-project-claims
+  skills/analyze-project-claims/SKILL.md` completed against the public source.
+- A live bounded reporter test returned `PUBLIC_ISSUE_APPROVAL_REQUIRED` when
+  given report approval without `--allow-public-issue`; the GitHub issue list
+  remained unchanged.
+- GitHub secret scanning and push protection are enabled.
 
 ## Passed checks
 
@@ -56,5 +67,5 @@ available.
 
 The history scan is deterministic pattern matching, not proof that no sensitive
 semantic content exists. Actions hosted-runner logs and GitHub notification
-delivery were not exhaustively reclassified. Public secret scanning and push
-protection should be verified after publication.
+delivery were not exhaustively reclassified. No independent customer install
+or production owner-API deployment was observed in this review.

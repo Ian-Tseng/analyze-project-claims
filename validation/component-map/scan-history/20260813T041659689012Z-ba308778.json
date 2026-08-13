@@ -1,0 +1,46 @@
+{
+  "accepted_map_id": "component-map-bb925016d58d",
+  "action": "conflict_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260813T041659689012Z-ba308778-component-map-b61ff30070f9.json",
+    "delta": "deltas/20260813T041659689012Z-ba308778.json"
+  },
+  "candidate_map_id": "component-map-b61ff30070f9",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "public-security-guidance",
+        "fields": [
+          "target",
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md"
+      }
+    ]
+  },
+  "event_id": "20260813T041659689012Z-ba308778",
+  "integrity": {
+    "canonical_payload_sha256": "0a2d4df62a51cf8819ac190064920310d5ed935522906c3210ce0cdb89eba9a5"
+  },
+  "map_state_after": "conflict_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-13T04:16:59.689012Z",
+  "schema_version": "1.0",
+  "skill_sha256": "0dc46609b35df360adeb6191595ee914e51cbb4c8e03fb9fd0ad64154bdd5861"
+}
