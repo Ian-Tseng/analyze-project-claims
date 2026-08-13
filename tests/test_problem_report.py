@@ -156,6 +156,16 @@ class ProblemReportTests(unittest.TestCase):
             self.assertEqual(reporter.remote_status(report_id)["remote_status"], "triaged")
             self.assertEqual(reporter.remote_delete(report_id)["remote_status"], "deleted")
 
+    def test_status_exposes_active_report_schema_version(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            root = self.make_skill(base)
+            reporter = self.subject.Reporter(root, self.subject.PolicyStore(base / "state"))
+            reporter.configure("ask", transport="github")
+            status = reporter.status()
+            self.assertEqual(status["schema_version"], self.subject.POLICY_SCHEMA_VERSION)
+            self.assertEqual(status["report_schema_version"], self.subject.SCHEMA_VERSION)
+
     def test_redaction_rejects_credentials_paths_and_control_characters(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = self.make_skill(Path(temporary))

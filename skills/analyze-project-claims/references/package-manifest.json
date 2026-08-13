@@ -34,7 +34,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "ee402406ff8713a69628db322e00d2b076126e91a2a23d2f1e5a6eca715010c8"
+      "sha256": "b8b1c543e5dbc16c336a41778e8ac85b8a35355c29d5bac0dcc40eaa8d7bdb25"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -54,7 +54,7 @@
     },
     {
       "path": "scripts/problem_report.py",
-      "sha256": "f97cb6aecb2bad6a5fba8ec5a35af24709181dffa5b4b66a0bd0720fe103ca5f"
+      "sha256": "6c2f56d612adf11006e6de2e4e8763009e165ced8755ecc3ba62ffadaade3f24"
     },
     {
       "path": "scripts/reconcile_component_map.py",

@@ -233,7 +233,7 @@ For the reusable design and release procedure, read
 For the exact v0.4.1 to v0.4.2 validation record and the limits of that evidence,
 read [Managed Update End-to-End Evidence Log](docs/MANAGED_UPDATE_E2E_LOG.md).
 
-Version `0.5.0` adds consent-gated internal problem reporting while preserving
+Version `0.5.1` adds consent-gated internal problem reporting while preserving
 the validated managed replacement path. `VERSION`, package
 metadata, the package manifest, and citation metadata must remain synchronized.
 

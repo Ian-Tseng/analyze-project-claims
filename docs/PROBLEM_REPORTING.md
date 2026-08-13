@@ -56,6 +56,10 @@ Nothing leaves the device until the user approves that preview.
 Update consent does not change this table. The local policy never stores an
 API token.
 
+Machine-readable `status` distinguishes the local policy contract in
+`schema_version` from the outbound report contract in
+`report_schema_version`.
+
 ## Default: private GitHub Issues
 
 The default transport uses the user's existing GitHub CLI login:

@@ -704,6 +704,7 @@ class Reporter:
             "STATUS",
             state,
             f"Problem reporting is {state['mode']} through {state['transport']}.",
+            report_schema_version=SCHEMA_VERSION,
             repository=state["repository"],
             endpoint=state["endpoint"],
             last_report_id=state["last_report_id"],
