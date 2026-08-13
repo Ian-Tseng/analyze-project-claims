@@ -1,0 +1,94 @@
+{
+  "accepted_map_id": "component-map-99593593b8c4",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-6fd309577555",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/codex/prompts/resolve-internal-report.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/workflows/agent-maintainer.yml"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "analytics_service"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "analytics_service/server.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/AGENT_MAINTAINER.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/INSTALLATION_ANALYTICS.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "maintainer_service"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "maintainer_service/intake.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_agent_maintainer.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_analytics_service.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "09e8b347d802c0dd8ec4f6c22d88a11792c1b19612de2bcd9cfaafb8aaff3271"
+  },
+  "recorded_at_utc": "2026-08-13T15:35:18.025229Z",
+  "scan_id": "20260813T153518025229Z-2bf2ab6b",
+  "schema_version": "1.0"
+}

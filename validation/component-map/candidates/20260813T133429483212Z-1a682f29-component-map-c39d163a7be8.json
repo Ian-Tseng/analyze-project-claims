@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-13T15:38:18.131685Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -55,8 +55,6 @@
     "maintainer_service/intake.py",
     "maintainer_service/patch_guard.py",
     "docs/AGENT_MAINTAINER.md",
-    "docs/AGENT_MAINTAINER_E2E_LOG.md",
-    "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md",
     "analytics_service/server.py",
     "docs/INSTALLATION_ANALYTICS.md",
     "skills/analyze-project-claims/references/installation-analytics-event.schema.json",
@@ -83,14 +81,6 @@
             {
               "locator": "owner review and completion",
               "source": "docs/AGENT_MAINTAINER.md"
-            },
-            {
-              "locator": "local observations and hosted-execution limitations",
-              "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
-            },
-            {
-              "locator": "lifecycle contract, privilege zones, required tests, and evidence boundary",
-              "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
             },
             {
               "locator": "owner triage and public/private processing boundary",
@@ -1097,16 +1087,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-13T15:38:09.692028Z",
+  "created_at_utc": "2026-08-13T13:34:29.483212Z",
   "integrity": {
-    "canonical_payload_sha256": "52f69b5350cbb4c57d4be5a0bec2a1945a9fe522e8b027ee430d4cd1d5814ade"
+    "canonical_payload_sha256": "7075cef3d8600dcdf1cfa3a7283fbc980c93bdb2a96d9e9ac78c1347bb9be026"
   },
-  "map_id": "component-map-ab945b31ed28",
-  "map_state": "accepted",
+  "map_id": "component-map-c39d163a7be8",
+  "map_state": "drift_candidate",
   "mapper_version": "1.2.0",
   "objective": "Map the v0.6.3 product-lifecycle candidate, including consent-bounded installation analytics, owner-gated agent maintenance, cross-agent packaging, public reporting, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or local E2E evidence as production proof.",
-  "origin_scan_id": "20260813T153809692028Z-9733e5b3",
-  "previous_map_id": "component-map-99593593b8c4",
+  "origin_scan_id": "20260813T133429483212Z-1a682f29",
+  "previous_map_id": "component-map-39a13c95d3af",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1178,8 +1168,6 @@
     ".github/codex/prompts/resolve-internal-report.md",
     "maintainer_service",
     "docs/AGENT_MAINTAINER.md",
-    "docs/AGENT_MAINTAINER_E2E_LOG.md",
-    "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md",
     "analytics_service",
     "docs/INSTALLATION_ANALYTICS.md",
     "tests/test_agent_maintainer.py",
@@ -1194,13 +1182,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "68f28c5978b9722a4643dab66a947d305b94f453796241bde886f47aab363deb",
+      "sha256": "61addf9dac893f782a266c8679280481e616d885742d36b3c66bd41dc2d8893d",
       "source": ".github/codex/prompts/resolve-internal-report.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "be6601ea7cf407e03763b71fb9a88d28fcae9539c28120501ea552e02910ebe9",
+      "sha256": "756e6d4ea5040ff5fbb0ed277ea271c00aa686a74e1e9e0a42ae0f244d05a6b0",
       "source": ".github/workflows/agent-maintainer.yml"
     },
     {
@@ -1338,13 +1326,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "92c010f30218a84776684ba98cdf166fdcc5fc84de55397d2600fe636c39ce4e",
+      "sha256": "640dd0c64fbe08412469a1f9b2d089d706e5e21ab3de102321247058033a4827",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3f8f9dab8bd8e62cb8937a2345b989d5e69536f6c6795f8f28da7b9c55501789",
+      "sha256": "9e4a3d6992daece5fd76a78f442526c70940dcdcd893f56ca87aceef713b6656",
       "source": "README.md"
     },
     {
@@ -1362,37 +1350,25 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "d37cd04a05bac1189f6579634640bbf4b7c7bb695b722dd6ecf10170a563e88c",
+      "sha256": "a4c1b588591424c52025d6c40c65cf619fb42afff92f07059af347a71b0e4121",
       "source": "analytics_service"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "02d6c92ce637376ede242a495476e09ebe44c97a214d93f3da235276f4f963fe",
+      "sha256": "40706f579b5adf80b06be51784974300e30de02c9ba9980d688536e71ec53ef4",
       "source": "analytics_service/server.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4ecaa20ea122b9c6d96e86deeceef3c6dce4f4798544cdd574c1c669ecd387a8",
+      "sha256": "ad693f5e2691c17580ba31a0768f15088fdb7cbd0039057aeab3b559dfcc8f1d",
       "source": "docs/AGENT_MAINTAINER.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ee361484ce077dccb725d9960371b6bd8320459fc1e59398ca3ae3494ada6dff",
-      "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "72c0450a00958d74de96134768d8f95c44fdad2c2d95816aa9313de8a355383d",
-      "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "16c2a10f0c75286f5fd0513cfe6cbb6574c3c2053fcddc4463ba4f7acfefe4a0",
+      "sha256": "1df3121f1e0e027090351e3e6fa7427abebd72f4d1201b526af42279681bcd8c",
       "source": "docs/INSTALLATION_ANALYTICS.md"
     },
     {
@@ -1602,19 +1578,19 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "42b4a77f3855ad96a5abc6a948658d819ef1425c775e2a3ac97b02e5f03d99fd",
+      "sha256": "9c3cf20915dbd0fb1a547f3681b1adc44ed734ffc9f59a537ff00e77232e4f77",
       "source": "maintainer_service"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "381652cbf59bc2bd0ba0557c734cb352637a13a6dd3c5d1951f1e690e111a8ff",
+      "sha256": "6b64eecbc1adda22dfb31f2b262595f94d1eda1afeb07219dc64b433716ecaf3",
       "source": "maintainer_service/intake.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a06d55cf41e3b97fe1e0df0bfe8b79369d0e98ad67bbe1fd23313e910b6fe121",
+      "sha256": "90fa0d133b8abef4765927827afc22261dfee1c465c6d18a0e49df9f92967244",
       "source": "maintainer_service/patch_guard.py"
     },
     {
@@ -1626,7 +1602,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "b3c626d8178ce52e31f9c87b9afa80cbfa64ac64e956d79371c41242cabcc35d",
+      "sha256": "bbb981d64234a7e8bcb71c1c1b666337c8afd330e34a3958710bde84b3914a2d",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -1668,7 +1644,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0f777c1627a248ca3dab982d1615df8c89aed9e8b3ad994e95144bda317e2cb7",
+      "sha256": "4b3b7be0f759cded45452fdffbff68f7141e02a896cf1ef60093bf21ba6ce536",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
@@ -1734,13 +1710,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "49fb5d2ca181f7c97aa54df1022aff267f53442db50707c3f4eb7ad7e1d95eb4",
+      "sha256": "591b39e5ea6d5c30741d1695cf25f50bde09145a4cc852f18533378adb084f95",
       "source": "tests/test_agent_maintainer.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "bf0041fdc55b3e4e4e20b010fa3f8ad6da37239fcb76eb3acc7de039c1515990",
+      "sha256": "c45b4e47bdf2ef6ee1a37cd2fb3beaedd5d4e2a49b62266cbf26566c161808b3",
       "source": "tests/test_analytics_service.py"
     },
     {
@@ -1812,7 +1788,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "5f0a91dd067522c1006832e5385ded61e3a42d055721e6eb7231c0157c93fa87",
+      "sha256": "010c002bbabba539c5da24babcdeda7aebf495050664f12daef96a16db17ec85",
       "source": "tests/test_record_scan.py"
     },
     {

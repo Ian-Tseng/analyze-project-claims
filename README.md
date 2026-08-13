@@ -159,6 +159,20 @@ The update policy stores only its mode, hashed install binding, timestamps,
 suspension state, and last outcome. Update consent does not grant reporting
 consent.
 
+## Optional installation analytics
+
+The repository contains an opt-in reference client and private owner API for
+counting unique consenting activated installations by version. This is not a
+download count or a count of unique people. No public analytics endpoint is
+currently bundled or claimed as deployed, so installing or using the skill
+does not send analytics by default.
+
+The user must enable a reviewed owner endpoint and later run a check-in before
+the first bounded event is sent. Update and problem-report consent remain
+separate. Read [Privacy-Bounded Installation Analytics](docs/INSTALLATION_ANALYTICS.md)
+for the exact fields, user controls, owner deployment, aggregate query, erasure,
+retention, and evidence limits.
+
 ## Report an internal tool problem
 
 When the tool itself fails, the skill can prepare a local preview and ask
@@ -179,6 +193,11 @@ separately enabled updater can install it on later use.
 
 Read [Internal Problem Reporting](docs/PROBLEM_REPORTING.md) for the reusable
 architecture, data contract, owner workflow, API, retention, and deletion.
+Maintainers can optionally use the owner-gated
+[Agent Maintainer](docs/AGENT_MAINTAINER.md) to turn an exact disclosed public
+report into a tested draft pull request; it never merges or releases by itself.
+For another repository, use the
+[reusable agent-maintainer guide](docs/GITHUB_AGENT_MAINTAINER_GUIDE.md).
 
 ## Formal audit records
 
@@ -254,7 +273,7 @@ Use `python3` instead of `py -3` on macOS or Linux. A passing suite validates
 the tested software contracts; it does not establish scientific benefit or
 cross-project reliability.
 
-## Maintainers
+## Maintainer and release guidance
 
 Read [PUBLISHING.md](PUBLISHING.md) for owner setup, license and citation gates,
 manifest rebuilding, GitHub upload, `gh skill publish`, and public install/update
@@ -270,10 +289,13 @@ For a reusable cross-agent validation procedure, read
 The current Claude-targeted result and its runtime limit are in the
 [Claude Code E2E Evidence Log](docs/CLAUDE_CODE_E2E_LOG.md).
 
-Version `0.6.2` makes component-map directory identity insensitive to generated
-Python bytecode caches while retaining ordinary-file drift detection, and
-names the repository's current validation authorities explicitly. `VERSION`, package
-metadata, the package manifest, and citation metadata must remain synchronized.
+`VERSION`, package metadata, the package manifest, and citation metadata must
+remain synchronized for every release.
+
+## Release history
+
+See the repository's versioned changes and published artifacts on
+[GitHub Releases](https://github.com/Ian-Tseng/analyze-project-claims/releases).
 
 ## Citation and license
 

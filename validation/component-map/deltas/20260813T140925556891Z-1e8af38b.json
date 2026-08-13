@@ -1,0 +1,28 @@
+{
+  "accepted_map_id": "component-map-f7647b9ae07b",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-99593593b8c4",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "98d8044f3bf6a2e3dc24b9a7c16a7f1d7b6ff3e7418d5601678b9dabff319740"
+  },
+  "recorded_at_utc": "2026-08-13T14:09:25.556891Z",
+  "scan_id": "20260813T140925556891Z-1e8af38b",
+  "schema_version": "1.0"
+}

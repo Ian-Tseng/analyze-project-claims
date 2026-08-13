@@ -495,6 +495,32 @@ client token in `ANALYZE_PROJECT_CLAIMS_REPORT_TOKEN`; never write that token
 into policy or project files. Suspected security vulnerabilities must use the
 repository's private vulnerability reporting channel, not this reporter.
 
+## Keep installation analytics explicit and separate
+
+Installation analytics are optional owner infrastructure, not a default skill
+side effect. No public endpoint is bundled. Do not prompt, create an identity,
+or send an event merely because the skill was installed, invoked, updated, or
+used to report a problem. Update consent and reporting consent do not authorize
+analytics.
+
+When the user explicitly asks and an owner endpoint is available, route these
+requests to `scripts/installation_analytics.py` with global options before the
+verb:
+
+- "show installation analytics status" -> `--format json status`
+- "preview installation analytics" -> `--format json preview`
+- "enable installation analytics for <endpoint>" -> `--format json enable --endpoint <endpoint>`
+- "send an installation analytics check-in" -> `--format json check-in`
+- "disable installation analytics" -> `--format json disable`
+- "erase my installation analytics" -> `--format json erase`
+
+Enabling creates local random identity but sends nothing; a later check-in is
+the first network event. The scoped client token must come only from
+`ANALYZE_PROJECT_CLAIMS_ANALYTICS_TOKEN`. Describe the owner metric as unique
+consenting activated installations, never downloads, users, or total installs.
+Do not claim a live count until the owner API is deployed and the aggregate was
+actually queried.
+
 ## Run consent-gated update maintenance
 
 At the end of each substantive invocation, after the claims result is complete

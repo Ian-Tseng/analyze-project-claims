@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-13T15:38:18.131685Z",
+  "accepted_at_utc": "2026-08-13T06:34:10.710860Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -49,101 +49,9 @@
     "skills/analyze-project-claims/scripts/update_policy.py",
     "tests/test_problem_report.py",
     "tests/test_reporting_service.py",
-    "tests/test_update_policy.py",
-    ".github/workflows/agent-maintainer.yml",
-    ".github/codex/prompts/resolve-internal-report.md",
-    "maintainer_service/intake.py",
-    "maintainer_service/patch_guard.py",
-    "docs/AGENT_MAINTAINER.md",
-    "docs/AGENT_MAINTAINER_E2E_LOG.md",
-    "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md",
-    "analytics_service/server.py",
-    "docs/INSTALLATION_ANALYTICS.md",
-    "skills/analyze-project-claims/references/installation-analytics-event.schema.json",
-    "skills/analyze-project-claims/references/installation-analytics-policy.schema.json",
-    "skills/analyze-project-claims/scripts/installation_analytics.py",
-    "tests/test_agent_maintainer.py",
-    "tests/test_installation_analytics.py",
-    "tests/test_analytics_service.py",
-    "tests/test_agent_compatibility.py",
-    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
+    "tests/test_update_policy.py"
   ],
   "components": [
-    {
-      "component_id": "agent-maintainer",
-      "component_type": "service",
-      "elements": [
-        {
-          "element_id": "human-release-gate",
-          "evidence_locators": [
-            {
-              "locator": "problem-report operations and release evidence",
-              "source": "PUBLISHING.md"
-            },
-            {
-              "locator": "owner review and completion",
-              "source": "docs/AGENT_MAINTAINER.md"
-            },
-            {
-              "locator": "local observations and hosted-execution limitations",
-              "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
-            },
-            {
-              "locator": "lifecycle contract, privilege zones, required tests, and evidence boundary",
-              "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
-            },
-            {
-              "locator": "owner triage and public/private processing boundary",
-              "source": "docs/PROBLEM_REPORTING.md"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "An automated candidate never merges, releases, closes a report, or proves user update; owner review, ordinary CI, versioned publication, installed replacement, and fresh activation remain separate gates."
-        },
-        {
-          "element_id": "owner-gated-bounded-intake",
-          "evidence_locators": [
-            {
-              "locator": "issues labeled trigger and prepare job",
-              "source": ".github/workflows/agent-maintainer.yml"
-            },
-            {
-              "locator": "prepare_task exact event, identity, body, disclosure, and event-code checks",
-              "source": "maintainer_service/intake.py"
-            },
-            {
-              "locator": "owner, exact-body, disclosure, malformed event, task minimization, and E2E rejection regressions",
-              "source": "tests/test_agent_maintainer.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "Only an exact newly disclosed public report labeled agent-ready by the canonical owner becomes a minimal untrusted task; raw issue content, comments, reporter identity, installation identity, private API reports, and E2E probes remain excluded."
-        },
-        {
-          "element_id": "privilege-separated-candidate",
-          "evidence_locators": [
-            {
-              "locator": "untrusted evidence and forbidden owner-action instructions",
-              "source": ".github/codex/prompts/resolve-internal-report.md"
-            },
-            {
-              "locator": "prepare, fix, validate, and publish-draft jobs",
-              "source": ".github/workflows/agent-maintainer.yml"
-            },
-            {
-              "locator": "path, mode, UTF-8, size, sensitive-surface, and release-quartet checks",
-              "source": "maintainer_service/patch_guard.py"
-            },
-            {
-              "locator": "patch-guard and privilege-separation workflow regressions",
-              "source": "tests/test_agent_maintainer.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "Codex has no repository write credential; trusted guards bound paths and release identity, a fresh secret-free job tests the exact patch, and only a later non-executing job can publish a new draft branch and pull request."
-        }
-      ]
-    },
     {
       "component_id": "annotation-codebook-calibration",
       "component_type": "experiment",
@@ -424,35 +332,6 @@
       ]
     },
     {
-      "component_id": "cross-agent-package-compatibility",
-      "component_type": "distribution",
-      "elements": [
-        {
-          "element_id": "separate-host-evidence",
-          "evidence_locators": [
-            {
-              "locator": "separate Claude Code target validation",
-              "source": "PUBLISHING.md"
-            },
-            {
-              "locator": "Codex and Claude Code install and update boundaries",
-              "source": "README.md"
-            },
-            {
-              "locator": "cross-agent validation procedure",
-              "source": "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
-            },
-            {
-              "locator": "frontmatter, manual layout, package verification, and documentation regressions",
-              "source": "tests/test_agent_compatibility.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "Codex managed installation and Claude Code package compatibility are documented and evaluated as separate host surfaces without extending Codex replacement evidence to Claude runtime behavior."
-        }
-      ]
-    },
-    {
       "component_id": "cross-project-evaluation",
       "component_type": "experiment",
       "elements": [
@@ -605,69 +484,6 @@
           ],
           "relation_type": "contains",
           "target": "A separately consented updater delegates replacement to GitHub CLI and verifies source, scope, pin, version, tree, and package integrity for next use."
-        }
-      ]
-    },
-    {
-      "component_id": "installation-analytics",
-      "component_type": "service",
-      "elements": [
-        {
-          "element_id": "aggregate-owner-metric",
-          "evidence_locators": [
-            {
-              "locator": "Authenticator, AnalyticsStore, summary, purge, and HTTP handlers",
-              "source": "analytics_service/server.py"
-            },
-            {
-              "locator": "metric interpretation and owner API deployment boundary",
-              "source": "docs/INSTALLATION_ANALYTICS.md"
-            },
-            {
-              "locator": "authentication, aggregate, keyed-identity, erasure, schema, and retention regressions",
-              "source": "tests/test_analytics_service.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "The optional owner API authenticates and deduplicates bounded events, stores keyed installation hashes, supports principal-scoped erasure and retention, and exposes only aggregate consenting-installation counts."
-        },
-        {
-          "element_id": "analytics-evidence-boundary",
-          "evidence_locators": [
-            {
-              "locator": "Optional installation analytics",
-              "source": "README.md"
-            },
-            {
-              "locator": "Validation and evidence limits",
-              "source": "docs/INSTALLATION_ANALYTICS.md"
-            },
-            {
-              "locator": "public metric and consent-boundary documentation regression",
-              "source": "tests/test_installation_analytics.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "Local analytics tests establish software contracts only; no public endpoint, population-level user count, privacy-law compliance, or production abuse resistance is claimed."
-        },
-        {
-          "element_id": "explicit-client-consent",
-          "evidence_locators": [
-            {
-              "locator": "user controls and separate-consent contract",
-              "source": "docs/INSTALLATION_ANALYTICS.md"
-            },
-            {
-              "locator": "AnalyticsClient.prompt, enable, preview, check_in, disable, and erase",
-              "source": "skills/analyze-project-claims/scripts/installation_analytics.py"
-            },
-            {
-              "locator": "no-send default and enablement, version event, retry, and erasure regressions",
-              "source": "tests/test_installation_analytics.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "Installation analytics remain off by default; enabling creates only local random identity, and a later explicit check-in sends the first exact-schema event."
         }
       ]
     },
@@ -1097,16 +913,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-13T15:38:09.692028Z",
+  "created_at_utc": "2026-08-13T06:33:20.336310Z",
   "integrity": {
-    "canonical_payload_sha256": "52f69b5350cbb4c57d4be5a0bec2a1945a9fe522e8b027ee430d4cd1d5814ade"
+    "canonical_payload_sha256": "4542d60a25be22c67bedfc285637dde96f78fc851ff4871ff0d28598cf28c254"
   },
-  "map_id": "component-map-ab945b31ed28",
+  "map_id": "component-map-39a13c95d3af",
   "map_state": "accepted",
   "mapper_version": "1.2.0",
-  "objective": "Map the v0.6.3 product-lifecycle candidate, including consent-bounded installation analytics, owner-gated agent maintenance, cross-agent packaging, public reporting, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or local E2E evidence as production proof.",
-  "origin_scan_id": "20260813T153809692028Z-9733e5b3",
-  "previous_map_id": "component-map-99593593b8c4",
+  "objective": "Map the v0.6.2 directory-identity and validation-authority repair together with the public GitHub-distributed package, reporting boundary, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or E2E evidence as general empirical reliability.",
+  "origin_scan_id": "20260813T063320336310Z-da514f52",
+  "previous_map_id": "component-map-be92062affaa",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1172,47 +988,15 @@
     "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
     "tests/test_problem_report.py",
     "tests/test_reporting_service.py",
-    "tests/test_update_policy.py",
-    ".github/workflows/agent-maintainer.yml",
-    ".github/workflows/validate.yml",
-    ".github/codex/prompts/resolve-internal-report.md",
-    "maintainer_service",
-    "docs/AGENT_MAINTAINER.md",
-    "docs/AGENT_MAINTAINER_E2E_LOG.md",
-    "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md",
-    "analytics_service",
-    "docs/INSTALLATION_ANALYTICS.md",
-    "tests/test_agent_maintainer.py",
-    "tests/test_installation_analytics.py",
-    "tests/test_analytics_service.py",
-    "tests/test_agent_compatibility.py",
-    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
+    "tests/test_update_policy.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "65697da4dab3b71a5108927e065d9f8214b8438e05859897391cf7c5d510b3c5",
+  "skill_sha256": "f798718052bb76cf89a12924d427bdf2e5aef9055b289f06713c4b996b9be303",
   "source_snapshot": [
     {
       "exists": true,
       "kind": "file",
-      "sha256": "68f28c5978b9722a4643dab66a947d305b94f453796241bde886f47aab363deb",
-      "source": ".github/codex/prompts/resolve-internal-report.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "be6601ea7cf407e03763b71fb9a88d28fcae9539c28120501ea552e02910ebe9",
-      "source": ".github/workflows/agent-maintainer.yml"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "bbff08fa10003157c21709c31f857d6bc67c4bb6ccceeb53c9db0a78f73e314b",
-      "source": ".github/workflows/validate.yml"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "15fdf9d56195cc5eab4bb5c11694dc0d8e8c9e535d4aaec42583773cc9833803",
+      "sha256": "23d4b34af67e689ad0530e3af9526b8b29cb4552533c459be39c2b354f715eff",
       "source": "CITATION.cff"
     },
     {
@@ -1338,13 +1122,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "92c010f30218a84776684ba98cdf166fdcc5fc84de55397d2600fe636c39ce4e",
+      "sha256": "5a8222c48208645bfd31483cbfb9915bca8bfea2baa331e0724aa196ef4c1660",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3f8f9dab8bd8e62cb8937a2345b989d5e69536f6c6795f8f28da7b9c55501789",
+      "sha256": "9e2ee68c46b8ef4f59daa23291098962300bf8100d9545c06e8600d038adb421",
       "source": "README.md"
     },
     {
@@ -1356,55 +1140,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c9f56eb9348cbc8345bdaea7ca24c9f960e1598af05472794760a2682ff07a8c",
+      "sha256": "a466ef209f5c3aee5ff0c702e2e9d5cced4783d2a655e8ab66330f21a5557b3f",
       "source": "VERSION"
     },
     {
       "exists": true,
-      "kind": "directory",
-      "sha256": "d37cd04a05bac1189f6579634640bbf4b7c7bb695b722dd6ecf10170a563e88c",
-      "source": "analytics_service"
-    },
-    {
-      "exists": true,
       "kind": "file",
-      "sha256": "02d6c92ce637376ede242a495476e09ebe44c97a214d93f3da235276f4f963fe",
-      "source": "analytics_service/server.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "4ecaa20ea122b9c6d96e86deeceef3c6dce4f4798544cdd574c1c669ecd387a8",
-      "source": "docs/AGENT_MAINTAINER.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "ee361484ce077dccb725d9960371b6bd8320459fc1e59398ca3ae3494ada6dff",
-      "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "72c0450a00958d74de96134768d8f95c44fdad2c2d95816aa9313de8a355383d",
-      "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "16c2a10f0c75286f5fd0513cfe6cbb6574c3c2053fcddc4463ba4f7acfefe4a0",
-      "source": "docs/INSTALLATION_ANALYTICS.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "b2d677a5ae706dd92672be12bd03603b718bcb1367b6693f157b7822b7784597",
-      "source": "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "c858824976e69b0af469ac1c88cd77f3db721593e2f96a6399710d963987b2f6",
+      "sha256": "ac60b864cb378689bd86888d1195394dec88aaca5daa81db4b715366b666a624",
       "source": "docs/PROBLEM_REPORTING.md"
     },
     {
@@ -1601,24 +1343,6 @@
     },
     {
       "exists": true,
-      "kind": "directory",
-      "sha256": "42b4a77f3855ad96a5abc6a948658d819ef1425c775e2a3ac97b02e5f03d99fd",
-      "source": "maintainer_service"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "381652cbf59bc2bd0ba0557c734cb352637a13a6dd3c5d1951f1e690e111a8ff",
-      "source": "maintainer_service/intake.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "a06d55cf41e3b97fe1e0df0bfe8b79369d0e98ad67bbe1fd23313e910b6fe121",
-      "source": "maintainer_service/patch_guard.py"
-    },
-    {
-      "exists": true,
       "kind": "file",
       "sha256": "b82bf8945edee117c95263e5b32e21ce98bbda0a9819f95b1570f94319b4b448",
       "source": "reporting_service/server.py"
@@ -1626,13 +1350,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "b3c626d8178ce52e31f9c87b9afa80cbfa64ac64e956d79371c41242cabcc35d",
+      "sha256": "31ab862edf684ade1015b9b608f10b96bed9d8bd3b09cdb48f22e18d674f44af",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "65697da4dab3b71a5108927e065d9f8214b8438e05859897391cf7c5d510b3c5",
+      "sha256": "f798718052bb76cf89a12924d427bdf2e5aef9055b289f06713c4b996b9be303",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -1656,25 +1380,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4741469eefca0775d3cf18f33ceee71c5f9f3dcbdc68c13c1e6e9b93135c6e3c",
-      "source": "skills/analyze-project-claims/references/installation-analytics-event.schema.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "72d6744792d5838787664fb2a5fb2dfa3a84e2e699183edc0961fecfbc59337a",
-      "source": "skills/analyze-project-claims/references/installation-analytics-policy.schema.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "0f777c1627a248ca3dab982d1615df8c89aed9e8b3ad994e95144bda317e2cb7",
+      "sha256": "f753d39bb9847309c9ab761812febb341ebeaa88be98d969c7fec53b061ddfb0",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3902b993ef8f53a35d93dd5f26c083a0c51aab5141a27693dbe3a28b9e62c9ce",
+      "sha256": "bc805674be656723178eb7aced15332d51881166bae7616968128d50b1bd4d11",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -1698,13 +1410,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "62c4ffad8440fcc4d8a876313d487fca9cdfb25f4ec37e69695830190e4cebe6",
-      "source": "skills/analyze-project-claims/scripts/installation_analytics.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "738005e6d7a10fc6f8112e0b3f02c77e58245e9a1e3bebd319e2320b17b28ceb",
+      "sha256": "7fff1d9d7d05e608e49b41566346d3218367b166695544e3c7786e450bb2e74b",
       "source": "skills/analyze-project-claims/scripts/problem_report.py"
     },
     {
@@ -1724,24 +1430,6 @@
       "kind": "file",
       "sha256": "73ad6b8e4bc7445d278bf9f9cfd16dff5afd5974823894f41a778da179ac01b2",
       "source": "skills/analyze-project-claims/scripts/update_policy.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "ca8bd621d326b343b9769854a3f5bcf7142ec55ed4744fa58adc9339c6283f61",
-      "source": "tests/test_agent_compatibility.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "49fb5d2ca181f7c97aa54df1022aff267f53442db50707c3f4eb7ad7e1d95eb4",
-      "source": "tests/test_agent_maintainer.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "bf0041fdc55b3e4e4e20b010fa3f8ad6da37239fcb76eb3acc7de039c1515990",
-      "source": "tests/test_analytics_service.py"
     },
     {
       "exists": true,
@@ -1776,12 +1464,6 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "179eaec0104462a3848a57d954bdb7043f66a932bf6f9ded9b207190b18c6f4c",
-      "source": "tests/test_installation_analytics.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
       "sha256": "c87207c3e75425974234d3e71214d1397d3c89979fbea753de699f6746f24092",
       "source": "tests/test_natural_project_codebook_binding.py"
     },
@@ -1806,13 +1488,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "947d3f2f4da30df40ca5aa53d3bd7e029517740850e5e86ffacfa10b5a0fcc07",
+      "sha256": "17f6b3bb637b75b2900234c10ceac7daa63637fb5767b7e22eea237314ec825e",
       "source": "tests/test_problem_report.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "5f0a91dd067522c1006832e5385ded61e3a42d055721e6eb7231c0157c93fa87",
+      "sha256": "c8cb212ff169379e9d9cd2a18c4391d70f2395e4cd7ce6edb449d6605fe5aa23",
       "source": "tests/test_record_scan.py"
     },
     {

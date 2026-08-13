@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "f798718052bb76cf89a12924d427bdf2e5aef9055b289f06713c4b996b9be303"
+      "sha256": "65697da4dab3b71a5108927e065d9f8214b8438e05859897391cf7c5d510b3c5"
     },
     {
       "path": "agents/openai.yaml",
@@ -33,8 +33,16 @@
       "sha256": "33128e872845b8c6b08906b62ae98093915f5a15d5f85445ba13f1177848fe82"
     },
     {
+      "path": "references/installation-analytics-event.schema.json",
+      "sha256": "4741469eefca0775d3cf18f33ceee71c5f9f3dcbdc68c13c1e6e9b93135c6e3c"
+    },
+    {
+      "path": "references/installation-analytics-policy.schema.json",
+      "sha256": "72d6744792d5838787664fb2a5fb2dfa3a84e2e699183edc0961fecfbc59337a"
+    },
+    {
       "path": "references/package-version.json",
-      "sha256": "bc805674be656723178eb7aced15332d51881166bae7616968128d50b1bd4d11"
+      "sha256": "3902b993ef8f53a35d93dd5f26c083a0c51aab5141a27693dbe3a28b9e62c9ce"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -53,8 +61,12 @@
       "sha256": "960538a7c7654746ac696502de3b9b64e6776321497c174efc2f171159e15f6d"
     },
     {
+      "path": "scripts/installation_analytics.py",
+      "sha256": "62c4ffad8440fcc4d8a876313d487fca9cdfb25f4ec37e69695830190e4cebe6"
+    },
+    {
       "path": "scripts/problem_report.py",
-      "sha256": "7fff1d9d7d05e608e49b41566346d3218367b166695544e3c7786e450bb2e74b"
+      "sha256": "738005e6d7a10fc6f8112e0b3f02c77e58245e9a1e3bebd319e2320b17b28ceb"
     },
     {
       "path": "scripts/reconcile_component_map.py",

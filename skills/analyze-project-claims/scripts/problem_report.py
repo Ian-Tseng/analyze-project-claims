@@ -535,6 +535,7 @@ def github_body(report: Mapping[str, object]) -> str:
         [
             "",
             "This report uses the bounded internal-event schema. It does not include attachments, raw logs, prompts, or project files.",
+            "After owner triage, this public issue may be sent to OpenAI Codex to prepare a reviewed draft fix.",
             "",
         ]
     )
@@ -919,7 +920,10 @@ def build_parser() -> argparse.ArgumentParser:
     submit.add_argument(
         "--allow-public-issue",
         action="store_true",
-        help="Allow this explicitly approved bounded report to become a public GitHub issue.",
+        help=(
+            "Allow this explicitly approved bounded report to become a public GitHub issue that may, after owner "
+            "triage, be sent to OpenAI Codex to prepare a reviewed draft fix."
+        ),
     )
     remote = commands.add_parser("remote-status")
     remote.add_argument("--report-id", required=True)

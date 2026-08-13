@@ -295,6 +295,7 @@ class ProblemReportTests(unittest.TestCase):
 
             result = transport.send(report, allow_public_issue=True)
             self.assertEqual(result.visibility, "public")
+            self.assertIn("sent to OpenAI Codex", runner.body)
             self.assertEqual(len(runner.calls), 3)
 
     def test_github_transport_unknown_visibility_fails_closed(self) -> None:

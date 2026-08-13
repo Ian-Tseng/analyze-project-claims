@@ -244,10 +244,12 @@ Configure the desired GitHub notifications. The Issues list or private API is
 the authoritative receipt; a notification is convenience, not proof of
 ingestion.
 
-Triage the report before changing code. Require a regression test, reviewed
-fix, passing CI, and a new versioned SemVer release whose tag is not moved.
-Never run or merge code from an issue body automatically. Close the issue only
-after the released fix and installed-update evidence exist.
+Triage the report before changing code. Eligible public reports can use the
+owner-gated [Agent Maintainer](docs/AGENT_MAINTAINER.md) to produce an isolated,
+validated draft pull request. Never execute issue text or automatically merge,
+release, or close a report. Require a regression test, reviewed fix, passing
+CI, and a new versioned SemVer release whose tag is not moved. Close the issue
+only after the released fix and installed-update evidence exist.
 
 If operating the optional API, follow
 [Internal Problem Reporting](docs/PROBLEM_REPORTING.md). Production requires an
@@ -258,6 +260,22 @@ The API service is owner infrastructure and is not installed with the skill.
 
 Add report schemas and `problem_report.py` to the package-manifest check. Never
 publish a package whose runtime event enum and JSON schema disagree.
+
+If enabling the optional agent-maintainer workflow, follow
+[Agent Maintainer for Internal Reports](docs/AGENT_MAINTAINER.md). Create the
+owner-only `agent-ready` label and add dedicated `OPENAI_API_KEY` and narrowly
+scoped, expiring `AGENT_MAINTAINER_TOKEN` secrets. Verify the exact pinned
+Actions revisions before each release. Do not apply the label until the issue's
+fixed disclosure and bounded form pass owner review. A successful run creates
+only a draft candidate; it never replaces the release checklist above.
+
+If operating installation analytics, follow
+[Privacy-Bounded Installation Analytics](docs/INSTALLATION_ANALYTICS.md), run
+both analytics test modules, publish the exact fields and retention policy, and
+deploy the API behind HTTPS before distributing a scoped client credential.
+Never describe repository traffic or the aggregate as downloads, users, or all
+installs. If no production endpoint was observed, keep the feature described as
+an inactive reference architecture.
 
 ## 7. Evidence boundary
 

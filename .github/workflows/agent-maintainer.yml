@@ -1,0 +1,214 @@
+name: agent maintainer candidate
+
+on:
+  issues:
+    types: [labeled]
+
+permissions: {}
+
+concurrency:
+  group: agent-maintainer-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: >-
+      github.event.label.name == 'agent-ready' &&
+      github.actor == 'Ian-Tseng' &&
+      github.event.issue.pull_request == null
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      base_sha: ${{ steps.base.outputs.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+      - name: Bind the immutable default-branch commit
+        id: base
+        shell: bash
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Accept only an exact owner-gated bounded report
+        env:
+          BASE_SHA: ${{ steps.base.outputs.sha }}
+        run: >-
+          python maintainer_service/intake.py
+          --event "$GITHUB_EVENT_PATH"
+          --out .agent-maintainer/task.json
+          --repo-root .
+          --repository Ian-Tseng/analyze-project-claims
+          --allow-actor Ian-Tseng
+          --base-sha "$BASE_SHA"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: agent-maintainer-task
+          path: .agent-maintainer/task.json
+          if-no-files-found: error
+          retention-days: 1
+
+  fix:
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.prepare.outputs.base_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: agent-maintainer-task
+          path: .agent-maintainer
+      - name: Create a separate unprivileged agent account and trusted collector
+        shell: bash
+        run: |
+          sudo adduser --system --home /home/agent-maintainer --shell /bin/bash --group agent-maintainer
+          sudo usermod -a -G agent-maintainer runner
+          sudo chmod o+x /home/runner /home/runner/work "$(dirname "$GITHUB_WORKSPACE")"
+          sudo test "$(id -nG agent-maintainer)" = "agent-maintainer"
+          sudo chown -R runner:agent-maintainer "$GITHUB_WORKSPACE"
+          sudo chmod -R g+rwX "$GITHUB_WORKSPACE"
+          sudo find "$GITHUB_WORKSPACE" -type d -exec chmod g+s {} +
+          sudo install -d -o root -g root -m 0755 /opt/analyze-project-claims-maintainer
+          sudo install -o root -g root -m 0444 maintainer_service/patch_guard.py /opt/analyze-project-claims-maintainer/patch_guard.py
+          sudo install -o root -g root -m 0555 maintainer_service/post_agent.sh /opt/analyze-project-claims-maintainer/post_agent.sh
+          sudo cp -a .git /opt/analyze-project-claims-maintainer/git
+          sudo chown -R root:root /opt/analyze-project-claims-maintainer/git
+          sudo chmod -R go-w /opt/analyze-project-claims-maintainer/git
+      - name: Run Codex as the isolated account without repository credentials
+        uses: openai/codex-action@52fe01ec70a42f454c9d2ebd47598f9fd6893d56 # v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt-file: .github/codex/prompts/resolve-internal-report.md
+          codex-args: '["--ephemeral"]'
+          permission-profile: ":workspace"
+          safety-strategy: unprivileged-user
+          codex-user: agent-maintainer
+          allow-users: Ian-Tseng
+      - name: Stop agent processes, enforce the boundary, and capture the patch
+        shell: bash
+        run: |
+          sudo /usr/bin/pkill -KILL -u agent-maintainer || true
+          sudo /usr/bin/env -i GITHUB_WORKSPACE="$GITHUB_WORKSPACE" RUNNER_TEMP="$RUNNER_TEMP" /bin/bash --noprofile --norc /opt/analyze-project-claims-maintainer/post_agent.sh
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: agent-maintainer-candidate
+          path: |
+            ${{ runner.temp }}/candidate.patch
+            ${{ runner.temp }}/candidate.sha256
+            ${{ runner.temp }}/patch-guard.json
+          if-no-files-found: error
+          retention-days: 7
+
+  validate:
+    needs: [prepare, fix]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.prepare.outputs.base_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: agent-maintainer-candidate
+          path: ${{ runner.temp }}/candidate
+      - name: Apply and recheck the exact candidate without secrets
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP/candidate"
+          sha256sum --check candidate.sha256
+          cd "$GITHUB_WORKSPACE"
+          cp maintainer_service/patch_guard.py "$RUNNER_TEMP/patch_guard.py"
+          git apply --check --index "$RUNNER_TEMP/candidate/candidate.patch"
+          git apply --index "$RUNNER_TEMP/candidate/candidate.patch"
+          python "$RUNNER_TEMP/patch_guard.py" --repo-root . --staged
+      - name: Run the complete standard-library suite
+        run: python -m unittest discover -s tests -v
+      - name: Verify packaged-skill identity
+        run: >-
+          python skills/analyze-project-claims/scripts/update_policy.py
+          --format json verify-package
+
+  publish-draft:
+    needs: [prepare, validate]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.prepare.outputs.base_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: agent-maintainer-candidate
+          path: ${{ runner.temp }}/candidate
+      - name: Apply the validated patch and enforce the guard again
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP/candidate"
+          sha256sum --check candidate.sha256
+          cd "$GITHUB_WORKSPACE"
+          cp maintainer_service/patch_guard.py "$RUNNER_TEMP/patch_guard.py"
+          git apply --check --index "$RUNNER_TEMP/candidate/candidate.patch"
+          git apply --index "$RUNNER_TEMP/candidate/candidate.patch"
+          python "$RUNNER_TEMP/patch_guard.py" --repo-root . --staged
+      - name: Publish a run-scoped candidate branch and draft pull request
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.AGENT_MAINTAINER_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          BRANCH="agent/issue-${ISSUE_NUMBER}-run-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          ASKPASS="$RUNNER_TEMP/agent-maintainer-askpass.sh"
+          cat > "$ASKPASS" <<'EOF'
+          #!/usr/bin/env bash
+          case "$1" in
+            *Username*) printf '%s\n' "x-access-token" ;;
+            *Password*) printf '%s\n' "${GH_TOKEN:?}" ;;
+            *) exit 1 ;;
+          esac
+          EOF
+          chmod 0700 "$ASKPASS"
+          git config user.name "analyze-project-claims-maintainer[bot]"
+          git config user.email "analyze-project-claims-maintainer@users.noreply.github.com"
+          git -c core.hooksPath=/dev/null -c core.fsmonitor=false switch -c "$BRANCH"
+          git -c core.hooksPath=/dev/null -c core.fsmonitor=false commit -m "Propose candidate fix for internal report #${ISSUE_NUMBER}"
+          GIT_ASKPASS="$ASKPASS" GIT_TERMINAL_PROMPT=0 git -c credential.helper= push origin "HEAD:refs/heads/${BRANCH}"
+          rm -f "$ASKPASS"
+          cat > "$RUNNER_TEMP/pr-body.md" <<EOF
+          Automated candidate for internal report #${ISSUE_NUMBER}.
+
+          The bounded patch passed the isolated full test suite and package verification.
+          It remains a draft and must be reviewed by the owner. Do not call the report fixed
+          until a new immutable release is published and installed-update activation is verified.
+          EOF
+          PR_URL="$(gh pr create --draft --base "$DEFAULT_BRANCH" --head "$BRANCH" --title "Agent candidate for internal report #${ISSUE_NUMBER}" --body-file "$RUNNER_TEMP/pr-body.md")"
+          gh issue comment "$ISSUE_NUMBER" --body "A validated draft candidate is ready for owner review: ${PR_URL}"
+

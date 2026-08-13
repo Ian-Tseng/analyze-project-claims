@@ -100,6 +100,12 @@ receipt records observed visibility. Users need issue-write access, and public
 issues are visible to everyone. The Issues list is the authoritative receipt;
 web, email, and mobile notifications depend on the owner's settings.
 
+The public issue body also discloses that, after owner triage, its bounded
+contents may be sent to OpenAI Codex to prepare a reviewed draft fix. Only that
+exact newly disclosed form can enter the optional agent-maintainer workflow.
+The raw issue, comments, reporter identity, and installation UUID are not
+forwarded. See [Agent Maintainer for Internal Reports](AGENT_MAINTAINER.md).
+
 This client does not automate deletion of GitHub issues. Public copies,
 notifications, forks, caches, or archives may remain after deletion. Do not
 report suspected vulnerabilities here; use the private vulnerability action
@@ -173,6 +179,12 @@ For either transport:
 7. Record the fixed version and then close the report.
 8. Verify an installed older copy updates and that a fresh invocation loads
    the new version.
+
+For an eligible public GitHub issue, the owner may apply `agent-ready` to ask
+the optional workflow for an isolated candidate. The result is a draft pull
+request, never an automatic merge or release. Private API records remain
+manual: their reporting consent does not authorize disclosure to OpenAI or
+another third-party processor.
 
 For GitHub, comments and issue state provide the owner/user conversation. For
 the API, `PATCH /v1/reports/<id>` accepts exactly `status`, `owner_note`, and
