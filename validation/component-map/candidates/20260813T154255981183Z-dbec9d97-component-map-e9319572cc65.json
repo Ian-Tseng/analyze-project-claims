@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-13T15:43:03.036914Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1099,10 +1099,10 @@
   ],
   "created_at_utc": "2026-08-13T15:42:55.981183Z",
   "integrity": {
-    "canonical_payload_sha256": "7462849971f516b26a73e3aaab5ba5804a0cf8912a2c5abbc1683342e5b68225"
+    "canonical_payload_sha256": "62c73eaffdfd533fb7c7e3c0bbb483557c38df3711735c7d0d514be15d054869"
   },
   "map_id": "component-map-e9319572cc65",
-  "map_state": "accepted",
+  "map_state": "drift_candidate",
   "mapper_version": "1.2.0",
   "objective": "Map the v0.6.3 product-lifecycle candidate, including consent-bounded installation analytics, owner-gated agent maintenance, cross-agent packaging, public reporting, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or local E2E evidence as production proof.",
   "origin_scan_id": "20260813T154255981183Z-dbec9d97",
