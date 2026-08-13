@@ -1,0 +1,49 @@
+{
+  "accepted_map_id": "component-map-45056e9d8c2b",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260813T052249873398Z-88db3975-component-map-be92062affaa.json",
+    "delta": "deltas/20260813T052249873398Z-88db3975.json"
+  },
+  "candidate_map_id": "component-map-be92062affaa",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_record_scan.py"
+      }
+    ]
+  },
+  "event_id": "20260813T052249873398Z-88db3975",
+  "integrity": {
+    "canonical_payload_sha256": "3f4c2a7e6a7af90885af2e452c1dbd0cdef0744dc8ba0a1bc2f1340a94d2d1f8"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.1.0",
+  "recorded_at_utc": "2026-08-13T05:22:49.873398Z",
+  "schema_version": "1.0",
+  "skill_sha256": "0dc46609b35df360adeb6191595ee914e51cbb4c8e03fb9fd0ad64154bdd5861"
+}

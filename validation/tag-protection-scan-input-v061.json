@@ -1,0 +1,77 @@
+{
+  "objective": "Verify the post-repair GitHub ruleset that protects version-tag identity while keeping release-record immutability claims accurately bounded.",
+  "scope": [
+    "PUBLISHING.md",
+    "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
+    "tests/test_record_scan.py",
+    "validation/component-map/accepted-map.json"
+  ],
+  "authority": [
+    "PUBLISHING.md",
+    "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
+    "tests/test_record_scan.py",
+    "validation/component-map/accepted-map.json",
+    "GitHub repository ruleset API"
+  ],
+  "components": [
+    {
+      "component_id": "release-contract",
+      "component_type": "configuration",
+      "elements": [
+        {
+          "element_id": "version-tag-protection",
+          "target": "An active no-bypass GitHub ruleset prevents update and deletion of refs/tags/v* while documentation does not overstate release-record immutability.",
+          "method": "executed_test",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "GitHub repository ruleset API",
+              "locator": "ruleset 20781141",
+              "observed": "Protect version release tags is active for refs/tags/v*, contains update and deletion restrictions, has no bypass actors, and reports current_user_can_bypass=never."
+            },
+            {
+              "source": "GitHub CLI publication dry-run",
+              "locator": "gh skill publish .\\skills --dry-run",
+              "observed": "The earlier missing-tag-protection warning disappeared; the only remaining warning concerns the 528-line skill body."
+            },
+            {
+              "source": "tests/test_record_scan.py",
+              "locator": "test_public_status_docs_are_scope_bound_and_release_claims_are_enforceable",
+              "observed": "The documentation regression passed and requires both the protected-tag control and the immutable=false boundary for releases through v0.6.0."
+            }
+          ],
+          "safe_interpretation": "Version-tag refs are protected against mutation and deletion from the verified timestamp forward; release notes and assets through v0.6.0 remain editable GitHub release records and are not called immutable.",
+          "required_repair": "Enable GitHub release immutability before a future release and verify its attestation only if full release-record immutability is required."
+        },
+        {
+          "element_id": "ruleset-map-synchronization",
+          "target": "Ruleset documentation source changes are accepted in the component map and produce a zero-change follow-up.",
+          "method": "executed_test",
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "evidence": [
+            {
+              "source": "validation/component-map/accepted-map.json",
+              "locator": "component-map-be92062affaa",
+              "observed": "The source-only drift candidate was explicitly accepted after the focused documentation regression passed."
+            },
+            {
+              "source": "validation/component-map/scan-history",
+              "locator": "20260813T052300512623Z-a9c1960d",
+              "observed": "Immediate post-acceptance reconciliation returned checked_unchanged."
+            }
+          ],
+          "safe_interpretation": "Current map authority includes the tag-protection documentation and regression source hashes.",
+          "required_repair": null
+        }
+      ]
+    }
+  ],
+  "strongest_safe_claim": "GitHub now enforces no-bypass update and deletion restrictions for all v* tag refs, and the v0.6.1 documentation accurately separates protected tag identity from immutable release records.",
+  "claim_boundary": "The ruleset does not make existing release notes or assets immutable and does not provide a release attestation for releases through v0.6.0.",
+  "unresolved_uncertainties": [
+    "GitHub release immutability remains disabled or unverified for releases through v0.6.0.",
+    "The v0.6.1 candidate remains unpublished until commit-bound CI passes."
+  ]
+}

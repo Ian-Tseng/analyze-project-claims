@@ -19,6 +19,11 @@ Resolve these before making the repository public:
 - review commit identities, issues, releases, Actions logs, and artifacts;
 - verify automatic reports require the private owner API;
 - prepare `SECURITY.md` and enable private vulnerability reporting;
+- verify the active `Protect version release tags` ruleset blocks update and
+  deletion of `refs/tags/v*` with no bypass actor;
+- either enable GitHub release immutability before publishing or describe the
+  release guarantee as policy-only; GitHub does not apply this setting
+  retroactively;
 - authenticate GitHub CLI;
 - review everything that will be committed.
 
@@ -137,6 +142,23 @@ Publishing creates a GitHub release. If post-publication evidence fails, do not
 try to repair the same published tag. Fix the package, increment the version,
 rerun validation, and publish a new candidate.
 
+If **Enable release immutability** was turned on in repository Settings before
+publication, verify the new release:
+
+```powershell
+gh release verify "v$Version"
+```
+
+Require that command to succeed before calling the release immutable. The
+setting applies only to future releases. When enforcement is unavailable or
+was enabled too late, use policy-only language: the maintainer does not move
+published version tags, but GitHub has not made that release immutable.
+
+The repository tag ruleset is a separate control: it prevents moving or
+deleting `v*` refs, including existing tags, but it does not make release notes
+or release assets immutable. A publication dry-run should no longer warn that
+tag protection is absent.
+
 ## 5. Test the public user journey
 
 Use a clean environment with no duplicate `analyze-project-claims` install.
@@ -193,9 +215,9 @@ the authoritative receipt; a notification is convenience, not proof of
 ingestion.
 
 Triage the report before changing code. Require a regression test, reviewed
-fix, passing CI, and a new immutable SemVer release. Never run or merge code
-from an issue body automatically. Close the issue only after the released fix
-and installed-update evidence exist.
+fix, passing CI, and a new versioned SemVer release whose tag is not moved.
+Never run or merge code from an issue body automatically. Close the issue only
+after the released fix and installed-update evidence exist.
 
 If operating the optional API, follow
 [Internal Problem Reporting](docs/PROBLEM_REPORTING.md). Production requires an

@@ -674,7 +674,11 @@ class UpdateCoordinator:
             return _result(
                 "CONSENT_REQUIRED",
                 state,
-                "Enable automatic updates for this tracked standalone skill? Checks run at most once per 24 hours and never use --force or --unpin.",
+                (
+                    "Enable automatic updates for this tracked standalone skill? After a successful check, "
+                    "the next automatic check waits at least 24 hours. A transient failure may retry no sooner "
+                    "than one hour on a later invocation. The updater never uses --force or --unpin."
+                ),
                 action="Say `enable automatic updates`, `notify me about updates`, or `disable updates`.",
                 emit=True,
             )

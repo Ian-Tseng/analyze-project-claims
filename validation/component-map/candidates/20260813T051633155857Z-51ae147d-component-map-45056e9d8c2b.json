@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-13T05:22:59.901958Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -892,16 +892,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-13T05:22:49.873398Z",
+  "created_at_utc": "2026-08-13T05:16:33.155857Z",
   "integrity": {
-    "canonical_payload_sha256": "78b1729999340cf8fd459303940fbffa5f17f8b4036ac96b7d79eb653840f7eb"
+    "canonical_payload_sha256": "e689883bd1384de701474b55d47641bd51d34209d963ab1a792ec9bc183a9c54"
   },
-  "map_id": "component-map-be92062affaa",
-  "map_state": "accepted",
+  "map_id": "component-map-45056e9d8c2b",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.1.0",
   "objective": "Map the public GitHub-distributed package, private automatic-reporting boundary, explicit public-issue path, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or E2E evidence as general empirical reliability.",
-  "origin_scan_id": "20260813T052249873398Z-88db3975",
-  "previous_map_id": "component-map-45056e9d8c2b",
+  "origin_scan_id": "20260813T051633155857Z-51ae147d",
+  "previous_map_id": "component-map-b61ff30070f9",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1101,7 +1101,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "5a8222c48208645bfd31483cbfb9915bca8bfea2baa331e0724aa196ef4c1660",
+      "sha256": "fbdc1b746e47f01e100d611070789cda8431b57eced42587d6d603929eeefe2e",
       "source": "PUBLISHING.md"
     },
     {
@@ -1137,7 +1137,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "afe2d0e88ba1347dcd38cb34402e95b703d52b06eea5e2bb694b481c79fb39bf",
+      "sha256": "3bec2ee52e9cb427387cfe60df6eb28c41c1dbf043c4294e1f89def216e85545",
       "source": "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md"
     },
     {
@@ -1473,7 +1473,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1582c19ce1d0bdda56a29063a2df4eff31c96642c5917ff7a5b6fe4343876714",
+      "sha256": "511776a962914c0903ef5bfd3d7cba400d58b77f14fcb049ca683552b160af9d",
       "source": "tests/test_record_scan.py"
     },
     {

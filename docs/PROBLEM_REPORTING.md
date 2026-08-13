@@ -5,8 +5,9 @@ It does not report problems found in the project being audited.
 
 Problem reports and automatic updates are separate choices. A report never
 executes code or triggers a deployment. The owner reviews it, makes a tested
-change, publishes an immutable release, and only then can a separately
-consented updater install that release on a later invocation.
+change, publishes a versioned release without moving an earlier tag, and only
+then can a separately consented updater install that release on a later
+invocation.
 
 ```text
 internal tool failure
@@ -14,7 +15,7 @@ internal tool failure
   -> user reporting policy
   -> visibility-gated GitHub issue or owner HTTPS API
   -> owner triage and reviewed fix
-  -> passing CI and immutable release
+  -> passing CI and versioned release
   -> separately consented update on later use
 ```
 
@@ -167,7 +168,8 @@ For either transport:
 3. Add a regression test that fails for the reported behavior.
 4. Implement and review the smallest safe fix.
 5. Require the full test suite and CI to pass.
-6. Publish a new immutable SemVer release; never rewrite an existing tag.
+6. Publish a new SemVer release; never rewrite an existing tag. Call it
+   immutable only when GitHub enforcement is enabled and verified.
 7. Record the fixed version and then close the report.
 8. Verify an installed older copy updates and that a fresh invocation loads
    the new version.

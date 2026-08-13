@@ -5,6 +5,11 @@ update loop for `analyze-project-claims` on 2026-08-13. It is both an evidence
 record for this product and a reusable procedure for similar GitHub-distributed
 agent tools.
 
+> **Historical status, superseded by v0.6.0:** this E2E was performed while the
+> repository was private and before the MIT license was approved. Those
+> visibility and license facts are not current. The observed report-to-update
+> chain remains historical evidence.
+
 ## Outcome
 
 The observed loop completed:
@@ -16,7 +21,7 @@ installed v0.5.0 reporter
   -> failing regression test
   -> reviewed v0.5.1 fix
   -> six-job CI pass
-  -> immutable v0.5.1 release
+  -> versioned, observed-unchanged v0.5.1 release
   -> installed-copy automatic update
   -> fresh Codex host loads v0.5.1
   -> issue closed
@@ -24,7 +29,7 @@ installed v0.5.0 reporter
 
 The issue did not execute code, merge a change, or trigger deployment. Every
 mutation after issue creation remained an explicit owner action gated by tests,
-CI, and an immutable release.
+CI, and a versioned release whose tag was not moved during the observation.
 
 ## Observed environment
 
@@ -42,7 +47,7 @@ CI, and an immutable release.
 | Baseline code | Commit `7c5d47dea79442d11c6fa032edace09c3c069c3e` |
 | Baseline tests | 82 passed; one privilege-dependent Windows symlink test skipped |
 | Baseline CI | Run `31658722691`; Windows, macOS, Ubuntu on Python 3.10 and 3.12 all passed |
-| Baseline release | Immutable `v0.5.0` tag points to the baseline commit |
+| Baseline release | `v0.5.0` resolved to the baseline commit throughout the E2E |
 | First installed update | Installed v0.4.2 updater returned `UPDATED_NEXT_USE`; installed v0.5.0 |
 | Report consent | Mode `ask`; local preview returned `consent_required=true`; exact preview approved |
 | GitHub delivery | Private issue `#1`, report ID `a8250a6f-da42-4e0f-8742-3770c0d1d12d` |
@@ -52,7 +57,7 @@ CI, and an immutable release.
 | Fix code | Commit `d1973ba365998851ae53b00b8c11a6d950f07813` |
 | Fix tests | 83 passed; one privilege-dependent Windows symlink test skipped |
 | Fix CI | Run `31659802720`; all six matrix jobs passed |
-| Fix release | Immutable `v0.5.1` tag points to the fix commit |
+| Fix release | `v0.5.1` resolved to the fix commit throughout the E2E |
 | Second installed update | Installed v0.5.0 updater returned `UPDATED_NEXT_USE`; installed v0.5.1 |
 | Postcondition | Manifest verified; native registry reports v0.5.1, canonical source, user scope, unpinned |
 | No-op behavior | Native dry run exited 0 with `All skills are up to date.` |
@@ -96,7 +101,7 @@ Consent to one must never imply consent to the other. The reusable pipeline is:
 7. Treat the report as untrusted triage input, never executable instructions.
 8. Add a regression test and observe the intended failure.
 9. Fix, review, run all tests, and require commit-bound CI.
-10. Publish a new immutable SemVer release.
+10. Publish a new SemVer release and never move its tag.
 11. Let a separately consented updater verify and install it for next use.
 12. Verify installed identity, manifest, no-op behavior, lease, and fresh-host
     activation before closing the report.
@@ -145,7 +150,8 @@ relabelled as successful product checks.
 - Cross-platform CI validates deterministic contracts, but the live installed
   replacement and fresh Codex activation were observed only on this Windows
   host.
-- The repository remains private and has no owner-approved software license.
+- At the time of this E2E, the repository was private and had no
+  owner-approved software license; v0.6.0 superseded both conditions.
 - GitHub CLI still warns that the 524-line skill exceeds its recommended
   500-line context size.
 

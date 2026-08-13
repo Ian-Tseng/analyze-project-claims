@@ -113,11 +113,12 @@ Say one of:
 - `check for updates now`;
 - `show update status`.
 
-With `auto` enabled, the skill checks at most once every 24 hours after the
-current task finishes. GitHub CLI performs the replacement; the updater verifies
-the source, path, version, Git tree identity, and package manifest. The current
-invocation keeps its starting version, and the next invocation loads a verified
-update.
+With `auto` enabled, a successful check starts a 24-hour lease after the
+current task finishes. A transient failure may retry no sooner than one hour
+on a later invocation. GitHub CLI performs the replacement; the updater
+verifies the source, path, version, Git tree identity, and package manifest.
+The current invocation keeps its starting version, and the next invocation
+loads a verified update.
 
 Automatic replacement applies only to one clean, unpinned, user-scope install
 tracked by GitHub CLI. Pinned and project-scope installs become notify-only.
@@ -234,8 +235,9 @@ For the reusable design and release procedure, read
 For the exact v0.4.1 to v0.4.2 validation record and the limits of that evidence,
 read [Managed Update End-to-End Evidence Log](docs/MANAGED_UPDATE_E2E_LOG.md).
 
-Version `0.6.0` adds private automatic reporting and public-destination guards.
-`VERSION`, package
+Version `0.6.1` makes update retry timing explicit and corrects the
+historical-release and security-review claim boundaries introduced around the
+public v0.6.0 release. `VERSION`, package
 metadata, the package manifest, and citation metadata must remain synchronized.
 
 ## Citation and license

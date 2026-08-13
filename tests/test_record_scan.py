@@ -131,6 +131,34 @@ class RecordScanTests(unittest.TestCase):
         self.assertIn("historical", authority.lower())
         self.assertIn("self-scan-input.json", authority)
 
+    def test_public_status_docs_are_scope_bound_and_release_claims_are_enforceable(self) -> None:
+        review = (ROOT / "docs" / "PUBLIC_RELEASE_SECURITY_REVIEW.md").read_text(encoding="utf-8")
+        self.assertIn("Pre-publication history-scan scope", review)
+        self.assertIn("ending", review)
+        self.assertIn("`65b995c57ef6a3b395fd995686add21aeb29fd01`", review)
+        self.assertIn("Every release through `v0.6.0` (five releases)", review)
+        self.assertNotIn("both `main` and `v0.6.0`", review)
+        self.assertNotIn("Ten reachable commits", review)
+        self.assertNotIn("Four published releases", review)
+
+        e2e = (ROOT / "docs" / "PROBLEM_REPORTING_E2E_LOG.md").read_text(encoding="utf-8")
+        self.assertIn("Historical status, superseded", e2e)
+        self.assertIn("At the time of this E2E", e2e)
+        self.assertNotIn("The repository remains private", e2e)
+
+        publishing = (ROOT / "PUBLISHING.md").read_text(encoding="utf-8")
+        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        reporting = (ROOT / "docs" / "PROBLEM_REPORTING.md").read_text(encoding="utf-8")
+        guide = (ROOT / "docs" / "MANAGED_SKILL_UPDATE_GUIDE.md").read_text(encoding="utf-8")
+        active_release_docs = "\n".join((publishing, security, reporting, guide)).lower()
+        self.assertNotIn("new immutable release", active_release_docs)
+        self.assertNotIn("publish one immutable release", active_release_docs)
+        self.assertIn("gh release verify", publishing)
+        self.assertIn("policy-only", publishing.lower())
+        self.assertIn("Protect version release tags", publishing)
+        self.assertIn("ruleset `20781141`", review)
+        self.assertIn("immutable=false", review)
+
 
 if __name__ == "__main__":
     unittest.main()

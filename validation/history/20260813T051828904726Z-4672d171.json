@@ -1,0 +1,215 @@
+{
+  "components": [
+    {
+      "component_id": "managed-updates",
+      "component_status": "PASS",
+      "component_type": "code",
+      "element_counts": {
+        "PASS": 1
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "update-cadence-disclosure",
+          "evidence": [
+            {
+              "locator": "test_update_consent_discloses_success_lease_and_failure_retry",
+              "observed": "The regression failed against the v0.6.0 prompt, passed after repair, and the full suite passed 88 tests with one privilege-dependent Windows skip.",
+              "source": "tests/test_update_policy.py"
+            },
+            {
+              "locator": "UpdateCoordinator.prompt, SUCCESS_LEASE_SECONDS, TRANSIENT_BACKOFF_SECONDS",
+              "observed": "The prompt now names both intervals; implementation remains 24 hours after success and one hour after transient failure.",
+              "source": "skills/analyze-project-claims/scripts/update_policy.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "Users receive accurate consent information for both successful and failed automatic checks.",
+          "target": "Update consent distinguishes the 24-hour successful-check lease from the one-hour transient-failure retry delay."
+        }
+      ]
+    },
+    {
+      "component_id": "release-contract",
+      "component_status": "PASS",
+      "component_type": "documentation",
+      "element_counts": {
+        "PASS": 2
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "release-immutability-boundary",
+          "evidence": [
+            {
+              "locator": "test_public_status_docs_are_scope_bound_and_release_claims_are_enforceable",
+              "observed": "The regression forbids active unenforced immutable-release claims and requires the publication verification command and policy-only fallback.",
+              "source": "tests/test_record_scan.py"
+            },
+            {
+              "locator": "releases through v0.6.0 and immutable-releases guidance",
+              "observed": "Five existing releases reported immutable=false; GitHub documentation says the repository setting applies only to future releases.",
+              "source": "GitHub release API and official documentation"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": "Enable release immutability in repository Settings before a future publication if a platform-enforced guarantee is desired.",
+          "safe_interpretation": "Releases through v0.6.0 were observed unchanged but are not GitHub-enforced immutable; a future release may use the stronger term only after verification.",
+          "target": "Existing releases are described as versioned tags that the maintainer does not move; immutability is claimed only after GitHub enforcement verifies a future release."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "release-metadata-synchronization",
+          "evidence": [
+            {
+              "locator": "test_repository_package_version_and_manifest_are_consistent",
+              "observed": "VERSION, package-version.json, and the rebuilt package manifest verified in the passing full suite.",
+              "source": "tests/test_update_policy.py"
+            },
+            {
+              "locator": "test_public_package_contract",
+              "observed": "CITATION.cff version and license matched the repository release identity.",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The local v0.6.1 candidate is internally consistent; publication and installed replacement are separate gates.",
+          "target": "The v0.6.1 candidate has synchronized repository version, citation version, package version, and deterministic package manifest."
+        }
+      ]
+    },
+    {
+      "component_id": "evidence-lifecycle",
+      "component_status": "PASS",
+      "component_type": "artifact",
+      "element_counts": {
+        "PASS": 3
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "security-review-scope-binding",
+          "evidence": [
+            {
+              "locator": "Pre-publication history-scan scope and publication postconditions",
+              "observed": "The scan ends at 65b995c, v0.6.0 alone is the stable tagged identity, and the five-release asset check is explicitly bounded through v0.6.0.",
+              "source": "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md"
+            },
+            {
+              "locator": "test_public_status_docs_are_scope_bound_and_release_claims_are_enforceable",
+              "observed": "The stale unbounded counts and main-equals-tag wording are rejected.",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The review is a bounded historical record; later commits do not silently expand its scan scope.",
+          "target": "The public security review binds dynamic counts and history scanning to exact states instead of presenting a moving main branch as release identity."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "superseded-e2e-status",
+          "evidence": [
+            {
+              "locator": "Historical status, superseded notice and Limits",
+              "observed": "The document now distinguishes at-the-time visibility and license state from current public MIT status without deleting the original evidence.",
+              "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
+            },
+            {
+              "locator": "test_public_status_docs_are_scope_bound_and_release_claims_are_enforceable",
+              "observed": "The regression requires the historical notice and rejects the present-tense private-repository claim.",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The E2E remains valid for its observed v0.5.1 loop but is not current repository-status authority.",
+          "target": "The v0.5.1 E2E retains its private-repository and pre-license facts as historical context while clearly marking them superseded by v0.6.0."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "component-map-synchronization",
+          "evidence": [
+            {
+              "locator": "component-map-45056e9d8c2b",
+              "observed": "The reviewed conflict candidate was accepted after the full suite passed.",
+              "source": "validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "20260813T051718787359Z-87a5cb06",
+              "observed": "Immediate post-acceptance reconciliation returned checked_unchanged with no source, element, or contract changes.",
+              "source": "validation/component-map/scan-history"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "Current structural authority is synchronized to the repaired local candidate.",
+          "target": "The accepted component map incorporates the v0.6.1 release-boundary and source changes and produces a zero-change follow-up."
+        }
+      ]
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "aca7c81b5bac5c27f3fbceb86b9f164ac27b6c9f13fcf6457b71d4bb3528265b"
+  },
+  "scan": {
+    "authority": [
+      "VERSION",
+      "CITATION.cff",
+      "PUBLISHING.md",
+      "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
+      "skills/analyze-project-claims/references/package-manifest.json",
+      "skills/analyze-project-claims/references/package-version.json",
+      "skills/analyze-project-claims/scripts/update_policy.py",
+      "tests/test_record_scan.py",
+      "tests/test_update_policy.py",
+      "validation/component-map/accepted-map.json"
+    ],
+    "logger_version": "1.0.0",
+    "objective": "Verify that the v0.6.1 repair removes the audited update-cadence, release-immutability, security-review scope, and superseded E2E status contradictions without rewriting historical evidence.",
+    "recorded_at_utc": "2026-08-13T05:18:28.904726Z",
+    "scan_id": "20260813T051828904726Z-4672d171",
+    "scope": [
+      "README.md",
+      "PUBLISHING.md",
+      "SECURITY.md",
+      "VERSION",
+      "CITATION.cff",
+      "docs/MANAGED_SKILL_UPDATE_GUIDE.md",
+      "docs/MANAGED_UPDATE_E2E_LOG.md",
+      "docs/PROBLEM_REPORTING.md",
+      "docs/PROBLEM_REPORTING_E2E_LOG.md",
+      "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
+      "skills/analyze-project-claims/scripts/update_policy.py",
+      "tests/test_record_scan.py",
+      "tests/test_update_policy.py",
+      "validation/component-map/accepted-map.json"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "0dc46609b35df360adeb6191595ee914e51cbb4c8e03fb9fd0ad64154bdd5861"
+  },
+  "schema_version": "1.0",
+  "summary": {
+    "claim_boundary": "This scan does not establish publication, GitHub-enforced immutability, installed v0.6.1 replacement, independent-customer delivery, notification arrival, production owner-API operation, or general cross-project reliability.",
+    "component_count": 3,
+    "element_count": 6,
+    "element_counts": {
+      "PASS": 6
+    },
+    "scan_status": "PASS",
+    "strongest_safe_claim": "The local v0.6.1 candidate repairs all four audited inconsistencies, preserves historical evidence, has synchronized package identity and accepted component-map authority, and passes the full deterministic suite.",
+    "unresolved_uncertainties": [
+      "GitHub release immutability is not enforced for releases through v0.6.0 and can only be enabled prospectively in repository Settings.",
+      "The v0.6.1 candidate has not yet been published or installed through the managed update path.",
+      "No production HTTPS owner-API deployment or independent customer notification path has been observed."
+    ]
+  }
+}

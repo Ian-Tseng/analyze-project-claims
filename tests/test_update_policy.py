@@ -154,6 +154,17 @@ class UpdatePolicyTests(unittest.TestCase):
             self.assertEqual(native.list_calls, 1)  # Local eligibility probe; no update/network action.
             self.assertEqual(native.update_calls, [])
 
+    def test_update_consent_discloses_success_lease_and_failure_retry(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
+            base = Path(temporary)
+            root = make_skill(base)
+            subject = coordinator(root, base / "state", FakeNative([install_for(root)]), [1000])
+            message = subject.prompt()["message"].lower()
+            self.assertIn("successful check", message)
+            self.assertIn("24 hours", message)
+            self.assertIn("transient failure", message)
+            self.assertIn("one hour", message)
+
     def test_untracked_or_host_managed_copy_does_not_prompt_or_write_state(self) -> None:
         with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
             base = Path(temporary)

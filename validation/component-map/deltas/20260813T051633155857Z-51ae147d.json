@@ -1,0 +1,122 @@
+{
+  "accepted_map_id": "component-map-b61ff30070f9",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-45056e9d8c2b",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "identified-release-metadata",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "problem-reporting",
+        "element_id": "issue-to-release-gate",
+        "fields": [
+          "target",
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "SECURITY.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/PROBLEM_REPORTING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/update_policy.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_record_scan.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_update_policy.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "aa445c1c79adbf981cb79c6be51370dde8f901824d74d159b05c2be7dfbc0073"
+  },
+  "recorded_at_utc": "2026-08-13T05:16:33.155857Z",
+  "scan_id": "20260813T051633155857Z-51ae147d",
+  "schema_version": "1.0"
+}

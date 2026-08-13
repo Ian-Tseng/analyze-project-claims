@@ -29,9 +29,10 @@ details.
 ## Disclosure process
 
 The maintainer will validate scope, coordinate privately when more information
-is needed, prepare a tested fix, and publish a new immutable release. Public
-disclosure should wait until affected users can update. Submission does not
-guarantee a particular response or remediation timeline.
+is needed, prepare a tested fix, and publish a new versioned release without
+moving an earlier release tag. Public disclosure should wait until affected
+users can update. Submission does not guarantee a particular response or
+remediation timeline.
 
 Ordinary non-security defects may use public GitHub Issues after reviewing the
 exact content that will be posted.

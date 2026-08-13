@@ -45,7 +45,7 @@ does not invoke the skill, no check runs.
 - an authenticated GitHub account with repository access;
 - Python 3 if you reuse this repository's policy helper;
 - one canonical skill package in `skills/<skill-name>/`;
-- immutable SemVer release tags;
+- SemVer release tags that the maintainer never moves;
 - a clean user-scope installation for automatic replacement.
 
 After installing GitHub CLI for the first time, restart Codex or the terminal so
@@ -85,7 +85,7 @@ Keep these identities synchronized on every release:
 | Repository `VERSION` | Release workflow | Exact SemVer, such as `0.4.2` |
 | `package-version.json` | Installed package | Same SemVer and skill name |
 | `SKILL.md` metadata | GitHub CLI installation | Canonical source, package path, ref, and tree SHA |
-| Git tag | GitHub release | Immutable `v<SemVer>` pointing to the released commit |
+| Git tag | GitHub release | Versioned `v<SemVer>` pointing to the released commit; immutability is claimed only when GitHub enforcement verifies |
 | `gh skill list` version | Native install registry | Same SemVer, allowing one leading `v` |
 | Package manifest | Released bytes | Exact normalized file set and SHA-256 digests |
 | Citation metadata | Public release metadata | Same release version when citation is enabled |
@@ -228,7 +228,7 @@ Dry run complete. Use without --dry-run to publish.
 Require CI to pass before the real publish command. `gh skill publish` creates
 a GitHub release, so post-publish repair needs a new patch version.
 
-Publish one immutable release:
+Publish one versioned release:
 
 ```powershell
 $Version = (Get-Content -Raw .\VERSION).Trim()
@@ -350,7 +350,7 @@ update-policy file and defaults to local preview plus per-report approval. See
 
 - [ ] One canonical `skills/<name>/` package tree
 - [ ] Explicit install path and successful update rediscovery
-- [ ] Immutable tag matching package SemVer
+- [ ] Tag matching package SemVer; GitHub immutability verified or guarantee labelled policy-only
 - [ ] Synchronized version and citation files
 - [ ] Deterministic manifest with narrow installer normalization
 - [ ] Separate modes for off, notify, and auto

@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-13T05:22:59.901958Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -894,10 +894,10 @@
   ],
   "created_at_utc": "2026-08-13T05:22:49.873398Z",
   "integrity": {
-    "canonical_payload_sha256": "78b1729999340cf8fd459303940fbffa5f17f8b4036ac96b7d79eb653840f7eb"
+    "canonical_payload_sha256": "2f05d602fb6950fe6a25641f4423188ae4db20f660ef6471e9d82c14d755ec04"
   },
   "map_id": "component-map-be92062affaa",
-  "map_state": "accepted",
+  "map_state": "drift_candidate",
   "mapper_version": "1.1.0",
   "objective": "Map the public GitHub-distributed package, private automatic-reporting boundary, explicit public-issue path, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or E2E evidence as general empirical reliability.",
   "origin_scan_id": "20260813T052249873398Z-88db3975",

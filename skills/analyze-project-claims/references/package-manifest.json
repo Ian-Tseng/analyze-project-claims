@@ -34,7 +34,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "b817144c4d7bdc7f3679d6c9c1d5e5966dd7a578e750e1d2924383db6957695e"
+      "sha256": "d55abdf8c98df0a062dc24a8cde371ad944fb823350ec158109dccf1d128ae45"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -66,7 +66,7 @@
     },
     {
       "path": "scripts/update_policy.py",
-      "sha256": "a18c355e9fd7caa809c3fb28b83f77c49abedb5f55a16cf1e1c6aeeb81fc1342"
+      "sha256": "73ad6b8e4bc7445d278bf9f9cfd16dff5afd5974823894f41a778da179ac01b2"
     }
   ]
 }

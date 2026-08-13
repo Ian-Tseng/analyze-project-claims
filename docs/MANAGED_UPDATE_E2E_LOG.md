@@ -85,7 +85,7 @@ and Ubuntu on Python 3.10 and 3.12. The run is recorded in
 | 66 local tests passed | The tested policy, integrity, lifecycle, and helper contracts pass on the local environment | A real GitHub replacement happened |
 | Six CI jobs passed | The standard-library suite passes on three operating systems and two Python versions | Each operating system completed a live install and upgrade |
 | `gh skill publish --dry-run` passed | GitHub CLI discovered and validated the canonical package | A release or installation exists |
-| Immutable `v0.4.1` and `v0.4.2` tags | Each package version has a stable Git commit identity | A user loaded either package |
+| Observed unchanged `v0.4.1` and `v0.4.2` tags | Each package version resolved to a stable Git commit during the E2E | A user loaded either package |
 | Fresh invocation before and after | Codex loaded the baseline, then the installed candidate | Other hosts or plugin surfaces behave the same way |
 | Pre/post manifest checks | The baseline and replacement matched their release manifests | The package is free of every possible security defect |
 
@@ -122,8 +122,9 @@ detects semantic or payload changes.
 Before a release tag existed, GitHub CLI described the install version as
 `main`. That could not be reconciled with the package SemVer.
 
-Reusable rule: publish immutable `v<package-version>` tags and require the
-package version, GitHub CLI version, tag, and installed tree to agree.
+Reusable rule: publish versioned `v<package-version>` tags, never move them,
+and require the package version, GitHub CLI version, tag, and installed tree
+to agree.
 
 ### Mixed manual and managed copies
 
