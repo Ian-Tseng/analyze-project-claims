@@ -17,7 +17,8 @@ from typing import Any
 
 
 SCHEMA_VERSION = "1.0"
-MAPPER_VERSION = "1.1.0"
+MAPPER_VERSION = "1.2.0"
+TRANSIENT_PYTHON_SUFFIXES = {".pyc", ".pyo"}
 CANDIDATE_STATES = {
     "bootstrapped_provisional",
     "drift_candidate",
@@ -50,6 +51,13 @@ def _sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _is_transient_python_artifact(root: Path, path: Path) -> bool:
+    relative = path.relative_to(root)
+    return "__pycache__" in relative.parts or path.suffix.lower() in (
+        TRANSIENT_PYTHON_SUFFIXES
+    )
 
 
 def _add_integrity(record: dict[str, Any]) -> dict[str, Any]:
@@ -172,7 +180,11 @@ def _hash_declared_source(source: str, project_root: Path) -> dict[str, Any]:
         return {"source": source, "exists": True, "kind": "file", "sha256": _sha256_file(resolved)}
     if resolved.is_dir():
         entries: list[dict[str, str]] = []
-        for child in sorted(path for path in resolved.rglob("*") if path.is_file()):
+        for child in sorted(
+            path
+            for path in resolved.rglob("*")
+            if path.is_file() and not _is_transient_python_artifact(resolved, path)
+        ):
             entries.append(
                 {
                     "path": child.relative_to(resolved).as_posix(),

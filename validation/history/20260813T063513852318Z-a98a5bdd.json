@@ -1,0 +1,200 @@
+{
+  "components": [
+    {
+      "component_id": "directory-source-identity",
+      "component_status": "PASS",
+      "component_type": "code",
+      "element_counts": {
+        "PASS": 2
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "python-cache-stability",
+          "evidence": [
+            {
+              "locator": "test_directory_hash_ignores_generated_python_cache_files",
+              "observed": "The regression returned drift_detected before the repair and checked_unchanged after the repair.",
+              "source": "tests/test_component_map.py"
+            },
+            {
+              "locator": "_is_transient_python_artifact and _hash_declared_source",
+              "observed": "The directory snapshot excludes only the declared generated Python artifacts.",
+              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "Interpreter bytecode-cache creation no longer manufactures component-map source drift.",
+          "target": "Generated Python __pycache__ content, *.pyc, and *.pyo do not change a mapped directory's source identity."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "ordinary-file-drift-sensitivity",
+          "evidence": [
+            {
+              "locator": "test_directory_hash_detects_regular_file_changes",
+              "observed": "Adding new-source.txt produced drift_detected with one source change.",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The cache exclusion does not hide ordinary directory content changes.",
+          "target": "Adding an ordinary file to a mapped directory still changes source identity and produces a drift candidate."
+        }
+      ]
+    },
+    {
+      "component_id": "validation-authority-and-map-lifecycle",
+      "component_status": "PASS",
+      "component_type": "lifecycle",
+      "element_counts": {
+        "PASS": 2
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "explicit-status-authority",
+          "evidence": [
+            {
+              "locator": "Validation authority",
+              "observed": "The authority document explicitly states that no separate active project check table is currently designated.",
+              "source": "validation/README.md"
+            },
+            {
+              "locator": "test_documentation_identifies_observation_and_history_authority",
+              "observed": "The documentation regression passed and rejects the former undefined table reference.",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The active status authority is identifiable without guessing a table path.",
+          "target": "Current repository status uses the accepted map and newest applicable scan record, with no unnamed active check table."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "accepted-map-zero-drift",
+          "evidence": [
+            {
+              "locator": "accepted_candidate event",
+              "observed": "Candidate component-map-39a13c95d3af was explicitly accepted and the prior map was archived.",
+              "source": "validation/component-map/scan-history/20260813T063410710860Z-01ba2898.json"
+            },
+            {
+              "locator": "checked_unchanged event",
+              "observed": "The immediate reconciliation reported no source, structural, or contract changes.",
+              "source": "validation/component-map/scan-history/20260813T063411459099Z-1c719a1a.json"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "component-map-39a13c95d3af is the current accepted structural authority for this candidate.",
+          "target": "The exact reviewed v0.6.2 component-map candidate is accepted and an immediate repeat reconciliation is unchanged."
+        }
+      ]
+    },
+    {
+      "component_id": "candidate-package-validation",
+      "component_status": "PASS",
+      "component_type": "artifact",
+      "element_counts": {
+        "PASS": 2
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "v062-package-identity",
+          "evidence": [
+            {
+              "locator": "verify-package result",
+              "observed": "Package verification returned digest 7ceed9ccd383001ca687f3c2a47f0414244f2b3dcef72e371eccdca7aab63d6f.",
+              "source": "skills/analyze-project-claims/references/package-manifest.json"
+            },
+            {
+              "locator": "release identity",
+              "observed": "VERSION, CITATION.cff, and package-version.json all identify 0.6.2.",
+              "source": "VERSION"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The local candidate has one internally verified package identity; publication and installation remain later gates.",
+          "target": "VERSION, citation metadata, installed-local version metadata, and the package manifest identify one verified v0.6.2 candidate."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "full-regression-suite",
+          "evidence": [
+            {
+              "locator": "py -m unittest discover -s tests -v",
+              "observed": "91 tests passed; one Windows privilege-dependent symlink test was skipped.",
+              "source": "tests"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The tested software contracts pass on this Windows host; this is not general scientific or customer reliability evidence.",
+          "target": "The repository's deterministic regression suite passes after the repair."
+        }
+      ]
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "5ab528b5621c202d5f6ad38f5711aa086de9f002535f38ed31af75656ef9ddf2"
+  },
+  "scan": {
+    "authority": [
+      "skills/analyze-project-claims/scripts/reconcile_component_map.py",
+      "tests/test_component_map.py",
+      "tests/test_record_scan.py",
+      "validation/README.md",
+      "validation/component-map/accepted-map.json",
+      "skills/analyze-project-claims/references/package-manifest.json"
+    ],
+    "logger_version": "1.0.0",
+    "objective": "Verify that the v0.6.2 repair removes Python-cache-induced false component-map drift, preserves ordinary-file drift detection, names current validation authorities, synchronizes package identity, and leaves broader reliability claims bounded.",
+    "recorded_at_utc": "2026-08-13T06:35:13.852318Z",
+    "scan_id": "20260813T063513852318Z-a98a5bdd",
+    "scope": [
+      "skills/analyze-project-claims/scripts/reconcile_component_map.py",
+      "skills/analyze-project-claims/SKILL.md",
+      "tests/test_component_map.py",
+      "tests/test_record_scan.py",
+      "validation/README.md",
+      "validation/component-map/accepted-map.json",
+      "validation/component-map/scan-history/20260813T063410710860Z-01ba2898.json",
+      "validation/component-map/scan-history/20260813T063411459099Z-1c719a1a.json",
+      "VERSION",
+      "CITATION.cff",
+      "README.md",
+      "skills/analyze-project-claims/references/package-version.json",
+      "skills/analyze-project-claims/references/package-manifest.json"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "f798718052bb76cf89a12924d427bdf2e5aef9055b289f06713c4b996b9be303"
+  },
+  "schema_version": "1.0",
+  "summary": {
+    "claim_boundary": "This scan does not establish publication, GitHub release immutability, managed installed replacement, fresh-host activation, production owner-API operation, independent-customer delivery, notification arrival, or general cross-project reliability.",
+    "component_count": 3,
+    "element_count": 6,
+    "element_counts": {
+      "PASS": 6
+    },
+    "scan_status": "PASS",
+    "strongest_safe_claim": "The local v0.6.2 candidate deterministically ignores generated Python bytecode caches in directory source identity, still detects ordinary file drift, explicitly identifies validation authorities, has an accepted zero-drift component map, and passes package verification plus 91 deterministic tests.",
+    "unresolved_uncertainties": [
+      "The candidate is not publicly released or installed until commit-bound CI, publication, managed update, and fresh-host activation complete.",
+      "GitHub release immutability remains prospective and must be verified separately for any release that claims it.",
+      "No production HTTPS owner API or independent customer delivery observation exists."
+    ]
+  }
+}

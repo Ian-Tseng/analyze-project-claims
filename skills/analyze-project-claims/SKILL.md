@@ -338,6 +338,9 @@ Use this lifecycle:
    implementation, schema, template, configuration, or prompt dependency it
    exercises. Reject test-only evidence so source drift cannot be hidden by an
    unchanged test file.
+   Directory source hashes include ordinary files but exclude only generated
+   Python `__pycache__` content, `*.pyc`, and `*.pyo`, so interpreter cache
+   creation cannot manufacture source drift.
 2. If no accepted map exists, create a `bootstrapped_provisional` candidate.
    Discovery is not acceptance, so do not create an accepted map implicitly.
 3. If an accepted map exists, compare identifiers, targets, relations, and

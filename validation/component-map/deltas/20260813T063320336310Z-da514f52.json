@@ -1,0 +1,120 @@
+{
+  "accepted_map_id": "component-map-be92062affaa",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-39a13c95d3af",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "component-map-lifecycle",
+        "element_id": "cache-insensitive-directory-identity"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "validation-status-authority"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "bounded-readme-claims",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "identified-release-metadata",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "objective",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "readme-validation-layout"
+      }
+    ],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_component_map.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_record_scan.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "validation/README.md"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "c3154b9ca028f5486d3249988b6a7b5ac8a0c085fde324171e95d3447acd6026"
+  },
+  "recorded_at_utc": "2026-08-13T06:33:20.336310Z",
+  "scan_id": "20260813T063320336310Z-da514f52",
+  "schema_version": "1.0"
+}

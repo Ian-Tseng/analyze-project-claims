@@ -130,6 +130,11 @@ class RecordScanTests(unittest.TestCase):
         self.assertIn("self-scan-input-v020.json", authority)
         self.assertIn("historical", authority.lower())
         self.assertIn("self-scan-input.json", authority)
+        self.assertIn(
+            "No separate active project check table is currently designated",
+            authority,
+        )
+        self.assertNotIn("the active project check table", authority)
 
     def test_public_status_docs_are_scope_bound_and_release_claims_are_enforceable(self) -> None:
         review = (ROOT / "docs" / "PUBLIC_RELEASE_SECURITY_REVIEW.md").read_text(encoding="utf-8")

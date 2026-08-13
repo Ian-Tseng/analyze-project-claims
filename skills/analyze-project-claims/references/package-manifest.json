@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "0dc46609b35df360adeb6191595ee914e51cbb4c8e03fb9fd0ad64154bdd5861"
+      "sha256": "f798718052bb76cf89a12924d427bdf2e5aef9055b289f06713c4b996b9be303"
     },
     {
       "path": "agents/openai.yaml",
@@ -34,7 +34,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "d55abdf8c98df0a062dc24a8cde371ad944fb823350ec158109dccf1d128ae45"
+      "sha256": "bc805674be656723178eb7aced15332d51881166bae7616968128d50b1bd4d11"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -58,7 +58,7 @@
     },
     {
       "path": "scripts/reconcile_component_map.py",
-      "sha256": "78fed1ce861445c5cb34af1f4647a241de43f3959f6ec648c48d95eefccb21b4"
+      "sha256": "a5374425511ba2977de0faed4552dfd71c6f6dcba446955f60008508682adfd3"
     },
     {
       "path": "scripts/record_scan.py",

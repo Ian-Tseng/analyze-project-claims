@@ -235,9 +235,9 @@ For the reusable design and release procedure, read
 For the exact v0.4.1 to v0.4.2 validation record and the limits of that evidence,
 read [Managed Update End-to-End Evidence Log](docs/MANAGED_UPDATE_E2E_LOG.md).
 
-Version `0.6.1` makes update retry timing explicit and corrects the
-historical-release and security-review claim boundaries introduced around the
-public v0.6.0 release. `VERSION`, package
+Version `0.6.2` makes component-map directory identity insensitive to generated
+Python bytecode caches while retaining ordinary-file drift detection, and
+names the repository's current validation authorities explicitly. `VERSION`, package
 metadata, the package manifest, and citation metadata must remain synchronized.
 
 ## Citation and license
