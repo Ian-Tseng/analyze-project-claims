@@ -177,7 +177,37 @@ A real replacement test requires a later published candidate. During that
 test, the current invocation must continue using its starting version and the
 next invocation must load the verified new version.
 
-## Evidence boundary
+## 6. Verify problem-report operations
+
+Run the reporter and owner-service tests before publishing:
+
+```powershell
+py -3 -m unittest discover -s tests -p "test_problem_report.py" -v
+py -3 -m unittest discover -s tests -p "test_reporting_service.py" -v
+```
+
+For the default GitHub transport, submit one owner-approved E2E report from an
+installed candidate and verify it in the repository's Issues list. Configure
+GitHub `Watch > Custom > Issues` and the desired web, email, or mobile
+notification channel. The Issues list is the authoritative receipt; a
+notification is delivery convenience, not proof of ingestion.
+
+Triage the report before changing code. Require a regression test, reviewed
+fix, passing CI, and a new immutable SemVer release. Never run or merge code
+from an issue body automatically. Close the issue only after the released fix
+and installed-update evidence exist.
+
+If operating the optional API, follow
+[Internal Problem Reporting](docs/PROBLEM_REPORTING.md). Production requires an
+HTTPS reverse proxy, hashed scoped tokens, encrypted persistent storage,
+backups, explicit retention, and owner monitoring. Test client isolation,
+deduplication, triage status, deletion, and retention against the exact build.
+The API service is owner infrastructure and is not installed with the skill.
+
+Add report schemas and `problem_report.py` to the package-manifest check. Never
+publish a package whose runtime event enum and JSON schema disagree.
+
+## 7. Evidence boundary
 
 A successful dry-run proves package discovery and validation only. It does not
 prove that the repository was pushed, that a release was published, that Codex

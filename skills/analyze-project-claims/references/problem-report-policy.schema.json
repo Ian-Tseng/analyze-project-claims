@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/schemas/problem-report-policy.schema.json",
+  "title": "Analyze Project Claims local problem-report policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mode",
+    "transport",
+    "repository",
+    "endpoint",
+    "installation_id",
+    "last_attempt_at",
+    "last_success_at",
+    "last_report_id",
+    "last_outcome"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "mode": {"enum": ["unconfigured", "off", "ask", "auto-minimal"]},
+    "transport": {"enum": ["github", "api"]},
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "endpoint": {"type": ["string", "null"]},
+    "installation_id": {"type": "string", "format": "uuid"},
+    "last_attempt_at": {"type": ["integer", "null"], "minimum": 0},
+    "last_success_at": {"type": ["integer", "null"], "minimum": 0},
+    "last_report_id": {"type": ["string", "null"], "format": "uuid"},
+    "last_outcome": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]{0,63}$"
+    }
+  }
+}

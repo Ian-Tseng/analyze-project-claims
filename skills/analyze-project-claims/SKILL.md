@@ -438,6 +438,55 @@ rewrite an earlier scan record. For a read-only task without write authority,
 emit the complete record in the response and state that persistence was not
 authorized; do not silently mutate the audited project.
 
+## Report internal product failures separately
+
+Problem reporting applies only when this skill, one of its packaged helpers,
+or its managed updater fails internally. A contradiction, risk, failed
+experiment, or defect found in the user's project is an audit result, not an
+internal product report. Never transmit project findings.
+
+Finish the substantive audit first. Then, for an eligible internal event, use
+an available Python 3 launcher to prepare a bounded local report:
+
+```text
+<python-3> <skill-root>/scripts/problem_report.py --format json prepare \
+  --event-code <fixed-event-code> --summary <generic-summary> \
+  --outcome-code <fixed-outcome> [--exit-code <integer>]
+```
+
+Use only an event from the script's fixed enum, a generic summary, up to five
+generic reproduction steps, and the bounded outcome/exit fields. Never include
+project text, project paths, raw logs, prompts, attachments, environment
+variables, tokens, credentials, user identity, or arbitrary metadata. Inspect
+the returned preview. Reporting failure must not replace or shorten the audit.
+
+The initial policy is unconfigured and nothing is sent. Route explicit user
+intent to these deterministic actions:
+
+- "ask before reporting internal problems" -> `configure --mode ask --transport github`
+- "enable minimal automatic problem reports" -> `configure --mode auto-minimal --transport github`
+- "disable problem reporting" -> `configure --mode off`
+- "show problem-reporting status" -> `status`
+- "show the owner status for report <id>" -> `remote-status --report-id <id>` for API transport
+- "delete report <id>" -> `remote-delete --report-id <id>` for API transport
+
+For "report this internal tool problem", prepare the report and show the local
+preview. In `ask` or `unconfigured` mode, send only after the user approves
+that exact preview, using:
+
+```text
+<python-3> <skill-root>/scripts/problem_report.py --format json submit \
+  --report <local-report-path> --approved
+```
+
+In `auto-minimal` mode, the user has consented to sending the fixed minimal
+schema, so prepare and submit without `--approved`. In `off` mode, leave the
+report local unless the user gives one-time approval for that exact preview.
+GitHub delivery uses the user's existing `gh` authentication. API delivery
+requires the scoped client token in
+`ANALYZE_PROJECT_CLAIMS_REPORT_TOKEN`; never write that token into policy or
+project files.
+
 ## Run consent-gated update maintenance
 
 At the end of each substantive invocation, after the claims result is complete

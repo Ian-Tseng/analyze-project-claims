@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/schemas/problem-report.schema.json",
+  "title": "Analyze Project Claims bounded internal problem report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "report_id",
+    "product",
+    "product_version",
+    "created_at",
+    "installation_id",
+    "source",
+    "event_code",
+    "component",
+    "severity",
+    "summary",
+    "reproduction_steps",
+    "diagnostics",
+    "content_fingerprint"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "report_id": {"type": "string", "format": "uuid"},
+    "product": {"const": "analyze-project-claims"},
+    "product_version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "created_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "installation_id": {"type": "string", "format": "uuid"},
+    "source": {"const": "agent-detected"},
+    "event_code": {
+      "enum": [
+        "UPDATE_NATIVE_FAILURE",
+        "UPDATE_INTEGRITY_FAILURE",
+        "PACKAGE_VALIDATION_FAILURE",
+        "COMPONENT_MAP_INTERNAL_ERROR",
+        "SCAN_RECORDER_INTERNAL_ERROR",
+        "REPORTER_INTERNAL_ERROR",
+        "REPORTING_E2E_TEST",
+        "SKILL_RUNTIME_ERROR"
+      ]
+    },
+    "component": {
+      "enum": ["update", "package", "component-map", "scan-record", "reporting", "skill-runtime"]
+    },
+    "severity": {"enum": ["low", "medium", "high"]},
+    "summary": {"type": "string", "minLength": 12, "maxLength": 240},
+    "reproduction_steps": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {"type": "string", "minLength": 3, "maxLength": 200}
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "python_version", "gh_version", "outcome_code", "exit_code"],
+      "properties": {
+        "platform": {"enum": ["windows", "macos", "linux", "other"]},
+        "python_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "gh_version": {
+          "type": ["string", "null"],
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "outcome_code": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z][A-Z0-9_]{0,63}$"
+        },
+        "exit_code": {
+          "type": ["integer", "null"],
+          "minimum": -255,
+          "maximum": 255
+        }
+      }
+    },
+    "content_fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

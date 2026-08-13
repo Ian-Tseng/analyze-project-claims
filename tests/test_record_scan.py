@@ -73,13 +73,17 @@ class RecordScanTests(unittest.TestCase):
             SKILL_ROOT / "references" / "component-map-observation.schema.json",
             SKILL_ROOT / "references" / "component-map.schema.json",
             SKILL_ROOT / "references" / "scan-record.schema.json",
+            SKILL_ROOT / "references" / "problem-report.schema.json",
+            SKILL_ROOT / "references" / "problem-report-policy.schema.json",
             SKILL_ROOT / "references" / "update-policy.schema.json",
             SKILL_ROOT / "references" / "package-version.json",
             SKILL_ROOT / "references" / "package-manifest.json",
             SKILL_ROOT / "scripts" / "update_policy.py",
             SKILL_ROOT / "scripts" / "reconcile_component_map.py",
+            SKILL_ROOT / "scripts" / "problem_report.py",
             LOGGER,
             EXAMPLE,
+            ROOT / "docs" / "PROBLEM_REPORTING.md",
             ROOT / "validation" / "README.md",
         ]
         self.assertEqual([str(path) for path in required if not path.is_file()], [])
@@ -90,6 +94,8 @@ class RecordScanTests(unittest.TestCase):
         json.loads((SKILL_ROOT / "references" / "component-map-observation.schema.json").read_text(encoding="utf-8"))
         json.loads((SKILL_ROOT / "references" / "component-map.schema.json").read_text(encoding="utf-8"))
         json.loads((SKILL_ROOT / "references" / "update-policy.schema.json").read_text(encoding="utf-8"))
+        json.loads((SKILL_ROOT / "references" / "problem-report.schema.json").read_text(encoding="utf-8"))
+        json.loads((SKILL_ROOT / "references" / "problem-report-policy.schema.json").read_text(encoding="utf-8"))
         json.loads((SKILL_ROOT / "references" / "package-version.json").read_text(encoding="utf-8"))
         json.loads((SKILL_ROOT / "references" / "package-manifest.json").read_text(encoding="utf-8"))
 

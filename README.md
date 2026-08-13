@@ -124,9 +124,29 @@ tracked by GitHub CLI. Pinned and project-scope installs become notify-only.
 Duplicate, locally edited, manually copied, and plugin-hosted copies are not
 automatically replaced. The updater never forces an overwrite or removes a pin.
 
-The local policy record contains only the selected mode, hashed source/install
-binding, timestamps, suspension state, and last outcome. No project content,
-claims, errors, or telemetry are sent to a database.
+The update policy stores only its mode, hashed install binding, timestamps,
+suspension state, and last outcome. Update consent does not grant reporting
+consent.
+
+## Report an internal tool problem
+
+When the tool itself fails, the skill can prepare a local preview and ask
+before sending it. Project-audit findings are never reported.
+
+Say `report this internal tool problem`, `enable minimal automatic problem
+reports`, `disable problem reporting`, or `show problem-reporting status`.
+
+By default, your existing `gh` login creates an `[internal-report]` issue in
+this private repository. The owner reads it in Issues and can enable GitHub
+notifications. An owner-hosted HTTPS API is optional.
+
+The fixed schema excludes project content, raw logs, prompts, attachments, and
+credentials; path- and secret-like text is rejected locally. Reports cannot
+install code. The owner reviews, tests, and publishes a release. Only a
+separately enabled updater can install it on later use.
+
+Read [Internal Problem Reporting](docs/PROBLEM_REPORTING.md) for the reusable
+architecture, data contract, owner workflow, API, retention, and deletion.
 
 ## Formal audit records
 
@@ -213,7 +233,8 @@ For the reusable design and release procedure, read
 For the exact v0.4.1 to v0.4.2 validation record and the limits of that evidence,
 read [Managed Update End-to-End Evidence Log](docs/MANAGED_UPDATE_E2E_LOG.md).
 
-Version `0.4.2` completes live validation of the managed replacement path. `VERSION`, package
+Version `0.5.0` adds consent-gated internal problem reporting while preserving
+the validated managed replacement path. `VERSION`, package
 metadata, the package manifest, and citation metadata must remain synchronized.
 
 ## Citation and license
