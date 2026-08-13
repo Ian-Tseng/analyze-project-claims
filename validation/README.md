@@ -10,7 +10,9 @@ historical evidence.
   Never rewrite an earlier event or scan record.
 - `self-scan-input.json` is the retained v0.1.0 input fixture.
 - `self-scan-input-v020.json` is the retained v0.2.0 input fixture.
-- Neither input fixture is current status authority. Use the accepted map, the
+- `problem-reporting-scan-input-v051.json` is the retained v0.5.1 reporting,
+  issue-to-release, installed-update, and component-map synchronization input.
+- These input fixtures are not current status authority. Use the accepted map, the
   newest applicable immutable scan record, and the active project check table
   together when reporting current status.
 

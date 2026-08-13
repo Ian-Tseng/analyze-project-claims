@@ -1,0 +1,243 @@
+{
+  "components": [
+    {
+      "component_id": "component-map-lifecycle",
+      "component_status": "PASS",
+      "component_type": "code",
+      "element_counts": {
+        "PASS": 1
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "reporting-map-synchronization",
+          "evidence": [
+            {
+              "locator": "reconcile then accept then reconcile",
+              "observed": "Candidate component-map-1153ef523720 was accepted; the immediate follow-up returned checked_unchanged with no changes.",
+              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "distribution and problem-reporting components",
+              "observed": "Canonical managed package/update elements and four problem-reporting lifecycle elements are accepted.",
+              "source": "validation/component-map/accepted-map.json"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The formal structural authority now matches the active package/reporting architecture and preserves the other mapped research components.",
+          "target": "The accepted component map uses the canonical skills/ package path and covers reporting, owner API, issue-to-release, and managed-update elements without dropping unrelated components."
+        }
+      ]
+    },
+    {
+      "component_id": "distribution",
+      "component_status": "PASS",
+      "component_type": "artifact",
+      "element_counts": {
+        "PASS": 2
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "canonical-managed-package",
+          "evidence": [
+            {
+              "locator": "verify-package and native install discovery",
+              "observed": "Repository and installed package manifests verified; native registry returned exactly one canonical user-scope unpinned v0.5.1 installation.",
+              "source": "skills/analyze-project-claims/scripts/update_policy.py"
+            },
+            {
+              "locator": "test_public_package_contract",
+              "observed": "The package contract requires the reporter, schemas, update helper, and one canonical skills/ tree.",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The observed repository and managed Windows installation have one consistent v0.5.1 package identity.",
+          "target": "Exactly one GitHub CLI-discoverable package exists under skills/analyze-project-claims, with synchronized version and manifest identity."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "partially_supported",
+          "element_id": "managed-update-postcondition",
+          "evidence": [
+            {
+              "locator": "enable, maintain, postcondition, and lease",
+              "observed": "Installed v0.4.2 updated to v0.5.0 and installed v0.5.0 updated to v0.5.1, each with UPDATED_NEXT_USE.",
+              "source": "skills/analyze-project-claims/scripts/update_policy.py"
+            },
+            {
+              "locator": "full updater regression file",
+              "observed": "Consent, binding, pinned/project degradation, local edits, postcondition, output bounds, locking, and lease tests passed.",
+              "source": "tests/test_update_policy.py"
+            },
+            {
+              "locator": "postcondition and fresh-host gates",
+              "observed": "Manifest, registry identity, dry-run no-op, NOT_DUE lease, and fresh Codex v0.5.1 activation were observed on Windows.",
+              "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": "Repeat live installed replacement and fresh-host activation on supported macOS and Linux hosts before making a cross-platform live-update claim.",
+          "safe_interpretation": "The managed replacement path worked twice on the observed Windows host and is regression-tested across CI platforms; live replacement on other hosts remains unobserved.",
+          "target": "A separately consented updater delegates replacement to GitHub CLI and verifies source, scope, pin, version, tree, and package integrity for next use."
+        }
+      ]
+    },
+    {
+      "component_id": "problem-reporting",
+      "component_status": "PASS",
+      "component_type": "service",
+      "element_counts": {
+        "PASS": 4
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "separate-consent-boundary",
+          "evidence": [
+            {
+              "locator": "PolicyStore, prepare, and submit",
+              "observed": "The installed reporter in ask mode prepared a local preview with consent_required=true before issue delivery.",
+              "source": "skills/analyze-project-claims/scripts/problem_report.py"
+            },
+            {
+              "locator": "default consent, off, ask, and auto-minimal paths",
+              "observed": "Nine reporter regressions passed, including exact policy schema and non-storage of API tokens.",
+              "source": "tests/test_problem_report.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The tested CLI paths keep update and reporting consent separate and require exact-report approval by default.",
+          "target": "Problem reporting has a strict policy independent from update consent and defaults to local preview plus exact-report approval."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "bounded-private-report-contract",
+          "evidence": [
+            {
+              "locator": "EVENTS, validate_report, _safe_text, and GitHubTransport",
+              "observed": "Issue #1 body matched the approved fixed-schema preview and contained no project content or attachments.",
+              "source": "skills/analyze-project-claims/scripts/problem_report.py"
+            },
+            {
+              "locator": "schema, redaction, tamper, and argument-array regressions",
+              "observed": "Unknown fields, modified fingerprints, secrets, absolute paths, and control characters were rejected.",
+              "source": "tests/test_problem_report.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The tested reporter and observed issue enforce the bounded internal-event contract; absence of every possible secret format is not proved.",
+          "target": "Only fixed internal events and bounded diagnostics can be delivered; project content, arbitrary fields, paths, secrets, prompts, raw logs, and attachments are excluded."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "partially_supported",
+          "element_id": "owner-api-lifecycle",
+          "evidence": [
+            {
+              "locator": "Authenticator, ReportStore, RateLimiter, and ReportHandler",
+              "observed": "A local process E2E completed configure, consented submit, receive, status, delete, and not-found postcondition.",
+              "source": "reporting_service/server.py"
+            },
+            {
+              "locator": "full service regression file",
+              "observed": "Eight authentication, tenant isolation, deduplication, triage, deletion, retention, schema, and rate-limit tests passed.",
+              "source": "tests/test_reporting_service.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": "Deploy behind production HTTPS with encrypted persistent storage, monitoring, backup/restore testing, token rotation, and an external security review before production use.",
+          "safe_interpretation": "The local standard-library service satisfies the tested contract; production HTTPS, storage encryption, backup, operations, and abuse resistance remain untested.",
+          "target": "The optional owner API authenticates scoped principals, isolates tenants, deduplicates, triages, retains, and deletes bounded reports without exposing database access."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "partially_supported",
+          "element_id": "issue-to-release-gate",
+          "evidence": [
+            {
+              "locator": "issue #1 evidence chain",
+              "observed": "Issue #1 was received, triaged, reproduced by a failing test, fixed in CI-passing immutable v0.5.1, installed, activated in a fresh Codex host, then closed.",
+              "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
+            },
+            {
+              "locator": "problem-report operations",
+              "observed": "The owner workflow forbids executing issue text and requires regression, CI, new SemVer release, installed evidence, then closure.",
+              "source": "PUBLISHING.md"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": "Repeat with a separate authorized user account and directly observe the configured owner notification channel before claiming independent-user notification delivery.",
+          "safe_interpretation": "One owner-account private-repository issue completed the gated loop; independent-customer delivery and GitHub notification arrival remain unobserved.",
+          "target": "A report remains untrusted triage input until a red test, reviewed fix, commit-bound CI, immutable release, installed postcondition, and fresh-host activation complete."
+        }
+      ]
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "4e0e0a3c51ef467c255a2c0843fa5d2fb39e4ea69269991f30538ecfc59db9c5"
+  },
+  "scan": {
+    "authority": [
+      "VERSION",
+      "PUBLISHING.md",
+      "docs/PROBLEM_REPORTING_E2E_LOG.md",
+      "skills/analyze-project-claims/references/package-manifest.json",
+      "skills/analyze-project-claims/references/package-version.json",
+      "skills/analyze-project-claims/references/problem-report-policy.schema.json",
+      "skills/analyze-project-claims/references/problem-report.schema.json",
+      "skills/analyze-project-claims/scripts/problem_report.py",
+      "skills/analyze-project-claims/scripts/update_policy.py",
+      "reporting_service/server.py",
+      "tests/test_problem_report.py",
+      "tests/test_reporting_service.py",
+      "tests/test_update_policy.py",
+      "validation/component-map/accepted-map.json"
+    ],
+    "logger_version": "1.0.0",
+    "objective": "Audit the v0.5.1 internal problem-reporting, owner triage, immutable fix release, managed update, and synchronized component-map lifecycle without expanding the evidence beyond the observed environments.",
+    "recorded_at_utc": "2026-08-13T02:25:06.315685Z",
+    "scan_id": "20260813T022506315685Z-2961f3ff",
+    "scope": [
+      "README.md",
+      "PUBLISHING.md",
+      "VERSION",
+      "docs/PROBLEM_REPORTING.md",
+      "docs/PROBLEM_REPORTING_E2E_LOG.md",
+      "reporting_service/server.py",
+      "skills/analyze-project-claims",
+      "tests/test_problem_report.py",
+      "tests/test_reporting_service.py",
+      "tests/test_update_policy.py",
+      "validation/component-map/accepted-map.json"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "6a84a09e5929a5be7f28d93bbdb1585ad512110d8f55c8aba845f6d9274d381f"
+  },
+  "schema_version": "1.0",
+  "summary": {
+    "claim_boundary": "Production API security, GitHub notification arrival, independent-customer permissions, cross-platform live replacement, and general product reliability remain unproved.",
+    "component_count": 3,
+    "element_count": 7,
+    "element_counts": {
+      "PASS": 7
+    },
+    "scan_status": "PASS",
+    "strongest_safe_claim": "Version 0.5.1 implements a separately consented bounded internal-report path, a locally tested tenant-isolated owner API, and one observed private GitHub issue-to-tested-release-to-installed-update loop on Windows; the synchronized accepted map and deterministic tests support these bounded claims.",
+    "unresolved_uncertainties": [
+      "No production HTTPS API deployment or external security review has been observed.",
+      "No independent customer account or GitHub web/email/mobile notification delivery has been observed.",
+      "Live installed replacement and fresh-host activation were observed only on one Windows host.",
+      "The private repository still lacks an owner-approved software license."
+    ]
+  }
+}

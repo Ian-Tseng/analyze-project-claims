@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-13T02:28:51.011721Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -841,15 +841,15 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-13T02:28:39.632249Z",
+  "created_at_utc": "2026-08-13T02:26:05.073678Z",
   "integrity": {
-    "canonical_payload_sha256": "769c535495fe4777e8a7d963b53a38db803f309a11b1df76bc8f9bbe1412ad74"
+    "canonical_payload_sha256": "358dfa6d947661d2cf9e0dc7b1d539b16a066330683e876c1d066f2d98ee3586"
   },
-  "map_id": "component-map-c4efe31d3e24",
-  "map_state": "accepted",
+  "map_id": "component-map-3d6069d1ca9f",
+  "map_state": "drift_candidate",
   "mapper_version": "1.1.0",
   "objective": "Map the canonical GitHub-distributed package, managed update and internal problem-reporting lifecycle, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or E2E evidence as general empirical reliability.",
-  "origin_scan_id": "20260813T022839632249Z-084313d9",
+  "origin_scan_id": "20260813T022605073678Z-926c99bb",
   "previous_map_id": "component-map-1153ef523720",
   "schema_version": "1.0",
   "scope": [
@@ -1053,7 +1053,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a723bd63b0f942e80dbdbb4505b8a2922032792aa6317197cf156e836a7d933c",
+      "sha256": "3d173026b0c2f6bc5e9552d590024f6054601b006c0537653603b53c646131f3",
       "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
     },
     {
@@ -1419,7 +1419,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "48152384f59eaeb090af2cce24e58f855e2d5d9b9bc74bd25eb7b262057644e8",
+      "sha256": "ec4faca160102a4ec1b825854bf62230f72ad962d54f9aac94d02fa85fd6babe",
       "source": "validation/README.md"
     }
   ]

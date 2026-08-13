@@ -1,10 +1,10 @@
 {
-  "accepted_at_utc": "2026-08-13T02:28:51.011721Z",
+  "accepted_at_utc": "2026-08-10T03:53:15.860629Z",
   "authority": [
-    "skills/analyze-project-claims/SKILL.md",
-    "skills/analyze-project-claims/references/component-map-observation.schema.json",
-    "skills/analyze-project-claims/references/component-map.schema.json",
-    "skills/analyze-project-claims/references/scan-record.schema.json",
+    "skill/analyze-project-claims/SKILL.md",
+    "skill/analyze-project-claims/references/component-map-observation.schema.json",
+    "skill/analyze-project-claims/references/component-map.schema.json",
+    "skill/analyze-project-claims/references/scan-record.schema.json",
     "evaluation/protocol.md",
     "evaluation/configs/dry-run.json",
     "evaluation/scripts/cross_project_reliability.py",
@@ -28,21 +28,7 @@
     "evaluation/scripts/annotation_calibration.py",
     "tests/test_annotation_calibration.py",
     "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\calibration_manifest.json",
-    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json",
-    "VERSION",
-    "PUBLISHING.md",
-    "docs/PROBLEM_REPORTING.md",
-    "docs/PROBLEM_REPORTING_E2E_LOG.md",
-    "reporting_service/server.py",
-    "skills/analyze-project-claims/references/package-manifest.json",
-    "skills/analyze-project-claims/references/package-version.json",
-    "skills/analyze-project-claims/references/problem-report-policy.schema.json",
-    "skills/analyze-project-claims/references/problem-report.schema.json",
-    "skills/analyze-project-claims/scripts/problem_report.py",
-    "skills/analyze-project-claims/scripts/update_policy.py",
-    "tests/test_problem_report.py",
-    "tests/test_reporting_service.py",
-    "tests/test_update_policy.py"
+    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json"
   ],
   "components": [
     {
@@ -210,15 +196,15 @@
           "evidence_locators": [
             {
               "locator": "Build or reconcile the component-to-element map",
-              "source": "skills/analyze-project-claims/SKILL.md"
+              "source": "skill/analyze-project-claims/SKILL.md"
             },
             {
               "locator": "required evidence with minItems 1",
-              "source": "skills/analyze-project-claims/references/component-map-observation.schema.json"
+              "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
             },
             {
               "locator": "_is_test_source and test-only evidence rejection",
-              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
             },
             {
               "locator": "test_mapper_rejects_element_without_evidence and test_mapper_rejects_test_only_element_evidence",
@@ -233,7 +219,7 @@
           "evidence_locators": [
             {
               "locator": "_compare and reconcile candidate preservation",
-              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
             },
             {
               "locator": "test_stale_source_produces_delta and test_conflict_produces_candidate_without_overwrite",
@@ -248,7 +234,7 @@
           "evidence_locators": [
             {
               "locator": "missing accepted-map branch",
-              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
             },
             {
               "locator": "test_missing_map_bootstraps_provisional",
@@ -263,11 +249,11 @@
           "evidence_locators": [
             {
               "locator": "observation element evidence field",
-              "source": "skills/analyze-project-claims/assets/component-map-observation.template.json"
+              "source": "skill/analyze-project-claims/assets/component-map-observation.template.json"
             },
             {
               "locator": "observation evidence contract",
-              "source": "skills/analyze-project-claims/references/component-map-observation.schema.json"
+              "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
             },
             {
               "locator": "test_observation_template_preserves_evidence_locators",
@@ -282,7 +268,7 @@
           "evidence_locators": [
             {
               "locator": "_validate_map and _accept",
-              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
             },
             {
               "locator": "test_accept_rejects_candidate_missing_schema_required_target",
@@ -297,7 +283,7 @@
           "evidence_locators": [
             {
               "locator": "checked_unchanged branch",
-              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+              "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
             },
             {
               "locator": "test_valid_map_is_checked_without_rebuild",
@@ -422,46 +408,30 @@
       "component_type": "artifact",
       "elements": [
         {
-          "element_id": "canonical-managed-package",
+          "element_id": "github-wrapper-mirror-parity",
           "evidence_locators": [
             {
-              "locator": "repository release identity",
-              "source": "VERSION"
+              "locator": "test_github_wrapper_downloads_copy_is_exact",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
             },
             {
-              "locator": "normalized package file hashes",
-              "source": "skills/analyze-project-claims/references/package-manifest.json"
-            },
-            {
-              "locator": "installed package SemVer",
-              "source": "skills/analyze-project-claims/references/package-version.json"
-            },
-            {
-              "locator": "test_public_package_contract",
-              "source": "tests/test_record_scan.py"
+              "locator": "public wrapper content and evaluation references",
+              "source": "README.md"
             }
           ],
           "relation_type": "contains",
-          "target": "Exactly one GitHub CLI-discoverable package exists under skills/analyze-project-claims, with synchronized version and manifest identity."
+          "target": "The workspace GitHub wrapper and Downloads mirror remain synchronized after append-only audits."
         },
         {
-          "element_id": "managed-update-postcondition",
+          "element_id": "official-skill-validation",
           "evidence_locators": [
             {
-              "locator": "observed v0.4.2 to v0.5.0 to v0.5.1 installed transitions",
-              "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
-            },
-            {
-              "locator": "enable, maintain, native update, and postcondition verification",
-              "source": "skills/analyze-project-claims/scripts/update_policy.py"
-            },
-            {
-              "locator": "consent, eligibility, replacement, lease, and integrity regressions",
-              "source": "tests/test_update_policy.py"
+              "locator": "skill-creator/scripts/quick_validate.py on four roots",
+              "source": "skill/analyze-project-claims"
             }
           ],
           "relation_type": "contains",
-          "target": "A separately consented updater delegates replacement to GitHub CLI and verifies source, scope, pin, version, tree, and package integrity for next use."
+          "target": "Skill metadata and referenced resources in staging, export, Downloads, and installed copies."
         }
       ]
     },
@@ -687,92 +657,6 @@
       ]
     },
     {
-      "component_id": "problem-reporting",
-      "component_type": "service",
-      "elements": [
-        {
-          "element_id": "bounded-private-report-contract",
-          "evidence_locators": [
-            {
-              "locator": "closed outbound report schema",
-              "source": "skills/analyze-project-claims/references/problem-report.schema.json"
-            },
-            {
-              "locator": "EVENTS, validate_report, _safe_text, and transports",
-              "source": "skills/analyze-project-claims/scripts/problem_report.py"
-            },
-            {
-              "locator": "schema equality, redaction, tamper, and GitHub argument regressions",
-              "source": "tests/test_problem_report.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "Only fixed internal events and bounded diagnostics can be delivered; project content, arbitrary fields, paths, secrets, prompts, raw logs, and attachments are excluded."
-        },
-        {
-          "element_id": "issue-to-release-gate",
-          "evidence_locators": [
-            {
-              "locator": "problem-report operations and immutable release gates",
-              "source": "PUBLISHING.md"
-            },
-            {
-              "locator": "issue #1 to v0.5.1 evidence chain and limits",
-              "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
-            },
-            {
-              "locator": "verified update active next use",
-              "source": "skills/analyze-project-claims/scripts/update_policy.py"
-            },
-            {
-              "locator": "status schema-version regression from issue #1",
-              "source": "tests/test_problem_report.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "A report remains untrusted triage input until a red test, reviewed fix, commit-bound CI, immutable release, installed postcondition, and fresh-host activation complete."
-        },
-        {
-          "element_id": "owner-api-lifecycle",
-          "evidence_locators": [
-            {
-              "locator": "owner HTTPS deployment and triage contract",
-              "source": "docs/PROBLEM_REPORTING.md"
-            },
-            {
-              "locator": "Authenticator, ReportStore, rate limiter, and HTTP handlers",
-              "source": "reporting_service/server.py"
-            },
-            {
-              "locator": "authentication, isolation, deduplication, status, deletion, retention, and rate-limit regressions",
-              "source": "tests/test_reporting_service.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "The optional owner API authenticates scoped principals, isolates tenants, deduplicates, triages, retains, and deletes bounded reports without exposing database access."
-        },
-        {
-          "element_id": "separate-consent-boundary",
-          "evidence_locators": [
-            {
-              "locator": "exact mode and transport policy contract",
-              "source": "skills/analyze-project-claims/references/problem-report-policy.schema.json"
-            },
-            {
-              "locator": "PolicyStore, Reporter.prepare, and Reporter.submit",
-              "source": "skills/analyze-project-claims/scripts/problem_report.py"
-            },
-            {
-              "locator": "default consent and auto-minimal regressions",
-              "source": "tests/test_problem_report.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "Problem reporting has a strict policy independent from update consent and defaults to local preview plus exact-report approval."
-        }
-      ]
-    },
-    {
       "component_id": "scan-logging",
       "component_type": "code",
       "elements": [
@@ -781,11 +665,11 @@
           "evidence_locators": [
             {
               "locator": "hierarchical scan exchange contract",
-              "source": "skills/analyze-project-claims/references/scan-record.schema.json"
+              "source": "skill/analyze-project-claims/references/scan-record.schema.json"
             },
             {
               "locator": "record derivation and append-only write",
-              "source": "skills/analyze-project-claims/scripts/record_scan.py"
+              "source": "skill/analyze-project-claims/scripts/record_scan.py"
             },
             {
               "locator": "public recorder regressions",
@@ -841,21 +725,21 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-13T02:28:39.632249Z",
+  "created_at_utc": "2026-08-10T03:53:10.515019Z",
   "integrity": {
-    "canonical_payload_sha256": "769c535495fe4777e8a7d963b53a38db803f309a11b1df76bc8f9bbe1412ad74"
+    "canonical_payload_sha256": "cc028201767c21f1c5d28feec63cf8cb068b11b3d132a00643a3e35b4a4062ea"
   },
-  "map_id": "component-map-c4efe31d3e24",
+  "map_id": "component-map-594d68663e67",
   "map_state": "accepted",
   "mapper_version": "1.1.0",
-  "objective": "Map the canonical GitHub-distributed package, managed update and internal problem-reporting lifecycle, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or E2E evidence as general empirical reliability.",
-  "origin_scan_id": "20260813T022839632249Z-084313d9",
-  "previous_map_id": "component-map-1153ef523720",
+  "objective": "Map the public package, deterministic dry-run lifecycle, metadata-frozen natural-project pilot preparation, and separate human codebook-calibration exercise without treating practice or preparation artifacts as empirical reliability evidence.",
+  "origin_scan_id": "20260810T035310515019Z-13d86ffc",
+  "previous_map_id": "component-map-5cbb02d6e7a7",
   "schema_version": "1.0",
   "scope": [
     "README.md",
     "CITATION.cff.template",
-    "skills/analyze-project-claims",
+    "skill/analyze-project-claims",
     "tests/test_component_map.py",
     "tests/test_cross_project_reliability.py",
     "tests/test_record_scan.py",
@@ -899,23 +783,15 @@
     "tests/test_annotation_calibration.py",
     "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py",
     "F:\\logic_guided_rag_experiment\\data\\analyze_project_claims_annotation_calibration\\artifact_registry.json",
-    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller",
-    "VERSION",
-    "PUBLISHING.md",
-    "docs/PROBLEM_REPORTING.md",
-    "docs/PROBLEM_REPORTING_E2E_LOG.md",
-    "reporting_service/server.py",
-    "tests/test_problem_report.py",
-    "tests/test_reporting_service.py",
-    "tests/test_update_policy.py"
+    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "6a84a09e5929a5be7f28d93bbdb1585ad512110d8f55c8aba845f6d9274d381f",
+  "skill_sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52",
   "source_snapshot": [
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ea9253eaca4a719f8f2c28f829c6a6063f5150ce7440c1415fd96fd22dfa4eec",
+      "sha256": "58d5ed65822ac864200f1f321b25b70a2e7492fe9ca4788d33735ec74711079a",
       "source": "CITATION.cff.template"
     },
     {
@@ -1029,37 +905,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "e57850beadb548b01ea6c53f735f9e23cdcc007695cf544f73ea0a7105d4b2fb",
-      "source": "PUBLISHING.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "9be9443eb5cabb6be9f67f01afe8367f4415b418ca3bcf43b7f4bb2cb9255ff6",
+      "sha256": "554e64d04ce90607244298889785785dcdb975829ad5532ccd8b4259177ba743",
       "source": "README.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "aba951626c8690ce493cbc8f018205bb468003f61fbf00fd3d3c71cebabc0177",
-      "source": "VERSION"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "939fdf866994042128e3b35bd65ecdee5041d69bd35678dad28d5bee090aae95",
-      "source": "docs/PROBLEM_REPORTING.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "a723bd63b0f942e80dbdbb4505b8a2922032792aa6317197cf156e836a7d933c",
-      "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "1451f6e10eed905411f587c7426a14b6c0e6c31ebd9398b63b2bb9bd3476d40c",
+      "sha256": "589f33dd2aadca857659f7c5cf94503378769cb57cdcdae9a3e0d3fae7519723",
       "source": "evaluation/README.md"
     },
     {
@@ -1089,7 +941,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3190a205163c11be70d540b75c19babff86bfe3bef3d8e8f4312513e3528a382",
+      "sha256": "78c8e5f3bba9e6e4b3c2dcfae97fedc89dc346e3e06a07d036397c8ce8fdffa7",
       "source": "evaluation/configs/dry-run.json"
     },
     {
@@ -1238,93 +1090,51 @@
     },
     {
       "exists": true,
-      "kind": "file",
-      "sha256": "b82bf8945edee117c95263e5b32e21ce98bbda0a9819f95b1570f94319b4b448",
-      "source": "reporting_service/server.py"
-    },
-    {
-      "exists": true,
       "kind": "directory",
-      "sha256": "2014d92bca84fc986ff5eae2a4dc03e9e7a44a04d13130b254f14c82c9a3384a",
-      "source": "skills/analyze-project-claims"
+      "sha256": "f6fc296a55e50fdce5ed236f019c2cb9d755df11f529213370006fe3ccf19e35",
+      "source": "skill/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6a84a09e5929a5be7f28d93bbdb1585ad512110d8f55c8aba845f6d9274d381f",
-      "source": "skills/analyze-project-claims/SKILL.md"
+      "sha256": "a1988a1288ae9ab65fb460fbf2cf43e2dbe392286f2d755ca399b61123703a52",
+      "source": "skill/analyze-project-claims/SKILL.md"
     },
     {
       "exists": true,
       "kind": "file",
       "sha256": "76496fa1ec32920c07241a5c8819d19bf0e541f9be24f5c303a1887f4e20df57",
-      "source": "skills/analyze-project-claims/assets/component-map-observation.template.json"
+      "source": "skill/analyze-project-claims/assets/component-map-observation.template.json"
     },
     {
       "exists": true,
       "kind": "file",
       "sha256": "d4858c9673142b9ef21a6f382602228da658a0569bb839bbd4ea36b086bca2b7",
-      "source": "skills/analyze-project-claims/references/component-map-observation.schema.json"
+      "source": "skill/analyze-project-claims/references/component-map-observation.schema.json"
     },
     {
       "exists": true,
       "kind": "file",
       "sha256": "33128e872845b8c6b08906b62ae98093915f5a15d5f85445ba13f1177848fe82",
-      "source": "skills/analyze-project-claims/references/component-map.schema.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "af624da131c35c243af5a6aac4ec3d6d0f210afe06b818109f2aec2f90aadd88",
-      "source": "skills/analyze-project-claims/references/package-manifest.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "b8b1c543e5dbc16c336a41778e8ac85b8a35355c29d5bac0dcc40eaa8d7bdb25",
-      "source": "skills/analyze-project-claims/references/package-version.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "b0b4c7e747d603124810f6f9ea8a3864828208b3171b5ca7ca8abf8e0b4013ca",
-      "source": "skills/analyze-project-claims/references/problem-report-policy.schema.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "44983ab807053256a7be4b70634adea04cfe11457961fd5d5752d49d2f1d7c1b",
-      "source": "skills/analyze-project-claims/references/problem-report.schema.json"
+      "source": "skill/analyze-project-claims/references/component-map.schema.json"
     },
     {
       "exists": true,
       "kind": "file",
       "sha256": "7e92c3fd696fae083f3310b03f7e12303311d7dc0637c9b002eb1d1164ec387e",
-      "source": "skills/analyze-project-claims/references/scan-record.schema.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "6c2f56d612adf11006e6de2e4e8763009e165ced8755ecc3ba62ffadaade3f24",
-      "source": "skills/analyze-project-claims/scripts/problem_report.py"
+      "source": "skill/analyze-project-claims/references/scan-record.schema.json"
     },
     {
       "exists": true,
       "kind": "file",
       "sha256": "78fed1ce861445c5cb34af1f4647a241de43f3959f6ec648c48d95eefccb21b4",
-      "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+      "source": "skill/analyze-project-claims/scripts/reconcile_component_map.py"
     },
     {
       "exists": true,
       "kind": "file",
       "sha256": "36a00545539a2ea2954b9b54c928cdd14c4634de17cc3edc45a61aedfb8cbb2b",
-      "source": "skills/analyze-project-claims/scripts/record_scan.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "a18c355e9fd7caa809c3fb28b83f77c49abedb5f55a16cf1e1c6aeeb81fc1342",
-      "source": "skills/analyze-project-claims/scripts/update_policy.py"
+      "source": "skill/analyze-project-claims/scripts/record_scan.py"
     },
     {
       "exists": true,
@@ -1347,7 +1157,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "595813cc124f916d06693efb3555be5fc8e4e8590601b026099f3d245ab7dc11",
+      "sha256": "65d0f46c6e47bb015052ed1e29ae8030531aaf101800a8a09ac32485ea6c6170",
       "source": "tests/test_component_map.py"
     },
     {
@@ -1383,32 +1193,14 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "03731a72d8d18ddae89518b0024000495b9a127aa3db35b0cba77b7f9a966291",
-      "source": "tests/test_problem_report.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "c7a91fcc7e4be76b76b662ef994c0c1b06bb3227d6fc55615728b250588daf97",
+      "sha256": "ccdc164736a0f70ae9049d6608cde1a979a4c14a6d42aedd742b13f02cf084bb",
       "source": "tests/test_record_scan.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "8b669b241894a92d820522d150b401a107e50aea1f9c710267a16d83191b7985",
-      "source": "tests/test_reporting_service.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "9d07699370c8459202ec8ab009d6fe6d3da1c5856148bfb4a0b74bb50e01d022",
+      "sha256": "027f17a75d807fd1b03b482d22cc90620fc033c517382c2cb52d8305af993f95",
       "source": "tests/test_strict_evidence_contract.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "5f42bd2bc5d72e87a1879335ebae8708fead639fc1d06d85700beb5b1fd70b2a",
-      "source": "tests/test_update_policy.py"
     },
     {
       "exists": true,
@@ -1419,7 +1211,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "48152384f59eaeb090af2cce24e58f855e2d5d9b9bc74bd25eb7b262057644e8",
+      "sha256": "a9221fbd8b49157e1bad700f77eaa920c24fe0367fd1625f0673863adcb9aa72",
       "source": "validation/README.md"
     }
   ]

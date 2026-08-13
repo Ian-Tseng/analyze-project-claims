@@ -172,3 +172,7 @@ transport, tenancy, retention, and status behaviors. A local API test does not
 prove a production deployment. A report visible in a private repository proves
 ingestion there, not that email or mobile notification arrived. A two-release
 installed update test proves that observed environment and versions only.
+
+The exact v0.5.0 to v0.5.1 issue-to-update evidence and reusable lessons are
+recorded in [Problem Reporting End-to-End Evidence
+Log](PROBLEM_REPORTING_E2E_LOG.md).
