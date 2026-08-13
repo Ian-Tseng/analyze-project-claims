@@ -25,7 +25,7 @@ actually know?
 ## Install
 
 The managed installation requires GitHub CLI 2.90.0 or later.
-The canonical owner is `Ian-Tseng`. For a private repository, the installing account must already have access:
+Install the public package from its canonical owner, `Ian-Tseng`:
 
 ```powershell
 gh skill install Ian-Tseng/analyze-project-claims `
@@ -136,9 +136,10 @@ before sending it. Project-audit findings are never reported.
 Say `report this internal tool problem`, `enable minimal automatic problem
 reports`, `disable problem reporting`, or `show problem-reporting status`.
 
-By default, your existing `gh` login creates an `[internal-report]` issue in
-this private repository. The owner reads it in Issues and can enable GitHub
-notifications. An owner-hosted HTTPS API is optional.
+GitHub delivery checks repository visibility. A public issue requires approval
+of the exact preview plus a separate public-issue confirmation. Automatic
+reports require the optional private owner API. Report suspected vulnerabilities
+through [SECURITY.md](SECURITY.md), never through a public issue.
 
 The fixed schema excludes project content, raw logs, prompts, attachments, and
 credentials; path- and secret-like text is rejected locally. Reports cannot
@@ -233,16 +234,11 @@ For the reusable design and release procedure, read
 For the exact v0.4.1 to v0.4.2 validation record and the limits of that evidence,
 read [Managed Update End-to-End Evidence Log](docs/MANAGED_UPDATE_E2E_LOG.md).
 
-Version `0.5.1` adds consent-gated internal problem reporting while preserving
-the validated managed replacement path. `VERSION`, package
+Version `0.6.0` adds private automatic reporting and public-destination guards.
+`VERSION`, package
 metadata, the package manifest, and citation metadata must remain synchronized.
 
 ## Citation and license
 
-`CITATION.cff.template` remains a template because the author identity and
-license have not been supplied. Complete it and
-rename it to `CITATION.cff` before the identified public release.
-
-No software license has been selected. Add an author-approved `LICENSE` before
-describing this repository as open source. Publishing code without a license
-does not grant general reuse rights.
+Citation metadata is in [CITATION.cff](CITATION.cff). The software is available
+under the [MIT License](LICENSE).

@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-13T03:30:41.351597Z",
+  "accepted_at_utc": "2026-08-13T02:28:51.011721Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -31,15 +31,10 @@
     "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json",
     "VERSION",
     "PUBLISHING.md",
-    "CITATION.cff",
-    "LICENSE",
-    "SECURITY.md",
-    "CONTRIBUTING.md",
     "docs/PROBLEM_REPORTING.md",
     "docs/PROBLEM_REPORTING_E2E_LOG.md",
     "reporting_service/server.py",
     "skills/analyze-project-claims/references/package-manifest.json",
-    "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
     "skills/analyze-project-claims/references/package-version.json",
     "skills/analyze-project-claims/references/problem-report-policy.schema.json",
     "skills/analyze-project-claims/references/problem-report.schema.json",
@@ -660,20 +655,12 @@
           "element_id": "identified-release-metadata",
           "evidence_locators": [
             {
-              "locator": "identified v0.6.0 software citation metadata",
-              "source": "CITATION.cff"
-            },
-            {
-              "locator": "MIT License and 2026 copyright notice",
-              "source": "LICENSE"
-            },
-            {
-              "locator": "public package citation and license contract",
-              "source": "tests/test_record_scan.py"
+              "locator": "placeholder fields",
+              "source": "CITATION.cff.template"
             }
           ],
           "relation_type": "contains",
-          "target": "Release authorship, repository URL, and author-approved software license are explicit; no DOI is claimed."
+          "target": "Final authorship, repository URL, DOI, and author-approved software license."
         },
         {
           "element_id": "legacy-self-scan-authority",
@@ -685,21 +672,6 @@
           ],
           "relation_type": "contains",
           "target": "Current and historical self-scan inputs have unambiguous authority and lifecycle labels."
-        },
-        {
-          "element_id": "public-security-guidance",
-          "evidence_locators": [
-            {
-              "locator": "public issue, privacy, testing, and pull-request boundaries",
-              "source": "CONTRIBUTING.md"
-            },
-            {
-              "locator": "private vulnerability reporting and disclosure policy",
-              "source": "SECURITY.md"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "Public contribution and vulnerability-reporting channels separate ordinary issues from private security disclosure."
         },
         {
           "element_id": "readme-validation-layout",
@@ -780,25 +752,6 @@
           "target": "The optional owner API authenticates scoped principals, isolates tenants, deduplicates, triages, retains, and deletes bounded reports without exposing database access."
         },
         {
-          "element_id": "public-destination-privacy-guard",
-          "evidence_locators": [
-            {
-              "locator": "GitHub visibility and private automatic-reporting contract",
-              "source": "docs/PROBLEM_REPORTING.md"
-            },
-            {
-              "locator": "Reporter.configure, Reporter.submit, and GitHubTransport.repository_visibility",
-              "source": "skills/analyze-project-claims/scripts/problem_report.py"
-            },
-            {
-              "locator": "private-only auto-minimal, legacy-policy stop, visibility fail-closed, and dedicated public-issue approval regressions",
-              "source": "tests/test_problem_report.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "Automatic reports use only the private owner API; GitHub visibility is verified fail-closed and a public issue requires exact-report approval plus dedicated public-destination approval."
-        },
-        {
           "element_id": "separate-consent-boundary",
           "evidence_locators": [
             {
@@ -810,12 +763,12 @@
               "source": "skills/analyze-project-claims/scripts/problem_report.py"
             },
             {
-              "locator": "default consent and private-only auto-minimal regressions",
+              "locator": "default consent and auto-minimal regressions",
               "source": "tests/test_problem_report.py"
             }
           ],
           "relation_type": "contains",
-          "target": "Problem reporting is independent from update consent, defaults to a local preview, and requires the private owner API for automatic delivery."
+          "target": "Problem reporting has a strict policy independent from update consent and defaults to local preview plus exact-report approval."
         }
       ]
     },
@@ -888,24 +841,20 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-13T03:30:34.069153Z",
+  "created_at_utc": "2026-08-13T02:28:39.632249Z",
   "integrity": {
-    "canonical_payload_sha256": "3a6086a64bbc9c11198a338d931ed5085ebf729dbf2535ec4f1098e61462841d"
+    "canonical_payload_sha256": "769c535495fe4777e8a7d963b53a38db803f309a11b1df76bc8f9bbe1412ad74"
   },
-  "map_id": "component-map-bb925016d58d",
+  "map_id": "component-map-c4efe31d3e24",
   "map_state": "accepted",
   "mapper_version": "1.1.0",
-  "objective": "Map the public GitHub-distributed package, private automatic-reporting boundary, explicit public-issue path, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or E2E evidence as general empirical reliability.",
-  "origin_scan_id": "20260813T033034069153Z-9884f8a6",
-  "previous_map_id": "component-map-65b6fa87fc82",
+  "objective": "Map the canonical GitHub-distributed package, managed update and internal problem-reporting lifecycle, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or E2E evidence as general empirical reliability.",
+  "origin_scan_id": "20260813T022839632249Z-084313d9",
+  "previous_map_id": "component-map-1153ef523720",
   "schema_version": "1.0",
   "scope": [
     "README.md",
-    "CITATION.cff",
-    "LICENSE",
-    "SECURITY.md",
-    "CONTRIBUTING.md",
-    "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
+    "CITATION.cff.template",
     "skills/analyze-project-claims",
     "tests/test_component_map.py",
     "tests/test_cross_project_reliability.py",
@@ -952,33 +901,22 @@
     "F:\\logic_guided_rag_experiment\\data\\analyze_project_claims_annotation_calibration\\artifact_registry.json",
     "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller",
     "VERSION",
-    "CITATION.cff",
-    "LICENSE",
-    "SECURITY.md",
-    "CONTRIBUTING.md",
     "PUBLISHING.md",
     "docs/PROBLEM_REPORTING.md",
     "docs/PROBLEM_REPORTING_E2E_LOG.md",
     "reporting_service/server.py",
-    "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
     "tests/test_problem_report.py",
     "tests/test_reporting_service.py",
     "tests/test_update_policy.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "0dc46609b35df360adeb6191595ee914e51cbb4c8e03fb9fd0ad64154bdd5861",
+  "skill_sha256": "6a84a09e5929a5be7f28d93bbdb1585ad512110d8f55c8aba845f6d9274d381f",
   "source_snapshot": [
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b71f0e39725a1a82215737d8dd880b3ab5a8589f4b646f86522c48bc1721d240",
-      "source": "CITATION.cff"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "30010da34a0e024705927fe82852cb7af132797b68d03b6655c3c41fca8e6ee5",
-      "source": "CONTRIBUTING.md"
+      "sha256": "ea9253eaca4a719f8f2c28f829c6a6063f5150ce7440c1415fd96fd22dfa4eec",
+      "source": "CITATION.cff.template"
     },
     {
       "exists": true,
@@ -1091,37 +1029,25 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f36e4e8795a747e3fc05393800891a07d4d93487fb031dbe1b895e5a29c8eb04",
-      "source": "LICENSE"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "9ffca85e190c78fd7ee829a1d481219c55e09b53b53febd6b59246cfcb7f3579",
+      "sha256": "e57850beadb548b01ea6c53f735f9e23cdcc007695cf544f73ea0a7105d4b2fb",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "23162c11b962758f8ae8013c6f0e4f6e0d31dabbe55ba78ab622fb6b78f534b7",
+      "sha256": "9be9443eb5cabb6be9f67f01afe8367f4415b418ca3bcf43b7f4bb2cb9255ff6",
       "source": "README.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "877085c0531fa483773a01f1509b84fc39aeb5eedb7657e6e4eea7ce2f41e082",
-      "source": "SECURITY.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "97a5d6e540a6120d09c39ddb667e0e8e2bac7fcc2ffef813b82e08fd60365bce",
+      "sha256": "aba951626c8690ce493cbc8f018205bb468003f61fbf00fd3d3c71cebabc0177",
       "source": "VERSION"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "7002375aadad9c02429c00fa7ec04855c23600038a1a31e776ed72fe594fdc30",
+      "sha256": "939fdf866994042128e3b35bd65ecdee5041d69bd35678dad28d5bee090aae95",
       "source": "docs/PROBLEM_REPORTING.md"
     },
     {
@@ -1129,12 +1055,6 @@
       "kind": "file",
       "sha256": "a723bd63b0f942e80dbdbb4505b8a2922032792aa6317197cf156e836a7d933c",
       "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "82a8cadde555e8c1a6f5a25a10031b7bc0a1c3261574f034ece56b36178ae1d6",
-      "source": "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md"
     },
     {
       "exists": true,
@@ -1325,13 +1245,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "f65d6bd69fdeb490dfd648e4a0a778f5198207b0260d48f6a361c0f5f54be5bc",
+      "sha256": "2014d92bca84fc986ff5eae2a4dc03e9e7a44a04d13130b254f14c82c9a3384a",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0dc46609b35df360adeb6191595ee914e51cbb4c8e03fb9fd0ad64154bdd5861",
+      "sha256": "6a84a09e5929a5be7f28d93bbdb1585ad512110d8f55c8aba845f6d9274d381f",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -1355,13 +1275,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "459650c96b5f23aa14119c32ade08baad7621a7493f5259351d4713b2e18d9a7",
+      "sha256": "af624da131c35c243af5a6aac4ec3d6d0f210afe06b818109f2aec2f90aadd88",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b817144c4d7bdc7f3679d6c9c1d5e5966dd7a578e750e1d2924383db6957695e",
+      "sha256": "b8b1c543e5dbc16c336a41778e8ac85b8a35355c29d5bac0dcc40eaa8d7bdb25",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -1385,7 +1305,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "7fff1d9d7d05e608e49b41566346d3218367b166695544e3c7786e450bb2e74b",
+      "sha256": "6c2f56d612adf11006e6de2e4e8763009e165ced8755ecc3ba62ffadaade3f24",
       "source": "skills/analyze-project-claims/scripts/problem_report.py"
     },
     {
@@ -1463,13 +1383,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "17f6b3bb637b75b2900234c10ceac7daa63637fb5767b7e22eea237314ec825e",
+      "sha256": "03731a72d8d18ddae89518b0024000495b9a127aa3db35b0cba77b7f9a966291",
       "source": "tests/test_problem_report.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "be4265ad21acdeb70f05aa13eb15287fe8396da7486c1e1b3eb111341dc3e25c",
+      "sha256": "c7a91fcc7e4be76b76b662ef994c0c1b06bb3227d6fc55615728b250588daf97",
       "source": "tests/test_record_scan.py"
     },
     {

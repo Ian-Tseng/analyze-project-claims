@@ -12,7 +12,7 @@ consented updater install that release on a later invocation.
 internal tool failure
   -> local bounded preview
   -> user reporting policy
-  -> private GitHub issue or owner HTTPS API
+  -> visibility-gated GitHub issue or owner HTTPS API
   -> owner triage and reviewed fix
   -> passing CI and immutable release
   -> separately consented update on later use
@@ -50,7 +50,7 @@ Nothing leaves the device until the user approves that preview.
 |---|---|
 | `unconfigured` | Local preview; exact-report approval required |
 | `ask` | Local preview; exact-report approval required |
-| `auto-minimal` | Fixed minimal schema may be sent automatically |
+| `auto-minimal` | Fixed minimal schema may be sent to the private owner API automatically |
 | `off` | No automatic sending; one-time approval is still possible |
 
 Update consent does not change this table. The local policy never stores an
@@ -60,7 +60,7 @@ Machine-readable `status` distinguishes the local policy contract in
 `schema_version` from the outbound report contract in
 `report_schema_version`.
 
-## Default: private GitHub Issues
+## GitHub Issues and repository visibility
 
 The default transport uses the user's existing GitHub CLI login:
 
@@ -77,20 +77,32 @@ py -3 .\skills\analyze-project-claims\scripts\problem_report.py `
   submit --report <local-report.json> --approved
 ```
 
-The command calls `gh issue create` with an argument array and a temporary body
-file. It creates an `[internal-report]` issue in the private repository. The
-user must already have repository and issue-write access.
+Before issue creation, the reporter calls `gh repo view` and accepts only a
+known `private`, `internal`, or `public` visibility. An error or unknown value
+fails closed without creating an issue.
 
-The owner receives the report in the repository's Issues list. To receive an
-alert, open the repository, choose `Watch`, select `Custom`, enable `Issues`,
-and configure GitHub web, email, or mobile notifications. Notification
-delivery depends on the owner's GitHub settings, so the Issues list remains
-the authoritative receipt.
+For a public repository, `--approved` alone is insufficient. After the user is
+told that anyone can read the issue and confirms that destination for this
+exact bounded preview, rerun:
 
-This client does not automate deletion of GitHub issues. A user who needs a
-GitHub report redacted or removed should contact the repository owner. The
-owner should restrict repository access and avoid copying report bodies into
-public systems.
+```powershell
+py -3 .\skills\analyze-project-claims\scripts\problem_report.py `
+  submit --report <local-report.json> --approved --allow-public-issue
+```
+
+`auto-minimal` is rejected for GitHub transport, including legacy saved
+policies. Configure the owner HTTPS API when automatic reports must remain
+private.
+
+The issue command uses an argument array and temporary body file. The delivery
+receipt records observed visibility. Users need issue-write access, and public
+issues are visible to everyone. The Issues list is the authoritative receipt;
+web, email, and mobile notifications depend on the owner's settings.
+
+This client does not automate deletion of GitHub issues. Public copies,
+notifications, forks, caches, or archives may remain after deletion. Do not
+report suspected vulnerabilities here; use the private vulnerability action
+described in `SECURITY.md`.
 
 ## Optional owner HTTPS API
 

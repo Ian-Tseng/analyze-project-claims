@@ -1,6 +1,7 @@
 ---
 name: analyze-project-claims
 description: Analyze a project as a connected system of objectives, claims, assumptions, evidence, counterevidence, dependencies, risks, lifecycle states, and decisions. Use when assessing project health or direction; checking inconsistencies; auditing research evidence, experiment status, completion markers, paper-table eligibility, RAG transition artifacts, leakage, split integrity, manifest consumption, or claim boundaries; deciding whether to continue, validate, redesign, pause, or stop; or repairing active claims without rewriting historical evidence.
+license: MIT
 ---
 
 # Analyze Project Claims
@@ -464,7 +465,7 @@ The initial policy is unconfigured and nothing is sent. Route explicit user
 intent to these deterministic actions:
 
 - "ask before reporting internal problems" -> `configure --mode ask --transport github`
-- "enable minimal automatic problem reports" -> `configure --mode auto-minimal --transport github`
+- "enable minimal automatic problem reports" -> configure `auto-minimal` only with an owner API endpoint
 - "disable problem reporting" -> `configure --mode off`
 - "show problem-reporting status" -> `status`
 - "show the owner status for report <id>" -> `remote-status --report-id <id>` for API transport
@@ -479,13 +480,17 @@ that exact preview, using:
   --report <local-report-path> --approved
 ```
 
-In `auto-minimal` mode, the user has consented to sending the fixed minimal
-schema, so prepare and submit without `--approved`. In `off` mode, leave the
-report local unless the user gives one-time approval for that exact preview.
-GitHub delivery uses the user's existing `gh` authentication. API delivery
-requires the scoped client token in
-`ANALYZE_PROJECT_CLAIMS_REPORT_TOKEN`; never write that token into policy or
-project files.
+GitHub delivery verifies repository visibility. If it returns
+`PUBLIC_ISSUE_APPROVAL_REQUIRED`, explain that the bounded report will be
+public and obtain a second, report-specific confirmation before rerunning with
+both `--approved` and `--allow-public-issue`. Never add that flag in
+`auto-minimal` mode. In `off` mode, leave the report local unless the user gives
+one-time approval for that exact preview.
+
+Use the owner API for private `auto-minimal` delivery. It requires the scoped
+client token in `ANALYZE_PROJECT_CLAIMS_REPORT_TOKEN`; never write that token
+into policy or project files. Suspected security vulnerabilities must use the
+repository's private vulnerability reporting channel, not this reporter.
 
 ## Run consent-gated update maintenance
 

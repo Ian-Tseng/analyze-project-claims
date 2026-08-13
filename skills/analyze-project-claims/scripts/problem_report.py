@@ -123,6 +123,7 @@ class DeliveryResult:
     status: str
     url: str | None
     duplicate: bool = False
+    visibility: str | None = None
 
 
 def default_state_directory() -> Path:
@@ -546,8 +547,32 @@ class GitHubTransport:
         self.command = list(command)
         self.runner = runner or CommandRunner()
 
-    def send(self, report: Mapping[str, object]) -> DeliveryResult:
+    def repository_visibility(self) -> str:
+        result = self.runner.run(
+            [*self.command, "repo", "view", self.repository, "--json", "visibility", "--jq", ".visibility"],
+            timeout=20,
+        )
+        visibility = result.stdout.strip().lower()
+        if result.returncode != 0 or visibility not in {"private", "internal", "public"}:
+            raise ReportError(
+                "DELIVERY_VISIBILITY_UNKNOWN",
+                "GitHub repository visibility could not be verified; no issue was created.",
+                action="Check GitHub CLI access and retry. Use the owner API when private delivery is required.",
+            )
+        return visibility
+
+    def send(self, report: Mapping[str, object], *, allow_public_issue: bool = False) -> DeliveryResult:
         validated = validate_report(dict(report))
+        visibility = self.repository_visibility()
+        if visibility == "public" and not allow_public_issue:
+            raise ReportError(
+                "PUBLIC_ISSUE_APPROVAL_REQUIRED",
+                "The target repository is public; no issue was created.",
+                action=(
+                    "Review the bounded preview and rerun submit with both --approved and "
+                    "--allow-public-issue, or configure the private owner API."
+                ),
+            )
         descriptor, name = tempfile.mkstemp(prefix="problem-report-", suffix=".md")
         path = Path(name)
         try:
@@ -564,13 +589,13 @@ class GitHubTransport:
             with contextlib.suppress(OSError):
                 path.unlink()
         if result.returncode != 0:
-            raise ReportError("DELIVERY_FAILED", "GitHub CLI could not create the private issue.")
+            raise ReportError("DELIVERY_FAILED", "GitHub CLI could not create the issue.")
         url = result.stdout.strip().splitlines()[-1] if result.stdout.strip() else ""
         expected = re.compile(rf"^https://github\.com/{re.escape(self.repository)}/issues/(\d+)$", re.IGNORECASE)
         match = expected.fullmatch(url)
         if not match:
             raise ReportError("DELIVERY_INVALID_RESPONSE", "GitHub CLI returned an unexpected issue URL.")
-        return DeliveryResult(match.group(1), "received", url)
+        return DeliveryResult(match.group(1), "received", url, visibility=visibility)
 
 
 class ApiTransport:
@@ -686,6 +711,15 @@ class Reporter:
         selected_transport = transport or str(state["transport"])
         if selected_transport not in TRANSPORTS:
             raise ReportError("POLICY_INVALID", "Problem-report transport is invalid.")
+        if mode == "auto-minimal" and selected_transport == "github":
+            raise ReportError(
+                "PRIVATE_TRANSPORT_REQUIRED",
+                "Automatic problem reporting requires the private owner API.",
+                action=(
+                    "Configure ask mode for user-approved GitHub issues, or configure auto-minimal "
+                    "with the owner API endpoint."
+                ),
+            )
         state["mode"] = mode
         state["transport"] = selected_transport
         if repository is not None:
@@ -757,11 +791,26 @@ class Reporter:
             raise ReportError("POLICY_INVALID", "API transport requires an endpoint.")
         return self.api_factory(endpoint)
 
-    def submit(self, report_path: Path, *, approved: bool = False) -> dict[str, object]:
+    def submit(
+        self,
+        report_path: Path,
+        *,
+        approved: bool = False,
+        allow_public_issue: bool = False,
+    ) -> dict[str, object]:
         state = self.store.load(create=True)
         report = load_report(report_path)
         if report["installation_id"] != state["installation_id"]:
             raise ReportError("REPORT_IDENTITY_MISMATCH", "Report belongs to a different local installation.")
+        if state["mode"] == "auto-minimal" and state["transport"] == "github":
+            raise ReportError(
+                "PRIVATE_TRANSPORT_REQUIRED",
+                "A legacy automatic GitHub policy was stopped before delivery.",
+                action=(
+                    "Reconfigure ask mode for user-approved GitHub issues, or configure auto-minimal "
+                    "with the private owner API."
+                ),
+            )
         if state["mode"] != "auto-minimal" and not approved:
             return _result(
                 "CONSENT_REQUIRED" if state["mode"] != "off" else "REPORTING_DISABLED",
@@ -770,10 +819,21 @@ class Reporter:
                 action="Review the report preview and rerun submit with --approved for this report only.",
                 preview=report_preview(report),
             )
+        if allow_public_issue and (
+            state["transport"] != "github" or not approved or state["mode"] == "auto-minimal"
+        ):
+            raise ReportError(
+                "PUBLIC_ISSUE_APPROVAL_INVALID",
+                "Public-issue approval is valid only for an explicitly approved GitHub report.",
+            )
         state["last_attempt_at"] = max(0, int(self.now_epoch()))
         state["last_report_id"] = report["report_id"]
         try:
-            delivered = self._transport(state).send(report)
+            transport = self._transport(state)
+            if state["transport"] == "github":
+                delivered = transport.send(report, allow_public_issue=allow_public_issue)
+            else:
+                delivered = transport.send(report)
         except ReportError:
             state["last_outcome"] = "DELIVERY_FAILED"
             self.store.save(state)
@@ -789,6 +849,7 @@ class Reporter:
             "status": delivered.status,
             "url": delivered.url,
             "duplicate": delivered.duplicate,
+            "visibility": delivered.visibility,
             "delivered_at": state["last_success_at"],
         }
         receipt_path = self.store.save_receipt(str(report["report_id"]), receipt)
@@ -801,6 +862,7 @@ class Reporter:
             remote_status=delivered.status,
             url=delivered.url,
             duplicate=delivered.duplicate,
+            visibility=delivered.visibility,
             receipt_path=str(receipt_path),
         )
 
@@ -854,6 +916,11 @@ def build_parser() -> argparse.ArgumentParser:
     submit = commands.add_parser("submit")
     submit.add_argument("--report", type=Path, required=True)
     submit.add_argument("--approved", action="store_true")
+    submit.add_argument(
+        "--allow-public-issue",
+        action="store_true",
+        help="Allow this explicitly approved bounded report to become a public GitHub issue.",
+    )
     remote = commands.add_parser("remote-status")
     remote.add_argument("--report-id", required=True)
     delete = commands.add_parser("remote-delete")
@@ -897,7 +964,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 exit_code=args.exit_code,
             )
         elif args.command == "submit":
-            result = reporter.submit(args.report, approved=args.approved)
+            result = reporter.submit(
+                args.report,
+                approved=args.approved,
+                allow_public_issue=args.allow_public_issue,
+            )
         elif args.command == "remote-status":
             result = reporter.remote_status(args.report_id)
         elif args.command == "remote-delete":

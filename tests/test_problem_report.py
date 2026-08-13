@@ -25,13 +25,26 @@ def load_module():
 
 
 class FakeTransport:
-    def __init__(self, module) -> None:
+    def __init__(self, module, *, public: bool = False) -> None:
         self.module = module
+        self.public = public
         self.reports: list[dict[str, object]] = []
+        self.public_issue_approvals: list[bool] = []
 
-    def send(self, report):
+    def send(self, report, *, allow_public_issue=False):
+        self.public_issue_approvals.append(allow_public_issue)
+        if self.public and not allow_public_issue:
+            raise self.module.ReportError(
+                "PUBLIC_ISSUE_APPROVAL_REQUIRED",
+                "GitHub repository is public; dedicated approval is required.",
+            )
         self.reports.append(dict(report))
-        return self.module.DeliveryResult(str(report["report_id"]), "received", "https://example.test/report")
+        return self.module.DeliveryResult(
+            str(report["report_id"]),
+            "received",
+            "https://example.test/report",
+            visibility="public" if self.public else "private",
+        )
 
     def status(self, report_id):
         return self.module.DeliveryResult(report_id, "triaged", f"https://example.test/{report_id}")
@@ -41,14 +54,17 @@ class FakeTransport:
 
 
 class FakeRunner:
-    def __init__(self, module, repository: str) -> None:
+    def __init__(self, module, repository: str, *, visibility: str = "PRIVATE") -> None:
         self.module = module
         self.repository = repository
+        self.visibility = visibility
         self.calls: list[list[str]] = []
         self.body = ""
 
     def run(self, arguments, *, timeout):
         self.calls.append(list(arguments))
+        if "repo" in arguments and "view" in arguments:
+            return self.module.NativeResult(0, f"{self.visibility}\n", "")
         body_path = Path(arguments[arguments.index("--body-file") + 1])
         self.body = body_path.read_text(encoding="utf-8")
         return self.module.NativeResult(0, f"https://github.com/{self.repository}/issues/17\n", "")
@@ -126,10 +142,9 @@ class ProblemReportTests(unittest.TestCase):
             reporter = self.subject.Reporter(
                 root,
                 self.subject.PolicyStore(base / "state"),
-                gh_command=("definitely-not-installed-gh",),
-                github_factory=lambda _repository: transport,
+                api_factory=lambda _endpoint: transport,
             )
-            reporter.configure("auto-minimal", transport="github")
+            reporter.configure("auto-minimal", transport="api", endpoint="http://127.0.0.1:8080/v1/reports")
             prepared = reporter.prepare(
                 event_code="COMPONENT_MAP_INTERNAL_ERROR",
                 summary="Component map helper exited before producing a candidate.",
@@ -140,6 +155,60 @@ class ProblemReportTests(unittest.TestCase):
 
             with self.assertRaises(self.subject.ReportError):
                 reporter.prepare(event_code="USER_PROJECT_FINDING", summary="A user project has a defect.")
+
+    def test_auto_minimal_requires_private_api_for_new_and_legacy_policies(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            root = self.make_skill(base)
+            transport = FakeTransport(self.subject, public=True)
+            store = self.subject.PolicyStore(base / "state")
+            reporter = self.subject.Reporter(
+                root,
+                store,
+                github_factory=lambda _repository: transport,
+            )
+            with self.assertRaises(self.subject.ReportError) as configured:
+                reporter.configure("auto-minimal", transport="github")
+            self.assertEqual(configured.exception.code, "PRIVATE_TRANSPORT_REQUIRED")
+
+            legacy = store.load(create=True)
+            legacy["mode"] = "auto-minimal"
+            legacy["transport"] = "github"
+            store.save(legacy)
+            prepared = reporter.prepare(
+                event_code="REPORTER_INTERNAL_ERROR",
+                summary="The reporter encountered an internal state transition error.",
+            )
+            with self.assertRaises(self.subject.ReportError) as raised:
+                reporter.submit(Path(prepared["report_path"]))
+            self.assertEqual(raised.exception.code, "PRIVATE_TRANSPORT_REQUIRED")
+            self.assertEqual(transport.reports, [])
+            self.assertEqual(transport.public_issue_approvals, [])
+
+    def test_public_github_issue_requires_per_report_dedicated_approval(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            root = self.make_skill(base)
+            transport = FakeTransport(self.subject, public=True)
+            reporter = self.subject.Reporter(
+                root,
+                self.subject.PolicyStore(base / "state"),
+                github_factory=lambda _repository: transport,
+            )
+            reporter.configure("ask", transport="github")
+            prepared = reporter.prepare(
+                event_code="REPORTER_INTERNAL_ERROR",
+                summary="The reporter encountered an internal state transition error.",
+            )
+            report_path = Path(prepared["report_path"])
+            with self.assertRaises(self.subject.ReportError) as raised:
+                reporter.submit(report_path, approved=True)
+            self.assertEqual(raised.exception.code, "PUBLIC_ISSUE_APPROVAL_REQUIRED")
+
+            sent = reporter.submit(report_path, approved=True, allow_public_issue=True)
+            self.assertEqual(sent["status"], "REPORT_SENT")
+            self.assertEqual(sent["visibility"], "public")
+            self.assertEqual(transport.public_issue_approvals, [False, True])
 
     def test_api_status_and_deletion_are_installation_scoped_actions(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -201,12 +270,42 @@ class ProblemReportTests(unittest.TestCase):
             transport = self.subject.GitHubTransport("owner/repository", runner=runner)
             result = transport.send(report)
             self.assertEqual(result.remote_id, "17")
-            call = runner.calls[0]
+            self.assertEqual(result.visibility, "private")
+            self.assertEqual(
+                runner.calls[0],
+                ["gh", "repo", "view", "owner/repository", "--json", "visibility", "--jq", ".visibility"],
+            )
+            call = runner.calls[1]
             self.assertEqual(call[:5], ["gh", "issue", "create", "--repo", "owner/repository"])
             self.assertIn("--body-file", call)
             self.assertNotIn("--label", call)
             self.assertIn("Internal product report", runner.body)
             self.assertNotIn(str(Path.home()), runner.body)
+
+    def test_github_transport_public_visibility_fails_closed_without_approval(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = self.make_skill(Path(temporary))
+            report = self.build_report(root)
+            runner = FakeRunner(self.subject, "owner/repository", visibility="PUBLIC")
+            transport = self.subject.GitHubTransport("owner/repository", runner=runner)
+            with self.assertRaises(self.subject.ReportError) as raised:
+                transport.send(report)
+            self.assertEqual(raised.exception.code, "PUBLIC_ISSUE_APPROVAL_REQUIRED")
+            self.assertEqual(len(runner.calls), 1)
+
+            result = transport.send(report, allow_public_issue=True)
+            self.assertEqual(result.visibility, "public")
+            self.assertEqual(len(runner.calls), 3)
+
+    def test_github_transport_unknown_visibility_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = self.make_skill(Path(temporary))
+            report = self.build_report(root)
+            runner = FakeRunner(self.subject, "owner/repository", visibility="UNEXPECTED")
+            transport = self.subject.GitHubTransport("owner/repository", runner=runner)
+            with self.assertRaises(self.subject.ReportError) as raised:
+                transport.send(report, allow_public_issue=True)
+            self.assertEqual(raised.exception.code, "DELIVERY_VISIBILITY_UNKNOWN")
 
     def test_policy_schema_is_exact_and_never_stores_api_token(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

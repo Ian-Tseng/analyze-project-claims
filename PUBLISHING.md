@@ -14,15 +14,16 @@ Resolve these before making the repository public:
 
 - verify that the canonical GitHub owner remains `Ian-Tseng`;
 - update every owner reference if the repository is transferred;
-- provide the real author information in `CITATION.cff.template`;
-- choose an author-approved software license and add `LICENSE`;
-- rename the completed citation template to `CITATION.cff`;
+- verify the author identity and MIT license in `CITATION.cff` and `LICENSE`;
+- scan current files and reachable history for credentials and private data;
+- review commit identities, issues, releases, Actions logs, and artifacts;
+- verify automatic reports require the private owner API;
+- prepare `SECURITY.md` and enable private vulnerability reporting;
 - authenticate GitHub CLI;
-- initialize the Git repository and review everything that will be committed.
+- review everything that will be committed.
 
-Do not describe the repository as open source before a license has been
-selected. A public GitHub repository without a license does not grant general
-reuse rights.
+Changing visibility exposes retained history to cloning and forking. Treat the
+switch as a publication event, not a reversible privacy control.
 
 ## 1. Set the release identity
 
@@ -43,14 +44,9 @@ Find the remaining release placeholders and verify owner references:
 rg -n "REPLACE_WITH_|github.com/Ian-Tseng|Ian-Tseng/analyze-project-claims" .
 ```
 
-Verify the owner in these files, and update it if the repository is transferred:
-
-- `README.md`;
-- `CITATION.cff.template`;
-- `skills/analyze-project-claims/references/update-policy.schema.json`.
-
-Complete the author and license fields in `CITATION.cff.template`, rename it to
-`CITATION.cff`, and add the matching `LICENSE` file.
+Verify the owner in `README.md`, `CITATION.cff`, and the packaged schemas. If
+the repository is transferred, update those references and rebuild the package
+manifest.
 
 ## 2. Rebuild and validate the package identity
 
@@ -186,11 +182,15 @@ py -3 -m unittest discover -s tests -p "test_problem_report.py" -v
 py -3 -m unittest discover -s tests -p "test_reporting_service.py" -v
 ```
 
-For the default GitHub transport, submit one owner-approved E2E report from an
-installed candidate and verify it in the repository's Issues list. Configure
-GitHub `Watch > Custom > Issues` and the desired web, email, or mobile
-notification channel. The Issues list is the authoritative receipt; a
-notification is delivery convenience, not proof of ingestion.
+For GitHub transport, verify visibility lookup fails closed. A public issue
+must require both `--approved` and `--allow-public-issue` for the exact preview.
+Verify new and legacy `auto-minimal` GitHub policies stop before delivery;
+automatic reports require the private owner API. Security reports must use
+private vulnerability reporting.
+
+Configure the desired GitHub notifications. The Issues list or private API is
+the authoritative receipt; a notification is convenience, not proof of
+ingestion.
 
 Triage the report before changing code. Require a regression test, reviewed
 fix, passing CI, and a new immutable SemVer release. Never run or merge code

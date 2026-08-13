@@ -62,9 +62,12 @@ class RecordScanTests(unittest.TestCase):
         required = [
             ROOT / "README.md",
             ROOT / "PUBLISHING.md",
+            ROOT / "CONTRIBUTING.md",
+            ROOT / "SECURITY.md",
+            ROOT / "LICENSE",
             ROOT / "evaluation" / "README.md",
             ROOT / "VERSION",
-            ROOT / "CITATION.cff.template",
+            ROOT / "CITATION.cff",
             SKILL_ROOT / "SKILL.md",
             SKILL_ROOT / "agents" / "openai.yaml",
             SKILL_ROOT / "assets" / "component-map-observation.template.json",
@@ -98,6 +101,12 @@ class RecordScanTests(unittest.TestCase):
         json.loads((SKILL_ROOT / "references" / "problem-report-policy.schema.json").read_text(encoding="utf-8"))
         json.loads((SKILL_ROOT / "references" / "package-version.json").read_text(encoding="utf-8"))
         json.loads((SKILL_ROOT / "references" / "package-manifest.json").read_text(encoding="utf-8"))
+        self.assertFalse((ROOT / "CITATION.cff.template").exists())
+        citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertIn(f'version: "{version}"', citation)
+        self.assertIn('license: "MIT"', citation)
+        self.assertNotIn("REPLACE_WITH_", citation)
 
     def test_documentation_identifies_observation_and_history_authority(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
