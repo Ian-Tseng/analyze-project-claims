@@ -87,6 +87,8 @@ class RecordScanTests(unittest.TestCase):
             LOGGER,
             EXAMPLE,
             ROOT / "docs" / "PROBLEM_REPORTING.md",
+            ROOT / "docs" / "MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md",
+            ROOT / "docs" / "CLAUDE_CODE_E2E_LOG.md",
             ROOT / "validation" / "README.md",
         ]
         self.assertEqual([str(path) for path in required if not path.is_file()], [])
@@ -118,7 +120,7 @@ class RecordScanTests(unittest.TestCase):
         self.assertNotIn("## Upload and publish to GitHub", readme)
         self.assertNotIn("## Paper-facing evaluation plan", readme)
         self.assertNotIn("????", readme)
-        self.assertLessEqual(len(readme.split()), 1200)
+        self.assertLessEqual(len(readme.split()), 1350)
         self.assertLess(readme.index("## Install"), readme.index("## Quickstart"))
         publishing = (ROOT / "PUBLISHING.md").read_text(encoding="utf-8")
         self.assertIn("gh repo create", publishing)

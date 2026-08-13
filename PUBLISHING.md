@@ -191,6 +191,36 @@ Invoke the installed skill once. It should finish the substantive audit before
 asking for update consent. Say `enable automatic updates`, invoke it again, and
 confirm that an up-to-date check is silent.
 
+Test Claude Code as a separate managed target in a clean environment with no
+duplicate skill:
+
+```powershell
+gh skill install "$Owner/$Repository" `
+  skills/analyze-project-claims/SKILL.md `
+  --agent claude-code `
+  --scope user
+
+gh skill list --agent claude-code --scope user `
+  --json skillName,sourceURL,scope,version,pinned,path
+```
+
+From a neutral consumer directory outside the publisher repository, run `gh
+skill update analyze-project-claims --dry-run`. Then start Claude Code, confirm
+that `/skills` lists `analyze-project-claims`, and invoke
+`/analyze-project-claims` on a disposable fixture. Record the Claude Code and
+GitHub CLI versions, operating system, source version and tree, installed path,
+manifest digest, invocation, and result. Test a manual directory copy
+separately when needed; it is host-managed and does not establish managed
+update state.
+
+If no authenticated Claude Code CLI is available, restrict the release claim to
+structural Agent Skills compatibility. Do not claim Claude Code runtime
+validation until the smoke test above has been observed.
+
+Use [How to Validate a GitHub Skill Across Codex and Claude Code](docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md)
+as the reusable procedure. Record exact observations and gaps in an evidence
+log such as [Claude Code E2E Evidence Log](docs/CLAUDE_CODE_E2E_LOG.md).
+
 A real replacement test requires a later published candidate. During that
 test, the current invocation must continue using its starting version and the
 next invocation must load the verified new version.
@@ -233,6 +263,6 @@ publish a package whose runtime event enum and JSON schema disagree.
 
 A successful dry-run proves package discovery and validation only. It does not
 prove that the repository was pushed, that a release was published, that Codex
-loaded it, or that automatic replacement works across supported operating
-systems. Record those observations separately before claiming release
-readiness.
+or Claude Code loaded it, or that automatic replacement works across supported
+operating systems. Record those observations separately before claiming
+release readiness.

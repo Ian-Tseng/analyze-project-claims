@@ -24,8 +24,10 @@ actually know?
 
 ## Install
 
-The managed installation requires GitHub CLI 2.90.0 or later.
-Install the public package from its canonical owner, `Ian-Tseng`:
+### Codex
+
+A managed Codex installation requires GitHub CLI 2.90.0 or later. Install the
+public package from its canonical owner, `Ian-Tseng`:
 
 ```powershell
 gh skill install Ian-Tseng/analyze-project-claims `
@@ -34,10 +36,10 @@ gh skill install Ian-Tseng/analyze-project-claims `
   --scope user
 ```
 
-The explicit canonical path makes the selected package unambiguous; the
-`skills/` layout also lets `gh skill update` rediscover it. `gh skill` is in public preview.
+The canonical path makes the package unambiguous and lets `gh skill update`
+rediscover it. `gh skill` is in public preview.
 
-For a manual installation without managed updates:
+For an unmanaged Codex copy:
 
 ```powershell
 Copy-Item -Recurse -Force `
@@ -45,15 +47,39 @@ Copy-Item -Recurse -Force `
   "$env:USERPROFILE\.codex\skills\analyze-project-claims"
 ```
 
-Manual copies are not eligible for automatic upgrades.
+### Claude Code
+
+Claude Code uses the same
+[Agent Skills package](https://code.claude.com/docs/en/skills). Install it from
+the canonical source as a GitHub CLI-tracked user skill:
+
+```powershell
+gh skill install Ian-Tseng/analyze-project-claims `
+  skills/analyze-project-claims/SKILL.md `
+  --agent claude-code `
+  --scope user
+```
+
+GitHub CLI records it under `~/.claude/skills` so `gh skill list` and `gh skill
+update` can rediscover it. A direct copy is an unmanaged fallback and cannot
+receive managed updates.
 
 ## Quickstart
 
-Open the project you want to inspect and ask Codex:
+Open the project you want to inspect and invoke the installed skill.
+
+In Codex:
 
 ```text
 Use $analyze-project-claims to audit this repository's claims, evidence,
 lifecycle states, contradictions, and next validation gate.
+```
+
+In Claude Code:
+
+```text
+/analyze-project-claims audit this repository's claims, evidence, lifecycle
+states, contradictions, and next validation gate.
 ```
 
 For a narrower check:
@@ -101,9 +127,13 @@ scientific success, and publication eligibility are separate conclusions.
 
 ## Automatic updates
 
-An eligible GitHub CLI installation asks once whether to enable updates, after
-the first substantive audit is complete. Nothing is checked or changed before
-you choose.
+This section applies only to eligible GitHub CLI-tracked standalone
+installations. Such an installation asks once whether to enable updates after
+the first substantive audit. Nothing is checked or changed before you choose.
+
+Live replacement has been validated on Codex. The Claude Code path has verified
+install, listing, manifest, and update dry-run evidence, but not yet live Claude
+discovery, invocation, or replacement evidence.
 
 Say one of:
 
@@ -234,6 +264,11 @@ For the reusable design and release procedure, read
 [How to Build Safe Managed Updates for a GitHub Skill](docs/MANAGED_SKILL_UPDATE_GUIDE.md).
 For the exact v0.4.1 to v0.4.2 validation record and the limits of that evidence,
 read [Managed Update End-to-End Evidence Log](docs/MANAGED_UPDATE_E2E_LOG.md).
+
+For a reusable cross-agent validation procedure, read
+[How to Validate a GitHub Skill Across Codex and Claude Code](docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md).
+The current Claude-targeted result and its runtime limit are in the
+[Claude Code E2E Evidence Log](docs/CLAUDE_CODE_E2E_LOG.md).
 
 Version `0.6.2` makes component-map directory identity insensitive to generated
 Python bytecode caches while retaining ordinary-file drift detection, and
