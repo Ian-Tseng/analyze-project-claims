@@ -66,6 +66,33 @@ not prove client compatibility.
 Use an isolated user home with no duplicate installation. Preview the public
 source, then install the same canonical package for each target:
 
+On Windows, start a fresh PowerShell process and bind every home variable to
+the same disposable root. Setting only `HOME` or only `USERPROFILE` is not a
+complete isolation boundary for tools that consult Windows home semantics:
+
+```powershell
+$SmokeHome = Join-Path $env:TEMP "skill-smoke-$([guid]::NewGuid())"
+New-Item -ItemType Directory -Force -Path $SmokeHome | Out-Null
+
+$env:USERPROFILE = $SmokeHome
+$env:HOME = $SmokeHome
+$env:HOMEDRIVE = [IO.Path]::GetPathRoot($SmokeHome).TrimEnd('\')
+$env:HOMEPATH = $SmokeHome.Substring($env:HOMEDRIVE.Length)
+
+$BeforeCodex = gh skill list --agent codex --scope user --json skillName |
+  ConvertFrom-Json
+$BeforeClaude = gh skill list --agent claude-code --scope user --json skillName |
+  ConvertFrom-Json
+
+if ($BeforeCodex.Count -ne 0 -or $BeforeClaude.Count -ne 0) {
+  throw "The disposable user-scope registries are not empty."
+}
+```
+
+Keep that process isolated for the rest of the install, list, verification,
+and update checks. Do not reuse the operator's normal shell, because changing
+these variables can redirect unrelated user-scoped tools.
+
 ```powershell
 gh skill install OWNER/REPOSITORY skills/SKILL_NAME/SKILL.md `
   --agent codex --scope user
@@ -112,8 +139,14 @@ skill syntax. For Claude Code:
 4. Invoke `/SKILL_NAME` on a disposable, non-sensitive fixture.
 5. Capture the command, bounded output, exit status, and unexpected behavior.
 
-Client discovery and Real invocation are separate observations. Never label a
+Client discovery and real invocation are separate observations. Never label a
 metadata check or copied directory as runtime validation.
+
+If the client executable is absent, record discovery and invocation as `NOT
+OBSERVED`; do not substitute filesystem inspection. If the client is present
+but the isolated home is not authenticated, record the same status and the
+authentication boundary. Distribution evidence remains valid, but runtime
+evidence has not advanced.
 
 ## 6. Validate replacement separately
 
@@ -156,6 +189,18 @@ State the highest completed gate and name the next missing gate. Examples:
 
 Compatibility evidence is versioned. Re-run affected gates when the package,
 client, GitHub CLI, installation layout, or update contract changes.
+
+## Operational completion rules
+
+- Enable release immutability before publication and verify it afterward.
+- Treat version-tag rules and release immutability as separate controls.
+- If a merge command fails only while deleting a branch held by another local
+  worktree, query the remote pull-request state before doing anything else. A
+  remote `MERGED` result must not be retried.
+- Retain an isolated smoke directory until source, scope, version, pin, path,
+  manifest digest, and update output have been recorded.
+- Keep earlier dated observations append-only. A newer release adds evidence;
+  it does not retroactively strengthen an older run.
 
 ## References
 

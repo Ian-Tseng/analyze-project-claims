@@ -1,5 +1,92 @@
 # Claude Code End-to-End Evidence Log
 
+## v0.7.0 public distribution result
+
+**PARTIAL PASS - DISTRIBUTION E2E PASSED; RUNTIME NOT OBSERVED.** On
+2026-08-15 (Asia/Taipei), the immutable public v0.7.0 release completed an
+isolated user-scope install, registry listing, package verification, and
+neutral-directory update dry-run for both Claude Code and Codex targets.
+Claude client discovery and invocation were not run because this machine had
+no `claude` executable. The isolated Codex home was not authenticated, so it
+also was not used as substitute runtime evidence.
+
+### Environment and release identity
+
+| Field | Observed value |
+| --- | --- |
+| Operating system | Microsoft Windows NT 10.0.26200.0, x64 |
+| GitHub CLI | 2.97.0 (2026-07-31) |
+| Public source | `https://github.com/Ian-Tseng/analyze-project-claims` |
+| Release | `v0.7.0` |
+| Release commit | `347b5a82b653771cce75e98b7803c23d6bec6fbb` |
+| Release state | GitHub immutable; `gh release verify v0.7.0` passed |
+| Tag protection | Active update-and-deletion rules for `refs/tags/v*`; no bypass actor |
+| Main CI | Six passing jobs: Windows, macOS, and Ubuntu on Python 3.10 and 3.12 |
+| Requested agents | `claude-code` and `codex` |
+| Scope and pin | user, unpinned |
+| Claude path | `<isolated-home>\.claude\skills\analyze-project-claims` |
+| Codex path | `<isolated-home>\.codex\skills\analyze-project-claims` |
+| Package digest | `9d486dacb7d740e71e17c45f0a7243e7ca3f0f161382d8131afc129bcde95186` |
+
+The smoke root set `USERPROFILE`, `HOME`, `HOMEDRIVE`, and `HOMEPATH` to one
+disposable directory. Before installation, both target-specific user lists
+were empty. After installation, each list contained exactly one canonical
+v0.7.0 entry at its target path.
+
+### Observed gates
+
+| Gate | Status | Direct observation |
+| --- | --- | --- |
+| Public package preview | PASS | GitHub CLI fetched and rendered the canonical public source. |
+| Empty isolated registries | PASS | Both target-specific user lists returned no installations before the smoke. |
+| Claude-targeted install | PASS | One canonical v0.7.0 user-scope, unpinned entry appeared under `.claude/skills`. |
+| Codex-targeted control install | PASS | One canonical v0.7.0 user-scope, unpinned entry appeared under `.codex/skills`. |
+| Installed package integrity | PASS | Both installed copies returned `PACKAGE_VERIFIED` with the digest above. |
+| Update rediscovery | PASS | A neutral-directory `gh skill update analyze-project-claims --dry-run` returned `All skills are up to date.` |
+| Claude client discovery | NOT OBSERVED | No `claude` executable was available on this machine. |
+| Real Claude invocation | NOT OBSERVED | `/analyze-project-claims` was not run. |
+| Isolated Codex invocation | NOT OBSERVED | The isolated `CODEX_HOME` reported `Not logged in`. |
+| Live replacement | NOT OBSERVED | An up-to-date dry-run does not install a later version. |
+
+The release identity is supported by [GitHub release
+v0.7.0](https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.0),
+the six-job [main CI
+run](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/31817785877),
+the package
+[manifest](../skills/analyze-project-claims/references/package-manifest.json),
+the formal validation
+[record](../validation/history/20260814T155937638082Z-c36faabe.json), and its
+derived human-readable
+[report](../validation/reports/20260814T155937638082Z-c36faabe.md).
+
+### Complete the runtime gate on another PC
+
+Run these commands in a clean user environment on the machine that has an
+authenticated Claude Code installation:
+
+```powershell
+gh skill install Ian-Tseng/analyze-project-claims `
+  skills/analyze-project-claims/SKILL.md `
+  --agent claude-code `
+  --scope user
+
+gh skill list --agent claude-code --scope user `
+  --json skillName,sourceURL,scope,version,pinned,path
+
+gh skill update analyze-project-claims --dry-run
+claude --version
+claude
+```
+
+In the fresh Claude Code session, run `/skills`, confirm the exact
+`analyze-project-claims` name, then invoke `/analyze-project-claims` on a
+disposable non-sensitive fixture. Append the Claude version, operating system,
+command, bounded output, and exit result here. Do not rewrite this observation.
+A live replacement still requires a later immutable release and a separate
+before/after invocation test.
+
+## Historical v0.6.2 result
+
 ## Result
 
 **PARTIAL PASS - RUNTIME NOT OBSERVED.** On 2026-08-13, the public v0.6.2

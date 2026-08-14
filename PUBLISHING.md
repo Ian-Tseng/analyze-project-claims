@@ -30,6 +30,25 @@ Resolve these before making the repository public:
 Changing visibility exposes retained history to cloning and forking. Treat the
 switch as a publication event, not a reversible privacy control.
 
+## Publication order and irreversible checkpoints
+
+Use this order for every versioned release:
+
+1. synchronize version, citation, package metadata, and manifest identities;
+2. run focused and full local validation from a clean candidate;
+3. merge the reviewed candidate and require CI to pass on the exact `main`
+   commit that will be released;
+4. verify the `refs/tags/v*` protection ruleset and enable GitHub release
+   immutability **before** publication;
+5. run `gh skill publish .\skills --dry-run` and review every warning;
+6. publish the new SemVer tag exactly once and run `gh release verify`;
+7. run public preview, isolated install, registry, manifest, and update tests;
+8. record runtime discovery and invocation separately for every target client.
+
+Do not infer a later checkpoint from an earlier pass. In particular, package
+discovery is not installation, installation is not client discovery, and an
+up-to-date dry-run is not a live replacement.
+
 ## 1. Set the release identity
 
 The canonical owner is currently `Ian-Tseng`. If the repository is transferred, set the new owner explicitly and rebuild the package manifest.
@@ -87,6 +106,12 @@ The expected results are:
 - no release placeholder remains;
 - `git status` contains only intentional files.
 
+On macOS, a test-owned temporary path may be spelled through the `/var`
+symlink while its canonical form begins with `/private/var`. A containment test
+may canonicalize its own temporary root before comparing paths. Do not weaken
+production rejection of symbolic links, Windows reparse points, or paths that
+escape an approved root.
+
 ## 3. Initialize and upload the repository
 
 If this directory is not already a Git repository:
@@ -117,6 +142,19 @@ gh repo create "$Owner/$Repository" `
 Use `--private` while release identity or licensing is incomplete. If the
 remote repository already exists, add its canonical `origin` and use a normal,
 reviewed `git push` instead of running `gh repo create` again.
+
+If `gh pr merge --delete-branch` exits nonzero after attempting a merge, query
+the pull request immediately:
+
+```powershell
+gh pr view <number> --repo "$Owner/$Repository" `
+  --json state,mergedAt,mergeCommit,headRefName,baseRefName
+```
+
+The server-side pull-request state is authoritative. When it says `MERGED`, do
+not retry the merge merely because local branch deletion failed; another
+worktree may still have that branch checked out. Clean up the branch only after
+that worktree is detached and the deletion is independently safe.
 
 ## 4. Validate and publish the skill release
 
@@ -182,6 +220,27 @@ gh skill list --agent codex --scope user `
 gh skill update analyze-project-claims --dry-run
 ```
 
+For a non-destructive Windows smoke test, point all four home variables at one
+disposable directory in a fresh PowerShell process:
+
+```powershell
+$SmokeHome = Join-Path $env:TEMP "apc-skill-smoke-$Version"
+New-Item -ItemType Directory -Force -Path $SmokeHome | Out-Null
+
+$env:USERPROFILE = $SmokeHome
+$env:HOME = $SmokeHome
+$env:HOMEDRIVE = [IO.Path]::GetPathRoot($SmokeHome).TrimEnd('\')
+$env:HOMEPATH = $SmokeHome.Substring($env:HOMEDRIVE.Length)
+
+gh skill list --agent codex --scope user --json skillName
+gh skill list --agent claude-code --scope user --json skillName
+```
+
+Require both initial lists to be empty. That precondition proves the following
+install and update observations are isolated from the operator's real user
+registry. Keep the directory until its evidence is recorded, then remove it
+through a separately reviewed cleanup step.
+
 Confirm that the listing shows:
 
 - the canonical GitHub repository;
@@ -228,7 +287,27 @@ A real replacement test requires a later published candidate. During that
 test, the current invocation must continue using its starting version and the
 next invocation must load the verified new version.
 
-## 6. Verify problem-report operations
+## 6. Record claim-to-evidence links
+
+Keep machine authority, human-readable views, and remote lifecycle evidence
+distinct. For v0.7.0, the evidence map is:
+
+| Claim | Supporting authority |
+| --- | --- |
+| Released package bytes and version | [`package-manifest.json`](skills/analyze-project-claims/references/package-manifest.json), [`package-version.json`](skills/analyze-project-claims/references/package-version.json), and [GitHub release v0.7.0](https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.0) |
+| Accepted repository structure | [`project-component-map.json`](validation/component-map/accepted-map.json) |
+| Formal evidence-bound audit | [`20260814T155937638082Z-c36faabe.json`](validation/history/20260814T155937638082Z-c36faabe.json) |
+| Human-readable audit view | [`20260814T155937638082Z-c36faabe.md`](validation/reports/20260814T155937638082Z-c36faabe.md) |
+| Cross-platform tests on released `main` | [GitHub Actions run 31817785877](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/31817785877) |
+| Public Codex and Claude-targeted distribution | [`CLAUDE_CODE_E2E_LOG.md`](docs/CLAUDE_CODE_E2E_LOG.md) |
+
+Markdown reports are derived views; do not treat them as a second authority.
+When a mapped source fix changes component identity, reconcile the component
+map, explicitly accept the intended candidate, run a second unchanged check,
+and then append a new validation JSON record and report. Never rewrite an
+earlier accepted map event, audit record, or dated E2E observation.
+
+## 7. Verify problem-report operations
 
 Run the reporter and owner-service tests before publishing:
 
@@ -280,7 +359,7 @@ Never describe repository traffic or the aggregate as downloads, users, or all
 installs. If no production endpoint was observed, keep the feature described as
 an inactive reference architecture.
 
-## 7. Evidence boundary
+## 8. Evidence boundary
 
 A successful dry-run proves package discovery and validation only. It does not
 prove that the repository was pushed, that a release was published, that Codex
