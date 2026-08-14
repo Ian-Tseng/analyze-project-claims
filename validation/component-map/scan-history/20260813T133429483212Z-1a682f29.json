@@ -1,0 +1,302 @@
+{
+  "accepted_map_id": "component-map-39a13c95d3af",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260813T133429483212Z-1a682f29-component-map-c39d163a7be8.json",
+    "delta": "deltas/20260813T133429483212Z-1a682f29.json"
+  },
+  "candidate_map_id": "component-map-c39d163a7be8",
+  "changes": {
+    "added_components": [
+      "agent-maintainer",
+      "cross-agent-package-compatibility",
+      "installation-analytics"
+    ],
+    "added_elements": [
+      {
+        "component_id": "agent-maintainer",
+        "element_id": "human-release-gate"
+      },
+      {
+        "component_id": "agent-maintainer",
+        "element_id": "owner-gated-bounded-intake"
+      },
+      {
+        "component_id": "agent-maintainer",
+        "element_id": "privilege-separated-candidate"
+      },
+      {
+        "component_id": "cross-agent-package-compatibility",
+        "element_id": "separate-host-evidence"
+      },
+      {
+        "component_id": "installation-analytics",
+        "element_id": "aggregate-owner-metric"
+      },
+      {
+        "component_id": "installation-analytics",
+        "element_id": "analytics-evidence-boundary"
+      },
+      {
+        "component_id": "installation-analytics",
+        "element_id": "explicit-client-consent"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": ".github/codex/prompts/resolve-internal-report.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": ".github/workflows/agent-maintainer.yml"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": ".github/workflows/validate.yml"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "analytics_service"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "analytics_service/server.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/AGENT_MAINTAINER.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/INSTALLATION_ANALYTICS.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/PROBLEM_REPORTING.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "maintainer_service"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "maintainer_service/intake.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "maintainer_service/patch_guard.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/installation-analytics-event.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/installation-analytics-policy.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/installation_analytics.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/problem_report.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_agent_compatibility.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_agent_maintainer.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_analytics_service.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_installation_analytics.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_problem_report.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_record_scan.py"
+      }
+    ]
+  },
+  "event_id": "20260813T133429483212Z-1a682f29",
+  "integrity": {
+    "canonical_payload_sha256": "5c9c307c8d1a913e00875918be483166da593aab9b8d7885997d5471e53a3f2e"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.2.0",
+  "recorded_at_utc": "2026-08-13T13:34:29.483212Z",
+  "schema_version": "1.0",
+  "skill_sha256": "65697da4dab3b71a5108927e065d9f8214b8438e05859897391cf7c5d510b3c5"
+}

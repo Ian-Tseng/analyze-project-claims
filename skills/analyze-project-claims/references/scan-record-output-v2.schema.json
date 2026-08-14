@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/schemas/scan-record-output-v2.json",
+  "title": "Analyze Project Claims Persisted Evidence-Bound Audit Record v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "record_kind", "scan", "evidence_items", "claims", "bindings", "limitations", "summary", "integrity"],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "record_kind": {"const": "evidence_bound_audit_record"},
+    "scan": {"$ref": "#/$defs/scan"},
+    "evidence_items": {"type": "array", "maxItems": 300, "items": {"$ref": "#/$defs/evidence"}},
+    "claims": {"type": "array", "minItems": 1, "maxItems": 200, "items": {"$ref": "#/$defs/claim"}},
+    "bindings": {"type": "array", "maxItems": 1000, "items": {"$ref": "#/$defs/binding"}},
+    "limitations": {"type": "array", "maxItems": 200, "items": {"$ref": "#/$defs/limitation"}},
+    "summary": {"$ref": "#/$defs/summary"},
+    "integrity": {"$ref": "#/$defs/integrity"}
+  },
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-z][a-z0-9]*(?:[-:.][a-z0-9]+)*$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "text": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "text_array": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+    "engine_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "provider_kind", "engine_name", "engine_version", "map_schema_version", "receipt_protocol_version", "engine_digest"],
+      "properties": {
+        "status": {"const": "verified"},
+        "provider_kind": {"type": "string", "minLength": 1},
+        "engine_name": {"type": "string", "minLength": 1},
+        "engine_version": {"type": "string", "minLength": 1},
+        "map_schema_version": {"type": "string", "minLength": 1},
+        "receipt_protocol_version": {"type": "string", "minLength": 1},
+        "engine_digest": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "accepted_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["map_id", "path", "sha256"],
+      "properties": {
+        "map_id": {"type": "string", "pattern": "^component-map-[0-9a-f]{12}$"},
+        "path": {"type": "string", "minLength": 1, "maxLength": 500},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "scan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scan_id", "recorded_at_utc", "recorder_version", "skill_name", "skill_sha256", "engine_identity", "accepted_map", "objective", "scope", "authority"],
+      "properties": {
+        "scan_id": {"type": "string", "pattern": "^[0-9]{8}T[0-9]{12}Z-[0-9a-f]{8}$"},
+        "recorded_at_utc": {"type": "string", "format": "date-time"},
+        "recorder_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "skill_name": {"const": "analyze-project-claims"},
+        "skill_sha256": {"$ref": "#/$defs/sha256"},
+        "engine_identity": {"$ref": "#/$defs/engine_identity"},
+        "accepted_map": {"$ref": "#/$defs/accepted_map"},
+        "objective": {"$ref": "#/$defs/text"},
+        "scope": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}},
+        "authority": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}}
+      }
+    },
+    "file_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "media_type", "byte_size", "sha256"],
+      "properties": {
+        "kind": {"const": "file"},
+        "path": {"type": "string", "minLength": 1, "maxLength": 500},
+        "media_type": {"type": "string", "minLength": 1},
+        "byte_size": {"type": "integer", "minimum": 0, "maximum": 10485760},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "https_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "url"],
+      "properties": {
+        "kind": {"const": "https"},
+        "url": {"type": "string", "format": "uri", "pattern": "^https://", "maxLength": 1000},
+        "revision": {"type": "string", "minLength": 1, "maxLength": 300},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "source": {"oneOf": [{"$ref": "#/$defs/file_source"}, {"$ref": "#/$defs/https_source"}]},
+    "whole_file_locator": {
+      "type": "object", "additionalProperties": false, "required": ["kind"],
+      "properties": {"kind": {"const": "whole_file"}}
+    },
+    "value_locator": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "value"],
+      "properties": {
+        "kind": {"enum": ["json_pointer", "test_case", "artifact_key"]},
+        "value": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    },
+    "line_range_locator": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "start", "end"],
+      "properties": {
+        "kind": {"const": "line_range"},
+        "start": {"type": "integer", "minimum": 1},
+        "end": {"type": "integer", "minimum": 1}
+      }
+    },
+    "locator": {"oneOf": [{"$ref": "#/$defs/whole_file_locator"}, {"$ref": "#/$defs/value_locator"}, {"$ref": "#/$defs/line_range_locator"}]},
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "source", "locator", "method", "observed_summary", "selection_sha256", "freshness", "identity_sha256"],
+      "properties": {
+        "evidence_id": {"$ref": "#/$defs/id"},
+        "source": {"$ref": "#/$defs/source"},
+        "locator": {"$ref": "#/$defs/locator"},
+        "method": {"enum": ["inspected", "schema_validated", "executed_test", "replayed", "inferred", "not_tested"]},
+        "observed_summary": {"$ref": "#/$defs/text"},
+        "selection_sha256": {"oneOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+        "freshness": {"enum": ["current", "declared_immutable", "unverifiable"]},
+        "identity_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "element_ref": {
+      "type": "object", "additionalProperties": false, "required": ["component_id", "element_id"],
+      "properties": {"component_id": {"$ref": "#/$defs/id"}, "element_id": {"$ref": "#/$defs/id"}}
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "statement", "claim_digest", "element_ref", "material", "status", "rationale"],
+      "properties": {
+        "claim_id": {"$ref": "#/$defs/id"},
+        "statement": {"$ref": "#/$defs/text"},
+        "claim_digest": {"$ref": "#/$defs/sha256"},
+        "element_ref": {"$ref": "#/$defs/element_ref"},
+        "material": {"type": "boolean"},
+        "status": {"enum": ["supported", "partially_supported", "contradicted", "untested", "invalidly_specified", "not_applicable"]},
+        "rationale": {"$ref": "#/$defs/text"}
+      }
+    },
+    "binding": {
+      "type": "object", "additionalProperties": false, "required": ["claim_id", "evidence_id", "role"],
+      "properties": {
+        "claim_id": {"$ref": "#/$defs/id"},
+        "evidence_id": {"$ref": "#/$defs/id"},
+        "role": {"enum": ["supports", "contradicts", "limits", "context"]}
+      }
+    },
+    "limitation": {
+      "type": "object", "additionalProperties": false, "required": ["limitation_id", "text", "claim_ids", "evidence_ids"],
+      "properties": {
+        "limitation_id": {"$ref": "#/$defs/id"},
+        "text": {"$ref": "#/$defs/text"},
+        "claim_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "evidence_ids": {"type": "array", "items": {"$ref": "#/$defs/id"}}
+      }
+    },
+    "claim_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supported": {"type": "integer", "minimum": 0},
+        "partially_supported": {"type": "integer", "minimum": 0},
+        "contradicted": {"type": "integer", "minimum": 0},
+        "untested": {"type": "integer", "minimum": 0},
+        "invalidly_specified": {"type": "integer", "minimum": 0},
+        "not_applicable": {"type": "integer", "minimum": 0}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scan_status", "claim_count", "material_claim_count", "claim_counts", "evidence_count", "strongest_safe_claim_id", "strongest_safe_claim", "claim_boundary_ids", "no_supported_claim", "unresolved_uncertainties"],
+      "properties": {
+        "scan_status": {"enum": ["PASS", "FAIL", "PARTIAL", "NA"]},
+        "claim_count": {"type": "integer", "minimum": 1, "maximum": 200},
+        "material_claim_count": {"type": "integer", "minimum": 0, "maximum": 200},
+        "claim_counts": {"$ref": "#/$defs/claim_counts"},
+        "evidence_count": {"type": "integer", "minimum": 0, "maximum": 300},
+        "strongest_safe_claim_id": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+        "strongest_safe_claim": {"oneOf": [{"$ref": "#/$defs/text"}, {"type": "null"}]},
+        "claim_boundary_ids": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "no_supported_claim": {"type": "boolean"},
+        "unresolved_uncertainties": {"$ref": "#/$defs/text_array"}
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_payload_sha256", "output_schema_sha256", "renderer_id", "renderer_sha256", "recorder_sha256"],
+      "properties": {
+        "canonical_payload_sha256": {"$ref": "#/$defs/sha256"},
+        "output_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "renderer_id": {"const": "evidence-bound-markdown-v1"},
+        "renderer_sha256": {"$ref": "#/$defs/sha256"},
+        "recorder_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

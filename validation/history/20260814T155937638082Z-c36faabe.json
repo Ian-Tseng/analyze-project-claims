@@ -1,0 +1,243 @@
+{
+  "bindings": [
+    {
+      "claim_id": "local-v070-candidate-validated",
+      "evidence_id": "full-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v070-candidate-validated",
+      "evidence_id": "focused-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v070-candidate-validated",
+      "evidence_id": "lifecycle-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v070-candidate-validated",
+      "evidence_id": "package-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v070-candidate-validated",
+      "evidence_id": "engine-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v070-candidate-validated",
+      "evidence_id": "map-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v070-candidate-validated",
+      "evidence_id": "full-suite-result",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "4787a61cf80aa3cef85326044ac0a0b20ab2a4ca249ccb09586199d6a2200b43",
+      "claim_id": "local-v070-candidate-validated",
+      "element_ref": {
+        "component_id": "scan-logging",
+        "element_id": "hierarchical-scan-record"
+      },
+      "material": true,
+      "rationale": "Every listed result is bounded to a persisted local receipt; remote CI, public installation, and semantic entailment remain separate gates.",
+      "statement": "On this Windows host, the local v0.7.0 candidate passed 176 repository tests with one privilege-dependent generic symlink test skipped, passed 41 focused evidence-bound tests and eight lifecycle consumer tests, verified its package and embedded engine, and checked its accepted component map unchanged.",
+      "status": "partially_supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "freshness": "current",
+      "identity_sha256": "05dcd94c3477b9474e5e66f9d0687fd6d1e4481ed315cd5323e87a0f1b1d320e",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 176 passing repository tests and one privilege-dependent generic symlink skip on Windows.",
+      "selection_sha256": "0ae4fa352759b736166a9c2142a173da1f5d63cdce737974cc925b580b8a044a",
+      "source": {
+        "byte_size": 1792,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.7.0-validation-receipt.json",
+        "sha256": "82f526a6c7c0775e4746973710d801109f8ae05003ce14cc88b3d10768aad410"
+      }
+    },
+    {
+      "evidence_id": "focused-suite-result",
+      "freshness": "current",
+      "identity_sha256": "54120a1db21cf352347d654d1a57914d2bdf846d751574359fca7261d790ce63",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "focused_evidence_bound_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 41 passing focused evidence-bound tests.",
+      "selection_sha256": "d841e99f465967e4fee64d4f6e7da123f3cd1d25ff90a237bdc282ae9b9d83cd",
+      "source": {
+        "byte_size": 1792,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.7.0-validation-receipt.json",
+        "sha256": "82f526a6c7c0775e4746973710d801109f8ae05003ce14cc88b3d10768aad410"
+      }
+    },
+    {
+      "evidence_id": "lifecycle-suite-result",
+      "freshness": "current",
+      "identity_sha256": "72c70382947ae3e9c15dab414ae52c281c8dbe6ad4953de9b96ef0c623a24a42",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "lifecycle_receipt_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records eight passing lifecycle receipt consumer tests.",
+      "selection_sha256": "d6a2013efd029d9a6d3e480ed7e0b030bfc07692e29eab2d53b1a651e70d411c",
+      "source": {
+        "byte_size": 1792,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.7.0-validation-receipt.json",
+        "sha256": "82f526a6c7c0775e4746973710d801109f8ae05003ce14cc88b3d10768aad410"
+      }
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "freshness": "current",
+      "identity_sha256": "b05536e15262ba29cedc81dc3a4adff346d218912630a573c35e0d7806afdefb",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "package_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The v0.7.0 package matches its rebuilt manifest and recorded package digest.",
+      "selection_sha256": "33e39cfb3cda810662b149e8633b92f33525bfd2a1e931fadcb255ae3b607dae",
+      "source": {
+        "byte_size": 1792,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.7.0-validation-receipt.json",
+        "sha256": "82f526a6c7c0775e4746973710d801109f8ae05003ce14cc88b3d10768aad410"
+      }
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "freshness": "current",
+      "identity_sha256": "236c52eae6c2335bce33b98921cb97535ac97cb43e9412e47a41c8649a4c95e3",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "engine_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.2.0 engine identity verified.",
+      "selection_sha256": "ce4ac9df8524e8d1c7fd7b3da256783f6f8c3ec6063bdeb2f982072b3ac7bd6f",
+      "source": {
+        "byte_size": 1792,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.7.0-validation-receipt.json",
+        "sha256": "82f526a6c7c0775e4746973710d801109f8ae05003ce14cc88b3d10768aad410"
+      }
+    },
+    {
+      "evidence_id": "map-verification-result",
+      "freshness": "current",
+      "identity_sha256": "4e30df263ed19e5aef70b3a7b4f2b482ebfd9fc861d499f6a548301b27354625",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "component_map_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The accepted component map checked unchanged after final byte synchronization.",
+      "selection_sha256": "b364b76347af45c653cfd47a4592d4794913cd4561d5cbc0c825e90783791205",
+      "source": {
+        "byte_size": 1792,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.7.0-validation-receipt.json",
+        "sha256": "82f526a6c7c0775e4746973710d801109f8ae05003ce14cc88b3d10768aad410"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "76fa964ce7e43d89e475565fc5712183605a026bfd647e754f6cf59155c38a97",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "local-v070-candidate-validated"
+      ],
+      "evidence_ids": [
+        "full-suite-result"
+      ],
+      "limitation_id": "local-platform-and-publication-boundary",
+      "text": "The evidence is local Windows candidate evidence; one generic symlink test was privilege-skipped, and remote CI, public installation, Claude activation, and release publication remain unproved."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-6552a63bd2d4",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "28ccbf941a6c22e90649457ff349610f33cea42d7fbdc2cca8e4474d6836fc5b"
+    },
+    "authority": [
+      "validation/v0.7.0-validation-receipt.json",
+      "validation/component-map/accepted-map.json"
+    ],
+    "engine_identity": {
+      "engine_digest": "d8f3e1ea723c123cdcdebd30cdfcdcc542e716bb52dfb8f06867d4e75d26060c",
+      "engine_name": "component-evidence",
+      "engine_version": "1.2.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "State the strongest safe local validation claim for the v0.7.0 candidate.",
+    "recorded_at_utc": "2026-08-14T15:59:37.638082Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260814T155937638082Z-c36faabe",
+    "scope": [
+      "v0.7.0 local candidate",
+      "evidence-bound recorder 2.1.0",
+      "lifecycle receipt consumer",
+      "package, engine, skill, and component-map identities"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "c227c6119120d46e0f521cae86804995e0aab6dc0a6bbe978cc6371bfac060c5"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "local-platform-and-publication-boundary"
+    ],
+    "claim_count": 1,
+    "claim_counts": {
+      "partially_supported": 1
+    },
+    "evidence_count": 6,
+    "material_claim_count": 1,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "On this Windows host, the local v0.7.0 candidate passed 176 repository tests with one privilege-dependent generic symlink test skipped, passed 41 focused evidence-bound tests and eight lifecycle consumer tests, verified its package and embedded engine, and checked its accepted component map unchanged.",
+    "strongest_safe_claim_id": "local-v070-candidate-validated",
+    "unresolved_uncertainties": [
+      "Remote commit-bound CI has not yet run for this candidate.",
+      "Public Codex and Claude Code install/update smoke tests require publication first.",
+      "Claude runtime discovery and invocation were not observed on this host.",
+      "GitHub release immutability enforcement has not yet been verified for v0.7.0."
+    ]
+  }
+}

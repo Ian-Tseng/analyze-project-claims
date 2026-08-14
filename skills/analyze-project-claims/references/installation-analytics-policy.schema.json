@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/schemas/installation-analytics-policy.schema.json",
+  "title": "Analyze Project Claims local installation analytics policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mode",
+    "prompted",
+    "endpoint",
+    "installation_id",
+    "last_sent_version",
+    "last_event_id",
+    "last_success_at",
+    "last_outcome",
+    "pending_event"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "mode": {"enum": ["unconfigured", "off", "on"]},
+    "prompted": {"type": "boolean"},
+    "endpoint": {"type": ["string", "null"]},
+    "installation_id": {"type": ["string", "null"], "format": "uuid"},
+    "last_sent_version": {
+      "type": ["string", "null"],
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "last_event_id": {"type": ["string", "null"], "format": "uuid"},
+    "last_success_at": {"type": ["integer", "null"], "minimum": 0},
+    "last_outcome": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{0,63}$"},
+    "pending_event": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "installation-analytics-event.schema.json"}
+      ]
+    }
+  }
+}

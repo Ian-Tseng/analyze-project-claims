@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-13T06:34:10.710860Z",
+  "accepted_at_utc": "2026-08-14T15:40:45.695783Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -49,9 +49,112 @@
     "skills/analyze-project-claims/scripts/update_policy.py",
     "tests/test_problem_report.py",
     "tests/test_reporting_service.py",
-    "tests/test_update_policy.py"
+    "tests/test_update_policy.py",
+    ".github/workflows/agent-maintainer.yml",
+    ".github/codex/prompts/resolve-internal-report.md",
+    "maintainer_service/intake.py",
+    "maintainer_service/patch_guard.py",
+    "docs/AGENT_MAINTAINER.md",
+    "docs/AGENT_MAINTAINER_E2E_LOG.md",
+    "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md",
+    "analytics_service/server.py",
+    "docs/INSTALLATION_ANALYTICS.md",
+    "skills/analyze-project-claims/references/installation-analytics-event.schema.json",
+    "skills/analyze-project-claims/references/installation-analytics-policy.schema.json",
+    "skills/analyze-project-claims/scripts/installation_analytics.py",
+    "tests/test_agent_maintainer.py",
+    "tests/test_installation_analytics.py",
+    "tests/test_analytics_service.py",
+    "tests/test_agent_compatibility.py",
+    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md",
+    "skills/analyze-project-claims/references/evidence-bound-audit-records.md",
+    "skills/analyze-project-claims/references/scan-record-v2.schema.json",
+    "skills/analyze-project-claims/references/scan-record-output-v2.schema.json",
+    "skills/analyze-project-claims/scripts/record_scan.py",
+    "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py",
+    "tests/test_evidence_bound_scan_release_blockers.py",
+    "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
+    "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
+    "tests/test_lifecycle_receipt_consumer.py"
   ],
   "components": [
+    {
+      "component_id": "agent-maintainer",
+      "component_type": "service",
+      "elements": [
+        {
+          "element_id": "human-release-gate",
+          "evidence_locators": [
+            {
+              "locator": "problem-report operations and release evidence",
+              "source": "PUBLISHING.md"
+            },
+            {
+              "locator": "owner review and completion",
+              "source": "docs/AGENT_MAINTAINER.md"
+            },
+            {
+              "locator": "local observations and hosted-execution limitations",
+              "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
+            },
+            {
+              "locator": "lifecycle contract, privilege zones, required tests, and evidence boundary",
+              "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
+            },
+            {
+              "locator": "owner triage and public/private processing boundary",
+              "source": "docs/PROBLEM_REPORTING.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "An automated candidate never merges, releases, closes a report, or proves user update; owner review, ordinary CI, versioned publication, installed replacement, and fresh activation remain separate gates."
+        },
+        {
+          "element_id": "owner-gated-bounded-intake",
+          "evidence_locators": [
+            {
+              "locator": "issues labeled trigger and prepare job",
+              "source": ".github/workflows/agent-maintainer.yml"
+            },
+            {
+              "locator": "prepare_task exact event, identity, body, disclosure, and event-code checks",
+              "source": "maintainer_service/intake.py"
+            },
+            {
+              "locator": "owner, exact-body, disclosure, malformed event, task minimization, and E2E rejection regressions",
+              "source": "tests/test_agent_maintainer.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Only an exact newly disclosed public report labeled agent-ready by the canonical owner becomes a minimal untrusted task; raw issue content, comments, reporter identity, installation identity, private API reports, and E2E probes remain excluded."
+        },
+        {
+          "element_id": "privilege-separated-candidate",
+          "evidence_locators": [
+            {
+              "locator": "untrusted evidence and forbidden owner-action instructions",
+              "source": ".github/codex/prompts/resolve-internal-report.md"
+            },
+            {
+              "locator": "prepare, fix, validate, and publish-draft jobs",
+              "source": ".github/workflows/agent-maintainer.yml"
+            },
+            {
+              "locator": "path, mode, UTF-8, size, sensitive-surface, and release-quartet checks",
+              "source": "maintainer_service/patch_guard.py"
+            },
+            {
+              "locator": "patch-guard and privilege-separation workflow regressions",
+              "source": "tests/test_agent_maintainer.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Codex has no repository write credential; trusted guards bound paths and release identity, a fresh secret-free job tests the exact patch, and only a later non-executing job can publish a new draft branch and pull request."
+        }
+      ]
+    },
     {
       "component_id": "annotation-codebook-calibration",
       "component_type": "experiment",
@@ -266,6 +369,29 @@
           "target": "Source drift or same-ID semantic conflict emits candidate/delta evidence while preserving the accepted map."
         },
         {
+          "element_id": "embedded-engine-identity",
+          "evidence_locators": [
+            {
+              "locator": "provider, version, protocol, file hashes, and engine_digest",
+              "source": "skills/analyze-project-claims/references/component-evidence-engine.json"
+            },
+            {
+              "locator": "strict embedded provider receipt contract",
+              "source": "skills/analyze-project-claims/references/component-map-receipt.schema.json"
+            },
+            {
+              "locator": "build_engine_descriptor, verify_engine_descriptor, and verified_engine_summary",
+              "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/identity.py"
+            },
+            {
+              "locator": "descriptor, tamper, semantic-boundary, import-boundary, and verify-self tests",
+              "source": "tests/test_component_evidence_engine.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "One analyzer package embeds a versioned component-evidence engine whose descriptor binds code, schemas, templates, protocol, and receipt identity without creating a second discoverable skill."
+        },
+        {
           "element_id": "missing-map-bootstrap",
           "evidence_locators": [
             {
@@ -328,6 +454,35 @@
           ],
           "relation_type": "contains",
           "target": "An unchanged accepted map is checked and reused without a replacement candidate or delta."
+        }
+      ]
+    },
+    {
+      "component_id": "cross-agent-package-compatibility",
+      "component_type": "distribution",
+      "elements": [
+        {
+          "element_id": "separate-host-evidence",
+          "evidence_locators": [
+            {
+              "locator": "separate Claude Code target validation",
+              "source": "PUBLISHING.md"
+            },
+            {
+              "locator": "Codex and Claude Code install and update boundaries",
+              "source": "README.md"
+            },
+            {
+              "locator": "cross-agent validation procedure",
+              "source": "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
+            },
+            {
+              "locator": "frontmatter, manual layout, package verification, and documentation regressions",
+              "source": "tests/test_agent_compatibility.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Codex managed installation and Claude Code package compatibility are documented and evaluated as separate host surfaces without extending Codex replacement evidence to Claude runtime behavior."
         }
       ]
     },
@@ -484,6 +639,113 @@
           ],
           "relation_type": "contains",
           "target": "A separately consented updater delegates replacement to GitHub CLI and verifies source, scope, pin, version, tree, and package integrity for next use."
+        }
+      ]
+    },
+    {
+      "component_id": "installation-analytics",
+      "component_type": "service",
+      "elements": [
+        {
+          "element_id": "aggregate-owner-metric",
+          "evidence_locators": [
+            {
+              "locator": "Authenticator, AnalyticsStore, summary, purge, and HTTP handlers",
+              "source": "analytics_service/server.py"
+            },
+            {
+              "locator": "metric interpretation and owner API deployment boundary",
+              "source": "docs/INSTALLATION_ANALYTICS.md"
+            },
+            {
+              "locator": "authentication, aggregate, keyed-identity, erasure, schema, and retention regressions",
+              "source": "tests/test_analytics_service.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The optional owner API authenticates and deduplicates bounded events, stores keyed installation hashes, supports principal-scoped erasure and retention, and exposes only aggregate consenting-installation counts."
+        },
+        {
+          "element_id": "analytics-evidence-boundary",
+          "evidence_locators": [
+            {
+              "locator": "Optional installation analytics",
+              "source": "README.md"
+            },
+            {
+              "locator": "Validation and evidence limits",
+              "source": "docs/INSTALLATION_ANALYTICS.md"
+            },
+            {
+              "locator": "public metric and consent-boundary documentation regression",
+              "source": "tests/test_installation_analytics.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Local analytics tests establish software contracts only; no public endpoint, population-level user count, privacy-law compliance, or production abuse resistance is claimed."
+        },
+        {
+          "element_id": "explicit-client-consent",
+          "evidence_locators": [
+            {
+              "locator": "user controls and separate-consent contract",
+              "source": "docs/INSTALLATION_ANALYTICS.md"
+            },
+            {
+              "locator": "AnalyticsClient.prompt, enable, preview, check_in, disable, and erase",
+              "source": "skills/analyze-project-claims/scripts/installation_analytics.py"
+            },
+            {
+              "locator": "no-send default and enablement, version event, retry, and erasure regressions",
+              "source": "tests/test_installation_analytics.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Installation analytics remain off by default; enabling creates only local random identity, and a later explicit check-in sends the first exact-schema event."
+        }
+      ]
+    },
+    {
+      "component_id": "lifecycle-receipt-consumer",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "nonrecursive-followup-boundary",
+          "evidence_locators": [
+            {
+              "locator": "closed read-only follow-up request contract",
+              "source": "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json"
+            },
+            {
+              "locator": "_validate_prior_requests, build_followup_request, repeated-signature and MAX_CYCLES gates",
+              "source": "skills/analyze-project-claims/scripts/lifecycle_receipt.py"
+            },
+            {
+              "locator": "single follow-up, repeated finding stop, and maximum-cycle regressions",
+              "source": "tests/test_lifecycle_receipt_consumer.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "An inconsistent or evidence-gap receipt can produce only a digest-bound read-only follow-up plan, stops on repeated evidence requirements, and stops after three distinct reconciliation cycles."
+        },
+        {
+          "element_id": "read-only-bounded-interpretation",
+          "evidence_locators": [
+            {
+              "locator": "closed aggregate lifecycle receipt contract",
+              "source": "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json"
+            },
+            {
+              "locator": "_validate_receipt, interpret_receipt, imports, and actions_not_performed",
+              "source": "skills/analyze-project-claims/scripts/lifecycle_receipt.py"
+            },
+            {
+              "locator": "read-only consumer, digest tamper, complete, incomplete, and recovered receipt regressions",
+              "source": "tests/test_lifecycle_receipt_consumer.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Lifecycle verification receipts are schema- and digest-validated without importing or executing lifecycle, publication, reporting, cleanup, or live-install actions."
         }
       ]
     },
@@ -852,20 +1114,24 @@
           "element_id": "hierarchical-scan-record",
           "evidence_locators": [
             {
-              "locator": "hierarchical scan exchange contract",
-              "source": "skills/analyze-project-claims/references/scan-record.schema.json"
+              "locator": "closed persisted evidence-bound audit record schema",
+              "source": "skills/analyze-project-claims/references/scan-record-output-v2.schema.json"
             },
             {
-              "locator": "record derivation and append-only write",
+              "locator": "normalized v2.1 append, render, persisted replay, and verify contracts",
+              "source": "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py"
+            },
+            {
+              "locator": "v1 compatibility dispatch and v2 command routing",
               "source": "skills/analyze-project-claims/scripts/record_scan.py"
             },
             {
-              "locator": "public recorder regressions",
-              "source": "tests/test_record_scan.py"
+              "locator": "adversarial identity, path, recovery, compatibility, and resource-boundary regressions",
+              "source": "tests/test_evidence_bound_scan_release_blockers.py"
             }
           ],
           "relation_type": "contains",
-          "target": "Element-level evidence method, check status, claim status, interpretation, and repair are persisted hierarchically."
+          "target": "The recorder preserves frozen v1 history while v2.1 appends normalized claims, exact accepted-map element references, evidence identities, explicit role bindings, limitations, strongest-safe-claim boundaries, deterministic reports, and live identity verification."
         },
         {
           "element_id": "repository-regression",
@@ -913,16 +1179,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-13T06:33:20.336310Z",
+  "created_at_utc": "2026-08-14T15:40:26.940000Z",
   "integrity": {
-    "canonical_payload_sha256": "4542d60a25be22c67bedfc285637dde96f78fc851ff4871ff0d28598cf28c254"
+    "canonical_payload_sha256": "8a14a1dd33e67807bcb94ccc19f8741ac28d44b3676829878fd2796c547f112b"
   },
-  "map_id": "component-map-39a13c95d3af",
+  "map_id": "component-map-6552a63bd2d4",
   "map_state": "accepted",
   "mapper_version": "1.2.0",
-  "objective": "Map the v0.6.2 directory-identity and validation-authority repair together with the public GitHub-distributed package, reporting boundary, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or E2E evidence as general empirical reliability.",
-  "origin_scan_id": "20260813T063320336310Z-da514f52",
-  "previous_map_id": "component-map-be92062affaa",
+  "objective": "Map the v0.7.0 product-lifecycle and evidence-bound audit candidate, including read-only lifecycle receipt interpretation, exact claim-to-evidence bindings, consent-bounded installation analytics, owner-gated agent maintenance, cross-agent packaging, public reporting, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or local E2E evidence as production proof.",
+  "origin_scan_id": "20260814T154026940000Z-49a1d09d",
+  "previous_map_id": "component-map-3084c60e1789",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -988,15 +1254,72 @@
     "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
     "tests/test_problem_report.py",
     "tests/test_reporting_service.py",
-    "tests/test_update_policy.py"
+    "tests/test_update_policy.py",
+    ".github/workflows/agent-maintainer.yml",
+    ".github/workflows/validate.yml",
+    ".github/codex/prompts/resolve-internal-report.md",
+    "maintainer_service",
+    "docs/AGENT_MAINTAINER.md",
+    "docs/AGENT_MAINTAINER_E2E_LOG.md",
+    "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md",
+    "analytics_service",
+    "docs/INSTALLATION_ANALYTICS.md",
+    "tests/test_agent_maintainer.py",
+    "tests/test_installation_analytics.py",
+    "tests/test_analytics_service.py",
+    "tests/test_agent_compatibility.py",
+    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md",
+    "CHANGELOG.md",
+    "docs/LIFECYCLE_RECEIPT_GUIDE.md",
+    "examples/scan-input-v2.example.json",
+    "skills/analyze-project-claims/assets/scan-record-v2.template.json",
+    "skills/analyze-project-claims/references/evidence-bound-audit-records.md",
+    "skills/analyze-project-claims/references/scan-record-v2.schema.json",
+    "skills/analyze-project-claims/references/scan-record-output-v2.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-phase-receipt.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
+    "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
+    "tests/test_evidence_bound_scan.py",
+    "tests/test_evidence_bound_scan_edge_cases.py",
+    "tests/test_evidence_bound_scan_invariants.py",
+    "tests/test_evidence_bound_scan_operational.py",
+    "tests/test_evidence_bound_scan_release_blockers.py",
+    "tests/test_evidence_bound_scan_security.py",
+    "tests/test_lifecycle_receipt_consumer.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "f798718052bb76cf89a12924d427bdf2e5aef9055b289f06713c4b996b9be303",
+  "skill_sha256": "c227c6119120d46e0f521cae86804995e0aab6dc0a6bbe978cc6371bfac060c5",
   "source_snapshot": [
     {
       "exists": true,
       "kind": "file",
-      "sha256": "23d4b34af67e689ad0530e3af9526b8b29cb4552533c459be39c2b354f715eff",
+      "sha256": "68f28c5978b9722a4643dab66a947d305b94f453796241bde886f47aab363deb",
+      "source": ".github/codex/prompts/resolve-internal-report.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "be6601ea7cf407e03763b71fb9a88d28fcae9539c28120501ea552e02910ebe9",
+      "source": ".github/workflows/agent-maintainer.yml"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "e8a74382ef9b116ac5b00c66cf3a7808e833d0a2e6f4aa86cef5e22de7a718fd",
+      "source": ".github/workflows/validate.yml"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "7d0acde6975149592c71b88e8a7129af913f80d8ce42bd9b7403fdc236af6cb6",
+      "source": "CHANGELOG.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "da5029b6e6658d1a70cee674e6f5e73413a97e8ea2e4c7f6d039c81fc2ee3970",
       "source": "CITATION.cff"
     },
     {
@@ -1122,13 +1445,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "5a8222c48208645bfd31483cbfb9915bca8bfea2baa331e0724aa196ef4c1660",
+      "sha256": "df0fb80998d1d17ece6576d5445c4c9be55800bfe3eedc1023e90cc9119bd088",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "9e2ee68c46b8ef4f59daa23291098962300bf8100d9545c06e8600d038adb421",
+      "sha256": "72aee807baf460c2e17daf92022a307861cd782c2c1329f739090180d0185815",
       "source": "README.md"
     },
     {
@@ -1140,13 +1463,61 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a466ef209f5c3aee5ff0c702e2e9d5cced4783d2a655e8ab66330f21a5557b3f",
+      "sha256": "967d9afb101346667166f2e76e81910bc190488d7d41d50ca0072e9d92f00e32",
       "source": "VERSION"
     },
     {
       "exists": true,
+      "kind": "directory",
+      "sha256": "d37cd04a05bac1189f6579634640bbf4b7c7bb695b722dd6ecf10170a563e88c",
+      "source": "analytics_service"
+    },
+    {
+      "exists": true,
       "kind": "file",
-      "sha256": "ac60b864cb378689bd86888d1195394dec88aaca5daa81db4b715366b666a624",
+      "sha256": "02d6c92ce637376ede242a495476e09ebe44c97a214d93f3da235276f4f963fe",
+      "source": "analytics_service/server.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "4ecaa20ea122b9c6d96e86deeceef3c6dce4f4798544cdd574c1c669ecd387a8",
+      "source": "docs/AGENT_MAINTAINER.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "ee361484ce077dccb725d9960371b6bd8320459fc1e59398ca3ae3494ada6dff",
+      "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "72c0450a00958d74de96134768d8f95c44fdad2c2d95816aa9313de8a355383d",
+      "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "16c2a10f0c75286f5fd0513cfe6cbb6574c3c2053fcddc4463ba4f7acfefe4a0",
+      "source": "docs/INSTALLATION_ANALYTICS.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "d9032e782ff4751e76dc0ad1a3ec6bcbce59f8d732fa0e8b03e182dfdc215402",
+      "source": "docs/LIFECYCLE_RECEIPT_GUIDE.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "c463422ea38c18edfc5d28b7fcb5a044de695e1fe1fc29fe4913754fd2053a4b",
+      "source": "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "c858824976e69b0af469ac1c88cd77f3db721593e2f96a6399710d963987b2f6",
       "source": "docs/PROBLEM_REPORTING.md"
     },
     {
@@ -1344,19 +1715,43 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "d6e6a3ebb4b3589141eed1229cfe457e5921c5d3ef4ee8afb839f1ecec75bfd2",
+      "source": "examples/scan-input-v2.example.json"
+    },
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "42b4a77f3855ad96a5abc6a948658d819ef1425c775e2a3ac97b02e5f03d99fd",
+      "source": "maintainer_service"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "381652cbf59bc2bd0ba0557c734cb352637a13a6dd3c5d1951f1e690e111a8ff",
+      "source": "maintainer_service/intake.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "a06d55cf41e3b97fe1e0df0bfe8b79369d0e98ad67bbe1fd23313e910b6fe121",
+      "source": "maintainer_service/patch_guard.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "b82bf8945edee117c95263e5b32e21ce98bbda0a9819f95b1570f94319b4b448",
       "source": "reporting_service/server.py"
     },
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "31ab862edf684ade1015b9b608f10b96bed9d8bd3b09cdb48f22e18d674f44af",
+      "sha256": "210b5f04f60266872d46b9a48a287d38c5e3b5a98f4ab0eaa4025fcc387d9aad",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f798718052bb76cf89a12924d427bdf2e5aef9055b289f06713c4b996b9be303",
+      "sha256": "c227c6119120d46e0f521cae86804995e0aab6dc0a6bbe978cc6371bfac060c5",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -1368,8 +1763,26 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "5a9c35e6c12db1ebb5fd9d6e0f412a8ff64e09ce84fda02ad39d59d3568dfa44",
+      "source": "skills/analyze-project-claims/assets/scan-record-v2.template.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "b4064d1c508c5f2e3ca7a01f33e767fc4a6cb3cb8f50e6dcf2e035f0084d97d8",
+      "source": "skills/analyze-project-claims/references/component-evidence-engine.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "d4858c9673142b9ef21a6f382602228da658a0569bb839bbd4ea36b086bca2b7",
       "source": "skills/analyze-project-claims/references/component-map-observation.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "69dacc0ba5498431a1e6c20e5cad5f591d1159a8be6a97f77013d128ac5fdbc9",
+      "source": "skills/analyze-project-claims/references/component-map-receipt.schema.json"
     },
     {
       "exists": true,
@@ -1380,13 +1793,55 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f753d39bb9847309c9ab761812febb341ebeaa88be98d969c7fec53b061ddfb0",
+      "sha256": "81827d8b331a13fb9e8aeabf52211c7b7dfa8f6093e870ada69b504d2a00cb36",
+      "source": "skills/analyze-project-claims/references/evidence-bound-audit-records.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "4741469eefca0775d3cf18f33ceee71c5f9f3dcbdc68c13c1e6e9b93135c6e3c",
+      "source": "skills/analyze-project-claims/references/installation-analytics-event.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "72d6744792d5838787664fb2a5fb2dfa3a84e2e699183edc0961fecfbc59337a",
+      "source": "skills/analyze-project-claims/references/installation-analytics-policy.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "8a2f94e740cf51360cc4c1a7efb177f64a514dbb49947d6b09a13aaf71276b3d",
+      "source": "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "eba8ac280f4d6d726493b2dc902697f75e4ea5614cd4591c24c17f6ecb9b6b7d",
+      "source": "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "60c4b0aca141cd4a01e03ec4d94a0535285ba27951518cdba5a3feac1353dbdd",
+      "source": "skills/analyze-project-claims/references/lifecycle-phase-receipt.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "3b0349708bd69e5327e1f57fd26acf13e6e183beec735b9408996d6d592a2caa",
+      "source": "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "6b0b925ae1b82757fcedee1162fb550348814d248b84e80b6acda2106bd8271a",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "bc805674be656723178eb7aced15332d51881166bae7616968128d50b1bd4d11",
+      "sha256": "56e1868a47abd432e1402733f46f20e0979a4329b583d6462f4492f7f514a826",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -1404,25 +1859,61 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+      "source": "skills/analyze-project-claims/references/scan-record-output-v2.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "2389d2cd60a4ed178e62e132574ae86fd97a8a449617cf722ba573a41356a715",
+      "source": "skills/analyze-project-claims/references/scan-record-v2.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "7e92c3fd696fae083f3310b03f7e12303311d7dc0637c9b002eb1d1164ec387e",
       "source": "skills/analyze-project-claims/references/scan-record.schema.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "7fff1d9d7d05e608e49b41566346d3218367b166695544e3c7786e450bb2e74b",
+      "sha256": "6c0d6ce5c1df00674b0167e92b4ec072813b58277771cfa1ef2e391853f37565",
+      "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/identity.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+      "source": "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "62c4ffad8440fcc4d8a876313d487fca9cdfb25f4ec37e69695830190e4cebe6",
+      "source": "skills/analyze-project-claims/scripts/installation_analytics.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "9d5c38103b98c74bb30a8d86a6e84294ce2c943eb33663679b950420168e6585",
+      "source": "skills/analyze-project-claims/scripts/lifecycle_receipt.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "738005e6d7a10fc6f8112e0b3f02c77e58245e9a1e3bebd319e2320b17b28ceb",
       "source": "skills/analyze-project-claims/scripts/problem_report.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a5374425511ba2977de0faed4552dfd71c6f6dcba446955f60008508682adfd3",
+      "sha256": "919cb0c513f30767bd03dbb5b29bb32fd3e1d25fd28bec5ecd4c17bb4d0ff601",
       "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "36a00545539a2ea2954b9b54c928cdd14c4634de17cc3edc45a61aedfb8cbb2b",
+      "sha256": "ecdfa716c4e64e072189ca8592b28cbcdc206bdf25b2f688817cd45c8aadfe53",
       "source": "skills/analyze-project-claims/scripts/record_scan.py"
     },
     {
@@ -1430,6 +1921,24 @@
       "kind": "file",
       "sha256": "73ad6b8e4bc7445d278bf9f9cfd16dff5afd5974823894f41a778da179ac01b2",
       "source": "skills/analyze-project-claims/scripts/update_policy.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "7b7f5b9e5bd0ed6aa202ab76a1e9892ca56101bf0ea85ca9752bab5762617804",
+      "source": "tests/test_agent_compatibility.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "49fb5d2ca181f7c97aa54df1022aff267f53442db50707c3f4eb7ad7e1d95eb4",
+      "source": "tests/test_agent_maintainer.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "fd6480f5c47fca18cfb4273b6ceb121d180983c3b0877fb86c937f0db116aaf1",
+      "source": "tests/test_analytics_service.py"
     },
     {
       "exists": true,
@@ -1452,6 +1961,12 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "704f6326d25182133b34b9eb03b49fd810b4c4db6e62b66ff13b93d15a7994a9",
+      "source": "tests/test_component_evidence_engine.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "02b0ef515da1cee346fad45756731ab5645fb1f1b1227afe35bc581128c03727",
       "source": "tests/test_component_map.py"
     },
@@ -1460,6 +1975,54 @@
       "kind": "file",
       "sha256": "ffefc4bca69716d201fd4a79c73fdadee8511998fabae30e28c5fcf6fdf77917",
       "source": "tests/test_cross_project_reliability.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "f11370125b47ab25a7df221a80a60245cfbadbfadb7eda9b83f2c4e62d1cf056",
+      "source": "tests/test_evidence_bound_scan.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "c98325647471f761167fb1e4c79c02c8cae4fefd303125ae9ec22f5cf848e2c3",
+      "source": "tests/test_evidence_bound_scan_edge_cases.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "38ab818cde603c9d2dafc37466993ff12d686009d1f40bbc7dd1e2d7dd8f0705",
+      "source": "tests/test_evidence_bound_scan_invariants.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "e5b479a538886495190f1d7bfebf19e38471090f24618a6779b1923985e0e1c5",
+      "source": "tests/test_evidence_bound_scan_operational.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "2d4c7957ae8b11a1d004449df21cbffd91c898ab87a14f9f1dbd5ba668c7879b",
+      "source": "tests/test_evidence_bound_scan_release_blockers.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "d106caf88ee9ee007ce38a932217447dbd7c918d21444d1d8a1095c12dd53ade",
+      "source": "tests/test_evidence_bound_scan_security.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "179eaec0104462a3848a57d954bdb7043f66a932bf6f9ded9b207190b18c6f4c",
+      "source": "tests/test_installation_analytics.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "f7ed17d62c0c3833f24a5a581e9c620ddd86244186d16cc9c4beabcecf845a2f",
+      "source": "tests/test_lifecycle_receipt_consumer.py"
     },
     {
       "exists": true,
@@ -1488,13 +2051,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "17f6b3bb637b75b2900234c10ceac7daa63637fb5767b7e22eea237314ec825e",
+      "sha256": "947d3f2f4da30df40ca5aa53d3bd7e029517740850e5e86ffacfa10b5a0fcc07",
       "source": "tests/test_problem_report.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c8cb212ff169379e9d9cd2a18c4391d70f2395e4cd7ce6edb449d6605fe5aa23",
+      "sha256": "5f0a91dd067522c1006832e5385ded61e3a42d055721e6eb7231c0157c93fa87",
       "source": "tests/test_record_scan.py"
     },
     {
@@ -1524,7 +2087,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "bd88a9a0bc24dedf38fd974b9d3e22d472289c24a8990126ee3315de285338a7",
+      "sha256": "860eaf9ae49e3e530c0378c0f837aac7db4b3185721366a4015268307e40f22a",
       "source": "validation/README.md"
     }
   ]

@@ -1,0 +1,43 @@
+{
+  "accepted_map_id": "component-map-177cb5ee9bde",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260813T134841363358Z-89d2e826-component-map-e940e3861cb3.json",
+    "delta": "deltas/20260813T134841363358Z-89d2e826.json"
+  },
+  "candidate_map_id": "component-map-e940e3861cb3",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_record_scan.py"
+      }
+    ]
+  },
+  "event_id": "20260813T134841363358Z-89d2e826",
+  "integrity": {
+    "canonical_payload_sha256": "ee05173ef1bc7e1e6ddcff9b0a623edf3dd4afb339d87332f6496ebc04080776"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.2.0",
+  "recorded_at_utc": "2026-08-13T13:48:41.363358Z",
+  "schema_version": "1.0",
+  "skill_sha256": "65697da4dab3b71a5108927e065d9f8214b8438e05859897391cf7c5d510b3c5"
+}

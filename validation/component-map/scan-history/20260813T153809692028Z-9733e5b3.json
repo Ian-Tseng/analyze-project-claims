@@ -1,0 +1,103 @@
+{
+  "accepted_map_id": "component-map-99593593b8c4",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260813T153809692028Z-9733e5b3-component-map-ab945b31ed28.json",
+    "delta": "deltas/20260813T153809692028Z-9733e5b3.json"
+  },
+  "candidate_map_id": "component-map-ab945b31ed28",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/codex/prompts/resolve-internal-report.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/workflows/agent-maintainer.yml"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "analytics_service"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "analytics_service/server.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/AGENT_MAINTAINER.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/INSTALLATION_ANALYTICS.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "maintainer_service"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "maintainer_service/intake.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_agent_maintainer.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_analytics_service.py"
+      }
+    ]
+  },
+  "event_id": "20260813T153809692028Z-9733e5b3",
+  "integrity": {
+    "canonical_payload_sha256": "8063702560980553b70f61370368254121a2d85786b666a6a4cefca0976dd408"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.2.0",
+  "recorded_at_utc": "2026-08-13T15:38:09.692028Z",
+  "schema_version": "1.0",
+  "skill_sha256": "65697da4dab3b71a5108927e065d9f8214b8438e05859897391cf7c5d510b3c5"
+}

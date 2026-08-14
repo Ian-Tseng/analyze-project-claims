@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "provider_kind": "embedded",
+  "engine_name": "component-evidence",
+  "engine_version": "1.2.0",
+  "map_schema_version": "1.0",
+  "receipt_protocol_version": "2.0",
+  "algorithm": "sha256",
+  "files": [
+    {
+      "path": "assets/component-map-observation.template.json",
+      "sha256": "76496fa1ec32920c07241a5c8819d19bf0e541f9be24f5c303a1887f4e20df57"
+    },
+    {
+      "path": "assets/component-map.template.json",
+      "sha256": "8d14d5c04fc154c9a0f6b751e7e0e6cff331e64d325c210608c6d1d29523e2fc"
+    },
+    {
+      "path": "references/component-evidence-protocol.md",
+      "sha256": "f077389071bf7dd46c4543c496bd6cf1e0b50eb2b35b491ca0a4ed3a30027f5a"
+    },
+    {
+      "path": "references/component-map-observation.schema.json",
+      "sha256": "d4858c9673142b9ef21a6f382602228da658a0569bb839bbd4ea36b086bca2b7"
+    },
+    {
+      "path": "references/component-map-receipt.schema.json",
+      "sha256": "69dacc0ba5498431a1e6c20e5cad5f591d1159a8be6a97f77013d128ac5fdbc9"
+    },
+    {
+      "path": "references/component-map.schema.json",
+      "sha256": "33128e872845b8c6b08906b62ae98093915f5a15d5f85445ba13f1177848fe82"
+    },
+    {
+      "path": "scripts/_internal/__init__.py",
+      "sha256": "d4893f5ffed0ed0b38ae2d3a781796bbebe9213c38c5df9e906e75ae547e45a0"
+    },
+    {
+      "path": "scripts/_internal/component_evidence/__init__.py",
+      "sha256": "5bbbe54cec76073ad7663d186e331029e9f8cdbc76e3c4ec561e2da03347a5a9"
+    },
+    {
+      "path": "scripts/_internal/component_evidence/identity.py",
+      "sha256": "6c0d6ce5c1df00674b0167e92b4ec072813b58277771cfa1ef2e391853f37565"
+    },
+    {
+      "path": "scripts/reconcile_component_map.py",
+      "sha256": "919cb0c513f30767bd03dbb5b29bb32fd3e1d25fd28bec5ecd4c17bb4d0ff601"
+    }
+  ],
+  "engine_digest": "d8f3e1ea723c123cdcdebd30cdfcdcc542e716bb52dfb8f06867d4e75d26060c"
+}

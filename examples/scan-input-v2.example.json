@@ -1,0 +1,55 @@
+{
+  "schema_version": "2.0",
+  "objective": "Bind the latest persisted structural scan status to the exact historical record that reports it.",
+  "scope": [
+    "validation/history/20260814T073620422660Z-4823f56d.json"
+  ],
+  "authority": [
+    "validation/README.md",
+    "validation/component-map/accepted-map.json"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "evidence:latest-scan-status",
+      "source": {
+        "kind": "file",
+        "path": "validation/history/20260814T073620422660Z-4823f56d.json"
+      },
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/summary/scan_status"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The persisted scan record reports a PARTIAL scan status."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "claim:latest-scan-is-partial",
+      "statement": "The persisted 2026-08-14 structural scan record reports PARTIAL status.",
+      "element_ref": {
+        "component_id": "scan-logging",
+        "element_id": "hierarchical-scan-record"
+      },
+      "material": true,
+      "status": "supported",
+      "rationale": "The claim repeats one exact field from the cited persisted record and does not generalize beyond it."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "claim:latest-scan-is-partial",
+      "evidence_id": "evidence:latest-scan-status",
+      "role": "supports"
+    }
+  ],
+  "limitations": [],
+  "summary": {
+    "strongest_safe_claim_id": "claim:latest-scan-is-partial",
+    "claim_boundary_ids": [],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "This example binds one historical status field; it does not establish current release readiness or scientific benefit."
+  ]
+}

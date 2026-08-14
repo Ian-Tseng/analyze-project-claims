@@ -1,0 +1,52 @@
+{
+  "schema_version": "2.0",
+  "objective": "State the audit question and success condition.",
+  "scope": [
+    "path/or/artifact/in/scope"
+  ],
+  "authority": [
+    "authoritative/source/path"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "evidence:result",
+      "source": {
+        "kind": "file",
+        "path": "relative/path/to/result.json"
+      },
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/result"
+      },
+      "method": "schema_validated",
+      "observed_summary": "State only the bounded observation used by the claim."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "claim:result-recorded",
+      "statement": "State one material, scope-bounded claim.",
+      "element_ref": {
+        "component_id": "accepted-component-id",
+        "element_id": "accepted-element-id"
+      },
+      "material": true,
+      "status": "supported",
+      "rationale": "Explain the human semantic judgment without claiming that hashing proves entailment."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "claim:result-recorded",
+      "evidence_id": "evidence:result",
+      "role": "supports"
+    }
+  ],
+  "limitations": [],
+  "summary": {
+    "strongest_safe_claim_id": "claim:result-recorded",
+    "claim_boundary_ids": [],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": []
+}

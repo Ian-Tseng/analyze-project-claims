@@ -1,0 +1,43 @@
+{
+  "accepted_map_id": "component-map-ca67ce89e923",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260814T151933102016Z-3d1c2d61-component-map-d42e9a65b1e8.json",
+    "delta": "deltas/20260814T151933102016Z-3d1c2d61.json"
+  },
+  "candidate_map_id": "component-map-d42e9a65b1e8",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      }
+    ]
+  },
+  "event_id": "20260814T151933102016Z-3d1c2d61",
+  "integrity": {
+    "canonical_payload_sha256": "52da6b622d10e4f5a420d12bda4c2ea79b6d64aa3553b704ac1417f47027ea0d"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.2.0",
+  "recorded_at_utc": "2026-08-14T15:19:33.102016Z",
+  "schema_version": "1.0",
+  "skill_sha256": "c227c6119120d46e0f521cae86804995e0aab6dc0a6bbe978cc6371bfac060c5"
+}

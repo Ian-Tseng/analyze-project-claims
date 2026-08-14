@@ -1,6 +1,6 @@
 ---
 name: analyze-project-claims
-description: Analyze a project as a connected system of objectives, claims, assumptions, evidence, counterevidence, dependencies, risks, lifecycle states, and decisions. Use when assessing project health or direction; checking inconsistencies; auditing research evidence, experiment status, completion markers, paper-table eligibility, RAG transition artifacts, leakage, split integrity, manifest consumption, or claim boundaries; deciding whether to continue, validate, redesign, pause, or stop; or repairing active claims without rewriting historical evidence.
+description: Analyze a project as a connected system of objectives, claims, assumptions, evidence, counterevidence, dependencies, risks, lifecycle states, and decisions. Use when assessing project health or direction; checking inconsistencies; interpreting a product-lifecycle verification receipt; auditing research evidence, experiment status, completion markers, paper-table eligibility, RAG transition artifacts, leakage, split integrity, manifest consumption, or claim boundaries; deciding whether to continue, validate, redesign, pause, or stop; or repairing active claims without rewriting historical evidence.
 license: MIT
 ---
 
@@ -324,7 +324,55 @@ Use a table with:
 finding | evidence | status | safest interpretation | required repair
 ```
 
+## Interpret lifecycle verification evidence
+
+Select this route automatically when the user provides a
+`LifecycleVerificationReceipt` or asks whether product install, update,
+activation, report-preview, rollback, and cleanup evidence is mutually
+consistent. Do not run lifecycle commands here. `product-lifecycle` owns
+execution; this skill only validates and interprets its receipt.
+
+Use the installed, read-only consumer:
+
+```text
+<python-3> <skill-root>/scripts/lifecycle_receipt.py --format json interpret \
+  --receipt <lifecycle-verification-receipt.json> \
+  [--prior-request <verification-followup-request.json>]
+```
+
+Keep check status, claim status, and evidence method separate. Never collapse
+the result into a bare `E2E PASS`. A `COMPLETE` receipt supports only its exact
+product, release, adapter, target, platform, phase, and evidence scope.
+
+If the result is `INCONSISTENT` or `EVIDENCE_GAP`, the consumer may emit one
+digest-bound `VerificationFollowupRequest` whose only allowed action is a new
+read-only plan:
+
+```text
+<python-3> <skill-root>/scripts/lifecycle_receipt.py --format json followup \
+  --receipt <lifecycle-verification-receipt.json> \
+  [--prior-request <earlier-followup-request.json>]
+```
+
+Do not recursively invoke another skill or interpret the request as approval
+to execute, publish, report, mutate a live installation, or clean up. Stop
+when the same finding/evidence requirement repeats, and stop after at most
+three distinct reconciliation cycles. Return `RECONCILIATION_STALLED` with a
+human decision point instead of looping.
 ## Build or reconcile the component-to-element map
+
+At the start of every substantive audit, verify the versioned component-
+evidence engine bundled inside this skill:
+
+```powershell
+py scripts/reconcile_component_map.py verify-self
+```
+
+This is a local, network-free identity check and must not invoke semantic
+analysis recursively. The engine is part of the analyzer package, not a second
+skill to discover or install. If verification fails, do not claim structural
+evidence is verified; preserve any safe audit result, state the limitation, and
+route only the fixed internal failure through the separate reporting policy.
 
 Before a formal scan, reconcile the project structure against a durable
 component-to-element map. The map records what can be checked; the scan record
@@ -398,49 +446,67 @@ history events are immutable evidence. If writes are not authorized, return
 the proposed map and delta in the response without implying they were
 persisted or accepted.
 
-## Emit a component-to-element scan record
+## Emit an evidence-bound audit record
 
-Every project scan must yield one scan record after map reconciliation,
-including scans that find no
-inconsistency and scans that end `PARTIAL`, `FAIL`, or `BLOCKED`. Organize the
-record as:
+Every substantive project scan must yield one audit record after map
+reconciliation, including scans that find no inconsistency and scans that end
+partial, failed, or blocked. For formal or explicitly logged work, use scan
+record v2. It binds each material claim to exact evidence instead of treating a
+file path or free-form evidence paragraph as support.
+
+Start from `assets/scan-record-v2.template.json`; validate inputs against
+`references/scan-record-v2.schema.json`. The append command persists the
+normalized `references/scan-record-output-v2.schema.json` contract and can also
+create a deterministic Markdown report. Read
+`references/evidence-bound-audit-records.md` for the full authoring, migration,
+error, and verification contract.
+
+A v2 record has four normalized registries:
+
+- `claims`: stable claim IDs, accepted `{component_id, element_id}` references,
+  materiality, status, and rationale;
+- `evidence_items`: exact local root-relative sources or declared immutable
+  HTTPS sources, typed locators, methods, observations, and computed digests;
+- `bindings`: explicit `supports`, `contradicts`, `limits`, or `context` edges;
+- `limitations`: named boundaries linked back to claims and evidence.
+
+Use the evidence methods `inspected`, `schema_validated`, `executed_test`,
+`replayed`, `inferred`, or `not_tested`. `not_tested` is context-only and cannot
+support, contradict, or limit a claim. `executed_test` must cite a persisted
+result, log, or receipt; test source code is context, not execution evidence.
+No command infers semantic entailment from matching prose. A supported claim
+needs a support binding, partial support needs a named limitation, unresolved
+counterevidence prevents a fully supported strongest claim, and stale or
+unverifiable evidence cannot support the strongest-safe-claim summary.
+
+Use the staged workflow so errors are found before an append-only write:
 
 ```text
-scan
--> component
--> element
--> method, check status, claim status, evidence, interpretation, repair
+<python-3> scripts/record_scan.py preflight --map-root <map-root> --project-root <root>
+<python-3> scripts/record_scan.py init --map-root <map-root> --project-root <root> --output <draft.json>
+<python-3> scripts/record_scan.py evidence digest --source <path> --locator <typed-locator> --project-root <root> --id <evidence-id>
+<python-3> scripts/record_scan.py validate --record <input.json> --map-root <map-root> --project-root <root>
+<python-3> scripts/record_scan.py append --record <input.json> --map-root <map-root> --project-root <root> --log-dir <history> --report-dir <reports>
+<python-3> scripts/record_scan.py render --record <record.json> --output <report.md> --project-root <root>
+<python-3> scripts/record_scan.py verify --record <record.json> --map-root <map-root> --project-root <root> --report <report.md>
 ```
 
-Use stable component and element identifiers. Record the objective, scope,
-authoritative sources, skill hash, timestamp, and per-status counts. Derive
-component and scan summaries from element states rather than entering an
-unsupported aggregate `PASS` manually.
+`render` derives Markdown deterministically from a persisted record. `verify`
+recomputes current local identities and reports drift without rewriting
+history. External sources are never fetched implicitly; without a SHA-256 digest or a
+full lowercase 40-/64-hexadecimal object ID they remain `unverifiable`. Reject path escapes, links or
+reparse points, oversized selections, unstable reads, unsafe URLs, and
+secret-like observation text before writing.
 
-For every element, use exactly one evidence method:
+Legacy flag-only v1 records and `references/scan-record.schema.json` remain
+readable but frozen. Render and verify label them `legacy_unbound` because their
+prose cannot be upgraded into claim-to-evidence bindings automatically;
+`draft-v2` copies it only into an untested, unbound draft for human review.
 
-- `inspected`: content or metadata was read;
-- `schema_validated`: a declared schema or deterministic structural contract
-  was applied;
-- `executed_test`: executable behavior was run and its result observed;
-- `replayed`: stored outputs were deterministically recomputed;
-- `inferred`: the conclusion follows from cited evidence but was not directly
-  executed;
-- `not_tested`: the element lacks direct evidence.
-
-Do not label an element `executed_test` merely because it was read, parsed,
-found on disk, or mentioned by another artifact. Keep check status (`PASS`,
-`FAIL`, `PARTIAL`, `PENDING`, `NA`, or `BLOCKED`) separate from claim status
-(`supported`, `partially_supported`, `contradicted`, `untested`,
-`invalidly_specified`, or `not_applicable`).
-
-For a formal or explicitly logged audit, persist the record with
-`scripts/record_scan.py` into an append-only history directory. Use
-`references/scan-record.schema.json` as the exchange contract and
-`assets/scan-record.template.json` as the starting shape. Never overwrite or
-rewrite an earlier scan record. For a read-only task without write authority,
-emit the complete record in the response and state that persistence was not
-authorized; do not silently mutate the audited project.
+The accepted map is structural authority, the append-only JSON is audit
+authority, and Markdown is a derived view. For a read-only task without write
+authority, emit the complete proposed input in the response and say that it was
+not persisted; never imply an append occurred.
 
 ## Report internal product failures separately
 
@@ -494,6 +560,32 @@ Use the owner API for private `auto-minimal` delivery. It requires the scoped
 client token in `ANALYZE_PROJECT_CLAIMS_REPORT_TOKEN`; never write that token
 into policy or project files. Suspected security vulnerabilities must use the
 repository's private vulnerability reporting channel, not this reporter.
+
+## Keep installation analytics explicit and separate
+
+Installation analytics are optional owner infrastructure, not a default skill
+side effect. No public endpoint is bundled. Do not prompt, create an identity,
+or send an event merely because the skill was installed, invoked, updated, or
+used to report a problem. Update consent and reporting consent do not authorize
+analytics.
+
+When the user explicitly asks and an owner endpoint is available, route these
+requests to `scripts/installation_analytics.py` with global options before the
+verb:
+
+- "show installation analytics status" -> `--format json status`
+- "preview installation analytics" -> `--format json preview`
+- "enable installation analytics for <endpoint>" -> `--format json enable --endpoint <endpoint>`
+- "send an installation analytics check-in" -> `--format json check-in`
+- "disable installation analytics" -> `--format json disable`
+- "erase my installation analytics" -> `--format json erase`
+
+Enabling creates local random identity but sends nothing; a later check-in is
+the first network event. The scoped client token must come only from
+`ANALYZE_PROJECT_CLAIMS_ANALYTICS_TOKEN`. Describe the owner metric as unique
+consenting activated installations, never downloads, users, or total installs.
+Do not claim a live count until the owner API is deployed and the aggregate was
+actually queried.
 
 ## Run consent-gated update maintenance
 

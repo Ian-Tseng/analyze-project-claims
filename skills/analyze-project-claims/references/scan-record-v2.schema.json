@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/schemas/scan-record-input-v2.json",
+  "title": "Analyze Project Claims Evidence-Bound Scan Input v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "objective",
+    "scope",
+    "authority",
+    "evidence_items",
+    "claims",
+    "bindings",
+    "limitations",
+    "summary",
+    "unresolved_uncertainties"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "objective": {"$ref": "#/$defs/text"},
+    "scope": {"$ref": "#/$defs/nonempty_text_array"},
+    "authority": {"$ref": "#/$defs/nonempty_text_array"},
+    "evidence_items": {
+      "type": "array",
+      "maxItems": 300,
+      "items": {"$ref": "#/$defs/evidence_item"}
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "items": {"$ref": "#/$defs/claim"}
+    },
+    "bindings": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {"$ref": "#/$defs/binding"}
+    },
+    "limitations": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {"$ref": "#/$defs/limitation"}
+    },
+    "summary": {"$ref": "#/$defs/summary"},
+    "unresolved_uncertainties": {"$ref": "#/$defs/text_array"}
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z][a-z0-9]*(?:[-:.][a-z0-9]+)*$"
+    },
+    "text": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "text_array": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+    "nonempty_text_array": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/text"}
+    },
+    "file_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path"],
+      "properties": {
+        "kind": {"const": "file"},
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+        }
+      }
+    },
+    "https_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "url"],
+      "properties": {
+        "kind": {"const": "https"},
+        "url": {"type": "string", "format": "uri", "pattern": "^https://", "maxLength": 1000},
+        "revision": {"type": "string", "minLength": 1, "maxLength": 300},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "source": {"oneOf": [{"$ref": "#/$defs/file_source"}, {"$ref": "#/$defs/https_source"}]},
+    "whole_file_locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {"kind": {"const": "whole_file"}}
+    },
+    "value_locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "value"],
+      "properties": {
+        "kind": {"enum": ["json_pointer", "test_case", "artifact_key"]},
+        "value": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    },
+    "line_range_locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "start", "end"],
+      "properties": {
+        "kind": {"const": "line_range"},
+        "start": {"type": "integer", "minimum": 1},
+        "end": {"type": "integer", "minimum": 1}
+      }
+    },
+    "locator": {
+      "oneOf": [
+        {"$ref": "#/$defs/whole_file_locator"},
+        {"$ref": "#/$defs/value_locator"},
+        {"$ref": "#/$defs/line_range_locator"}
+      ]
+    },
+    "evidence_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "source", "locator", "method", "observed_summary"],
+      "properties": {
+        "evidence_id": {"$ref": "#/$defs/id"},
+        "source": {"$ref": "#/$defs/source"},
+        "locator": {"$ref": "#/$defs/locator"},
+        "method": {
+          "enum": ["inspected", "schema_validated", "executed_test", "replayed", "inferred", "not_tested"]
+        },
+        "observed_summary": {"$ref": "#/$defs/text"}
+      }
+    },
+    "element_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["component_id", "element_id"],
+      "properties": {
+        "component_id": {"$ref": "#/$defs/id"},
+        "element_id": {"$ref": "#/$defs/id"}
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "statement", "element_ref", "material", "status", "rationale"],
+      "properties": {
+        "claim_id": {"$ref": "#/$defs/id"},
+        "statement": {"$ref": "#/$defs/text"},
+        "element_ref": {"$ref": "#/$defs/element_ref"},
+        "material": {"type": "boolean"},
+        "status": {
+          "enum": ["supported", "partially_supported", "contradicted", "untested", "invalidly_specified", "not_applicable"]
+        },
+        "rationale": {"$ref": "#/$defs/text"}
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "evidence_id", "role"],
+      "properties": {
+        "claim_id": {"$ref": "#/$defs/id"},
+        "evidence_id": {"$ref": "#/$defs/id"},
+        "role": {"enum": ["supports", "contradicts", "limits", "context"]}
+      }
+    },
+    "limitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["limitation_id", "text", "claim_ids", "evidence_ids"],
+      "properties": {
+        "limitation_id": {"$ref": "#/$defs/id"},
+        "text": {"$ref": "#/$defs/text"},
+        "claim_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}},
+        "evidence_ids": {"type": "array", "items": {"$ref": "#/$defs/id"}}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strongest_safe_claim_id", "claim_boundary_ids", "no_supported_claim"],
+      "properties": {
+        "strongest_safe_claim_id": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+        "claim_boundary_ids": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "no_supported_claim": {"type": "boolean"}
+      }
+    }
+  }
+}

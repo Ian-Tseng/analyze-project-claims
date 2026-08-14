@@ -70,6 +70,7 @@ py -3 .\skills\analyze-project-claims\scripts\update_policy.py `
   verify-package
 
 py -3 -m unittest discover -s tests -v
+py -3 -m unittest discover -s tests -p "test_evidence_bound_scan*.py" -v
 ```
 
 On macOS or Linux, replace `py -3` with `python3`. Remove
@@ -79,7 +80,9 @@ Git.
 The expected results are:
 
 - package verification succeeds;
-- the complete test suite passes;
+- the complete suite and focused evidence-bound record tests pass;
+- both v2 schemas, the v2 template, and the evidence-bound record guide are in
+  `references/package-manifest.json`;
 - `VERSION`, `CITATION.cff`, and `references/package-version.json` agree;
 - no release placeholder remains;
 - `git status` contains only intentional files.
@@ -191,6 +194,36 @@ Invoke the installed skill once. It should finish the substantive audit before
 asking for update consent. Say `enable automatic updates`, invoke it again, and
 confirm that an up-to-date check is silent.
 
+Test Claude Code as a separate managed target in a clean environment with no
+duplicate skill:
+
+```powershell
+gh skill install "$Owner/$Repository" `
+  skills/analyze-project-claims/SKILL.md `
+  --agent claude-code `
+  --scope user
+
+gh skill list --agent claude-code --scope user `
+  --json skillName,sourceURL,scope,version,pinned,path
+```
+
+From a neutral consumer directory outside the publisher repository, run `gh
+skill update analyze-project-claims --dry-run`. Then start Claude Code, confirm
+that `/skills` lists `analyze-project-claims`, and invoke
+`/analyze-project-claims` on a disposable fixture. Record the Claude Code and
+GitHub CLI versions, operating system, source version and tree, installed path,
+manifest digest, invocation, and result. Test a manual directory copy
+separately when needed; it is host-managed and does not establish managed
+update state.
+
+If no authenticated Claude Code CLI is available, restrict the release claim to
+structural Agent Skills compatibility. Do not claim Claude Code runtime
+validation until the smoke test above has been observed.
+
+Use [How to Validate a GitHub Skill Across Codex and Claude Code](docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md)
+as the reusable procedure. Record exact observations and gaps in an evidence
+log such as [Claude Code E2E Evidence Log](docs/CLAUDE_CODE_E2E_LOG.md).
+
 A real replacement test requires a later published candidate. During that
 test, the current invocation must continue using its starting version and the
 next invocation must load the verified new version.
@@ -214,10 +247,12 @@ Configure the desired GitHub notifications. The Issues list or private API is
 the authoritative receipt; a notification is convenience, not proof of
 ingestion.
 
-Triage the report before changing code. Require a regression test, reviewed
-fix, passing CI, and a new versioned SemVer release whose tag is not moved.
-Never run or merge code from an issue body automatically. Close the issue only
-after the released fix and installed-update evidence exist.
+Triage the report before changing code. Eligible public reports can use the
+owner-gated [Agent Maintainer](docs/AGENT_MAINTAINER.md) to produce an isolated,
+validated draft pull request. Never execute issue text or automatically merge,
+release, or close a report. Require a regression test, reviewed fix, passing
+CI, and a new versioned SemVer release whose tag is not moved. Close the issue
+only after the released fix and installed-update evidence exist.
 
 If operating the optional API, follow
 [Internal Problem Reporting](docs/PROBLEM_REPORTING.md). Production requires an
@@ -229,10 +264,26 @@ The API service is owner infrastructure and is not installed with the skill.
 Add report schemas and `problem_report.py` to the package-manifest check. Never
 publish a package whose runtime event enum and JSON schema disagree.
 
+If enabling the optional agent-maintainer workflow, follow
+[Agent Maintainer for Internal Reports](docs/AGENT_MAINTAINER.md). Create the
+owner-only `agent-ready` label and add dedicated `OPENAI_API_KEY` and narrowly
+scoped, expiring `AGENT_MAINTAINER_TOKEN` secrets. Verify the exact pinned
+Actions revisions before each release. Do not apply the label until the issue's
+fixed disclosure and bounded form pass owner review. A successful run creates
+only a draft candidate; it never replaces the release checklist above.
+
+If operating installation analytics, follow
+[Privacy-Bounded Installation Analytics](docs/INSTALLATION_ANALYTICS.md), run
+both analytics test modules, publish the exact fields and retention policy, and
+deploy the API behind HTTPS before distributing a scoped client credential.
+Never describe repository traffic or the aggregate as downloads, users, or all
+installs. If no production endpoint was observed, keep the feature described as
+an inactive reference architecture.
+
 ## 7. Evidence boundary
 
 A successful dry-run proves package discovery and validation only. It does not
 prove that the repository was pushed, that a release was published, that Codex
-loaded it, or that automatic replacement works across supported operating
-systems. Record those observations separately before claiming release
-readiness.
+or Claude Code loaded it, or that automatic replacement works across supported
+operating systems. Record those observations separately before claiming
+release readiness.
