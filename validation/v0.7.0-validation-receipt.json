@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "candidate_version": "0.7.0",
+  "recorded_at_utc": "2026-08-14T15:22:00Z",
+  "platform": "Windows",
+  "full_suite": {
+    "command": "py -3 -m unittest discover -s tests -p test_*.py",
+    "status": "PASS",
+    "tests_run": 176,
+    "skipped": 1,
+    "skip_boundary": "The generic update-policy symlink test is privilege-dependent on Windows; the dedicated evidence-bound Windows junction test passed."
+  },
+  "focused_evidence_bound_suite": {
+    "status": "PASS",
+    "tests_run": 41,
+    "failed": 0
+  },
+  "lifecycle_receipt_suite": {
+    "command": "py -3 -m unittest discover -s tests -p test_lifecycle_receipt_consumer.py -v",
+    "status": "PASS",
+    "tests_run": 8,
+    "failed": 0
+  },
+  "package_verification": {
+    "status": "PASS",
+    "package_manifest_digest": "9d486dacb7d740e71e17c45f0a7243e7ca3f0f161382d8131afc129bcde95186",
+    "version": "0.7.0"
+  },
+  "engine_verification": {
+    "status": "PASS",
+    "engine_name": "component-evidence",
+    "engine_version": "1.2.0",
+    "engine_digest": "d8f3e1ea723c123cdcdebd30cdfcdcc542e716bb52dfb8f06867d4e75d26060c"
+  },
+  "skill_validation": {
+    "status": "PASS",
+    "validator_result": "Skill is valid!"
+  },
+  "component_map_verification": {
+    "status": "PASS",
+    "action": "checked_unchanged",
+    "map_id": "component-map-3084c60e1789",
+    "source_changes": []
+  },
+  "independent_ship_audit": {
+    "status": "PASS",
+    "focused_tests": 41,
+    "targeted_adversarial_probes": 3,
+    "open_p1_gaps": 0
+  },
+  "limitations": [
+    "These are local Windows candidate results, not commit-bound remote CI or public-install evidence.",
+    "Artifact identity and freshness checks do not establish semantic entailment.",
+    "Claude runtime activation was not observed on this host."
+  ]
+}

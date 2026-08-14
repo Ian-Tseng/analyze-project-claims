@@ -188,12 +188,13 @@
     "integrity": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["canonical_payload_sha256", "output_schema_sha256", "renderer_id", "renderer_sha256"],
+      "required": ["canonical_payload_sha256", "output_schema_sha256", "renderer_id", "renderer_sha256", "recorder_sha256"],
       "properties": {
         "canonical_payload_sha256": {"$ref": "#/$defs/sha256"},
         "output_schema_sha256": {"$ref": "#/$defs/sha256"},
         "renderer_id": {"const": "evidence-bound-markdown-v1"},
-        "renderer_sha256": {"$ref": "#/$defs/sha256"}
+        "renderer_sha256": {"$ref": "#/$defs/sha256"},
+        "recorder_sha256": {"$ref": "#/$defs/sha256"}
       }
     }
   }

@@ -9,6 +9,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from evidence_bound_fixtures import accepted_map_record
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = ROOT / "skills" / "analyze-project-claims"
@@ -36,17 +38,13 @@ class EvidenceBoundScanOperationalTests(unittest.TestCase):
             check=False,
         )
 
-    def prepare(self, root: Path, *, map_id: str = "component-map-0123456789ab") -> tuple[Path, Path]:
+    def prepare(self, root: Path, *, map_id: str | None = None) -> tuple[Path, Path]:
         artifact = root / "receipt.json"
         artifact.write_text('{"status":"passed"}\n', encoding="utf-8")
         map_root = root / ".claim-audit" / "component-map"
-        value = {
-            "schema_version": "1.0",
-            "map_id": map_id,
-            "map_state": "accepted",
-            "skill_name": "analyze-project-claims",
-            "skill_sha256": hashlib.sha256((SKILL_ROOT / "SKILL.md").read_bytes()).hexdigest(),
-            "components": [
+        value = accepted_map_record(
+            SKILL_ROOT,
+            [
                 {
                     "component_id": "validation",
                     "component_type": "artifact",
@@ -60,8 +58,8 @@ class EvidenceBoundScanOperationalTests(unittest.TestCase):
                     ],
                 }
             ],
-        }
-        value["integrity"] = {"canonical_payload_sha256": canonical_sha256(value)}
+            map_id_override=map_id,
+        )
         map_root.mkdir(parents=True)
         (map_root / "accepted-map.json").write_text(
             json.dumps(value, indent=2) + "\n", encoding="utf-8"

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/personal-agent-skills/schemas/lifecycle-verification-receipt-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "protocol_version", "run_id", "plan_digest", "verifier", "adapter", "product", "target", "status", "phases", "strongest_safe_claim", "limitations", "actions_not_performed", "parent_receipt_digest", "iteration", "resume_digest", "receipt_digest"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "kind": {"const": "LifecycleVerificationReceipt"},
+    "protocol_version": {"const": "1.0"},
+    "run_id": {"type": "string", "pattern": "^plv-[a-z0-9-]{1,64}$"},
+    "plan_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "verifier": {"type": "object"},
+    "adapter": {"type": "object"},
+    "product": {"type": "object"},
+    "target": {"type": "object"},
+    "status": {"enum": ["RELEASE_B_REQUIRED", "CLEANUP_REQUIRED", "ROLLBACK_COMPLETE_CLEANUP_REQUIRED", "RECOVERY_REQUIRED", "RUN_INTERRUPTED_RECOVERABLE", "COMPLETE", "RECOVERED"]},
+    "phases": {"type": "array", "maxItems": 16, "items": {"$ref": "lifecycle-phase-receipt.schema.json"}},
+    "strongest_safe_claim": {"type": "string", "minLength": 1, "maxLength": 500},
+    "limitations": {"type": "array", "maxItems": 32, "items": {"type": "string", "maxLength": 120}},
+    "actions_not_performed": {"type": "array", "contains": {"const": "report_send"}},
+    "parent_receipt_digest": {"type": ["string", "null"], "pattern": "^sha256:[0-9a-f]{64}$"},
+    "iteration": {"type": "integer", "minimum": 0, "maximum": 3},
+    "resume_digest": {"type": ["string", "null"], "pattern": "^sha256:[0-9a-f]{64}$"},
+    "receipt_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

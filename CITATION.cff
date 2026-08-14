@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software, please cite this software artifact."
 title: "Analyze Project Claims: Evidence-Bounded Auditing for Agent-Managed Projects"
 type: software
-version: "0.6.3"
-date-released: "2026-08-13"
+version: "0.7.0"
+date-released: "2026-08-14"
 authors:
   - family-names: "Tseng"
     given-names: "Yin-Yan"

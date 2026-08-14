@@ -23,10 +23,11 @@ from _internal.component_evidence.identity import (
     EngineIdentityError,
     verified_engine_summary,
 )
+from reconcile_component_map import MapError, _validate_map
 
 
 SCHEMA_VERSION = "2.0"
-RECORDER_VERSION = "2.0.0"
+RECORDER_VERSION = "2.1.0"
 RECORD_KIND = "evidence_bound_audit_record"
 RENDERER_ID = "evidence-bound-markdown-v1"
 COMMANDS = {
@@ -42,6 +43,7 @@ COMMANDS = {
 ID_PATTERN = re.compile(r"^[a-z][a-z0-9]*(?:[-:.][a-z0-9]+)*$")
 MAP_ID_PATTERN = re.compile(r"^component-map-[0-9a-f]{12}$")
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
+IMMUTABLE_REVISION_PATTERN = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 SECRET_PATTERNS = (
     re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----", re.IGNORECASE),
     re.compile(r"\b(?:gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16})\b"),
@@ -74,6 +76,8 @@ MAX_CLAIMS = 200
 MAX_EVIDENCE = 300
 MAX_BINDINGS = 1000
 MAX_SOURCE_BYTES = 10 * 1024 * 1024
+MAX_RECORD_BYTES = 5 * 1024 * 1024
+MAX_TEXT_ITEMS = 500
 MAX_SELECTION_BYTES = 64 * 1024
 MAX_OBSERVATION_CHARS = 2000
 MAX_RENDER_BYTES = 1024 * 1024
@@ -155,8 +159,18 @@ def _sha256_file(path: Path) -> str:
 
 def _load_json(path: Path, code: str = "RECORD_JSON_INVALID") -> dict[str, Any]:
     try:
+        if path.stat().st_size > MAX_RECORD_BYTES:
+            _raise(
+                code,
+                f"JSON input {path.name!r} exceeds {MAX_RECORD_BYTES} bytes.",
+                "Record and map inputs are bounded before parsing.",
+                "The oversized input was not parsed.",
+                "Use a bounded record or split unrelated audit scope.",
+            )
         value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
+    except AuditRecordError:
+        raise
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, RecursionError) as exc:
         _raise(
             code,
             f"Cannot read valid JSON from {path}.",
@@ -237,10 +251,14 @@ def _looks_like_test_source(source: dict[str, Any]) -> bool:
 
 
 def _text_list(value: Any, field: str, *, nonempty: bool = False) -> list[str]:
-    if not isinstance(value, list) or (nonempty and not value):
+    if (
+        not isinstance(value, list)
+        or len(value) > MAX_TEXT_ITEMS
+        or (nonempty and not value)
+    ):
         _raise(
             "RECORD_SCHEMA_UNSUPPORTED",
-            f"{field} must be {'a non-empty' if nonempty else 'an'} array of strings.",
+            f"{field} must be a bounded {'non-empty ' if nonempty else ''}array of strings.",
             "The input has the wrong collection shape.",
             "The record cannot be validated or appended.",
             f"Provide the required {field} array.",
@@ -294,7 +312,16 @@ def _is_reparse(path: Path) -> bool:
 
 
 def _safe_file(project_root: Path, relative: str) -> Path:
-    root = project_root.resolve(strict=True)
+    declared_root = Path(os.path.abspath(project_root))
+    if declared_root.is_symlink() or _is_reparse(declared_root):
+        _raise(
+            "EVIDENCE_PATH_UNSAFE",
+            "The declared project root is a symlink or reparse point.",
+            "Root-bound evidence requires an ordinary directory identity.",
+            "The evidence artifact will not be read.",
+            "Use the resolved ordinary project directory as --project-root.",
+        )
+    root = declared_root.resolve(strict=True)
     candidate = root.joinpath(*PurePosixPath(relative).parts)
     cursor = root
     for part in PurePosixPath(relative).parts:
@@ -568,52 +595,81 @@ def _normalize_source(raw: Any, field: str) -> dict[str, Any]:
 
 
 def _load_map(map_root: Path, project_root: Path, skill_root: Path) -> dict[str, Any]:
-    project = project_root.resolve(strict=True)
-    map_path = (map_root / "accepted-map.json").resolve(strict=True)
+    declared_project = Path(os.path.abspath(project_root))
+    declared_map = Path(os.path.abspath(map_root / "accepted-map.json"))
+    if declared_project.is_symlink() or _is_reparse(declared_project):
+        _raise(
+            "MAP_NOT_ACCEPTED",
+            "The declared project root is a symlink or reparse point.",
+            "Accepted-map identity requires an ordinary project root.",
+            "The scan cannot bind to this map.",
+            "Use the resolved ordinary project directory as --project-root.",
+        )
+    try:
+        lexical_relative = declared_map.relative_to(declared_project)
+    except ValueError:
+        _raise(
+            "MAP_NOT_ACCEPTED",
+            "The accepted map path is lexically outside the project root.",
+            f"Declared map path: {declared_map}.",
+            "The scan cannot bind to this map.",
+            "Place the accepted map under the project root.",
+        )
+    cursor = declared_project
+    for part in lexical_relative.parts:
+        cursor = cursor / part
+        if cursor.exists() and (cursor.is_symlink() or _is_reparse(cursor)):
+            _raise(
+                "MAP_NOT_ACCEPTED",
+                "The accepted map path crosses a symlink or reparse point.",
+                f"Unsafe map path component: {cursor}.",
+                "The scan cannot bind to this map.",
+                "Use ordinary directories and an ordinary accepted-map.json file.",
+            )
+    project = declared_project.resolve(strict=True)
+    map_path = declared_map.resolve(strict=True)
     try:
         relative_map = map_path.relative_to(project).as_posix()
     except ValueError:
         _raise(
             "MAP_NOT_ACCEPTED",
-            "The accepted map is outside the project root.",
+            "The accepted map resolves outside the project root.",
             f"Resolved map path: {map_path}.",
             "The scan cannot bind to this map.",
             "Place the accepted map under the project root.",
         )
-    if map_path.is_symlink() or _is_reparse(map_path):
+    if not map_path.is_file():
         _raise(
             "MAP_NOT_ACCEPTED",
-            "The accepted map is a symlink or reparse point.",
-            "Map identity must resolve to an ordinary local file.",
+            "accepted-map.json is not an ordinary file.",
+            "Map identity requires one bounded local JSON file.",
             "The scan cannot bind to this map.",
-            "Use an ordinary accepted-map.json file.",
+            "Provide an ordinary accepted-map.json file.",
         )
     value = _load_json(map_path, "MAP_NOT_ACCEPTED")
-    map_id = value.get("map_id")
-    if (
-        value.get("map_state") != "accepted"
-        or value.get("skill_name") != "analyze-project-claims"
-        or not isinstance(map_id, str)
-        or MAP_ID_PATTERN.fullmatch(map_id) is None
-    ):
+    try:
+        _validate_map(value, str(map_path))
+    except MapError as exc:
+        message = str(exc)
+        code = (
+            "MAP_IDENTITY_MISMATCH"
+            if "integrity" in message or "map_id does not match" in message
+            else "MAP_NOT_ACCEPTED"
+        )
+        _raise(
+            code,
+            "accepted-map.json fails the authoritative component-map contract.",
+            message,
+            "No v2 record can bind to this map.",
+            "Reconcile and explicitly accept a valid component-map candidate.",
+        )
+    if value["map_state"] != "accepted":
         _raise(
             "MAP_NOT_ACCEPTED",
-            "accepted-map.json is not an accepted analyze-project-claims map with a semantic map ID.",
-            "The map state, skill name, or component-map identity is invalid.",
+            "accepted-map.json is not in the accepted lifecycle state.",
+            f"Observed map_state: {value['map_state']!r}.",
             "No v2 record can be validated or appended.",
-            "Reconcile and explicitly accept a component-map candidate first.",
-        )
-    integrity = value.get("integrity")
-    expected = integrity.get("canonical_payload_sha256") if isinstance(integrity, dict) else None
-    payload = copy.deepcopy(value)
-    payload.pop("integrity", None)
-    if not isinstance(expected, str) or _sha256_bytes(_canonical_bytes(payload)) != expected:
-        _raise(
-            "MAP_IDENTITY_MISMATCH",
-            "accepted-map.json fails its canonical integrity check.",
-            "The persisted map payload does not match its integrity digest.",
-            "No v2 record can bind to this map.",
-            "Restore or explicitly replace the accepted map through reconciliation.",
+            "Explicitly accept the reviewed component-map candidate first.",
         )
     skill_sha = _sha256_file(skill_root / "SKILL.md")
     if value.get("skill_sha256") != skill_sha:
@@ -841,6 +897,9 @@ def _normalize_input(raw: Any, map_info: dict[str, Any]) -> dict[str, Any]:
 
 
 def _validate_binding_invariants(value: dict[str, Any], freshness: dict[str, str] | None = None) -> None:
+    evidence_methods = {
+        item["evidence_id"]: item["method"] for item in value["evidence_items"]
+    }
     by_claim: dict[str, list[dict[str, str]]] = {claim["claim_id"]: [] for claim in value["claims"]}
     for binding in value["bindings"]:
         by_claim[binding["claim_id"]].append(binding)
@@ -870,6 +929,16 @@ def _validate_binding_invariants(value: dict[str, Any], freshness: dict[str, str
         bindings = by_claim[claim_id]
         support = [item for item in bindings if item["role"] == "supports"]
         contradictions = [item for item in bindings if item["role"] == "contradicts"]
+        for binding in bindings:
+            method = evidence_methods[binding["evidence_id"]]
+            if binding["role"] != "context" and method == "not_tested":
+                _raise(
+                    "EVIDENCE_METHOD_ROLE_CONFLICT",
+                    f"Evidence {binding['evidence_id']!r} uses not_tested but is bound as {binding['role']}.",
+                    "The not_tested method can provide context only; it cannot establish support, contradiction, or a limitation.",
+                    "The claim status is not evidence-bound.",
+                    "Use context, collect evidence with an applicable method, or lower the claim status.",
+                )
         if claim["status"] in {"supported", "partially_supported"} and not support:
             _raise("BINDING_MISSING", f"Claim {claim_id!r} is {claim['status']} but has no supporting evidence binding.", "A status assertion exists without structural support.", "The claim cannot be appended or selected as strongest.", "Add a supports binding or lower the claim status.")
         if claim["status"] == "contradicted" and not contradictions:
@@ -882,10 +951,17 @@ def _validate_binding_invariants(value: dict[str, Any], freshness: dict[str, str
             code = "STRONGEST_CLAIM_UNBOUND" if claim_id == strongest else "CLAIM_STATUS_CONFLICT"
             _raise(code, f"Supported claim {claim_id!r} has unresolved contradicting evidence.", "A supported status cannot coexist with unresolved counterevidence.", "The claim is not eligible as a safe supported claim.", "Use partially_supported or contradicted and state the boundary.")
         if freshness is not None and claim["status"] in {"supported", "partially_supported"}:
-            if not any(freshness[item["evidence_id"]] in CURRENT_FRESHNESS for item in support):
-                _raise("EVIDENCE_DIGEST_MISMATCH", f"Claim {claim_id!r} has no current supporting evidence.", "All supporting bindings are stale, missing, or unverifiable.", "The claim cannot be appended as supported.", "Refresh or immutably identify supporting evidence.")
+            support_freshness = [freshness[item["evidence_id"]] for item in support]
+            if not any(state in CURRENT_FRESHNESS for state in support_freshness):
+                code = (
+                    "EXTERNAL_EVIDENCE_UNVERIFIABLE"
+                    if "unverifiable" in support_freshness
+                    else "EVIDENCE_DIGEST_MISMATCH"
+                )
+                _raise(code, f"Claim {claim_id!r} has no current supporting evidence.", "All supporting bindings are stale, missing, or unverifiable.", "The claim cannot be appended as supported.", "Refresh or immutably identify supporting evidence.")
     if value["summary"]["no_supported_claim"] and any(
-        claim["status"] in {"supported", "partially_supported"} for claim in value["claims"]
+        claim["material"] and claim["status"] in {"supported", "partially_supported"}
+        for claim in value["claims"]
     ):
         _raise(
             "STRONGEST_CLAIM_UNBOUND",
@@ -912,8 +988,17 @@ def _validate_binding_invariants(value: dict[str, Any], freshness: dict[str, str
 def _materialize_evidence(item: dict[str, Any], project_root: Path, cache: dict[str, tuple[Path, bytes]]) -> dict[str, Any]:
     source = item["source"]
     if source["kind"] == "https":
-        freshness = "declared_immutable" if source.get("revision") or source.get("sha256") else "unverifiable"
-        selection_sha = source.get("sha256")
+        revision = source.get("revision")
+        immutable_revision = (
+            isinstance(revision, str)
+            and IMMUTABLE_REVISION_PATTERN.fullmatch(revision) is not None
+        )
+        freshness = (
+            "declared_immutable"
+            if source.get("sha256") or immutable_revision
+            else "unverifiable"
+        )
+        selection_sha = None
         identity = {"source": source, "locator": item["locator"], "method": item["method"], "selection_sha256": selection_sha}
         return {**item, "source": source, "selection_sha256": selection_sha, "freshness": freshness, "identity_sha256": _sha256_bytes(_canonical_bytes(identity))}
     relative = source["path"]
@@ -947,10 +1032,12 @@ def _scan_status(claims: list[dict[str, Any]]) -> str:
 
 def _contract_identities(skill_root: Path) -> dict[str, str]:
     schema_path = skill_root / "references" / "scan-record-output-v2.schema.json"
+    implementation_sha = _sha256_file(Path(__file__))
     return {
         "output_schema_sha256": _sha256_file(schema_path),
         "renderer_id": RENDERER_ID,
-        "renderer_sha256": _sha256_bytes(RENDERER_ID.encode("utf-8")),
+        "renderer_sha256": implementation_sha,
+        "recorder_sha256": implementation_sha,
     }
 
 
@@ -1008,6 +1095,250 @@ def _build_record(normalized: dict[str, Any], map_info: dict[str, Any], skill_ro
     return result
 
 
+def _required_object(value: Any, keys: set[str], field: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        _raise(
+            "RECORD_SCHEMA_UNSUPPORTED",
+            f"{field} must be an object.",
+            "The persisted v2 record has the wrong structural type.",
+            "The record cannot be safely rendered or verified.",
+            "Restore a conforming append-only record or append a new one.",
+        )
+    missing = sorted(keys - set(value))
+    if missing:
+        _raise(
+            "RECORD_SCHEMA_UNSUPPORTED",
+            f"{field} is missing required fields: {', '.join(missing)}.",
+            "The persisted v2 output contract is incomplete.",
+            "The record cannot be safely rendered or verified.",
+            "Restore a conforming append-only record or append a new one.",
+        )
+    _reject_unknown(value, keys, field)
+    return value
+
+
+def _required_sha256(value: Any, field: str) -> str:
+    if not isinstance(value, str) or SHA256_PATTERN.fullmatch(value) is None:
+        _raise(
+            "RECORD_SCHEMA_UNSUPPORTED",
+            f"{field} must be a lowercase SHA-256 digest.",
+            "The persisted identity field is malformed.",
+            "The record cannot be safely rendered or verified.",
+            "Restore the exact persisted digest or append a new record.",
+        )
+    return value
+
+
+def _validate_persisted_record(record: dict[str, Any]) -> None:
+    root_keys = {
+        "schema_version",
+        "record_kind",
+        "scan",
+        "evidence_items",
+        "claims",
+        "bindings",
+        "limitations",
+        "summary",
+        "integrity",
+    }
+    _required_object(record, root_keys, "record")
+    if record.get("schema_version") != SCHEMA_VERSION or record.get("record_kind") != RECORD_KIND:
+        _raise(
+            "RECORD_SCHEMA_UNSUPPORTED",
+            "The record is not a supported evidence-bound v2 output.",
+            "schema_version and record_kind must identify the exact persisted contract.",
+            "The record cannot be rendered or verified as v2.",
+            "Use a conforming v2 record; schema_version 1.0 remains legacy-readable.",
+        )
+
+    scan_keys = {
+        "scan_id",
+        "recorded_at_utc",
+        "recorder_version",
+        "skill_name",
+        "skill_sha256",
+        "engine_identity",
+        "accepted_map",
+        "objective",
+        "scope",
+        "authority",
+    }
+    scan = _required_object(record.get("scan"), scan_keys, "record.scan")
+    scan_id = _text(scan.get("scan_id"), "record.scan.scan_id", maximum=64)
+    if re.fullmatch(r"[0-9]{8}T[0-9]{12}Z-[0-9a-f]{8}", scan_id) is None:
+        _raise("RECORD_SCHEMA_UNSUPPORTED", "record.scan.scan_id is malformed.", "Persisted scan IDs use the UTC timestamp and random-suffix contract.", "The record cannot be safely addressed.", "Restore the original scan ID or append a new record.")
+    recorded_at = _text(scan.get("recorded_at_utc"), "record.scan.recorded_at_utc", maximum=64)
+    try:
+        datetime.fromisoformat(recorded_at.replace("Z", "+00:00"))
+    except ValueError:
+        _raise("RECORD_SCHEMA_UNSUPPORTED", "record.scan.recorded_at_utc is not an ISO-8601 timestamp.", "The persisted timestamp is malformed.", "The record chronology is not reliable.", "Restore the original timestamp or append a new record.")
+    recorder_version = _text(scan.get("recorder_version"), "record.scan.recorder_version", maximum=40)
+    if re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", recorder_version) is None:
+        _raise("RECORD_SCHEMA_UNSUPPORTED", "record.scan.recorder_version is malformed.", "Recorder versions use three-part semantic versioning.", "The recorder identity is incomplete.", "Restore a semantic recorder version.")
+    if scan.get("skill_name") != "analyze-project-claims":
+        _raise("RECORD_SCHEMA_UNSUPPORTED", "record.scan.skill_name is unsupported.", "This recorder only owns analyze-project-claims records.", "The record cannot be processed by this skill.", "Use the owning recorder.")
+    _required_sha256(scan.get("skill_sha256"), "record.scan.skill_sha256")
+
+    engine_keys = {
+        "status",
+        "provider_kind",
+        "engine_name",
+        "engine_version",
+        "map_schema_version",
+        "receipt_protocol_version",
+        "engine_digest",
+    }
+    engine = _required_object(scan.get("engine_identity"), engine_keys, "record.scan.engine_identity")
+    if engine.get("status") != "verified":
+        _raise("RECORD_SCHEMA_UNSUPPORTED", "record.scan.engine_identity.status must be verified.", "An unverified structural engine cannot be persisted as authority.", "The engine identity is unusable.", "Append only after verify-self succeeds.")
+    for field in engine_keys - {"status", "engine_digest"}:
+        _text(engine.get(field), f"record.scan.engine_identity.{field}", maximum=200)
+    _required_sha256(engine.get("engine_digest"), "record.scan.engine_identity.engine_digest")
+
+    accepted = _required_object(scan.get("accepted_map"), {"map_id", "path", "sha256"}, "record.scan.accepted_map")
+    map_id = _text(accepted.get("map_id"), "record.scan.accepted_map.map_id", maximum=64)
+    if MAP_ID_PATTERN.fullmatch(map_id) is None:
+        _raise("RECORD_SCHEMA_UNSUPPORTED", "record.scan.accepted_map.map_id is malformed.", "Accepted map IDs use component-map plus twelve hexadecimal characters.", "The map identity cannot be checked.", "Restore a valid accepted map identity.")
+    _relative_posix_path(accepted.get("path"), "record.scan.accepted_map.path")
+    _required_sha256(accepted.get("sha256"), "record.scan.accepted_map.sha256")
+
+    raw_evidence = record.get("evidence_items")
+    if not isinstance(raw_evidence, list) or len(raw_evidence) > MAX_EVIDENCE:
+        _raise("RECORD_SCHEMA_UNSUPPORTED", "record.evidence_items must be a bounded array.", "The persisted evidence registry is invalid or oversized.", "The record cannot be safely processed.", "Restore a conforming registry.")
+    input_evidence: list[dict[str, Any]] = []
+    freshness: dict[str, str] = {}
+    for index, evidence in enumerate(raw_evidence):
+        field = f"record.evidence_items[{index}]"
+        evidence = _required_object(
+            evidence,
+            {"evidence_id", "source", "locator", "method", "observed_summary", "selection_sha256", "freshness", "identity_sha256"},
+            field,
+        )
+        source = evidence.get("source")
+        if not isinstance(source, dict):
+            _raise("RECORD_SCHEMA_UNSUPPORTED", f"{field}.source must be an object.", "The persisted source has the wrong type.", "The evidence identity cannot be replayed.", "Restore a typed source object.")
+        if source.get("kind") == "file":
+            source = _required_object(source, {"kind", "path", "media_type", "byte_size", "sha256"}, f"{field}.source")
+            input_source: dict[str, Any] = {"kind": "file", "path": _relative_posix_path(source.get("path"), f"{field}.source.path")}
+            _text(source.get("media_type"), f"{field}.source.media_type", maximum=200)
+            byte_size = source.get("byte_size")
+            if isinstance(byte_size, bool) or not isinstance(byte_size, int) or not 0 <= byte_size <= MAX_SOURCE_BYTES:
+                _raise("RECORD_SCHEMA_UNSUPPORTED", f"{field}.source.byte_size is outside the supported range.", "The persisted file size is malformed or oversized.", "The evidence identity cannot be trusted.", "Restore a size between zero and the source limit.")
+            _required_sha256(source.get("sha256"), f"{field}.source.sha256")
+            expected_freshness = "current"
+        elif source.get("kind") == "https":
+            if "kind" not in source or "url" not in source:
+                _raise("RECORD_SCHEMA_UNSUPPORTED", f"{field}.source is missing kind or url.", "The persisted HTTPS source is incomplete.", "The evidence identity cannot be replayed.", "Restore a conforming HTTPS source.")
+            _reject_unknown(source, {"kind", "url", "revision", "sha256"}, f"{field}.source")
+            input_source = _validate_https_source(source, f"{field}.source")
+            revision = source.get("revision")
+            immutable_revision = isinstance(revision, str) and IMMUTABLE_REVISION_PATTERN.fullmatch(revision) is not None
+            expected_freshness = "declared_immutable" if source.get("sha256") or immutable_revision else "unverifiable"
+        else:
+            _raise("RECORD_SCHEMA_UNSUPPORTED", f"{field}.source.kind is unsupported.", "Only file and HTTPS sources are defined.", "The evidence identity cannot be replayed.", "Restore a supported source kind.")
+        selection = evidence.get("selection_sha256")
+        if source["kind"] == "file":
+            _required_sha256(selection, f"{field}.selection_sha256")
+        elif selection is not None:
+            _raise("RECORD_SCHEMA_UNSUPPORTED", f"{field}.selection_sha256 must be null for unfetched external evidence.", "No external selection bytes were resolved locally.", "The record would fabricate selected-content identity.", "Set it to null and append a new record.")
+        observed_freshness = evidence.get("freshness")
+        if observed_freshness != expected_freshness:
+            _raise("RECORD_DERIVATION_MISMATCH", f"{field}.freshness does not match its source identity.", f"Expected {expected_freshness!r}, observed {observed_freshness!r}.", "The record overstates or misstates evidence freshness.", "Append a new record from the source declaration.")
+        freshness_value = str(observed_freshness)
+        evidence_id = _identifier(evidence.get("evidence_id"), f"{field}.evidence_id")
+        freshness[evidence_id] = freshness_value
+        identity = {
+            "source": source,
+            "locator": evidence.get("locator"),
+            "method": evidence.get("method"),
+            "selection_sha256": selection,
+        }
+        expected_identity = _sha256_bytes(_canonical_bytes(identity))
+        if _required_sha256(evidence.get("identity_sha256"), f"{field}.identity_sha256") != expected_identity:
+            _raise("RECORD_DERIVATION_MISMATCH", f"{field}.identity_sha256 does not match its evidence identity.", "The source, locator, method, or selection identity changed.", "The evidence binding cannot be trusted.", "Restore the original record or append a new one.")
+        input_evidence.append(
+            {
+                "evidence_id": evidence_id,
+                "source": input_source,
+                "locator": evidence.get("locator"),
+                "method": evidence.get("method"),
+                "observed_summary": evidence.get("observed_summary"),
+            }
+        )
+
+    raw_claims = record.get("claims")
+    if not isinstance(raw_claims, list) or not raw_claims or len(raw_claims) > MAX_CLAIMS:
+        _raise("RECORD_SCHEMA_UNSUPPORTED", "record.claims must contain a bounded non-empty array.", "The persisted claim registry is invalid.", "The record cannot be safely processed.", "Restore one to the maximum supported number of claims.")
+    input_claims: list[dict[str, Any]] = []
+    fake_elements: dict[tuple[str, str], dict[str, Any]] = {}
+    for index, claim in enumerate(raw_claims):
+        field = f"record.claims[{index}]"
+        claim = _required_object(claim, {"claim_id", "statement", "claim_digest", "element_ref", "material", "status", "rationale"}, field)
+        statement = claim.get("statement")
+        if _required_sha256(claim.get("claim_digest"), f"{field}.claim_digest") != _sha256_bytes(_canonical_bytes(statement)):
+            _raise("RECORD_DERIVATION_MISMATCH", f"{field}.claim_digest does not match its statement.", "The persisted claim text and digest differ.", "The claim identity cannot be trusted.", "Restore the original claim or append a new record.")
+        ref = claim.get("element_ref")
+        if isinstance(ref, dict) and isinstance(ref.get("component_id"), str) and isinstance(ref.get("element_id"), str):
+            fake_elements[(ref["component_id"], ref["element_id"])] = {}
+        input_claims.append({key: claim.get(key) for key in ("claim_id", "statement", "element_ref", "material", "status", "rationale")})
+
+    summary_keys = {
+        "scan_status",
+        "claim_count",
+        "material_claim_count",
+        "claim_counts",
+        "evidence_count",
+        "strongest_safe_claim_id",
+        "strongest_safe_claim",
+        "claim_boundary_ids",
+        "no_supported_claim",
+        "unresolved_uncertainties",
+    }
+    summary = _required_object(record.get("summary"), summary_keys, "record.summary")
+    raw_input = {
+        "schema_version": SCHEMA_VERSION,
+        "objective": scan.get("objective"),
+        "scope": scan.get("scope"),
+        "authority": scan.get("authority"),
+        "evidence_items": input_evidence,
+        "claims": input_claims,
+        "bindings": record.get("bindings"),
+        "limitations": record.get("limitations"),
+        "summary": {
+            "strongest_safe_claim_id": summary.get("strongest_safe_claim_id"),
+            "claim_boundary_ids": summary.get("claim_boundary_ids"),
+            "no_supported_claim": summary.get("no_supported_claim"),
+        },
+        "unresolved_uncertainties": summary.get("unresolved_uncertainties"),
+    }
+    normalized = _normalize_input(raw_input, {"elements": fake_elements})
+    if normalized["claims"] != raw_claims or normalized["bindings"] != record.get("bindings") or normalized["limitations"] != record.get("limitations"):
+        _raise("RECORD_DERIVATION_MISMATCH", "The persisted registries are not their normalized v2 form.", "Claim digests, references, ordering, or bounded values differ from normalization.", "The record cannot be safely rendered or verified.", "Restore the append output or append a new record.")
+    _validate_binding_invariants(normalized, freshness)
+    strongest_id = normalized["summary"]["strongest_safe_claim_id"]
+    strongest_text = None if strongest_id is None else next(claim["statement"] for claim in raw_claims if claim["claim_id"] == strongest_id)
+    expected_summary = {
+        "scan_status": _scan_status(raw_claims),
+        "claim_count": len(raw_claims),
+        "material_claim_count": sum(1 for claim in raw_claims if claim["material"]),
+        "claim_counts": dict(sorted(Counter(claim["status"] for claim in raw_claims).items())),
+        "evidence_count": len(raw_evidence),
+        "strongest_safe_claim_id": strongest_id,
+        "strongest_safe_claim": strongest_text,
+        "claim_boundary_ids": normalized["summary"]["claim_boundary_ids"],
+        "no_supported_claim": normalized["summary"]["no_supported_claim"],
+        "unresolved_uncertainties": normalized["unresolved_uncertainties"],
+    }
+    if summary != expected_summary:
+        _raise("RECORD_DERIVATION_MISMATCH", "record.summary does not match the normalized registries.", "One or more counts, statuses, strongest-claim fields, boundaries, or uncertainties were recomputed differently.", "The derived summary cannot be trusted.", "Restore the original append output or append a new record.")
+
+    integrity = _required_object(record.get("integrity"), {"canonical_payload_sha256", "output_schema_sha256", "renderer_id", "renderer_sha256", "recorder_sha256"}, "record.integrity")
+    for field in ("canonical_payload_sha256", "output_schema_sha256", "renderer_sha256", "recorder_sha256"):
+        _required_sha256(integrity.get(field), f"record.integrity.{field}")
+    renderer_id = _text(integrity.get("renderer_id"), "record.integrity.renderer_id", maximum=100)
+    if renderer_id != RENDERER_ID:
+        _raise("RECORD_SCHEMA_UNSUPPORTED", "record.integrity.renderer_id is unsupported.", "The persisted output schema defines one renderer contract ID.", "The record cannot be rendered under an unknown contract.", "Use the matching released package or append a new record.")
+
 def _verify_record_integrity(record: dict[str, Any]) -> None:
     integrity = record.get("integrity")
     expected = integrity.get("canonical_payload_sha256") if isinstance(integrity, dict) else None
@@ -1017,6 +1348,22 @@ def _verify_record_integrity(record: dict[str, Any]) -> None:
         payload_integrity.pop("canonical_payload_sha256", None)
     if not isinstance(expected, str) or _sha256_bytes(_canonical_bytes(payload)) != expected:
         _raise("RECORD_INTEGRITY_MISMATCH", "The persisted record fails its canonical integrity check.", "The payload no longer matches its stored digest.", "The record must not be trusted or rendered as current.", "Restore the original record or append a new validated record.")
+    if (
+        record.get("schema_version") == SCHEMA_VERSION
+        and record.get("record_kind") == RECORD_KIND
+        and isinstance(record.get("scan"), dict)
+        and record["scan"].get("recorder_version") == "2.0.0"
+        and isinstance(record.get("integrity"), dict)
+        and "recorder_sha256" not in record["integrity"]
+    ):
+        _raise(
+            "LEGACY_V2_CONTRACT_UNBOUND",
+            "This pre-release recorder 2.0.0 record lacks code-bound recorder identity.",
+            "The final v2 contract added recorder_sha256 in recorder 2.1.0.",
+            "The record remains historical but cannot be rendered or verified as current.",
+            "Use recorder 2.0.0 only for historical inspection, or append a freshly reviewed record with recorder 2.1.0 or newer.",
+        )
+    _validate_persisted_record(record)
 
 
 def _atomic_create(path: Path, data: bytes) -> None:
@@ -1109,10 +1456,35 @@ def _required_repair(status_value: str) -> str:
     }[status_value]
 
 
-def render_record(record: dict[str, Any]) -> str:
-    if record.get("schema_version") != SCHEMA_VERSION or record.get("record_kind") != RECORD_KIND:
+def _is_legacy_record(record: dict[str, Any]) -> bool:
+    return record.get("schema_version") == "1.0" and "record_kind" not in record
+
+
+def render_record(
+    record: dict[str, Any],
+    project_root: Path | None = None,
+    report_path: Path | None = None,
+    skill_root: Path | None = None,
+) -> str:
+    if _is_legacy_record(record):
         return _legacy_render(record)
     _verify_record_integrity(record)
+    if skill_root is not None:
+        current_contract = _contract_identities(skill_root)
+        for field, code in (
+            ("output_schema_sha256", "SCHEMA_IDENTITY_MISMATCH"),
+            ("renderer_id", "RENDERER_IDENTITY_MISMATCH"),
+            ("renderer_sha256", "RENDERER_IDENTITY_MISMATCH"),
+            ("recorder_sha256", "RECORDER_IDENTITY_MISMATCH"),
+        ):
+            if record["integrity"].get(field) != current_contract[field]:
+                _raise(
+                    code,
+                    f"The active {field} differs from the implementation bound into the record.",
+                    "Standalone rendering must use the exact bound schema and implementation bytes.",
+                    "No potentially divergent report was emitted.",
+                    "Use the matching released package or append a new reviewed record.",
+                )
     lines = [
         "# Evidence-bound audit record",
         "",
@@ -1165,13 +1537,22 @@ def render_record(record: dict[str, Any]) -> str:
             evidence = evidence_by_id[binding["evidence_id"]]
             source = evidence["source"]
             if source["kind"] == "file":
-                destination = quote(source["path"], safe="/")
+                link_path = source["path"]
+                if project_root is not None and report_path is not None:
+                    target = Path(os.path.abspath(project_root)) / Path(*PurePosixPath(source["path"]).parts)
+                    link_path = Path(os.path.relpath(target, Path(os.path.abspath(report_path)).parent)).as_posix()
+                destination = quote(link_path, safe="/.")
                 source_label = f"[{_markdown_text(source['path'])}](<{destination}>)"
             else:
                 destination = quote(source["url"], safe=":/@-._~!$&'()*+,;=%")
                 source_label = f"[{_markdown_text(source['url'])}](<{destination}>)"
+            revision_label = (
+                f"; revision `{_markdown_text(source['revision'])}`"
+                if source.get("kind") == "https" and source.get("revision")
+                else ""
+            )
             lines.append(
-                f"- **{binding['role']}** `{_markdown_text(evidence['evidence_id'])}`: {source_label}; "
+                f"- **{binding['role']}** `{_markdown_text(evidence['evidence_id'])}`: {source_label}{revision_label}; "
                 f"{_markdown_text(_locator_label(evidence['locator']))}; freshness `{evidence['freshness']}`; "
                 f"artifact `{source.get('sha256', 'unavailable')}`; selection `{evidence.get('selection_sha256') or 'unavailable'}`"
             )
@@ -1285,17 +1666,28 @@ def _append(args: argparse.Namespace, skill_root: Path) -> int:
     if args.report_dir is not None:
         report_path = args.report_dir / f"{record['scan']['scan_id']}.md"
         try:
-            _atomic_create(report_path, render_record(record).encode("utf-8"))
+            _atomic_create(
+                report_path,
+                render_record(record, args.project_root, report_path, skill_root).encode("utf-8"),
+            )
         except (OSError, AuditRecordError) as exc:
-            print(f"REPORT_WRITE_FAILED\n\nProblem: The scan record was committed but its derived report was not written.\nCause: {exc}\nEffect: The JSON record remains authoritative and unchanged.\nFix: Run record_scan.py render --record {output} --output {report_path}\nRetry: record_scan.py render --record {output} --output {report_path}\nDocs: {DOC_URL}#report-write-failed", file=os.sys.stderr)
+            print(f"REPORT_WRITE_FAILED\n\nProblem: The scan record was committed but its derived report was not written.\nCause: {exc}\nEffect: The JSON record remains authoritative and unchanged.\nFix: Run record_scan.py render --record {output} --output {report_path} --project-root {args.project_root}\nRetry: record_scan.py render --record {output} --output {report_path} --project-root {args.project_root}\nDocs: {DOC_URL}#report-write-failed", file=os.sys.stderr)
             return 3
     print(json.dumps({"status": "appended", "log": str(output.resolve()), "report": str(report_path.resolve()) if report_path else None, "scan_id": record["scan"]["scan_id"], "scan_status": record["summary"]["scan_status"], "canonical_payload_sha256": record["integrity"]["canonical_payload_sha256"]}, indent=2, sort_keys=True))
     return 0
 
 
-def _render(args: argparse.Namespace) -> int:
+def _render(args: argparse.Namespace, skill_root: Path) -> int:
     value = _load_json(args.record)
-    report = render_record(value)
+    if args.output is not None and not _is_legacy_record(value) and args.project_root is None:
+        _raise(
+            "REPORT_CONTEXT_REQUIRED",
+            "Writing a v2 report requires --project-root.",
+            "Local evidence links must be resolved relative to the report directory.",
+            "The report was not written with broken links.",
+            "Provide the same project root used when appending the record.",
+        )
+    report = render_record(value, args.project_root, args.output, skill_root)
     if args.output is None:
         print(report, end="")
     else:
@@ -1306,7 +1698,7 @@ def _render(args: argparse.Namespace) -> int:
 
 def _verify(args: argparse.Namespace, skill_root: Path) -> int:
     record = _load_json(args.record)
-    if record.get("schema_version") != SCHEMA_VERSION or record.get("record_kind") != RECORD_KIND:
+    if _is_legacy_record(record):
         output = {"status": "legacy_unbound", "codes": ["LEGACY_RECORD_UNBOUND"], "record": str(args.record.resolve())}
         print(json.dumps(output, indent=2) if args.format == "json" else "LEGACY_RECORD_UNBOUND\nLegacy v1 records are readable but do not carry exact claim-to-evidence bindings.")
         return 3
@@ -1327,14 +1719,17 @@ def _verify(args: argparse.Namespace, skill_root: Path) -> int:
         ("output_schema_sha256", "SCHEMA_IDENTITY_MISMATCH"),
         ("renderer_id", "RENDERER_IDENTITY_MISMATCH"),
         ("renderer_sha256", "RENDERER_IDENTITY_MISMATCH"),
+        ("recorder_sha256", "RECORDER_IDENTITY_MISMATCH"),
     ):
         if record["integrity"].get(field) != current_contract[field]:
             codes.append(code)
     if record["scan"].get("skill_sha256") != _sha256_file(skill_root / "SKILL.md"):
         codes.append("SKILL_IDENTITY_MISMATCH")
+    if record["scan"].get("recorder_version") != RECORDER_VERSION:
+        codes.append("RECORDER_IDENTITY_MISMATCH")
     try:
         engine = verified_engine_summary(skill_root)
-        if record["scan"].get("engine_identity", {}).get("engine_digest") != engine["engine_digest"]:
+        if record["scan"].get("engine_identity") != engine:
             codes.append("ENGINE_IDENTITY_MISMATCH")
     except (EngineIdentityError, OSError):
         codes.append("ENGINE_IDENTITY_MISMATCH")
@@ -1342,8 +1737,21 @@ def _verify(args: argparse.Namespace, skill_root: Path) -> int:
         try:
             map_info = _load_map(args.map_root, args.project_root, skill_root)
             expected_map = record["scan"].get("accepted_map", {})
-            if expected_map.get("map_id") != map_info["value"]["map_id"] or expected_map.get("sha256") != map_info["sha256"]:
+            if (
+                expected_map.get("map_id") != map_info["value"]["map_id"]
+                or expected_map.get("sha256") != map_info["sha256"]
+                or expected_map.get("path") != map_info["relative_path"]
+            ):
                 codes.append("MAP_IDENTITY_MISMATCH")
+            if any(
+                (
+                    claim["element_ref"]["component_id"],
+                    claim["element_ref"]["element_id"],
+                )
+                not in map_info["elements"]
+                for claim in record["claims"]
+            ):
+                codes.append("CLAIM_ELEMENT_UNKNOWN")
         except AuditRecordError:
             codes.append("MAP_IDENTITY_MISMATCH")
         cache: dict[str, tuple[Path, bytes]] = {}
@@ -1358,18 +1766,52 @@ def _verify(args: argparse.Namespace, skill_root: Path) -> int:
                 if relative not in cache:
                     path = _safe_file(args.project_root, relative)
                     cache[relative] = (path, _read_stable(path))
-                _, data = cache[relative]
+                path, data = cache[relative]
                 selected = _select_bytes(data, evidence["locator"], relative)
-                if _sha256_bytes(data) != source.get("sha256") or _sha256_bytes(selected) != evidence.get("selection_sha256"):
+                expected_source = {
+                    "kind": "file",
+                    "path": relative,
+                    "media_type": mimetypes.guess_type(path.name)[0] or "application/octet-stream",
+                    "byte_size": len(data),
+                    "sha256": _sha256_bytes(data),
+                }
+                expected_selection = _sha256_bytes(selected)
+                expected_identity = _sha256_bytes(
+                    _canonical_bytes(
+                        {
+                            "source": expected_source,
+                            "locator": evidence["locator"],
+                            "method": evidence["method"],
+                            "selection_sha256": expected_selection,
+                        }
+                    )
+                )
+                if (
+                    source != expected_source
+                    or evidence.get("selection_sha256") != expected_selection
+                    or evidence.get("identity_sha256") != expected_identity
+                ):
                     codes.append("EVIDENCE_DIGEST_MISMATCH")
             except AuditRecordError:
                 codes.append("EVIDENCE_DIGEST_MISMATCH")
     if args.report is not None:
-        try:
-            if args.report.read_text(encoding="utf-8") != render_record(record):
+        contract_codes = {
+            "SCHEMA_IDENTITY_MISMATCH",
+            "RENDERER_IDENTITY_MISMATCH",
+            "RECORDER_IDENTITY_MISMATCH",
+        }
+        if not contract_codes.intersection(codes):
+            try:
+                expected_report = render_record(
+                    record,
+                    args.project_root,
+                    args.report,
+                    skill_root,
+                )
+                if args.report.read_text(encoding="utf-8") != expected_report:
+                    codes.append("REPORT_OUT_OF_DATE")
+            except (OSError, AuditRecordError):
                 codes.append("REPORT_OUT_OF_DATE")
-        except OSError:
-            codes.append("REPORT_OUT_OF_DATE")
     codes = sorted(set(codes))
     output = {"status": "verified" if not codes else "stale", "codes": codes, "record": str(args.record.resolve()), "canonical_payload_sha256": record["integrity"]["canonical_payload_sha256"]}
     if args.format == "json":
@@ -1399,6 +1841,7 @@ def _draft_v2(args: argparse.Namespace, skill_root: Path) -> int:
         "summary": {"strongest_safe_claim_id": None, "claim_boundary_ids": [], "no_supported_claim": True},
         "unresolved_uncertainties": ["LEGACY_RECORD_UNBOUND: human review and fresh evidence bindings are required."],
     }
+    _normalize_input(value, map_info)
     _write_json_exclusive(args.output, value)
     print(json.dumps({"status": "legacy_draft_created", "output": str(args.output.resolve()), "bindings_invented": 0}, indent=2))
     return 0
@@ -1439,6 +1882,7 @@ def _parser() -> argparse.ArgumentParser:
     render = subparsers.add_parser("render", help="Render a deterministic Markdown view")
     render.add_argument("--record", required=True, type=Path)
     render.add_argument("--output", type=Path)
+    render.add_argument("--project-root", type=Path)
     verify = subparsers.add_parser("verify", help="Recompute evidence identity and freshness")
     verify.add_argument("--record", required=True, type=Path)
     verify.add_argument("--map-root", type=Path)
@@ -1467,12 +1911,24 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "append":
             return _append(args, skill_root)
         if args.command == "render":
-            return _render(args)
+            return _render(args, skill_root)
         if args.command == "verify":
             return _verify(args, skill_root)
         return _draft_v2(args, skill_root)
     except (AuditRecordError, EngineIdentityError) as exc:
         print(f"record_scan: {exc}", file=os.sys.stderr)
+        return 2
+    except (KeyError, TypeError, IndexError, AttributeError, StopIteration) as exc:
+        print(
+            "record_scan: RECORD_SCHEMA_UNSUPPORTED\n\n"
+            "Problem: A persisted record is missing a required typed field.\n"
+            f"Cause: {type(exc).__name__}.\n"
+            "Effect: The record was not rendered or described as verified.\n"
+            "Fix: Validate against scan-record-output-v2.schema.json or restore the original bytes.\n"
+            "Retry: Rerun after repairing the structural contract.\n"
+            f"Docs: {DOC_URL}#record-schema-unsupported",
+            file=os.sys.stderr,
+        )
         return 2
     except OSError as exc:
         print(

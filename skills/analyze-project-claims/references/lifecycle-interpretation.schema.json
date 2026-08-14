@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/schemas/lifecycle-interpretation-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "protocol_version", "source_receipt_digest", "run_id", "status", "check_status", "claim_status", "evidence_method", "strongest_safe_claim", "finding", "finding_signature", "followup_required", "completed_cycles", "max_cycles", "scope", "actions_not_performed", "interpretation_digest"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "kind": {"const": "LifecycleReceiptInterpretation"},
+    "protocol_version": {"const": "1.0"},
+    "source_receipt_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "run_id": {"type": "string", "pattern": "^plv-[a-z0-9-]{1,64}$"},
+    "status": {"enum": ["CONSISTENT", "INCONSISTENT", "EVIDENCE_GAP", "RECONCILIATION_STALLED"]},
+    "check_status": {"enum": ["PASS", "FAIL", "PARTIAL", "BLOCKED"]},
+    "claim_status": {"enum": ["supported", "partially_supported", "contradicted"]},
+    "evidence_method": {"const": "schema_validated"},
+    "strongest_safe_claim": {"type": "string", "minLength": 1, "maxLength": 500},
+    "finding": {"type": ["object", "null"]},
+    "finding_signature": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "followup_required": {"type": "boolean"},
+    "completed_cycles": {"type": "integer", "minimum": 0, "maximum": 3},
+    "max_cycles": {"const": 3},
+    "scope": {"type": "object"},
+    "actions_not_performed": {"type": "array", "contains": {"const": "lifecycle_execution"}},
+    "interpretation_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

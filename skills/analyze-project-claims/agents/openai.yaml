@@ -1,4 +1,4 @@
 interface:
   display_name: "Analyze Project Claims"
-  short_description: "Audit claims, evidence, lifecycle, and decisions"
-  default_prompt: "Use $analyze-project-claims to audit this project's claims, evidence, lifecycle states, inconsistencies, and next action."
+  short_description: "Audit claims, lifecycle evidence, and decisions"
+  default_prompt: "Use $analyze-project-claims to audit this project's claims, lifecycle receipts, evidence, inconsistencies, and next action."

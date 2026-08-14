@@ -105,6 +105,8 @@ Unresolved uncertainty
 The skill does not silently turn 'unknown,' 'failed,' or 'not tested' into a
 pass.
 
+See the [lifecycle receipt guide](docs/LIFECYCLE_RECEIPT_GUIDE.md).
+
 ## Example
 
 If a status document says an experiment is complete but the result table was
@@ -235,9 +237,10 @@ py -3 .\skills\analyze-project-claims\scripts\record_scan.py append `
   --log-dir .\validation\history --report-dir .\validation\reports
 ```
 
-`executed_test` must cite a persisted result or receipt, not test source. Append
-and verify recompute local evidence. External evidence is not fetched and stays
-unverifiable without an immutable revision or digest. Legacy v1 records remain
+`executed_test` must cite a persisted result or receipt, not test source;
+`not_tested` is context-only. Append and verify recompute local evidence.
+External evidence is not fetched and stays unverifiable without a SHA-256 digest
+or full lowercase 40-/64-hexadecimal object ID. Legacy v1 records remain
 readable as `legacy_unbound`. See the
 [evidence-bound record guide](skills/analyze-project-claims/references/evidence-bound-audit-records.md)
 and [validation authority](validation/README.md).

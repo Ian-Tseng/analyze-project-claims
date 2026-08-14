@@ -1,6 +1,6 @@
 ---
 name: analyze-project-claims
-description: Analyze a project as a connected system of objectives, claims, assumptions, evidence, counterevidence, dependencies, risks, lifecycle states, and decisions. Use when assessing project health or direction; checking inconsistencies; auditing research evidence, experiment status, completion markers, paper-table eligibility, RAG transition artifacts, leakage, split integrity, manifest consumption, or claim boundaries; deciding whether to continue, validate, redesign, pause, or stop; or repairing active claims without rewriting historical evidence.
+description: Analyze a project as a connected system of objectives, claims, assumptions, evidence, counterevidence, dependencies, risks, lifecycle states, and decisions. Use when assessing project health or direction; checking inconsistencies; interpreting a product-lifecycle verification receipt; auditing research evidence, experiment status, completion markers, paper-table eligibility, RAG transition artifacts, leakage, split integrity, manifest consumption, or claim boundaries; deciding whether to continue, validate, redesign, pause, or stop; or repairing active claims without rewriting historical evidence.
 license: MIT
 ---
 
@@ -324,6 +324,41 @@ Use a table with:
 finding | evidence | status | safest interpretation | required repair
 ```
 
+## Interpret lifecycle verification evidence
+
+Select this route automatically when the user provides a
+`LifecycleVerificationReceipt` or asks whether product install, update,
+activation, report-preview, rollback, and cleanup evidence is mutually
+consistent. Do not run lifecycle commands here. `product-lifecycle` owns
+execution; this skill only validates and interprets its receipt.
+
+Use the installed, read-only consumer:
+
+```text
+<python-3> <skill-root>/scripts/lifecycle_receipt.py --format json interpret \
+  --receipt <lifecycle-verification-receipt.json> \
+  [--prior-request <verification-followup-request.json>]
+```
+
+Keep check status, claim status, and evidence method separate. Never collapse
+the result into a bare `E2E PASS`. A `COMPLETE` receipt supports only its exact
+product, release, adapter, target, platform, phase, and evidence scope.
+
+If the result is `INCONSISTENT` or `EVIDENCE_GAP`, the consumer may emit one
+digest-bound `VerificationFollowupRequest` whose only allowed action is a new
+read-only plan:
+
+```text
+<python-3> <skill-root>/scripts/lifecycle_receipt.py --format json followup \
+  --receipt <lifecycle-verification-receipt.json> \
+  [--prior-request <earlier-followup-request.json>]
+```
+
+Do not recursively invoke another skill or interpret the request as approval
+to execute, publish, report, mutate a live installation, or clean up. Stop
+when the same finding/evidence requirement repeats, and stop after at most
+three distinct reconciliation cycles. Return `RECONCILIATION_STALLED` with a
+human decision point instead of looping.
 ## Build or reconcile the component-to-element map
 
 At the start of every substantive audit, verify the versioned component-
@@ -436,7 +471,8 @@ A v2 record has four normalized registries:
 - `limitations`: named boundaries linked back to claims and evidence.
 
 Use the evidence methods `inspected`, `schema_validated`, `executed_test`,
-`replayed`, `inferred`, or `not_tested`. `executed_test` must cite a persisted
+`replayed`, `inferred`, or `not_tested`. `not_tested` is context-only and cannot
+support, contradict, or limit a claim. `executed_test` must cite a persisted
 result, log, or receipt; test source code is context, not execution evidence.
 No command infers semantic entailment from matching prose. A supported claim
 needs a support binding, partial support needs a named limitation, unresolved
@@ -451,13 +487,14 @@ Use the staged workflow so errors are found before an append-only write:
 <python-3> scripts/record_scan.py evidence digest --source <path> --locator <typed-locator> --project-root <root> --id <evidence-id>
 <python-3> scripts/record_scan.py validate --record <input.json> --map-root <map-root> --project-root <root>
 <python-3> scripts/record_scan.py append --record <input.json> --map-root <map-root> --project-root <root> --log-dir <history> --report-dir <reports>
+<python-3> scripts/record_scan.py render --record <record.json> --output <report.md> --project-root <root>
 <python-3> scripts/record_scan.py verify --record <record.json> --map-root <map-root> --project-root <root> --report <report.md>
 ```
 
 `render` derives Markdown deterministically from a persisted record. `verify`
 recomputes current local identities and reports drift without rewriting
-history. External sources are never fetched implicitly; without a declared
-revision or digest they remain `unverifiable`. Reject path escapes, links or
+history. External sources are never fetched implicitly; without a SHA-256 digest or a
+full lowercase 40-/64-hexadecimal object ID they remain `unverifiable`. Reject path escapes, links or
 reparse points, oversized selections, unstable reads, unsafe URLs, and
 secret-like observation text before writing.
 

@@ -6,11 +6,11 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "a82ea001de16fb0ba3553e7499f450272b0aa8d33e97f8515b0674b095d9659d"
+      "sha256": "c227c6119120d46e0f521cae86804995e0aab6dc0a6bbe978cc6371bfac060c5"
     },
     {
       "path": "agents/openai.yaml",
-      "sha256": "340151a27a835d7cd331d9e4da4d382c4f5a92641ba915b30156833c978a215a"
+      "sha256": "016341b806e79b2d6fb6bb44b033dca47c69ae87ae2ec80c9b45aca08f5af946"
     },
     {
       "path": "assets/component-map-observation.template.json",
@@ -50,7 +50,7 @@
     },
     {
       "path": "references/evidence-bound-audit-records.md",
-      "sha256": "a26e13f8f8d79b3fb5ffa734c98bf8131060445cd52186fbc0b5d7f08dfa9c37"
+      "sha256": "81827d8b331a13fb9e8aeabf52211c7b7dfa8f6093e870ada69b504d2a00cb36"
     },
     {
       "path": "references/installation-analytics-event.schema.json",
@@ -61,8 +61,24 @@
       "sha256": "72d6744792d5838787664fb2a5fb2dfa3a84e2e699183edc0961fecfbc59337a"
     },
     {
+      "path": "references/lifecycle-followup-request.schema.json",
+      "sha256": "8a2f94e740cf51360cc4c1a7efb177f64a514dbb49947d6b09a13aaf71276b3d"
+    },
+    {
+      "path": "references/lifecycle-interpretation.schema.json",
+      "sha256": "eba8ac280f4d6d726493b2dc902697f75e4ea5614cd4591c24c17f6ecb9b6b7d"
+    },
+    {
+      "path": "references/lifecycle-phase-receipt.schema.json",
+      "sha256": "60c4b0aca141cd4a01e03ec4d94a0535285ba27951518cdba5a3feac1353dbdd"
+    },
+    {
+      "path": "references/lifecycle-verification-receipt.schema.json",
+      "sha256": "3b0349708bd69e5327e1f57fd26acf13e6e183beec735b9408996d6d592a2caa"
+    },
+    {
       "path": "references/package-version.json",
-      "sha256": "3902b993ef8f53a35d93dd5f26c083a0c51aab5141a27693dbe3a28b9e62c9ce"
+      "sha256": "56e1868a47abd432e1402733f46f20e0979a4329b583d6462f4492f7f514a826"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -74,7 +90,7 @@
     },
     {
       "path": "references/scan-record-output-v2.schema.json",
-      "sha256": "5f142323a31bd592fc766f34e0dc18b7b36a75f1b7ec6cd36a6e55391c6e51d8"
+      "sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65"
     },
     {
       "path": "references/scan-record-v2.schema.json",
@@ -102,11 +118,15 @@
     },
     {
       "path": "scripts/_internal/evidence_bound_scan.py",
-      "sha256": "dcc0178d6c2966e202245dd94a4d9704e1f124ab4e4be02b684840703baeca2d"
+      "sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
     },
     {
       "path": "scripts/installation_analytics.py",
       "sha256": "62c4ffad8440fcc4d8a876313d487fca9cdfb25f4ec37e69695830190e4cebe6"
+    },
+    {
+      "path": "scripts/lifecycle_receipt.py",
+      "sha256": "9d5c38103b98c74bb30a8d86a6e84294ce2c943eb33663679b950420168e6585"
     },
     {
       "path": "scripts/problem_report.py",

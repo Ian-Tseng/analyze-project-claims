@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-14T15:21:12.951539Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1179,16 +1179,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-14T15:21:06.627650Z",
+  "created_at_utc": "2026-08-14T15:19:33.102016Z",
   "integrity": {
-    "canonical_payload_sha256": "3aa0481da27d1a665d7ac034cd3bcc93810b60d61059fbb9b483469f2432eb31"
+    "canonical_payload_sha256": "42ba010a5455e2d521d292fac2a5513fc016c6b39dd560311f2d5c96ed41a26a"
   },
-  "map_id": "component-map-3084c60e1789",
-  "map_state": "accepted",
+  "map_id": "component-map-d42e9a65b1e8",
+  "map_state": "drift_candidate",
   "mapper_version": "1.2.0",
   "objective": "Map the v0.7.0 product-lifecycle and evidence-bound audit candidate, including read-only lifecycle receipt interpretation, exact claim-to-evidence bindings, consent-bounded installation analytics, owner-gated agent maintenance, cross-agent packaging, public reporting, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or local E2E evidence as production proof.",
-  "origin_scan_id": "20260814T152106627650Z-bd7396d0",
-  "previous_map_id": "component-map-d42e9a65b1e8",
+  "origin_scan_id": "20260814T151933102016Z-3d1c2d61",
+  "previous_map_id": "component-map-ca67ce89e923",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1451,7 +1451,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "72aee807baf460c2e17daf92022a307861cd782c2c1329f739090180d0185815",
+      "sha256": "fe5513d10fad69b4bd5a405cfc95f1cdd6276626d7d34e09816310c10d0635b1",
       "source": "README.md"
     },
     {

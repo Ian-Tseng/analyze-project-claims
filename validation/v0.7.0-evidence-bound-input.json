@@ -1,0 +1,96 @@
+{
+  "schema_version": "2.0",
+  "objective": "State the strongest safe local validation claim for the v0.7.0 candidate.",
+  "scope": [
+    "v0.7.0 local candidate",
+    "evidence-bound recorder 2.1.0",
+    "lifecycle receipt consumer",
+    "package, engine, skill, and component-map identities"
+  ],
+  "authority": [
+    "validation/v0.7.0-validation-receipt.json",
+    "validation/component-map/accepted-map.json"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "source": {"kind": "file", "path": "validation/v0.7.0-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "full_suite"},
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 176 passing repository tests and one privilege-dependent generic symlink skip on Windows."
+    },
+    {
+      "evidence_id": "focused-suite-result",
+      "source": {"kind": "file", "path": "validation/v0.7.0-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "focused_evidence_bound_suite"},
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 41 passing focused evidence-bound tests."
+    },
+    {
+      "evidence_id": "lifecycle-suite-result",
+      "source": {"kind": "file", "path": "validation/v0.7.0-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "lifecycle_receipt_suite"},
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records eight passing lifecycle receipt consumer tests."
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "source": {"kind": "file", "path": "validation/v0.7.0-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "package_verification"},
+      "method": "schema_validated",
+      "observed_summary": "The v0.7.0 package matches its rebuilt manifest and recorded package digest."
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "source": {"kind": "file", "path": "validation/v0.7.0-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "engine_verification"},
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.2.0 engine identity verified."
+    },
+    {
+      "evidence_id": "map-verification-result",
+      "source": {"kind": "file", "path": "validation/v0.7.0-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "component_map_verification"},
+      "method": "schema_validated",
+      "observed_summary": "The accepted component map checked unchanged after final byte synchronization."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "local-v070-candidate-validated",
+      "statement": "On this Windows host, the local v0.7.0 candidate passed 176 repository tests with one privilege-dependent generic symlink test skipped, passed 41 focused evidence-bound tests and eight lifecycle consumer tests, verified its package and embedded engine, and checked its accepted component map unchanged.",
+      "element_ref": {"component_id": "scan-logging", "element_id": "hierarchical-scan-record"},
+      "material": true,
+      "status": "partially_supported",
+      "rationale": "Every listed result is bounded to a persisted local receipt; remote CI, public installation, and semantic entailment remain separate gates."
+    }
+  ],
+  "bindings": [
+    {"claim_id": "local-v070-candidate-validated", "evidence_id": "full-suite-result", "role": "supports"},
+    {"claim_id": "local-v070-candidate-validated", "evidence_id": "focused-suite-result", "role": "supports"},
+    {"claim_id": "local-v070-candidate-validated", "evidence_id": "lifecycle-suite-result", "role": "supports"},
+    {"claim_id": "local-v070-candidate-validated", "evidence_id": "package-verification-result", "role": "supports"},
+    {"claim_id": "local-v070-candidate-validated", "evidence_id": "engine-verification-result", "role": "supports"},
+    {"claim_id": "local-v070-candidate-validated", "evidence_id": "map-verification-result", "role": "supports"},
+    {"claim_id": "local-v070-candidate-validated", "evidence_id": "full-suite-result", "role": "limits"}
+  ],
+  "limitations": [
+    {
+      "limitation_id": "local-platform-and-publication-boundary",
+      "text": "The evidence is local Windows candidate evidence; one generic symlink test was privilege-skipped, and remote CI, public installation, Claude activation, and release publication remain unproved.",
+      "claim_ids": ["local-v070-candidate-validated"],
+      "evidence_ids": ["full-suite-result"]
+    }
+  ],
+  "summary": {
+    "strongest_safe_claim_id": "local-v070-candidate-validated",
+    "claim_boundary_ids": ["local-platform-and-publication-boundary"],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "Remote commit-bound CI has not yet run for this candidate.",
+    "Public Codex and Claude Code install/update smoke tests require publication first.",
+    "Claude runtime discovery and invocation were not observed on this host.",
+    "GitHub release immutability enforcement has not yet been verified for v0.7.0."
+  ]
+}

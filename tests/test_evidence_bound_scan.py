@@ -8,6 +8,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from evidence_bound_fixtures import accepted_map_record
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_ROOT = ROOT / "skills" / "analyze-project-claims"
@@ -38,15 +40,9 @@ class EvidenceBoundScanTests(unittest.TestCase):
 
     def write_map(self, root: Path) -> Path:
         map_root = root / ".claim-audit" / "component-map"
-        record = {
-            "schema_version": "1.0",
-            "map_id": "component-map-0123456789ab",
-            "map_state": "accepted",
-            "skill_name": "analyze-project-claims",
-            "skill_sha256": hashlib.sha256(
-                (SKILL_ROOT / "SKILL.md").read_bytes()
-            ).hexdigest(),
-            "components": [
+        record = accepted_map_record(
+            SKILL_ROOT,
+            [
                 {
                     "component_id": "results",
                     "component_type": "artifact",
@@ -60,8 +56,7 @@ class EvidenceBoundScanTests(unittest.TestCase):
                     ],
                 }
             ],
-        }
-        record["integrity"] = {"canonical_payload_sha256": canonical_sha256(record)}
+        )
         map_root.mkdir(parents=True)
         (map_root / "accepted-map.json").write_text(
             json.dumps(record, indent=2) + "\n", encoding="utf-8"
@@ -181,9 +176,21 @@ class EvidenceBoundScanTests(unittest.TestCase):
             self.assertIn("results.json", report)
             self.assertIn("Semantic review required", report)
 
-            render = self.run_cli(root, "render", "--record", str(record_path))
+            rerender_path = reports / "rerender.md"
+            render = self.run_cli(
+                root,
+                "render",
+                "--record",
+                str(record_path),
+                "--output",
+                str(rerender_path),
+                "--project-root",
+                str(root),
+            )
             self.assertEqual(render.returncode, 0, render.stderr)
-            self.assertEqual(render.stdout, report)
+            self.assertEqual(rerender_path.read_text(encoding="utf-8"), report)
+            self.assertIn("[results.json](<../results.json>)", report)
+            self.assertEqual((report_path.parent / "../results.json").resolve(), (root / "results.json").resolve())
 
     def test_supported_claim_without_support_binding_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory(prefix="evidence-bound-") as temp:

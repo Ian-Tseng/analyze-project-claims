@@ -73,6 +73,10 @@ Binding roles have distinct meanings:
 - `limits`: evidence establishes a material boundary;
 - `context`: useful background that never counts as support.
 
+`not_tested` evidence is context-only. It cannot be bound as support,
+contradiction, or limitation. Other declared methods may participate in those
+roles, subject to the status, receipt, freshness, and human-review rules below.
+
 The recorder enforces these structural rules:
 
 - `supported` and `partially_supported` require current support;
@@ -118,19 +122,21 @@ source limit fail closed. Represent a directory through an explicit bounded
 manifest or receipt file. A Git LFS pointer is a named unavailable state, not
 the bytes of its referenced artifact.
 
-External HTTPS evidence is never fetched implicitly. A supplied digest or
-immutable revision is recorded as `declared_immutable`; without one it is
-`unverifiable`. Query strings, fragments, and embedded credentials are
+External HTTPS evidence is never fetched implicitly. A supplied SHA-256 digest
+or a full lowercase 40- or 64-hexadecimal object ID is recorded as
+`declared_immutable`; labels such as `main`, `latest`, and version-like tags are
+`unverifiable` without the digest. Query strings, fragments, and embedded credentials are
 rejected. Unsafe Unicode controls and secret-like observations are also
 rejected before persistence. An unverifiable support, contradiction, or
 limitation blocks the strongest safe claim.
 
 ## Integrity identities
 
-The canonical record digest covers the normalized payload plus the output-schema
-and renderer identities; it excludes only its own `canonical_payload_sha256`
-field. `output_schema_sha256` binds the persisted contract.
-`renderer_id` and `renderer_sha256` bind the deterministic Markdown contract.
+The canonical record digest covers the normalized payload plus output-schema,
+recorder, and renderer identities; it excludes only its own
+`canonical_payload_sha256` field. `output_schema_sha256` binds the persisted
+contract. `renderer_sha256` and `recorder_sha256` both bind the exact recorder
+module bytes, while `renderer_id` names the deterministic Markdown contract.
 A digest confirms byte identity, not authorship or semantic truth. Unsalted
 hashes of low-entropy selected values may be guessable, so reports do not expose
 the selected bytes by default.
@@ -140,7 +146,8 @@ the selected bytes by default.
 ```powershell
 py -3 $Recorder render `
   --record .\validation\history\<scan-id>.json `
-  --output .\validation\reports\<scan-id>.md
+  --output .\validation\reports\<scan-id>.md `
+  --project-root .
 
 py -3 $Recorder verify `
   --record .\validation\history\<scan-id>.json `
@@ -150,13 +157,16 @@ py -3 $Recorder verify `
   --format json
 ```
 
-`render` emits the same bytes for the same record. It includes the record
-digest, claim IDs, roles, links, locators, artifact and selection digests,
-freshness, counterevidence, limitations, and the semantic-review boundary.
+`render` emits the same bytes for the same record and report location. It
+refuses active schema, recorder, or renderer identity drift before emitting a
+v2 view. Reports include the record digest, claim IDs, roles, links, locators,
+external revisions, artifact and selection digests, freshness,
+counterevidence, limitations, and the semantic-review boundary.
 
 `verify` never rewrites history. It compares the record with the active skill,
-embedded engine, accepted map, local artifact bytes, selected bytes, and
-optional rendered report. After evidence changes, review the new state and
+full embedded-engine identity, recorder version, accepted map identity and
+path, local artifact bytes and derived metadata, selected bytes, and optional
+rendered report. After evidence changes, review the new state and
 append a new record.
 
 ## Legacy migration
@@ -180,6 +190,12 @@ py -3 $Recorder draft-v2 `
 
 The draft copies claim prose as `untested`, creates no evidence or bindings,
 and selects no strongest claim. A reviewer must complete it.
+
+Recorder 2.1.0 finalized the v2 implementation-identity contract. An intact
+pre-release recorder 2.0.0 record that lacks `recorder_sha256` is reported as
+`LEGACY_V2_CONTRACT_UNBOUND`; it is historical evidence, not a current verified
+record. Recreate it from current evidence under recorder 2.1.0 or newer rather
+than silently upgrading its claims.
 
 ## Error contract
 
@@ -233,7 +249,7 @@ Review the change; never rewrite the old record.
 ### external-evidence-unverifiable
 
 An external reference has no locally recomputable or declared immutable
-identity. Pin an immutable revision/digest or treat it only as context.
+identity. Pin a SHA-256 digest or full 40-/64-hexadecimal object ID, or treat it only as context.
 
 ### executed-test-receipt-required
 
@@ -272,12 +288,35 @@ control characters, or exceeds its bound. Replace it with bounded plain text.
 An external reference is not safe query-free, fragment-free HTTPS. Remove
 credentials, queries, fragments, or unsupported schemes.
 
-### schema-identity-mismatch / renderer-identity-mismatch
+### schema-identity-mismatch / renderer-identity-mismatch / recorder-identity-mismatch
 
-The active output schema or deterministic renderer contract differs from the
-one bound into the record. Use the matching released package to reproduce the
-old view, or append a newly reviewed record under the current contract.
+The active output schema, deterministic renderer, or recorder implementation
+differs from the one bound into the record. Use the matching released package
+to reproduce the old view, or append a newly reviewed record under the current
+contract.
 
+### record-schema-unsupported / record-derivation-mismatch
+
+A persisted v2 record is structurally invalid or its claim/evidence identities,
+invariants, or derived summary do not replay exactly. A recomputed canonical
+digest does not override this check. Restore the append output or append a new
+record.
+
+### evidence-method-role-conflict
+
+A `not_tested` item was used as support, contradiction, or limitation. Keep it
+as context or cite evidence collected with an applicable method.
+
+### report-context-required
+
+Writing a v2 report omitted `--project-root`, so local evidence links could not
+be made relative to the output file. Supply the project root used at append.
+
+### legacy-v2-contract-unbound
+
+An intact pre-release recorder 2.0.0 record lacks the final code-bound recorder
+identity. Preserve it as historical evidence; use the matching old package for
+inspection or append a newly reviewed recorder 2.1.0 record.
 ### strongest-claim-unbound
 
 The selected strongest claim lacks eligible current support, hides a
