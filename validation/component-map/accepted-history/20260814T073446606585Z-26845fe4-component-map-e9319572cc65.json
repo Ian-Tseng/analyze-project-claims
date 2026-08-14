@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-14T07:40:13.589960Z",
+  "accepted_at_utc": "2026-08-13T15:43:03.036914Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -66,14 +66,7 @@
     "tests/test_installation_analytics.py",
     "tests/test_analytics_service.py",
     "tests/test_agent_compatibility.py",
-    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md",
-    "skills/analyze-project-claims/references/component-evidence-engine.json",
-    "skills/analyze-project-claims/references/component-evidence-protocol.md",
-    "skills/analyze-project-claims/references/component-map-receipt.schema.json",
-    "skills/analyze-project-claims/scripts/_internal/__init__.py",
-    "skills/analyze-project-claims/scripts/_internal/component_evidence/__init__.py",
-    "skills/analyze-project-claims/scripts/_internal/component_evidence/identity.py",
-    "tests/test_component_evidence_engine.py"
+    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
   ],
   "components": [
     {
@@ -363,29 +356,6 @@
           ],
           "relation_type": "contains",
           "target": "Source drift or same-ID semantic conflict emits candidate/delta evidence while preserving the accepted map."
-        },
-        {
-          "element_id": "embedded-engine-identity",
-          "evidence_locators": [
-            {
-              "locator": "provider, version, protocol, file hashes, and engine_digest",
-              "source": "skills/analyze-project-claims/references/component-evidence-engine.json"
-            },
-            {
-              "locator": "strict embedded provider receipt contract",
-              "source": "skills/analyze-project-claims/references/component-map-receipt.schema.json"
-            },
-            {
-              "locator": "build_engine_descriptor, verify_engine_descriptor, and verified_engine_summary",
-              "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/identity.py"
-            },
-            {
-              "locator": "descriptor, tamper, semantic-boundary, import-boundary, and verify-self tests",
-              "source": "tests/test_component_evidence_engine.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "One analyzer package embeds a versioned component-evidence engine whose descriptor binds code, schemas, templates, protocol, and receipt identity without creating a second discoverable skill."
         },
         {
           "element_id": "missing-map-bootstrap",
@@ -1127,16 +1097,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-14T07:40:08.997487Z",
+  "created_at_utc": "2026-08-13T15:42:55.981183Z",
   "integrity": {
-    "canonical_payload_sha256": "d08172ab9fe879224e9f2265b8d9bae268d5dbcacd5d64b9fd62570f5d1d4fc7"
+    "canonical_payload_sha256": "7462849971f516b26a73e3aaab5ba5804a0cf8912a2c5abbc1683342e5b68225"
   },
-  "map_id": "component-map-5754e1a09eb1",
+  "map_id": "component-map-e9319572cc65",
   "map_state": "accepted",
   "mapper_version": "1.2.0",
   "objective": "Map the v0.6.3 product-lifecycle candidate, including consent-bounded installation analytics, owner-gated agent maintenance, cross-agent packaging, public reporting, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or local E2E evidence as production proof.",
-  "origin_scan_id": "20260814T074008997487Z-1a60ffec",
-  "previous_map_id": "component-map-36d808af399c",
+  "origin_scan_id": "20260813T154255981183Z-dbec9d97",
+  "previous_map_id": "component-map-ab945b31ed28",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1216,17 +1186,10 @@
     "tests/test_installation_analytics.py",
     "tests/test_analytics_service.py",
     "tests/test_agent_compatibility.py",
-    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md",
-    "skills/analyze-project-claims/references/component-evidence-engine.json",
-    "skills/analyze-project-claims/references/component-evidence-protocol.md",
-    "skills/analyze-project-claims/references/component-map-receipt.schema.json",
-    "skills/analyze-project-claims/scripts/_internal/__init__.py",
-    "skills/analyze-project-claims/scripts/_internal/component_evidence/__init__.py",
-    "skills/analyze-project-claims/scripts/_internal/component_evidence/identity.py",
-    "tests/test_component_evidence_engine.py"
+    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "793fec3fc6c7cb3032435c41c6a7d4ce52f6dd5e046163ae04704b2ba73f8417",
+  "skill_sha256": "65697da4dab3b71a5108927e065d9f8214b8438e05859897391cf7c5d510b3c5",
   "source_snapshot": [
     {
       "exists": true,
@@ -1381,7 +1344,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "85f05c8fa151ce4da5bdef4ecd8d47491c953dec4d336f40071c7eeb0b23c6e9",
+      "sha256": "3f8f9dab8bd8e62cb8937a2345b989d5e69536f6c6795f8f28da7b9c55501789",
       "source": "README.md"
     },
     {
@@ -1663,13 +1626,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "01c0900089b3ccca224063027e0ee6db5d6d352cd6cd49f33c4adf5d6586d6a9",
+      "sha256": "b3c626d8178ce52e31f9c87b9afa80cbfa64ac64e956d79371c41242cabcc35d",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "793fec3fc6c7cb3032435c41c6a7d4ce52f6dd5e046163ae04704b2ba73f8417",
+      "sha256": "65697da4dab3b71a5108927e065d9f8214b8438e05859897391cf7c5d510b3c5",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -1681,26 +1644,8 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b4064d1c508c5f2e3ca7a01f33e767fc4a6cb3cb8f50e6dcf2e035f0084d97d8",
-      "source": "skills/analyze-project-claims/references/component-evidence-engine.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "f077389071bf7dd46c4543c496bd6cf1e0b50eb2b35b491ca0a4ed3a30027f5a",
-      "source": "skills/analyze-project-claims/references/component-evidence-protocol.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
       "sha256": "d4858c9673142b9ef21a6f382602228da658a0569bb839bbd4ea36b086bca2b7",
       "source": "skills/analyze-project-claims/references/component-map-observation.schema.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "69dacc0ba5498431a1e6c20e5cad5f591d1159a8be6a97f77013d128ac5fdbc9",
-      "source": "skills/analyze-project-claims/references/component-map-receipt.schema.json"
     },
     {
       "exists": true,
@@ -1723,7 +1668,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a80208dc53e833ae12e26eb8d643ad9fb5df3e6287ca18efa80e455c7603e0f1",
+      "sha256": "0f777c1627a248ca3dab982d1615df8c89aed9e8b3ad994e95144bda317e2cb7",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
@@ -1753,24 +1698,6 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d4893f5ffed0ed0b38ae2d3a781796bbebe9213c38c5df9e906e75ae547e45a0",
-      "source": "skills/analyze-project-claims/scripts/_internal/__init__.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "5bbbe54cec76073ad7663d186e331029e9f8cdbc76e3c4ec561e2da03347a5a9",
-      "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/__init__.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "6c0d6ce5c1df00674b0167e92b4ec072813b58277771cfa1ef2e391853f37565",
-      "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/identity.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
       "sha256": "62c4ffad8440fcc4d8a876313d487fca9cdfb25f4ec37e69695830190e4cebe6",
       "source": "skills/analyze-project-claims/scripts/installation_analytics.py"
     },
@@ -1783,7 +1710,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "919cb0c513f30767bd03dbb5b29bb32fd3e1d25fd28bec5ecd4c17bb4d0ff601",
+      "sha256": "a5374425511ba2977de0faed4552dfd71c6f6dcba446955f60008508682adfd3",
       "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
     },
     {
@@ -1833,12 +1760,6 @@
       "kind": "file",
       "sha256": "a8f9389794e06428b60686e1d0a2d2b997c9ea165441f20ce4f3e77685459a8a",
       "source": "tests/test_calibration_ui.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "704f6326d25182133b34b9eb03b49fd810b4c4db6e62b66ff13b93d15a7994a9",
-      "source": "tests/test_component_evidence_engine.py"
     },
     {
       "exists": true,

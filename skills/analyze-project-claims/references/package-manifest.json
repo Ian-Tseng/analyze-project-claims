@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "65697da4dab3b71a5108927e065d9f8214b8438e05859897391cf7c5d510b3c5"
+      "sha256": "793fec3fc6c7cb3032435c41c6a7d4ce52f6dd5e046163ae04704b2ba73f8417"
     },
     {
       "path": "agents/openai.yaml",
@@ -25,8 +25,20 @@
       "sha256": "a8a6ce5281aa6197c3c2c2dd294e05e31dc4bdc4fc851fd42c1e147e9fe86b9c"
     },
     {
+      "path": "references/component-evidence-engine.json",
+      "sha256": "b4064d1c508c5f2e3ca7a01f33e767fc4a6cb3cb8f50e6dcf2e035f0084d97d8"
+    },
+    {
+      "path": "references/component-evidence-protocol.md",
+      "sha256": "f077389071bf7dd46c4543c496bd6cf1e0b50eb2b35b491ca0a4ed3a30027f5a"
+    },
+    {
       "path": "references/component-map-observation.schema.json",
       "sha256": "d4858c9673142b9ef21a6f382602228da658a0569bb839bbd4ea36b086bca2b7"
+    },
+    {
+      "path": "references/component-map-receipt.schema.json",
+      "sha256": "69dacc0ba5498431a1e6c20e5cad5f591d1159a8be6a97f77013d128ac5fdbc9"
     },
     {
       "path": "references/component-map.schema.json",
@@ -61,6 +73,18 @@
       "sha256": "960538a7c7654746ac696502de3b9b64e6776321497c174efc2f171159e15f6d"
     },
     {
+      "path": "scripts/_internal/__init__.py",
+      "sha256": "d4893f5ffed0ed0b38ae2d3a781796bbebe9213c38c5df9e906e75ae547e45a0"
+    },
+    {
+      "path": "scripts/_internal/component_evidence/__init__.py",
+      "sha256": "5bbbe54cec76073ad7663d186e331029e9f8cdbc76e3c4ec561e2da03347a5a9"
+    },
+    {
+      "path": "scripts/_internal/component_evidence/identity.py",
+      "sha256": "6c0d6ce5c1df00674b0167e92b4ec072813b58277771cfa1ef2e391853f37565"
+    },
+    {
       "path": "scripts/installation_analytics.py",
       "sha256": "62c4ffad8440fcc4d8a876313d487fca9cdfb25f4ec37e69695830190e4cebe6"
     },
@@ -70,7 +94,7 @@
     },
     {
       "path": "scripts/reconcile_component_map.py",
-      "sha256": "a5374425511ba2977de0faed4552dfd71c6f6dcba446955f60008508682adfd3"
+      "sha256": "919cb0c513f30767bd03dbb5b29bb32fd3e1d25fd28bec5ecd4c17bb4d0ff601"
     },
     {
       "path": "scripts/record_scan.py",

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/schemas/component-map-receipt-v2.json",
+  "title": "Component Map Evidence Receipt v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "provider_kind",
+    "engine_name",
+    "engine_version",
+    "engine_digest",
+    "map_schema_version",
+    "receipt_protocol_version",
+    "accepted_map_id",
+    "accepted_map_sha256",
+    "covered_source_sha256",
+    "generated_at",
+    "receipt_digest"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "provider_kind": {"const": "embedded"},
+    "engine_name": {"const": "component-evidence"},
+    "engine_version": {"type": "string", "minLength": 1},
+    "engine_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "map_schema_version": {"type": "string", "minLength": 1},
+    "receipt_protocol_version": {"const": "2.0"},
+    "accepted_map_id": {
+      "type": "string",
+      "pattern": "^component-map-[0-9a-f]{12}$"
+    },
+    "accepted_map_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "covered_source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "receipt_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

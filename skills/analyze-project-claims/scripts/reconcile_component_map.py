@@ -15,6 +15,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from _internal.component_evidence.identity import (
+    EngineIdentityError,
+    verified_engine_summary,
+)
+
 
 SCHEMA_VERSION = "1.0"
 MAPPER_VERSION = "1.2.0"
@@ -982,7 +987,20 @@ def main() -> int:
     accept.add_argument("--candidate", required=True, type=Path)
     accept.add_argument("--map-root", required=True, type=Path)
 
+    subparsers.add_parser(
+        'verify-self',
+        help='Verify the embedded component-evidence engine identity',
+    )
+
     args = parser.parse_args()
+    if args.command == 'verify-self':
+        try:
+            output = verified_engine_summary(Path(__file__).resolve().parents[1])
+        except (EngineIdentityError, OSError) as exc:
+            print(f'reconcile_component_map: {exc}', file=sys.stderr)
+            return 2
+        print(json.dumps(output, ensure_ascii=False, indent=2, sort_keys=True))
+        return 0
     skill_path = Path(__file__).resolve().parents[1] / "SKILL.md"
     try:
         output = _reconcile(args, skill_path) if args.command == "reconcile" else _accept(args, skill_path)

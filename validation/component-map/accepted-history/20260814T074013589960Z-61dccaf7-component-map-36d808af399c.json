@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-14T07:40:13.589960Z",
+  "accepted_at_utc": "2026-08-14T07:37:56.686476Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1127,16 +1127,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-14T07:40:08.997487Z",
+  "created_at_utc": "2026-08-14T07:37:48.826021Z",
   "integrity": {
-    "canonical_payload_sha256": "d08172ab9fe879224e9f2265b8d9bae268d5dbcacd5d64b9fd62570f5d1d4fc7"
+    "canonical_payload_sha256": "256425e605553d694b4651ff1156e458531853ed16771d5f713a31ed2bcadf43"
   },
-  "map_id": "component-map-5754e1a09eb1",
+  "map_id": "component-map-36d808af399c",
   "map_state": "accepted",
   "mapper_version": "1.2.0",
   "objective": "Map the v0.6.3 product-lifecycle candidate, including consent-bounded installation analytics, owner-gated agent maintenance, cross-agent packaging, public reporting, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or local E2E evidence as production proof.",
-  "origin_scan_id": "20260814T074008997487Z-1a60ffec",
-  "previous_map_id": "component-map-36d808af399c",
+  "origin_scan_id": "20260814T073748826021Z-436a4e60",
+  "previous_map_id": "component-map-6584f3dab658",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1381,7 +1381,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "85f05c8fa151ce4da5bdef4ecd8d47491c953dec4d336f40071c7eeb0b23c6e9",
+      "sha256": "50dc9c87f65c1ef917026d2c5534b15751eaacd519905a93d1616a320d83428e",
       "source": "README.md"
     },
     {

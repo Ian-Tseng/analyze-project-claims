@@ -1,0 +1,55 @@
+{
+  "accepted_map_id": "component-map-6584f3dab658",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260814T073748826021Z-436a4e60-component-map-36d808af399c.json",
+    "delta": "deltas/20260814T073748826021Z-436a4e60.json"
+  },
+  "candidate_map_id": "component-map-36d808af399c",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      }
+    ]
+  },
+  "event_id": "20260814T073748826021Z-436a4e60",
+  "integrity": {
+    "canonical_payload_sha256": "639546a7664c771e89f08782e2b9510448f53d1dacbeb2270ebf4f765d3d6486"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.2.0",
+  "recorded_at_utc": "2026-08-14T07:37:48.826021Z",
+  "schema_version": "1.0",
+  "skill_sha256": "793fec3fc6c7cb3032435c41c6a7d4ce52f6dd5e046163ae04704b2ba73f8417"
+}

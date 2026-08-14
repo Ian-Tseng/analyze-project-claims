@@ -1,0 +1,135 @@
+{
+  "components": [
+    {
+      "component_id": "embedded-component-evidence-engine",
+      "component_status": "PARTIAL",
+      "component_type": "code",
+      "element_counts": {
+        "PARTIAL": 1,
+        "PASS": 3
+      },
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "descriptor-bound-identity",
+          "evidence": [
+            {
+              "locator": "descriptor match, engine tamper, semantic-only boundary, import boundary, and verify-self cases",
+              "observed": "5 focused tests passed",
+              "source": "tests/test_component_evidence_engine.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The checked-in engine bytes and descriptor are deterministically bound in the tested local package.",
+          "target": "The embedded engine descriptor binds provider, versions, protocols, declared files, and exact content digests and rejects tampering."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "legacy-mapper-compatibility",
+          "evidence": [
+            {
+              "locator": "focused component-map regression run",
+              "observed": "11 mapper tests passed alongside 5 engine tests",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "The tested v1 mapper behavior remains intact in this slice.",
+          "target": "Existing reconcile and accept behavior remains compatible after adding verify-self."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "package-and-repository-regression",
+          "evidence": [
+            {
+              "locator": "verify-package",
+              "observed": "PACKAGE_VERIFIED",
+              "source": "skills/analyze-project-claims/references/package-manifest.json"
+            },
+            {
+              "locator": "py -3 -m pytest -q",
+              "observed": "126 passed and 1 skipped",
+              "source": "tests"
+            },
+            {
+              "locator": "skill-creator quick_validate.py",
+              "observed": "Skill is valid!",
+              "source": "skills/analyze-project-claims"
+            }
+          ],
+          "method": "executed_test",
+          "required_repair": null,
+          "safe_interpretation": "Local structural and deterministic regressions pass for the changed package.",
+          "target": "The enclosing skill manifest, structural validator, and full repository suite remain valid."
+        },
+        {
+          "check_status": "PARTIAL",
+          "claim_status": "partially_supported",
+          "element_id": "internal-module-decomposition",
+          "evidence": [
+            {
+              "locator": "current module inventory",
+              "observed": "Identity module exists; core.py, storage.py, receipts.py, and cli.py are not yet present, while mapper behavior remains in reconcile_component_map.py",
+              "source": "skills/analyze-project-claims/scripts/_internal/component_evidence"
+            }
+          ],
+          "method": "inspected",
+          "required_repair": "Move mature mapper responsibilities behind narrow internal modules incrementally while retaining the compatibility entrypoint and golden v1 fixtures.",
+          "safe_interpretation": "The distribution and identity boundary is implemented, but the full internal code decomposition remains future work.",
+          "target": "The mature mapper implementation is decomposed behind core, storage, receipts, identity, and CLI internal modules."
+        }
+      ]
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "4e9707561cc72afe8cf37d891a9e2725da6ec63d5bf92af408946875d1966fc4"
+  },
+  "scan": {
+    "authority": [
+      "skills/analyze-project-claims/references/component-evidence-engine.json",
+      "skills/analyze-project-claims/references/component-evidence-protocol.md",
+      "skills/analyze-project-claims/references/package-manifest.json",
+      "tests/test_component_evidence_engine.py",
+      "validation/component-map/accepted-map.json"
+    ],
+    "logger_version": "1.0.0",
+    "objective": "Verify that the first embedded component-evidence implementation slice is internally identified, package-bound, backward compatible, and honestly bounded before further decomposition.",
+    "recorded_at_utc": "2026-08-14T07:36:20.422660Z",
+    "scan_id": "20260814T073620422660Z-4823f56d",
+    "scope": [
+      "skills/analyze-project-claims/scripts/_internal/component_evidence",
+      "skills/analyze-project-claims/scripts/reconcile_component_map.py",
+      "skills/analyze-project-claims/references/component-evidence-engine.json",
+      "skills/analyze-project-claims/references/component-evidence-protocol.md",
+      "skills/analyze-project-claims/references/component-map-receipt.schema.json",
+      "skills/analyze-project-claims/references/package-manifest.json",
+      "tests/test_component_evidence_engine.py",
+      "tests/test_component_map.py",
+      "validation/component-map/accepted-map.json"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "65697da4dab3b71a5108927e065d9f8214b8438e05859897391cf7c5d510b3c5"
+  },
+  "schema_version": "1.0",
+  "summary": {
+    "claim_boundary": "This does not establish a released fresh-host installation, automatic runtime enforcement, automatic owner reporting, or completion of the planned core/storage/receipt/CLI decomposition.",
+    "component_count": 1,
+    "element_count": 4,
+    "element_counts": {
+      "PARTIAL": 1,
+      "PASS": 3
+    },
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "One analyzer package now contains a locally verified, descriptor-bound component-evidence identity layer without regressing the tested mapper or package contracts.",
+    "unresolved_uncertainties": [
+      "Fresh-host SHA-bound preview, install, activation, update, rollback, and removal remain untested for this candidate.",
+      "The mature mapper remains monolithic behind the compatibility entrypoint.",
+      "Enforcement and GitHub issue submission remain NO-SHIP."
+    ]
+  }
+}

@@ -218,6 +218,14 @@ Start with these files:
 - `skills/analyze-project-claims/assets/scan-record.template.json`;
 - `skills/analyze-project-claims/references/scan-record.schema.json`.
 
+One skill package embeds the versioned component-evidence engine; no second
+skill is installed. Verify its descriptor-bound code, schemas, protocol, and
+templates locally:
+
+```powershell
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py verify-self
+```
+
 Create or reconcile a component map:
 
 ```powershell

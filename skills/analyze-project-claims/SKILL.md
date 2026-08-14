@@ -326,6 +326,19 @@ finding | evidence | status | safest interpretation | required repair
 
 ## Build or reconcile the component-to-element map
 
+At the start of every substantive audit, verify the versioned component-
+evidence engine bundled inside this skill:
+
+```powershell
+py scripts/reconcile_component_map.py verify-self
+```
+
+This is a local, network-free identity check and must not invoke semantic
+analysis recursively. The engine is part of the analyzer package, not a second
+skill to discover or install. If verification fails, do not claim structural
+evidence is verified; preserve any safe audit result, state the limitation, and
+route only the fixed internal failure through the separate reporting policy.
+
 Before a formal scan, reconcile the project structure against a durable
 component-to-element map. The map records what can be checked; the scan record
 records what was checked and what the evidence established.
