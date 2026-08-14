@@ -38,7 +38,11 @@ class AnalyticsServiceTests(unittest.TestCase):
 
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
-        base = Path(self.temporary.name)
+        # macOS reports its temporary root through /var, which is a system
+        # symlink to /private/var. Canonicalize the test-owned directory so the
+        # store's intentional no-symlink traversal policy is exercised only by
+        # the explicit adversarial paths below.
+        base = Path(self.temporary.name).resolve(strict=True)
         auth = self.subject.Authenticator(
             frozenset(
                 {
