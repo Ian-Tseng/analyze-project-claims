@@ -201,57 +201,46 @@ For another repository, use the
 
 ## Formal audit records
 
-Most users can stop after the agent's audit response. Formal reviews can also
-create two machine-readable artifacts:
+Formal reviews can persist an accepted component map and an append-only v2
+evidence-bound audit record. Material claims use stable component/element IDs;
+evidence uses exact source and selection digests; explicit bindings connect
+them. Markdown reports are derived views, not a second authority.
 
-- a component map describing what is in scope and checkable;
-- an append-only scan record describing what was actually tested and learned.
-
-The map has an explicit candidate and acceptance lifecycle. Existing accepted
-maps are never replaced implicitly. Scan records bind their evidence to the
-exact skill bytes and keep check status separate from claim status.
-
-Start with these files:
+Start with:
 
 - `skills/analyze-project-claims/assets/component-map-observation.template.json`;
 - `skills/analyze-project-claims/references/component-map-observation.schema.json`;
-- `skills/analyze-project-claims/assets/scan-record.template.json`;
-- `skills/analyze-project-claims/references/scan-record.schema.json`.
+- `skills/analyze-project-claims/assets/scan-record-v2.template.json`;
+- `skills/analyze-project-claims/references/scan-record-v2.schema.json`.
 
-One skill package embeds the versioned component-evidence engine; no second
-skill is installed. Verify its descriptor-bound code, schemas, protocol, and
-templates locally:
+Verify the embedded engine, then reconcile and explicitly accept a map:
 
 ```powershell
 py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py verify-self
-```
-
-Create or reconcile a component map:
-
-```powershell
 py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile `
-  --observation .\component-map-observation.json `
-  --map-root .\.claim-audit\component-map `
-  --project-root .
-```
-
-After human review, accept the exact returned candidate:
-
-```powershell
+  --observation .\component-map-observation.json --map-root .\.claim-audit\component-map --project-root .
 py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py accept `
-  --candidate .\.claim-audit\component-map\candidates\<candidate>.json `
-  --map-root .\.claim-audit\component-map
+  --candidate .\.claim-audit\component-map\candidates\<candidate>.json --map-root .\.claim-audit\component-map
 ```
 
-Persist a validated append-only scan record:
+Validate before the append-only write:
 
 ```powershell
-py -3 .\skills\analyze-project-claims\scripts\record_scan.py `
-  --record .\examples\scan-input.example.json `
-  --log-dir .\validation\history
+py -3 .\skills\analyze-project-claims\scripts\record_scan.py init `
+  --map-root .\.claim-audit\component-map --project-root . --output .\scan-input.json
+py -3 .\skills\analyze-project-claims\scripts\record_scan.py validate `
+  --record .\scan-input.json --map-root .\.claim-audit\component-map --project-root .
+py -3 .\skills\analyze-project-claims\scripts\record_scan.py append `
+  --record .\scan-input.json --map-root .\.claim-audit\component-map --project-root . `
+  --log-dir .\validation\history --report-dir .\validation\reports
 ```
 
-See `validation/README.md` for current and historical artifact authority.
+`executed_test` must cite a persisted result or receipt, not test source. Append
+and verify recompute local evidence. External evidence is not fetched and stays
+unverifiable without an immutable revision or digest. Legacy v1 records remain
+readable as `legacy_unbound`. See the
+[evidence-bound record guide](skills/analyze-project-claims/references/evidence-bound-audit-records.md)
+and [validation authority](validation/README.md).
 
 ## Evidence and limitations
 

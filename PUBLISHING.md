@@ -70,6 +70,7 @@ py -3 .\skills\analyze-project-claims\scripts\update_policy.py `
   verify-package
 
 py -3 -m unittest discover -s tests -v
+py -3 -m unittest discover -s tests -p "test_evidence_bound_scan*.py" -v
 ```
 
 On macOS or Linux, replace `py -3` with `python3`. Remove
@@ -79,7 +80,9 @@ Git.
 The expected results are:
 
 - package verification succeeds;
-- the complete test suite passes;
+- the complete suite and focused evidence-bound record tests pass;
+- both v2 schemas, the v2 template, and the evidence-bound record guide are in
+  `references/package-manifest.json`;
 - `VERSION`, `CITATION.cff`, and `references/package-version.json` agree;
 - no release placeholder remains;
 - `git status` contains only intentional files.

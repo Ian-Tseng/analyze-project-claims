@@ -411,49 +411,65 @@ history events are immutable evidence. If writes are not authorized, return
 the proposed map and delta in the response without implying they were
 persisted or accepted.
 
-## Emit a component-to-element scan record
+## Emit an evidence-bound audit record
 
-Every project scan must yield one scan record after map reconciliation,
-including scans that find no
-inconsistency and scans that end `PARTIAL`, `FAIL`, or `BLOCKED`. Organize the
-record as:
+Every substantive project scan must yield one audit record after map
+reconciliation, including scans that find no inconsistency and scans that end
+partial, failed, or blocked. For formal or explicitly logged work, use scan
+record v2. It binds each material claim to exact evidence instead of treating a
+file path or free-form evidence paragraph as support.
+
+Start from `assets/scan-record-v2.template.json`; validate inputs against
+`references/scan-record-v2.schema.json`. The append command persists the
+normalized `references/scan-record-output-v2.schema.json` contract and can also
+create a deterministic Markdown report. Read
+`references/evidence-bound-audit-records.md` for the full authoring, migration,
+error, and verification contract.
+
+A v2 record has four normalized registries:
+
+- `claims`: stable claim IDs, accepted `{component_id, element_id}` references,
+  materiality, status, and rationale;
+- `evidence_items`: exact local root-relative sources or declared immutable
+  HTTPS sources, typed locators, methods, observations, and computed digests;
+- `bindings`: explicit `supports`, `contradicts`, `limits`, or `context` edges;
+- `limitations`: named boundaries linked back to claims and evidence.
+
+Use the evidence methods `inspected`, `schema_validated`, `executed_test`,
+`replayed`, `inferred`, or `not_tested`. `executed_test` must cite a persisted
+result, log, or receipt; test source code is context, not execution evidence.
+No command infers semantic entailment from matching prose. A supported claim
+needs a support binding, partial support needs a named limitation, unresolved
+counterevidence prevents a fully supported strongest claim, and stale or
+unverifiable evidence cannot support the strongest-safe-claim summary.
+
+Use the staged workflow so errors are found before an append-only write:
 
 ```text
-scan
--> component
--> element
--> method, check status, claim status, evidence, interpretation, repair
+<python-3> scripts/record_scan.py preflight --map-root <map-root> --project-root <root>
+<python-3> scripts/record_scan.py init --map-root <map-root> --project-root <root> --output <draft.json>
+<python-3> scripts/record_scan.py evidence digest --source <path> --locator <typed-locator> --project-root <root> --id <evidence-id>
+<python-3> scripts/record_scan.py validate --record <input.json> --map-root <map-root> --project-root <root>
+<python-3> scripts/record_scan.py append --record <input.json> --map-root <map-root> --project-root <root> --log-dir <history> --report-dir <reports>
+<python-3> scripts/record_scan.py verify --record <record.json> --map-root <map-root> --project-root <root> --report <report.md>
 ```
 
-Use stable component and element identifiers. Record the objective, scope,
-authoritative sources, skill hash, timestamp, and per-status counts. Derive
-component and scan summaries from element states rather than entering an
-unsupported aggregate `PASS` manually.
+`render` derives Markdown deterministically from a persisted record. `verify`
+recomputes current local identities and reports drift without rewriting
+history. External sources are never fetched implicitly; without a declared
+revision or digest they remain `unverifiable`. Reject path escapes, links or
+reparse points, oversized selections, unstable reads, unsafe URLs, and
+secret-like observation text before writing.
 
-For every element, use exactly one evidence method:
+Legacy flag-only v1 records and `references/scan-record.schema.json` remain
+readable but frozen. Render and verify label them `legacy_unbound` because their
+prose cannot be upgraded into claim-to-evidence bindings automatically;
+`draft-v2` copies it only into an untested, unbound draft for human review.
 
-- `inspected`: content or metadata was read;
-- `schema_validated`: a declared schema or deterministic structural contract
-  was applied;
-- `executed_test`: executable behavior was run and its result observed;
-- `replayed`: stored outputs were deterministically recomputed;
-- `inferred`: the conclusion follows from cited evidence but was not directly
-  executed;
-- `not_tested`: the element lacks direct evidence.
-
-Do not label an element `executed_test` merely because it was read, parsed,
-found on disk, or mentioned by another artifact. Keep check status (`PASS`,
-`FAIL`, `PARTIAL`, `PENDING`, `NA`, or `BLOCKED`) separate from claim status
-(`supported`, `partially_supported`, `contradicted`, `untested`,
-`invalidly_specified`, or `not_applicable`).
-
-For a formal or explicitly logged audit, persist the record with
-`scripts/record_scan.py` into an append-only history directory. Use
-`references/scan-record.schema.json` as the exchange contract and
-`assets/scan-record.template.json` as the starting shape. Never overwrite or
-rewrite an earlier scan record. For a read-only task without write authority,
-emit the complete record in the response and state that persistence was not
-authorized; do not silently mutate the audited project.
+The accepted map is structural authority, the append-only JSON is audit
+authority, and Markdown is a derived view. For a read-only task without write
+authority, emit the complete proposed input in the response and say that it was
+not persisted; never imply an append occurred.
 
 ## Report internal product failures separately
 

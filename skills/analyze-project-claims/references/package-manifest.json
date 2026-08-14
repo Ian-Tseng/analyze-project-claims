@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "793fec3fc6c7cb3032435c41c6a7d4ce52f6dd5e046163ae04704b2ba73f8417"
+      "sha256": "a82ea001de16fb0ba3553e7499f450272b0aa8d33e97f8515b0674b095d9659d"
     },
     {
       "path": "agents/openai.yaml",
@@ -19,6 +19,10 @@
     {
       "path": "assets/component-map.template.json",
       "sha256": "8d14d5c04fc154c9a0f6b751e7e0e6cff331e64d325c210608c6d1d29523e2fc"
+    },
+    {
+      "path": "assets/scan-record-v2.template.json",
+      "sha256": "5a9c35e6c12db1ebb5fd9d6e0f412a8ff64e09ce84fda02ad39d59d3568dfa44"
     },
     {
       "path": "assets/scan-record.template.json",
@@ -45,6 +49,10 @@
       "sha256": "33128e872845b8c6b08906b62ae98093915f5a15d5f85445ba13f1177848fe82"
     },
     {
+      "path": "references/evidence-bound-audit-records.md",
+      "sha256": "a26e13f8f8d79b3fb5ffa734c98bf8131060445cd52186fbc0b5d7f08dfa9c37"
+    },
+    {
       "path": "references/installation-analytics-event.schema.json",
       "sha256": "4741469eefca0775d3cf18f33ceee71c5f9f3dcbdc68c13c1e6e9b93135c6e3c"
     },
@@ -63,6 +71,14 @@
     {
       "path": "references/problem-report.schema.json",
       "sha256": "44983ab807053256a7be4b70634adea04cfe11457961fd5d5752d49d2f1d7c1b"
+    },
+    {
+      "path": "references/scan-record-output-v2.schema.json",
+      "sha256": "5f142323a31bd592fc766f34e0dc18b7b36a75f1b7ec6cd36a6e55391c6e51d8"
+    },
+    {
+      "path": "references/scan-record-v2.schema.json",
+      "sha256": "2389d2cd60a4ed178e62e132574ae86fd97a8a449617cf722ba573a41356a715"
     },
     {
       "path": "references/scan-record.schema.json",
@@ -85,6 +101,10 @@
       "sha256": "6c0d6ce5c1df00674b0167e92b4ec072813b58277771cfa1ef2e391853f37565"
     },
     {
+      "path": "scripts/_internal/evidence_bound_scan.py",
+      "sha256": "dcc0178d6c2966e202245dd94a4d9704e1f124ab4e4be02b684840703baeca2d"
+    },
+    {
       "path": "scripts/installation_analytics.py",
       "sha256": "62c4ffad8440fcc4d8a876313d487fca9cdfb25f4ec37e69695830190e4cebe6"
     },
@@ -98,7 +118,7 @@
     },
     {
       "path": "scripts/record_scan.py",
-      "sha256": "36a00545539a2ea2954b9b54c928cdd14c4634de17cc3edc45a61aedfb8cbb2b"
+      "sha256": "ecdfa716c4e64e072189ca8592b28cbcdc206bdf25b2f688817cd45c8aadfe53"
     },
     {
       "path": "scripts/update_policy.py",

@@ -13,6 +13,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from _internal.evidence_bound_scan import dispatch_if_v2
+
 
 LOGGER_VERSION = "1.0.0"
 SCHEMA_VERSION = "1.0"
@@ -229,6 +231,9 @@ def _normalize_record(raw: Any, skill_path: Path) -> dict[str, Any]:
 
 
 def main() -> int:
+    dispatched = dispatch_if_v2(sys.argv[1:])
+    if dispatched is not None:
+        return dispatched
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--record", required=True, type=Path, help="Input scan-record JSON")
     parser.add_argument("--log-dir", required=True, type=Path, help="Append-only history directory")
