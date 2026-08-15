@@ -1,8 +1,64 @@
 # Managed Update End-to-End Evidence Log
 
-This record captures what was actually observed while validating the
-`analyze-project-claims` managed update path on 2026-08-12. It separates live
-evidence from behavior covered only by code or tests.
+This append-only record captures dated observations of the
+`analyze-project-claims` managed update path. Each result separates live
+replacement evidence from behavior covered only by code or tests.
+
+## v0.7.0 to v0.7.1 public replacement result
+
+**PASS ON THE RECORDED WINDOWS CODEX INSTALLATION.** On 2026-08-15
+(Asia/Taipei), a canonical GitHub CLI-tracked, user-scope, unpinned v0.7.0
+installation with existing `auto` consent replaced itself with immutable public
+release v0.7.1. The running invocation retained v0.7.0 and reported
+`UPDATED_NEXT_USE`; the installed copy then verified as v0.7.1.
+
+The released commit was
+`fd17acc2296763bf7e9ca745b84da97d62fe1495`. Pull request
+[#4](https://github.com/Ian-Tseng/analyze-project-claims/pull/4) merged to that
+commit, all six jobs in the exact-main [CI
+run](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/31865670854)
+passed, and [release
+v0.7.1](https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.1)
+verified as immutable.
+
+### Observed postconditions
+
+| Check | Observation |
+| --- | --- |
+| Replacement | `UPDATED_NEXT_USE`; current invocation v0.7.0, installed version v0.7.1 |
+| Native registry | Canonical public source, user scope, v0.7.1, unpinned, expected Codex path |
+| Package integrity | `PACKAGE_VERIFIED`; normalized digest `2b12f69b30890d2842149e029e74352294c65649f2e692a9b0025707bb35ee1c` |
+| Fresh policy-aware check | `UP_TO_DATE` in `auto` mode despite the active lease |
+| Stored policy | `auto`, not suspended, next check 24 hours after the successful check |
+| Local full suite | 182 tests ran: 181 passed and 1 Windows privilege-dependent symlink test skipped |
+| Focused updater suite | 29 tests ran: 28 passed and the same symlink test skipped |
+
+The smoke ran from a neutral consumer directory. Running the same updater
+discovery inside the publisher checkout exposed both its project package and
+the user installation and correctly returned `AMBIGUOUS_INSTALL`. A filtered
+`gh skill list --agent codex --scope user` showed only the user copy, so that
+narrow listing was not sufficient to establish the updater's unfiltered view.
+
+### Inconsistency found before release
+
+The first policy-aware implementation read `auto` consent before acquiring the
+single-flight lock. A concurrent disable could therefore land while the check
+waited and leave the mutating path authorized by stale state. The released fix
+reloads policy under the lock, derives dry-run versus replacement from that
+state, and rechecks `unconfigured`, `off`, and suspended-auto gates before any
+native update.
+
+Regression tests cover both consent directions under lock, locked reloads to
+inactive modes, explicit non-auto mode preservation, lease bypass in `auto`,
+and the CLI route. The safe claim is limited to the observed Windows Codex
+installation plus the deterministic cross-platform test contract; this run
+does not establish live Claude Code, macOS, Linux, pinned, project-scope, or
+plugin-host replacement.
+
+## Historical v0.4.1 to v0.4.2 private replacement result
+
+The following section records what was observed on 2026-08-12. It remains
+historical evidence and is not rewritten by the newer public run.
 
 ## Conclusion
 

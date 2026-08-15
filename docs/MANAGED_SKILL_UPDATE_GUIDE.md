@@ -136,6 +136,25 @@ Write state atomically and guard it with a single-flight lock. On Unix, restrict
 the state directory and file permissions. Reject state symlinks and unknown
 schema fields.
 
+### Make the locked policy authoritative
+
+A policy read before the lock is only a fast-path observation. It must never
+authorize replacement. Another process can disable, enable, or suspend updates
+between that read and lock acquisition.
+
+After acquiring the lock:
+
+1. reload the policy from disk;
+2. derive mutation authority from that locked state;
+3. re-run the `unconfigured`, `off`, and suspended-auto gates;
+4. only then choose dry-run or replacement behavior.
+
+Test both directions of the race. Revoking `auto` while a check waits for the
+lock must make the check read-only. Granting `auto` in the same window must
+allow the verified replacement path. Also cover locked reloads to
+`unconfigured`, `off`, and suspended `auto`. Pre-lock checks remain useful for
+speed, but the locked reload is the consent authority.
+
 ## 5. Gate automatic replacement
 
 Before enabling or running `auto`, require all of the following:
@@ -271,6 +290,25 @@ Run installed-user maintenance from a neutral consumer project. Running it
 inside the publisher repository can expose both the repository package and the
 user copy to discovery, which should fail closed as ambiguous.
 
+Use the same unfiltered registry view as the updater before relying on a
+target-specific listing:
+
+```powershell
+$Matches = gh skill list `
+  --json skillName,sourceURL,scope,version,pinned,path |
+  ConvertFrom-Json |
+  Where-Object skillName -eq "analyze-project-claims"
+
+if (@($Matches).Count -ne 1) {
+  throw "Expected exactly one visible analyze-project-claims installation."
+}
+```
+
+`gh skill list --agent codex --scope user` is still useful for checking the
+intended target entry, but it is narrower than updater discovery. Inside the
+publisher checkout it can show one user installation while the unfiltered view
+correctly sees both that install and the project package.
+
 ## 10. Prove a real replacement with two releases
 
 A complete replacement test needs a baseline release and a later candidate:
@@ -285,6 +323,11 @@ A complete replacement test needs a baseline release and a later candidate:
 8. start a fresh host invocation and record that it loaded `vB`;
 9. run another dry check and require an up-to-date result;
 10. invoke maintenance within the lease and require `NOT_DUE`.
+
+For a policy-aware `check-now`, the post-replacement check in `auto` mode should
+return `UP_TO_DATE` even when a lease is active. The same command in `notify`,
+`off`, or unconfigured mode must remain a dry run and preserve the exact stored
+mode. Record the new-process observation separately from updater output.
 
 Unit tests should also cover consent, exact path/version binding, pinned and
 project degradation, duplicate names, source changes, transient failures,
@@ -363,7 +406,9 @@ update-policy file and defaults to local preview plus per-report approval. See
 - [ ] No force, unpin, or in-process self-overwrite
 - [ ] Current-invocation stability and next-invocation activation
 - [ ] Backoff, lease, lock, and bounded native output
+- [ ] Consent reloaded and re-evaluated under the update lock
 - [ ] CI before publication
+- [ ] Neutral-directory smoke using the updater's unfiltered install view
 - [ ] Clean two-release E2E with fresh host invocations
 - [ ] Honest evidence boundary by host, operating system, and repository type
 - [ ] Separate consent and data path for optional problem reporting
