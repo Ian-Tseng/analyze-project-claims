@@ -753,6 +753,9 @@ class UpdateCoordinator:
         state = self.store.load()
         return _result("STATUS", state, f"Update mode is {state['mode']}.", emit=True)
 
+    def check_now(self) -> dict[str, object]:
+        return self.maintain(force=True, policy_aware=True)
+
     def _save_outcome(
         self,
         state: dict[str, object],
@@ -783,9 +786,16 @@ class UpdateCoordinator:
                 "Inspect the installation and explicitly re-enable the policy.",
             )
 
-    def maintain(self, *, force: bool = False, notify_only: bool = False) -> dict[str, object]:
+    def maintain(
+        self,
+        *,
+        force: bool = False,
+        notify_only: bool = False,
+        policy_aware: bool = False,
+    ) -> dict[str, object]:
         state = self.store.load()
-        if not notify_only and state["mode"] == "unconfigured":
+        effective_notify_only = notify_only or (policy_aware and state["mode"] != "auto")
+        if not effective_notify_only and state["mode"] == "unconfigured":
             if state["prompted"]:
                 return _result("UNCONFIGURED", state, "No update preference is configured.")
             try:
@@ -797,9 +807,9 @@ class UpdateCoordinator:
                     "This surface is not a GitHub CLI-tracked standalone installation.",
                 )
             return self.prompt()
-        elif not notify_only and state["mode"] == "off":
+        elif not effective_notify_only and state["mode"] == "off":
             return _result("DISABLED", state, "Automatic update activity is disabled.")
-        if state["suspended"] and not notify_only:
+        if state["suspended"] and not effective_notify_only:
             return _result(
                 "AUTO_SUSPENDED",
                 state,
@@ -816,6 +826,19 @@ class UpdateCoordinator:
             if not acquired:
                 return _result("LOCKED", state, "Another update-policy action is already running.")
             state = self.store.load()
+            effective_notify_only = notify_only or (policy_aware and state["mode"] != "auto")
+            if not effective_notify_only and state["mode"] == "unconfigured":
+                return _result("UNCONFIGURED", state, "No update preference is configured.")
+            if not effective_notify_only and state["mode"] == "off":
+                return _result("DISABLED", state, "Automatic update activity is disabled.")
+            if state["suspended"] and not effective_notify_only:
+                return _result(
+                    "AUTO_SUSPENDED",
+                    state,
+                    "Automatic updates are suspended after an integrity failure.",
+                    action="Inspect the installation and explicitly re-enable automatic updates.",
+                    emit=True,
+                )
             next_check = state["next_check_at"]
             if not force and isinstance(next_check, int) and self._timestamp() < next_check:
                 return _result("NOT_DUE", state, "The update lease is still active.")
@@ -823,7 +846,7 @@ class UpdateCoordinator:
                 install = discover_installation(self.native, self.skill_root)
                 if state["installation_id"] is not None:
                     self._bind(state, install)
-                mode = "notify" if notify_only else state["mode"]
+                mode = "notify" if effective_notify_only else state["mode"]
                 if mode == "notify":
                     result = self.native.update(dry_run=True)
                     if result.returncode != 0:
@@ -951,7 +974,7 @@ class UpdateCoordinator:
                     "PACKAGE_MANIFEST_INVALID",
                     "SOURCE_OR_INSTALL_CHANGED",
                 }:
-                    if state["mode"] == "auto" and not notify_only:
+                    if state["mode"] == "auto" and not effective_notify_only:
                         self._save_outcome(state, exc.code, success=False, suspended=True)
                     return _result(exc.code, state, exc.message, action=exc.action, emit=True)
                 raise
@@ -1010,7 +1033,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "maintain":
             result = coordinator.maintain()
         elif args.command == "check-now":
-            result = coordinator.maintain(force=True, notify_only=True)
+            result = coordinator.check_now()
         elif args.command == "verify-package":
             digest = verify_package_manifest(args.skill_root)
             state = store.load()

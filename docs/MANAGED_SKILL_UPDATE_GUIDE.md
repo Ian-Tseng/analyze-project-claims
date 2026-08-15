@@ -176,6 +176,10 @@ Map user language to deterministic actions:
 | Check now | `check-now` |
 | Ordinary substantive invocation | `maintain` |
 
+`check-now` bypasses the lease but still honors stored consent. In `auto` mode
+it runs the verified replacement path immediately. In `notify`, `off`, or
+unconfigured mode it performs only the native dry run and preserves the mode.
+
 Use a success lease, such as 24 hours, to avoid a network check on every
 invocation. Use a shorter retry delay, such as one hour, after transient native
 or network failures.

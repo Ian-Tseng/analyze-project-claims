@@ -613,6 +613,10 @@ Route explicit user requests to these deterministic verbs:
 - "show update status" -> `status`
 - "check for updates now" -> `check-now`
 
+`check-now` bypasses the lease while honoring stored consent. In `auto` mode it
+runs the verified replacement path immediately; otherwise it is read-only and
+does not change the stored mode.
+
 Keep global options such as `--format json` before the verb. Do not invent a
 custom download, overwrite, unpin, or force-update path.
 

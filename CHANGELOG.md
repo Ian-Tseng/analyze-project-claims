@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here.
 
+## [0.7.1] - 2026-08-15
+
+### Changed
+
+- Explicit `check-now` requests now honor existing automatic-update consent:
+  `auto` performs immediate verified replacement, while all other modes remain
+  read-only and preserve their stored policy.
+
 ## [0.7.0] - 2026-08-14
 
 ### Added
@@ -24,4 +32,5 @@ All notable changes to this project are documented here.
 - Persisted v2 records replay their normalized invariants and derived identities;
   recomputing the outer checksum alone cannot make a malformed record valid.
 
+[0.7.1]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.1
 [0.7.0]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.0
