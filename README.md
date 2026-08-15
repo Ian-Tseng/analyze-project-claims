@@ -145,12 +145,11 @@ Say one of:
 - `check for updates now`;
 - `show update status`.
 
-With `auto` enabled, a successful check starts a 24-hour lease after the
-current task finishes. A transient failure may retry no sooner than one hour
-on a later invocation. GitHub CLI performs the replacement; the updater
-verifies the source, path, version, Git tree identity, and package manifest.
-The current invocation keeps its starting version, and the next invocation
-loads a verified update.
+`check for updates now` bypasses the lease: it installs in `auto` mode and is
+read-only otherwise. Successful checks start a 24-hour lease; transient
+failures retry after one hour. GitHub CLI replaces the package after source,
+path, version, tree, and manifest verification. The current invocation keeps
+its version; the next loads the update.
 
 Automatic replacement applies only to one clean, unpinned, user-scope install
 tracked by GitHub CLI. Pinned and project-scope installs become notify-only.

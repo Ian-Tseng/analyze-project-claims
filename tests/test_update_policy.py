@@ -336,18 +336,157 @@ class UpdatePolicyTests(unittest.TestCase):
             self.assertTrue(update_policy.PolicyStore(base / "state").load()["suspended"])
             self.assertEqual(native.update_calls, [])
 
-    def test_check_now_is_read_only_and_does_not_change_mode(self) -> None:
+    def test_check_now_is_read_only_without_auto_consent_and_does_not_change_mode(self) -> None:
         with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
             base = Path(temporary)
             root = make_skill(base)
             native = FakeNative([install_for(root)])
             native.result = update_policy.NativeResult(0, "an update is available", "")
             subject = coordinator(root, base / "state", native, [1000])
-            result = subject.maintain(force=True, notify_only=True)
+            result = subject.check_now()
             self.assertEqual(result["status"], "NOTIFY_CHECKED")
             self.assertEqual(result["mode"], "unconfigured")
             self.assertEqual(update_policy.PolicyStore(base / "state").load()["mode"], "unconfigured")
             self.assertEqual(native.update_calls, [True])
+
+    def test_check_now_preserves_explicit_non_auto_modes(self) -> None:
+        for mode in ("notify", "off"):
+            with self.subTest(mode=mode), tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
+                base = Path(temporary)
+                root = make_skill(base)
+                native = FakeNative([install_for(root)])
+                native.result = update_policy.NativeResult(0, "an update is available", "")
+                subject = coordinator(root, base / "state", native, [1000])
+                if mode == "notify":
+                    subject.enable("notify")
+                else:
+                    subject.disable()
+                native.update_calls.clear()
+
+                result = subject.check_now()
+
+                self.assertEqual(result["status"], "NOTIFY_CHECKED")
+                self.assertEqual(result["mode"], mode)
+                self.assertEqual(update_policy.PolicyStore(base / "state").load()["mode"], mode)
+                self.assertEqual(native.update_calls, [True])
+
+    def test_check_now_honors_auto_consent_and_bypasses_the_active_lease(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
+            base = Path(temporary)
+            root = make_skill(base)
+            native = FakeNative([install_for(root)])
+            subject = coordinator(root, base / "state", native, [1000])
+            subject.enable("auto")
+            self.assertEqual(subject.maintain()["status"], "UP_TO_DATE")
+            native.update_calls.clear()
+
+            result = subject.check_now()
+
+            self.assertEqual(result["status"], "UP_TO_DATE")
+            self.assertEqual(result["mode"], "auto")
+            self.assertEqual(native.update_calls, [False])
+
+    def test_check_now_rechecks_revoked_auto_consent_under_lock(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
+            base = Path(temporary)
+            root = make_skill(base)
+            native = FakeNative([install_for(root)])
+            native.result = update_policy.NativeResult(0, "an update is available", "")
+            subject = coordinator(root, base / "state", native, [1000])
+            auto_state = update_policy.default_state()
+            auto_state.update({"mode": "auto", "prompted": True})
+            off_state = dict(auto_state)
+            off_state["mode"] = "off"
+
+            with mock.patch.object(subject.store, "load", side_effect=[auto_state, off_state]):
+                result = subject.check_now()
+
+            self.assertEqual(result["status"], "NOTIFY_CHECKED")
+            self.assertEqual(result["mode"], "off")
+            self.assertEqual(native.update_calls, [True])
+
+    def test_maintain_rechecks_inactive_auto_states_under_lock(self) -> None:
+        cases = (
+            ("unconfigured", False, "UNCONFIGURED"),
+            ("off", False, "DISABLED"),
+            ("auto", True, "AUTO_SUSPENDED"),
+        )
+        for locked_mode, suspended, expected_status in cases:
+            with self.subTest(status=expected_status), tempfile.TemporaryDirectory(
+                prefix="update-policy-"
+            ) as temporary:
+                base = Path(temporary)
+                root = make_skill(base)
+                native = FakeNative([install_for(root)])
+                subject = coordinator(root, base / "state", native, [1000])
+                auto_state = update_policy.default_state()
+                auto_state.update({"mode": "auto", "prompted": True})
+                locked_state = dict(auto_state)
+                locked_state.update({"mode": locked_mode, "suspended": suspended})
+
+                with mock.patch.object(subject.store, "load", side_effect=[auto_state, locked_state]):
+                    result = subject.maintain()
+
+                self.assertEqual(result["status"], expected_status)
+                self.assertEqual(native.update_calls, [])
+
+    def test_check_now_uses_newly_granted_auto_consent_under_lock(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
+            base = Path(temporary)
+            root = make_skill(base)
+            native = FakeNative([install_for(root)])
+            subject = coordinator(root, base / "state", native, [1000])
+            off_state = update_policy.default_state()
+            off_state.update(
+                {
+                    "mode": "off",
+                    "prompted": True,
+                    "installation_id": update_policy.installation_id(
+                        "https://github.com/owner/repository", root
+                    ),
+                    "source_fingerprint": update_policy.source_fingerprint(
+                        "https://github.com/owner/repository"
+                    ),
+                }
+            )
+            auto_state = dict(off_state)
+            auto_state["mode"] = "auto"
+
+            with mock.patch.object(subject.store, "load", side_effect=[off_state, auto_state]):
+                result = subject.check_now()
+
+            self.assertEqual(result["status"], "UP_TO_DATE")
+            self.assertEqual(result["mode"], "auto")
+            self.assertEqual(native.update_calls, [False])
+
+    def test_check_now_cli_uses_the_policy_aware_path(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
+            base = Path(temporary)
+            root = make_skill(base)
+            result = update_policy._result(
+                "NOTIFY_CHECKED",
+                update_policy.default_state(),
+                "Checked.",
+            )
+            with mock.patch.object(
+                update_policy.UpdateCoordinator,
+                "check_now",
+                return_value=result,
+            ) as check_now, mock.patch("builtins.print"):
+                exit_code = update_policy.main(
+                    [
+                        "--skill-root",
+                        str(root),
+                        "--state-dir",
+                        str(base / "state"),
+                        "--format",
+                        "json",
+                        "check-now",
+                    ]
+                )
+
+            self.assertEqual(exit_code, 0)
+            check_now.assert_called_once_with()
 
     def test_state_schema_is_exact_and_unknown_fields_fail_closed(self) -> None:
         schema = json.loads((SKILL_ROOT / "references" / "update-policy.schema.json").read_text(encoding="utf-8"))
