@@ -78,7 +78,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "56e1868a47abd432e1402733f46f20e0979a4329b583d6462f4492f7f514a826"
+      "sha256": "d9a33f51a4095c20f26d2f9e077f328cb961f1e8891c02c4f064669fd572f10a"
     },
     {
       "path": "references/problem-report-policy.schema.json",
