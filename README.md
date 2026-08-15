@@ -280,8 +280,9 @@ smoke tests.
 
 For the reusable design and release procedure, read
 [How to Build Safe Managed Updates for a GitHub Skill](docs/MANAGED_SKILL_UPDATE_GUIDE.md).
-For the exact v0.4.1 to v0.4.2 validation record and the limits of that evidence,
-read [Managed Update End-to-End Evidence Log](docs/MANAGED_UPDATE_E2E_LOG.md).
+For the dated v0.4.1 to v0.4.2 and public v0.7.0 to v0.7.1 replacement records,
+including the limits of each observation, read the
+[Managed Update End-to-End Evidence Log](docs/MANAGED_UPDATE_E2E_LOG.md).
 
 For a reusable cross-agent validation procedure, read
 [How to Validate a GitHub Skill Across Codex and Claude Code](docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md).

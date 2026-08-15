@@ -30,6 +30,10 @@ Resolve these before making the repository public:
 Changing visibility exposes retained history to cloning and forking. Treat the
 switch as a publication event, not a reversible privacy control.
 
+The dated pre-publication scope, accepted history exposure, verified controls,
+and remaining limits are recorded in the
+[Public Release Security Review](docs/PUBLIC_RELEASE_SECURITY_REVIEW.md).
+
 ## Publication order and irreversible checkpoints
 
 Use this order for every versioned release:
@@ -105,6 +109,10 @@ The expected results are:
 - `VERSION`, `CITATION.cff`, and `references/package-version.json` agree;
 - no release placeholder remains;
 - `git status` contains only intentional files.
+
+When recording `unittest` evidence, the `Ran N tests` total includes skipped
+tests. If the summary says `skipped=K`, report `N-K` passed and `K` skipped;
+do not report `N` passed plus `K` skipped.
 
 On macOS, a test-owned temporary path may be spelled through the `/var`
 symlink while its canonical form begins with `/private/var`. A containment test
@@ -220,6 +228,27 @@ gh skill list --agent codex --scope user `
 gh skill update analyze-project-claims --dry-run
 ```
 
+Run the smoke from a neutral consumer directory outside this repository. Before
+accepting the filtered user-scope entry above, inspect the same unfiltered view
+used by the updater and require exactly one matching name:
+
+```powershell
+$VisibleMatches = gh skill list `
+  --json skillName,sourceURL,scope,version,pinned,path |
+  ConvertFrom-Json |
+  Where-Object skillName -eq "analyze-project-claims"
+
+if (@($VisibleMatches).Count -ne 1) {
+  throw "Ambiguous analyze-project-claims installation view."
+}
+```
+
+A publisher checkout contributes a project-scope package to that unfiltered
+view. A filtered `--agent codex --scope user` listing may still show one user
+entry there, so it cannot by itself prove that updater discovery is
+unambiguous. `AMBIGUOUS_INSTALL` in the publisher checkout is the intended
+fail-closed result, not evidence that the installed package is broken.
+
 For a non-destructive Windows smoke test, point all four home variables at one
 disposable directory in a fresh PowerShell process:
 
@@ -295,7 +324,7 @@ distinct. For v0.7.0, the evidence map is:
 | Claim | Supporting authority |
 | --- | --- |
 | Released package bytes and version | [`package-manifest.json`](skills/analyze-project-claims/references/package-manifest.json), [`package-version.json`](skills/analyze-project-claims/references/package-version.json), and [GitHub release v0.7.0](https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.0) |
-| Accepted repository structure | [`project-component-map.json`](validation/component-map/accepted-map.json) |
+| Accepted repository structure | [`accepted-map.json`](validation/component-map/accepted-map.json) |
 | Formal evidence-bound audit | [`20260814T155937638082Z-c36faabe.json`](validation/history/20260814T155937638082Z-c36faabe.json) |
 | Human-readable audit view | [`20260814T155937638082Z-c36faabe.md`](validation/reports/20260814T155937638082Z-c36faabe.md) |
 | Cross-platform tests on released `main` | [GitHub Actions run 31817785877](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/31817785877) |
