@@ -6,11 +6,11 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "1380e32e7ccd7f0551ddecb718ed5cd3c06b4466e0def8690b8bf2607820d835"
+      "sha256": "0dde22f55dcb2e31ea288751018703ccdae73e4f11648ffa554400dca686be78"
     },
     {
       "path": "agents/openai.yaml",
-      "sha256": "016341b806e79b2d6fb6bb44b033dca47c69ae87ae2ec80c9b45aca08f5af946"
+      "sha256": "3716ea14e3c3dbd2b520099e8c48824dd4ebf2af16198039b618182a33f3e688"
     },
     {
       "path": "assets/component-map-observation.template.json",
@@ -30,11 +30,11 @@
     },
     {
       "path": "references/component-evidence-engine.json",
-      "sha256": "b4064d1c508c5f2e3ca7a01f33e767fc4a6cb3cb8f50e6dcf2e035f0084d97d8"
+      "sha256": "7a6d988645d316b0659afacff7764f0d1e1dd46b91857e7a43f4f6a5dfb28267"
     },
     {
       "path": "references/component-evidence-protocol.md",
-      "sha256": "f077389071bf7dd46c4543c496bd6cf1e0b50eb2b35b491ca0a4ed3a30027f5a"
+      "sha256": "d6a0bc88603e2605d6f0841c5de40972d09a578dae8feafc9f8486a2130410eb"
     },
     {
       "path": "references/component-map-observation.schema.json",
@@ -77,8 +77,12 @@
       "sha256": "3b0349708bd69e5327e1f57fd26acf13e6e183beec735b9408996d6d592a2caa"
     },
     {
+      "path": "references/logic-guided-rag-audit.md",
+      "sha256": "cc2d9c86b2a1194fae64d209448be765a8fe9e4273f6410b91846aedc02811ed"
+    },
+    {
       "path": "references/package-version.json",
-      "sha256": "d9a33f51a4095c20f26d2f9e077f328cb961f1e8891c02c4f064669fd572f10a"
+      "sha256": "2fc20cc524120f7202dac5131d3175368af82553fb3104cb8e8c6e98cf6fa8c5"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -101,6 +105,22 @@
       "sha256": "7e92c3fd696fae083f3310b03f7e12303311d7dc0637c9b002eb1d1164ec387e"
     },
     {
+      "path": "references/skill-outcome-receipt.schema.json",
+      "sha256": "3e4a4e8187eb94472454558f4c57ead56d764ed9921cbad27e8bc66846b29d96"
+    },
+    {
+      "path": "references/skill-quality-contribution.schema.json",
+      "sha256": "f86ce13f590a33e1ec6f4debec00a26b1ee639e47de36b6c6d9a238afb19e210"
+    },
+    {
+      "path": "references/skill-quality-loop.md",
+      "sha256": "d10d9e9c17581ad46e4c65b93eb43740ddc11b16ea16088caf1d92a51b04d0cb"
+    },
+    {
+      "path": "references/skill-quality-proposal.schema.json",
+      "sha256": "dfc3affbcfa499e9bdc0f543a8b9b0d7d9c3d4817b3dec4096c0dd1e622328a3"
+    },
+    {
       "path": "references/update-policy.schema.json",
       "sha256": "960538a7c7654746ac696502de3b9b64e6776321497c174efc2f171159e15f6d"
     },
@@ -110,7 +130,7 @@
     },
     {
       "path": "scripts/_internal/component_evidence/__init__.py",
-      "sha256": "5bbbe54cec76073ad7663d186e331029e9f8cdbc76e3c4ec561e2da03347a5a9"
+      "sha256": "843cd1c1195f508fbe7f59436c1d6afabb302e1410fe32391419845b8052068d"
     },
     {
       "path": "scripts/_internal/component_evidence/identity.py",
@@ -119,6 +139,26 @@
     {
       "path": "scripts/_internal/evidence_bound_scan.py",
       "sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+    },
+    {
+      "path": "scripts/_internal/safe_process.py",
+      "sha256": "a2042ec7d6c52523ffe6f053c15660632697454c366bf0d709f4b00eb92a0a13"
+    },
+    {
+      "path": "scripts/_internal/skill_quality/__init__.py",
+      "sha256": "7bd991085e96ce41386aceaf594ad176c465a6c445dcb8d6d5f9d1cd7a81277b"
+    },
+    {
+      "path": "scripts/_internal/skill_quality/contract.py",
+      "sha256": "5f2b3e360ebc767b20ed5942dc149ac8c6aa0177c268af02ce508c764564fbef"
+    },
+    {
+      "path": "scripts/_internal/skill_quality/contribution.py",
+      "sha256": "875fbeac7776340e004759c4b6aff7e3d3647215628ba179ca6330e6fb11a42b"
+    },
+    {
+      "path": "scripts/_internal/skill_quality/store.py",
+      "sha256": "de3ef67f0af3f1283bf0bfbebb5716750b758a6f74e2b8e741f7e92bf8abeb33"
     },
     {
       "path": "scripts/installation_analytics.py",
@@ -134,15 +174,19 @@
     },
     {
       "path": "scripts/reconcile_component_map.py",
-      "sha256": "919cb0c513f30767bd03dbb5b29bb32fd3e1d25fd28bec5ecd4c17bb4d0ff601"
+      "sha256": "08ea2b34784ea1ab35bfd36410329637108481816054c539f61bd8bff7874554"
     },
     {
       "path": "scripts/record_scan.py",
       "sha256": "ecdfa716c4e64e072189ca8592b28cbcdc206bdf25b2f688817cd45c8aadfe53"
     },
     {
+      "path": "scripts/skill_quality_loop.py",
+      "sha256": "2a91da4e608e5102eb1d503bb62cb81464b24f223a19999ce8cc5b6f307f0d5d"
+    },
+    {
       "path": "scripts/update_policy.py",
-      "sha256": "bd47fcb6d6a63d41afca08e19ecc4cc76721051326407ed921181e143b4e1608"
+      "sha256": "601909435e8023fecbb072f9c9108721f39c058f3ae1732af516697601b5808f"
     }
   ]
 }

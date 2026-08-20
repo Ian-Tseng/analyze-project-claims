@@ -16,13 +16,15 @@ from pathlib import Path
 from typing import Any
 
 from _internal.component_evidence.identity import (
+    DESCRIPTOR_PATH,
     EngineIdentityError,
+    build_engine_descriptor,
     verified_engine_summary,
 )
 
 
 SCHEMA_VERSION = "1.0"
-MAPPER_VERSION = "1.2.0"
+MAPPER_VERSION = "1.3.0"
 TRANSIENT_PYTHON_SUFFIXES = {".pyc", ".pyo"}
 CANDIDATE_STATES = {
     "bootstrapped_provisional",
@@ -664,7 +666,15 @@ def _compare_maps(accepted: dict[str, Any], observed: dict[str, Any]) -> dict[st
             source_changes.append({"source": source, "fields": fields})
 
     contract_changes = [
-        field for field in ("objective", "scope", "authority") if accepted[field] != observed[field]
+        field
+        for field in (
+            "objective",
+            "scope",
+            "authority",
+            "skill_sha256",
+            "mapper_version",
+        )
+        if accepted[field] != observed[field]
     ]
     return {
         "added_components": sorted(after_component_ids - before_component_ids),
@@ -991,8 +1001,39 @@ def main() -> int:
         'verify-self',
         help='Verify the embedded component-evidence engine identity',
     )
+    build_self = subparsers.add_parser(
+        'build-self',
+        help='Rebuild the embedded component-evidence engine descriptor',
+    )
+    build_self.add_argument(
+        '--write',
+        action='store_true',
+        required=True,
+        help='Acknowledge the descriptor write',
+    )
 
     args = parser.parse_args()
+    if args.command == 'build-self':
+        skill_root = Path(__file__).resolve().parents[1]
+        try:
+            descriptor = build_engine_descriptor(skill_root)
+            _write_atomic(skill_root / DESCRIPTOR_PATH, descriptor)
+        except (EngineIdentityError, OSError) as exc:
+            print(f'reconcile_component_map: {exc}', file=sys.stderr)
+            return 2
+        print(
+            json.dumps(
+                {
+                    'status': 'rebuilt',
+                    'descriptor': str((skill_root / DESCRIPTOR_PATH).resolve()),
+                    'engine_digest': descriptor['engine_digest'],
+                },
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
     if args.command == 'verify-self':
         try:
             output = verified_engine_summary(Path(__file__).resolve().parents[1])

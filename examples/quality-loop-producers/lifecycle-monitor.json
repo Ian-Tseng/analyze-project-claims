@@ -1,0 +1,10 @@
+{
+  "owner": "Ian-Tseng",
+  "repository": "lifecycle-monitor",
+  "skill": "lifecycle-monitor",
+  "version": "2.0.0",
+  "package_digest_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+  "outcome": "completed_with_limitations",
+  "quality_signal": "lifecycle_inconsistency",
+  "requested_action": "analyze_quality"
+}

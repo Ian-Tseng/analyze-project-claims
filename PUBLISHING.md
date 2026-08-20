@@ -38,16 +38,23 @@ and remaining limits are recorded in the
 
 Use this order for every versioned release:
 
-1. synchronize version, citation, package metadata, and manifest identities;
-2. run focused and full local validation from a clean candidate;
-3. merge the reviewed candidate and require CI to pass on the exact `main`
+1. synchronize version, citation, package, plugin, and marketplace identities;
+2. rebuild and verify the embedded evidence-engine descriptor;
+3. rebuild and verify the package manifest;
+4. reconcile the exact candidate tree, review and accept the exact component
+   map candidate, run a second unchanged reconciliation, and pass formal
+   preflight;
+5. run focused, full, skill, plugin, and offline quality-loop validation from a
+   clean candidate;
+6. merge the reviewed candidate and require CI to pass on the exact `main`
    commit that will be released;
-4. verify the `refs/tags/v*` protection ruleset and enable GitHub release
+7. verify the `refs/tags/v*` protection ruleset and enable GitHub release
    immutability **before** publication;
-5. run `gh skill publish .\skills --dry-run` and review every warning;
-6. publish the new SemVer tag exactly once and run `gh release verify`;
-7. run public preview, isolated install, registry, manifest, and update tests;
-8. record runtime discovery and invocation separately for every target client.
+8. run `gh skill publish .\skills --dry-run` and review every warning;
+9. publish the new SemVer tag exactly once and run `gh release verify`;
+10. run public preview, standalone install, plugin install, registry, manifest,
+    update, and fresh-activation tests;
+11. record runtime discovery and invocation separately for every target client.
 
 Do not infer a later checkpoint from an earlier pass. In particular, package
 discovery is not installation, installation is not client discovery, and an
@@ -78,8 +85,15 @@ manifest.
 
 ## 2. Rebuild and validate the package identity
 
-Changing the schema owner changes the packaged bytes. Rebuild the package
-manifest before committing:
+Changing the schema owner or embedded mapper changes packaged bytes. Rebuild
+and verify the evidence-engine identity first:
+
+```powershell
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py build-self --write
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py verify-self
+```
+
+Then rebuild the package manifest before committing:
 
 ```powershell
 py -3 .\skills\analyze-project-claims\scripts\update_policy.py `
@@ -107,6 +121,8 @@ The expected results are:
 - both v2 schemas, the v2 template, and the evidence-bound record guide are in
   `references/package-manifest.json`;
 - `VERSION`, `CITATION.cff`, and `references/package-version.json` agree;
+- `.codex-plugin/plugin.json` has the same version and the repository
+  marketplace points to the root plugin;
 - no release placeholder remains;
 - `git status` contains only intentional files.
 
@@ -120,7 +136,24 @@ may canonicalize its own temporary root before comparing paths. Do not weaken
 production rejection of symbolic links, Windows reparse points, or paths that
 escape an approved root.
 
-## 3. Initialize and upload the repository
+## 3. Reconcile release validation authority
+
+The accepted component map must describe the exact release candidate, including
+the active `SKILL.md` digest, mapper identity, quality-loop surfaces, plugin
+adapter, contribution boundary, updater doctor, and release preflight.
+
+```powershell
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile --observation .\validation\component-map-observation-v080.json --map-root .\validation\component-map --project-root .
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py accept --candidate <exact-candidate-from-reconcile> --map-root .\validation\component-map
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile --observation .\validation\component-map-observation-v080.json --map-root .\validation\component-map --project-root .
+py -3 .\skills\analyze-project-claims\scripts\record_scan.py preflight --map-root .\validation\component-map --project-root .
+```
+
+The second reconcile must report `checked_unchanged`. Never let an agent-created
+patch accept its own map. Owner acceptance applies only to the exact reviewed
+candidate and does not authorize merge or release.
+
+## 4. Initialize and upload the repository
 
 If this directory is not already a Git repository:
 
@@ -164,7 +197,27 @@ not retry the merge merely because local branch deletion failed; another
 worktree may still have that branch checked out. Clean up the branch only after
 that worktree is detached and the deletion is independently safe.
 
-## 4. Validate and publish the skill release
+## 5. Validate the quality loop and plugin
+
+Run the closed-schema, replay, concurrency, consent, intake, and plugin tests:
+
+```powershell
+py -3 -m unittest discover -s tests -p "test_skill_quality_loop.py" -v
+py -3 -m unittest discover -s tests -p "test_quality_contribution.py" -v
+py -3 -m unittest discover -s tests -p "test_plugin_bundle.py" -v
+py -3 .\skills\analyze-project-claims\scripts\skill_quality_loop.py --format json --state-dir .\.quality-loop-release-smoke conformance
+py -3 "$env:USERPROFILE\.codex\skills\.system\plugin-creator\scripts\validate_plugin.py" .
+```
+
+Require `QUALITY_PROPOSAL_READY`, replay deduplication, `outbound: NONE`, and
+plugin validation success. The conformance state is local disposable evidence;
+remove it only after recording the result.
+
+These passes do not establish live Codex hook continuation or Claude runtime
+invocation. Record those separately in `docs/CODEX_PLUGIN_E2E_LOG.md` and
+`docs/CLAUDE_CODE_E2E_LOG.md`.
+
+## 6. Validate and publish the skill release
 
 The installable source currently lives under `skills/`, so pass that directory
 to GitHub CLI discovery:
@@ -208,7 +261,7 @@ deleting `v*` refs, including existing tags, but it does not make release notes
 or release assets immutable. A publication dry-run should no longer warn that
 tag protection is absent.
 
-## 5. Test the public user journey
+## 7. Test the public user journey
 
 Use a clean environment with no duplicate `analyze-project-claims` install.
 Preview the package before installing it:
@@ -308,6 +361,21 @@ If no authenticated Claude Code CLI is available, restrict the release claim to
 structural Agent Skills compatibility. Do not claim Claude Code runtime
 validation until the smoke test above has been observed.
 
+Test the Codex plugin separately from the standalone skill. Do not keep both
+visible under the same skill name:
+
+```powershell
+codex plugin marketplace add "$Owner/$Repository" --ref "v$Version"
+codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
+codex plugin list --json
+```
+
+Review and trust the exact hook command in Codex. Record plugin discovery,
+`/hooks` status, one disposable exact receipt, continuation or veto outcome,
+local proposal identity, replay behavior, and fresh-session activation. If
+continuation is not observed, preserve the receipt and run explicit `consume`;
+do not claim automatic analysis.
+
 Use [How to Validate a GitHub Skill Across Codex and Claude Code](docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md)
 as the reusable procedure. Record exact observations and gaps in an evidence
 log such as [Claude Code E2E Evidence Log](docs/CLAUDE_CODE_E2E_LOG.md).
@@ -316,19 +384,19 @@ A real replacement test requires a later published candidate. During that
 test, the current invocation must continue using its starting version and the
 next invocation must load the verified new version.
 
-## 6. Record claim-to-evidence links
+## 8. Record claim-to-evidence links
 
 Keep machine authority, human-readable views, and remote lifecycle evidence
-distinct. For v0.7.0, the evidence map is:
+distinct. For v0.8.0, the evidence map is version-bound:
 
 | Claim | Supporting authority |
 | --- | --- |
-| Released package bytes and version | [`package-manifest.json`](skills/analyze-project-claims/references/package-manifest.json), [`package-version.json`](skills/analyze-project-claims/references/package-version.json), and [GitHub release v0.7.0](https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.0) |
+| Released package bytes and version | [`package-manifest.json`](skills/analyze-project-claims/references/package-manifest.json), [`package-version.json`](skills/analyze-project-claims/references/package-version.json), and [GitHub release v0.8.0](https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.0) after publication |
 | Accepted repository structure | [`accepted-map.json`](validation/component-map/accepted-map.json) |
-| Formal evidence-bound audit | [`20260814T155937638082Z-c36faabe.json`](validation/history/20260814T155937638082Z-c36faabe.json) |
-| Human-readable audit view | [`20260814T155937638082Z-c36faabe.md`](validation/reports/20260814T155937638082Z-c36faabe.md) |
-| Cross-platform tests on released `main` | [GitHub Actions run 31817785877](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/31817785877) |
-| Public Codex and Claude-targeted distribution | [`CLAUDE_CODE_E2E_LOG.md`](docs/CLAUDE_CODE_E2E_LOG.md) |
+| Formal evidence-bound audit | The newest applicable verified v2 record under `validation/history/`, interpreted under [validation authority](validation/README.md) |
+| Human-readable audit view | The matching deterministic view under `validation/reports/`; it is derived, not authority |
+| Cross-platform tests on released `main` | The exact v0.8.0 commit's required GitHub Actions run after merge |
+| Prior scope-limited Codex and Claude-targeted distribution evidence | [`CLAUDE_CODE_E2E_LOG.md`](docs/CLAUDE_CODE_E2E_LOG.md) |
 
 Markdown reports are derived views; do not treat them as a second authority.
 When a mapped source fix changes component identity, reconcile the component
@@ -336,17 +404,22 @@ map, explicitly accept the intended candidate, run a second unchanged check,
 and then append a new validation JSON record and report. Never rewrite an
 earlier accepted map event, audit record, or dated E2E observation.
 
-## 7. Verify problem-report operations
+## 9. Verify problem-report and quality-contribution operations
 
 Run the reporter and owner-service tests before publishing:
 
 ```powershell
 py -3 -m unittest discover -s tests -p "test_problem_report.py" -v
 py -3 -m unittest discover -s tests -p "test_reporting_service.py" -v
+py -3 -m unittest discover -s tests -p "test_quality_contribution.py" -v
 ```
 
 For GitHub transport, verify visibility lookup fails closed. A public issue
 must require both `--approved` and `--allow-public-issue` for the exact preview.
+The approval must expire, one contribution ID must create at most one issue,
+and ambiguous post-request outcomes must require reconciliation rather than a
+blind retry. Verify external executables resolve to absolute paths without
+consulting the current project directory.
 Verify new and legacy `auto-minimal` GitHub policies stop before delivery;
 automatic reports require the private owner API. Security reports must use
 private vulnerability reporting.
@@ -361,6 +434,11 @@ validated draft pull request. Never execute issue text or automatically merge,
 release, or close a report. Require a regression test, reviewed fix, passing
 CI, and a new versioned SemVer release whose tag is not moved. Close the issue
 only after the released fix and installed-update evidence exist.
+
+Quality contributions use the same owner label only after exact enum-only
+intake. Preview and exact approval are local; a public issue requires a second
+draft-specific confirmation. The issue authorizes only a map-pending candidate,
+not component-map acceptance, merge, release, closure, or installed update.
 
 If operating the optional API, follow
 [Internal Problem Reporting](docs/PROBLEM_REPORTING.md). Production requires an
@@ -388,7 +466,7 @@ Never describe repository traffic or the aggregate as downloads, users, or all
 installs. If no production endpoint was observed, keep the feature described as
 an inactive reference architecture.
 
-## 8. Evidence boundary
+## 10. Evidence boundary
 
 A successful dry-run proves package discovery and validation only. It does not
 prove that the repository was pushed, that a release was published, that Codex

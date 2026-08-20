@@ -3,70 +3,61 @@
 Audit a research or engineering project without confusing completed work with
 proven results.
 
-`analyze-project-claims` helps an AI agent trace objectives, claims, evidence,
-counterevidence, dependencies, lifecycle states, risks, and decisions across a
-repository. It finds contradictions, states the strongest claim the available
-evidence supports, and recommends the smallest useful next check.
+`analyze-project-claims` traces objectives, claims, evidence, counterevidence,
+dependencies, lifecycle states, risks, and decisions across a repository. It
+finds contradictions, states the strongest claim the evidence supports, and
+recommends the smallest useful next check.
 
-Use it when code, reports, experiment artifacts, tables, and status documents
-may disagree, or when a project needs a defensible answer to: what do we
-actually know?
 ## What it checks
 
-- source-of-truth and authority boundaries;
-- claims with same-scope evidence and counterevidence;
+- authority and source-of-truth boundaries;
+- same-scope evidence and counterevidence;
 - runner, audit, scientific, and acceptance states kept separate;
-- completed experiments and proof that artifacts were actually consumed;
-- contradictions across code, configuration, artifacts, monitors, tables, and
-  prose;
-- provenance, split, leakage, and publication boundaries;
-- the smallest evidence-producing next action.
+- proof that reported pipelines consumed the cited artifacts;
+- contradictions across code, configuration, monitors, tables, and prose;
+- provenance, split, leakage, and publication boundaries.
 
 ## Install
 
-### Codex
+### Codex standalone skill
 
-A managed Codex installation requires GitHub CLI 2.90.0 or later. Install the
-public package from its canonical owner, `Ian-Tseng`:
-
-```powershell
-gh skill install Ian-Tseng/analyze-project-claims `
-  skills/analyze-project-claims/SKILL.md `
-  --agent codex `
-  --scope user
-```
-
-The canonical path makes the package unambiguous and lets `gh skill update`
-rediscover it. `gh skill` is in public preview.
-
-For an unmanaged Codex copy:
+For a GitHub CLI-tracked standalone install:
 
 ```powershell
-Copy-Item -Recurse -Force `
-  .\skills\analyze-project-claims `
-  "$env:USERPROFILE\.codex\skills\analyze-project-claims"
+gh skill install Ian-Tseng/analyze-project-claims skills/analyze-project-claims/SKILL.md --agent codex --scope user
 ```
+
+This needs GitHub CLI 2.90.0 or later. The canonical path lets `gh skill
+update` rediscover the package.
+
+### Codex plugin with bounded handoff
+
+Choose this instead of the standalone install when you want the optional
+`Stop` receipt hook:
+
+```powershell
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.8.0
+codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
+```
+
+Do not install both copies under the same visible name. Review the exact hook
+before trusting it. The plugin manager owns updates. The hook can request at
+most one continuation, but routing is not guaranteed and live continuation is
+not yet claimed. Explicit `consume` is the portable fallback.
 
 ### Claude Code
 
 Claude Code uses the same
-[Agent Skills package](https://code.claude.com/docs/en/skills). Install it from
-the canonical source as a GitHub CLI-tracked user skill:
+[Agent Skills package](https://code.claude.com/docs/en/skills):
 
 ```powershell
-gh skill install Ian-Tseng/analyze-project-claims `
-  skills/analyze-project-claims/SKILL.md `
-  --agent claude-code `
-  --scope user
+gh skill install Ian-Tseng/analyze-project-claims skills/analyze-project-claims/SKILL.md --agent claude-code --scope user
 ```
 
-GitHub CLI records it under `~/.claude/skills` so `gh skill list` and `gh skill
-update` can rediscover it. A direct copy is an unmanaged fallback and cannot
-receive managed updates.
+This proves managed distribution only until Claude `/skills` discovery and
+invocation are observed.
 
 ## Quickstart
-
-Open the project you want to inspect and invoke the installed skill.
 
 In Codex:
 
@@ -82,222 +73,139 @@ In Claude Code:
 states, contradictions, and next validation gate.
 ```
 
-For a narrower check:
-
-```text
-Use $analyze-project-claims to verify whether the reported experiment is
-actually complete and whether its result is strong enough for the stated claim.
-```
-
-The response leads with the conclusion and normally includes:
-
-```text
-Overall conclusion
-
-finding | evidence | status | safest interpretation | required repair
-
-Strongest safe claim
-Scientific and publication boundary
-Recommended next action
-Unresolved uncertainty
-```
-
-The skill does not silently turn 'unknown,' 'failed,' or 'not tested' into a
-pass.
-
-See the [lifecycle receipt guide](docs/LIFECYCLE_RECEIPT_GUIDE.md).
+A typical response includes the conclusion, an inconsistency table, strongest
+safe claim, scientific and publication boundary, next action, and unresolved
+uncertainty. The skill never silently turns `unknown`, `failed`, or
+`not_tested` into a pass. See the
+[lifecycle receipt guide](docs/LIFECYCLE_RECEIPT_GUIDE.md).
 
 ## Example
 
-If a status document says an experiment is complete but the result table was
-generated from an older run, the skill should report something like:
+If a status document says an experiment is complete but its result table came
+from an older run, the safe conclusion is:
 
 ```text
-Overall conclusion: The workflow completed, but the reported scientific result
-is not established from the current run.
-
-Finding: The active result table does not consume the current run artifact.
-Status: Contradicted.
-Safest interpretation: Execution completed; scientific success remains
-untested for the current configuration.
-Required repair: Regenerate the table from the current artifact and record its
-identity before making the result claim.
+Execution completed, but the current scientific result is untested.
+Regenerate the table from the current artifact and bind its identity before
+making the result claim.
 ```
 
-This is the core product boundary: process completion, structural validation,
-scientific success, and publication eligibility are separate conclusions.
+Process completion, structural validity, scientific success, and publication
+eligibility are separate conclusions.
+
+## Optional skill-quality loop
+
+Compatible Ian-Tseng-managed skills can end with a content-free
+`SkillOutcomeReceipt`. It permits enum and package identity only: no project
+text, prompt, transcript, path, log, finding, attachment, or credential.
+
+```powershell
+py -3 .\skills\analyze-project-claims\scripts\skill_quality_loop.py --format json consume --marker "<exact-marker>"
+py -3 .\skills\analyze-project-claims\scripts\skill_quality_loop.py --format json --state-dir .\.quality-loop-smoke conformance
+```
+
+Replay returns the same proposal ID. Conformance must report
+`QUALITY_PROPOSAL_READY`, `replay_deduplicated: true`, and `outbound: NONE`.
+No issue, edit, update, or release is authorized. Read
+[Skill Quality Loop](docs/SKILL_QUALITY_LOOP.md), the
+[receipt contract](docs/SKILL_OUTCOME_RECEIPT.md), and the
+[reusable design guide](docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md).
 
 ## Automatic updates
 
-This section applies only to eligible GitHub CLI-tracked standalone
-installations. Such an installation asks once whether to enable updates after
-the first substantive audit. Nothing is checked or changed before you choose.
-
-Live replacement has been validated on Codex. The Claude Code path has verified
-install, listing, manifest, and update dry-run evidence, but not yet live Claude
-discovery, invocation, or replacement evidence.
-
-Say one of:
+Eligible standalone installs ask once after the first audit. Nothing is
+checked or changed before consent. Say:
 
 - `enable automatic updates`;
 - `notify me about updates`;
 - `disable updates`;
 - `check for updates now`;
-- `show update status`.
+- `show update status`;
+- `diagnose update authority`.
 
-`check for updates now` bypasses the lease: it installs in `auto` mode and is
-read-only otherwise. Successful checks start a 24-hour lease; transient
-failures retry after one hour. GitHub CLI replaces the package after source,
-path, version, tree, and manifest verification. The current invocation keeps
-its version; the next loads the update.
-
-Automatic replacement applies only to one clean, unpinned, user-scope install
-tracked by GitHub CLI. Pinned and project-scope installs become notify-only.
-Duplicate, locally edited, manually copied, and plugin-hosted copies are not
-automatically replaced. The updater never forces an overwrite or removes a pin.
-
-The update policy stores only its mode, hashed install binding, timestamps,
-suspension state, and last outcome. Update consent does not grant reporting
-consent.
+Checks use a 24-hour success lease and one-hour transient retry. Replacement
+requires one clean, unpinned user install with verified source, tree, version,
+and manifest; it activates next use. Pinned, project, duplicate, edited,
+manual, and plugin copies are never blindly replaced. The doctor lists
+competing copies without deleting them. Update, reporting, analytics, and
+contribution consent remain separate.
 
 ## Optional installation analytics
 
-The repository contains an opt-in reference client and private owner API for
-counting unique consenting activated installations by version. This is not a
-download count or a count of unique people. No public analytics endpoint is
-currently bundled or claimed as deployed, so installing or using the skill
-does not send analytics by default.
-
-The user must enable a reviewed owner endpoint and later run a check-in before
-the first bounded event is sent. Update and problem-report consent remain
-separate. Read [Privacy-Bounded Installation Analytics](docs/INSTALLATION_ANALYTICS.md)
-for the exact fields, user controls, owner deployment, aggregate query, erasure,
-retention, and evidence limits.
+The opt-in reference client counts unique consenting activated installations,
+not downloads or people. No public endpoint is claimed, so using the skill
+does not send analytics by default. Enabling an endpoint and sending a later
+check-in are separate. See
+[Privacy-Bounded Installation Analytics](docs/INSTALLATION_ANALYTICS.md).
 
 ## Report an internal tool problem
 
-When the tool itself fails, the skill can prepare a local preview and ask
-before sending it. Project-audit findings are never reported.
+Internal failures can create a local bounded preview; project findings are
+never reports. Public submission needs exact-preview approval plus a second
+visibility confirmation. Automatic reports require a private owner API;
+security issues use [SECURITY.md](SECURITY.md).
 
-Say `report this internal tool problem`, `enable minimal automatic problem
-reports`, `disable problem reporting`, or `show problem-reporting status`.
-
-GitHub delivery checks repository visibility. A public issue requires approval
-of the exact preview plus a separate public-issue confirmation. Automatic
-reports require the optional private owner API. Report suspected vulnerabilities
-through [SECURITY.md](SECURITY.md), never through a public issue.
-
-The fixed schema excludes project content, raw logs, prompts, attachments, and
-credentials; path- and secret-like text is rejected locally. Reports cannot
-install code. The owner reviews, tests, and publishes a release. Only a
-separately enabled updater can install it on later use.
-
-Read [Internal Problem Reporting](docs/PROBLEM_REPORTING.md) for the reusable
-architecture, data contract, owner workflow, API, retention, and deletion.
-Maintainers can optionally use the owner-gated
-[Agent Maintainer](docs/AGENT_MAINTAINER.md) to turn an exact disclosed public
-report into a tested draft pull request; it never merges or releases by itself.
-For another repository, use the
-[reusable agent-maintainer guide](docs/GITHUB_AGENT_MAINTAINER_GUIDE.md).
+The schema excludes project content, logs, prompts, paths, attachments, and
+credentials. The owner-gated [Agent Maintainer](docs/AGENT_MAINTAINER.md) may
+create one map-pending draft from an exact report or enum-only contribution; it
+cannot accept, merge, release, close, or update. See
+[Internal Problem Reporting](docs/PROBLEM_REPORTING.md) and the
+[reusable maintainer guide](docs/GITHUB_AGENT_MAINTAINER_GUIDE.md).
 
 ## Formal audit records
 
-Formal reviews can persist an accepted component map and an append-only v2
-evidence-bound audit record. Material claims use stable component/element IDs;
-evidence uses exact source and selection digests; explicit bindings connect
-them. Markdown reports are derived views, not a second authority.
-
-Start with:
+Formal reviews use an explicitly accepted component map and append-only v2
+claim-to-evidence records. Start with:
 
 - `skills/analyze-project-claims/assets/component-map-observation.template.json`;
 - `skills/analyze-project-claims/references/component-map-observation.schema.json`;
 - `skills/analyze-project-claims/assets/scan-record-v2.template.json`;
 - `skills/analyze-project-claims/references/scan-record-v2.schema.json`.
 
-Verify the embedded engine, then reconcile and explicitly accept a map:
-
-```powershell
-py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py verify-self
-py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile `
-  --observation .\component-map-observation.json --map-root .\.claim-audit\component-map --project-root .
-py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py accept `
-  --candidate .\.claim-audit\component-map\candidates\<candidate>.json --map-root .\.claim-audit\component-map
-```
-
-Validate before the append-only write:
-
-```powershell
-py -3 .\skills\analyze-project-claims\scripts\record_scan.py init `
-  --map-root .\.claim-audit\component-map --project-root . --output .\scan-input.json
-py -3 .\skills\analyze-project-claims\scripts\record_scan.py validate `
-  --record .\scan-input.json --map-root .\.claim-audit\component-map --project-root .
-py -3 .\skills\analyze-project-claims\scripts\record_scan.py append `
-  --record .\scan-input.json --map-root .\.claim-audit\component-map --project-root . `
-  --log-dir .\validation\history --report-dir .\validation\reports
-```
-
-`executed_test` must cite a persisted result or receipt, not test source;
-`not_tested` is context-only. Append and verify recompute local evidence.
-External evidence is not fetched and stays unverifiable without a SHA-256 digest
-or full lowercase 40-/64-hexadecimal object ID. Legacy v1 records remain
-readable as `legacy_unbound`. See the
-[evidence-bound record guide](skills/analyze-project-claims/references/evidence-bound-audit-records.md)
+Verify the embedded engine, reconcile and explicitly accept the exact
+candidate, then require a second unchanged reconciliation and preflight before
+append. `executed_test` cites persisted output, not test source. External
+evidence is never fetched implicitly. Markdown is derived, not authority. See
+the [evidence-bound record guide](skills/analyze-project-claims/references/evidence-bound-audit-records.md)
 and [validation authority](validation/README.md).
 
 ## Evidence and limitations
 
 The package structure, deterministic helpers, update policy, and regression
-tests are validated. The workflow has also been used on one outcome-known RAG
-project, where it found and supported repair of lifecycle, provenance,
-terminology, and claim-boundary inconsistencies.
+tests are validated. One outcome-known RAG-project exercise found lifecycle,
+provenance, terminology, and claim-boundary inconsistencies. That does not
+establish reliability across projects, domains, agents, or models, or claim
+improved retrieval or generation quality.
 
-That does not establish general reliability across projects, domains, agents,
-or models, and this skill does not claim to improve retrieval or generation
-quality. Cross-project human evaluation remains incomplete.
-
-The detailed evaluation protocol, calibration workflow, natural-project pilot,
-schemas, and claim boundaries live in [evaluation/README.md](evaluation/README.md).
-They remain public for transparency without blocking the main user journey.
+The evaluation protocol, calibration flow, natural-project pilot, schemas, and
+boundaries are in [evaluation/README.md](evaluation/README.md).
 
 ## Validation
 
-The public package uses only the Python standard library for its mapper,
-recorder, updater, and tests:
+The package uses only the Python standard library:
 
 ```powershell
 py -3 -m unittest discover -s tests -v
 ```
 
-Use `python3` instead of `py -3` on macOS or Linux. A passing suite validates
-the tested software contracts; it does not establish scientific benefit or
-cross-project reliability.
+A pass establishes only the tested contracts.
 
 ## Maintainer and release guidance
 
-Read [PUBLISHING.md](PUBLISHING.md) for owner setup, license and citation gates,
-manifest rebuilding, GitHub upload, `gh skill publish`, and public install/update
-smoke tests.
+Read [PUBLISHING.md](PUBLISHING.md) for identity, map, manifest, CI, publication,
+and public install/update gates. Reusable procedures and dated evidence:
 
-For the reusable design and release procedure, read
-[How to Build Safe Managed Updates for a GitHub Skill](docs/MANAGED_SKILL_UPDATE_GUIDE.md).
-For the dated v0.4.1 to v0.4.2 and public v0.7.0 to v0.7.1 replacement records,
-including the limits of each observation, read the
-[Managed Update End-to-End Evidence Log](docs/MANAGED_UPDATE_E2E_LOG.md).
+- [Safe Managed Updates](docs/MANAGED_SKILL_UPDATE_GUIDE.md)
+- [Managed Update E2E Log](docs/MANAGED_UPDATE_E2E_LOG.md)
+- [Cross-Agent Validation](docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md)
+- [Claude Code E2E Log](docs/CLAUDE_CODE_E2E_LOG.md)
+- [Other-PC Claude Checklist](docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md)
+- [Codex Plugin E2E Log](docs/CODEX_PLUGIN_E2E_LOG.md)
 
-For a reusable cross-agent validation procedure, read
-[How to Validate a GitHub Skill Across Codex and Claude Code](docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md).
-The current Claude-targeted result and its runtime limit are in the
-[Claude Code E2E Evidence Log](docs/CLAUDE_CODE_E2E_LOG.md).
-
-`VERSION`, package metadata, the package manifest, and citation metadata must
-remain synchronized for every release.
-
-## Release history
-
-See the repository's versioned changes and published artifacts on
+`VERSION`, citation, package, plugin, manifest, and accepted-map identities must
+remain synchronized. Historical release artifacts are on
 [GitHub Releases](https://github.com/Ian-Tseng/analyze-project-claims/releases).
 
 ## Citation and license
 
-Citation metadata is in [CITATION.cff](CITATION.cff). The software is available
-under the [MIT License](LICENSE).
+See [CITATION.cff](CITATION.cff) and the [MIT License](LICENSE).

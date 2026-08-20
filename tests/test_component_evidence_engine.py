@@ -98,6 +98,29 @@ class ComponentEvidenceEngineTests(unittest.TestCase):
         self.assertEqual(output['provider_kind'], 'embedded')
         self.assertRegex(output['engine_digest'], r'^[0-9a-f]{64}$')
 
+    def test_build_self_cli_repairs_descriptor_in_copy(self) -> None:
+        with tempfile.TemporaryDirectory(prefix='engine-build-') as temporary:
+            copied = Path(temporary) / 'skill'
+            shutil.copytree(SKILL_ROOT, copied)
+            descriptor = copied / 'references' / 'component-evidence-engine.json'
+            descriptor.write_text('{}\n', encoding='utf-8')
+            result = subprocess.run(
+                [sys.executable, str(copied / 'scripts' / 'reconcile_component_map.py'), 'build-self', '--write'],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            verified = subprocess.run(
+                [sys.executable, str(copied / 'scripts' / 'reconcile_component_map.py'), 'verify-self'],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(verified.returncode, 0, verified.stderr)
+
 
 if __name__ == '__main__':
     unittest.main()

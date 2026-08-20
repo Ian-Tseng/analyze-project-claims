@@ -1,0 +1,20 @@
+{
+  "name": "ian-tseng-analyze-project-claims",
+  "interface": {
+    "displayName": "Ian Tseng Skills"
+  },
+  "plugins": [
+    {
+      "name": "analyze-project-claims",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

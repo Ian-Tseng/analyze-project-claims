@@ -23,6 +23,11 @@ from pathlib import Path
 from typing import Callable, Iterator, Sequence
 from urllib.parse import urlparse
 
+SCRIPT_DIRECTORY = Path(__file__).resolve().parent
+if str(SCRIPT_DIRECTORY) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIRECTORY))
+
+from _internal.safe_process import ExecutableResolutionError, resolve_executable
 
 SCHEMA_VERSION = 1
 SKILL_NAME = "analyze-project-claims"
@@ -233,10 +238,18 @@ class NativeClient:
         self.timeout = timeout
 
     def run(self, arguments: Sequence[str]) -> NativeResult:
+        try:
+            executable = resolve_executable(self.command[0])
+        except ExecutableResolutionError as exc:
+            raise PolicyError(
+                "NATIVE_GH_UNAVAILABLE",
+                str(exc),
+                "Install GitHub CLI on a trusted PATH or pass its absolute path with --gh.",
+            ) from exc
         with tempfile.TemporaryFile() as stdout_file, tempfile.TemporaryFile() as stderr_file:
             try:
                 completed = subprocess.run(
-                    [*self.command, *arguments],
+                    [executable, *self.command[1:], *arguments],
                     stdin=subprocess.DEVNULL,
                     stdout=stdout_file,
                     stderr=stderr_file,
@@ -580,7 +593,8 @@ def discover_installation(native: NativeClient, skill_root: Path) -> Installatio
         raise PolicyError(
             "AMBIGUOUS_INSTALL",
             "More than one installed skill has this name, so an update-by-name is unsafe.",
-            "Remove the duplicate or update each installation manually.",
+            "Run the update-authority doctor, then keep plugin-manager for a plugin copy, GitHub CLI "
+            "for one standalone copy, or manual updates. No copy is removed automatically.",
         )
     item = matches[0]
     required = {"path", "sourceURL", "scope", "version", "pinned"}
@@ -617,6 +631,89 @@ def discover_installation(native: NativeClient, skill_root: Path) -> Installatio
         if metadata_source != source:
             raise PolicyError("SOURCE_MISMATCH", "GitHub CLI and SKILL.md source metadata disagree.")
     return Installation(listed_path, source, item["scope"], packaged_version, item["pinned"], tree_sha)
+
+
+def diagnose_update_authority(native: NativeClient, skill_root: Path) -> dict[str, object]:
+    running = skill_root.resolve()
+    matches = [item for item in native.list_installs() if item.get("skillName") == SKILL_NAME]
+    visible: list[dict[str, object]] = []
+    for item in matches:
+        raw_path = item.get("path")
+        listed_path: Path | None = None
+        if isinstance(raw_path, str):
+            listed_path = Path(raw_path).resolve()
+            if listed_path.name == "SKILL.md":
+                listed_path = listed_path.parent
+        visible.append(
+            {
+                "path": str(listed_path) if listed_path is not None else None,
+                "scope": item.get("scope") if isinstance(item.get("scope"), str) else None,
+                "pinned": item.get("pinned") if isinstance(item.get("pinned"), bool) else None,
+                "source": item.get("sourceURL") if isinstance(item.get("sourceURL"), str) else None,
+                "is_running_copy": listed_path == running,
+                "registry": "github-cli",
+            }
+        )
+    if not any(item["is_running_copy"] for item in visible):
+        visible.append(
+            {
+                "path": str(running),
+                "scope": None,
+                "pinned": None,
+                "source": None,
+                "is_running_copy": True,
+                "registry": "running-package-only",
+            }
+        )
+    verification: dict[str, object] = {
+        "identity": "not_verified",
+        "package_manifest": "not_verified",
+        "reason": None,
+    }
+    if len(visible) > 1:
+        status = "UPDATE_AUTHORITY_CONFLICT"
+        authority = "unresolved"
+        action = (
+            "Keep exactly one authority for each active copy. Plugin packages use plugin-manager; "
+            "one clean standalone user-scope copy may use GitHub CLI; otherwise update manually."
+        )
+    elif not matches:
+        status = "MANUAL_OR_PLUGIN_MANAGED"
+        authority = "plugin-manager-or-manual"
+        action = "Use the plugin manager for a plugin install or install one standalone copy with GitHub CLI."
+    else:
+        try:
+            installation = discover_installation(native, skill_root)
+            manifest_digest = verify_package_manifest(skill_root)
+        except PolicyError as exc:
+            status = "MANUAL_AUTHORITY_REQUIRED"
+            authority = "manual"
+            action = exc.action or "Resolve the reported identity or package-integrity mismatch."
+            verification["reason"] = exc.code
+        else:
+            verification = {
+                "identity": "verified",
+                "package_manifest": "verified",
+                "manifest_digest": manifest_digest,
+                "reason": None,
+            }
+            if installation.scope == "user" and installation.pinned is False:
+                status = "GITHUB_CLI_AUTHORITY"
+                authority = "github-cli"
+                action = "This verified standalone copy is eligible for the separately consented GitHub CLI updater."
+            else:
+                status = "MANUAL_AUTHORITY_REQUIRED"
+                authority = "manual"
+                action = "Pinned and non-user-scope copies require manual or notify-only updates."
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "status": status,
+        "authority": authority,
+        "visible_copies": visible,
+        "verification": verification,
+        "action": action,
+        "mutated": False,
+    }
 
 
 def _result(
@@ -1007,6 +1104,7 @@ def build_parser() -> argparse.ArgumentParser:
     enable_parser.add_argument("--mode", choices=("auto", "notify"), required=True)
     subparsers.add_parser("disable")
     subparsers.add_parser("status")
+    subparsers.add_parser("doctor")
     subparsers.add_parser("maintain")
     subparsers.add_parser("check-now")
     subparsers.add_parser("verify-package")
@@ -1030,6 +1128,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             result = coordinator.disable()
         elif args.command == "status":
             result = coordinator.status()
+        elif args.command == "doctor":
+            result = diagnose_update_authority(native, args.skill_root)
         elif args.command == "maintain":
             result = coordinator.maintain()
         elif args.command == "check-now":

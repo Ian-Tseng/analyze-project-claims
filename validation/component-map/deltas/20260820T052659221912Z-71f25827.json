@@ -1,0 +1,113 @@
+{
+  "accepted_map_id": "component-map-46a792611afd",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-2807527f1557",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "consent-gated-owner-contribution",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "explicit-update-authority",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "active-rag-claim-consistency",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/logic-guided-rag-audit.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/safe_process.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contribution.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_quality_contribution.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_safe_process.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_skill_quality_loop.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "a1b045022035e11afc30cc9ee3d3d412c16afa185644febeb1bcdfebe71add7d"
+  },
+  "recorded_at_utc": "2026-08-20T05:26:59.221912Z",
+  "scan_id": "20260820T052659221912Z-71f25827",
+  "schema_version": "1.0"
+}

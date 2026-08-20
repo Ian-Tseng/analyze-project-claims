@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/skill-quality-contribution.schema.json",
+  "title": "Skill Quality Contribution v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contribution_id",
+    "proposal_id",
+    "receipt_digest_sha256",
+    "analyzer_version",
+    "producer_skill",
+    "producer_repository",
+    "producer_version",
+    "producer_package_digest_sha256",
+    "quality_signal",
+    "recommended_action",
+    "destination",
+    "created_at_utc",
+    "content_fingerprint_sha256",
+    "approval_id"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "contribution_id": {"type": "string", "format": "uuid"},
+    "proposal_id": {"type": "string", "pattern": "^quality-proposal-[0-9a-f]{24}$"},
+    "receipt_digest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "analyzer_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "producer_skill": {"type": "string", "pattern": "^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"},
+    "producer_repository": {"type": "string", "pattern": "^[A-Za-z0-9_.-]{1,100}$"},
+    "producer_version": {"type": "string"},
+    "producer_package_digest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "quality_signal": {
+      "enum": [
+        "claim_evidence_gap",
+        "lifecycle_inconsistency",
+        "documentation_mismatch",
+        "internal_failure",
+        "no_issue"
+      ]
+    },
+    "recommended_action": {
+      "enum": [
+        "review_claim_evidence_binding",
+        "review_lifecycle_contract",
+        "review_documentation_contract",
+        "prepare_bounded_regression",
+        "no_change_recommended"
+      ]
+    },
+    "destination": {"const": "Ian-Tseng/analyze-project-claims"},
+    "created_at_utc": {"type": "string", "format": "date-time"},
+    "content_fingerprint_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "approval_id": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

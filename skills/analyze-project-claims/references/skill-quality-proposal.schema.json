@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/skill-quality-proposal.schema.json",
+  "title": "Local Skill Quality Proposal v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proposal_id",
+    "receipt_digest_sha256",
+    "analyzer_version",
+    "producer",
+    "outcome",
+    "quality_signal",
+    "recommended_action",
+    "status",
+    "created_at_utc",
+    "outbound"
+  ],
+  "properties": {
+    "proposal_id": {"type": "string", "pattern": "^quality-proposal-[0-9a-f]{24}$"},
+    "receipt_digest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "analyzer_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "producer": {"$ref": "#/$defs/producer"},
+    "outcome": {"enum": ["completed", "completed_with_limitations", "failed"]},
+    "quality_signal": {
+      "enum": [
+        "claim_evidence_gap",
+        "lifecycle_inconsistency",
+        "documentation_mismatch",
+        "internal_failure",
+        "no_issue"
+      ]
+    },
+    "recommended_action": {
+      "enum": [
+        "review_claim_evidence_binding",
+        "review_lifecycle_contract",
+        "review_documentation_contract",
+        "prepare_bounded_regression",
+        "no_change_recommended"
+      ]
+    },
+    "status": {"enum": ["active", "dismissed"]},
+    "created_at_utc": {"type": "string", "format": "date-time"},
+    "dismissed_at_utc": {"type": "string", "format": "date-time"},
+    "outbound": {"const": "NONE"}
+  },
+  "$defs": {
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "repository", "skill", "version", "package_digest_sha256", "identity_authority"],
+      "properties": {
+        "owner": {"const": "Ian-Tseng"},
+        "repository": {"type": "string"},
+        "skill": {"type": "string"},
+        "version": {"type": "string"},
+        "package_digest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "identity_authority": {"const": "producer_declared_untrusted"}
+      }
+    }
+  }
+}

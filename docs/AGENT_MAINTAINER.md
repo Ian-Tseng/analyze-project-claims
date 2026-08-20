@@ -1,7 +1,8 @@
-# Agent Maintainer for Internal Reports
+# Agent Maintainer for Bounded Reports and Quality Contributions
 
 This optional owner workflow turns one reviewed public internal-report issue
-into a validated draft pull request. It does not merge, release, close the
+or enum-only skill-quality contribution into a validated, map-pending draft
+pull request. It does not accept a component map, merge, release, close the
 issue, or update users.
 
 This is the operator runbook for `Ian-Tseng/analyze-project-claims`. To adapt
@@ -9,7 +10,7 @@ the architecture to another repository, use the
 [Reusable GitHub Agent-Maintainer Guide](GITHUB_AGENT_MAINTAINER_GUIDE.md).
 
 ```text
-bounded public report
+bounded public report or enum-only quality contribution
   -> owner applies agent-ready
   -> exact-schema intake removes unrelated issue data
   -> Codex prepares a candidate without GitHub write credentials
@@ -70,10 +71,11 @@ under `validation/component-map/` retains that role.
 | Trigger and job privileges | `.github/workflows/agent-maintainer.yml` | Trusted default-branch workflow |
 | Ordinary repository CI | `.github/workflows/validate.yml` | Independent push and pull-request validation |
 | Agent instructions | `.github/codex/prompts/resolve-internal-report.md` | Trusted prompt; report fields remain untrusted |
-| Exact issue intake | `maintainer_service/intake.py` | Converts one disclosed public report to a minimal task |
+| Exact issue intake | `maintainer_service/intake.py` | Converts one exact disclosed report or enum-only contribution to a minimal task |
 | Candidate allowlist | `maintainer_service/patch_guard.py` | Copied before Codex and reused without importing candidate code |
 | Post-agent collection | `maintainer_service/post_agent.sh` | Installed root-owned before privilege drop; uses a protected Git snapshot, a new alternate index, and a clean process environment |
 | Public report producer | `skills/analyze-project-claims/scripts/problem_report.py` | Consent, redaction, exact body, and processing disclosure |
+| Quality contribution producer | `skills/analyze-project-claims/scripts/skill_quality_loop.py` and `scripts/_internal/skill_quality/contribution.py` | Local preview, exact approval, public visibility confirmation, and enum-only body |
 | Package identity | `VERSION`, `CITATION.cff`, package version, package manifest | Synchronized release candidate identity |
 | Regression contracts | `tests/test_agent_maintainer.py`, `tests/test_problem_report.py` | Local deterministic boundary evidence |
 | Owner operations | `docs/AGENT_MAINTAINER.md`, `docs/PROBLEM_REPORTING.md`, `PUBLISHING.md` | Setup, triage, review, release, and evidence limits |
@@ -84,15 +86,21 @@ not retroactively prove an earlier or downstream state.
 
 ## Triage and start a candidate
 
-Review the issue first. It is eligible only when all of these are true:
+Review the issue first. It is eligible only when all common conditions and one
+exact body contract are true:
 
 - it is an open issue, not a pull request;
-- the body exactly matches the bounded Markdown emitted by
-  `problem_report.py`;
-- its fixed disclosure says the public report may be sent to OpenAI Codex;
-- its event code is known and is not `REPORTING_E2E_TEST`;
 - the title, report classification, repository, issue number, and URL agree;
 - `Ian-Tseng` applies the exact `agent-ready` label.
+
+For an internal report, the body must exactly match `problem_report.py`, its
+fixed disclosure must allow OpenAI Codex processing, and the event code must be
+known and not `REPORTING_E2E_TEST`.
+
+For a quality contribution, the body must exactly match the enum-only
+contribution contract; owner, repository, producer package identity,
+recommendation, timestamp, title, and fingerprint must validate. `no_issue` is
+not eligible. No raw issue body or arbitrary contribution string is forwarded.
 
 Then apply the label:
 
@@ -103,8 +111,8 @@ gh issue edit <number> `
 ```
 
 The label is authorization for one isolated candidate attempt only. It is not
-authorization to merge, publish, call the report fixed, close it, or process a
-private API record.
+authorization to accept the component map, merge, publish, call the issue
+fixed, close it, update an installation, or process a private API record.
 
 ## What the automation enforces
 
@@ -143,6 +151,12 @@ runs the full standard-library suite, and verifies package identity. The
 publisher applies the same digest in a fresh checkout and does not execute
 candidate code.
 
+Candidate validation may report component-map drift, because the agent cannot
+edit or accept repository validation authority. That is `map-pending`, not a
+passing release state. After reviewing the patch, the owner reconciles the
+exact resulting tree, accepts the exact candidate, runs a second unchanged
+reconciliation, and requires formal record preflight.
+
 ## Owner review and completion
 
 The successful output is a new
@@ -155,11 +169,13 @@ Before marking the pull request ready:
 1. verify the issue is an actual product defect;
 2. review the regression test and smallest-fix claim;
 3. inspect every changed path and the patch-guard artifact;
-4. require the ordinary multi-platform CI run;
-5. merge through the normal protected-branch process;
-6. publish a new version without moving an old tag;
-7. verify an older managed install updates and a fresh invocation loads it;
-8. record the fixed version, then close the report.
+4. reconcile and explicitly accept the exact component-map candidate;
+5. run a second unchanged reconciliation and formal preflight;
+6. require the ordinary multi-platform CI run;
+7. merge through the normal protected-branch process;
+8. publish a new version without moving an old tag;
+9. verify an older managed install updates and a fresh invocation loads it;
+10. record the fixed version, then close the issue.
 
 Users with separately enabled managed updates can receive the released version
 on a later invocation. A draft, merge, passing test, or even release by itself

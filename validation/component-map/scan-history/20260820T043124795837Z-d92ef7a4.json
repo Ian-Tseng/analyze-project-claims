@@ -1,0 +1,392 @@
+{
+  "accepted_map_id": "component-map-6552a63bd2d4",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260820T043124795837Z-d92ef7a4-component-map-8b2fad7861e8.json",
+    "delta": "deltas/20260820T043124795837Z-d92ef7a4.json"
+  },
+  "candidate_map_id": "component-map-8b2fad7861e8",
+  "changes": {
+    "added_components": [
+      "managed-skill-quality-loop"
+    ],
+    "added_elements": [
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "consent-gated-owner-contribution"
+      },
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "content-free-receipt-contract"
+      },
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "explicit-update-authority"
+      },
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "identity-drift-release-gate"
+      },
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "map-pending-maintainer-boundary"
+      },
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "portable-consumer-and-codex-adapter"
+      },
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "replay-safe-local-proposal"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority",
+      "skill_sha256",
+      "mapper_version"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": ".agents/plugins/marketplace.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": ".codex-plugin/plugin.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/workflows/agent-maintainer.yml"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/workflows/validate.yml"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/AGENT_MAINTAINER.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/CODEX_PLUGIN_E2E_LOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/SKILL_OUTCOME_RECEIPT.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/SKILL_QUALITY_LOOP.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "examples/quality-loop-producers"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "hooks/hooks.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "maintainer_service"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "maintainer_service/intake.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/component-evidence-engine.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/component-evidence-protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/skill-outcome-receipt.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/skill-quality-contribution.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/skill-quality-proposal.schema.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contract.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contribution.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/store.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/update_policy.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_component_evidence_engine.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_component_map.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_plugin_bundle.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_quality_contribution.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_skill_quality_loop.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_update_policy.py"
+      }
+    ]
+  },
+  "event_id": "20260820T043124795837Z-d92ef7a4",
+  "integrity": {
+    "canonical_payload_sha256": "fe2186d91238e80ff56cfea26e4510b235bbd7c2e18cc7f8d430ee2e94798712"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.3.0",
+  "recorded_at_utc": "2026-08-20T04:31:24.795837Z",
+  "schema_version": "1.0",
+  "skill_sha256": "d4af88ab5176a02e97c49d6647c3197bd2cde1542c904ca90b1ab12250d16a90"
+}
