@@ -1,0 +1,52 @@
+{
+  "accepted_map_id": "component-map-25b55810e9df",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-d6c5c48d5824",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/actions/managed-skill-core/managed_skill_core.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/MANAGED_FLEET_OPERATIONS.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_evidence_bound_scan_operational.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_managed_fleet.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "569c3d22dec57c8aa31d5556941b48569f6d09182c04cd1fd50446cf511ee9bd"
+  },
+  "recorded_at_utc": "2026-08-20T17:46:25.353335Z",
+  "scan_id": "20260820T174625353335Z-c3b2b8b8",
+  "schema_version": "1.0"
+}

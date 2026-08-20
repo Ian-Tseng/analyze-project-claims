@@ -17,7 +17,7 @@
       "source": {"kind": "file", "path": "validation/v0.8.1-validation-receipt.json"},
       "locator": {"kind": "artifact_key", "value": "full_suite"},
       "method": "executed_test",
-      "observed_summary": "The persisted receipt records 229 repository tests run on Windows: 228 passed and one privilege-dependent generic symlink test was skipped."
+      "observed_summary": "The persisted receipt records 230 repository tests run on Windows: 229 passed and one privilege-dependent generic symlink test was skipped."
     },
     {
       "evidence_id": "skill-validation-result",
@@ -55,21 +55,21 @@
       "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified."
     },
     {
-      "evidence_id": "map-verification-result",
+      "evidence_id": "hosted-dry-run-failures",
       "source": {"kind": "file", "path": "validation/v0.8.1-validation-receipt.json"},
-      "locator": {"kind": "artifact_key", "value": "component_map_verification"},
-      "method": "schema_validated",
-      "observed_summary": "The accepted component map checked unchanged after final package synchronization."
+      "locator": {"kind": "artifact_key", "value": "hosted_dry_run_observations"},
+      "method": "inspected",
+      "observed_summary": "Two hosted method dry runs stopped fail-closed before agent execution or repository writes: the first on caller-versus-central workflow identity and the second on a missing configuration-only authorization expiry."
     }
   ],
   "claims": [
     {
       "claim_id": "local-v081-candidate-validated",
-      "statement": "On this Windows host, the local v0.8.1 repair candidate ran 229 repository tests: 228 passed and one privilege-dependent generic symlink test was skipped. It passed the official skill validator and repository plugin contract tests, replayed the offline quality-loop conformance fixture without outbound action, verified its package and embedded engine, and checked component-map-25b55810e9df unchanged after owner acceptance. The tests cover the closed managed-fleet policy, deterministic thin caller, explicit reusable-workflow SHA binding, immutable authorization inputs, protected-environment workflow structure, privilege separation, and documentation surfaces; successful repaired hosted execution remains unobserved.",
+      "statement": "On this Windows host, the local v0.8.1 repair candidate ran 230 repository tests: 229 passed and one privilege-dependent generic symlink test was skipped. It passed the official skill validator and repository plugin contract tests, replayed the offline quality-loop conformance fixture without outbound action, and verified its package and embedded engine. The tests cover the closed managed-fleet policy, deterministic thin caller, explicit reusable-workflow SHA binding, expiring configuration-only authorizations, protected-environment workflow structure, privilege separation, and documentation surfaces. Two hosted dry runs stopped fail-closed before agent execution or repository writes; successful repaired hosted execution remains unobserved.",
       "element_ref": {"component_id": "agent-maintainer", "element_id": "pinned-reusable-repair-boundary"},
       "material": true,
       "status": "partially_supported",
-      "rationale": "Every listed result is bounded to a persisted local repair-candidate receipt; a successful repaired hosted canary, agent execution, draft publication, remote CI for the repair, public installation, Claude activation, and release remain separate gates."
+      "rationale": "Every listed result is bounded to a persisted repair-candidate receipt and two exact hosted failure observations; a successful repaired hosted canary, agent execution, draft publication, remote CI for this repair, public installation, Claude activation, and release remain separate gates."
     }
   ],
   "bindings": [
@@ -79,7 +79,7 @@
     {"claim_id": "local-v081-candidate-validated", "evidence_id": "quality-loop-conformance-result", "role": "supports"},
     {"claim_id": "local-v081-candidate-validated", "evidence_id": "package-verification-result", "role": "supports"},
     {"claim_id": "local-v081-candidate-validated", "evidence_id": "engine-verification-result", "role": "supports"},
-    {"claim_id": "local-v081-candidate-validated", "evidence_id": "map-verification-result", "role": "supports"},
+    {"claim_id": "local-v081-candidate-validated", "evidence_id": "hosted-dry-run-failures", "role": "limits"},
     {"claim_id": "local-v081-candidate-validated", "evidence_id": "full-suite-result", "role": "limits"}
   ],
   "limitations": [
@@ -87,7 +87,7 @@
       "limitation_id": "local-platform-and-publication-boundary",
       "text": "The evidence is local Windows repair-candidate evidence; one generic symlink test was privilege-skipped, and a successful repaired hosted canary, agent execution, draft publication, remote CI for the repair, public installation, Claude activation, and release publication remain unproved.",
       "claim_ids": ["local-v081-candidate-validated"],
-      "evidence_ids": ["full-suite-result"]
+      "evidence_ids": ["full-suite-result", "hosted-dry-run-failures"]
     }
   ],
   "summary": {
@@ -101,6 +101,6 @@
     "Claude runtime discovery and invocation were not observed on this host.",
     "Repository release immutability is enabled, but the v0.8.1 release attestation cannot be verified until publication.",
     "Producer-repository issue routing does not establish that each destination has the protected maintainer workflow installed."
-    ,"The repaired reusable workflow has not yet completed a producer dry run or either protected environment."
+    ,"The repaired reusable workflow has not yet completed a successful producer dry run or either protected environment; runs 32392414122 and 32398400200 are retained fail-closed evidence."
   ]
 }

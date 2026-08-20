@@ -324,7 +324,8 @@ def _intake(root: Path, policy_path: Path, event_path: Path, base_sha: str, work
     event = _read_json(event_path, MAX_EVENT_BYTES)
     if not isinstance(event, dict):
         raise CoreError("GitHub event root must be an object.")
-    now = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    now_value = datetime.now(timezone.utc)
+    now = now_value.isoformat(timespec="seconds").replace("+00:00", "Z")
     if dry_run:
         repository = event.get("repository")
         if not isinstance(repository, dict) or repository.get("id") != policy["repository"]["id"] or repository.get("full_name") != policy["repository"]["full_name"]:
@@ -340,6 +341,9 @@ def _intake(root: Path, policy_path: Path, event_path: Path, base_sha: str, work
             "workflow_sha": workflow_sha,
             "nonce": nonce,
             "created_at_utc": now,
+            "expires_at_utc": (now_value + timedelta(hours=2)).isoformat(
+                timespec="seconds"
+            ).replace("+00:00", "Z"),
         }
         result = {"authorization_id": sha256(canonical_bytes(manifest)), "manifest": manifest}
     else:

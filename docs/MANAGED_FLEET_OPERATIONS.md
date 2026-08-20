@@ -52,6 +52,16 @@ match the policy's central pin, so intake exited with no candidate or outbound
 mutation. This observation is a regression fixture, not evidence that a later
 dry run or live repair succeeded.
 
+After the explicit workflow identity repair reached the pinned central action,
+[run 32398400200](https://github.com/Ian-Tseng/audit-method-data-flow/actions/runs/32398400200)
+exposed a second configuration-only defect: the dry-run authorization omitted
+`expires_at_utc`, while the shared summary renderer required it. Preparation
+again stopped before artifact upload, agent execution, or repository writes.
+Dry-run authorizations now carry the same two-hour expiry boundary as live
+authorizations, with an end-to-end regression covering the manifest, outputs,
+and summary. The failed run remains evidence of fail-closed behavior, not a
+successful canary.
+
 ## Normal attempt
 
 The workflow binds a canonical authorization manifest, uploads it as a

@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -178,6 +179,52 @@ class ManagedFleetContractTests(unittest.TestCase):
             )["authorization_id"],
         )
 
+    def test_configuration_dry_run_emits_an_expiring_authorization_and_summary(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            policy_path = root / ".github" / "managed-skill-policy.json"
+            policy_path.parent.mkdir(parents=True)
+            policy_path.write_text(json.dumps(self.policy()), encoding="utf-8")
+            event_path = root / "event.json"
+            event_path.write_text(json.dumps(self.event(self.policy())), encoding="utf-8")
+            runner_temp = root / "runner"
+            runner_temp.mkdir()
+            summary = root / "summary.md"
+            output = root / "output.txt"
+
+            with mock.patch.dict(
+                self.core.os.environ,
+                {
+                    "RUNNER_TEMP": str(runner_temp),
+                    "GITHUB_STEP_SUMMARY": str(summary),
+                    "GITHUB_OUTPUT": str(output),
+                },
+                clear=False,
+            ):
+                self.core._intake(
+                    root,
+                    Path(".github/managed-skill-policy.json"),
+                    event_path,
+                    "b" * 40,
+                    SHA,
+                    "run-12-attempt-1",
+                    True,
+                )
+
+            result = json.loads(
+                (runner_temp / "managed-repair" / "authorization.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            manifest = result["manifest"]
+            self.assertEqual(manifest["kind"], "configuration_dry_run")
+            self.assertGreater(
+                self.core._iso(manifest["expires_at_utc"]),
+                self.core._iso(manifest["created_at_utc"]),
+            )
+            self.assertIn(manifest["expires_at_utc"], summary.read_text(encoding="utf-8"))
+            self.assertIn("authorization-path=", output.read_text(encoding="utf-8"))
+
     def test_reusable_workflow_has_privilege_and_provenance_boundaries(self) -> None:
         workflow = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("workflow_call:", workflow)
@@ -187,6 +234,8 @@ class ManagedFleetContractTests(unittest.TestCase):
         operations = (ROOT / "docs" / "MANAGED_FLEET_OPERATIONS.md").read_text(encoding="utf-8")
         self.assertIn("Do not use `github.workflow_sha`", operations)
         self.assertIn("run 32392414122", operations)
+        self.assertIn("run 32398400200", operations)
+        self.assertIn("same two-hour expiry boundary", operations)
         self.assertIn("permissions: {}", workflow)
         self.assertIn("environment: managed-repair-agent", workflow)
         self.assertIn("environment: managed-repair-publish", workflow)

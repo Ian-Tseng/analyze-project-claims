@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-20T18:00:50.702722Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1461,10 +1461,10 @@
   ],
   "created_at_utc": "2026-08-20T17:46:25.353335Z",
   "integrity": {
-    "canonical_payload_sha256": "6eaf2d0a71461055491b65ceb63974edaef021d5642bc83b509b8c2fd80c32c1"
+    "canonical_payload_sha256": "7686e4b454f48d97d67796a831373a81c3ade9e381e2892f75f7ff3a6bdc0daa"
   },
   "map_id": "component-map-d6c5c48d5824",
-  "map_state": "accepted",
+  "map_state": "drift_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.8.1 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating structural or local E2E evidence as live host proof.",
   "origin_scan_id": "20260820T174625353335Z-c3b2b8b8",

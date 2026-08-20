@@ -1,0 +1,61 @@
+{
+  "accepted_map_id": "component-map-25b55810e9df",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260820T174625353335Z-c3b2b8b8-component-map-d6c5c48d5824.json",
+    "delta": "deltas/20260820T174625353335Z-c3b2b8b8.json"
+  },
+  "candidate_map_id": "component-map-d6c5c48d5824",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/actions/managed-skill-core/managed_skill_core.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/MANAGED_FLEET_OPERATIONS.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_evidence_bound_scan_operational.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_managed_fleet.py"
+      }
+    ]
+  },
+  "event_id": "20260820T174625353335Z-c3b2b8b8",
+  "integrity": {
+    "canonical_payload_sha256": "2b70dd437e740b8b4b8bfc60c826edc6454ccbe9f247c76096530d3cf146bb6e"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.3.0",
+  "recorded_at_utc": "2026-08-20T17:46:25.353335Z",
+  "schema_version": "1.0",
+  "skill_sha256": "d892da7147f2d4ab01bf60a45f9425af3c81970fb979f29af7ee9cbee86ac999"
+}
