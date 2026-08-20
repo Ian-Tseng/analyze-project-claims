@@ -119,6 +119,7 @@ class ManagedFleetContractTests(unittest.TestCase):
     def test_caller_is_sha_pinned_and_contains_no_central_implementation(self) -> None:
         caller = self.fleet.render_caller(SHA)
         self.assertIn(f"Ian-Tseng/analyze-project-claims/.github/workflows/managed-skill-repair.yml@{SHA}", caller)
+        self.assertIn(f"workflow-sha: {SHA}", caller)
         self.assertIn("secrets:", caller)
         self.assertIn("OPENAI_API_KEY", caller)
         self.assertNotIn("inherit", caller)
@@ -180,6 +181,12 @@ class ManagedFleetContractTests(unittest.TestCase):
     def test_reusable_workflow_has_privilege_and_provenance_boundaries(self) -> None:
         workflow = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("workflow_call:", workflow)
+        self.assertIn("workflow-sha:", workflow)
+        self.assertEqual(workflow.count("${{ inputs.workflow-sha }}"), 3)
+        self.assertNotIn("github.workflow_sha", workflow)
+        operations = (ROOT / "docs" / "MANAGED_FLEET_OPERATIONS.md").read_text(encoding="utf-8")
+        self.assertIn("Do not use `github.workflow_sha`", operations)
+        self.assertIn("run 32392414122", operations)
         self.assertIn("permissions: {}", workflow)
         self.assertIn("environment: managed-repair-agent", workflow)
         self.assertIn("environment: managed-repair-publish", workflow)

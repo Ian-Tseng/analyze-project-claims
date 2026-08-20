@@ -7,6 +7,10 @@ on:
         description: Canonical caller policy path.
         required: true
         type: string
+      workflow-sha:
+        description: Exact reusable-workflow commit repeated by the reviewed caller.
+        required: true
+        type: string
       dry-run:
         description: Validate intake and configuration without agent or publication jobs.
         required: false
@@ -55,7 +59,7 @@ jobs:
           policy-path: ${{ inputs.policy-path }}
           event-path: ${{ github.event_path }}
           base-sha: ${{ steps.base.outputs.sha }}
-          workflow-sha: ${{ github.workflow_sha }}
+          workflow-sha: ${{ inputs.workflow-sha }}
           nonce: run-${{ github.run_id }}-attempt-${{ github.run_attempt }}
           dry-run: ${{ inputs.dry-run }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -93,7 +97,7 @@ jobs:
           mode: verify-live
           policy-path: ${{ inputs.policy-path }}
           authorization-path: ${{ runner.temp }}/managed-repair/authorization.json
-          workflow-sha: ${{ github.workflow_sha }}
+          workflow-sha: ${{ inputs.workflow-sha }}
           github-token: ${{ github.token }}
       - id: agent-prep
         uses: $/.github/actions/managed-skill-core
@@ -191,7 +195,7 @@ jobs:
           mode: verify-live
           policy-path: ${{ inputs.policy-path }}
           authorization-path: ${{ runner.temp }}/managed-repair/authorization.json
-          workflow-sha: ${{ github.workflow_sha }}
+          workflow-sha: ${{ inputs.workflow-sha }}
           github-token: ${{ github.token }}
       - uses: $/.github/actions/managed-skill-core
         with:

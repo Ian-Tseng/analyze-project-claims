@@ -178,7 +178,7 @@
     },
     {
       "path": "scripts/managed_fleet.py",
-      "sha256": "6d78881382f7a2d3d8584818a48b3bfd87708b623fd02ae43ef8bd51b2523fbe"
+      "sha256": "4ecc65dc2feec04b34695e69020427a23366ea9c2d97fa0229bfa0af553b96e0"
     },
     {
       "path": "scripts/problem_report.py",

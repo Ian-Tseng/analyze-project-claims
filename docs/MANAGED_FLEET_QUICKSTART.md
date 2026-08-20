@@ -31,6 +31,11 @@ contains spaces. Review the returned `files`, then repeat the command with
 `--apply`. Enabling repair is a separate choice: add `--enable-repair` only
 after both protected environments and the canary are ready.
 
+`init` repeats the reviewed central SHA in the caller `uses` ref, the explicit
+`workflow-sha` input, and the closed policy. Keep all three identical. GitHub's
+`github.workflow_sha` context identifies the caller inside a reusable workflow
+and is not a substitute for this explicit binding.
+
 Validate and inspect the local state:
 
 ```powershell
