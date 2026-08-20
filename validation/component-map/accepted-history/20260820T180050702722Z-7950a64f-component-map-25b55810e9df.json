@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-20T18:00:50.702722Z",
+  "accepted_at_utc": "2026-08-20T16:37:53.063006Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1459,16 +1459,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-20T17:46:25.353335Z",
+  "created_at_utc": "2026-08-20T16:37:02.957648Z",
   "integrity": {
-    "canonical_payload_sha256": "6eaf2d0a71461055491b65ceb63974edaef021d5642bc83b509b8c2fd80c32c1"
+    "canonical_payload_sha256": "8666025917e73afdb9fc9fe36d323efcf0d3d6d6c54f186513b6bf9bc9ecf282"
   },
-  "map_id": "component-map-d6c5c48d5824",
+  "map_id": "component-map-25b55810e9df",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.8.1 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating structural or local E2E evidence as live host proof.",
-  "origin_scan_id": "20260820T174625353335Z-c3b2b8b8",
-  "previous_map_id": "component-map-25b55810e9df",
+  "origin_scan_id": "20260820T163702957648Z-f4b36021",
+  "previous_map_id": "component-map-e9f55c152d3a",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1607,7 +1607,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4f43e890de436ef23342056ecc1037576a9f586795bf95896a2706f08a921373",
+      "sha256": "bc51a442f8add024981eee216adf1c15ccad8363f35fbf24920e6f6d13f22523",
       "source": ".github/actions/managed-skill-core/managed_skill_core.py"
     },
     {
@@ -1637,7 +1637,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "15eab8637a4b60fa0100cb56862ed24e352d774d4a4d1066a6e99b68da8ef8b0",
+      "sha256": "ddc8ccb13afb892e63ab56e7067ce1eabd98283d9358cd66c558ae5011e6b95a",
       "source": "CHANGELOG.md"
     },
     {
@@ -1847,7 +1847,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "47e43fe0f9df1330526383a936a4151d9d5f5845268a9a4d75c4649f00b57793",
+      "sha256": "78903fd4d017ccdf2488d2e4827c11e55e559e4630c07f0bb627c131a0987979",
       "source": "docs/MANAGED_FLEET_OPERATIONS.md"
     },
     {
@@ -2483,7 +2483,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "459405858fb4115479dc9f60c0c83af93a7f0f2ce0087fb9f5ae58c6fdbf2297",
+      "sha256": "e5b479a538886495190f1d7bfebf19e38471090f24618a6779b1923985e0e1c5",
       "source": "tests/test_evidence_bound_scan_operational.py"
     },
     {
@@ -2513,7 +2513,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6ea2a17b53daef6e41ea2cd0757a28c879ed580f14575f5798c60f1ccc4d422f",
+      "sha256": "5d541c97b04f3020055c73a82e13de1d112aa408a36a09f949d34cc2a8f2164f",
       "source": "tests/test_managed_fleet.py"
     },
     {

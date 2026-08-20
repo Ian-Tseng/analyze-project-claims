@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "candidate_version": "0.8.1",
-  "recorded_at_utc": "2026-08-20T16:38:31Z",
+  "recorded_at_utc": "2026-08-20T17:44:36Z",
   "platform": "Windows",
   "full_suite": {
-    "command": "py -3 -m unittest discover -s tests -v",
+    "command": "py -3 -X utf8 -m unittest discover -s tests -q",
     "status": "PASS",
-    "tests_run": 229,
+    "tests_run": 230,
     "skipped": 1,
     "skip_boundary": "The generic update-policy symlink test is privilege-dependent on Windows; dedicated path-resolution, junction, and cross-process tests passed."
   },
@@ -25,8 +25,8 @@
     "result": "QUALITY_PROPOSAL_READY",
     "replay_deduplicated": true,
     "outbound": "NONE",
-    "proposal_id": "quality-proposal-995a2dea5c7d1edab0cd1dfd",
-    "receipt_digest_sha256": "9b7674263eb6224ba4cbb1b77820453c840ec4357b5e44a69fba27d71993d08e"
+    "proposal_id": "quality-proposal-5f58f0062defac033bcdb853",
+    "receipt_digest_sha256": "94af21b243461305a2df0b74ccc2173ceb929c6b279e77d1e395b9551204501b"
   },
   "package_verification": {
     "status": "PASS",
@@ -39,17 +39,27 @@
     "engine_version": "1.3.0",
     "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b"
   },
-  "component_map_verification": {
-    "status": "PASS",
-    "action": "accepted_then_checked_unchanged",
-    "map_id": "component-map-25b55810e9df",
-    "source_changes": []
-  },
+  "hosted_dry_run_observations": [
+    {
+      "run_id": 32392414122,
+      "status": "FAIL_CLOSED",
+      "boundary": "caller workflow identity did not match the central policy pin",
+      "agent_started": false,
+      "outbound": "NONE"
+    },
+    {
+      "run_id": 32398400200,
+      "status": "FAIL_CLOSED",
+      "boundary": "configuration-only authorization omitted expires_at_utc before summary rendering",
+      "agent_started": false,
+      "outbound": "NONE"
+    }
+  ],
   "limitations": [
     "These are local Windows repair-candidate results, not commit-bound remote CI or public-install evidence for the repair.",
     "Artifact identity and freshness checks do not establish semantic entailment.",
     "Claude runtime activation was not observed on this host.",
     "Producer protected-environment settings were observed, but administrator bypass remains available on the current repository plan.",
-    "Hosted run 32392414122 observed fail-closed rejection of the superseded workflow-sha binding; a successful repaired dry canary, isolated agent execution, and draft publication were not observed."
+    "Hosted runs 32392414122 and 32398400200 both stopped fail-closed before agent execution or repository writes; a successful repaired dry canary, isolated agent execution, and draft publication were not observed."
   ]
 }

@@ -14,6 +14,8 @@ All notable changes to this project are documented here.
 - Preserve local-only defaults, exact preview approval, separate public
   visibility confirmation, one-use replay protection, and post-create
   uncertainty handling.
+- Give configuration-only managed-repair authorizations the same two-hour
+  expiry field as live authorizations so hosted dry-run summaries complete.
 
 ## [0.8.0] - 2026-08-20
 

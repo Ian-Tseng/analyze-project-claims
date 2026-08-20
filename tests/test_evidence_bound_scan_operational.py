@@ -3,6 +3,7 @@ from __future__ import annotations
 import concurrent.futures
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -34,8 +35,11 @@ class EvidenceBoundScanOperationalTests(unittest.TestCase):
             [sys.executable, str(RECORDER), *args],
             cwd=cwd,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             capture_output=True,
             check=False,
+            env={**os.environ, "PYTHONUTF8": "1"},
         )
 
     def prepare(self, root: Path, *, map_id: str | None = None) -> tuple[Path, Path]:
