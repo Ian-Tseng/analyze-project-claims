@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate_version": "0.8.1",
-  "recorded_at_utc": "2026-08-20T16:10:00Z",
+  "recorded_at_utc": "2026-08-20T16:38:31Z",
   "platform": "Windows",
   "full_suite": {
     "command": "py -3 -m unittest discover -s tests -v",
@@ -30,7 +30,7 @@
   },
   "package_verification": {
     "status": "PASS",
-    "package_manifest_digest": "8bf01aea9bffe37321abc5d569c720b4e0da68e03066b06fdf951006297a01ad",
+    "package_manifest_digest": "d8f51a7777d9904d11f7bbcaed98644599ecca0ba586567adf45b0b3a23ed6bb",
     "version": "0.8.1"
   },
   "engine_verification": {
@@ -42,13 +42,14 @@
   "component_map_verification": {
     "status": "PASS",
     "action": "accepted_then_checked_unchanged",
-    "map_id": "component-map-e9f55c152d3a",
+    "map_id": "component-map-25b55810e9df",
     "source_changes": []
   },
   "limitations": [
-    "These are local Windows candidate results, not commit-bound remote CI or public-install evidence.",
+    "These are local Windows repair-candidate results, not commit-bound remote CI or public-install evidence for the repair.",
     "Artifact identity and freshness checks do not establish semantic entailment.",
     "Claude runtime activation was not observed on this host.",
-    "Protected environments, hosted canary, isolated agent execution, and draft publication were not observed."
+    "Producer protected-environment settings were observed, but administrator bypass remains available on the current repository plan.",
+    "Hosted run 32392414122 observed fail-closed rejection of the superseded workflow-sha binding; a successful repaired dry canary, isolated agent execution, and draft publication were not observed."
   ]
 }

@@ -1,0 +1,73 @@
+{
+  "accepted_map_id": "component-map-e9f55c152d3a",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260820T163702957648Z-f4b36021-component-map-25b55810e9df.json",
+    "delta": "deltas/20260820T163702957648Z-f4b36021.json"
+  },
+  "candidate_map_id": "component-map-25b55810e9df",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/workflows/managed-skill-repair.yml"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/MANAGED_FLEET_OPERATIONS.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/MANAGED_FLEET_QUICKSTART.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/managed_fleet.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_managed_fleet.py"
+      }
+    ]
+  },
+  "event_id": "20260820T163702957648Z-f4b36021",
+  "integrity": {
+    "canonical_payload_sha256": "d98050a8ca0ca65264f1beff5e65cc61ff95f68c57601b3a22a34206979e4aef"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.3.0",
+  "recorded_at_utc": "2026-08-20T16:37:02.957648Z",
+  "schema_version": "1.0",
+  "skill_sha256": "d892da7147f2d4ab01bf60a45f9425af3c81970fb979f29af7ee9cbee86ac999"
+}

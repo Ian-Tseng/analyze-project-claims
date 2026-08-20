@@ -234,6 +234,7 @@ jobs:
     uses: Ian-Tseng/analyze-project-claims/.github/workflows/managed-skill-repair.yml@{workflow_sha}
     with:
       policy-path: .github/managed-skill-policy.json
+      workflow-sha: {workflow_sha}
       dry-run: ${{{{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}}}
     secrets:
       OPENAI_API_KEY: ${{{{ secrets.OPENAI_API_KEY }}}}

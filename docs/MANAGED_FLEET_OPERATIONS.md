@@ -36,6 +36,22 @@ Hosted settings are external state. Record the repository, environment reviewer
 IDs, protection read-back, PR setting, secret name (never its value), workflow
 run URL, exact workflow SHA, and observation time in the canary evidence.
 
+### Reusable-workflow identity
+
+Do not use `github.workflow_sha` as the reusable-workflow identity. In a called
+workflow GitHub resolves that context to the caller workflow commit, not the
+central commit named after `@` in `uses`. The thin caller must repeat the same
+reviewed central commit in three places: the `uses` ref, the `workflow-sha`
+input, and `.github/managed-skill-policy.json`. Intake rejects any disagreement
+before agent execution, artifact publication, or repository writes.
+
+The first method dry run on 2026-08-20 demonstrated this fail-closed boundary:
+[run 32392414122](https://github.com/Ian-Tseng/audit-method-data-flow/actions/runs/32392414122)
+passed the producer `main` commit through `github.workflow_sha`, which did not
+match the policy's central pin, so intake exited with no candidate or outbound
+mutation. This observation is a regression fixture, not evidence that a later
+dry run or live repair succeeded.
+
 ## Normal attempt
 
 The workflow binds a canonical authorization manifest, uploads it as a

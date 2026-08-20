@@ -65,11 +65,11 @@
   "claims": [
     {
       "claim_id": "local-v081-candidate-validated",
-      "statement": "On this Windows host, the local v0.8.1 candidate ran 229 repository tests: 228 passed and one privilege-dependent generic symlink test was skipped. It passed the official skill validator and repository plugin contract tests, replayed the offline quality-loop conformance fixture without outbound action, verified its package and embedded engine, and checked component-map-e9f55c152d3a unchanged after owner acceptance. The tests cover the closed managed-fleet policy, deterministic thin caller, immutable authorization inputs, protected-environment workflow structure, privilege separation, and documentation surfaces; hosted GitHub execution remains unobserved.",
+      "statement": "On this Windows host, the local v0.8.1 repair candidate ran 229 repository tests: 228 passed and one privilege-dependent generic symlink test was skipped. It passed the official skill validator and repository plugin contract tests, replayed the offline quality-loop conformance fixture without outbound action, verified its package and embedded engine, and checked component-map-25b55810e9df unchanged after owner acceptance. The tests cover the closed managed-fleet policy, deterministic thin caller, explicit reusable-workflow SHA binding, immutable authorization inputs, protected-environment workflow structure, privilege separation, and documentation surfaces; successful repaired hosted execution remains unobserved.",
       "element_ref": {"component_id": "agent-maintainer", "element_id": "pinned-reusable-repair-boundary"},
       "material": true,
       "status": "partially_supported",
-      "rationale": "Every listed result is bounded to a persisted local receipt; protected-environment configuration, hosted canary, agent execution, draft publication, remote CI, public installation, Claude activation, and release remain separate gates."
+      "rationale": "Every listed result is bounded to a persisted local repair-candidate receipt; a successful repaired hosted canary, agent execution, draft publication, remote CI for the repair, public installation, Claude activation, and release remain separate gates."
     }
   ],
   "bindings": [
@@ -85,7 +85,7 @@
   "limitations": [
     {
       "limitation_id": "local-platform-and-publication-boundary",
-      "text": "The evidence is local Windows candidate evidence; one generic symlink test was privilege-skipped, and protected environments, hosted canary, agent execution, draft publication, remote CI, public installation, Claude activation, and release publication remain unproved.",
+      "text": "The evidence is local Windows repair-candidate evidence; one generic symlink test was privilege-skipped, and a successful repaired hosted canary, agent execution, draft publication, remote CI for the repair, public installation, Claude activation, and release publication remain unproved.",
       "claim_ids": ["local-v081-candidate-validated"],
       "evidence_ids": ["full-suite-result"]
     }
@@ -96,11 +96,11 @@
     "no_supported_claim": false
   },
   "unresolved_uncertainties": [
-    "Remote commit-bound CI has not yet run for this candidate.",
+    "Remote commit-bound CI has not yet run for this repair candidate.",
     "Public Codex and Claude Code install/update smoke tests require publication first.",
     "Claude runtime discovery and invocation were not observed on this host.",
-    "GitHub release immutability enforcement has not yet been verified for v0.8.1.",
+    "Repository release immutability is enabled, but the v0.8.1 release attestation cannot be verified until publication.",
     "Producer-repository issue routing does not establish that each destination has the protected maintainer workflow installed."
-    ,"The reusable workflow has not yet run through either protected environment on a producer repository."
+    ,"The repaired reusable workflow has not yet completed a producer dry run or either protected environment."
   ]
 }
