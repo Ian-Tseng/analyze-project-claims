@@ -1,0 +1,267 @@
+{
+  "bindings": [
+    {
+      "claim_id": "local-v080-candidate-validated",
+      "evidence_id": "full-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v080-candidate-validated",
+      "evidence_id": "skill-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v080-candidate-validated",
+      "evidence_id": "plugin-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v080-candidate-validated",
+      "evidence_id": "quality-loop-conformance-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v080-candidate-validated",
+      "evidence_id": "package-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v080-candidate-validated",
+      "evidence_id": "engine-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v080-candidate-validated",
+      "evidence_id": "map-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v080-candidate-validated",
+      "evidence_id": "full-suite-result",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "b160812a63bdc5678a446d202c2a001fc486da71a151d9296461f38374079559",
+      "claim_id": "local-v080-candidate-validated",
+      "element_ref": {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "identity-drift-release-gate"
+      },
+      "material": true,
+      "rationale": "Every listed result is bounded to a persisted local receipt; remote CI, public installation, Claude activation, and publication remain separate gates.",
+      "statement": "On this Windows host, the local v0.8.0 candidate ran 221 repository tests: 220 passed and one privilege-dependent generic symlink test was skipped. It also passed the official skill and plugin validators, replayed the offline quality-loop conformance fixture without outbound action, verified its package and embedded engine, and checked its accepted component map unchanged.",
+      "status": "partially_supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "freshness": "current",
+      "identity_sha256": "222a9fbc2ebbfbaf2196bb7a216c5c336969348b8f15b6526b79d3ef41f8b6c2",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 221 repository tests run on Windows: 220 passed and one privilege-dependent generic symlink test was skipped.",
+      "selection_sha256": "9cc6fe1e94c5ca70c1df7b987a2b72f055640d19609870aec0345451026d268f",
+      "source": {
+        "byte_size": 1885,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.0-validation-receipt.json",
+        "sha256": "9e255af4419ed3d4f60c8e5781f451682ea3a6c54e3639c2229dad567bcf66e1"
+      }
+    },
+    {
+      "evidence_id": "skill-validation-result",
+      "freshness": "current",
+      "identity_sha256": "a4215646d74aefec71c8097118e8f85f7fdf30947d45955de0cde22e8f662dc3",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "skill_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local skill validator accepted the packaged skill.",
+      "selection_sha256": "bb3ffe464da1885aed5ec843f6b055b0c2c0e48dbccb99a0695af0f0c4ed26f8",
+      "source": {
+        "byte_size": 1885,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.0-validation-receipt.json",
+        "sha256": "9e255af4419ed3d4f60c8e5781f451682ea3a6c54e3639c2229dad567bcf66e1"
+      }
+    },
+    {
+      "evidence_id": "plugin-validation-result",
+      "freshness": "current",
+      "identity_sha256": "a63058eacdbdeb9868df9c1ef7fadf3c66b428409958f6bc8da833959e1357f9",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "plugin_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local plugin validator accepted the repository-root plugin.",
+      "selection_sha256": "8c2ff294213315fceff8156eab219467902a8c6e02b33969c887a1db73795c5d",
+      "source": {
+        "byte_size": 1885,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.0-validation-receipt.json",
+        "sha256": "9e255af4419ed3d4f60c8e5781f451682ea3a6c54e3639c2229dad567bcf66e1"
+      }
+    },
+    {
+      "evidence_id": "quality-loop-conformance-result",
+      "freshness": "current",
+      "identity_sha256": "e70755fa67e8ec5a9e62eb9ffaaf7f3ccf5ba0bc317e8fb376075e78c4462bc1",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "quality_loop_conformance"
+      },
+      "method": "replayed",
+      "observed_summary": "The offline conformance fixture committed one local proposal, deduplicated replay, and performed no outbound action.",
+      "selection_sha256": "ce0e4c5f9042c898aed22f57b1f5ccb93756c43dcdafaa896420b4dc91388811",
+      "source": {
+        "byte_size": 1885,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.0-validation-receipt.json",
+        "sha256": "9e255af4419ed3d4f60c8e5781f451682ea3a6c54e3639c2229dad567bcf66e1"
+      }
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "freshness": "current",
+      "identity_sha256": "b4db6a3e2ee97b14243fde1dea3f501aec12123678cca6117c27718e7b66878a",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "package_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The v0.8.0 package matches its rebuilt manifest and recorded package digest.",
+      "selection_sha256": "ea709dc4d60aee2ec9bd2620e5e639f4966a56be8875017656bbdc2ad75c34c9",
+      "source": {
+        "byte_size": 1885,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.0-validation-receipt.json",
+        "sha256": "9e255af4419ed3d4f60c8e5781f451682ea3a6c54e3639c2229dad567bcf66e1"
+      }
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "freshness": "current",
+      "identity_sha256": "64196bfbbc777b6f2198b6a21fa4eb7a09c085474aeab4c10addb70d708135ce",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "engine_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified.",
+      "selection_sha256": "e0b06ffe03f8d910801a04f18e07b20c5eef772d9e31fc6e5786a75b3d5b95c4",
+      "source": {
+        "byte_size": 1885,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.0-validation-receipt.json",
+        "sha256": "9e255af4419ed3d4f60c8e5781f451682ea3a6c54e3639c2229dad567bcf66e1"
+      }
+    },
+    {
+      "evidence_id": "map-verification-result",
+      "freshness": "current",
+      "identity_sha256": "4f3d794735ffa481fc03721740a1849c0abc6e297650f431a9a0fe6b2cdbd583",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "component_map_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The accepted component map checked unchanged after final package synchronization.",
+      "selection_sha256": "667c44c0446c54b8366227895b982cb6a54d39070c547527beac43233513d037",
+      "source": {
+        "byte_size": 1885,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.0-validation-receipt.json",
+        "sha256": "9e255af4419ed3d4f60c8e5781f451682ea3a6c54e3639c2229dad567bcf66e1"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "bdda9464be576532c65e9e72d0314111ad74d40e08e9d5d39da3e501b48cc6d7",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "local-v080-candidate-validated"
+      ],
+      "evidence_ids": [
+        "full-suite-result"
+      ],
+      "limitation_id": "local-platform-and-publication-boundary",
+      "text": "The evidence is local Windows candidate evidence; one generic symlink test was privilege-skipped, and remote CI, public installation, Claude activation, and release publication remain unproved."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-249c391a40c5",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "705323dfba014848505673257857ff72b3495450cd38aa857ac7f6c2a0840caf"
+    },
+    "authority": [
+      "validation/v0.8.0-validation-receipt.json",
+      "validation/component-map/accepted-map.json"
+    ],
+    "engine_identity": {
+      "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "State the strongest safe local validation claim for the v0.8.0 candidate.",
+    "recorded_at_utc": "2026-08-20T05:32:09.860422Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260820T053209860422Z-f9476b09",
+    "scope": [
+      "v0.8.0 local candidate",
+      "evidence-bound recorder 2.1.0",
+      "managed skill quality loop",
+      "package, plugin, engine, skill, and component-map identities"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "0dde22f55dcb2e31ea288751018703ccdae73e4f11648ffa554400dca686be78"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "local-platform-and-publication-boundary"
+    ],
+    "claim_count": 1,
+    "claim_counts": {
+      "partially_supported": 1
+    },
+    "evidence_count": 7,
+    "material_claim_count": 1,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "On this Windows host, the local v0.8.0 candidate ran 221 repository tests: 220 passed and one privilege-dependent generic symlink test was skipped. It also passed the official skill and plugin validators, replayed the offline quality-loop conformance fixture without outbound action, verified its package and embedded engine, and checked its accepted component map unchanged.",
+    "strongest_safe_claim_id": "local-v080-candidate-validated",
+    "unresolved_uncertainties": [
+      "Remote commit-bound CI has not yet run for this candidate.",
+      "Public Codex and Claude Code install/update smoke tests require publication first.",
+      "Claude runtime discovery and invocation were not observed on this host.",
+      "GitHub release immutability enforcement has not yet been verified for v0.8.0."
+    ]
+  }
+}

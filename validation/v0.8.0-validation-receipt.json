@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "candidate_version": "0.8.0",
+  "recorded_at_utc": "2026-08-20T05:58:05Z",
+  "platform": "Windows",
+  "full_suite": {
+    "command": "py -3 -m unittest discover -s tests -v",
+    "status": "PASS",
+    "tests_run": 222,
+    "skipped": 1,
+    "skip_boundary": "The generic update-policy symlink test is privilege-dependent on Windows; dedicated path-resolution, junction, and cross-process tests passed."
+  },
+  "skill_validation": {
+    "command": "quick_validate.py skills/analyze-project-claims",
+    "status": "PASS",
+    "validator_result": "Skill is valid!"
+  },
+  "plugin_validation": {
+    "command": "validate_plugin.py .",
+    "status": "PASS",
+    "validator_result": "Plugin validation passed"
+  },
+  "quality_loop_conformance": {
+    "status": "PASS",
+    "result": "QUALITY_PROPOSAL_READY",
+    "replay_deduplicated": true,
+    "outbound": "NONE",
+    "proposal_id": "quality-proposal-27bdb59ad25ad95178dfed6f",
+    "receipt_digest_sha256": "7f12fda77990c3e8de727d7008d33fc15f4b34aab5542f4c8e3f9cea7ccd397e"
+  },
+  "package_verification": {
+    "status": "PASS",
+    "package_manifest_digest": "a924264d36416495652cc20edd27189682e8f106cee1c689375371be75fdf350",
+    "version": "0.8.0"
+  },
+  "engine_verification": {
+    "status": "PASS",
+    "engine_name": "component-evidence",
+    "engine_version": "1.3.0",
+    "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b"
+  },
+  "component_map_verification": {
+    "status": "PASS",
+    "action": "checked_unchanged",
+    "map_id": "component-map-b73289a82f06",
+    "source_changes": []
+  },
+  "limitations": [
+    "These are local Windows candidate results, not commit-bound remote CI or public-install evidence.",
+    "Artifact identity and freshness checks do not establish semantic entailment.",
+    "Claude runtime activation was not observed on this host."
+  ]
+}

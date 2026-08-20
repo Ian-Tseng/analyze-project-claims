@@ -227,6 +227,33 @@ class ComponentMapTests(unittest.TestCase):
         self.assertIsNone(output["candidate"])
         self.assertEqual(hashlib.sha256(Path(accepted).read_bytes()).hexdigest(), before)
 
+    def test_stale_skill_identity_produces_promotable_candidate(self) -> None:
+        accepted_path = Path(self.bootstrap_and_accept())
+        accepted = json.loads(accepted_path.read_text(encoding='utf-8'))
+        accepted['skill_sha256'] = '0' * 64
+        payload = dict(accepted)
+        payload.pop('integrity')
+        accepted['integrity'] = {
+            'canonical_payload_sha256': hashlib.sha256(
+                json.dumps(
+                    payload,
+                    ensure_ascii=False,
+                    sort_keys=True,
+                    separators=(',', ':'),
+                ).encode('utf-8')
+            ).hexdigest()
+        }
+        accepted_path.write_text(json.dumps(accepted), encoding='utf-8')
+
+        result, output = self.reconcile()
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(output['action'], 'drift_detected')
+        self.assertEqual(output['changes']['contract_changes'], ['skill_sha256'])
+        self.assertIsNotNone(output['candidate'])
+        candidate = json.loads(Path(output['candidate']).read_text(encoding='utf-8'))
+        self.assertNotEqual(candidate['skill_sha256'], accepted['skill_sha256'])
+
     def test_stale_source_produces_delta(self) -> None:
         accepted = self.bootstrap_and_accept()
         before = hashlib.sha256(Path(accepted).read_bytes()).hexdigest()

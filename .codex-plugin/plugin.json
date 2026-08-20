@@ -1,0 +1,27 @@
+{
+  "name": "analyze-project-claims",
+  "version": "0.8.0",
+  "description": "Evidence-bounded project analysis with an optional local-only cross-skill quality loop.",
+  "author": {
+    "name": "Ian Tseng",
+    "url": "https://github.com/Ian-Tseng"
+  },
+  "homepage": "https://github.com/Ian-Tseng/analyze-project-claims",
+  "repository": "https://github.com/Ian-Tseng/analyze-project-claims",
+  "license": "MIT",
+  "keywords": ["claims", "evidence", "quality", "skills"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Analyze Project Claims",
+    "shortDescription": "Audit claims and create local quality proposals",
+    "longDescription": "Analyze objectives, claims, evidence, lifecycle states, and inconsistencies. Compatible skills can optionally emit bounded receipts that create local-only improvement proposals.",
+    "developerName": "Ian Tseng",
+    "category": "Productivity",
+    "capabilities": ["Analysis", "Local workflow"],
+    "websiteURL": "https://github.com/Ian-Tseng/analyze-project-claims",
+    "defaultPrompt": [
+      "Audit this project's claims and evidence.",
+      "Consume the pending compatible skill receipt."
+    ]
+  }
+}

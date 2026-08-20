@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-14T15:40:45.695783Z",
+  "accepted_at_utc": "2026-08-20T05:53:27.094368Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -73,11 +73,27 @@
     "skills/analyze-project-claims/scripts/record_scan.py",
     "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py",
     "tests/test_evidence_bound_scan_release_blockers.py",
+    "skills/analyze-project-claims/references/lifecycle-verification-receipt.md",
     "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
     "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
     "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
     "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
-    "tests/test_lifecycle_receipt_consumer.py"
+    "tests/test_lifecycle_receipt_consumer.py",
+    "skills/analyze-project-claims/references/skill-outcome-receipt.schema.json",
+    "skills/analyze-project-claims/references/skill-quality-proposal.schema.json",
+    "skills/analyze-project-claims/references/skill-quality-contribution.schema.json",
+    "skills/analyze-project-claims/references/skill-quality-loop.md",
+    "skills/analyze-project-claims/scripts/skill_quality_loop.py",
+    "skills/analyze-project-claims/scripts/_internal/skill_quality",
+    "tests/test_skill_quality_loop.py",
+    "tests/test_quality_contribution.py",
+    ".codex-plugin/plugin.json",
+    ".agents/plugins/marketplace.json",
+    "hooks/hooks.json",
+    "tests/test_plugin_bundle.py",
+    "docs/CODEX_PLUGIN_E2E_LOG.md",
+    "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md",
+    "tests/test_component_evidence_engine.py"
   ],
   "components": [
     {
@@ -732,6 +748,10 @@
           "element_id": "read-only-bounded-interpretation",
           "evidence_locators": [
             {
+              "locator": "packaged read-only interpretation and follow-up boundaries",
+              "source": "skills/analyze-project-claims/references/lifecycle-verification-receipt.md"
+            },
+            {
               "locator": "closed aggregate lifecycle receipt contract",
               "source": "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json"
             },
@@ -746,6 +766,185 @@
           ],
           "relation_type": "contains",
           "target": "Lifecycle verification receipts are schema- and digest-validated without importing or executing lifecycle, publication, reporting, cleanup, or live-install actions."
+        }
+      ]
+    },
+    {
+      "component_id": "managed-skill-quality-loop",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "consent-gated-owner-contribution",
+          "evidence_locators": [
+            {
+              "locator": "exact quality body, owner, label, repository, title, and fingerprint validation",
+              "source": "maintainer_service/intake.py"
+            },
+            {
+              "locator": "closed enum and package-identity contribution schema",
+              "source": "skills/analyze-project-claims/references/skill-quality-contribution.schema.json"
+            },
+            {
+              "locator": "trusted absolute executable resolution excluding the current project",
+              "source": "skills/analyze-project-claims/scripts/_internal/safe_process.py"
+            },
+            {
+              "locator": "destination, content fingerprint, approval ID, visibility check, and argv-only GitHub transport",
+              "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contribution.py"
+            },
+            {
+              "locator": "local preview, stale approval, public two-step approval, and exact intake regressions",
+              "source": "tests/test_quality_contribution.py"
+            },
+            {
+              "locator": "current-project executable exclusion and relative-path rejection regressions",
+              "source": "tests/test_safe_process.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A proposal can create an enum-only local draft, but submission requires exact draft approval and a second public-visibility confirmation; exact owner intake never forwards raw issue content and authorizes only one isolated candidate attempt."
+        },
+        {
+          "element_id": "content-free-receipt-contract",
+          "evidence_locators": [
+            {
+              "locator": "closed SkillOutcomeReceipt v1 schema",
+              "source": "skills/analyze-project-claims/references/skill-outcome-receipt.schema.json"
+            },
+            {
+              "locator": "closed fields, canonical digest, marker, TTL, byte, and producer validation",
+              "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contract.py"
+            },
+            {
+              "locator": "marker round-trip, unknown field, expiry, and two-producer fixture regressions",
+              "source": "tests/test_skill_quality_loop.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Compatible Ian-Tseng-managed producers can declare one closed, size- and time-bounded receipt using only enum and package identity fields; unknown or content-bearing fields fail closed and producer identity remains explicitly untrusted."
+        },
+        {
+          "element_id": "explicit-update-authority",
+          "evidence_locators": [
+            {
+              "locator": "standalone versus plugin installation and update authority",
+              "source": "README.md"
+            },
+            {
+              "locator": "trusted absolute executable resolution excluding the current project",
+              "source": "skills/analyze-project-claims/scripts/_internal/safe_process.py"
+            },
+            {
+              "locator": "diagnose_update_authority, doctor, ambiguity, and replacement gates",
+              "source": "skills/analyze-project-claims/scripts/update_policy.py"
+            },
+            {
+              "locator": "current-project executable exclusion and relative-path rejection regressions",
+              "source": "tests/test_safe_process.py"
+            },
+            {
+              "locator": "update authority topology regressions",
+              "source": "tests/test_update_policy.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The updater lists all same-name visible copies and the running copy, fails closed on ambiguity, and never blindly replaces plugin-managed, manual, pinned, project-scope, duplicated, or locally edited installations."
+        },
+        {
+          "element_id": "identity-drift-release-gate",
+          "evidence_locators": [
+            {
+              "locator": "formal component-map preflight gate",
+              "source": ".github/workflows/validate.yml"
+            },
+            {
+              "locator": "identity drift and maintainer rebuild contract",
+              "source": "skills/analyze-project-claims/references/component-evidence-protocol.md"
+            },
+            {
+              "locator": "contract_changes, mapper v1.3.0, build-self, verify-self, reconcile, and accept",
+              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "descriptor rebuild and verification regressions",
+              "source": "tests/test_component_evidence_engine.py"
+            },
+            {
+              "locator": "stale skill identity produces promotable candidate",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Component reconciliation treats analyzer and mapper identity fields as contract drift, the evidence-engine descriptor has a deterministic rebuild command, and release CI requires formal preflight against the exact accepted map."
+        },
+        {
+          "element_id": "map-pending-maintainer-boundary",
+          "evidence_locators": [
+            {
+              "locator": "map-pending draft disclosure and forbidden owner actions",
+              "source": ".github/workflows/agent-maintainer.yml"
+            },
+            {
+              "locator": "formal accepted-map preflight",
+              "source": ".github/workflows/validate.yml"
+            },
+            {
+              "locator": "exact map reconciliation and release order",
+              "source": "PUBLISHING.md"
+            },
+            {
+              "locator": "quality intake, map-pending state, and owner completion gates",
+              "source": "docs/AGENT_MAINTAINER.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Owner-labeled automation may produce one isolated draft but cannot edit or accept validation authority; the owner must reconcile and accept the exact map candidate, run an unchanged reconciliation and formal preflight, then separately review, merge, release, close, and verify installation."
+        },
+        {
+          "element_id": "portable-consumer-and-codex-adapter",
+          "evidence_locators": [
+            {
+              "locator": "root canonical skill tree and plugin metadata",
+              "source": ".codex-plugin/plugin.json"
+            },
+            {
+              "locator": "local observations and live-host limitations",
+              "source": "docs/CODEX_PLUGIN_E2E_LOG.md"
+            },
+            {
+              "locator": "single Stop command, PLUGIN_ROOT, PLUGIN_DATA, timeout, and Windows command",
+              "source": "hooks/hooks.json"
+            },
+            {
+              "locator": "consume, doctor, conformance, bounded hook input, and no-op failure paths",
+              "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
+            },
+            {
+              "locator": "single tree, version synchronization, and hook boundary regressions",
+              "source": "tests/test_plugin_bundle.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The explicit CLI is the portable quality-consumption path; the optional Codex plugin has one one-second Stop hook using plugin-private state and can request at most one continuation without claiming guaranteed routing or live-host observation."
+        },
+        {
+          "element_id": "replay-safe-local-proposal",
+          "evidence_locators": [
+            {
+              "locator": "closed local proposal schema",
+              "source": "skills/analyze-project-claims/references/skill-quality-proposal.schema.json"
+            },
+            {
+              "locator": "atomic locked state, queue bounds, lease recovery, proposal key, and outbound counter",
+              "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/store.py"
+            },
+            {
+              "locator": "replay, sixteen-consumer concurrency, lease, recursion, and conformance regressions",
+              "source": "tests/test_skill_quality_loop.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A private bounded atomic store creates one deterministic local proposal per receipt digest and analyzer version, deduplicates replay and concurrent consumers, recovers expired leases, and performs no outbound action."
         }
       ]
     },
@@ -900,6 +1099,10 @@
             {
               "locator": "focused active-consistency tests",
               "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+            },
+            {
+              "locator": "extracted repository-grounded RAG claim audit contract",
+              "source": "skills/analyze-project-claims/references/logic-guided-rag-audit.md"
             }
           ],
           "relation_type": "contains",
@@ -1179,16 +1382,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-14T15:40:26.940000Z",
+  "created_at_utc": "2026-08-20T05:53:04.113215Z",
   "integrity": {
-    "canonical_payload_sha256": "8a14a1dd33e67807bcb94ccc19f8741ac28d44b3676829878fd2796c547f112b"
+    "canonical_payload_sha256": "60bc92819ae21752ecbd67eb32d3a12e35ca30f75251b2f9c41a93c4a7090410"
   },
-  "map_id": "component-map-6552a63bd2d4",
+  "map_id": "component-map-b73289a82f06",
   "map_state": "accepted",
-  "mapper_version": "1.2.0",
-  "objective": "Map the v0.7.0 product-lifecycle and evidence-bound audit candidate, including read-only lifecycle receipt interpretation, exact claim-to-evidence bindings, consent-bounded installation analytics, owner-gated agent maintenance, cross-agent packaging, public reporting, managed updates, deterministic evaluation, natural-project preparation, and human codebook calibration without treating structural or local E2E evidence as production proof.",
-  "origin_scan_id": "20260814T154026940000Z-49a1d09d",
-  "previous_map_id": "component-map-3084c60e1789",
+  "mapper_version": "1.3.0",
+  "objective": "Map the v0.8.0 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter, consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating structural or local E2E evidence as live host proof.",
+  "origin_scan_id": "20260820T055304113215Z-bc4cb420",
+  "previous_map_id": "component-map-892a82500cd6",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1279,6 +1482,7 @@
     "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
     "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
     "skills/analyze-project-claims/references/lifecycle-phase-receipt.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-verification-receipt.md",
     "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
     "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
     "tests/test_evidence_bound_scan.py",
@@ -1287,11 +1491,36 @@
     "tests/test_evidence_bound_scan_operational.py",
     "tests/test_evidence_bound_scan_release_blockers.py",
     "tests/test_evidence_bound_scan_security.py",
-    "tests/test_lifecycle_receipt_consumer.py"
+    "tests/test_lifecycle_receipt_consumer.py",
+    ".codex-plugin/plugin.json",
+    ".agents/plugins/marketplace.json",
+    "hooks/hooks.json",
+    "examples/quality-loop-producers",
+    "docs/SKILL_OUTCOME_RECEIPT.md",
+    "docs/SKILL_QUALITY_LOOP.md",
+    "docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md",
+    "docs/CODEX_PLUGIN_E2E_LOG.md",
+    "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md",
+    "tests/test_skill_quality_loop.py",
+    "tests/test_quality_contribution.py",
+    "tests/test_plugin_bundle.py",
+    "tests/test_component_evidence_engine.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "c227c6119120d46e0f521cae86804995e0aab6dc0a6bbe978cc6371bfac060c5",
+  "skill_sha256": "0dde22f55dcb2e31ea288751018703ccdae73e4f11648ffa554400dca686be78",
   "source_snapshot": [
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "e0f4253827cbc871c7e33e6fbf8cac31e6582856592b88b34f4f855058e7cad0",
+      "source": ".agents/plugins/marketplace.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "bd1546ea2a2d48035efb5105b23c966fb2f72c2e7fb0368c7d1f0e2ff287c018",
+      "source": ".codex-plugin/plugin.json"
+    },
     {
       "exists": true,
       "kind": "file",
@@ -1301,25 +1530,25 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "be6601ea7cf407e03763b71fb9a88d28fcae9539c28120501ea552e02910ebe9",
+      "sha256": "6342a4ce03c34b61512cd5e715bbedc46f0df57e449840277206e06253f50aff",
       "source": ".github/workflows/agent-maintainer.yml"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "e8a74382ef9b116ac5b00c66cf3a7808e833d0a2e6f4aa86cef5e22de7a718fd",
+      "sha256": "d19bea8749520ee71e662a2d919a53ae84e02ee69cab7b4e616ccf1347ed6f4a",
       "source": ".github/workflows/validate.yml"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "7d0acde6975149592c71b88e8a7129af913f80d8ce42bd9b7403fdc236af6cb6",
+      "sha256": "b39dd29dc8355aca67a1877190fe7f05c626a0a88ee56fce738e2a3357fd3dc5",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "da5029b6e6658d1a70cee674e6f5e73413a97e8ea2e4c7f6d039c81fc2ee3970",
+      "sha256": "46d62f81d6310b66c627c2fe81d79c4596e8d62d5e7e8c706b2f35b5d7477dcd",
       "source": "CITATION.cff"
     },
     {
@@ -1445,13 +1674,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "df0fb80998d1d17ece6576d5445c4c9be55800bfe3eedc1023e90cc9119bd088",
+      "sha256": "2d2afe081bf69235e1f9e335eb22304f8516597c2a2fa986e3e113266fff9dae",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "72aee807baf460c2e17daf92022a307861cd782c2c1329f739090180d0185815",
+      "sha256": "2fa24848540af9430b22e77400754e02a6a88c9183a64bb68f27428d21bac1b7",
       "source": "README.md"
     },
     {
@@ -1463,7 +1692,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "967d9afb101346667166f2e76e81910bc190488d7d41d50ca0072e9d92f00e32",
+      "sha256": "a66780da23103beaf12432b418508966b31a2a3a787f9468a5b6cdaa8667c1ef",
       "source": "VERSION"
     },
     {
@@ -1481,7 +1710,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4ecaa20ea122b9c6d96e86deeceef3c6dce4f4798544cdd574c1c669ecd387a8",
+      "sha256": "17bec9f8cc9e7df5c43df27f6d82763122795d49a4af99cd0f04da18f3f066f7",
       "source": "docs/AGENT_MAINTAINER.md"
     },
     {
@@ -1489,6 +1718,18 @@
       "kind": "file",
       "sha256": "ee361484ce077dccb725d9960371b6bd8320459fc1e59398ca3ae3494ada6dff",
       "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "d2352f023fa5cba0d90aec0f30fa2e4dad025dce4b56e39c9536b7e61dd7aeca",
+      "source": "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "1f56f35c32badd5486ae26b947789f06a0db3a7a10763bcb398be5952d6786c4",
+      "source": "docs/CODEX_PLUGIN_E2E_LOG.md"
     },
     {
       "exists": true,
@@ -1505,13 +1746,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d9032e782ff4751e76dc0ad1a3ec6bcbce59f8d732fa0e8b03e182dfdc215402",
+      "sha256": "374c5342e86c3b3b829c1e2b1f8df8678f57f4c7ae77f43e868da59dbc8ebb7c",
       "source": "docs/LIFECYCLE_RECEIPT_GUIDE.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c463422ea38c18edfc5d28b7fcb5a044de695e1fe1fc29fe4913754fd2053a4b",
+      "sha256": "4fa79f190a01f22d9b6af9ac9f01d44326b0dc87e9167d42e5f6a847ad75a762",
       "source": "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
     },
     {
@@ -1531,6 +1772,24 @@
       "kind": "file",
       "sha256": "afe2d0e88ba1347dcd38cb34402e95b703d52b06eea5e2bb694b481c79fb39bf",
       "source": "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "e9925793a453ba1d579860a781559dbe1ba6fd7abfc8f8cbb47c1a35b24a5694",
+      "source": "docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "52155c0745cd3d1a4393a7e62b10a2192e92eb1cae056bb886060e90d078d4fd",
+      "source": "docs/SKILL_OUTCOME_RECEIPT.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "9d47bfd319f4a3e4b55001885c0ad3cce2c7b72e1e6dae2ab58350d278661813",
+      "source": "docs/SKILL_QUALITY_LOOP.md"
     },
     {
       "exists": true,
@@ -1714,20 +1973,32 @@
     },
     {
       "exists": true,
+      "kind": "directory",
+      "sha256": "8fc8b71c6561deccec4864f166ffea84ab16cb90b8507edc151d46e66420a259",
+      "source": "examples/quality-loop-producers"
+    },
+    {
+      "exists": true,
       "kind": "file",
       "sha256": "d6e6a3ebb4b3589141eed1229cfe457e5921c5d3ef4ee8afb839f1ecec75bfd2",
       "source": "examples/scan-input-v2.example.json"
     },
     {
       "exists": true,
+      "kind": "file",
+      "sha256": "388636132908b4f8fb7d51956fb90abeca2fd0cfcd27fd9a79a61bb0cdd219e7",
+      "source": "hooks/hooks.json"
+    },
+    {
+      "exists": true,
       "kind": "directory",
-      "sha256": "42b4a77f3855ad96a5abc6a948658d819ef1425c775e2a3ac97b02e5f03d99fd",
+      "sha256": "5d81925a4b0b262a60471b08867a9c90482cbfaa1b30bf49d142aa9ec2a20544",
       "source": "maintainer_service"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "381652cbf59bc2bd0ba0557c734cb352637a13a6dd3c5d1951f1e690e111a8ff",
+      "sha256": "ac1d2dbd254ec750414a7d9aa8ee7b5b4d181b63a797251b25649e0d9ae57d4a",
       "source": "maintainer_service/intake.py"
     },
     {
@@ -1745,13 +2016,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "210b5f04f60266872d46b9a48a287d38c5e3b5a98f4ab0eaa4025fcc387d9aad",
+      "sha256": "d34e1b0cd1a5c8d5e74b72facbaa332c0ce30e502e92e3aefd926b47198dc471",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c227c6119120d46e0f521cae86804995e0aab6dc0a6bbe978cc6371bfac060c5",
+      "sha256": "0dde22f55dcb2e31ea288751018703ccdae73e4f11648ffa554400dca686be78",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -1769,8 +2040,14 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b4064d1c508c5f2e3ca7a01f33e767fc4a6cb3cb8f50e6dcf2e035f0084d97d8",
+      "sha256": "7a6d988645d316b0659afacff7764f0d1e1dd46b91857e7a43f4f6a5dfb28267",
       "source": "skills/analyze-project-claims/references/component-evidence-engine.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "d6a0bc88603e2605d6f0841c5de40972d09a578dae8feafc9f8486a2130410eb",
+      "source": "skills/analyze-project-claims/references/component-evidence-protocol.md"
     },
     {
       "exists": true,
@@ -1829,19 +2106,31 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "374c5342e86c3b3b829c1e2b1f8df8678f57f4c7ae77f43e868da59dbc8ebb7c",
+      "source": "skills/analyze-project-claims/references/lifecycle-verification-receipt.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "3b0349708bd69e5327e1f57fd26acf13e6e183beec735b9408996d6d592a2caa",
       "source": "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6b0b925ae1b82757fcedee1162fb550348814d248b84e80b6acda2106bd8271a",
+      "sha256": "cc2d9c86b2a1194fae64d209448be765a8fe9e4273f6410b91846aedc02811ed",
+      "source": "skills/analyze-project-claims/references/logic-guided-rag-audit.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "98aff3b108d96e63cf6ac06f81252a8dbdaf11cd82e69992aa7261d20b0a6911",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "56e1868a47abd432e1402733f46f20e0979a4329b583d6462f4492f7f514a826",
+      "sha256": "2fc20cc524120f7202dac5131d3175368af82553fb3104cb8e8c6e98cf6fa8c5",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -1877,6 +2166,30 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "3e4a4e8187eb94472454558f4c57ead56d764ed9921cbad27e8bc66846b29d96",
+      "source": "skills/analyze-project-claims/references/skill-outcome-receipt.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "f86ce13f590a33e1ec6f4debec00a26b1ee639e47de36b6c6d9a238afb19e210",
+      "source": "skills/analyze-project-claims/references/skill-quality-contribution.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "d10d9e9c17581ad46e4c65b93eb43740ddc11b16ea16088caf1d92a51b04d0cb",
+      "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "dfc3affbcfa499e9bdc0f543a8b9b0d7d9c3d4817b3dec4096c0dd1e622328a3",
+      "source": "skills/analyze-project-claims/references/skill-quality-proposal.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "6c0d6ce5c1df00674b0167e92b4ec072813b58277771cfa1ef2e391853f37565",
       "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/identity.py"
     },
@@ -1885,6 +2198,36 @@
       "kind": "file",
       "sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
       "source": "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "a2042ec7d6c52523ffe6f053c15660632697454c366bf0d709f4b00eb92a0a13",
+      "source": "skills/analyze-project-claims/scripts/_internal/safe_process.py"
+    },
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "c325bdaa11b1e387e789eab7ca68403dff8ee61b2a54a41b47f289b0d6c579e6",
+      "source": "skills/analyze-project-claims/scripts/_internal/skill_quality"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "5f2b3e360ebc767b20ed5942dc149ac8c6aa0177c268af02ce508c764564fbef",
+      "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contract.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "875fbeac7776340e004759c4b6aff7e3d3647215628ba179ca6330e6fb11a42b",
+      "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contribution.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "de3ef67f0af3f1283bf0bfbebb5716750b758a6f74e2b8e741f7e92bf8abeb33",
+      "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/store.py"
     },
     {
       "exists": true,
@@ -1907,7 +2250,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "919cb0c513f30767bd03dbb5b29bb32fd3e1d25fd28bec5ecd4c17bb4d0ff601",
+      "sha256": "08ea2b34784ea1ab35bfd36410329637108481816054c539f61bd8bff7874554",
       "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
     },
     {
@@ -1919,7 +2262,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "73ad6b8e4bc7445d278bf9f9cfd16dff5afd5974823894f41a778da179ac01b2",
+      "sha256": "2a91da4e608e5102eb1d503bb62cb81464b24f223a19999ce8cc5b6f307f0d5d",
+      "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "601909435e8023fecbb072f9c9108721f39c058f3ae1732af516697601b5808f",
       "source": "skills/analyze-project-claims/scripts/update_policy.py"
     },
     {
@@ -1961,13 +2310,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "704f6326d25182133b34b9eb03b49fd810b4c4db6e62b66ff13b93d15a7994a9",
+      "sha256": "f08d50a6dce917edb5f76f0ceaf98c831eb2b93417942220a8eeecbae586d99c",
       "source": "tests/test_component_evidence_engine.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "02b0ef515da1cee346fad45756731ab5645fb1f1b1227afe35bc581128c03727",
+      "sha256": "4bb52b41a38a4353c34111a335825f8d8fc1c57a1713f7ddf9c66d08b4631297",
       "source": "tests/test_component_map.py"
     },
     {
@@ -2021,7 +2370,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f7ed17d62c0c3833f24a5a581e9c620ddd86244186d16cc9c4beabcecf845a2f",
+      "sha256": "81778ebc0291ae1d8c89475672689e08f6e1e974db5e7721f33673399019a1a7",
       "source": "tests/test_lifecycle_receipt_consumer.py"
     },
     {
@@ -2051,8 +2400,20 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "5f3d19485d55a3da5a852b2e58ead6a8610ebc5192b0a8271a1335353772597a",
+      "source": "tests/test_plugin_bundle.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "947d3f2f4da30df40ca5aa53d3bd7e029517740850e5e86ffacfa10b5a0fcc07",
       "source": "tests/test_problem_report.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "29cbce7eafeee7d839db5dbccb0d34ba565bea695f2b08f4d2da73c09cc510fa",
+      "source": "tests/test_quality_contribution.py"
     },
     {
       "exists": true,
@@ -2069,13 +2430,25 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "736611e666ca7fa232608eaae81966eaf30325ea0d3b8cb09b762586db27ba34",
+      "source": "tests/test_safe_process.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "0ad5752e7e26619452ce365586e26a4bd7ad3afd21ec1b3815cc0a6ca4d0f619",
+      "source": "tests/test_skill_quality_loop.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "9d07699370c8459202ec8ab009d6fe6d3da1c5856148bfb4a0b74bb50e01d022",
       "source": "tests/test_strict_evidence_contract.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d64b02bc6dc1752df2f620190b7c1c7491d3ffd8de16bb8c1c0647a6d142d7c7",
+      "sha256": "a0848590bed0321caf1fa1004c52ffb05b0bd3c8ef61584039512e46c62b39cd",
       "source": "tests/test_update_policy.py"
     },
     {

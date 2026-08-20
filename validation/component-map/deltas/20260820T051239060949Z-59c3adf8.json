@@ -1,0 +1,138 @@
+{
+  "accepted_map_id": "component-map-8b2fad7861e8",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-46a792611afd",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/SKILL_OUTCOME_RECEIPT.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/SKILL_QUALITY_LOOP.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/skill-outcome-receipt.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contract.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contribution.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/store.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/update_policy.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_quality_contribution.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_skill_quality_loop.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_update_policy.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "73ed274388521b2df967156358910a15b6b731fd799dd7746492dfb766e6e559"
+  },
+  "recorded_at_utc": "2026-08-20T05:12:39.060949Z",
+  "scan_id": "20260820T051239060949Z-59c3adf8",
+  "schema_version": "1.0"
+}

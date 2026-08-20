@@ -1,0 +1,10 @@
+{
+  "owner": "Ian-Tseng",
+  "repository": "document-auditor",
+  "skill": "document-auditor",
+  "version": "1.0.0",
+  "package_digest_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+  "outcome": "completed_with_limitations",
+  "quality_signal": "documentation_mismatch",
+  "requested_action": "analyze_quality"
+}

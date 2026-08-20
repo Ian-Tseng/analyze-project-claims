@@ -276,6 +276,49 @@ class UpdatePolicyTests(unittest.TestCase):
             self.assertEqual(raised.exception.code, "AMBIGUOUS_INSTALL")
             self.assertEqual(subject.status()["mode"], "unconfigured")
 
+    def test_update_authority_doctor_lists_conflicting_copies_without_mutation(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
+            base = Path(temporary)
+            root = make_skill(base)
+            second = base / "second" / "analyze-project-claims"
+            native = FakeNative(
+                [
+                    install_for(root),
+                    install_for(second, scope="project", pinned=True),
+                ]
+            )
+
+            result = update_policy.diagnose_update_authority(native, root)
+
+            self.assertEqual(result["status"], "UPDATE_AUTHORITY_CONFLICT")
+            self.assertEqual(result["authority"], "unresolved")
+            self.assertEqual(len(result["visible_copies"]), 2)
+            self.assertTrue(result["visible_copies"][0]["is_running_copy"])
+            self.assertEqual(native.update_calls, [])
+
+    def test_update_authority_doctor_verifies_identity_before_claiming_github_cli(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
+            base = Path(temporary)
+            root = make_skill(base)
+            native = FakeNative([install_for(root)])
+
+            result = update_policy.diagnose_update_authority(native, root)
+
+            self.assertEqual(result["status"], "GITHUB_CLI_AUTHORITY")
+            self.assertEqual(result["verification"]["identity"], "verified")
+            self.assertEqual(result["verification"]["package_manifest"], "verified")
+            self.assertRegex(result["verification"]["manifest_digest"], r"^[0-9a-f]{64}$")
+
+    def test_update_authority_doctor_always_lists_running_untracked_copy(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
+            root = make_skill(Path(temporary))
+            result = update_policy.diagnose_update_authority(FakeNative([]), root)
+
+            self.assertEqual(result["status"], "MANUAL_OR_PLUGIN_MANAGED")
+            self.assertEqual(len(result["visible_copies"]), 1)
+            self.assertTrue(result["visible_copies"][0]["is_running_copy"])
+            self.assertEqual(result["visible_copies"][0]["registry"], "running-package-only")
+
     def test_source_change_suspends_auto(self) -> None:
         with tempfile.TemporaryDirectory(prefix="update-policy-") as temporary:
             base = Path(temporary)
