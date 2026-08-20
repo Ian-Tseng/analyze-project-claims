@@ -1,0 +1,106 @@
+{
+  "schema_version": "2.0",
+  "objective": "State the strongest safe local validation claim for the v0.8.1 candidate, including producer-repository-bound contribution routing and the GitHub-managed fleet protocol.",
+  "scope": [
+    "v0.8.1 local candidate",
+    "evidence-bound recorder 2.1.0",
+    "managed skill quality loop and reusable repair workflow",
+    "package, plugin, engine, skill, and component-map identities"
+  ],
+  "authority": [
+    "validation/v0.8.1-validation-receipt.json",
+    "validation/component-map/accepted-map.json"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "source": {"kind": "file", "path": "validation/v0.8.1-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "full_suite"},
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 229 repository tests run on Windows: 228 passed and one privilege-dependent generic symlink test was skipped."
+    },
+    {
+      "evidence_id": "skill-validation-result",
+      "source": {"kind": "file", "path": "validation/v0.8.1-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "skill_validation"},
+      "method": "schema_validated",
+      "observed_summary": "The official local skill validator accepted the packaged skill."
+    },
+    {
+      "evidence_id": "plugin-validation-result",
+      "source": {"kind": "file", "path": "validation/v0.8.1-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "plugin_validation"},
+      "method": "executed_test",
+      "observed_summary": "Three repository plugin contract tests accepted the root plugin layout, marketplace identity, and bounded Stop hook."
+    },
+    {
+      "evidence_id": "quality-loop-conformance-result",
+      "source": {"kind": "file", "path": "validation/v0.8.1-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "quality_loop_conformance"},
+      "method": "replayed",
+      "observed_summary": "The offline conformance fixture committed one local proposal, deduplicated replay, and performed no outbound action."
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "source": {"kind": "file", "path": "validation/v0.8.1-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "package_verification"},
+      "method": "schema_validated",
+      "observed_summary": "The v0.8.1 package matches its rebuilt manifest and recorded package digest."
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "source": {"kind": "file", "path": "validation/v0.8.1-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "engine_verification"},
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified."
+    },
+    {
+      "evidence_id": "map-verification-result",
+      "source": {"kind": "file", "path": "validation/v0.8.1-validation-receipt.json"},
+      "locator": {"kind": "artifact_key", "value": "component_map_verification"},
+      "method": "schema_validated",
+      "observed_summary": "The accepted component map checked unchanged after final package synchronization."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "local-v081-candidate-validated",
+      "statement": "On this Windows host, the local v0.8.1 candidate ran 229 repository tests: 228 passed and one privilege-dependent generic symlink test was skipped. It passed the official skill validator and repository plugin contract tests, replayed the offline quality-loop conformance fixture without outbound action, verified its package and embedded engine, and checked component-map-e9f55c152d3a unchanged after owner acceptance. The tests cover the closed managed-fleet policy, deterministic thin caller, immutable authorization inputs, protected-environment workflow structure, privilege separation, and documentation surfaces; hosted GitHub execution remains unobserved.",
+      "element_ref": {"component_id": "agent-maintainer", "element_id": "pinned-reusable-repair-boundary"},
+      "material": true,
+      "status": "partially_supported",
+      "rationale": "Every listed result is bounded to a persisted local receipt; protected-environment configuration, hosted canary, agent execution, draft publication, remote CI, public installation, Claude activation, and release remain separate gates."
+    }
+  ],
+  "bindings": [
+    {"claim_id": "local-v081-candidate-validated", "evidence_id": "full-suite-result", "role": "supports"},
+    {"claim_id": "local-v081-candidate-validated", "evidence_id": "skill-validation-result", "role": "supports"},
+    {"claim_id": "local-v081-candidate-validated", "evidence_id": "plugin-validation-result", "role": "supports"},
+    {"claim_id": "local-v081-candidate-validated", "evidence_id": "quality-loop-conformance-result", "role": "supports"},
+    {"claim_id": "local-v081-candidate-validated", "evidence_id": "package-verification-result", "role": "supports"},
+    {"claim_id": "local-v081-candidate-validated", "evidence_id": "engine-verification-result", "role": "supports"},
+    {"claim_id": "local-v081-candidate-validated", "evidence_id": "map-verification-result", "role": "supports"},
+    {"claim_id": "local-v081-candidate-validated", "evidence_id": "full-suite-result", "role": "limits"}
+  ],
+  "limitations": [
+    {
+      "limitation_id": "local-platform-and-publication-boundary",
+      "text": "The evidence is local Windows candidate evidence; one generic symlink test was privilege-skipped, and protected environments, hosted canary, agent execution, draft publication, remote CI, public installation, Claude activation, and release publication remain unproved.",
+      "claim_ids": ["local-v081-candidate-validated"],
+      "evidence_ids": ["full-suite-result"]
+    }
+  ],
+  "summary": {
+    "strongest_safe_claim_id": "local-v081-candidate-validated",
+    "claim_boundary_ids": ["local-platform-and-publication-boundary"],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "Remote commit-bound CI has not yet run for this candidate.",
+    "Public Codex and Claude Code install/update smoke tests require publication first.",
+    "Claude runtime discovery and invocation were not observed on this host.",
+    "GitHub release immutability enforcement has not yet been verified for v0.8.1.",
+    "Producer-repository issue routing does not establish that each destination has the protected maintainer workflow installed."
+    ,"The reusable workflow has not yet run through either protected environment on a producer repository."
+  ]
+}

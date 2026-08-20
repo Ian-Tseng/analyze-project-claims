@@ -1,0 +1,207 @@
+name: reusable managed skill repair
+
+on:
+  workflow_call:
+    inputs:
+      policy-path:
+        description: Canonical caller policy path.
+        required: true
+        type: string
+      dry-run:
+        description: Validate intake and configuration without agent or publication jobs.
+        required: false
+        default: false
+        type: boolean
+    secrets:
+      OPENAI_API_KEY:
+        description: Repository-scoped OpenAI key used only by the isolated candidate job.
+        required: false
+
+permissions: {}
+
+concurrency:
+  group: managed-skill-repair-${{ github.repository_id }}-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      issues: read
+    outputs:
+      authorization-id: ${{ steps.intake.outputs.authorization-id }}
+      base-sha: ${{ steps.base.outputs.sha }}
+      enabled: ${{ steps.intake.outputs.enabled }}
+      profile: ${{ steps.intake.outputs.profile }}
+      package-root: ${{ steps.intake.outputs.package-root }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+      - id: base
+        shell: bash
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - id: intake
+        uses: $/.github/actions/managed-skill-core
+        with:
+          mode: intake
+          policy-path: ${{ inputs.policy-path }}
+          event-path: ${{ github.event_path }}
+          base-sha: ${{ steps.base.outputs.sha }}
+          workflow-sha: ${{ github.workflow_sha }}
+          nonce: run-${{ github.run_id }}-attempt-${{ github.run_attempt }}
+          dry-run: ${{ inputs.dry-run }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: managed-repair-authorization
+          path: ${{ steps.intake.outputs.authorization-path }}
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 1
+
+  candidate:
+    if: ${{ !inputs.dry-run && needs.prepare.outputs.enabled == 'true' }}
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: managed-repair-agent
+    permissions:
+      contents: read
+      issues: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.prepare.outputs.base-sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: managed-repair-authorization
+          path: ${{ runner.temp }}/managed-repair
+      - uses: $/.github/actions/managed-skill-core
+        with:
+          mode: verify-live
+          policy-path: ${{ inputs.policy-path }}
+          authorization-path: ${{ runner.temp }}/managed-repair/authorization.json
+          workflow-sha: ${{ github.workflow_sha }}
+          github-token: ${{ github.token }}
+      - id: agent-prep
+        uses: $/.github/actions/managed-skill-core
+        with:
+          mode: prepare-agent
+          policy-path: ${{ inputs.policy-path }}
+          authorization-path: ${{ runner.temp }}/managed-repair/authorization.json
+          event-path: ${{ github.event_path }}
+      - name: Run the isolated repair agent without repository credentials
+        uses: openai/codex-action@52fe01ec70a42f454c9d2ebd47598f9fd6893d56 # v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt-file: ${{ steps.agent-prep.outputs.prompt-file }}
+          codex-args: '["--ephemeral"]'
+          permission-profile: ":workspace"
+          safety-strategy: unprivileged-user
+          codex-user: managed-repair-agent
+          allow-users: Ian-Tseng
+      - name: Stop the agent account before trusted collection
+        shell: bash
+        run: sudo /usr/bin/pkill -KILL -u managed-repair-agent || true
+      - id: collect
+        uses: $/.github/actions/managed-skill-core
+        with:
+          mode: collect
+          policy-path: ${{ inputs.policy-path }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: managed-repair-candidate-${{ needs.prepare.outputs.authorization-id }}
+          path: ${{ runner.temp }}/managed-repair-candidate
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 7
+
+  validate:
+    if: ${{ !inputs.dry-run && needs.prepare.outputs.enabled == 'true' }}
+    needs: [prepare, candidate]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.prepare.outputs.base-sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: managed-repair-candidate-${{ needs.prepare.outputs.authorization-id }}
+          path: ${{ runner.temp }}/managed-repair-candidate
+      - name: Prefetch the fixed pytest validation profile
+        if: ${{ needs.prepare.outputs.profile == 'python-pytest-package-v1' }}
+        run: >-
+          python -m pip install --disable-pip-version-check
+          "pytest==8.3.5" "jsonschema==4.23.0" "tomli==2.2.1"
+      - uses: $/.github/actions/managed-skill-core
+        with:
+          mode: validate
+          policy-path: ${{ inputs.policy-path }}
+          patch-path: ${{ runner.temp }}/managed-repair-candidate/candidate.patch
+
+  publish-draft:
+    if: ${{ !inputs.dry-run && needs.prepare.outputs.enabled == 'true' }}
+    needs: [prepare, validate]
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment: managed-repair-publish
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.prepare.outputs.base-sha }}
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: managed-repair-authorization
+          path: ${{ runner.temp }}/managed-repair
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: managed-repair-candidate-${{ needs.prepare.outputs.authorization-id }}
+          path: ${{ runner.temp }}/managed-repair-candidate
+      - uses: $/.github/actions/managed-skill-core
+        with:
+          mode: verify-live
+          policy-path: ${{ inputs.policy-path }}
+          authorization-path: ${{ runner.temp }}/managed-repair/authorization.json
+          workflow-sha: ${{ github.workflow_sha }}
+          github-token: ${{ github.token }}
+      - uses: $/.github/actions/managed-skill-core
+        with:
+          mode: guard
+          policy-path: ${{ inputs.policy-path }}
+          patch-path: ${{ runner.temp }}/managed-repair-candidate/candidate.patch
+      - uses: $/.github/actions/managed-skill-core
+        with:
+          mode: publish
+          policy-path: ${{ inputs.policy-path }}
+          authorization-path: ${{ runner.temp }}/managed-repair/authorization.json
+          authorization-id: ${{ needs.prepare.outputs.authorization-id }}
+          github-token: ${{ github.token }}

@@ -2,6 +2,19 @@
 
 All notable changes to this project are documented here.
 
+## [0.8.1] - 2026-08-20
+
+### Changed
+
+- Route each consent-gated, enum-only skill-quality contribution to the
+  originating `Ian-Tseng/<producer-repository>` instead of a fixed central
+  issue tracker.
+- Bind preview validation, GitHub visibility checks, issue creation, returned
+  issue URLs, and owner intake to the same producer repository.
+- Preserve local-only defaults, exact preview approval, separate public
+  visibility confirmation, one-use replay protection, and post-create
+  uncertainty handling.
+
 ## [0.8.0] - 2026-08-20
 
 ### Added
@@ -74,6 +87,7 @@ All notable changes to this project are documented here.
 - Persisted v2 records replay their normalized invariants and derived identities;
   recomputing the outer checksum alone cannot make a malformed record valid.
 
+[0.8.1]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.1
 [0.8.0]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.0
 [0.7.1]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.1
 [0.7.0]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.0

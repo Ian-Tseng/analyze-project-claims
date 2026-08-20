@@ -1,0 +1,269 @@
+{
+  "accepted_map_id": "component-map-b73289a82f06",
+  "action": "conflict_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260820T160632290921Z-b79c5371-component-map-e9f55c152d3a.json",
+    "delta": "deltas/20260820T160632290921Z-b79c5371.json"
+  },
+  "candidate_map_id": "component-map-e9f55c152d3a",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "agent-maintainer",
+        "element_id": "closed-managed-fleet-onboarding"
+      },
+      {
+        "component_id": "agent-maintainer",
+        "element_id": "fleet-rollout-and-host-boundary"
+      },
+      {
+        "component_id": "agent-maintainer",
+        "element_id": "pinned-reusable-repair-boundary"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "consent-gated-owner-contribution",
+        "fields": [
+          "target",
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "objective",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".codex-plugin/plugin.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": ".github/actions/managed-skill-core/action.yml"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": ".github/actions/managed-skill-core/managed_skill_core.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": ".github/workflows/managed-skill-repair.yml"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/MANAGED_FLEET_OPERATIONS.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/MANAGED_FLEET_QUICKSTART.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/MANAGED_FLEET_SUPPORT_MATRIX.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/MANAGED_REPAIR_WALKTHROUGH.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/MULTI_AGENT_INSTALL_TOPOLOGY.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/SKILL_QUALITY_LOOP.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "maintainer_service"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "maintainer_service/intake.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/managed-skill-policy.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/skill-quality-contribution.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contribution.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/managed_fleet.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_managed_fleet.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_quality_contribution.py"
+      }
+    ]
+  },
+  "event_id": "20260820T160632290921Z-b79c5371",
+  "integrity": {
+    "canonical_payload_sha256": "b6e390bd9564fba129f01574e9614587cca110e30c76385ff58116ab8db94a96"
+  },
+  "map_state_after": "conflict_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.3.0",
+  "recorded_at_utc": "2026-08-20T16:06:32.290921Z",
+  "schema_version": "1.0",
+  "skill_sha256": "d892da7147f2d4ab01bf60a45f9425af3c81970fb979f29af7ee9cbee86ac999"
+}

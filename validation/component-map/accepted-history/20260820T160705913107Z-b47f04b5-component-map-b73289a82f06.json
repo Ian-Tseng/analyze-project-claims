@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-20T16:07:05.913107Z",
+  "accepted_at_utc": "2026-08-20T05:53:27.094368Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -101,52 +101,6 @@
       "component_type": "service",
       "elements": [
         {
-          "element_id": "closed-managed-fleet-onboarding",
-          "evidence_locators": [
-            {
-              "locator": "two-file LOCAL_READY onboarding and hosted-gate boundary",
-              "source": "docs/MANAGED_FLEET_QUICKSTART.md"
-            },
-            {
-              "locator": "closed owner, repository, path, environment, publication, compatibility, and workflow-pin contract",
-              "source": "skills/analyze-project-claims/references/managed-skill-policy.schema.json"
-            },
-            {
-              "locator": "closed policy validation, deterministic init, local doctor, canary preview, disable, and rollback-plan commands",
-              "source": "skills/analyze-project-claims/scripts/managed_fleet.py"
-            },
-            {
-              "locator": "strict policy, traversal, preview/apply, idempotency, pin, workflow, authorization, and documentation regressions",
-              "source": "tests/test_managed_fleet.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "An Ian-Tseng producer joins the managed fleet through one strict non-executable policy and one deterministic full-SHA-pinned caller; local scaffolding is preview-first, two-file-bounded, idempotent, and distinct from hosted readiness."
-        },
-        {
-          "element_id": "fleet-rollout-and-host-boundary",
-          "evidence_locators": [
-            {
-              "locator": "central reusable adoption, four zones, lifecycle gates, cutover, and rollback",
-              "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
-            },
-            {
-              "locator": "repository versions, caller state, canary order, supported protocol, and observation boundary",
-              "source": "docs/MANAGED_FLEET_SUPPORT_MATRIX.md"
-            },
-            {
-              "locator": "standalone, Codex, Claude, publisher, and repository-repair authority separation",
-              "source": "docs/MULTI_AGENT_INSTALL_TOPOLOGY.md"
-            },
-            {
-              "locator": "managed fleet routing and guardrails",
-              "source": "skills/analyze-project-claims/SKILL.md"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "Method, venue, and server callers are onboarded in code but activation is evidence-gated in canary order; managed repair, native installed replacement, Codex discovery, Claude discovery, release, and fresh activation remain distinct lifecycle states."
-        },
-        {
           "element_id": "human-release-gate",
           "evidence_locators": [
             {
@@ -191,37 +145,6 @@
           ],
           "relation_type": "contains",
           "target": "Only an exact newly disclosed public report labeled agent-ready by the canonical owner becomes a minimal untrusted task; raw issue content, comments, reporter identity, installation identity, private API reports, and E2E probes remain excluded."
-        },
-        {
-          "element_id": "pinned-reusable-repair-boundary",
-          "evidence_locators": [
-            {
-              "locator": "closed composite action interface and explicit token input",
-              "source": ".github/actions/managed-skill-core/action.yml"
-            },
-            {
-              "locator": "authorization binding, live refetch, root-owned collection, policy guard, validation, and idempotent publication",
-              "source": ".github/actions/managed-skill-core/managed_skill_core.py"
-            },
-            {
-              "locator": "workflow_call interface, central $/ helpers, job permissions, protected environments, candidate, validation, and draft publication",
-              "source": ".github/workflows/managed-skill-repair.yml"
-            },
-            {
-              "locator": "hosted provisioning, privilege zones, unknown-outcome reconciliation, disablement, and rollback",
-              "source": "docs/MANAGED_FLEET_OPERATIONS.md"
-            },
-            {
-              "locator": "receipt-to-issue-to-authorized-draft lifecycle boundaries",
-              "source": "docs/MANAGED_REPAIR_WALKTHROUGH.md"
-            },
-            {
-              "locator": "privilege, provenance, protected-environment, and authorization-manifest contract regressions",
-              "source": "tests/test_managed_fleet.py"
-            }
-          ],
-          "relation_type": "contains",
-          "target": "A central GitHub Cloud reusable workflow binds immutable issue, repository, policy, base, workflow, nonce, and expiry identities; separately approved agent and publication jobs keep the candidate credential-free, validate a guarded exact patch, reconcile deterministic draft state, and retain human release authority."
         },
         {
           "element_id": "privilege-separated-candidate",
@@ -866,11 +789,11 @@
               "source": "skills/analyze-project-claims/scripts/_internal/safe_process.py"
             },
             {
-              "locator": "owner-fixed producer destination, content fingerprint, approval ID, visibility check, issue URL binding, and argv-only GitHub transport",
+              "locator": "destination, content fingerprint, approval ID, visibility check, and argv-only GitHub transport",
               "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contribution.py"
             },
             {
-              "locator": "producer-repository routing, cross-repository rebinding refusal, local preview, stale approval, public two-step approval, and exact intake regressions",
+              "locator": "local preview, stale approval, public two-step approval, and exact intake regressions",
               "source": "tests/test_quality_contribution.py"
             },
             {
@@ -879,7 +802,7 @@
             }
           ],
           "relation_type": "contains",
-          "target": "A proposal can create an enum-only local draft bound to Ian-Tseng and the originating producer repository, but submission requires exact draft approval and a second public-visibility confirmation; exact owner intake rejects cross-repository rebinding, never forwards raw issue content, and authorizes only one isolated candidate attempt where the protected workflow is installed."
+          "target": "A proposal can create an enum-only local draft, but submission requires exact draft approval and a second public-visibility confirmation; exact owner intake never forwards raw issue content and authorizes only one isolated candidate attempt."
         },
         {
           "element_id": "content-free-receipt-contract",
@@ -1459,16 +1382,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-20T16:06:32.290921Z",
+  "created_at_utc": "2026-08-20T05:53:04.113215Z",
   "integrity": {
-    "canonical_payload_sha256": "efe8b522b4306693149795d8eb4065c77c33346a091ec8dfee6db6ccbd4579b3"
+    "canonical_payload_sha256": "60bc92819ae21752ecbd67eb32d3a12e35ca30f75251b2f9c41a93c4a7090410"
   },
-  "map_id": "component-map-e9f55c152d3a",
+  "map_id": "component-map-b73289a82f06",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.8.1 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating structural or local E2E evidence as live host proof.",
-  "origin_scan_id": "20260820T160632290921Z-b79c5371",
-  "previous_map_id": "component-map-b73289a82f06",
+  "objective": "Map the v0.8.0 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter, consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating structural or local E2E evidence as live host proof.",
+  "origin_scan_id": "20260820T055304113215Z-bc4cb420",
+  "previous_map_id": "component-map-892a82500cd6",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1584,7 +1507,7 @@
     "tests/test_component_evidence_engine.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "d892da7147f2d4ab01bf60a45f9425af3c81970fb979f29af7ee9cbee86ac999",
+  "skill_sha256": "0dde22f55dcb2e31ea288751018703ccdae73e4f11648ffa554400dca686be78",
   "source_snapshot": [
     {
       "exists": true,
@@ -1595,20 +1518,8 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "e20ffa637fa7a66fb064fb011eafef0caa12010c6afb4bcb7a536f99ff073c0e",
+      "sha256": "bd1546ea2a2d48035efb5105b23c966fb2f72c2e7fb0368c7d1f0e2ff287c018",
       "source": ".codex-plugin/plugin.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "cd4bd94b3788957f79e67e0eed3a35320e8cd66b588a3d499821759d7aa10862",
-      "source": ".github/actions/managed-skill-core/action.yml"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "bc51a442f8add024981eee216adf1c15ccad8363f35fbf24920e6f6d13f22523",
-      "source": ".github/actions/managed-skill-core/managed_skill_core.py"
     },
     {
       "exists": true,
@@ -1625,25 +1536,19 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "dd6ae8711bf44bbe574ca7356eff5556c344f4b15da3ec79b90304475a96d1c9",
-      "source": ".github/workflows/managed-skill-repair.yml"
-    },
-    {
-      "exists": true,
-      "kind": "file",
       "sha256": "d19bea8749520ee71e662a2d919a53ae84e02ee69cab7b4e616ccf1347ed6f4a",
       "source": ".github/workflows/validate.yml"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ddc8ccb13afb892e63ab56e7067ce1eabd98283d9358cd66c558ae5011e6b95a",
+      "sha256": "b39dd29dc8355aca67a1877190fe7f05c626a0a88ee56fce738e2a3357fd3dc5",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "99eca6e284e56523d01d6e0f1a6a8e86a05b04fe87c60890ddd97ad9799f1cff",
+      "sha256": "46d62f81d6310b66c627c2fe81d79c4596e8d62d5e7e8c706b2f35b5d7477dcd",
       "source": "CITATION.cff"
     },
     {
@@ -1769,13 +1674,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "098013b8894772d832a8486893b93e6f2d1904725282cd6f6ef17dafabfe8e62",
+      "sha256": "2d2afe081bf69235e1f9e335eb22304f8516597c2a2fa986e3e113266fff9dae",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "30f93624ad5d6060059d80c67f67e0c51500fbdcf806d83c7c798123120b43bf",
+      "sha256": "2fa24848540af9430b22e77400754e02a6a88c9183a64bb68f27428d21bac1b7",
       "source": "README.md"
     },
     {
@@ -1787,7 +1692,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "aaf6721dc37c40b4233accfc081f25776ff3bd1d2a4b9d5cea760d1c2cf86665",
+      "sha256": "a66780da23103beaf12432b418508966b31a2a3a787f9468a5b6cdaa8667c1ef",
       "source": "VERSION"
     },
     {
@@ -1829,7 +1734,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6c17b438da3e2c6abae7e30c9061ff670af61dae761237111ed02fce23cee886",
+      "sha256": "72c0450a00958d74de96134768d8f95c44fdad2c2d95816aa9313de8a355383d",
       "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
     },
     {
@@ -1843,36 +1748,6 @@
       "kind": "file",
       "sha256": "374c5342e86c3b3b829c1e2b1f8df8678f57f4c7ae77f43e868da59dbc8ebb7c",
       "source": "docs/LIFECYCLE_RECEIPT_GUIDE.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "d6cf8563209878577ad10ff2d66f2d7697cb3d324adb73f47820645e73544fef",
-      "source": "docs/MANAGED_FLEET_OPERATIONS.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "eda1b28e09168b1ed929de3f62d6770af9439c5e768c412158db82dbb967a292",
-      "source": "docs/MANAGED_FLEET_QUICKSTART.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "9a2c52a0e16ad644fcb7efc4f1faeb77b1cc4a9971023e0005ae8418d59b362a",
-      "source": "docs/MANAGED_FLEET_SUPPORT_MATRIX.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "e87e0a8dd9edf06932a2eff7d0bbd413942c3ef98e587347a93db217b7fb5028",
-      "source": "docs/MANAGED_REPAIR_WALKTHROUGH.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "0243495354f7e8eb37b8e315dfa0f9ec080bc6f0549dd9a8c1f0abb020ba63dd",
-      "source": "docs/MULTI_AGENT_INSTALL_TOPOLOGY.md"
     },
     {
       "exists": true,
@@ -1913,7 +1788,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a7ff892584fb96c0d2b3894263549ffc959e0260237e359aac3dccfc75d265c6",
+      "sha256": "9d47bfd319f4a3e4b55001885c0ad3cce2c7b72e1e6dae2ab58350d278661813",
       "source": "docs/SKILL_QUALITY_LOOP.md"
     },
     {
@@ -2117,13 +1992,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "080f0c767fb80a61fa6d8b837e6c7df1a489a22b5a46e6fae41a844b3477e4ae",
+      "sha256": "5d81925a4b0b262a60471b08867a9c90482cbfaa1b30bf49d142aa9ec2a20544",
       "source": "maintainer_service"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a05dffe13633184ef4e1238ff2e9a0fbb5d80f8aafcc3fdc546308257170c72c",
+      "sha256": "ac1d2dbd254ec750414a7d9aa8ee7b5b4d181b63a797251b25649e0d9ae57d4a",
       "source": "maintainer_service/intake.py"
     },
     {
@@ -2141,13 +2016,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "9bfb21a5cb3cd0cec1bd7553cef21030260d704314f9d122a99df570063c0bfb",
+      "sha256": "d34e1b0cd1a5c8d5e74b72facbaa332c0ce30e502e92e3aefd926b47198dc471",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d892da7147f2d4ab01bf60a45f9425af3c81970fb979f29af7ee9cbee86ac999",
+      "sha256": "0dde22f55dcb2e31ea288751018703ccdae73e4f11648ffa554400dca686be78",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -2249,19 +2124,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "cf5649a822d8af36f7cdfe02e4f3a484ffb359b666f94a284314106e3d0f439b",
-      "source": "skills/analyze-project-claims/references/managed-skill-policy.schema.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "abf78d85ff34ef646b54f956ec6476b942cce16cbaee3627ef40578af4482f8d",
+      "sha256": "98aff3b108d96e63cf6ac06f81252a8dbdaf11cd82e69992aa7261d20b0a6911",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "32900420dd3b1ee6bb9538e5980262e906256d24013fe9a3c4c191fafe3f213b",
+      "sha256": "2fc20cc524120f7202dac5131d3175368af82553fb3104cb8e8c6e98cf6fa8c5",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -2303,13 +2172,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "cb3ec27c98fcf95e16505bdbcd5106dfc24fb4fa2191bb3c2005a6a95f8617bd",
+      "sha256": "f86ce13f590a33e1ec6f4debec00a26b1ee639e47de36b6c6d9a238afb19e210",
       "source": "skills/analyze-project-claims/references/skill-quality-contribution.schema.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "fd9dc1df091a28f23c67871a5a97aac92d277202cd5fab56766def8b24df29ef",
+      "sha256": "d10d9e9c17581ad46e4c65b93eb43740ddc11b16ea16088caf1d92a51b04d0cb",
       "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
     },
     {
@@ -2339,7 +2208,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "a4c59ca0949f7f0449c6bcbcf8f4cd6b33fa95cfc2fbd6d2923f340dff5debfd",
+      "sha256": "c325bdaa11b1e387e789eab7ca68403dff8ee61b2a54a41b47f289b0d6c579e6",
       "source": "skills/analyze-project-claims/scripts/_internal/skill_quality"
     },
     {
@@ -2351,7 +2220,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "43f9a304e6657b601e571d0ae996b62774761ad2655528590c8fd0460cf381eb",
+      "sha256": "875fbeac7776340e004759c4b6aff7e3d3647215628ba179ca6330e6fb11a42b",
       "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contribution.py"
     },
     {
@@ -2371,12 +2240,6 @@
       "kind": "file",
       "sha256": "9d5c38103b98c74bb30a8d86a6e84294ce2c943eb33663679b950420168e6585",
       "source": "skills/analyze-project-claims/scripts/lifecycle_receipt.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "6d78881382f7a2d3d8584818a48b3bfd87708b623fd02ae43ef8bd51b2523fbe",
-      "source": "skills/analyze-project-claims/scripts/managed_fleet.py"
     },
     {
       "exists": true,
@@ -2513,12 +2376,6 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1180c52f09d92db5cec34e2c9c40c0f90480e8db6b30697a8475270c9b9ffb5d",
-      "source": "tests/test_managed_fleet.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
       "sha256": "c87207c3e75425974234d3e71214d1397d3c89979fbea753de699f6746f24092",
       "source": "tests/test_natural_project_codebook_binding.py"
     },
@@ -2555,7 +2412,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "2207747089fae83ddba2c81221dff7bc8791545d85888d5b05f43d14e7d652a9",
+      "sha256": "29cbce7eafeee7d839db5dbccb0d34ba565bea695f2b08f4d2da73c09cc510fa",
       "source": "tests/test_quality_contribution.py"
     },
     {

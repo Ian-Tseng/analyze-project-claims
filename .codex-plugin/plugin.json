@@ -1,6 +1,6 @@
 {
   "name": "analyze-project-claims",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Evidence-bounded project analysis with an optional local-only cross-skill quality loop.",
   "author": {
     "name": "Ian Tseng",

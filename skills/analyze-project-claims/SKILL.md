@@ -302,6 +302,31 @@ reconcile the contribution ID before retrying. Only `Ian-Tseng` may add
 `agent-ready`; that permits one isolated map-pending candidate, never map
 acceptance, merge, release, issue closure, or installed update.
 
+## Operate the managed skill fleet separately
+
+When the owner explicitly asks to onboard, diagnose, canary, disable, or plan
+rollback for an `Ian-Tseng` producer repository, read the packaged managed
+policy schema and `docs/MANAGED_FLEET_QUICKSTART.md`, then use
+`scripts/managed_fleet.py`. `init` previews exactly a policy and a thin
+full-SHA-pinned caller; mutation requires `--apply`. `validate` and
+`doctor --local` establish only `LOCAL_READY`. `doctor --repo` reads hosted
+configuration, while `canary --dry-run` previews the hosted gate sequence.
+
+The reusable workflow is a repository repair plane, not an invocation side
+effect or an update installer. The owner-applied label is triage eligibility.
+Two protected-environment approvals separately gate isolated agent execution
+and draft publication. The candidate has no repository write token; fresh
+validation is secret-free; publication is deterministic, draft-only, and
+reconciled before retry. Human review retains evidence acceptance, merge,
+release, publication, installed replacement, and fresh activation.
+
+Do not copy central workflow helpers into producers, create arbitrary policy
+commands, use `secrets: inherit`, weaken central denied paths, force-push,
+accept evidence automatically, or call a draft PR a deployed fix. The v1
+managed workflow supports GitHub Cloud and exact `Ian-Tseng` repositories only.
+If a pin is suspected, remove the trigger label, lock both environments, and
+disable from the caller repository before planning a reviewed rollback.
+
 ## Report internal product failures separately
 
 Problem reporting applies only when this skill, a packaged helper, or its

@@ -139,6 +139,9 @@ def _prepare_quality_task(
         raise IntakeError("The quality producer skill is invalid.")
     if not quality.contract.REPOSITORY.fullmatch(values["producer_repository"]):
         raise IntakeError("The quality producer repository is invalid.")
+    expected_destination = quality._destination_for_repository(values["producer_repository"])
+    if repository != expected_destination:
+        raise IntakeError("The quality contribution destination does not match its producer repository.")
     if not quality.contract.SHA256.fullmatch(values["producer_package_digest"]):
         raise IntakeError("The quality producer package digest is invalid.")
     signal = values["quality_signal"]
@@ -164,7 +167,7 @@ def _prepare_quality_task(
         "producer_package_digest_sha256": values["producer_package_digest"],
         "quality_signal": signal,
         "recommended_action": values["recommended_action"],
-        "destination": quality.DESTINATION,
+        "destination": repository,
         "created_at_utc": values["created_at"],
     }
     if values["fingerprint"] != quality.content_fingerprint(draft):
