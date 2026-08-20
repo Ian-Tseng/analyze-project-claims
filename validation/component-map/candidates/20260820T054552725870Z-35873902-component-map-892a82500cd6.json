@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-20T05:53:27.094368Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1382,16 +1382,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-20T05:53:04.113215Z",
+  "created_at_utc": "2026-08-20T05:45:52.725870Z",
   "integrity": {
-    "canonical_payload_sha256": "60bc92819ae21752ecbd67eb32d3a12e35ca30f75251b2f9c41a93c4a7090410"
+    "canonical_payload_sha256": "b3408cd7a86e6b5cc5c43db61cef005eaf4c666923f6fa0f593f4d575d9c46e6"
   },
-  "map_id": "component-map-b73289a82f06",
-  "map_state": "accepted",
+  "map_id": "component-map-892a82500cd6",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.8.0 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter, consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating structural or local E2E evidence as live host proof.",
-  "origin_scan_id": "20260820T055304113215Z-bc4cb420",
-  "previous_map_id": "component-map-892a82500cd6",
+  "origin_scan_id": "20260820T054552725870Z-35873902",
+  "previous_map_id": "component-map-249c391a40c5",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1680,7 +1680,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "2fa24848540af9430b22e77400754e02a6a88c9183a64bb68f27428d21bac1b7",
+      "sha256": "f6540f7bba1834f064e3fe4131b8d07724f99b6923efdaa13dfe38f05fda1347",
       "source": "README.md"
     },
     {
@@ -1710,7 +1710,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "17bec9f8cc9e7df5c43df27f6d82763122795d49a4af99cd0f04da18f3f066f7",
+      "sha256": "ecbd7aca7cc6b28709fb6d2a10ad55cb6fc45e8ae8b4210108cd15c3fd4bd6b0",
       "source": "docs/AGENT_MAINTAINER.md"
     },
     {
@@ -1746,7 +1746,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "374c5342e86c3b3b829c1e2b1f8df8678f57f4c7ae77f43e868da59dbc8ebb7c",
+      "sha256": "d9032e782ff4751e76dc0ad1a3ec6bcbce59f8d732fa0e8b03e182dfdc215402",
       "source": "docs/LIFECYCLE_RECEIPT_GUIDE.md"
     },
     {
@@ -1782,7 +1782,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "52155c0745cd3d1a4393a7e62b10a2192e92eb1cae056bb886060e90d078d4fd",
+      "sha256": "65e56cb1235a1886c93209a326bd4151b8d9261405620b4e5447a26bed23d578",
       "source": "docs/SKILL_OUTCOME_RECEIPT.md"
     },
     {
@@ -2016,7 +2016,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "d34e1b0cd1a5c8d5e74b72facbaa332c0ce30e502e92e3aefd926b47198dc471",
+      "sha256": "6a5c16aeb7610c44794ca4dd485d435ed8b1b3e8de96776cb984e21ea3c65762",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -2106,7 +2106,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "374c5342e86c3b3b829c1e2b1f8df8678f57f4c7ae77f43e868da59dbc8ebb7c",
+      "sha256": "d9032e782ff4751e76dc0ad1a3ec6bcbce59f8d732fa0e8b03e182dfdc215402",
       "source": "skills/analyze-project-claims/references/lifecycle-verification-receipt.md"
     },
     {
@@ -2124,7 +2124,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "98aff3b108d96e63cf6ac06f81252a8dbdaf11cd82e69992aa7261d20b0a6911",
+      "sha256": "985d8d4d53af1fe9df0550458b8223389b972d9dc8adafc178baa11e9a477ce4",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {

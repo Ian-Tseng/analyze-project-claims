@@ -52,8 +52,8 @@ The release identity is supported by [GitHub release
 v0.7.0](https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.0),
 the six-job [main CI
 run](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/31817785877),
-the package
-[manifest](../skills/analyze-project-claims/references/package-manifest.json),
+the version-bound [v0.7.0 package
+manifest](https://github.com/Ian-Tseng/analyze-project-claims/blob/v0.7.0/skills/analyze-project-claims/references/package-manifest.json),
 the formal validation
 [record](../validation/history/20260814T155937638082Z-c36faabe.json), and its
 derived human-readable

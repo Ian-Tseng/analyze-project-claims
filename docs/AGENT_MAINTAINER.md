@@ -75,7 +75,7 @@ under `validation/component-map/` retains that role.
 | Candidate allowlist | `maintainer_service/patch_guard.py` | Copied before Codex and reused without importing candidate code |
 | Post-agent collection | `maintainer_service/post_agent.sh` | Installed root-owned before privilege drop; uses a protected Git snapshot, a new alternate index, and a clean process environment |
 | Public report producer | `skills/analyze-project-claims/scripts/problem_report.py` | Consent, redaction, exact body, and processing disclosure |
-| Quality contribution producer | `skills/analyze-project-claims/scripts/skill_quality_loop.py` and `scripts/_internal/skill_quality/contribution.py` | Local preview, exact approval, public visibility confirmation, and enum-only body |
+| Quality contribution producer | `skills/analyze-project-claims/scripts/skill_quality_loop.py` and `skills/analyze-project-claims/scripts/_internal/skill_quality/contribution.py` | Local preview, exact approval, public visibility confirmation, and enum-only body |
 | Package identity | `VERSION`, `CITATION.cff`, package version, package manifest | Synchronized release candidate identity |
 | Regression contracts | `tests/test_agent_maintainer.py`, `tests/test_problem_report.py` | Local deterministic boundary evidence |
 | Owner operations | `docs/AGENT_MAINTAINER.md`, `docs/PROBLEM_REPORTING.md`, `PUBLISHING.md` | Setup, triage, review, release, and evidence limits |

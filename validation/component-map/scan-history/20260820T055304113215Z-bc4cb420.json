@@ -1,0 +1,73 @@
+{
+  "accepted_map_id": "component-map-892a82500cd6",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260820T055304113215Z-bc4cb420-component-map-b73289a82f06.json",
+    "delta": "deltas/20260820T055304113215Z-bc4cb420.json"
+  },
+  "candidate_map_id": "component-map-b73289a82f06",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/AGENT_MAINTAINER.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/LIFECYCLE_RECEIPT_GUIDE.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/SKILL_OUTCOME_RECEIPT.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/lifecycle-verification-receipt.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      }
+    ]
+  },
+  "event_id": "20260820T055304113215Z-bc4cb420",
+  "integrity": {
+    "canonical_payload_sha256": "69b3c53feeb55e1f074ca6e5c05cd1b9edf0c09c1733f93a3bd33f3fe2b7eac4"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.3.0",
+  "recorded_at_utc": "2026-08-20T05:53:04.113215Z",
+  "schema_version": "1.0",
+  "skill_sha256": "0dde22f55dcb2e31ea288751018703ccdae73e4f11648ffa554400dca686be78"
+}

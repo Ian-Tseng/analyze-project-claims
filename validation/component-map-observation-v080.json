@@ -89,6 +89,7 @@
                   "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
                   "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
                   "skills/analyze-project-claims/references/lifecycle-phase-receipt.schema.json",
+                  "skills/analyze-project-claims/references/lifecycle-verification-receipt.md",
                   "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
                   "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
                   "tests/test_evidence_bound_scan.py",
@@ -185,6 +186,7 @@
                       "skills/analyze-project-claims/scripts/record_scan.py",
                       "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py",
                       "tests/test_evidence_bound_scan_release_blockers.py",
+                      "skills/analyze-project-claims/references/lifecycle-verification-receipt.md",
                       "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
                       "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
                       "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
@@ -1281,6 +1283,10 @@
                                                                  {
                                                                      "source":  "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
                                                                      "locator":  "closed aggregate lifecycle receipt contract"
+                                                                 },
+                                                                 {
+                                                                     "source":  "skills/analyze-project-claims/references/lifecycle-verification-receipt.md",
+                                                                     "locator":  "packaged read-only interpretation and follow-up boundaries"
                                                                  },
                                                                  {
                                                                      "source":  "tests/test_lifecycle_receipt_consumer.py",

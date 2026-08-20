@@ -201,6 +201,8 @@ and public install/update gates. Reusable procedures and dated evidence:
 - [Claude Code E2E Log](docs/CLAUDE_CODE_E2E_LOG.md)
 - [Other-PC Claude Checklist](docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md)
 - [Codex Plugin E2E Log](docs/CODEX_PLUGIN_E2E_LOG.md)
+- [Changelog](CHANGELOG.md)
+- [Contributing](CONTRIBUTING.md)
 
 `VERSION`, citation, package, plugin, manifest, and accepted-map identities must
 remain synchronized. Historical release artifacts are on

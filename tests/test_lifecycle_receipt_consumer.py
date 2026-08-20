@@ -110,6 +110,12 @@ def recovered_receipt() -> dict[str, object]:
 
 
 class LifecycleReceiptConsumerTests(unittest.TestCase):
+    def test_packaged_lifecycle_guide_matches_public_guide(self) -> None:
+        packaged = SKILL_ROOT / "references" / "lifecycle-verification-receipt.md"
+        public = ROOT / "docs" / "LIFECYCLE_RECEIPT_GUIDE.md"
+        self.assertTrue(packaged.is_file())
+        self.assertEqual(packaged.read_bytes(), public.read_bytes())
+
     def load_module(self):
         import lifecycle_receipt
 

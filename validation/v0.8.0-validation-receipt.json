@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "candidate_version": "0.8.0",
-  "recorded_at_utc": "2026-08-20T05:31:38Z",
+  "recorded_at_utc": "2026-08-20T05:58:05Z",
   "platform": "Windows",
   "full_suite": {
     "command": "py -3 -m unittest discover -s tests -v",
     "status": "PASS",
-    "tests_run": 221,
+    "tests_run": 222,
     "skipped": 1,
     "skip_boundary": "The generic update-policy symlink test is privilege-dependent on Windows; dedicated path-resolution, junction, and cross-process tests passed."
   },
@@ -25,12 +25,12 @@
     "result": "QUALITY_PROPOSAL_READY",
     "replay_deduplicated": true,
     "outbound": "NONE",
-    "proposal_id": "quality-proposal-de9cd0cb989522e2928fb91d",
-    "receipt_digest_sha256": "90565edfaecdc157bbe2dec6e594ee55fe35d4cf0d132940a0e20963fd1a8338"
+    "proposal_id": "quality-proposal-27bdb59ad25ad95178dfed6f",
+    "receipt_digest_sha256": "7f12fda77990c3e8de727d7008d33fc15f4b34aab5542f4c8e3f9cea7ccd397e"
   },
   "package_verification": {
     "status": "PASS",
-    "package_manifest_digest": "a5c138c5f27b8c1e8cf8422c9e3f21dc2d9d97a72aa201fbab04da5ee828eb6c",
+    "package_manifest_digest": "a924264d36416495652cc20edd27189682e8f106cee1c689375371be75fdf350",
     "version": "0.8.0"
   },
   "engine_verification": {
@@ -42,7 +42,7 @@
   "component_map_verification": {
     "status": "PASS",
     "action": "checked_unchanged",
-    "map_id": "component-map-249c391a40c5",
+    "map_id": "component-map-b73289a82f06",
     "source_changes": []
   },
   "limitations": [

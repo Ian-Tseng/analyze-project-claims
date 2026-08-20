@@ -73,6 +73,10 @@
       "sha256": "60c4b0aca141cd4a01e03ec4d94a0535285ba27951518cdba5a3feac1353dbdd"
     },
     {
+      "path": "references/lifecycle-verification-receipt.md",
+      "sha256": "374c5342e86c3b3b829c1e2b1f8df8678f57f4c7ae77f43e868da59dbc8ebb7c"
+    },
+    {
       "path": "references/lifecycle-verification-receipt.schema.json",
       "sha256": "3b0349708bd69e5327e1f57fd26acf13e6e183beec735b9408996d6d592a2caa"
     },

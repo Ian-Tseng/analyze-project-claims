@@ -8,7 +8,7 @@ or proof that an update occurred.
 The executable contract is
 `skills/analyze-project-claims/references/skill-outcome-receipt.schema.json`.
 The validator and canonical digest implementation live in
-`scripts/_internal/skill_quality/contract.py`.
+`skills/analyze-project-claims/scripts/_internal/skill_quality/contract.py`.
 
 ## Closed fields
 

@@ -388,7 +388,7 @@ At minimum, define:
   default.
 
 This repository now implements that separate path in
-`scripts/problem_report.py`, with the owner service in
+`skills/analyze-project-claims/scripts/problem_report.py`, with the owner service in
 `reporting_service/server.py`. The reporting policy remains separate from the
 update-policy file and defaults to local preview plus per-report approval. See
 [Internal Problem Reporting](PROBLEM_REPORTING.md).

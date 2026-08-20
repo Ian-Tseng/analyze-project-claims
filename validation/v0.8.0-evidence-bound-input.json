@@ -17,7 +17,7 @@
       "source": {"kind": "file", "path": "validation/v0.8.0-validation-receipt.json"},
       "locator": {"kind": "artifact_key", "value": "full_suite"},
       "method": "executed_test",
-      "observed_summary": "The persisted receipt records 221 repository tests run on Windows: 220 passed and one privilege-dependent generic symlink test was skipped."
+      "observed_summary": "The persisted receipt records 222 repository tests run on Windows: 221 passed and one privilege-dependent generic symlink test was skipped."
     },
     {
       "evidence_id": "skill-validation-result",
@@ -65,7 +65,7 @@
   "claims": [
     {
       "claim_id": "local-v080-candidate-validated",
-      "statement": "On this Windows host, the local v0.8.0 candidate ran 221 repository tests: 220 passed and one privilege-dependent generic symlink test was skipped. It also passed the official skill and plugin validators, replayed the offline quality-loop conformance fixture without outbound action, verified its package and embedded engine, and checked its accepted component map unchanged.",
+      "statement": "On this Windows host, the local v0.8.0 candidate ran 222 repository tests: 221 passed and one privilege-dependent generic symlink test was skipped. It also passed the official skill and plugin validators, replayed the offline quality-loop conformance fixture without outbound action, verified its package and embedded engine, and checked its accepted component map unchanged.",
       "element_ref": {"component_id": "managed-skill-quality-loop", "element_id": "identity-drift-release-gate"},
       "material": true,
       "status": "partially_supported",
