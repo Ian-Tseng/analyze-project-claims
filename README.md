@@ -36,7 +36,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.8.0
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.8.1
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
@@ -150,7 +150,14 @@ credentials. The owner-gated [Agent Maintainer](docs/AGENT_MAINTAINER.md) may
 create one map-pending draft from an exact report or enum-only contribution; it
 cannot accept, merge, release, close, or update. See
 [Internal Problem Reporting](docs/PROBLEM_REPORTING.md) and the
-[reusable maintainer guide](docs/GITHUB_AGENT_MAINTAINER_GUIDE.md).
+[reusable managed-repair guide](docs/GITHUB_AGENT_MAINTAINER_GUIDE.md). New
+producer repositories use a closed policy plus a full-SHA-pinned thin caller;
+copying the legacy analyzer workflow or maintainer service is unsupported. Start
+with the [managed fleet quickstart](docs/MANAGED_FLEET_QUICKSTART.md), then use
+the [operations runbook](docs/MANAGED_FLEET_OPERATIONS.md),
+[repair walkthrough](docs/MANAGED_REPAIR_WALKTHROUGH.md),
+[multi-agent topology](docs/MULTI_AGENT_INSTALL_TOPOLOGY.md), and
+[support matrix](docs/MANAGED_FLEET_SUPPORT_MATRIX.md).
 
 ## Formal audit records
 

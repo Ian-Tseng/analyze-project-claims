@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "candidate_version": "0.8.1",
+  "recorded_at_utc": "2026-08-20T16:10:00Z",
+  "platform": "Windows",
+  "full_suite": {
+    "command": "py -3 -m unittest discover -s tests -v",
+    "status": "PASS",
+    "tests_run": 229,
+    "skipped": 1,
+    "skip_boundary": "The generic update-policy symlink test is privilege-dependent on Windows; dedicated path-resolution, junction, and cross-process tests passed."
+  },
+  "skill_validation": {
+    "command": "quick_validate.py skills/analyze-project-claims",
+    "status": "PASS",
+    "validator_result": "Skill is valid!"
+  },
+  "plugin_validation": {
+    "command": "py -3 -m unittest discover -s tests -p test_plugin_bundle.py -v",
+    "status": "PASS",
+    "validator_result": "3 repository plugin contract tests passed"
+  },
+  "quality_loop_conformance": {
+    "status": "PASS",
+    "result": "QUALITY_PROPOSAL_READY",
+    "replay_deduplicated": true,
+    "outbound": "NONE",
+    "proposal_id": "quality-proposal-995a2dea5c7d1edab0cd1dfd",
+    "receipt_digest_sha256": "9b7674263eb6224ba4cbb1b77820453c840ec4357b5e44a69fba27d71993d08e"
+  },
+  "package_verification": {
+    "status": "PASS",
+    "package_manifest_digest": "8bf01aea9bffe37321abc5d569c720b4e0da68e03066b06fdf951006297a01ad",
+    "version": "0.8.1"
+  },
+  "engine_verification": {
+    "status": "PASS",
+    "engine_name": "component-evidence",
+    "engine_version": "1.3.0",
+    "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b"
+  },
+  "component_map_verification": {
+    "status": "PASS",
+    "action": "accepted_then_checked_unchanged",
+    "map_id": "component-map-e9f55c152d3a",
+    "source_changes": []
+  },
+  "limitations": [
+    "These are local Windows candidate results, not commit-bound remote CI or public-install evidence.",
+    "Artifact identity and freshness checks do not establish semantic entailment.",
+    "Claude runtime activation was not observed on this host.",
+    "Protected environments, hosted canary, isolated agent execution, and draft publication were not observed."
+  ]
+}

@@ -110,10 +110,14 @@ py -3 <skill-root>\scripts\skill_quality_loop.py --format json `
   contribution-submit --draft <draft.json> --approve <approval-id> --approved
 ```
 
-The destination repository is public. The first attempt therefore stops with
-`PUBLIC_ISSUE_APPROVAL_REQUIRED`. Only after confirming the exact public draft
-may the user repeat with `--allow-public-issue`. The issue contains no files,
-patches, project content, paths, prompts, logs, findings, or attachments.
+The destination is derived, not supplied: a receipt from repository
+`<producer-repository>` can target only
+`Ian-Tseng/<producer-repository>`. The fixed owner boundary prevents routing
+to another GitHub account. If that repository is public, the first attempt
+stops with `PUBLIC_ISSUE_APPROVAL_REQUIRED`. Only after confirming the exact
+public draft may the user repeat with `--allow-public-issue`. The issue
+contains no files, patches, project content, paths, prompts, logs, findings,
+or attachments.
 
 The exact approval expires after 24 hours. A contribution ID is one-use in
 local state, so replay returns the first issue instead of creating another.
@@ -121,10 +125,12 @@ If GitHub times out, errors, or returns an unexpected response after creation
 begins, the state becomes `UNKNOWN`; reconcile the contribution ID on GitHub
 before retrying.
 
-Creating an issue does not run the maintainer. Only `Ian-Tseng` can review it
-and add `agent-ready`. The protected workflow produces a map-pending draft PR;
-it cannot edit `validation/`, accept a map, merge, release, close the issue, or
-update installed copies.
+Creating an issue does not itself run a maintainer. Only `Ian-Tseng` can
+review it and, where the destination repository has the protected maintainer
+workflow installed, add `agent-ready`. That workflow may produce only a
+map-pending draft PR; it cannot edit `validation/`, accept a map, merge,
+release, close the issue, or update installed copies. Without that workflow,
+the label is only an owner triage signal.
 
 ## Update authority
 

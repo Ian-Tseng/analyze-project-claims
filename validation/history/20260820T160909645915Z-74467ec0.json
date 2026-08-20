@@ -1,0 +1,269 @@
+{
+  "bindings": [
+    {
+      "claim_id": "local-v081-candidate-validated",
+      "evidence_id": "full-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v081-candidate-validated",
+      "evidence_id": "skill-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v081-candidate-validated",
+      "evidence_id": "plugin-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v081-candidate-validated",
+      "evidence_id": "quality-loop-conformance-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v081-candidate-validated",
+      "evidence_id": "package-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v081-candidate-validated",
+      "evidence_id": "engine-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v081-candidate-validated",
+      "evidence_id": "map-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v081-candidate-validated",
+      "evidence_id": "full-suite-result",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "0f8d0589e4eb52fe4e58b269a16fe7aa82c686178743a96955657909cf922b7c",
+      "claim_id": "local-v081-candidate-validated",
+      "element_ref": {
+        "component_id": "agent-maintainer",
+        "element_id": "pinned-reusable-repair-boundary"
+      },
+      "material": true,
+      "rationale": "Every listed result is bounded to a persisted local receipt; protected-environment configuration, hosted canary, agent execution, draft publication, remote CI, public installation, Claude activation, and release remain separate gates.",
+      "statement": "On this Windows host, the local v0.8.1 candidate ran 229 repository tests: 228 passed and one privilege-dependent generic symlink test was skipped. It passed the official skill validator and repository plugin contract tests, replayed the offline quality-loop conformance fixture without outbound action, verified its package and embedded engine, and checked component-map-e9f55c152d3a unchanged after owner acceptance. The tests cover the closed managed-fleet policy, deterministic thin caller, immutable authorization inputs, protected-environment workflow structure, privilege separation, and documentation surfaces; hosted GitHub execution remains unobserved.",
+      "status": "partially_supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "freshness": "current",
+      "identity_sha256": "b1a7ae4a51ad789cbe0bbc23e2408062434c83e0fefe59b6265329c083d8efc2",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 229 repository tests run on Windows: 228 passed and one privilege-dependent generic symlink test was skipped.",
+      "selection_sha256": "233c25ec0f19cd213647ea52f13908c81f045d65fabd13f4fad658be79a2f873",
+      "source": {
+        "byte_size": 2072,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.1-validation-receipt.json",
+        "sha256": "a5cbbf0e01371cf1a5bdcf91413d3cd63b29d6ab1f6cf6eb1e7fd69a042b1c41"
+      }
+    },
+    {
+      "evidence_id": "skill-validation-result",
+      "freshness": "current",
+      "identity_sha256": "9780ed8a951a119c029341ce32642175e1902948abcddf0c5d5fa0a940ec0bb3",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "skill_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local skill validator accepted the packaged skill.",
+      "selection_sha256": "bb3ffe464da1885aed5ec843f6b055b0c2c0e48dbccb99a0695af0f0c4ed26f8",
+      "source": {
+        "byte_size": 2072,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.1-validation-receipt.json",
+        "sha256": "a5cbbf0e01371cf1a5bdcf91413d3cd63b29d6ab1f6cf6eb1e7fd69a042b1c41"
+      }
+    },
+    {
+      "evidence_id": "plugin-validation-result",
+      "freshness": "current",
+      "identity_sha256": "4cf9700a1c95eb78226c41413f6f4f6bea0217de1ad4656d3960b1be33759152",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "plugin_validation"
+      },
+      "method": "executed_test",
+      "observed_summary": "Three repository plugin contract tests accepted the root plugin layout, marketplace identity, and bounded Stop hook.",
+      "selection_sha256": "5279a7265ac5546fbceaa7d44210e34e8137e33fd966086adc07befe2807ee28",
+      "source": {
+        "byte_size": 2072,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.1-validation-receipt.json",
+        "sha256": "a5cbbf0e01371cf1a5bdcf91413d3cd63b29d6ab1f6cf6eb1e7fd69a042b1c41"
+      }
+    },
+    {
+      "evidence_id": "quality-loop-conformance-result",
+      "freshness": "current",
+      "identity_sha256": "d73a11daf4d254eaf2dc3babe9b2421ed874b1a3087eb44058746ff5457fd16c",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "quality_loop_conformance"
+      },
+      "method": "replayed",
+      "observed_summary": "The offline conformance fixture committed one local proposal, deduplicated replay, and performed no outbound action.",
+      "selection_sha256": "02702713cfe70c792c1bc300fa17b3866ec8612c3334a0820d746e464c205cdb",
+      "source": {
+        "byte_size": 2072,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.1-validation-receipt.json",
+        "sha256": "a5cbbf0e01371cf1a5bdcf91413d3cd63b29d6ab1f6cf6eb1e7fd69a042b1c41"
+      }
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "freshness": "current",
+      "identity_sha256": "7e2e4c18f35c5e4d006794575f8c12486aab08f128b2b7c7e08017659d2f29d2",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "package_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The v0.8.1 package matches its rebuilt manifest and recorded package digest.",
+      "selection_sha256": "3f349f587c9983bb9ee17e213df9129a9c8d28c59d1d1ce2902f9d3253b7000c",
+      "source": {
+        "byte_size": 2072,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.1-validation-receipt.json",
+        "sha256": "a5cbbf0e01371cf1a5bdcf91413d3cd63b29d6ab1f6cf6eb1e7fd69a042b1c41"
+      }
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "freshness": "current",
+      "identity_sha256": "07f998df1aa16b8dbec9af2bcc33001f9174ba9f1d1dea60bd2d6a9d6c28cfca",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "engine_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified.",
+      "selection_sha256": "e0b06ffe03f8d910801a04f18e07b20c5eef772d9e31fc6e5786a75b3d5b95c4",
+      "source": {
+        "byte_size": 2072,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.1-validation-receipt.json",
+        "sha256": "a5cbbf0e01371cf1a5bdcf91413d3cd63b29d6ab1f6cf6eb1e7fd69a042b1c41"
+      }
+    },
+    {
+      "evidence_id": "map-verification-result",
+      "freshness": "current",
+      "identity_sha256": "3f35e71297d0e92375b98e15489978137eebc1857623d9a733a768d2513a0d24",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "component_map_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The accepted component map checked unchanged after final package synchronization.",
+      "selection_sha256": "810e682e986aab7d05b69cd11fa5209865ee3fde0a3fa645c7b4003350daec4a",
+      "source": {
+        "byte_size": 2072,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.1-validation-receipt.json",
+        "sha256": "a5cbbf0e01371cf1a5bdcf91413d3cd63b29d6ab1f6cf6eb1e7fd69a042b1c41"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "bc6544c0e86596970e16a596959fd8485b7ac74c6adf64db1ad57d3455790e51",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "local-v081-candidate-validated"
+      ],
+      "evidence_ids": [
+        "full-suite-result"
+      ],
+      "limitation_id": "local-platform-and-publication-boundary",
+      "text": "The evidence is local Windows candidate evidence; one generic symlink test was privilege-skipped, and protected environments, hosted canary, agent execution, draft publication, remote CI, public installation, Claude activation, and release publication remain unproved."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-e9f55c152d3a",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "78ed7b251f12a77ea621e2ef0a713a25b487c7d54e00e8719eecf82ab96f1a13"
+    },
+    "authority": [
+      "validation/v0.8.1-validation-receipt.json",
+      "validation/component-map/accepted-map.json"
+    ],
+    "engine_identity": {
+      "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "State the strongest safe local validation claim for the v0.8.1 candidate, including producer-repository-bound contribution routing and the GitHub-managed fleet protocol.",
+    "recorded_at_utc": "2026-08-20T16:09:09.645915Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260820T160909645915Z-74467ec0",
+    "scope": [
+      "v0.8.1 local candidate",
+      "evidence-bound recorder 2.1.0",
+      "managed skill quality loop and reusable repair workflow",
+      "package, plugin, engine, skill, and component-map identities"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "d892da7147f2d4ab01bf60a45f9425af3c81970fb979f29af7ee9cbee86ac999"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "local-platform-and-publication-boundary"
+    ],
+    "claim_count": 1,
+    "claim_counts": {
+      "partially_supported": 1
+    },
+    "evidence_count": 7,
+    "material_claim_count": 1,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "On this Windows host, the local v0.8.1 candidate ran 229 repository tests: 228 passed and one privilege-dependent generic symlink test was skipped. It passed the official skill validator and repository plugin contract tests, replayed the offline quality-loop conformance fixture without outbound action, verified its package and embedded engine, and checked component-map-e9f55c152d3a unchanged after owner acceptance. The tests cover the closed managed-fleet policy, deterministic thin caller, immutable authorization inputs, protected-environment workflow structure, privilege separation, and documentation surfaces; hosted GitHub execution remains unobserved.",
+    "strongest_safe_claim_id": "local-v081-candidate-validated",
+    "unresolved_uncertainties": [
+      "Remote commit-bound CI has not yet run for this candidate.",
+      "Public Codex and Claude Code install/update smoke tests require publication first.",
+      "Claude runtime discovery and invocation were not observed on this host.",
+      "GitHub release immutability enforcement has not yet been verified for v0.8.1.",
+      "Producer-repository issue routing does not establish that each destination has the protected maintainer workflow installed.",
+      "The reusable workflow has not yet run through either protected environment on a producer repository."
+    ]
+  }
+}

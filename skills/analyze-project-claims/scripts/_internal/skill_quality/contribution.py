@@ -20,7 +20,7 @@ from .store import RECOMMENDATIONS
 
 
 SCHEMA_VERSION = 1
-DESTINATION = "Ian-Tseng/analyze-project-claims"
+DESTINATION_OWNER = "Ian-Tseng"
 MAX_DRAFT_BYTES = 8192
 MAX_APPROVAL_AGE_SECONDS = 86400
 SUBPROCESS_TIMEOUT_SECONDS = 20
@@ -107,6 +107,16 @@ def approval_id(value: Mapping[str, Any]) -> str:
     return hashlib.sha256(_canonical(payload)).hexdigest()
 
 
+def _destination_for_repository(repository: object) -> str:
+    if not isinstance(repository, str) or not contract.REPOSITORY.fullmatch(repository):
+        raise ContributionError("CONTRIBUTION_DESTINATION_INVALID", "Producer repository is invalid.")
+    return f"{DESTINATION_OWNER}/{repository}"
+
+
+def _issue_url_pattern(destination: str) -> re.Pattern[str]:
+    return re.compile(rf"https://github\.com/{re.escape(destination)}/issues/[1-9][0-9]*")
+
+
 def validate_draft(value: object, *, now: datetime | None = None) -> dict[str, Any]:
     if not isinstance(value, dict) or set(value) != DRAFT_KEYS:
         raise ContributionError("CONTRIBUTION_SCHEMA_VIOLATION", "Contribution has unknown or missing fields.")
@@ -142,7 +152,7 @@ def validate_draft(value: object, *, now: datetime | None = None) -> dict[str, A
         raise ContributionError("CONTRIBUTION_SCHEMA_VIOLATION", "Quality signal is invalid.")
     if value["recommended_action"] != RECOMMENDATIONS[value["quality_signal"]]:
         raise ContributionError("CONTRIBUTION_SCHEMA_VIOLATION", "Quality recommendation is inconsistent.")
-    if value["destination"] != DESTINATION:
+    if value["destination"] != _destination_for_repository(value["producer_repository"]):
         raise ContributionError("CONTRIBUTION_DESTINATION_INVALID", "Contribution destination is invalid.")
     try:
         timestamp = datetime.fromisoformat(value["created_at_utc"][:-1] + "+00:00")
@@ -190,6 +200,7 @@ def prepare_contribution(proposal: Mapping[str, Any], state_dir: Path) -> dict[s
         raise ContributionError("CONTRIBUTION_PROPOSAL_INELIGIBLE", "Only active local-only proposals are eligible.")
     if proposal.get("quality_signal") == "no_issue":
         raise ContributionError("CONTRIBUTION_PROPOSAL_INELIGIBLE", "No-issue proposals cannot be submitted.")
+    destination = _destination_for_repository(producer.get("repository"))
     draft: dict[str, Any] = {
         "schema_version": SCHEMA_VERSION,
         "contribution_id": str(uuid.uuid4()),
@@ -202,7 +213,7 @@ def prepare_contribution(proposal: Mapping[str, Any], state_dir: Path) -> dict[s
         "producer_package_digest_sha256": producer["package_digest_sha256"],
         "quality_signal": proposal["quality_signal"],
         "recommended_action": proposal["recommended_action"],
-        "destination": DESTINATION,
+        "destination": destination,
         "created_at_utc": _utc_now(),
     }
     draft["content_fingerprint_sha256"] = content_fingerprint(draft)
@@ -215,7 +226,7 @@ def prepare_contribution(proposal: Mapping[str, Any], state_dir: Path) -> dict[s
         "draft": validated,
         "draft_path": str(path.resolve()),
         "approval_id": validated["approval_id"],
-        "destination": DESTINATION,
+        "destination": validated["destination"],
         "outbound": "NONE",
         "public_visibility_confirmation_required": True,
     }
@@ -277,10 +288,7 @@ def _read_submission(path: Path, draft: Mapping[str, Any]) -> dict[str, Any]:
     if value.get("visibility") not in {"PUBLIC", "PRIVATE", "INTERNAL"}:
         raise ContributionError("CONTRIBUTION_STATE_UNSAFE", "Contribution submission visibility is invalid.")
     issue_url = value.get("issue_url")
-    if issue_url is not None and not re.fullmatch(
-        r"https://github\.com/Ian-Tseng/analyze-project-claims/issues/[1-9][0-9]*",
-        issue_url,
-    ):
+    if issue_url is not None and not _issue_url_pattern(draft["destination"]).fullmatch(issue_url):
         raise ContributionError("CONTRIBUTION_STATE_UNSAFE", "Contribution submission URL is invalid.")
     return value
 
@@ -383,9 +391,10 @@ def submit_contribution(
             command[0] = resolve_executable(command[0])
         except ExecutableResolutionError as exc:
             raise ContributionError("CONTRIBUTION_DESTINATION_UNVERIFIED", str(exc)) from exc
+    destination = draft["destination"]
     try:
         view = runner(
-            [*command, "repo", "view", DESTINATION, "--json", "visibility"],
+            [*command, "repo", "view", destination, "--json", "visibility"],
             text=True,
             capture_output=True,
             check=False,
@@ -431,7 +440,7 @@ def submit_contribution(
                 "issue",
                 "create",
                 "--repo",
-                DESTINATION,
+                destination,
                 "--title",
                 github_title(draft),
                 "--body",
@@ -455,7 +464,7 @@ def submit_contribution(
             "GitHub returned an error after issue creation began. Reconcile the contribution ID before retrying.",
         )
     issue_url = created.stdout.strip()
-    if not re.fullmatch(r"https://github\.com/Ian-Tseng/analyze-project-claims/issues/[1-9][0-9]*", issue_url):
+    if not _issue_url_pattern(destination).fullmatch(issue_url):
         _best_effort_unknown(submission_path, draft, visibility)
         raise ContributionError(
             "CONTRIBUTION_OUTCOME_UNKNOWN",

@@ -70,9 +70,11 @@ Submit only after the user approves that exact draft and approval ID:
   --draft <draft.json> --approve <approval-id> --approved
 ```
 
-The destination is public. On `PUBLIC_ISSUE_APPROVAL_REQUIRED`, show the exact
-preview and obtain a second draft-specific confirmation before adding
-`--allow-public-issue`. Never add the flag automatically.
+The destination is derived from the receipt and fixed to
+`Ian-Tseng/<producer-repository>`; it cannot route to another owner. On
+`PUBLIC_ISSUE_APPROVAL_REQUIRED`, show the exact preview and obtain a second
+draft-specific confirmation before adding `--allow-public-issue`. Never add
+the flag automatically.
 
 Approval expires after 24 hours and each contribution ID is one-use. A
 `CONTRIBUTION_OUTCOME_UNKNOWN` result means GitHub may have created the issue:
@@ -80,9 +82,10 @@ search GitHub for the exact contribution ID and do not retry until reconciled.
 
 The contribution is enum and package identity only. It excludes files,
 patches, project content, paths, prompts, logs, findings, and attachments. Only
-`Ian-Tseng` may later add `agent-ready`; that authorizes one isolated
-map-pending draft attempt, not map acceptance, merge, release, closure, or
-installed update.
+`Ian-Tseng` may later add `agent-ready`. Where the destination repository
+has the protected maintainer workflow installed, that authorizes one isolated
+map-pending draft attempt; otherwise it is only an owner triage signal. It
+never authorizes map acceptance, merge, release, closure, or installed update.
 
 ## Errors
 

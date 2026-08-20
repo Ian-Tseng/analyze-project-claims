@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "0dde22f55dcb2e31ea288751018703ccdae73e4f11648ffa554400dca686be78"
+      "sha256": "d892da7147f2d4ab01bf60a45f9425af3c81970fb979f29af7ee9cbee86ac999"
     },
     {
       "path": "agents/openai.yaml",
@@ -85,8 +85,12 @@
       "sha256": "cc2d9c86b2a1194fae64d209448be765a8fe9e4273f6410b91846aedc02811ed"
     },
     {
+      "path": "references/managed-skill-policy.schema.json",
+      "sha256": "cf5649a822d8af36f7cdfe02e4f3a484ffb359b666f94a284314106e3d0f439b"
+    },
+    {
       "path": "references/package-version.json",
-      "sha256": "2fc20cc524120f7202dac5131d3175368af82553fb3104cb8e8c6e98cf6fa8c5"
+      "sha256": "32900420dd3b1ee6bb9538e5980262e906256d24013fe9a3c4c191fafe3f213b"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -114,11 +118,11 @@
     },
     {
       "path": "references/skill-quality-contribution.schema.json",
-      "sha256": "f86ce13f590a33e1ec6f4debec00a26b1ee639e47de36b6c6d9a238afb19e210"
+      "sha256": "cb3ec27c98fcf95e16505bdbcd5106dfc24fb4fa2191bb3c2005a6a95f8617bd"
     },
     {
       "path": "references/skill-quality-loop.md",
-      "sha256": "d10d9e9c17581ad46e4c65b93eb43740ddc11b16ea16088caf1d92a51b04d0cb"
+      "sha256": "fd9dc1df091a28f23c67871a5a97aac92d277202cd5fab56766def8b24df29ef"
     },
     {
       "path": "references/skill-quality-proposal.schema.json",
@@ -158,7 +162,7 @@
     },
     {
       "path": "scripts/_internal/skill_quality/contribution.py",
-      "sha256": "875fbeac7776340e004759c4b6aff7e3d3647215628ba179ca6330e6fb11a42b"
+      "sha256": "43f9a304e6657b601e571d0ae996b62774761ad2655528590c8fd0460cf381eb"
     },
     {
       "path": "scripts/_internal/skill_quality/store.py",
@@ -171,6 +175,10 @@
     {
       "path": "scripts/lifecycle_receipt.py",
       "sha256": "9d5c38103b98c74bb30a8d86a6e84294ce2c943eb33663679b950420168e6585"
+    },
+    {
+      "path": "scripts/managed_fleet.py",
+      "sha256": "6d78881382f7a2d3d8584818a48b3bfd87708b623fd02ae43ef8bd51b2523fbe"
     },
     {
       "path": "scripts/problem_report.py",

@@ -16,10 +16,13 @@ sys.path.insert(0, str(SCRIPTS))
 from _internal.skill_quality import contract  # noqa: E402
 from _internal.skill_quality.contribution import (  # noqa: E402
     ContributionError,
+    approval_id,
+    content_fingerprint,
     github_body,
     github_title,
     prepare_contribution,
     submit_contribution,
+    validate_draft,
 )
 from _internal.skill_quality.store import QualityStore  # noqa: E402
 import skill_quality_loop  # noqa: E402
@@ -36,10 +39,11 @@ class FakeGitHub:
         if command[1:3] == ["repo", "view"]:
             return subprocess.CompletedProcess(command, 0, json.dumps({"visibility": self.visibility}), "")
         if command[1:3] == ["issue", "create"]:
+            destination = command[command.index("--repo") + 1]
             return subprocess.CompletedProcess(
                 command,
                 0,
-                "https://github.com/Ian-Tseng/analyze-project-claims/issues/123\n",
+                f"https://github.com/{destination}/issues/123\n",
                 "",
             )
         return subprocess.CompletedProcess(command, 1, "", "unexpected")
@@ -75,6 +79,8 @@ class QualityContributionTests(unittest.TestCase):
         self.assertNotIn("C:/private/project", serialized)
         self.assertNotIn("prompt", serialized.lower())
         self.assertEqual(result["outbound"], "NONE")
+        self.assertEqual(result["destination"], "Ian-Tseng/example-producer")
+        self.assertEqual(draft["destination"], "Ian-Tseng/example-producer")
         self.assertTrue(Path(result["draft_path"]).is_file())
         self.assertEqual(github_title(draft), "[skill-quality] documentation_mismatch from example-producer")
 
@@ -97,6 +103,9 @@ class QualityContributionTests(unittest.TestCase):
             runner=fake,
         )
         self.assertEqual(submitted["status"], "SUBMITTED")
+        self.assertEqual(fake.commands[0][3], "Ian-Tseng/example-producer")
+        issue_command = next(command for command in fake.commands if command[1:3] == ["issue", "create"])
+        self.assertEqual(issue_command[issue_command.index("--repo") + 1], "Ian-Tseng/example-producer")
         self.assertEqual(submitted["issue_url"].rsplit("/", 1)[-1], "123")
         replay = submit_contribution(
             Path(result["draft_path"]),
@@ -209,6 +218,14 @@ class QualityContributionTests(unittest.TestCase):
         with self.assertRaisesRegex(ContributionError, "CONTRIBUTION_PROPOSAL_INELIGIBLE"):
             prepare_contribution(proposal, self.state_dir)
 
+    def test_destination_cannot_be_rebound_to_another_repository(self) -> None:
+        draft = prepare_contribution(self.proposal, self.state_dir)["draft"]
+        draft["destination"] = "Ian-Tseng/analyze-project-claims"
+        draft["content_fingerprint_sha256"] = content_fingerprint(draft)
+        draft["approval_id"] = approval_id(draft)
+        with self.assertRaisesRegex(ContributionError, "CONTRIBUTION_DESTINATION_INVALID"):
+            validate_draft(draft)
+
     def test_stale_approval_is_rejected_before_network(self) -> None:
         result = prepare_contribution(self.proposal, self.state_dir)
         fake = FakeGitHub()
@@ -229,10 +246,10 @@ class QualityContributionTests(unittest.TestCase):
             "action": "labeled",
             "label": {"name": "agent-ready"},
             "sender": {"login": "Ian-Tseng"},
-            "repository": {"full_name": "Ian-Tseng/analyze-project-claims"},
+            "repository": {"full_name": "Ian-Tseng/example-producer"},
             "issue": {
                 "number": 123,
-                "html_url": "https://github.com/Ian-Tseng/analyze-project-claims/issues/123",
+                "html_url": "https://github.com/Ian-Tseng/example-producer/issues/123",
                 "state": "open",
                 "labels": [{"name": "agent-ready"}],
                 "title": github_title(draft),
@@ -242,7 +259,7 @@ class QualityContributionTests(unittest.TestCase):
         task = prepare_task(
             event,
             repo_root=ROOT,
-            expected_repository="Ian-Tseng/analyze-project-claims",
+            expected_repository="Ian-Tseng/example-producer",
             allowed_actors={"Ian-Tseng"},
             base_sha="d" * 40,
         )

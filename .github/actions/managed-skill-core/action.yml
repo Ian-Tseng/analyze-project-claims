@@ -1,0 +1,101 @@
+name: Managed skill repair core
+description: Trusted central intake, authorization, patch collection, validation, and draft publication.
+inputs:
+  mode:
+    description: One closed managed-repair operation.
+    required: true
+  policy-path:
+    description: Canonical caller policy path.
+    required: true
+    default: .github/managed-skill-policy.json
+  authorization-path:
+    description: Authorization manifest/result path.
+    required: false
+    default: ""
+  base-sha:
+    description: Exact caller default-branch commit.
+    required: false
+    default: ""
+  workflow-sha:
+    description: Exact reusable-workflow commit.
+    required: false
+    default: ""
+  nonce:
+    description: Run-scoped single-use nonce.
+    required: false
+    default: ""
+  event-path:
+    description: GitHub event JSON path.
+    required: false
+    default: ""
+  patch-path:
+    description: Candidate patch path.
+    required: false
+    default: ""
+  authorization-id:
+    description: Exact authorization identity.
+    required: false
+    default: ""
+  github-token:
+    description: Job-scoped GitHub token; used only by live verification or publication.
+    required: false
+    default: ""
+  dry-run:
+    description: Produce configuration-only authorization and stop before agent execution.
+    required: false
+    default: "false"
+outputs:
+  authorization-id:
+    description: Canonical authorization SHA-256.
+    value: ${{ steps.core.outputs.authorization-id }}
+  authorization-path:
+    description: Path to the canonical authorization result.
+    value: ${{ steps.core.outputs.authorization-path }}
+  base-sha:
+    description: Bound default-branch SHA.
+    value: ${{ steps.core.outputs.base-sha }}
+  enabled:
+    description: Exact policy repair enablement.
+    value: ${{ steps.core.outputs.enabled }}
+  profile:
+    description: Named validation profile.
+    value: ${{ steps.core.outputs.profile }}
+  package-root:
+    description: Canonical primary package root.
+    value: ${{ steps.core.outputs.package-root }}
+  prompt-file:
+    description: Root-prepared agent prompt path.
+    value: ${{ steps.core.outputs.prompt-file }}
+  patch-path:
+    description: Trusted candidate patch path.
+    value: ${{ steps.core.outputs.patch-path }}
+  patch-sha256:
+    description: Candidate patch digest.
+    value: ${{ steps.core.outputs.patch-sha256 }}
+  pull-request-url:
+    description: Confirmed draft pull request URL.
+    value: ${{ steps.core.outputs.pull-request-url }}
+runs:
+  using: composite
+  steps:
+    - id: core
+      shell: bash
+      env:
+        MANAGED_MODE: ${{ inputs.mode }}
+        MANAGED_POLICY_PATH: ${{ inputs.policy-path }}
+        MANAGED_AUTHORIZATION_PATH: ${{ inputs.authorization-path }}
+        MANAGED_BASE_SHA: ${{ inputs.base-sha }}
+        MANAGED_WORKFLOW_SHA: ${{ inputs.workflow-sha }}
+        MANAGED_NONCE: ${{ inputs.nonce }}
+        MANAGED_EVENT_PATH: ${{ inputs.event-path }}
+        MANAGED_PATCH_PATH: ${{ inputs.patch-path }}
+        MANAGED_AUTHORIZATION_ID: ${{ inputs.authorization-id }}
+        MANAGED_GITHUB_TOKEN: ${{ inputs.github-token }}
+        MANAGED_DRY_RUN: ${{ inputs.dry-run }}
+      run: |
+        if [[ "$MANAGED_MODE" == "prepare-agent" || "$MANAGED_MODE" == "collect" ]]; then
+          sudo --preserve-env=GITHUB_WORKSPACE,RUNNER_TEMP,GITHUB_OUTPUT,GITHUB_EVENT_PATH,MANAGED_MODE,MANAGED_POLICY_PATH,MANAGED_AUTHORIZATION_PATH,MANAGED_BASE_SHA,MANAGED_WORKFLOW_SHA,MANAGED_NONCE,MANAGED_EVENT_PATH,MANAGED_PATCH_PATH,MANAGED_AUTHORIZATION_ID,MANAGED_DRY_RUN \
+            python "$GITHUB_ACTION_PATH/managed_skill_core.py"
+        else
+          python "$GITHUB_ACTION_PATH/managed_skill_core.py"
+        fi
