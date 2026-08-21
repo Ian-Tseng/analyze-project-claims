@@ -8,7 +8,7 @@
             "type": "command",
             "command": "python3 \"$PLUGIN_ROOT/skills/analyze-project-claims/scripts/skill_quality_loop.py\" --format json --state-dir \"$PLUGIN_DATA/skill-quality\" hook-stop",
             "commandWindows": "py -3 \"%PLUGIN_ROOT%\\skills\\analyze-project-claims\\scripts\\skill_quality_loop.py\" --format json --state-dir \"%PLUGIN_DATA%\\skill-quality\" hook-stop",
-            "timeout": 1,
+            "timeout": 5,
             "statusMessage": "Checking bounded skill receipt"
           }
         ]

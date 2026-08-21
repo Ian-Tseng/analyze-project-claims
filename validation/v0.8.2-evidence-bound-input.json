@@ -1,0 +1,208 @@
+{
+  "schema_version": "2.0",
+  "objective": "State the strongest safe local validation claim for the v0.8.2 Codex Stop-hook timeout repair.",
+  "scope": [
+    "v0.8.2 local candidate",
+    "evidence-bound recorder 2.1.0",
+    "managed skill quality loop and Codex plugin adapter",
+    "package, plugin, engine, skill, and component-map identities"
+  ],
+  "authority": [
+    "validation/v0.8.2-validation-receipt.json",
+    "validation/component-map/accepted-map.json"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.2-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 230 repository tests run on Windows: 229 passed and one privilege-dependent generic symlink test was skipped."
+    },
+    {
+      "evidence_id": "focused-stop-hook-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.2-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "focused_stop_hook_regression"
+      },
+      "method": "executed_test",
+      "observed_summary": "Three focused plugin tests require one Stop handler, plugin-private state, and an exact five-second timeout."
+    },
+    {
+      "evidence_id": "skill-validation-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.2-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "skill_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local skill validator accepted the packaged skill."
+    },
+    {
+      "evidence_id": "plugin-validation-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.2-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "plugin_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local plugin validator accepted the repository-root plugin."
+    },
+    {
+      "evidence_id": "quality-loop-conformance-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.2-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "quality_loop_conformance"
+      },
+      "method": "replayed",
+      "observed_summary": "The offline conformance fixture committed one local proposal, deduplicated replay, and performed no outbound action."
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.2-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "package_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The v0.8.2 package matches its rebuilt manifest and recorded package digest."
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.2-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "engine_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified."
+    },
+    {
+      "evidence_id": "live-v081-timeout-observation",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.2-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "live_host_observation"
+      },
+      "method": "inspected",
+      "observed_summary": "A fresh Codex session invoked audit-venue-submission and the v0.8.1 Stop hook, but the host wrapper exited 1 under its one-second timeout; an equivalent local no-op completed in 251 ms with no outbound action."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "statement": "On this Windows host, the local v0.8.2 candidate ran 230 repository tests: 229 passed and one privilege-dependent generic symlink test was skipped. It passed the official skill and plugin validators, replayed the offline quality-loop conformance fixture without outbound action, and verified its package and embedded engine. A focused regression requires the single Codex Stop hook to use an exact five-second timeout. The preceding live v0.8.1 activation invoked a compatible producer and the Stop hook but timed out, so successful v0.8.2 installed continuation remains unobserved.",
+      "element_ref": {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "portable-consumer-and-codex-adapter"
+      },
+      "material": true,
+      "status": "partially_supported",
+      "rationale": "The local candidate and exact timeout contract are tested, while commit-bound CI, publication, v0.8.2 installed activation, an actionable automatic continuation, and Claude runtime invocation remain separate gates."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "full-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "focused-stop-hook-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "skill-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "plugin-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "quality-loop-conformance-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "package-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "engine-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "live-v081-timeout-observation",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "full-suite-result",
+      "role": "limits"
+    }
+  ],
+  "limitations": [
+    {
+      "limitation_id": "local-candidate-and-live-activation-boundary",
+      "text": "The evidence validates local v0.8.2 candidate bytes and records a v0.8.1 live timeout; remote CI, publication, v0.8.2 installed activation, successful actionable continuation, and Claude runtime invocation remain unproved.",
+      "claim_ids": [
+        "local-v082-timeout-candidate-validated"
+      ],
+      "evidence_ids": [
+        "full-suite-result",
+        "live-v081-timeout-observation"
+      ]
+    }
+  ],
+  "summary": {
+    "strongest_safe_claim_id": "local-v082-timeout-candidate-validated",
+    "claim_boundary_ids": [
+      "local-candidate-and-live-activation-boundary"
+    ],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "Remote commit-bound CI has not yet run for this candidate.",
+    "The v0.8.2 GitHub release and public installation do not yet exist.",
+    "Fresh installed v0.8.2 Stop-hook continuation has not been observed.",
+    "An actionable compatible receipt has not yet produced an observed automatic analyzer continuation.",
+    "Claude runtime discovery, invocation, and replacement remain unobserved.",
+    "Producer identity is declared rather than host-attested, and Codex routing can be vetoed by other hooks."
+  ]
+}

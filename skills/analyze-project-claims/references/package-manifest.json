@@ -90,7 +90,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "32900420dd3b1ee6bb9538e5980262e906256d24013fe9a3c4c191fafe3f213b"
+      "sha256": "effdc06a8b620d7f58d0429765f12aa562c6c020cfd552f59ecf44d3856410d3"
     },
     {
       "path": "references/problem-report-policy.schema.json",
