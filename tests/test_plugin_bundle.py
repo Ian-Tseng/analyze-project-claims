@@ -23,7 +23,7 @@ class CodexPluginBundleTests(unittest.TestCase):
         self.assertEqual(len(handlers), 1)
         handler = handlers[0]
         self.assertEqual(handler["type"], "command")
-        self.assertLessEqual(handler["timeout"], 1)
+        self.assertEqual(handler["timeout"], 5)
         self.assertIn("PLUGIN_ROOT", handler["command"])
         self.assertIn("PLUGIN_DATA", handler["command"])
         self.assertIn("PLUGIN_ROOT", handler["commandWindows"])

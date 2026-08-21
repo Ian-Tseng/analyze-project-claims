@@ -83,7 +83,7 @@ The adapter:
 - extracts only an exact final-line receipt marker;
 - never reads `transcript_path`, project files, prompts, tool data, or network;
 - persists only the receipt plus the local host session/turn envelope;
-- has a one-second process timeout and no semantic analysis in the hook;
+- has a five-second process timeout and no semantic analysis in the hook;
 - requests at most one continuation for an original session/turn;
 - rejects analyzer-origin and depth-one recursion.
 

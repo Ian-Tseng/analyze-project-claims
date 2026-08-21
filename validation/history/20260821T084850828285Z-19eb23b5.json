@@ -1,0 +1,294 @@
+{
+  "bindings": [
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "full-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "focused-stop-hook-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "skill-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "plugin-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "quality-loop-conformance-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "package-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "engine-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "live-v081-timeout-observation",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "evidence_id": "full-suite-result",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "1274e03d13dfe618c34e06c5cae47ee8b23e6d581a8b26e57b69f10c41c98296",
+      "claim_id": "local-v082-timeout-candidate-validated",
+      "element_ref": {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "portable-consumer-and-codex-adapter"
+      },
+      "material": true,
+      "rationale": "The local candidate and exact timeout contract are tested, while commit-bound CI, publication, v0.8.2 installed activation, an actionable automatic continuation, and Claude runtime invocation remain separate gates.",
+      "statement": "On this Windows host, the local v0.8.2 candidate ran 230 repository tests: 229 passed and one privilege-dependent generic symlink test was skipped. It passed the official skill and plugin validators, replayed the offline quality-loop conformance fixture without outbound action, and verified its package and embedded engine. A focused regression requires the single Codex Stop hook to use an exact five-second timeout. The preceding live v0.8.1 activation invoked a compatible producer and the Stop hook but timed out, so successful v0.8.2 installed continuation remains unobserved.",
+      "status": "partially_supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "freshness": "current",
+      "identity_sha256": "ed2cb998df92fd8a8750f5181f196266bd1cf7a59f09815f88e8dfdf1890bd20",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 230 repository tests run on Windows: 229 passed and one privilege-dependent generic symlink test was skipped.",
+      "selection_sha256": "5531efabc3e5165df40f9b6508eb03b9296290aa88671042081c3aafdf76266e",
+      "source": {
+        "byte_size": 2701,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.2-validation-receipt.json",
+        "sha256": "e5680ff14a1c4ba21b5c4511c55d4ff88082de6f2daf52048cbd49a21315ebce"
+      }
+    },
+    {
+      "evidence_id": "focused-stop-hook-result",
+      "freshness": "current",
+      "identity_sha256": "7114e670fe42d7b3fd5738c18e4b61601bc28c674662414150355dbbbf24d100",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "focused_stop_hook_regression"
+      },
+      "method": "executed_test",
+      "observed_summary": "Three focused plugin tests require one Stop handler, plugin-private state, and an exact five-second timeout.",
+      "selection_sha256": "49c75a58de35bf10c0aaace0b19cdd5b0053294a748a837d93e9bfdd7da0d3ec",
+      "source": {
+        "byte_size": 2701,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.2-validation-receipt.json",
+        "sha256": "e5680ff14a1c4ba21b5c4511c55d4ff88082de6f2daf52048cbd49a21315ebce"
+      }
+    },
+    {
+      "evidence_id": "skill-validation-result",
+      "freshness": "current",
+      "identity_sha256": "e7c71786f4ca0da0746fd468baea0a5ece78989e609e6610248074814db8e49b",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "skill_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local skill validator accepted the packaged skill.",
+      "selection_sha256": "bb3ffe464da1885aed5ec843f6b055b0c2c0e48dbccb99a0695af0f0c4ed26f8",
+      "source": {
+        "byte_size": 2701,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.2-validation-receipt.json",
+        "sha256": "e5680ff14a1c4ba21b5c4511c55d4ff88082de6f2daf52048cbd49a21315ebce"
+      }
+    },
+    {
+      "evidence_id": "plugin-validation-result",
+      "freshness": "current",
+      "identity_sha256": "d289a392004414bcb7234ebe0753e432ce9265ccd34399e9ca11c82122d226e9",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "plugin_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local plugin validator accepted the repository-root plugin.",
+      "selection_sha256": "8c2ff294213315fceff8156eab219467902a8c6e02b33969c887a1db73795c5d",
+      "source": {
+        "byte_size": 2701,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.2-validation-receipt.json",
+        "sha256": "e5680ff14a1c4ba21b5c4511c55d4ff88082de6f2daf52048cbd49a21315ebce"
+      }
+    },
+    {
+      "evidence_id": "quality-loop-conformance-result",
+      "freshness": "current",
+      "identity_sha256": "15588677a6e3000c397711ce34c7f54b36106ce55ff4ca61f29ea58fd6945f6f",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "quality_loop_conformance"
+      },
+      "method": "replayed",
+      "observed_summary": "The offline conformance fixture committed one local proposal, deduplicated replay, and performed no outbound action.",
+      "selection_sha256": "4e92ae779d2167d28ed9b4cd8cd2e3def708d2eebaadcc04890efabe89a9e219",
+      "source": {
+        "byte_size": 2701,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.2-validation-receipt.json",
+        "sha256": "e5680ff14a1c4ba21b5c4511c55d4ff88082de6f2daf52048cbd49a21315ebce"
+      }
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "freshness": "current",
+      "identity_sha256": "4b080f62a0b2600b1511e32ae010bb5212d7908e490de119653676656cb631bb",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "package_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The v0.8.2 package matches its rebuilt manifest and recorded package digest.",
+      "selection_sha256": "1e0dd0b71d5787cc54fab9a2d0559d7c5fd977ae691897ae1b68cfd3df4e35b4",
+      "source": {
+        "byte_size": 2701,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.2-validation-receipt.json",
+        "sha256": "e5680ff14a1c4ba21b5c4511c55d4ff88082de6f2daf52048cbd49a21315ebce"
+      }
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "freshness": "current",
+      "identity_sha256": "ae717910df7a8542496b58a9a013d455939a262d130036c8117cb1d312f1ee3b",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "engine_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified.",
+      "selection_sha256": "e0b06ffe03f8d910801a04f18e07b20c5eef772d9e31fc6e5786a75b3d5b95c4",
+      "source": {
+        "byte_size": 2701,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.2-validation-receipt.json",
+        "sha256": "e5680ff14a1c4ba21b5c4511c55d4ff88082de6f2daf52048cbd49a21315ebce"
+      }
+    },
+    {
+      "evidence_id": "live-v081-timeout-observation",
+      "freshness": "current",
+      "identity_sha256": "8a35995636abe058ff3e236b33b9405630f61d9dc73b3cb02411db66a5dd9f71",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "live_host_observation"
+      },
+      "method": "inspected",
+      "observed_summary": "A fresh Codex session invoked audit-venue-submission and the v0.8.1 Stop hook, but the host wrapper exited 1 under its one-second timeout; an equivalent local no-op completed in 251 ms with no outbound action.",
+      "selection_sha256": "96c82854130cecf8bedba33ca80c84b673c85aa1b12cb9f3b4cf722bac92285e",
+      "source": {
+        "byte_size": 2701,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.2-validation-receipt.json",
+        "sha256": "e5680ff14a1c4ba21b5c4511c55d4ff88082de6f2daf52048cbd49a21315ebce"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "ae6f631f35b061671ad53b922f3f46b54b08400ae305c06073c52061289bae62",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "local-v082-timeout-candidate-validated"
+      ],
+      "evidence_ids": [
+        "full-suite-result",
+        "live-v081-timeout-observation"
+      ],
+      "limitation_id": "local-candidate-and-live-activation-boundary",
+      "text": "The evidence validates local v0.8.2 candidate bytes and records a v0.8.1 live timeout; remote CI, publication, v0.8.2 installed activation, successful actionable continuation, and Claude runtime invocation remain unproved."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-17d81ddff8f5",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "b25d707843468ae9a5a6073d4c612f539c538781029e80a0a66ee88d5078ed44"
+    },
+    "authority": [
+      "validation/v0.8.2-validation-receipt.json",
+      "validation/component-map/accepted-map.json"
+    ],
+    "engine_identity": {
+      "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "State the strongest safe local validation claim for the v0.8.2 Codex Stop-hook timeout repair.",
+    "recorded_at_utc": "2026-08-21T08:48:50.828285Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260821T084850828285Z-19eb23b5",
+    "scope": [
+      "v0.8.2 local candidate",
+      "evidence-bound recorder 2.1.0",
+      "managed skill quality loop and Codex plugin adapter",
+      "package, plugin, engine, skill, and component-map identities"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "d892da7147f2d4ab01bf60a45f9425af3c81970fb979f29af7ee9cbee86ac999"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "local-candidate-and-live-activation-boundary"
+    ],
+    "claim_count": 1,
+    "claim_counts": {
+      "partially_supported": 1
+    },
+    "evidence_count": 8,
+    "material_claim_count": 1,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "On this Windows host, the local v0.8.2 candidate ran 230 repository tests: 229 passed and one privilege-dependent generic symlink test was skipped. It passed the official skill and plugin validators, replayed the offline quality-loop conformance fixture without outbound action, and verified its package and embedded engine. A focused regression requires the single Codex Stop hook to use an exact five-second timeout. The preceding live v0.8.1 activation invoked a compatible producer and the Stop hook but timed out, so successful v0.8.2 installed continuation remains unobserved.",
+    "strongest_safe_claim_id": "local-v082-timeout-candidate-validated",
+    "unresolved_uncertainties": [
+      "Remote commit-bound CI has not yet run for this candidate.",
+      "The v0.8.2 GitHub release and public installation do not yet exist.",
+      "Fresh installed v0.8.2 Stop-hook continuation has not been observed.",
+      "An actionable compatible receipt has not yet produced an observed automatic analyzer continuation.",
+      "Claude runtime discovery, invocation, and replacement remain unobserved.",
+      "Producer identity is declared rather than host-attested, and Codex routing can be vetoed by other hooks."
+    ]
+  }
+}

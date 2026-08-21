@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "candidate_version": "0.8.2",
+  "recorded_at_utc": "2026-08-21T08:48:11Z",
+  "platform": "Windows",
+  "full_suite": {
+    "command": "py -3 -m unittest discover -s tests -v",
+    "status": "PASS",
+    "tests_run": 230,
+    "skipped": 1,
+    "skip_boundary": "The generic update-policy symlink test is privilege-dependent on Windows; dedicated path-resolution, junction, and cross-process tests passed."
+  },
+  "focused_stop_hook_regression": {
+    "command": "py -3 -m unittest discover -s tests -p test_plugin_bundle.py -v",
+    "status": "PASS",
+    "tests_run": 3,
+    "assertion": "The single Codex Stop handler uses plugin-private state and an exact five-second timeout."
+  },
+  "skill_validation": {
+    "command": "quick_validate.py skills/analyze-project-claims",
+    "status": "PASS",
+    "validator_result": "Skill is valid!"
+  },
+  "plugin_validation": {
+    "command": "validate_plugin.py .",
+    "status": "PASS",
+    "validator_result": "Plugin validation passed"
+  },
+  "quality_loop_conformance": {
+    "status": "PASS",
+    "result": "QUALITY_PROPOSAL_READY",
+    "replay_deduplicated": true,
+    "outbound": "NONE",
+    "proposal_id": "quality-proposal-524c7bcefd8ea2e4bf157931",
+    "receipt_digest_sha256": "a194e64e63597ee0ffd5f2ce0826d32540fb5eb84f3a068ce4794e01c82c9c21"
+  },
+  "package_verification": {
+    "status": "PASS",
+    "package_manifest_digest": "5f987315d551e653859b2d7bba89e2d6b660d7b3d0b5ccde7c8af09f4926f0fc",
+    "version": "0.8.2"
+  },
+  "engine_verification": {
+    "status": "PASS",
+    "engine_name": "component-evidence",
+    "engine_version": "1.3.0",
+    "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b"
+  },
+  "live_host_observation": {
+    "host": "Codex CLI 0.148.0 on Windows",
+    "installed_plugin_version": "0.8.1",
+    "producer_skill": "audit-venue-submission 0.1.1",
+    "receipt": "no_issue/requested_action:none",
+    "hook_started": true,
+    "status": "FAIL_TIMEOUT",
+    "host_exit_code": 1,
+    "controlled_equivalent_duration_ms": 251,
+    "controlled_equivalent_exit_code": 0,
+    "proposal_created": false,
+    "outbound": "NONE"
+  },
+  "limitations": [
+    "These are local Windows v0.8.2 release-candidate results, not commit-bound remote CI or public-install evidence.",
+    "The live host observation proves v0.8.1 producer invocation and Stop-hook activation, but the hook timed out; it does not prove the v0.8.2 timeout repair or successful continuation.",
+    "The observed receipt requested no action, so an actionable automatic analyzer continuation remains unobserved.",
+    "Codex routing is host-controlled and Claude runtime activation was not observed."
+  ]
+}

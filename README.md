@@ -36,7 +36,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.8.1
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.8.2
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 

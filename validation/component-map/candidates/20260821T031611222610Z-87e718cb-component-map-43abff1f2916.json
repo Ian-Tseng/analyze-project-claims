@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-21T09:08:52.464637Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1459,16 +1459,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-21T09:06:35.118015Z",
+  "created_at_utc": "2026-08-21T03:16:11.222610Z",
   "integrity": {
-    "canonical_payload_sha256": "f46c67f832623e7f820aced4f45ba13c4e47b34258b853891090d8159d4108f0"
+    "canonical_payload_sha256": "f8d229ef5d3f5ba532be84e2aeed21ddde7d9c071bd49684b8486848b60eaf6c"
   },
-  "map_id": "component-map-e2fbee4945db",
-  "map_state": "accepted",
+  "map_id": "component-map-43abff1f2916",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.8.2 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter with a live-observed host-timeout regression, producer-repository-bound consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating local tests or hook invocation as successful continuation proof.",
-  "origin_scan_id": "20260821T090635118015Z-1de45bef",
-  "previous_map_id": "component-map-17d81ddff8f5",
+  "origin_scan_id": "20260821T031611222610Z-87e718cb",
+  "previous_map_id": "component-map-d6c5c48d5824",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1637,13 +1637,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "38e2fd3c0ae053c7abf5c21cf325102837f9c3d9365da935b9b5aef5d6d087d1",
+      "sha256": "b3cc1f2ff44f58909727cccf0ed08cb3f927a59e45e60d3a54e012aa21f83bd7",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b6f28d627407998d0992ec623db5e1a828dc2c4c8af34ed454284fb1e9c36d4e",
+      "sha256": "fafaf84fdf09bcb6716d19edae2d5988048de2ed3bda25cbcfb3633935416b2b",
       "source": "CITATION.cff"
     },
     {
@@ -1823,7 +1823,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4a26adcf96ebc7a3be14d8b9fbbd675d4e9570ac24c05e5c06d004fda055946f",
+      "sha256": "d52eb366b7e3974e1b60c94246c2d2da1b568ee0ff30a5344a68384a214feeb1",
       "source": "docs/CODEX_PLUGIN_E2E_LOG.md"
     },
     {

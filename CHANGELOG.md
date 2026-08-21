@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented here.
 
+## [0.8.2] - 2026-08-21
+
+### Fixed
+
+- Raise the bounded Codex `Stop` hook timeout from one to five seconds after
+  a fresh Windows activation showed the host wrapper timing out even though
+  the same no-op receipt completed locally in 251 ms.
+- Preserve the hook's local-only, content-free, at-most-one-continuation, and
+  no-outbound-action boundaries while adding a regression test for the exact
+  deployed timeout.
+
 ## [0.8.1] - 2026-08-20
 
 ### Changed
@@ -89,6 +100,7 @@ All notable changes to this project are documented here.
 - Persisted v2 records replay their normalized invariants and derived identities;
   recomputing the outer checksum alone cannot make a malformed record valid.
 
+[0.8.2]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.2
 [0.8.1]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.1
 [0.8.0]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.0
 [0.7.1]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.7.1

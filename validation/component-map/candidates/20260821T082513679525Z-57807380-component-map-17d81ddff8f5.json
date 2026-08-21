@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-21T09:08:52.464637Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1459,16 +1459,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-21T09:06:35.118015Z",
+  "created_at_utc": "2026-08-21T08:25:13.679525Z",
   "integrity": {
-    "canonical_payload_sha256": "f46c67f832623e7f820aced4f45ba13c4e47b34258b853891090d8159d4108f0"
+    "canonical_payload_sha256": "043869805d9b5231617c2fdca516e14c6d8394efcae9b654c4ddb2840991d5b9"
   },
-  "map_id": "component-map-e2fbee4945db",
-  "map_state": "accepted",
+  "map_id": "component-map-17d81ddff8f5",
+  "map_state": "drift_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.8.2 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter with a live-observed host-timeout regression, producer-repository-bound consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating local tests or hook invocation as successful continuation proof.",
-  "origin_scan_id": "20260821T090635118015Z-1de45bef",
-  "previous_map_id": "component-map-17d81ddff8f5",
+  "origin_scan_id": "20260821T082513679525Z-57807380",
+  "previous_map_id": "component-map-43abff1f2916",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1823,7 +1823,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4a26adcf96ebc7a3be14d8b9fbbd675d4e9570ac24c05e5c06d004fda055946f",
+      "sha256": "b2b9d91e915c7ef623929f6283eb92dfb465dfd8c66a4254d5c4117937d1c2ba",
       "source": "docs/CODEX_PLUGIN_E2E_LOG.md"
     },
     {

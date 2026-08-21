@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-21T09:08:52.464637Z",
+  "accepted_at_utc": "2026-08-20T18:00:50.702722Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1002,7 +1002,7 @@
             }
           ],
           "relation_type": "contains",
-          "target": "The explicit CLI is the portable quality-consumption path; the optional Codex plugin has one five-second Stop hook using plugin-private state and can request at most one continuation without claiming guaranteed routing or successful live-host continuation."
+          "target": "The explicit CLI is the portable quality-consumption path; the optional Codex plugin has one one-second Stop hook using plugin-private state and can request at most one continuation without claiming guaranteed routing or live-host observation."
         },
         {
           "element_id": "replay-safe-local-proposal",
@@ -1459,16 +1459,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-21T09:06:35.118015Z",
+  "created_at_utc": "2026-08-20T17:46:25.353335Z",
   "integrity": {
-    "canonical_payload_sha256": "f46c67f832623e7f820aced4f45ba13c4e47b34258b853891090d8159d4108f0"
+    "canonical_payload_sha256": "6eaf2d0a71461055491b65ceb63974edaef021d5642bc83b509b8c2fd80c32c1"
   },
-  "map_id": "component-map-e2fbee4945db",
+  "map_id": "component-map-d6c5c48d5824",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.8.2 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter with a live-observed host-timeout regression, producer-repository-bound consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating local tests or hook invocation as successful continuation proof.",
-  "origin_scan_id": "20260821T090635118015Z-1de45bef",
-  "previous_map_id": "component-map-17d81ddff8f5",
+  "objective": "Map the v0.8.1 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating structural or local E2E evidence as live host proof.",
+  "origin_scan_id": "20260820T174625353335Z-c3b2b8b8",
+  "previous_map_id": "component-map-25b55810e9df",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1595,7 +1595,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1682068a45c78ef5c33f544c970c48852a30fd45fbfe579809d23ca5dd689df0",
+      "sha256": "e20ffa637fa7a66fb064fb011eafef0caa12010c6afb4bcb7a536f99ff073c0e",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -1637,13 +1637,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "38e2fd3c0ae053c7abf5c21cf325102837f9c3d9365da935b9b5aef5d6d087d1",
+      "sha256": "15eab8637a4b60fa0100cb56862ed24e352d774d4a4d1066a6e99b68da8ef8b0",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b6f28d627407998d0992ec623db5e1a828dc2c4c8af34ed454284fb1e9c36d4e",
+      "sha256": "99eca6e284e56523d01d6e0f1a6a8e86a05b04fe87c60890ddd97ad9799f1cff",
       "source": "CITATION.cff"
     },
     {
@@ -1769,13 +1769,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0cf237343595d6bf2f77e5ab0dbacd531b290e3c2b4fc686519d0e0fcf655867",
+      "sha256": "098013b8894772d832a8486893b93e6f2d1904725282cd6f6ef17dafabfe8e62",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3512d821b31b6aec0322f9e77f10f09dae72952b9d7bde3c66559b1fa80de756",
+      "sha256": "30f93624ad5d6060059d80c67f67e0c51500fbdcf806d83c7c798123120b43bf",
       "source": "README.md"
     },
     {
@@ -1787,7 +1787,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ceb9b2c03afb769df3b1e518520c4e1798e9a3313a1c5ffffcb054fef5d6d6fb",
+      "sha256": "aaf6721dc37c40b4233accfc081f25776ff3bd1d2a4b9d5cea760d1c2cf86665",
       "source": "VERSION"
     },
     {
@@ -1823,7 +1823,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4a26adcf96ebc7a3be14d8b9fbbd675d4e9570ac24c05e5c06d004fda055946f",
+      "sha256": "1f56f35c32badd5486ae26b947789f06a0db3a7a10763bcb398be5952d6786c4",
       "source": "docs/CODEX_PLUGIN_E2E_LOG.md"
     },
     {
@@ -1913,7 +1913,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "272b356209fd313b22e0e2c7382cfad592ec9eccf5cf770a298627db8ea9a10e",
+      "sha256": "a7ff892584fb96c0d2b3894263549ffc959e0260237e359aac3dccfc75d265c6",
       "source": "docs/SKILL_QUALITY_LOOP.md"
     },
     {
@@ -2111,7 +2111,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "bd36b7259f2dc3bf2499f6f2c3a403d13499ac26a3cbfc005745400ca89870bf",
+      "sha256": "388636132908b4f8fb7d51956fb90abeca2fd0cfcd27fd9a79a61bb0cdd219e7",
       "source": "hooks/hooks.json"
     },
     {
@@ -2141,7 +2141,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "3d0ff11cbfa5d09e11eaa8598e75f0f492b11982350fbdcf712652428e9b0d16",
+      "sha256": "27f54d110fa26c95d84e0da65b7b13d309faf33c1e9fadde3eea8694e7c1c175",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -2255,13 +2255,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "748545cbff361eb2031c8f2b783bd5744691c028834e8108066ac778e5104aed",
+      "sha256": "77dda71b0b9d18d67e4462d330a23208554c9bcd957890652dff451ba581ba6c",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "effdc06a8b620d7f58d0429765f12aa562c6c020cfd552f59ecf44d3856410d3",
+      "sha256": "32900420dd3b1ee6bb9538e5980262e906256d24013fe9a3c4c191fafe3f213b",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -2543,7 +2543,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "5e1a2e29e8c813738fb3faf26e2752621a0d66b5533a880ae2980a60b2b568ac",
+      "sha256": "5f3d19485d55a3da5a852b2e58ead6a8610ebc5192b0a8271a1335353772597a",
       "source": "tests/test_plugin_bundle.py"
     },
     {
