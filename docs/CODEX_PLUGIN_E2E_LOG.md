@@ -6,7 +6,7 @@ Parent baseline: v0.7.1 / commit `2fdb33afe5db23827dabe9addf718bb6020176f1`
 ## Local evidence
 
 - Repository-root plugin manifest and marketplace shape: tested.
-- One `Stop` handler, no ignored matcher, one-second timeout: tested.
+- One `Stop` handler, no ignored matcher, five-second timeout: tested.
 - `PLUGIN_ROOT` code location and `PLUGIN_DATA` private state: tested.
 - Exact final-line marker extraction: tested.
 - `stop_hook_active`, analyzer-origin, and depth guards: tested.
