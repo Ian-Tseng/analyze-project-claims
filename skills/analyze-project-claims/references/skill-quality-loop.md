@@ -15,7 +15,8 @@ The optional Codex plugin `Stop` hook can request at most one continuation for
 an original session/turn. It cannot guarantee one named-skill invocation:
 matching hooks run concurrently, another hook may veto continuation, and model
 routing is not deterministic. A persisted receipt remains available for the
-portable explicit path.
+portable explicit path. The receipt adapter never recursively invokes this or
+another skill and never starts a repair loop.
 
 ## Receipt contract
 
@@ -86,6 +87,16 @@ patches, project content, paths, prompts, logs, findings, and attachments. Only
 has the protected maintainer workflow installed, that authorizes one isolated
 map-pending draft attempt; otherwise it is only an owner triage signal. It
 never authorizes map acceptance, merge, release, closure, or installed update.
+
+Inside that one owner-authorized candidate attempt, the protected workflow may
+run at most three repair-and-recheck cycles. Each cycle rechecks the original
+scope and changed surfaces. It stops cleanly when no material same-scope
+finding remains, and stops without claiming convergence on a repeated finding
+set, unchanged or previously seen candidate diff identity, oscillation,
+forbidden scope, missing external evidence, an owner decision, or the third
+cycle. This is bounded reanalysis inside one isolated agent invocation, not
+receipt recursion. It never creates a follow-up issue or authorizes automatic
+merge, release, publication, or installed update.
 
 ## Errors
 

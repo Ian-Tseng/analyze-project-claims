@@ -1,0 +1,228 @@
+{
+  "schema_version": "2.0",
+  "objective": "State the strongest safe local validation claim for the v0.8.3 bounded owner-side repair convergence contract.",
+  "scope": [
+    "v0.8.3 local release-candidate tree",
+    "direct analyzer and reusable managed-skill maintainer prompts",
+    "content-free quality receipt and owner-contribution boundaries",
+    "package, plugin, engine, publisher dry-run, and accepted component-map identities"
+  ],
+  "authority": [
+    "validation/v0.8.3-validation-receipt.json",
+    "validation/component-map/accepted-map.json"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.3-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 231 repository tests run on Windows: 230 passed and one privilege-dependent generic symlink test was skipped."
+    },
+    {
+      "evidence_id": "bounded-owner-convergence-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.3-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "bounded_owner_convergence"
+      },
+      "method": "executed_test",
+      "observed_summary": "Twenty-four focused contract tests passed for the direct and reusable maintainer paths, asserting the three-cycle ceiling, clean-scope and repeated-finding stops, candidate diff identity and oscillation markers, and explicit skill and issue recursion bans. Additional stop, receipt, and workflow clauses were inspected in the prompt sources rather than independently exercised by these tests."
+    },
+    {
+      "evidence_id": "skill-validation-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.3-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "skill_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local skill validator accepted the packaged analyzer."
+    },
+    {
+      "evidence_id": "plugin-validation-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.3-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "plugin_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local plugin validator accepted the repository-root plugin."
+    },
+    {
+      "evidence_id": "publisher-dry-run-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.3-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "publisher_dry_run"
+      },
+      "method": "inspected",
+      "observed_summary": "GitHub CLI discovered the skill and completed a non-mutating publication dry-run with no outbound publication."
+    },
+    {
+      "evidence_id": "quality-loop-conformance-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.3-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "quality_loop_conformance"
+      },
+      "method": "replayed",
+      "observed_summary": "The offline conformance fixture committed one local proposal, deduplicated replay, and performed no outbound action."
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.3-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "package_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The v0.8.3 package matches its rebuilt manifest and recorded package digest."
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.8.3-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "engine_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "statement": "On this Windows host, the local v0.8.3 release-candidate tree passed 230 of 231 repository tests with one privilege-dependent symlink skip, both official validators, package and engine verification, offline replay-safe quality-loop conformance with no outbound action, and a non-mutating GitHub skill publication dry-run. The direct analyzer and reusable managed-skill maintainer prompts each authorize one isolated candidate attempt with at most three repair-and-recheck cycles and explicit clean-scope, repetition, unchanged-candidate, oscillation, forbidden-scope, missing-evidence, owner-decision, and cycle-limit stops. Skill invocation, quality receipts, issues, workflows, map acceptance, merge, release, publication, and installed update remain non-recursive and separately gated.",
+      "element_ref": {
+        "component_id": "agent-maintainer",
+        "element_id": "pinned-reusable-repair-boundary"
+      },
+      "material": true,
+      "status": "partially_supported",
+      "rationale": "The local bytes and prompt/test contracts are directly validated, while hosted agent behavior, convergence quality, commit-bound CI, draft creation, release, installation, and activation remain separate unobserved gates."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "full-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "bounded-owner-convergence-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "skill-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "plugin-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "publisher-dry-run-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "quality-loop-conformance-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "package-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "engine-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "bounded-owner-convergence-result",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "publisher-dry-run-result",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "full-suite-result",
+      "role": "limits"
+    }
+  ],
+  "limitations": [
+    {
+      "limitation_id": "local-prompt-versus-hosted-convergence-boundary",
+      "text": "Focused tests verify principal bounded-prompt markers and local controller inputs, but do not independently exercise every semantic stop clause or prove that a hosted model will find every same-scope defect, execute all three cycles, reach convergence, or create a validated draft.",
+      "claim_ids": [
+        "local-v083-bounded-owner-convergence-validated"
+      ],
+      "evidence_ids": [
+        "bounded-owner-convergence-result"
+      ]
+    },
+    {
+      "limitation_id": "dry-run-versus-publication-and-activation-boundary",
+      "text": "A local GitHub skill publication dry-run proves discovery only; it does not prove commit-bound CI, publication, installed replacement, Codex or Claude discovery, or fresh activation.",
+      "claim_ids": [
+        "local-v083-bounded-owner-convergence-validated"
+      ],
+      "evidence_ids": [
+        "publisher-dry-run-result",
+        "full-suite-result"
+      ]
+    }
+  ],
+  "summary": {
+    "strongest_safe_claim_id": "local-v083-bounded-owner-convergence-validated",
+    "claim_boundary_ids": [
+      "local-prompt-versus-hosted-convergence-boundary",
+      "dry-run-versus-publication-and-activation-boundary"
+    ],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "Commit-bound pull-request and exact-main CI have not yet run for v0.8.3.",
+    "Neither maintainer path has executed the bounded convergence contract in a hosted owner-authorized candidate run.",
+    "The v0.8.3 GitHub release, managed replacement, and fresh activation do not yet exist.",
+    "Codex routing remains host-controlled and Claude runtime discovery and invocation remain unobserved for v0.8.3.",
+    "Producer identity is declared rather than host-attested, and owner acceptance of this component map does not authorize merge or publication."
+  ]
+}

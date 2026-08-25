@@ -1,5 +1,5 @@
 {
-    "objective":  "Map the v0.8.2 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter with a live-observed host-timeout regression, producer-repository-bound consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating local tests or hook invocation as successful continuation proof.",
+    "objective":  "Map the v0.8.3 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, one owner-authorized repair attempt with at most three repair-and-recheck cycles, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating prompt contracts, local tests, or hook invocation as hosted convergence proof.",
     "scope":  [
                   "README.md",
                   "CITATION.cff",
@@ -1188,7 +1188,7 @@
                                             },
                                             {
                                                 "element_id":  "privilege-separated-candidate",
-                                                "target":  "Codex has no repository write credential; trusted guards bound paths and release identity, a fresh secret-free job tests the exact patch, and only a later non-executing job can publish a new draft branch and pull request.",
+                                                "target":  "Codex has no repository write credential; within one owner-authorized candidate attempt it may run at most three repair-and-recheck cycles with repeated finding-set, candidate-identity, and oscillation stops; trusted guards bound paths and release identity, a fresh secret-free job tests the exact patch, and only a later non-executing job can publish a new draft branch and pull request.",
                                                 "relation_type":  "contains",
                                                 "evidence":  [
                                                                  {
@@ -1201,11 +1201,11 @@
                                                                  },
                                                                  {
                                                                      "source":  ".github/codex/prompts/resolve-internal-report.md",
-                                                                     "locator":  "untrusted evidence and forbidden owner-action instructions"
+                                                                     "locator":  "untrusted evidence, bounded repair-and-recheck cycles, convergence stops, and forbidden owner-action instructions"
                                                                  },
                                                                  {
                                                                      "source":  "tests/test_agent_maintainer.py",
-                                                                     "locator":  "patch-guard and privilege-separation workflow regressions"
+                                                                     "locator":  "patch-guard, bounded convergence prompt, and privilege-separation workflow regressions"
                                                                  }
                                                              ]
                                             },
@@ -1234,7 +1234,7 @@
                                             },
                                             {
                                                 "element_id":  "pinned-reusable-repair-boundary",
-                                                "target":  "A central GitHub Cloud reusable workflow binds immutable issue, repository, policy, base, workflow, nonce, and expiry identities; separately approved agent and publication jobs keep the candidate credential-free, validate a guarded exact patch, reconcile deterministic draft state, and retain human release authority.",
+                                                "target":  "A central GitHub Cloud reusable workflow binds immutable issue, repository, policy, base, workflow, nonce, and expiry identities; one credential-free agent invocation may perform at most three repair-and-recheck cycles with repeated finding-set, candidate-identity, and oscillation stops; separately approved publication validates a guarded exact patch, reconciles deterministic draft state, and retains human release authority.",
                                                 "relation_type":  "contains",
                                                 "evidence":  [
                                                                  {
@@ -1247,11 +1247,11 @@
                                                                  },
                                                                  {
                                                                      "source":  ".github/actions/managed-skill-core/managed_skill_core.py",
-                                                                     "locator":  "authorization binding, live refetch, root-owned collection, policy guard, validation, and idempotent publication"
+                                                                     "locator":  "authorization binding, bounded convergence prompt, live refetch, root-owned collection, policy guard, validation, and idempotent publication"
                                                                  },
                                                                  {
                                                                      "source":  "tests/test_managed_fleet.py",
-                                                                     "locator":  "privilege, provenance, protected-environment, and authorization-manifest contract regressions"
+                                                                     "locator":  "bounded convergence, privilege, provenance, protected-environment, and authorization-manifest contract regressions"
                                                                  },
                                                                  {
                                                                      "source":  "docs/MANAGED_FLEET_OPERATIONS.md",
@@ -1436,7 +1436,7 @@
                                             },
                                             {
                                                 "element_id":  "portable-consumer-and-codex-adapter",
-                                                "target":  "The explicit CLI is the portable quality-consumption path; the optional Codex plugin has one five-second Stop hook using plugin-private state and can request at most one continuation without claiming guaranteed routing or successful live-host continuation.",
+                                                "target":  "The explicit CLI is the portable quality-consumption path; the receipt adapter never recursively invokes a skill or starts a repair loop; the optional Codex plugin has one five-second Stop hook using plugin-private state and can request at most one continuation without claiming guaranteed routing or successful live-host continuation.",
                                                 "relation_type":  "contains",
                                                 "evidence":  [
                                                                  {
@@ -1458,12 +1458,16 @@
                                                                  {
                                                                      "source":  "docs/CODEX_PLUGIN_E2E_LOG.md",
                                                                      "locator":  "local observations and live-host limitations"
+                                                                 },
+                                                                 {
+                                                                     "source":  "skills/analyze-project-claims/references/skill-quality-loop.md",
+                                                                     "locator":  "non-recursive receipt adapter and bounded owner-side convergence boundary"
                                                                  }
                                                              ]
                                             },
                                             {
                                                 "element_id":  "consent-gated-owner-contribution",
-                                                "target":  "A proposal can create an enum-only local draft bound to Ian-Tseng and the originating producer repository, but submission requires exact draft approval and a second public-visibility confirmation; exact owner intake rejects cross-repository rebinding, never forwards raw issue content, and authorizes only one isolated candidate attempt where the protected workflow is installed.",
+                                                "target":  "A proposal can create an enum-only local draft bound to Ian-Tseng and the originating producer repository, but submission requires exact draft approval and a second public-visibility confirmation; exact owner intake rejects cross-repository rebinding, never forwards raw issue content, and authorizes only one isolated candidate attempt with at most three non-recursive repair-and-recheck cycles where the protected workflow is installed.",
                                                 "relation_type":  "contains",
                                                 "evidence":  [
                                                                  {
@@ -1489,6 +1493,10 @@
                                                                  {
                                                                      "source":  "tests/test_safe_process.py",
                                                                      "locator":  "current-project executable exclusion and relative-path rejection regressions"
+                                                                 },
+                                                                 {
+                                                                     "source":  "skills/analyze-project-claims/SKILL.md",
+                                                                     "locator":  "bounded authorized repair and owner contribution boundary"
                                                                  }
                                                              ]
                                             },
@@ -1572,8 +1580,8 @@
                                         ]
                        }
                    ],
-    "strongest_safe_claim":  "The local v0.8.2 candidate implements a closed content-free receipt, replay-safe proposals, explicit update authority, consent-gated producer issue routing, a strict managed-fleet protocol, and a bounded five-second Codex Stop hook repair while retaining human evidence, merge, release, publication, and activation gates.",
-    "claim_boundary":  "Deterministic local tests, structural workflow and plugin validation, formal map identity, a live v0.8.1 hook failure, and stored earlier distribution evidence do not establish producer authentication, guaranteed model routing, successful Codex continuation, live Claude invocation, protected GitHub environments, a successful hosted dry canary, agent execution, draft publication, automatic issue resolution, production analytics or reporting deployment, independent-customer delivery, v0.8.2 installed replacement, or GitHub-enforced release immutability.",
+    "strongest_safe_claim":  "The local v0.8.3 candidate implements a closed content-free receipt, replay-safe proposals, explicit update authority, consent-gated producer issue routing, and a strict managed-fleet protocol whose two maintainer paths permit one owner-authorized attempt with at most three non-recursive repair-and-recheck cycles while retaining human evidence, merge, release, publication, and activation gates.",
+    "claim_boundary":  "Deterministic prompt-contract tests, local suites, structural workflow and plugin validation, formal map identity, and stored earlier distribution evidence do not establish producer authentication, guaranteed model routing, successful hosted convergence, live Claude invocation, protected GitHub environments, a successful hosted dry canary, agent execution, draft publication, automatic issue resolution, production analytics or reporting deployment, independent-customer delivery, v0.8.3 installed replacement, or GitHub-enforced release immutability.",
     "unresolved_uncertainties":  [
                                      "No production HTTPS deployment of the optional API has been observed.",
                                      "No independent customer account or GitHub notification delivery has been observed.",
@@ -1582,9 +1590,9 @@
                                      "The agent-maintainer workflow has not run on GitHub with configured secrets against an eligible disclosed report.",
                                      "The reusable managed-repair workflow and both protected environments have not yet completed a hosted producer canary.",
                                      "Claude Code package verification does not establish live Claude discovery, invocation, or replacement until the other-PC checklist is observed.",
-                                     "The v0.8.1 Codex plugin Stop hook was invoked on one Windows host but timed out before successful continuation; v0.8.2 fresh installed activation remains unobserved and the explicit consumer remains the proven path.",
+                                     "The v0.8.1 Codex plugin Stop hook was invoked on one Windows host but timed out before successful continuation; v0.8.3 fresh installed activation remains unobserved and the explicit consumer remains the proven path.",
                                      "Producer identity is declared, not host-attested.",
-                                     "The v0.8.2 candidate is not a published or installed release until commit-bound CI, GitHub release, managed replacement, and fresh-host activation gates pass.",
+                                     "The v0.8.3 candidate is not a published or installed release until commit-bound CI, GitHub release, managed replacement, and fresh-host activation gates pass.",
                                      "Producer-repository issue routing does not prove that every destination repository has the protected agent-maintainer workflow or required secrets installed."
                                  ]
 }

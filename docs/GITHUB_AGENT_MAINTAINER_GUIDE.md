@@ -38,7 +38,10 @@ Actions permissions, label, and dry canary.
    and expiry. A label is eligibility only.
 2. Candidate preparation is gated by `managed-repair-agent`. The model gets no
    repository write token. The central collector is installed root-owned before
-   the model and executes no candidate code.
+   the model and executes no candidate code. One owner-authorized candidate
+   attempt may use at most three repair-and-recheck cycles inside the same agent
+   invocation. Each cycle reruns configured validation and reinspects the
+   original scope plus changed surfaces.
 3. Fresh validation applies the exact patch in a secret-free checkout, re-runs
    the central guard, uses a fixed named profile, and denies network while
    candidate code runs where the GitHub runner supports a network namespace.
@@ -66,6 +69,14 @@ The local updater in each package remains separately consent-gated and verifies
 one unambiguous native installation. The outcome receipt remains content-free
 and local. Public issue creation remains a separately previewed and confirmed
 action restricted to exact `Ian-Tseng` producer repositories.
+
+The bounded candidate loop stops early when no material same-scope finding
+remains. It stops without claiming convergence on a repeated finding set, an
+unchanged or previously seen candidate diff identity, oscillation, forbidden
+scope, missing external evidence, an owner decision, or the third cycle. It
+must not recursively invoke another skill, create a follow-up issue, or trigger
+another workflow. A draft remains owner-review evidence; only the owner can
+accept the map, merge, release, publish, or cause an installation update.
 
 ## Cutover and rollback
 

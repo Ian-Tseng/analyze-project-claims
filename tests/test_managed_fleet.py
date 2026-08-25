@@ -225,6 +225,30 @@ class ManagedFleetContractTests(unittest.TestCase):
             self.assertIn(manifest["expires_at_utc"], summary.read_text(encoding="utf-8"))
             self.assertIn("authorization-path=", output.read_text(encoding="utf-8"))
 
+    def test_agent_prompt_runs_bounded_owner_side_convergence(self) -> None:
+        self.assertEqual(self.core.MAX_REPAIR_CYCLES, 3)
+        policy = self.policy()
+        event = self.event(policy)
+        authorization = self.core.build_authorization(
+            policy=policy,
+            event=event,
+            base_sha="b" * 40,
+            workflow_sha=SHA,
+            nonce="run-12-attempt-1",
+            now_utc="2026-08-20T12:01:00Z",
+        )
+        prompt = self.core._agent_prompt(policy, authorization, event)
+        self.assertIn("one owner-authorized candidate attempt", prompt)
+        self.assertIn("at most three repair-and-recheck cycles", prompt)
+        self.assertIn("no material same-scope finding remains", prompt)
+        self.assertIn("repeated finding set", prompt)
+        self.assertIn("candidate diff identity", prompt)
+        self.assertIn("oscillation", prompt)
+        self.assertIn("Do not invoke another skill recursively", prompt)
+        self.assertIn("Do not create another issue", prompt)
+        self.assertEqual(prompt.count("--- BEGIN UNTRUSTED ISSUE BODY ---"), 1)
+        self.assertEqual(prompt.count(event["issue"]["body"]), 1)
+
     def test_reusable_workflow_has_privilege_and_provenance_boundaries(self) -> None:
         workflow = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn("workflow_call:", workflow)

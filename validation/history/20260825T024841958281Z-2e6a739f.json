@@ -1,0 +1,314 @@
+{
+  "bindings": [
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "full-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "bounded-owner-convergence-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "skill-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "plugin-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "publisher-dry-run-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "quality-loop-conformance-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "package-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "engine-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "bounded-owner-convergence-result",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "publisher-dry-run-result",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "evidence_id": "full-suite-result",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "b5a727a1ea17fe23082da6c0c03293ff88fd9efbfba97a768df3a97dc53dc0ae",
+      "claim_id": "local-v083-bounded-owner-convergence-validated",
+      "element_ref": {
+        "component_id": "agent-maintainer",
+        "element_id": "pinned-reusable-repair-boundary"
+      },
+      "material": true,
+      "rationale": "The local bytes and prompt/test contracts are directly validated, while hosted agent behavior, convergence quality, commit-bound CI, draft creation, release, installation, and activation remain separate unobserved gates.",
+      "statement": "On this Windows host, the local v0.8.3 release-candidate tree passed 230 of 231 repository tests with one privilege-dependent symlink skip, both official validators, package and engine verification, offline replay-safe quality-loop conformance with no outbound action, and a non-mutating GitHub skill publication dry-run. The direct analyzer and reusable managed-skill maintainer prompts each authorize one isolated candidate attempt with at most three repair-and-recheck cycles and explicit clean-scope, repetition, unchanged-candidate, oscillation, forbidden-scope, missing-evidence, owner-decision, and cycle-limit stops. Skill invocation, quality receipts, issues, workflows, map acceptance, merge, release, publication, and installed update remain non-recursive and separately gated.",
+      "status": "partially_supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "freshness": "current",
+      "identity_sha256": "1df94c9b19a53bdc09829db723823cfdb5e4a377818db8db7b33ccb8b096681b",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The persisted receipt records 231 repository tests run on Windows: 230 passed and one privilege-dependent generic symlink test was skipped.",
+      "selection_sha256": "ca5e77d4cded5a4734d4b5a50b5db74ef1b238522b09a845eedd5d4089246459",
+      "source": {
+        "byte_size": 2961,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.3-validation-receipt.json",
+        "sha256": "683214bcbc1232e601c618ddef09f73aab45fb98f7be8e1164be635f45248ac0"
+      }
+    },
+    {
+      "evidence_id": "bounded-owner-convergence-result",
+      "freshness": "current",
+      "identity_sha256": "dea9b7cefdca7a3e12c4d0cd4bb2adac7fc9b11541931feb3e9aedb9ad8bf9c8",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "bounded_owner_convergence"
+      },
+      "method": "executed_test",
+      "observed_summary": "Twenty-four focused tests passed for the direct and reusable maintainer paths, including the three-cycle ceiling, clean-scope stop, repetition and oscillation stops, and non-recursive skill, receipt, issue, and workflow boundaries.",
+      "selection_sha256": "c16ab3a7d259504309cf2ebcd56803c61ee290f3e6c51e88c4f054f25316d6d7",
+      "source": {
+        "byte_size": 2961,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.3-validation-receipt.json",
+        "sha256": "683214bcbc1232e601c618ddef09f73aab45fb98f7be8e1164be635f45248ac0"
+      }
+    },
+    {
+      "evidence_id": "skill-validation-result",
+      "freshness": "current",
+      "identity_sha256": "3ab1b3aa5e1603344955138889ef643a817a5f5c9140238706560caab4ab9018",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "skill_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local skill validator accepted the packaged analyzer.",
+      "selection_sha256": "bb3ffe464da1885aed5ec843f6b055b0c2c0e48dbccb99a0695af0f0c4ed26f8",
+      "source": {
+        "byte_size": 2961,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.3-validation-receipt.json",
+        "sha256": "683214bcbc1232e601c618ddef09f73aab45fb98f7be8e1164be635f45248ac0"
+      }
+    },
+    {
+      "evidence_id": "plugin-validation-result",
+      "freshness": "current",
+      "identity_sha256": "d313153fd668fd7f74e6163c58d479cd80e18f08c5332ebfcc40b9ca39602aff",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "plugin_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local plugin validator accepted the repository-root plugin.",
+      "selection_sha256": "8c2ff294213315fceff8156eab219467902a8c6e02b33969c887a1db73795c5d",
+      "source": {
+        "byte_size": 2961,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.3-validation-receipt.json",
+        "sha256": "683214bcbc1232e601c618ddef09f73aab45fb98f7be8e1164be635f45248ac0"
+      }
+    },
+    {
+      "evidence_id": "publisher-dry-run-result",
+      "freshness": "current",
+      "identity_sha256": "93dd46941bcae96f874e826533c2c55b2e65b80be8b2c36c29edf23314f4ed79",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "publisher_dry_run"
+      },
+      "method": "inspected",
+      "observed_summary": "GitHub CLI discovered the skill and completed a non-mutating publication dry-run with no outbound publication.",
+      "selection_sha256": "0f709ad4b64112201361a53b21c29f668dacb09615b26f039439c98b45da7e82",
+      "source": {
+        "byte_size": 2961,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.3-validation-receipt.json",
+        "sha256": "683214bcbc1232e601c618ddef09f73aab45fb98f7be8e1164be635f45248ac0"
+      }
+    },
+    {
+      "evidence_id": "quality-loop-conformance-result",
+      "freshness": "current",
+      "identity_sha256": "eb80e7e31e5326ed96a2d491e173e69063f6fe680abc177713a9a1e21192ec2e",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "quality_loop_conformance"
+      },
+      "method": "replayed",
+      "observed_summary": "The offline conformance fixture committed one local proposal, deduplicated replay, and performed no outbound action.",
+      "selection_sha256": "4b1222a9f1ba3c9e3c146f2fa165139f0c7474fcf422f2f88acd454870e12ce6",
+      "source": {
+        "byte_size": 2961,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.3-validation-receipt.json",
+        "sha256": "683214bcbc1232e601c618ddef09f73aab45fb98f7be8e1164be635f45248ac0"
+      }
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "freshness": "current",
+      "identity_sha256": "687c667e013b7cf457432ccb9ecae4da6ce5b697b004a4c0b8cb573d7ac9ac24",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "package_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The v0.8.3 package matches its rebuilt manifest and recorded package digest.",
+      "selection_sha256": "145f08ee6a1e7ad7b4281ed01b99fe44bb10e4b80f52b3c81b9f87e1d028be7b",
+      "source": {
+        "byte_size": 2961,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.3-validation-receipt.json",
+        "sha256": "683214bcbc1232e601c618ddef09f73aab45fb98f7be8e1164be635f45248ac0"
+      }
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "freshness": "current",
+      "identity_sha256": "a34bd33d1055fb496b5a6f02d0525054437d05098516ebb6b5550bdc131b9f1a",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "engine_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified.",
+      "selection_sha256": "e0b06ffe03f8d910801a04f18e07b20c5eef772d9e31fc6e5786a75b3d5b95c4",
+      "source": {
+        "byte_size": 2961,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.8.3-validation-receipt.json",
+        "sha256": "683214bcbc1232e601c618ddef09f73aab45fb98f7be8e1164be635f45248ac0"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "e3dc4a79f190d7294765a80ffb06b2d88ac327f33dd0d8b1bb3742e06b496905",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "local-v083-bounded-owner-convergence-validated"
+      ],
+      "evidence_ids": [
+        "bounded-owner-convergence-result"
+      ],
+      "limitation_id": "local-prompt-versus-hosted-convergence-boundary",
+      "text": "Focused tests verify the bounded prompt contracts and local controller inputs; they do not prove that a hosted model will find every same-scope defect, execute all three cycles, reach convergence, or create a validated draft."
+    },
+    {
+      "claim_ids": [
+        "local-v083-bounded-owner-convergence-validated"
+      ],
+      "evidence_ids": [
+        "publisher-dry-run-result",
+        "full-suite-result"
+      ],
+      "limitation_id": "dry-run-versus-publication-and-activation-boundary",
+      "text": "A local GitHub skill publication dry-run proves discovery only; it does not prove commit-bound CI, publication, installed replacement, Codex or Claude discovery, or fresh activation."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-88b0fbb9cc6b",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "ecbff1899a95157f9950fcbfeda391330b047fd4c30020f3d63b7602ef0c795e"
+    },
+    "authority": [
+      "validation/v0.8.3-validation-receipt.json",
+      "validation/component-map/accepted-map.json"
+    ],
+    "engine_identity": {
+      "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "State the strongest safe local validation claim for the v0.8.3 bounded owner-side repair convergence contract.",
+    "recorded_at_utc": "2026-08-25T02:48:41.958281Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260825T024841958281Z-2e6a739f",
+    "scope": [
+      "v0.8.3 local release-candidate tree",
+      "direct analyzer and reusable managed-skill maintainer prompts",
+      "content-free quality receipt and owner-contribution boundaries",
+      "package, plugin, engine, publisher dry-run, and accepted component-map identities"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "c30585a2c54b9ed2e92049ceefa06f9b3a6efb886313cbfb592825e74156d451"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "local-prompt-versus-hosted-convergence-boundary",
+      "dry-run-versus-publication-and-activation-boundary"
+    ],
+    "claim_count": 1,
+    "claim_counts": {
+      "partially_supported": 1
+    },
+    "evidence_count": 8,
+    "material_claim_count": 1,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "On this Windows host, the local v0.8.3 release-candidate tree passed 230 of 231 repository tests with one privilege-dependent symlink skip, both official validators, package and engine verification, offline replay-safe quality-loop conformance with no outbound action, and a non-mutating GitHub skill publication dry-run. The direct analyzer and reusable managed-skill maintainer prompts each authorize one isolated candidate attempt with at most three repair-and-recheck cycles and explicit clean-scope, repetition, unchanged-candidate, oscillation, forbidden-scope, missing-evidence, owner-decision, and cycle-limit stops. Skill invocation, quality receipts, issues, workflows, map acceptance, merge, release, publication, and installed update remain non-recursive and separately gated.",
+    "strongest_safe_claim_id": "local-v083-bounded-owner-convergence-validated",
+    "unresolved_uncertainties": [
+      "Commit-bound pull-request and exact-main CI have not yet run for v0.8.3.",
+      "Neither maintainer path has executed the bounded convergence contract in a hosted owner-authorized candidate run.",
+      "The v0.8.3 GitHub release, managed replacement, and fresh activation do not yet exist.",
+      "Codex routing remains host-controlled and Claude runtime discovery and invocation remain unobserved for v0.8.3.",
+      "Producer identity is declared rather than host-attested, and owner acceptance of this component map does not authorize merge or publication."
+    ]
+  }
+}
