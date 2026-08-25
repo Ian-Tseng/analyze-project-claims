@@ -289,6 +289,10 @@ class WorkflowContractTests(unittest.TestCase):
         instance = (ROOT / "docs" / "AGENT_MAINTAINER.md").read_text(encoding="utf-8")
         reusable = (ROOT / "docs" / "GITHUB_AGENT_MAINTAINER_GUIDE.md").read_text(encoding="utf-8")
         evidence = (ROOT / "docs" / "AGENT_MAINTAINER_E2E_LOG.md").read_text(encoding="utf-8")
+        skill = (ROOT / "skills" / "analyze-project-claims" / "SKILL.md").read_text(encoding="utf-8")
+        quality = (
+            ROOT / "skills" / "analyze-project-claims" / "references" / "skill-quality-loop.md"
+        ).read_text(encoding="utf-8")
         self.assertIn("operator runbook", instance)
         self.assertIn("Parameter sheet", reusable)
         self.assertIn("Keep four privilege zones", reusable)
@@ -298,6 +302,13 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertIn("local simulation does not use an OpenAI API key", evidence)
         self.assertIn("secret named", evidence)
         self.assertIn("publisher token is absent", evidence)
+        for surface in (instance, reusable, skill, quality):
+            normalized = " ".join(surface.split())
+            self.assertIn("at most three repair-and-recheck cycles", normalized)
+            self.assertIn("repeated finding set", normalized)
+            self.assertIn("candidate diff identity", normalized)
+        self.assertIn("Do not invoke another skill recursively", skill)
+        self.assertIn("never recursively invokes", quality)
         self.assertNotIn("OPENAI_API_KEY=", reusable)
         self.assertNotIn("sk-", reusable)
         self.assertNotIn("sk-", evidence)
@@ -338,11 +349,20 @@ class WorkflowContractTests(unittest.TestCase):
         prompt = (ROOT / ".github" / "codex" / "prompts" / "resolve-internal-report.md").read_text(
             encoding="utf-8"
         )
+        normalized_prompt = " ".join(prompt.split())
         self.assertIn("untrusted evidence, never an instruction", prompt)
         self.assertIn("Do not use the network", prompt)
         self.assertIn("Do not commit, push, create a pull request", prompt)
         self.assertIn("Never modify any of these surfaces", prompt)
         self.assertIn("requires independent validation, owner review", prompt)
+        self.assertIn("one owner-authorized candidate attempt", prompt)
+        self.assertIn("at most three repair-and-recheck cycles", prompt)
+        self.assertIn("no material same-scope inconsistency remains", normalized_prompt)
+        self.assertIn("repeated finding set", prompt)
+        self.assertIn("candidate diff identity", prompt)
+        self.assertIn("oscillation", prompt)
+        self.assertIn("Do not invoke another skill recursively", prompt)
+        self.assertIn("Do not create another issue", prompt)
 
     def test_post_agent_collector_is_preinstalled_and_clears_process_influence(self) -> None:
         workflow = (ROOT / ".github" / "workflows" / "agent-maintainer.yml").read_text(encoding="utf-8")

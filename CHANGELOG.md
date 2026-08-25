@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented here.
 
+## [0.8.3] - 2026-08-25
+
+### Changed
+
+- Add a bounded owner-side convergence loop to both managed-repair paths: one
+  isolated agent invocation may perform at most three repair-and-recheck
+  cycles and stops early when no material same-scope finding remains.
+- Stop safely on repeated findings, unchanged or previously seen candidate
+  identities, oscillation, forbidden scope, missing external evidence, an
+  owner decision, or the cycle limit.
+- Keep skill invocation, quality receipts, issues, workflows, publication,
+  merge, release, and installed updates non-recursive and separately
+  consent- or owner-gated.
+
 ## [0.8.2] - 2026-08-21
 
 ### Fixed
@@ -100,6 +114,7 @@ All notable changes to this project are documented here.
 - Persisted v2 records replay their normalized invariants and derived identities;
   recomputing the outer checksum alone cannot make a malformed record valid.
 
+[0.8.3]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.3
 [0.8.2]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.2
 [0.8.1]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.1
 [0.8.0]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.0

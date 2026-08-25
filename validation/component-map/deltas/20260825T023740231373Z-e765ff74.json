@@ -1,0 +1,166 @@
+{
+  "accepted_map_id": "component-map-e2fbee4945db",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-88b0fbb9cc6b",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "agent-maintainer",
+        "element_id": "pinned-reusable-repair-boundary",
+        "fields": [
+          "target",
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "agent-maintainer",
+        "element_id": "privilege-separated-candidate",
+        "fields": [
+          "target",
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "consent-gated-owner-contribution",
+        "fields": [
+          "target",
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "portable-consumer-and-codex-adapter",
+        "fields": [
+          "target",
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "objective",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".codex-plugin/plugin.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/actions/managed-skill-core/managed_skill_core.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".github/codex/prompts/resolve-internal-report.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/AGENT_MAINTAINER.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/CODEX_PLUGIN_E2E_LOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_agent_maintainer.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_managed_fleet.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "99acd7d22f02c7912923d5f5b5a33106652516730e275eb403087979c0231b02"
+  },
+  "recorded_at_utc": "2026-08-25T02:37:40.231373Z",
+  "scan_id": "20260825T023740231373Z-e765ff74",
+  "schema_version": "1.0"
+}

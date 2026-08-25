@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-25T02:42:33.389836Z",
+  "accepted_at_utc": "2026-08-21T09:08:52.464637Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -200,7 +200,7 @@
               "source": ".github/actions/managed-skill-core/action.yml"
             },
             {
-              "locator": "authorization binding, bounded convergence prompt, live refetch, root-owned collection, policy guard, validation, and idempotent publication",
+              "locator": "authorization binding, live refetch, root-owned collection, policy guard, validation, and idempotent publication",
               "source": ".github/actions/managed-skill-core/managed_skill_core.py"
             },
             {
@@ -216,18 +216,18 @@
               "source": "docs/MANAGED_REPAIR_WALKTHROUGH.md"
             },
             {
-              "locator": "bounded convergence, privilege, provenance, protected-environment, and authorization-manifest contract regressions",
+              "locator": "privilege, provenance, protected-environment, and authorization-manifest contract regressions",
               "source": "tests/test_managed_fleet.py"
             }
           ],
           "relation_type": "contains",
-          "target": "A central GitHub Cloud reusable workflow binds immutable issue, repository, policy, base, workflow, nonce, and expiry identities; one credential-free agent invocation may perform at most three repair-and-recheck cycles with repeated finding-set, candidate-identity, and oscillation stops; separately approved publication validates a guarded exact patch, reconciles deterministic draft state, and retains human release authority."
+          "target": "A central GitHub Cloud reusable workflow binds immutable issue, repository, policy, base, workflow, nonce, and expiry identities; separately approved agent and publication jobs keep the candidate credential-free, validate a guarded exact patch, reconcile deterministic draft state, and retain human release authority."
         },
         {
           "element_id": "privilege-separated-candidate",
           "evidence_locators": [
             {
-              "locator": "untrusted evidence, bounded repair-and-recheck cycles, convergence stops, and forbidden owner-action instructions",
+              "locator": "untrusted evidence and forbidden owner-action instructions",
               "source": ".github/codex/prompts/resolve-internal-report.md"
             },
             {
@@ -239,12 +239,12 @@
               "source": "maintainer_service/patch_guard.py"
             },
             {
-              "locator": "patch-guard, bounded convergence prompt, and privilege-separation workflow regressions",
+              "locator": "patch-guard and privilege-separation workflow regressions",
               "source": "tests/test_agent_maintainer.py"
             }
           ],
           "relation_type": "contains",
-          "target": "Codex has no repository write credential; within one owner-authorized candidate attempt it may run at most three repair-and-recheck cycles with repeated finding-set, candidate-identity, and oscillation stops; trusted guards bound paths and release identity, a fresh secret-free job tests the exact patch, and only a later non-executing job can publish a new draft branch and pull request."
+          "target": "Codex has no repository write credential; trusted guards bound paths and release identity, a fresh secret-free job tests the exact patch, and only a later non-executing job can publish a new draft branch and pull request."
         }
       ]
     },
@@ -858,10 +858,6 @@
               "source": "maintainer_service/intake.py"
             },
             {
-              "locator": "bounded authorized repair and owner contribution boundary",
-              "source": "skills/analyze-project-claims/SKILL.md"
-            },
-            {
               "locator": "closed enum and package-identity contribution schema",
               "source": "skills/analyze-project-claims/references/skill-quality-contribution.schema.json"
             },
@@ -883,7 +879,7 @@
             }
           ],
           "relation_type": "contains",
-          "target": "A proposal can create an enum-only local draft bound to Ian-Tseng and the originating producer repository, but submission requires exact draft approval and a second public-visibility confirmation; exact owner intake rejects cross-repository rebinding, never forwards raw issue content, and authorizes only one isolated candidate attempt with at most three non-recursive repair-and-recheck cycles where the protected workflow is installed."
+          "target": "A proposal can create an enum-only local draft bound to Ian-Tseng and the originating producer repository, but submission requires exact draft approval and a second public-visibility confirmation; exact owner intake rejects cross-repository rebinding, never forwards raw issue content, and authorizes only one isolated candidate attempt where the protected workflow is installed."
         },
         {
           "element_id": "content-free-receipt-contract",
@@ -997,10 +993,6 @@
               "source": "hooks/hooks.json"
             },
             {
-              "locator": "non-recursive receipt adapter and bounded owner-side convergence boundary",
-              "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
-            },
-            {
               "locator": "consume, doctor, conformance, bounded hook input, and no-op failure paths",
               "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
             },
@@ -1010,7 +1002,7 @@
             }
           ],
           "relation_type": "contains",
-          "target": "The explicit CLI is the portable quality-consumption path; the receipt adapter never recursively invokes a skill or starts a repair loop; the optional Codex plugin has one five-second Stop hook using plugin-private state and can request at most one continuation without claiming guaranteed routing or successful live-host continuation."
+          "target": "The explicit CLI is the portable quality-consumption path; the optional Codex plugin has one five-second Stop hook using plugin-private state and can request at most one continuation without claiming guaranteed routing or successful live-host continuation."
         },
         {
           "element_id": "replay-safe-local-proposal",
@@ -1467,16 +1459,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-25T02:37:40.231373Z",
+  "created_at_utc": "2026-08-21T09:06:35.118015Z",
   "integrity": {
-    "canonical_payload_sha256": "b44501c180ac7a11df12929f2eaad279f2cd06f17147d8f28d53077bd1c5b0e6"
+    "canonical_payload_sha256": "f46c67f832623e7f820aced4f45ba13c4e47b34258b853891090d8159d4108f0"
   },
-  "map_id": "component-map-88b0fbb9cc6b",
+  "map_id": "component-map-e2fbee4945db",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.8.3 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, one owner-authorized repair attempt with at most three repair-and-recheck cycles, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating prompt contracts, local tests, or hook invocation as hosted convergence proof.",
-  "origin_scan_id": "20260825T023740231373Z-e765ff74",
-  "previous_map_id": "component-map-e2fbee4945db",
+  "objective": "Map the v0.8.2 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter with a live-observed host-timeout regression, producer-repository-bound consent-gated owner contribution, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating local tests or hook invocation as successful continuation proof.",
+  "origin_scan_id": "20260821T090635118015Z-1de45bef",
+  "previous_map_id": "component-map-17d81ddff8f5",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1592,7 +1584,7 @@
     "tests/test_component_evidence_engine.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "c30585a2c54b9ed2e92049ceefa06f9b3a6efb886313cbfb592825e74156d451",
+  "skill_sha256": "d892da7147f2d4ab01bf60a45f9425af3c81970fb979f29af7ee9cbee86ac999",
   "source_snapshot": [
     {
       "exists": true,
@@ -1603,7 +1595,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f5ab19cb1cb4a5b41b3668cb872bd583dcf05b5b649bae06639ccce1269b00ae",
+      "sha256": "1682068a45c78ef5c33f544c970c48852a30fd45fbfe579809d23ca5dd689df0",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -1615,13 +1607,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "e399de51abbfd285ef33d994a113676748a3d2638fd9ea9ea94aad4b7db3ea0d",
+      "sha256": "4f43e890de436ef23342056ecc1037576a9f586795bf95896a2706f08a921373",
       "source": ".github/actions/managed-skill-core/managed_skill_core.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "cee04a86bdca26d4a33a4de8e6d20ca81bd8b48e7c0ebc708f5e33e799b57e33",
+      "sha256": "68f28c5978b9722a4643dab66a947d305b94f453796241bde886f47aab363deb",
       "source": ".github/codex/prompts/resolve-internal-report.md"
     },
     {
@@ -1645,13 +1637,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "9f29c912d76c788be915698efc749998728ab6323d0199a122599b547cd6d60a",
+      "sha256": "38e2fd3c0ae053c7abf5c21cf325102837f9c3d9365da935b9b5aef5d6d087d1",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "752fabeef1384a70c756770120e6546a0d0b9233d18cef2f335e0954e1326292",
+      "sha256": "b6f28d627407998d0992ec623db5e1a828dc2c4c8af34ed454284fb1e9c36d4e",
       "source": "CITATION.cff"
     },
     {
@@ -1777,13 +1769,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c0099daa52e6ccfec7cf6e4df56ee472636698ba71923acf37f25b61d84ea5ba",
+      "sha256": "0cf237343595d6bf2f77e5ab0dbacd531b290e3c2b4fc686519d0e0fcf655867",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "dac338b6dbb02e901e6de1fbab4659220985fe9cee80b54a8aca922bb9684c3b",
+      "sha256": "3512d821b31b6aec0322f9e77f10f09dae72952b9d7bde3c66559b1fa80de756",
       "source": "README.md"
     },
     {
@@ -1795,7 +1787,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "780363b8ef02ff7e83eb72709f6396b09dec21a26403bb44f58ea8d6757fe33d",
+      "sha256": "ceb9b2c03afb769df3b1e518520c4e1798e9a3313a1c5ffffcb054fef5d6d6fb",
       "source": "VERSION"
     },
     {
@@ -1813,7 +1805,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "8ae2fe968e959e7afecd40843057ca129a05119bdc37339d0183fc7dea58aa5a",
+      "sha256": "17bec9f8cc9e7df5c43df27f6d82763122795d49a4af99cd0f04da18f3f066f7",
       "source": "docs/AGENT_MAINTAINER.md"
     },
     {
@@ -1831,13 +1823,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0f51a8698c9e197f6742a08000a7b825b8b1d0617a097c66136fd3c2fb3c475c",
+      "sha256": "4a26adcf96ebc7a3be14d8b9fbbd675d4e9570ac24c05e5c06d004fda055946f",
       "source": "docs/CODEX_PLUGIN_E2E_LOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d82394e7377bd5fa2ff949aba143a9d0c2b629639daeef78dc5b27a8b5b1057a",
+      "sha256": "6c17b438da3e2c6abae7e30c9061ff670af61dae761237111ed02fce23cee886",
       "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
     },
     {
@@ -2149,13 +2141,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "114ad36ca91ebbf309ca016698d71085fb7e5efb12d9ced9a862092003ab08db",
+      "sha256": "3d0ff11cbfa5d09e11eaa8598e75f0f492b11982350fbdcf712652428e9b0d16",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c30585a2c54b9ed2e92049ceefa06f9b3a6efb886313cbfb592825e74156d451",
+      "sha256": "d892da7147f2d4ab01bf60a45f9425af3c81970fb979f29af7ee9cbee86ac999",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -2263,13 +2255,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "aec95b49682f191707a4dc4781d53fb011f923a7d8a383700c19a0876325560d",
+      "sha256": "748545cbff361eb2031c8f2b783bd5744691c028834e8108066ac778e5104aed",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4d89ee92272260570bffb866ba75c66e38adde5e4a0d259519060701d43a8251",
+      "sha256": "effdc06a8b620d7f58d0429765f12aa562c6c020cfd552f59ecf44d3856410d3",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -2317,7 +2309,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ce769aa8e4fe1561039c5f2bc422d560a122f0eda462a2c46bda58ca7c54f5a3",
+      "sha256": "fd9dc1df091a28f23c67871a5a97aac92d277202cd5fab56766def8b24df29ef",
       "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
     },
     {
@@ -2425,7 +2417,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "58c104266d3b31f168cde321b879163f50983c374163d2feec778920b58246a2",
+      "sha256": "49fb5d2ca181f7c97aa54df1022aff267f53442db50707c3f4eb7ad7e1d95eb4",
       "source": "tests/test_agent_maintainer.py"
     },
     {
@@ -2521,7 +2513,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f9758a970b1679bd3b110345398df64251a70a1cdc20b91044cd54488009023d",
+      "sha256": "6ea2a17b53daef6e41ea2cd0757a28c879ed580f14575f5798c60f1ccc4d422f",
       "source": "tests/test_managed_fleet.py"
     },
     {

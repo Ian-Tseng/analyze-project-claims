@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "candidate_version": "0.8.3",
+  "recorded_at_utc": "2026-08-25T03:03:44Z",
+  "platform": "Windows",
+  "full_suite": {
+    "command": "py -3 -m unittest discover -s tests -v",
+    "status": "PASS",
+    "tests_run": 231,
+    "skipped": 1,
+    "skip_boundary": "The generic update-policy symlink test is privilege-dependent on Windows; dedicated path-resolution, junction, and cross-process tests passed."
+  },
+  "bounded_owner_convergence": {
+    "commands": [
+      "py -3 -m unittest discover -s tests -p test_agent_maintainer.py -v",
+      "py -3 -m unittest discover -s tests -p test_managed_fleet.py -v"
+    ],
+    "status": "PASS",
+    "tests_run": 24,
+    "cycle_ceiling": 3,
+    "assertion": "Focused contract tests confirm that both maintainer paths state one owner-authorized attempt, the three-cycle ceiling, clean-scope and repeated-finding stops, candidate diff identity tracking, oscillation handling, and explicit skill and issue recursion bans. Direct source inspection records the additional unchanged-or-prior-identity, forbidden-scope, missing-evidence, owner-decision, cycle-limit, receipt, and workflow boundaries; the focused tests do not independently exercise every semantic stop."
+  },
+  "skill_validation": {
+    "command": "quick_validate.py skills/analyze-project-claims",
+    "status": "PASS",
+    "validator_result": "Skill is valid!"
+  },
+  "plugin_validation": {
+    "command": "validate_plugin.py .",
+    "status": "PASS",
+    "validator_result": "Plugin validation passed"
+  },
+  "publisher_dry_run": {
+    "command": "gh skill publish .\\skills --dry-run",
+    "status": "PASS",
+    "result": "Dry run complete. Use without --dry-run to publish.",
+    "outbound": "NONE"
+  },
+  "quality_loop_conformance": {
+    "status": "PASS",
+    "result": "QUALITY_PROPOSAL_READY",
+    "replay_deduplicated": true,
+    "outbound": "NONE",
+    "proposal_id": "quality-proposal-418379d17581b63aa776b95e",
+    "receipt_digest_sha256": "7f1730de046a84a32058ad6a3a0d3eea62a9b4bf8cc8295bf8a4d7decd5b1cc9"
+  },
+  "package_verification": {
+    "status": "PASS",
+    "package_manifest_digest": "16597af2c1029a1401d73713031e00792679ab8fa610a18d846e5bde554b0909",
+    "version": "0.8.3"
+  },
+  "engine_verification": {
+    "status": "PASS",
+    "engine_name": "component-evidence",
+    "engine_version": "1.3.0",
+    "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b"
+  },
+  "limitations": [
+    "These are local Windows v0.8.3 release-candidate results, not commit-bound remote CI, hosted maintainer execution, public release, or installed-activation evidence.",
+    "The convergence controller is a bounded prompt and regression contract inside one model invocation; local tests do not prove that a hosted agent will find every same-scope defect or reach convergence.",
+    "No receipt, proposal, issue, workflow, map acceptance, merge, release, publication, or installed update is recursively or automatically authorized.",
+    "Codex routing is host-controlled and Claude runtime activation of v0.8.3 was not observed."
+  ]
+}

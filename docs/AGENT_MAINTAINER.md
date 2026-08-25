@@ -13,7 +13,8 @@ the architecture to another repository, use the
 bounded public report or enum-only quality contribution
   -> owner applies agent-ready
   -> exact-schema intake removes unrelated issue data
-  -> Codex prepares a candidate without GitHub write credentials
+  -> Codex performs one bounded candidate attempt without GitHub write credentials
+       (at most three repair-and-recheck cycles)
   -> a fresh secret-free job applies and tests the exact patch
   -> a final non-executing job publishes a new draft PR
   -> owner review, release, and installed-update verification
@@ -114,6 +115,16 @@ The label is authorization for one isolated candidate attempt only. It is not
 authorization to accept the component map, merge, publish, call the issue
 fixed, close it, update an installation, or process a private API record.
 
+Within that attempt, Codex may use at most three repair-and-recheck cycles.
+After each repair it reruns the focused and complete configured tests, then
+reinspects the original issue scope and every changed surface. It records the
+sorted active finding set and SHA-256 candidate diff identity. It stops early
+when no material same-scope finding remains. It also stops on a repeated
+finding set, an unchanged or previously seen candidate diff identity,
+oscillation, forbidden scope, missing external evidence, an owner decision, or
+the third cycle. It must not invoke another skill recursively, create another
+issue, or trigger another workflow.
+
 ## What the automation enforces
 
 The prepare job binds the issue event to one immutable default-branch commit,
@@ -156,6 +167,11 @@ edit or accept repository validation authority. That is `map-pending`, not a
 passing release state. After reviewing the patch, the owner reconciles the
 exact resulting tree, accepts the exact candidate, runs a second unchanged
 reconciliation, and requires formal record preflight.
+
+The bounded loop is a convergence aid, not proof of correctness. A stopped or
+limit-reached candidate may still be published as a draft for owner review,
+but it must say that convergence was not established. No automatic follow-up
+issue or second repair attempt is created.
 
 ## Owner review and completion
 

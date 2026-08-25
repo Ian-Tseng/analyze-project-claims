@@ -36,7 +36,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.8.2
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.8.3
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
@@ -147,7 +147,8 @@ security issues use [SECURITY.md](SECURITY.md).
 
 The schema excludes project content, logs, prompts, paths, attachments, and
 credentials. The owner-gated [Agent Maintainer](docs/AGENT_MAINTAINER.md) may
-create one map-pending draft from an exact report or enum-only contribution; it
+use at most three repair-and-recheck cycles inside one isolated attempt, then
+create one map-pending draft from an exact report or enum-only contribution. It
 cannot accept, merge, release, close, or update. See
 [Internal Problem Reporting](docs/PROBLEM_REPORTING.md) and the
 [reusable managed-repair guide](docs/GITHUB_AGENT_MAINTAINER_GUIDE.md). New

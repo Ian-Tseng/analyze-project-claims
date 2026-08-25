@@ -158,7 +158,24 @@ When repairs are authorized:
    scientific identity is intentionally created.
 4. Update every coupled active surface.
 5. Re-run tests, preflight, monitors, and stale-language scans.
-6. Iterate until no active same-scope inconsistency remains.
+6. Reinspect the original scope and every changed surface.
+
+Use at most three repair-and-recheck cycles inside one owner-authorized
+candidate attempt. After each cycle, record the sorted active
+`(path, rule-or-test, evidence-locator)` finding set and the SHA-256 candidate
+diff identity. Stop successfully when validation passes and no material
+same-scope inconsistency remains. Stop without claiming convergence on a
+repeated finding set, an unchanged or previously seen candidate diff identity,
+oscillation, a required forbidden edit, missing external evidence, an owner
+decision, or the third cycle. Preserve the last bounded candidate for owner
+review.
+
+Do not invoke another skill recursively, emit another quality receipt, open a
+second issue, or trigger another workflow to continue the loop. When the user
+asks to send a recommended reusable update to the owner, default to the local
+exact contribution preview. Public submission still requires the existing
+draft-specific and public-visibility approvals; the owner-applied label may
+authorize only one protected draft attempt.
 
 A result-changing protocol or implementation edit requires a new scientific
 configuration hash and run group.
