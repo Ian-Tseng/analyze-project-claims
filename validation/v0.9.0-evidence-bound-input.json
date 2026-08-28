@@ -114,7 +114,7 @@
         "value": "component_map_preflight"
       },
       "method": "schema_validated",
-      "observed_summary": "Owner-accepted component-map-a2e9cfaad704 passed an unchanged reconciliation and preflight with its exact map identity."
+      "observed_summary": "Owner-accepted component-map-9a8668d18008 passed an unchanged reconciliation and preflight with its exact map identity."
     }
   ],
   "claims": [

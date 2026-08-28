@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-28T10:14:52.148645Z",
+  "accepted_at_utc": "2026-08-28T09:23:43.754619Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1511,16 +1511,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-28T09:47:27.373744Z",
+  "created_at_utc": "2026-08-28T06:08:32.465230Z",
   "integrity": {
-    "canonical_payload_sha256": "8b3419eb4b9f7299c51a97de1cb868403f6683eeb503b90340051f7beafc2424"
+    "canonical_payload_sha256": "d52227e1075d560243c0e863f976699091afdd00a3af939d616a3d911dfd9845"
   },
-  "map_id": "component-map-9a8668d18008",
+  "map_id": "component-map-a2e9cfaad704",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.9.0 managed skill-quality learning candidate, including backward-compatible content-free receipt v2 context, exact-receipt intake identity, analyzer analysis revisions, bounded no-action tombstones, advisory cross-version problem signatures, closed evaluation manifests and digest-bound results with recomputed gates, manual pilot scaffolding, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, and all retained audit, repair, reporting, analytics, and release boundaries without treating protocol conformance, an unpinned synthetic manifest, a structurally valid result, local tests, prompt contracts, or hook invocation as learning or hosted convergence proof.",
-  "origin_scan_id": "20260828T094727373744Z-60870df1",
-  "previous_map_id": "component-map-a2e9cfaad704",
+  "origin_scan_id": "20260828T060832465230Z-99260bf8",
+  "previous_map_id": "component-map-1621680027a2",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1919,7 +1919,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b2404655a3eacdf776a747081eb57adb7e8ff7ed66e42367b56948acdbda7a6e",
+      "sha256": "e87e0a8dd9edf06932a2eff7d0bbd413942c3ef98e587347a93db217b7fb5028",
       "source": "docs/MANAGED_REPAIR_WALKTHROUGH.md"
     },
     {
@@ -1955,7 +1955,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ce51a41be6c3a44097381495a0ad03552c8bbc95933c2546297a9be93779a423",
+      "sha256": "e9925793a453ba1d579860a781559dbe1ba6fd7abfc8f8cbb47c1a35b24a5694",
       "source": "docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md"
     },
     {

@@ -89,7 +89,7 @@
         "value": "component_map_preflight"
       },
       "method": "schema_validated",
-      "observed_summary": "Owner-accepted component-map-a2e9cfaad704 passed the required unchanged reconciliation and preflight with its exact identity."
+      "observed_summary": "Owner-accepted component-map-9a8668d18008 passed the required unchanged reconciliation and preflight with its exact identity."
     },
     {
       "evidence_id": "self-audit-scope",

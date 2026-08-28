@@ -6,8 +6,10 @@ boundaries.
 1. A producer skill completes its substantive task and runs its local,
    consent-gated maintenance lease. A verified replacement affects the next
    invocation only.
-2. The producer emits exactly one content-free `SKILL_OUTCOME_RECEIPT_V1`
-   marker. Project paths, prompt text, logs, patches, and credentials are absent.
+2. The producer emits exactly one content-free `SKILL_OUTCOME_RECEIPT_V2`
+   marker with closed capability, invariant, and environment identifiers.
+   Project paths, prompt text, logs, patches, and credentials are absent. V1
+   remains readable only for legacy producer interoperability.
 3. `analyze-project-claims` consumes the marker locally. `no_issue` is a no-op;
    a material signal creates one local proposal.
 4. The user previews and separately confirms a bounded GitHub issue targeted to

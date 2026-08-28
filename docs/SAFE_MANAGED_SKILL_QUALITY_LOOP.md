@@ -27,8 +27,13 @@ differently, run multiple hooks concurrently, or stop a continuation. Define
 the durable promise instead:
 
 ```text
-proposal_key = SHA256(receipt_digest + analyzer_version)
+proposal_key = HASH("proposal", receipt_digest)
+analysis_revision_key = HASH("revision", receipt_digest, analyzer_version)
 ```
+
+The exact receipt owns the durable proposal identity. A new analyzer version
+adds one bounded, domain-separated child revision to that proposal rather than
+creating a second proposal for the same receipt.
 
 Use a private atomic store and this lifecycle:
 
@@ -40,8 +45,9 @@ CLAIMED -> PROPOSAL_COMMITTED -> CONSUMED
 ```
 
 A crash before commit is recoverable after the lease. A crash after commit is
-deduplicated by the proposal key. Recursion guards must include host state,
-producer identity, and a bounded causal depth.
+deduplicated by the receipt-keyed proposal identity, while re-analysis is
+deduplicated by the child revision identity. Recursion guards must include host
+state, producer identity, and a bounded causal depth.
 
 ## 3. Minimize data before redacting
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate_version": "0.9.0",
-  "recorded_at_utc": "2026-08-28T09:24:31.925260Z",
+  "recorded_at_utc": "2026-08-28T10:16:54.687170Z",
   "platform": "Windows",
   "full_suite": {
     "command": "py -3 -m unittest discover -s tests -v",
@@ -38,8 +38,8 @@
   "component_map_preflight": {
     "status": "PASS",
     "result": "READY",
-    "accepted_map_id": "component-map-a2e9cfaad704",
-    "accepted_map_sha256": "1d7bde45ffe33e37f13d52c2f7434bf942143765aa8c755daa97d5d35aa8e5a7",
+    "accepted_map_id": "component-map-9a8668d18008",
+    "accepted_map_sha256": "dc6194a93325560422562cb7f669d4f40e9eb792c3110eab15385c1e76fdbec9",
     "post_acceptance_reconciliation": "checked_unchanged"
   },
   "self_audit_scope": {

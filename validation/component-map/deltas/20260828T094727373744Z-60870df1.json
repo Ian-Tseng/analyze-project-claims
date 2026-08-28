@@ -1,0 +1,34 @@
+{
+  "accepted_map_id": "component-map-a2e9cfaad704",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-9a8668d18008",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/MANAGED_REPAIR_WALKTHROUGH.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "46ede4151604b32cc0a3f25d57a3dd01e6d29609d2329f1af56395c3720d1913"
+  },
+  "recorded_at_utc": "2026-08-28T09:47:27.373744Z",
+  "scan_id": "20260828T094727373744Z-60870df1",
+  "schema_version": "1.0"
+}
