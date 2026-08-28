@@ -1,0 +1,331 @@
+{
+  "bindings": [
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "full-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "skill-quality-contract-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "skill-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "quality-loop-conformance-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "evaluation-manifest-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "package-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "engine-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "component-map-preflight-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "evaluation-manifest-result",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "skill-quality-contract-result",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "full-suite-result",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "evidence_id": "component-map-preflight-result",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "562b13f762df4e7bc9d18818f125996fcbc9f833b4acf0038922d8b321f80299",
+      "claim_id": "local-v090-learning-loop-first-milestone-validated",
+      "element_ref": {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "evaluation-first-learning-boundary"
+      },
+      "material": true,
+      "rationale": "The local protocol, exact candidate bytes, schemas, state behavior, and non-outbound conformance are directly tested, while learning quality, controller enforcement, and release lifecycle outcomes remain separate future gates.",
+      "statement": "On this Windows host, the local v0.9.0 release-candidate tree passed 240 of 241 repository tests with one privilege-dependent symlink skip, the official skill validator, package and engine verification, accepted-map preflight, and offline replay-safe quality-loop conformance with no outbound action. The first learning-loop milestone provides v1/v2 content-free receipts, one proposal identity per exact receipt with analyzer revisions, local state migration, bounded no-action tombstones, and a closed evaluation-manifest and manual-pilot scaffold. A representative pilot, measured quality improvement, trusted mechanical repair controller, remote CI, release, installation, and activation remain unobserved or unimplemented.",
+      "status": "partially_supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "freshness": "current",
+      "identity_sha256": "699288a1bc46129e7b94ffb0cb914418bafdddcf4767e481b29b0ff2abcbdefa",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The post-acceptance Windows run executed 241 repository tests: 240 passed and one generic symlink test was skipped because link creation is privilege-dependent.",
+      "selection_sha256": "fe7690273926cdd8293f299263f95a375b0b561124c1d3d6e6af8c86bc623a0e",
+      "source": {
+        "byte_size": 3327,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-validation-receipt.json",
+        "sha256": "89523a97b824ab6fd122d217c695c7127aa5f1ec289daf00faa30a2c85cc2474"
+      }
+    },
+    {
+      "evidence_id": "skill-quality-contract-result",
+      "freshness": "current",
+      "identity_sha256": "308fdee9653acc174726c988a0a91fc7dd67b3592418d341b8e967c644be77ab",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "skill_quality_contract"
+      },
+      "method": "executed_test",
+      "observed_summary": "Forty focused tests passed for v1/v2 receipts, content-free context and signatures, receipt-keyed proposal identity, analyzer revisions, state migration, no-action tombstones, the closed evaluation manifest, and contribution compatibility.",
+      "selection_sha256": "07257bb78294b8ca813b9484ba17ecdde61c74e19c97d0f17a88f23b0ecd7adb",
+      "source": {
+        "byte_size": 3327,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-validation-receipt.json",
+        "sha256": "89523a97b824ab6fd122d217c695c7127aa5f1ec289daf00faa30a2c85cc2474"
+      }
+    },
+    {
+      "evidence_id": "skill-validation-result",
+      "freshness": "current",
+      "identity_sha256": "bcd323031b6c2d602b9275bdce466e3fbe3ebae722b146fb9a87488a46b39d9c",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "skill_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local skill validator accepted the packaged analyzer.",
+      "selection_sha256": "bb3ffe464da1885aed5ec843f6b055b0c2c0e48dbccb99a0695af0f0c4ed26f8",
+      "source": {
+        "byte_size": 3327,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-validation-receipt.json",
+        "sha256": "89523a97b824ab6fd122d217c695c7127aa5f1ec289daf00faa30a2c85cc2474"
+      }
+    },
+    {
+      "evidence_id": "quality-loop-conformance-result",
+      "freshness": "current",
+      "identity_sha256": "514794728afa6e39c7b9baebe6238d1c70525223a18f7ddb4592b2f960a1814c",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "quality_loop_conformance"
+      },
+      "method": "replayed",
+      "observed_summary": "The offline conformance fixture committed one local proposal, deduplicated replay, and performed no outbound action.",
+      "selection_sha256": "4aef0b088b82a274ab5a415c10ba9625883a22f0947724eb9d0ee2b48bf324f2",
+      "source": {
+        "byte_size": 3327,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-validation-receipt.json",
+        "sha256": "89523a97b824ab6fd122d217c695c7127aa5f1ec289daf00faa30a2c85cc2474"
+      }
+    },
+    {
+      "evidence_id": "evaluation-manifest-result",
+      "freshness": "current",
+      "identity_sha256": "e56ebb3d205bb3679191acc7e51c6614e65bf54ee9d9adf9e9266c6803341c75",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "evaluation_manifest"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The synthetic evaluation manifest and pilot scaffold validate against the closed contract, while readiness remains INCONCLUSIVE because no representative model run was performed.",
+      "selection_sha256": "3d3f3f5a3a2684b9edd24bc32cf7b42c3ffb2a6bf3c92e5f1f7b87fc58a7746c",
+      "source": {
+        "byte_size": 3327,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-validation-receipt.json",
+        "sha256": "89523a97b824ab6fd122d217c695c7127aa5f1ec289daf00faa30a2c85cc2474"
+      }
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "freshness": "current",
+      "identity_sha256": "e88e3ad462eaa54142cf847557c797b7b8698fb88421de521786e77daabf3f32",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "package_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The v0.9.0 package matches its rebuilt manifest and recorded package digest.",
+      "selection_sha256": "7bb0b0a1bbf23021e912b135acf834ab43a563b16605985c27320313475a96bd",
+      "source": {
+        "byte_size": 3327,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-validation-receipt.json",
+        "sha256": "89523a97b824ab6fd122d217c695c7127aa5f1ec289daf00faa30a2c85cc2474"
+      }
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "freshness": "current",
+      "identity_sha256": "05bba308a2f414377d309379b89865aed53a436b33db4320a3bb6a7fb5dfa16c",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "engine_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified.",
+      "selection_sha256": "e0b06ffe03f8d910801a04f18e07b20c5eef772d9e31fc6e5786a75b3d5b95c4",
+      "source": {
+        "byte_size": 3327,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-validation-receipt.json",
+        "sha256": "89523a97b824ab6fd122d217c695c7127aa5f1ec289daf00faa30a2c85cc2474"
+      }
+    },
+    {
+      "evidence_id": "component-map-preflight-result",
+      "freshness": "current",
+      "identity_sha256": "338903ce32d6c39ea5827aedccff9bad7aa5487ab4d57dcc5a3142840201f8f9",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "component_map_preflight"
+      },
+      "method": "schema_validated",
+      "observed_summary": "Owner-accepted component-map-074ab7f17fa4 passed an unchanged reconciliation and preflight with its exact map identity.",
+      "selection_sha256": "0bafe062ea3158155f0c5b20719c85bed6206366af6a7f274e7623f008e51c7f",
+      "source": {
+        "byte_size": 3327,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-validation-receipt.json",
+        "sha256": "89523a97b824ab6fd122d217c695c7127aa5f1ec289daf00faa30a2c85cc2474"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "9350c6ae36e2336509a2da0ccd199f554f4eb292f35d7a83ef4669ca29fb14f9",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "local-v090-learning-loop-first-milestone-validated"
+      ],
+      "evidence_ids": [
+        "evaluation-manifest-result",
+        "skill-quality-contract-result"
+      ],
+      "limitation_id": "synthetic-versus-measured-learning-boundary",
+      "text": "The unpinned synthetic manifest and schema tests do not prove representative pilot performance, false-cluster rate, reproducibility across model runs, or quality improvement."
+    },
+    {
+      "claim_ids": [
+        "local-v090-learning-loop-first-milestone-validated"
+      ],
+      "evidence_ids": [
+        "skill-quality-contract-result"
+      ],
+      "limitation_id": "intake-versus-trusted-controller-boundary",
+      "text": "The local receipt, proposal, revision, and tombstone contract does not implement a trusted attempt ledger, mechanical cycle accounting, termination authority, or an autonomous repair controller."
+    },
+    {
+      "claim_ids": [
+        "local-v090-learning-loop-first-milestone-validated"
+      ],
+      "evidence_ids": [
+        "full-suite-result",
+        "component-map-preflight-result"
+      ],
+      "limitation_id": "local-versus-release-activation-boundary",
+      "text": "Local tests and accepted-map preflight do not prove commit-bound pull-request or exact-main CI, release publication, managed installation, client routing, or fresh activation."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-074ab7f17fa4",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "f66c12e26a8a5bd02b2e35baa00f604bba6f71dfbcb479b2b9911e082aac4d7e"
+    },
+    "authority": [
+      "validation/v0.9.0-validation-receipt.json",
+      "validation/component-map/accepted-map.json"
+    ],
+    "engine_identity": {
+      "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "State the strongest safe local validation claim for the v0.9.0 skill-quality learning-loop first milestone.",
+    "recorded_at_utc": "2026-08-27T17:44:26.362668Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260827T174426362668Z-19236363",
+    "scope": [
+      "v0.9.0 local release-candidate tree",
+      "receipt v1/v2 compatibility and local proposal, revision, migration, and tombstone state",
+      "closed evaluation-manifest contract and manual pilot scaffold",
+      "accepted component-map, package, engine, skill validation, and offline conformance identities"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "9d2744b44fa9a3ddea1626eadc968464c83967dca744dd923d5977f0eb1eb903"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "synthetic-versus-measured-learning-boundary",
+      "intake-versus-trusted-controller-boundary",
+      "local-versus-release-activation-boundary"
+    ],
+    "claim_count": 1,
+    "claim_counts": {
+      "partially_supported": 1
+    },
+    "evidence_count": 8,
+    "material_claim_count": 1,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "On this Windows host, the local v0.9.0 release-candidate tree passed 240 of 241 repository tests with one privilege-dependent symlink skip, the official skill validator, package and engine verification, accepted-map preflight, and offline replay-safe quality-loop conformance with no outbound action. The first learning-loop milestone provides v1/v2 content-free receipts, one proposal identity per exact receipt with analyzer revisions, local state migration, bounded no-action tombstones, and a closed evaluation-manifest and manual-pilot scaffold. A representative pilot, measured quality improvement, trusted mechanical repair controller, remote CI, release, installation, and activation remain unobserved or unimplemented.",
+    "strongest_safe_claim_id": "local-v090-learning-loop-first-milestone-validated",
+    "unresolved_uncertainties": [
+      "Commit-bound pull-request and exact-main CI have not run for v0.9.0.",
+      "The representative ten-to-twenty-receipt pilot has not run, so clustering and quality-lift claims remain unmeasured.",
+      "A trusted attempt ledger, mechanically enforced cycle and termination controller, and autonomous repair loop are not implemented.",
+      "The v0.9.0 GitHub release, managed installation, and fresh activation do not exist.",
+      "Codex and Claude routing, discovery, and invocation remain host-controlled and unobserved for v0.9.0."
+    ]
+  }
+}

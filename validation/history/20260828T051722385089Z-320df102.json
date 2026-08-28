@@ -1,0 +1,302 @@
+{
+  "bindings": [
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "full-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "evaluation-result-contract",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "skill-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "package-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "engine-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "component-map-preflight-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "evaluation-result-contract",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "self-audit-scope",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "full-suite-result",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "component-map-preflight-result",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "3504fc04b9a9d3cfa735409a50425852d51e2344e5eebf4e265d534dcf1eecc7",
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "element_ref": {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "evaluation-first-learning-boundary"
+      },
+      "material": true,
+      "rationale": "Exact local bytes, deterministic tests, package identities, and accepted structural evidence support the scoped self-consistency claim, while semantic independence, measured learning value, controller enforcement, and release lifecycle outcomes remain separate unobserved gates.",
+      "statement": "On this Windows host, analyze-project-claims applied its own accepted component-map and evidence-bound protocol to the local v0.9.0 candidate. The exact accepted map passed an unchanged reconciliation and preflight; the package, embedded engine, and official skill validator verified; 250 of 251 repository tests passed with one privilege-dependent symlink skip; and fifteen focused tests validated the closed digest-bound evaluation manifest/result contract, exact fixture and repetition binding, recomputed gates, direct-failure precedence, and state-free validation. This establishes local structural self-consistency only: no representative pilot, pinned model evaluation, quality improvement, independent implementation, trusted repair controller, release, installation, or activation was observed.",
+      "status": "partially_supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "freshness": "current",
+      "identity_sha256": "97e911db6115190b77cef78f7d1f2477fcb2b5baa0e0c3bfda98470b091ef265",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The post-acceptance Windows run executed 251 repository tests: 250 passed and one generic symlink test was skipped because link creation is privilege-dependent.",
+      "selection_sha256": "93b5991bd9e2c72b8320ab36404f942327bd5a9c838682ec51fc2ab6e0346f10",
+      "source": {
+        "byte_size": 2913,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json",
+        "sha256": "67b76af33b07a75c606034bee0d8ed657b3c822dcb89085bff9ab0559719858a"
+      }
+    },
+    {
+      "evidence_id": "evaluation-result-contract",
+      "freshness": "current",
+      "identity_sha256": "9e1783dc75b8f33e1d0a4e45863b6812018485d7e63fd0983d99d12870964d97",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "evaluation_result_contract"
+      },
+      "method": "executed_test",
+      "observed_summary": "Fifteen post-acceptance tests passed for frozen thresholds, closed manifest/result schemas, digests, exact fixture coverage, repetition binding, derived summaries and classifications, failed-gate precedence, and state-free validation.",
+      "selection_sha256": "99752220dc3561e28e39cd92d28ea42c24aa7a18d8f43df179a54a0ada2268f7",
+      "source": {
+        "byte_size": 2913,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json",
+        "sha256": "67b76af33b07a75c606034bee0d8ed657b3c822dcb89085bff9ab0559719858a"
+      }
+    },
+    {
+      "evidence_id": "skill-validation-result",
+      "freshness": "current",
+      "identity_sha256": "28297c35efb4f6e63bbce60d171036108d5af0a7acc6438b057ed9a5f2bd0b7d",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "skill_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local skill validator accepted the packaged analyzer.",
+      "selection_sha256": "bb3ffe464da1885aed5ec843f6b055b0c2c0e48dbccb99a0695af0f0c4ed26f8",
+      "source": {
+        "byte_size": 2913,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json",
+        "sha256": "67b76af33b07a75c606034bee0d8ed657b3c822dcb89085bff9ab0559719858a"
+      }
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "freshness": "current",
+      "identity_sha256": "b8352863e89119ffe012b8453f33cb86faba8af33992ae5a3a1a7f0e247c3419",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "package_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The v0.9.0 package matches its rebuilt manifest and recorded package digest.",
+      "selection_sha256": "856a4a1c2cc6ede5bd94b8a5687f19a1610bb65502595a1a4dbd2cbacbbb6025",
+      "source": {
+        "byte_size": 2913,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json",
+        "sha256": "67b76af33b07a75c606034bee0d8ed657b3c822dcb89085bff9ab0559719858a"
+      }
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "freshness": "current",
+      "identity_sha256": "bfafa6b236201a28b95f6507a16f37729e2931ec33bd8e71d3aabc2dadb54438",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "engine_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified.",
+      "selection_sha256": "e0b06ffe03f8d910801a04f18e07b20c5eef772d9e31fc6e5786a75b3d5b95c4",
+      "source": {
+        "byte_size": 2913,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json",
+        "sha256": "67b76af33b07a75c606034bee0d8ed657b3c822dcb89085bff9ab0559719858a"
+      }
+    },
+    {
+      "evidence_id": "component-map-preflight-result",
+      "freshness": "current",
+      "identity_sha256": "beb9ea6de9b3f9a4c6e308e3ab3d853ca79ecc14eac586ced198354dc4a853ea",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "component_map_preflight"
+      },
+      "method": "schema_validated",
+      "observed_summary": "Owner-accepted component-map-1621680027a2 passed the required unchanged reconciliation and preflight with its exact identity.",
+      "selection_sha256": "94775ccc54a716ca5d613e0186edb6b2c2c4bb9de638bab1856bf8748b507406",
+      "source": {
+        "byte_size": 2913,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json",
+        "sha256": "67b76af33b07a75c606034bee0d8ed657b3c822dcb89085bff9ab0559719858a"
+      }
+    },
+    {
+      "evidence_id": "self-audit-scope",
+      "freshness": "current",
+      "identity_sha256": "30b6a90b23d632233719bdd19fa0e66c36114fab1b407ff10a6534fcdf0f3966",
+      "locator": {
+        "kind": "artifact_key",
+        "value": "self_audit_scope"
+      },
+      "method": "inspected",
+      "observed_summary": "The repository used the same analyzer package, evidence engine, schemas, and recorder to audit its own candidate, so this is deterministic self-consistency evidence rather than independent validation.",
+      "selection_sha256": "b283f941f1ead24923e69e3ecdb997a2d5b90fc1e2b9656da7ea8445e2e4835b",
+      "source": {
+        "byte_size": 2913,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json",
+        "sha256": "67b76af33b07a75c606034bee0d8ed657b3c822dcb89085bff9ab0559719858a"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "9fdc42ee879e07e3171543d17583ffbae9d4e0a2bf24b5a4e585d075c82effec",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "local-v090-self-audit-result-contract-validated"
+      ],
+      "evidence_ids": [
+        "evaluation-result-contract"
+      ],
+      "limitation_id": "artifact-contract-versus-measured-learning-boundary",
+      "text": "Closed manifest/result schemas and deterministic tests do not authenticate observations or establish representative pilot reproducibility, false-cluster rate, owner cost, model quality lift, or absence of regression."
+    },
+    {
+      "claim_ids": [
+        "local-v090-self-audit-result-contract-validated"
+      ],
+      "evidence_ids": [
+        "self-audit-scope"
+      ],
+      "limitation_id": "self-application-versus-independent-validation-boundary",
+      "text": "The self-audit reuses the analyzer package, component-evidence engine, schemas, and recorder under test; it is not an independent implementation or scientific replication and may share semantic defects."
+    },
+    {
+      "claim_ids": [
+        "local-v090-self-audit-result-contract-validated"
+      ],
+      "evidence_ids": [
+        "full-suite-result",
+        "component-map-preflight-result"
+      ],
+      "limitation_id": "local-versus-controller-and-release-boundary",
+      "text": "Local tests and accepted-map preflight do not prove a trusted repair controller, commit-bound CI, release publication, managed installation, client routing, or fresh activation."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-1621680027a2",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "22c62e85025f7468b0914c9ed9d27aa825cfc49e78a9b6899191a178557cc85a"
+    },
+    "authority": [
+      "validation/v0.9.0-evaluation-result-validation-receipt.json",
+      "validation/component-map/accepted-map.json"
+    ],
+    "engine_identity": {
+      "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "State the strongest safe self-audit claim for the local v0.9.0 evaluation-result contract after exact component-map acceptance.",
+    "recorded_at_utc": "2026-08-28T05:17:22.385089Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260828T051722385089Z-320df102",
+    "scope": [
+      "v0.9.0 local release-candidate tree",
+      "closed skill-quality evaluation manifest and result contracts",
+      "state-free exact-pair validation command",
+      "accepted component-map, package, engine, skill validator, and local test identities",
+      "same-package self-audit independence boundary"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "c96db14d576d287ae01cb541f156f07e05a9e28ef8ace4ca7e49cd8358938f49"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "artifact-contract-versus-measured-learning-boundary",
+      "self-application-versus-independent-validation-boundary",
+      "local-versus-controller-and-release-boundary"
+    ],
+    "claim_count": 1,
+    "claim_counts": {
+      "partially_supported": 1
+    },
+    "evidence_count": 7,
+    "material_claim_count": 1,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "On this Windows host, analyze-project-claims applied its own accepted component-map and evidence-bound protocol to the local v0.9.0 candidate. The exact accepted map passed an unchanged reconciliation and preflight; the package, embedded engine, and official skill validator verified; 250 of 251 repository tests passed with one privilege-dependent symlink skip; and fifteen focused tests validated the closed digest-bound evaluation manifest/result contract, exact fixture and repetition binding, recomputed gates, direct-failure precedence, and state-free validation. This establishes local structural self-consistency only: no representative pilot, pinned model evaluation, quality improvement, independent implementation, trusted repair controller, release, installation, or activation was observed.",
+    "strongest_safe_claim_id": "local-v090-self-audit-result-contract-validated",
+    "unresolved_uncertainties": [
+      "A representative ten-to-twenty-receipt pilot and pinned model comparison have not run.",
+      "No independent implementation has replicated the self-audit's semantic conclusions.",
+      "A trusted attempt ledger and mechanically enforced repair controller remain unimplemented.",
+      "Commit-bound pull-request and exact-main CI have not run for v0.9.0.",
+      "The v0.9.0 release, managed installation, Codex or Claude routing, and fresh activation remain unobserved."
+    ]
+  }
+}

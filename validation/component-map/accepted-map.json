@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-08-25T02:42:33.389836Z",
+  "accepted_at_utc": "2026-08-28T10:14:52.148645Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -8,6 +8,8 @@
     "skills/analyze-project-claims/scripts/reconcile_component_map.py",
     "tests/test_component_map.py",
     "evaluation/protocol.md",
+    "evaluation/quality-loop-pilot/protocol.md",
+    "evaluation/quality-loop-pilot/fixture-taxonomy.json",
     "evaluation/configs/dry-run.json",
     "evaluation/scripts/cross_project_reliability.py",
     "tests/test_cross_project_reliability.py",
@@ -80,12 +82,15 @@
     "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
     "tests/test_lifecycle_receipt_consumer.py",
     "skills/analyze-project-claims/references/skill-outcome-receipt.schema.json",
+    "skills/analyze-project-claims/references/skill-quality-evaluation-manifest.schema.json",
     "skills/analyze-project-claims/references/skill-quality-proposal.schema.json",
     "skills/analyze-project-claims/references/skill-quality-contribution.schema.json",
     "skills/analyze-project-claims/references/skill-quality-loop.md",
     "skills/analyze-project-claims/scripts/skill_quality_loop.py",
+    "skills/analyze-project-claims/scripts/_internal/skill_quality/attempt_contract.py",
     "skills/analyze-project-claims/scripts/_internal/skill_quality",
     "tests/test_skill_quality_loop.py",
+    "tests/test_skill_quality_evaluation.py",
     "tests/test_quality_contribution.py",
     ".codex-plugin/plugin.json",
     ".agents/plugins/marketplace.json",
@@ -889,20 +894,59 @@
           "element_id": "content-free-receipt-contract",
           "evidence_locators": [
             {
-              "locator": "closed SkillOutcomeReceipt v1 schema",
+              "locator": "closed SkillOutcomeReceipt v1/v2 schema and content-free context",
               "source": "skills/analyze-project-claims/references/skill-outcome-receipt.schema.json"
             },
             {
-              "locator": "closed fields, canonical digest, marker, TTL, byte, and producer validation",
+              "locator": "v1/v2 closed fields, canonical digest, versioned marker, advisory problem signature, TTL, byte, and producer validation",
               "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contract.py"
             },
             {
-              "locator": "marker round-trip, unknown field, expiry, and two-producer fixture regressions",
+              "locator": "v1/v2 marker, context allowlist, problem-signature, expiry, and producer fixture regressions",
               "source": "tests/test_skill_quality_loop.py"
             }
           ],
           "relation_type": "contains",
-          "target": "Compatible Ian-Tseng-managed producers can declare one closed, size- and time-bounded receipt using only enum and package identity fields; unknown or content-bearing fields fail closed and producer identity remains explicitly untrusted."
+          "target": "Compatible Ian-Tseng-managed producers can declare one closed, size- and time-bounded v2 receipt with content-free capability, invariant, and environment identity while exact v1 markers remain readable; unknown or content-bearing fields fail closed, producer identity remains explicitly untrusted, and v1 receipts cannot cross-cluster."
+        },
+        {
+          "element_id": "evaluation-first-learning-boundary",
+          "evidence_locators": [
+            {
+              "locator": "closed signal and dimension vocabulary with prohibited content-bearing dimensions",
+              "source": "evaluation/quality-loop-pilot/fixture-taxonomy.json"
+            },
+            {
+              "locator": "manual pilot selection, learning-value gates, and pending-evidence boundary",
+              "source": "evaluation/quality-loop-pilot/protocol.md"
+            },
+            {
+              "locator": "unpinned synthetic INCONCLUSIVE manifest",
+              "source": "evaluation/quality-loop-pilot/synthetic-evaluation-manifest.json"
+            },
+            {
+              "locator": "closed baseline, candidate, fixture, environment, model, and complete pilot-threshold schema",
+              "source": "skills/analyze-project-claims/references/skill-quality-evaluation-manifest.schema.json"
+            },
+            {
+              "locator": "closed per-fixture observation, derived summary, classification, manifest-binding, and digest schema",
+              "source": "skills/analyze-project-claims/references/skill-quality-evaluation-result.schema.json"
+            },
+            {
+              "locator": "closed evaluation manifest and result validation, canonical digests, exact fixture coverage, derived summaries, and gate classification",
+              "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/attempt_contract.py"
+            },
+            {
+              "locator": "state-free bounded evaluation-validate command",
+              "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
+            },
+            {
+              "locator": "manifest and result round-trip, threshold, exact coverage, digest, classification, repetition, schema parity, stateless CLI, and packaged synthetic regressions",
+              "source": "tests/test_skill_quality_evaluation.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A closed content-free evaluation manifest binds exact baseline and candidate packages, fixtures, environment, model parameters, repetitions, and all pilot thresholds; a separate digest-bound result covers every fixture exactly once and recomputes PASS, FAIL, or INCONCLUSIVE with direct failed gates taking precedence. The bundled synthetic pilot remains explicitly inconclusive, and neither artifact validation nor protocol conformance authenticates execution or proves improvement, recurrence, or repair authorization."
         },
         {
           "element_id": "explicit-update-authority",
@@ -1016,20 +1060,20 @@
           "element_id": "replay-safe-local-proposal",
           "evidence_locators": [
             {
-              "locator": "closed local proposal schema",
+              "locator": "closed v2 local proposal and analysis revision schema",
               "source": "skills/analyze-project-claims/references/skill-quality-proposal.schema.json"
             },
             {
-              "locator": "atomic locked state, queue bounds, lease recovery, proposal key, and outbound counter",
+              "locator": "v1 state migration, exact-receipt proposal key, revision and tombstone bounds, atomic locked state, lease recovery, and outbound counter",
               "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/store.py"
             },
             {
-              "locator": "replay, sixteen-consumer concurrency, lease, recursion, and conformance regressions",
+              "locator": "cross-version proposal identity, v1 migration, no-action tombstone, concurrency, lease, recursion, and conformance regressions",
               "source": "tests/test_skill_quality_loop.py"
             }
           ],
           "relation_type": "contains",
-          "target": "A private bounded atomic store creates one deterministic local proposal per receipt digest and analyzer version, deduplicates replay and concurrent consumers, recovers expired leases, and performs no outbound action."
+          "target": "A private bounded atomic store creates one deterministic intake proposal per exact receipt digest, stores analyzer versions as bounded analysis revisions, migrates v1 proposal state, preserves no-issue replay with expiring local tombstones, deduplicates concurrent consumers, recovers expired leases, and performs no outbound action."
         }
       ]
     },
@@ -1467,16 +1511,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-08-25T02:37:40.231373Z",
+  "created_at_utc": "2026-08-28T09:47:27.373744Z",
   "integrity": {
-    "canonical_payload_sha256": "b44501c180ac7a11df12929f2eaad279f2cd06f17147d8f28d53077bd1c5b0e6"
+    "canonical_payload_sha256": "8b3419eb4b9f7299c51a97de1cb868403f6683eeb503b90340051f7beafc2424"
   },
-  "map_id": "component-map-88b0fbb9cc6b",
+  "map_id": "component-map-9a8668d18008",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.8.3 managed skill-quality candidate, including content-free cross-skill receipts, replay-safe local proposals, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, one owner-authorized repair attempt with at most three repair-and-recheck cycles, explicit update authority, map-pending agent maintenance, read-only lifecycle interpretation, exact claim-to-evidence bindings, and all retained audit, evaluation, reporting, analytics, and release boundaries without treating prompt contracts, local tests, or hook invocation as hosted convergence proof.",
-  "origin_scan_id": "20260825T023740231373Z-e765ff74",
-  "previous_map_id": "component-map-e2fbee4945db",
+  "objective": "Map the v0.9.0 managed skill-quality learning candidate, including backward-compatible content-free receipt v2 context, exact-receipt intake identity, analyzer analysis revisions, bounded no-action tombstones, advisory cross-version problem signatures, closed evaluation manifests and digest-bound results with recomputed gates, manual pilot scaffolding, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, and all retained audit, repair, reporting, analytics, and release boundaries without treating protocol conformance, an unpinned synthetic manifest, a structurally valid result, local tests, prompt contracts, or hook invocation as learning or hosted convergence proof.",
+  "origin_scan_id": "20260828T094727373744Z-60870df1",
+  "previous_map_id": "component-map-a2e9cfaad704",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1491,6 +1535,7 @@
     "tests/test_record_scan.py",
     "validation/README.md",
     "evaluation/README.md",
+    "evaluation/quality-loop-pilot",
     "evaluation/protocol.md",
     "evaluation/configs/confirmatory.template.json",
     "evaluation/configs/development-pilot.template.json",
@@ -1587,12 +1632,13 @@
     "docs/CODEX_PLUGIN_E2E_LOG.md",
     "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md",
     "tests/test_skill_quality_loop.py",
+    "tests/test_skill_quality_evaluation.py",
     "tests/test_quality_contribution.py",
     "tests/test_plugin_bundle.py",
     "tests/test_component_evidence_engine.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "c30585a2c54b9ed2e92049ceefa06f9b3a6efb886313cbfb592825e74156d451",
+  "skill_sha256": "c96db14d576d287ae01cb541f156f07e05a9e28ef8ace4ca7e49cd8358938f49",
   "source_snapshot": [
     {
       "exists": true,
@@ -1603,7 +1649,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f5ab19cb1cb4a5b41b3668cb872bd583dcf05b5b649bae06639ccce1269b00ae",
+      "sha256": "ff6c4f55e083f1d56546e6c3b3162a1dbf88f5b22b52535b97c8a6121d72428d",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -1645,13 +1691,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "9f29c912d76c788be915698efc749998728ab6323d0199a122599b547cd6d60a",
+      "sha256": "c6ed2b67c35d9867560d398c3c63acd0f4eee8271c55b7f253897d75a895314c",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "752fabeef1384a70c756770120e6546a0d0b9233d18cef2f335e0954e1326292",
+      "sha256": "7d34b3126a9794e89d5458eda099f259ae25cf3c2572efa9ddb7f68cd46aaa97",
       "source": "CITATION.cff"
     },
     {
@@ -1777,13 +1823,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c0099daa52e6ccfec7cf6e4df56ee472636698ba71923acf37f25b61d84ea5ba",
+      "sha256": "1f3bfac566c5515c3b9991b11288fded5a5fb98b62296c7aff4b6fa89cd310f9",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "dac338b6dbb02e901e6de1fbab4659220985fe9cee80b54a8aca922bb9684c3b",
+      "sha256": "8700da863e177202e480b0c5568da8839cd701b5822c7e764674a77599a3ed2a",
       "source": "README.md"
     },
     {
@@ -1795,7 +1841,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "780363b8ef02ff7e83eb72709f6396b09dec21a26403bb44f58ea8d6757fe33d",
+      "sha256": "9d8c94f1ad3ea96b1e2ac4914fda4cb93c76b4a3e0d8cc6dd8976d6c0b227d15",
       "source": "VERSION"
     },
     {
@@ -1873,7 +1919,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "e87e0a8dd9edf06932a2eff7d0bbd413942c3ef98e587347a93db217b7fb5028",
+      "sha256": "b2404655a3eacdf776a747081eb57adb7e8ff7ed66e42367b56948acdbda7a6e",
       "source": "docs/MANAGED_REPAIR_WALKTHROUGH.md"
     },
     {
@@ -1909,25 +1955,25 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "e9925793a453ba1d579860a781559dbe1ba6fd7abfc8f8cbb47c1a35b24a5694",
+      "sha256": "ce51a41be6c3a44097381495a0ad03552c8bbc95933c2546297a9be93779a423",
       "source": "docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "52155c0745cd3d1a4393a7e62b10a2192e92eb1cae056bb886060e90d078d4fd",
+      "sha256": "f48f0961a4275d856ee91bc08e61f84c263e3e3ef73cf45bcfcae0a7340af539",
       "source": "docs/SKILL_OUTCOME_RECEIPT.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "272b356209fd313b22e0e2c7382cfad592ec9eccf5cf770a298627db8ea9a10e",
+      "sha256": "949636e18f7b9aa63c355d45fc9141257a5784c229261570fd82170d69459f86",
       "source": "docs/SKILL_QUALITY_LOOP.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1451f6e10eed905411f587c7426a14b6c0e6c31ebd9398b63b2bb9bd3476d40c",
+      "sha256": "29e7f6f83603b06238fb0b7925586d6c947a82ed324f8098bfab65199c61b050",
       "source": "evaluation/README.md"
     },
     {
@@ -2007,6 +2053,30 @@
       "kind": "file",
       "sha256": "31bac0599b73128a83fb9317797dd905475bb52843153fc6c5b2744637cae72b",
       "source": "evaluation/protocol.md"
+    },
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "aa9b486ff9c4ba5ce186977e7861ae5f67cb1051f8c1fb75179c7f505f56e870",
+      "source": "evaluation/quality-loop-pilot"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "d0dc8494d704a35b23512058d958789c61c6be82c63ed836374fc548359984ae",
+      "source": "evaluation/quality-loop-pilot/fixture-taxonomy.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "d7abb7979b2c9096b66a0492e03f38696c6bfb7689a39b41311aa1cde002aafb",
+      "source": "evaluation/quality-loop-pilot/protocol.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "0df399fc11a3b5b1cb10388884e513b68fe148d25d6c0d42e341e7befea07d83",
+      "source": "evaluation/quality-loop-pilot/synthetic-evaluation-manifest.json"
     },
     {
       "exists": true,
@@ -2107,7 +2177,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "8fc8b71c6561deccec4864f166ffea84ab16cb90b8507edc151d46e66420a259",
+      "sha256": "20d00fa25205b0282c61ee10235896d059592b9afae1f0dff5002f71c7bb0691",
       "source": "examples/quality-loop-producers"
     },
     {
@@ -2149,13 +2219,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "114ad36ca91ebbf309ca016698d71085fb7e5efb12d9ced9a862092003ab08db",
+      "sha256": "aca6ee4b1fd9434e7faacf9a79c87b966d007a6d1ec5695b04d05bc597ac6c2c",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c30585a2c54b9ed2e92049ceefa06f9b3a6efb886313cbfb592825e74156d451",
+      "sha256": "c96db14d576d287ae01cb541f156f07e05a9e28ef8ace4ca7e49cd8358938f49",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -2263,13 +2333,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "aec95b49682f191707a4dc4781d53fb011f923a7d8a383700c19a0876325560d",
+      "sha256": "5ff41af9622e6345bf43a707c0acab7b68ac1b67161de42528a97d6a3d106a36",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4d89ee92272260570bffb866ba75c66e38adde5e4a0d259519060701d43a8251",
+      "sha256": "2d9e50f710aa022dbb683827813bea827b1676d41d8eb240b047550d7af6a070",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -2305,7 +2375,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3e4a4e8187eb94472454558f4c57ead56d764ed9921cbad27e8bc66846b29d96",
+      "sha256": "d44baaeea26c6349a3c9029d28455304ad4764632fd659342aed36050a5da750",
       "source": "skills/analyze-project-claims/references/skill-outcome-receipt.schema.json"
     },
     {
@@ -2317,13 +2387,25 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ce769aa8e4fe1561039c5f2bc422d560a122f0eda462a2c46bda58ca7c54f5a3",
+      "sha256": "457535857aa6d892d905cf83ccc8bb74b1a0b6c4f6220228882382350a15b25b",
+      "source": "skills/analyze-project-claims/references/skill-quality-evaluation-manifest.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "79f0672f37a647c7d97a5ee28cb6ce42f1459e9a4cacdeb6d9baa02858cebd6d",
+      "source": "skills/analyze-project-claims/references/skill-quality-evaluation-result.schema.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "7a188eb406d3b6bfd676bcb3725acd2017f907713d88a38fece174afaffb98a2",
       "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "dfc3affbcfa499e9bdc0f543a8b9b0d7d9c3d4817b3dec4096c0dd1e622328a3",
+      "sha256": "33bb13c85f3bae9785b6941bebc4250bb86369ec8850f66a61ef5f78fd263806",
       "source": "skills/analyze-project-claims/references/skill-quality-proposal.schema.json"
     },
     {
@@ -2347,13 +2429,19 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "a4c59ca0949f7f0449c6bcbcf8f4cd6b33fa95cfc2fbd6d2923f340dff5debfd",
+      "sha256": "65a88162f836be727d71698f7d73296464598f55a12cfb33c24f344c2bc3f6d2",
       "source": "skills/analyze-project-claims/scripts/_internal/skill_quality"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "5f2b3e360ebc767b20ed5942dc149ac8c6aa0177c268af02ce508c764564fbef",
+      "sha256": "1deaba8921ddd8d3018610c591f6c1190fd2a61a7c49ba599f65c6e9d9e66c6b",
+      "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/attempt_contract.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "26f6076f98c82119300d15ff03b63b0e6d4693a59107b733f33a99c4fcafd247",
       "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contract.py"
     },
     {
@@ -2365,7 +2453,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "de3ef67f0af3f1283bf0bfbebb5716750b758a6f74e2b8e741f7e92bf8abeb33",
+      "sha256": "21ac1aad444cfd9b9c8c00dab1a4b84b7d5c5666731dd152254c8f0116006ec2",
       "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/store.py"
     },
     {
@@ -2407,7 +2495,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "2a91da4e608e5102eb1d503bb62cb81464b24f223a19999ce8cc5b6f307f0d5d",
+      "sha256": "f32a44fb103738f0c94731c56f347de12046d0903c22ec5b9e50c1d5e05d314f",
       "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
     },
     {
@@ -2569,7 +2657,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "5f0a91dd067522c1006832e5385ded61e3a42d055721e6eb7231c0157c93fa87",
+      "sha256": "a637013e0a0fcef7a26cd209f921434c3d4ecd91bed96774bf0cf96aecf92eb8",
       "source": "tests/test_record_scan.py"
     },
     {
@@ -2587,7 +2675,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0ad5752e7e26619452ce365586e26a4bd7ad3afd21ec1b3815cc0a6ca4d0f619",
+      "sha256": "b45df83e32c3c760feb6b52a495cdff1dad6b01571916b02e56d1ef24a36f683",
+      "source": "tests/test_skill_quality_evaluation.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "6a78f8ca160864247a2913b01fb566048f432a2d7fc0337b79439754f0b7c9ba",
       "source": "tests/test_skill_quality_loop.py"
     },
     {

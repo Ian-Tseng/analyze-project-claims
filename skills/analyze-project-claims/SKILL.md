@@ -291,11 +291,24 @@ When a compatible Ian-Tseng-managed skill ends with an exact
 `SkillOutcomeReceipt` marker, or the user asks to inspect pending skill
 quality, read `references/skill-quality-loop.md`.
 
-The receipt is producer-declared and content-free. A non-`no_issue` signal
-paired with `analyze_quality` can create one local proposal. `no_issue`
-paired with `none` is a no-op. Neither can prove producer identity or
+The receipt is producer-declared and content-free. v2 adds only capability,
+invariant, and environment-class identifiers; v1 remains readable. A
+non-`no_issue` signal paired with `analyze_quality` creates one intake
+proposal per exact receipt, while analyzer versions become child analysis
+revisions. `no_issue` paired with `none` writes only a bounded local
+tombstone. Advisory problem signatures may group v2 intake for evaluation but
+cannot deduplicate, reopen, or authorize. Neither path can prove producer identity or
 authorize edits, reports, issues, updates, release, or publication. Never
 inspect transcripts or project content as a fallback.
+
+Keep evaluation independent: a closed evaluation manifest pins baseline,
+candidate, fixtures, environment, model, and every pilot threshold. A separate
+digest-bound result covers every frozen fixture once and recomputes
+`PASS`/`FAIL`/`INCONCLUSIVE`; a direct failed gate dominates an inconclusive
+model cell. Structural validation of either artifact does not prove authentic
+execution or improvement. Attempt, cycle, termination, controller, activation,
+and recurrence claims require their later explicit authorities; receipt intake
+does not implement them.
 
 Portable explicit use:
 
@@ -304,6 +317,7 @@ Portable explicit use:
 <python-3> scripts/skill_quality_loop.py --format json consume --marker <marker>
 <python-3> scripts/skill_quality_loop.py --format json consume
 <python-3> scripts/skill_quality_loop.py --format json proposal-show --proposal-id <id>
+<python-3> scripts/skill_quality_loop.py --format json evaluation-validate --manifest <manifest.json> --result <result.json>
 ```
 
 The optional Codex plugin hook requests at most one continuation for a valid

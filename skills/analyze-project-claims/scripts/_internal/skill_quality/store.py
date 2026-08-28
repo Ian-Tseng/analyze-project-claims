@@ -15,9 +15,12 @@ from typing import Any, Iterator, Mapping
 from . import contract
 
 
-STATE_KEYS = {"schema_version", "receipts", "proposals", "hook_turns", "outbound_contributions"}
+STATE_KEYS_V1 = {"schema_version", "receipts", "proposals", "hook_turns", "outbound_contributions"}
+STATE_KEYS = STATE_KEYS_V1 | {"no_action_receipts"}
 MAX_RECEIPTS = 64
 MAX_PROPOSALS = 128
+MAX_NO_ACTION_RECEIPTS = 256
+MAX_ANALYSIS_REVISIONS = 128
 MAX_HOOK_TURNS = 256
 RECOMMENDATIONS = {
     "claim_evidence_gap": "review_claim_evidence_binding",
@@ -89,12 +92,120 @@ class QualityStore:
     @staticmethod
     def _empty() -> dict[str, Any]:
         return {
-            "schema_version": 1,
+            "schema_version": 2,
             "receipts": {},
             "proposals": {},
+            "no_action_receipts": {},
             "hook_turns": {},
             "outbound_contributions": {},
         }
+
+    @staticmethod
+    def _revision_id(receipt_digest: str, analyzer_version: str) -> str:
+        payload = f"skill-quality-analysis-revision-v1:{receipt_digest}:{analyzer_version}"
+        return "analysis-revision-" + hashlib.sha256(payload.encode("utf-8")).hexdigest()[:24]
+
+    @classmethod
+    def _append_revision(
+        cls,
+        record: dict[str, Any],
+        receipt_digest: str,
+        analyzer_version: str,
+        created_at: datetime,
+    ) -> bool:
+        revision_id = cls._revision_id(receipt_digest, analyzer_version)
+        revisions = record.setdefault("analysis_revisions", [])
+        if any(item.get("analysis_revision_id") == revision_id for item in revisions):
+            record["analyzer_version"] = analyzer_version
+            return False
+        if len(revisions) >= MAX_ANALYSIS_REVISIONS:
+            raise contract.QualityError(
+                "QUALITY_REVISION_LIMIT",
+                "The bounded analysis revision history is full.",
+            )
+        revisions.append(
+            {
+                "analysis_revision_id": revision_id,
+                "analyzer_version": analyzer_version,
+                "created_at_utc": _utc_text(created_at),
+            }
+        )
+        record["analyzer_version"] = analyzer_version
+        return True
+
+    @staticmethod
+    def _legacy_problem_signature(receipt_digest: str) -> str:
+        payload = {
+            "domain": "skill-quality-problem-signature-v1-legacy-singleton",
+            "receipt_digest_sha256": receipt_digest,
+        }
+        return hashlib.sha256(contract.canonical_bytes(payload)).hexdigest()
+
+    @classmethod
+    def _migrate_v1_state(cls, value: dict[str, Any]) -> dict[str, Any]:
+        if not all(
+            isinstance(value.get(key), dict)
+            for key in ("receipts", "proposals", "hook_turns", "outbound_contributions")
+        ):
+            raise contract.QualityError("QUALITY_STATE_INVALID", "Legacy quality-loop registries are invalid.")
+        migrated = {
+            "schema_version": 2,
+            "receipts": dict(value["receipts"]),
+            "proposals": {},
+            "no_action_receipts": {},
+            "hook_turns": dict(value["hook_turns"]),
+            "outbound_contributions": dict(value["outbound_contributions"]),
+        }
+        legacy_proposals: list[tuple[str, datetime, str, str, dict[str, Any]]] = []
+        for old_key, old in value["proposals"].items():
+            if not isinstance(old, dict):
+                raise contract.QualityError("QUALITY_STATE_INVALID", "Stored proposal is invalid.")
+            receipt_digest = old.get("receipt_digest_sha256")
+            analyzer_version = old.get("analyzer_version")
+            created_at = old.get("created_at_utc")
+            if not all(isinstance(item, str) for item in (receipt_digest, analyzer_version, created_at)):
+                raise contract.QualityError("QUALITY_STATE_INVALID", "Stored proposal provenance is invalid.")
+            if old.get("status") not in {"active", "dismissed"}:
+                raise contract.QualityError("QUALITY_STATE_INVALID", "Stored proposal lifecycle is invalid.")
+            legacy_proposals.append(
+                (receipt_digest, _parse_utc(created_at), analyzer_version, str(old_key), old)
+            )
+        for receipt_digest, created_at, analyzer_version, _old_key, old in sorted(
+            legacy_proposals
+        ):
+            proposal_id = cls._proposal_id(receipt_digest)
+            existing = migrated["proposals"].get(proposal_id)
+            if existing is None:
+                existing = dict(old)
+                existing.update(
+                    {
+                        "schema_version": 2,
+                        "proposal_id": proposal_id,
+                        "problem_signature_sha256": cls._legacy_problem_signature(receipt_digest),
+                        "problem_signature_authority": "advisory_untrusted_intake",
+                        "analysis_revisions": [],
+                    }
+                )
+                migrated["proposals"][proposal_id] = existing
+            else:
+                for field in (
+                    "producer",
+                    "outcome",
+                    "quality_signal",
+                    "recommended_action",
+                    "outbound",
+                ):
+                    if existing.get(field) != old.get(field):
+                        raise contract.QualityError(
+                            "QUALITY_STATE_INVALID",
+                            "Colliding legacy proposals disagree on immutable fields.",
+                        )
+                if old["status"] == "active":
+                    existing["status"] = "active"
+            if existing["status"] == "active":
+                existing.pop("dismissed_at_utc", None)
+            cls._append_revision(existing, receipt_digest, analyzer_version, created_at)
+        return migrated
 
     def _read(self) -> dict[str, Any]:
         if not self.path.exists():
@@ -105,12 +216,18 @@ class QualityStore:
             value = json.loads(self.path.read_text(encoding="utf-8"))
         except (OSError, UnicodeError, json.JSONDecodeError) as exc:
             raise contract.QualityError("QUALITY_STATE_INVALID", "Quality-loop state is not strict JSON.") from exc
-        if not isinstance(value, dict) or set(value) != STATE_KEYS or value.get("schema_version") != 1:
+        if not isinstance(value, dict):
+            raise contract.QualityError("QUALITY_STATE_INVALID", "Quality-loop state has an invalid shape.")
+        if value.get("schema_version") == 1 and set(value) == STATE_KEYS_V1:
+            value = self._migrate_v1_state(value)
+        if set(value) != STATE_KEYS or value.get("schema_version") != 2:
             raise contract.QualityError("QUALITY_STATE_INVALID", "Quality-loop state has an invalid shape.")
         if not all(isinstance(value[key], dict) for key in ("receipts", "proposals", "hook_turns")):
             raise contract.QualityError("QUALITY_STATE_INVALID", "Quality-loop registries are invalid.")
         if not isinstance(value["outbound_contributions"], dict):
             raise contract.QualityError("QUALITY_STATE_INVALID", "Quality-loop outbound registry is invalid.")
+        if not isinstance(value["no_action_receipts"], dict):
+            raise contract.QualityError("QUALITY_STATE_INVALID", "Quality-loop no-action registry is invalid.")
         return value
 
     def _write(self, state: Mapping[str, Any]) -> None:
@@ -133,8 +250,8 @@ class QualityStore:
         return hashlib.sha256(f"{session_id}:{turn_id}".encode("utf-8")).hexdigest()
 
     @staticmethod
-    def _proposal_id(receipt_digest: str, analyzer_version: str) -> str:
-        digest = hashlib.sha256(f"{receipt_digest}:{analyzer_version}".encode("utf-8")).hexdigest()
+    def _proposal_id(receipt_digest: str) -> str:
+        digest = hashlib.sha256(f"skill-quality-proposal-v2:{receipt_digest}".encode("utf-8")).hexdigest()
         return "quality-proposal-" + digest[:24]
 
     @staticmethod
@@ -165,6 +282,30 @@ class QualityStore:
         return changed
 
     @staticmethod
+    def _prune_no_actions(state: dict[str, Any], current: datetime) -> bool:
+        changed = False
+        for digest, record in list(state["no_action_receipts"].items()):
+            expires = record.get("expires_at_utc")
+            if not isinstance(expires, str):
+                raise contract.QualityError("QUALITY_STATE_INVALID", "Stored no-action expiry is invalid.")
+            if _parse_utc(expires) <= current:
+                state["no_action_receipts"].pop(digest)
+                changed = True
+        return changed
+
+    @staticmethod
+    def _free_no_action_capacity(state: dict[str, Any]) -> bool:
+        changed = False
+        while len(state["no_action_receipts"]) >= MAX_NO_ACTION_RECEIPTS:
+            oldest = min(
+                state["no_action_receipts"].values(),
+                key=lambda item: (item.get("created_at_utc", ""), item.get("receipt_digest_sha256", "")),
+            )
+            state["no_action_receipts"].pop(oldest["receipt_digest_sha256"], None)
+            changed = True
+        return changed
+
+    @staticmethod
     def _free_proposal_capacity(state: dict[str, Any]) -> bool:
         changed = False
         dismissed = sorted(
@@ -189,7 +330,9 @@ class QualityStore:
         digest = validated["receipt_digest_sha256"]
         with self._lock():
             state = self._read()
-            changed = self._prune_receipts(state, _utc_now())
+            current = _utc_now()
+            changed = self._prune_receipts(state, current)
+            changed = self._prune_no_actions(state, current) or changed
             existing = state["receipts"].get(digest)
             if existing is not None:
                 if changed:
@@ -221,6 +364,7 @@ class QualityStore:
         with self._lock():
             state = self._read()
             self._prune_receipts(state, current)
+            self._prune_no_actions(state, current)
             record = state["receipts"].get(receipt_digest)
             if record is None:
                 raise contract.QualityError("NO_COMPATIBLE_RECEIPT", "The receipt is not in local state.")
@@ -245,30 +389,63 @@ class QualityStore:
     ) -> dict[str, Any]:
         validated = contract.validate_receipt(dict(receipt))
         digest = validated["receipt_digest_sha256"]
-        proposal_id = self._proposal_id(digest, analyzer_version)
+        proposal_id = self._proposal_id(digest)
         current = _utc_now()
         with self._lock():
             state = self._read()
             self._prune_receipts(state, current)
+            self._prune_no_actions(state, current)
             if validated["requested_action"] == "none":
+                existing_no_action = state["no_action_receipts"].get(digest)
+                if existing_no_action is None:
+                    self._free_no_action_capacity(state)
+                    existing_no_action = {
+                        "schema_version": 2,
+                        "receipt_digest_sha256": digest,
+                        "problem_signature_sha256": contract.problem_signature(validated),
+                        "problem_signature_authority": "advisory_untrusted_intake",
+                        "analyzer_version": analyzer_version,
+                        "analysis_revisions": [],
+                        "quality_signal": validated["quality_signal"],
+                        "requested_action": "none",
+                        "created_at_utc": _utc_text(current),
+                        "expires_at_utc": validated["expires_at_utc"],
+                        "status": "no_action",
+                        "outbound": "NONE",
+                    }
+                    state["no_action_receipts"][digest] = existing_no_action
+                    deduplicated = False
+                else:
+                    deduplicated = True
+                revision_created = self._append_revision(
+                    existing_no_action,
+                    digest,
+                    analyzer_version,
+                    current,
+                )
                 state["receipts"].pop(digest, None)
                 self._write(state)
-                return {
-                    "receipt_digest_sha256": digest,
-                    "analyzer_version": analyzer_version,
-                    "quality_signal": validated["quality_signal"],
-                    "recommended_action": RECOMMENDATIONS[validated["quality_signal"]],
-                    "status": "no_action",
-                    "outbound": "NONE",
-                    "deduplicated": True,
-                }
+                result = dict(existing_no_action)
+                result["recommended_action"] = RECOMMENDATIONS[validated["quality_signal"]]
+                result["deduplicated"] = deduplicated
+                result["analysis_revision_created"] = revision_created
+                return result
             existing = state["proposals"].get(proposal_id)
             if existing is not None:
-                if digest in state["receipts"]:
+                revision_created = self._append_revision(
+                    existing,
+                    digest,
+                    analyzer_version,
+                    current,
+                )
+                had_receipt = digest in state["receipts"]
+                if had_receipt:
                     state["receipts"].pop(digest)
+                if revision_created or had_receipt:
                     self._write(state)
                 result = dict(existing)
                 result["deduplicated"] = True
+                result["analysis_revision_created"] = revision_created
                 return result
             self._free_proposal_capacity(state)
             if len(state["proposals"]) >= MAX_PROPOSALS:
@@ -291,9 +468,13 @@ class QualityStore:
                 if _parse_utc(record["lease_expires_at_utc"]) > current and lease_id != record["lease_id"]:
                     raise contract.QualityError("RECEIPT_BUSY", "The receipt has an active analyzer lease.")
             proposal = {
+                "schema_version": 2,
                 "proposal_id": proposal_id,
                 "receipt_digest_sha256": digest,
                 "analyzer_version": analyzer_version,
+                "problem_signature_sha256": contract.problem_signature(validated),
+                "problem_signature_authority": "advisory_untrusted_intake",
+                "analysis_revisions": [],
                 "producer": validated["producer"],
                 "outcome": validated["outcome"],
                 "quality_signal": validated["quality_signal"],
@@ -302,17 +483,21 @@ class QualityStore:
                 "created_at_utc": _utc_text(_utc_now()),
                 "outbound": "NONE",
             }
+            self._append_revision(proposal, digest, analyzer_version, current)
             state["proposals"][proposal_id] = proposal
             state["receipts"].pop(digest, None)
             self._write(state)
             result = dict(proposal)
             result["deduplicated"] = False
+            result["analysis_revision_created"] = True
             return result
 
     def consume_next(self, *, analyzer_version: str) -> dict[str, Any]:
         with self._lock():
             state = self._read()
-            changed = self._prune_receipts(state, _utc_now())
+            current = _utc_now()
+            changed = self._prune_receipts(state, current)
+            changed = self._prune_no_actions(state, current) or changed
             ready = [
                 record["receipt"]
                 for record in state["receipts"].values()
@@ -354,6 +539,7 @@ class QualityStore:
         with self._lock():
             state = self._read()
             self._prune_receipts(state, _utc_now())
+            self._prune_no_actions(state, _utc_now())
             if turn_key in state["hook_turns"]:
                 return {}
             if len(state["hook_turns"]) >= MAX_HOOK_TURNS:
@@ -387,7 +573,10 @@ class QualityStore:
     def status(self) -> dict[str, Any]:
         with self._lock():
             state = self._read()
-            if self._prune_receipts(state, _utc_now()):
+            current = _utc_now()
+            changed = self._prune_receipts(state, current)
+            changed = self._prune_no_actions(state, current) or changed
+            if changed:
                 self._write(state)
         pending = sum(1 for item in state["receipts"].values() if item.get("state") in {"READY", "CLAIMED"})
         return {
@@ -395,6 +584,7 @@ class QualityStore:
             "receipt_count": len(state["receipts"]),
             "pending_receipts": pending,
             "proposal_count": len(state["proposals"]),
+            "no_action_receipts": len(state["no_action_receipts"]),
             "outbound_actions": len(state["outbound_contributions"]),
         }
 

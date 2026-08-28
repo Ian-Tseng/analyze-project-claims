@@ -9,10 +9,12 @@ running package, or publish automatically.
 
 ```text
 compatible producer
-  -> content-free SkillOutcomeReceipt
+  -> content-free SkillOutcomeReceipt v2 (v1 readable)
   -> explicit handoff OR trusted Codex Stop adapter
   -> private local receipt store
-  -> one proposal per receipt digest and analyzer version
+  -> one intake proposal per exact receipt digest
+  -> analyzer-version analysis revisions
+  -> advisory problem signature for evaluation views only
   -> exact contribution preview
   -> per-submission approval
   -> separate public-visibility confirmation
@@ -68,6 +70,38 @@ state directory; the Codex plugin uses `PLUGIN_DATA/skill-quality`. Expired
 pending receipts and terminal receipt records are reclaimed. Active proposals
 retain bounded backpressure; dismissed proposals are the first records
 reclaimed when capacity is needed.
+
+## Identity and evaluation boundary
+
+The exact receipt digest owns intake identity. Analyzer version is revision
+provenance, so upgrading the analyzer does not duplicate a proposal. v2 problem
+signatures use only producer origin, quality signal, capability ID, invariant
+ID, and environment class; they are untrusted advisory clusters and cannot
+deduplicate, reopen, authorize, or trigger outbound work. v1 receipts remain
+readable but are singleton clusters.
+
+A `no_issue`/`none` receipt creates no proposal. A bounded digest-only local
+tombstone prevents replay from changing that result and expires with the
+receipt.
+
+Evaluation is a separate authority. The closed evaluation manifest binds exact
+baseline/candidate packages, fixture taxonomy, platform and dependency
+identities, model parameters, repetitions, and every receipt-count,
+reproducibility, false-cluster, improvement, and regression threshold. The
+separate closed result binds that manifest, covers every fixture once, records
+bounded owner disposition/time and metrics, and recomputes
+`PASS`/`FAIL`/`INCONCLUSIVE`. A failed observed gate dominates an unpinned
+model's inconclusive state. Validation does not authenticate execution or prove
+improvement beyond those exact inputs. Validate a completed pair without state
+or network:
+
+```text
+<python-3> scripts/skill_quality_loop.py --format json evaluation-validate \
+  --manifest <manifest.json> --result <result.json>
+```
+
+See
+[the manual pilot protocol](../evaluation/quality-loop-pilot/protocol.md).
 
 ## Codex plugin adapter
 

@@ -2,6 +2,36 @@
 
 All notable changes to this project are documented here.
 
+## [0.9.0] - 2026-08-28
+
+### Added
+
+- Add content-free `SkillOutcomeReceipt` v2 context for capability,
+  invariant, and environment identity while retaining exact v1 parsing.
+- Add advisory, cross-version problem signatures whose untrusted clusters
+  cannot deduplicate, reopen, authorize, or trigger work.
+- Add a closed evaluation-manifest contract and an explicitly
+  `INCONCLUSIVE` synthetic manual-pilot scaffold.
+- Add a separate digest-bound evaluation-result contract and state-free
+  validator that recompute summaries and `PASS`/`FAIL`/`INCONCLUSIVE` from
+  exact fixture coverage and frozen thresholds.
+
+### Changed
+
+- Make the exact receipt digest the intake proposal identity and store analyzer
+  versions as bounded child analysis revisions.
+- Preserve `no_issue` replay semantics with a bounded, expiring local
+  tombstone and migrate existing v1 local proposal state on read.
+- Freeze learning-loop terminology and keep evaluation, repair attempts,
+  publication, activation, and observed recurrence as separate authorities.
+
+### Evidence boundary
+
+- Focused contract tests prove v1/v2 parsing, local migration, replay,
+  tombstones, and manifest/result fail-closed behavior. The representative 10-20
+  receipt pilot, model evaluation, improvement, trusted controller, release,
+  and installed activation remain pending.
+
 ## [0.8.3] - 2026-08-25
 
 ### Changed
@@ -114,6 +144,7 @@ All notable changes to this project are documented here.
 - Persisted v2 records replay their normalized invariants and derived identities;
   recomputing the outer checksum alone cannot make a malformed record valid.
 
+[0.9.0]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.9.0
 [0.8.3]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.3
 [0.8.2]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.2
 [0.8.1]: https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.1

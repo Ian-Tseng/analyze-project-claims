@@ -1,4 +1,4 @@
-# SkillOutcomeReceipt v1
+# SkillOutcomeReceipt v2
 
 `SkillOutcomeReceipt` is a small, content-free handoff from a compatible
 Ian-Tseng-managed skill to `analyze-project-claims`. It is a signal to create a
@@ -10,12 +10,16 @@ The executable contract is
 The validator and canonical digest implementation live in
 `skills/analyze-project-claims/scripts/_internal/skill_quality/contract.py`.
 
+v2 is the default contract. Exact v1 markers remain readable for migration,
+but do not gain cross-version clustering.
+
 ## Closed fields
 
-The v1 receipt contains only:
+The v2 receipt contains only:
 
 - schema version and random receipt UUID;
 - producer-declared owner, repository, skill, SemVer, and package SHA-256;
+- content-free capability ID, invariant ID, and environment class;
 - enumerated outcome, quality signal, and requested action;
 - `action_performed: false`;
 - creation and expiry timestamps;
@@ -70,6 +74,12 @@ The Stop adapter ignores that pair and explicit consumption returns
 `NO_QUALITY_FOLLOWUP` without a proposal. Do not emit a receipt merely to
 force an analyzer invocation.
 
+For v2, pass `--capability-id`, `--invariant-id`, and
+`--environment-class` when the producer knows those exact identifiers.
+Defaults are `general`, `general-quality`, and `unknown`; do not place
+project text or fingerprints in identifier fields. Use `--schema-version 1`
+only for an explicit legacy interoperability test.
+
 ## Portable consumer path
 
 On a host without the trusted Codex plugin adapter, explicitly invoke the
@@ -78,18 +88,20 @@ analyzer with the marker:
 ```text
 /analyze-project-claims consume this exact SkillOutcomeReceipt marker and create
 one local proposal; do not submit, edit, release, or update anything:
-SKILL_OUTCOME_RECEIPT_V1:<token>
+SKILL_OUTCOME_RECEIPT_V2:<token>
 ```
 
 The skill calls:
 
 ```powershell
 py -3 <skill-root>\scripts\skill_quality_loop.py --format json consume `
-  --marker SKILL_OUTCOME_RECEIPT_V1:<token>
+  --marker SKILL_OUTCOME_RECEIPT_V2:<token>
 ```
 
-Replay returns the same proposal ID. The unique effect key is the receipt
-digest plus analyzer version.
+Replay returns the same proposal ID. The unique intake effect key is the exact
+receipt digest. A different analyzer version appends one analysis revision.
+The advisory problem signature can cluster compatible v2 receipts for
+evaluation views, but cannot change intake identity or authorize action.
 
 ## Producer conformance
 

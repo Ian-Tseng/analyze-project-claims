@@ -1,51 +1,48 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/Ian-Tseng/analyze-project-claims/skill-quality-proposal.schema.json",
-  "title": "Local Skill Quality Proposal v1",
+  "title": "Local Skill Quality Proposal v2",
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "proposal_id",
-    "receipt_digest_sha256",
-    "analyzer_version",
-    "producer",
-    "outcome",
-    "quality_signal",
-    "recommended_action",
-    "status",
-    "created_at_utc",
-    "outbound"
+    "schema_version", "proposal_id", "receipt_digest_sha256", "analyzer_version",
+    "problem_signature_sha256", "problem_signature_authority", "analysis_revisions",
+    "producer", "outcome", "quality_signal", "recommended_action", "status",
+    "created_at_utc", "outbound"
   ],
   "properties": {
+    "schema_version": {"const": 2},
     "proposal_id": {"type": "string", "pattern": "^quality-proposal-[0-9a-f]{24}$"},
     "receipt_digest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "analyzer_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "problem_signature_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "problem_signature_authority": {"const": "advisory_untrusted_intake"},
+    "analysis_revisions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "items": {"$ref": "#/$defs/analysis_revision"}
+    },
     "producer": {"$ref": "#/$defs/producer"},
     "outcome": {"enum": ["completed", "completed_with_limitations", "failed"]},
-    "quality_signal": {
-      "enum": [
-        "claim_evidence_gap",
-        "lifecycle_inconsistency",
-        "documentation_mismatch",
-        "internal_failure",
-        "no_issue"
-      ]
-    },
-    "recommended_action": {
-      "enum": [
-        "review_claim_evidence_binding",
-        "review_lifecycle_contract",
-        "review_documentation_contract",
-        "prepare_bounded_regression",
-        "no_change_recommended"
-      ]
-    },
+    "quality_signal": {"enum": ["claim_evidence_gap", "lifecycle_inconsistency", "documentation_mismatch", "internal_failure", "no_issue"]},
+    "recommended_action": {"enum": ["review_claim_evidence_binding", "review_lifecycle_contract", "review_documentation_contract", "prepare_bounded_regression", "no_change_recommended"]},
     "status": {"enum": ["active", "dismissed"]},
     "created_at_utc": {"type": "string", "format": "date-time"},
     "dismissed_at_utc": {"type": "string", "format": "date-time"},
     "outbound": {"const": "NONE"}
   },
   "$defs": {
+    "analysis_revision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["analysis_revision_id", "analyzer_version", "created_at_utc"],
+      "properties": {
+        "analysis_revision_id": {"type": "string", "pattern": "^analysis-revision-[0-9a-f]{24}$"},
+        "analyzer_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "created_at_utc": {"type": "string", "format": "date-time"}
+      }
+    },
     "producer": {
       "type": "object",
       "additionalProperties": false,

@@ -79,6 +79,8 @@ class RecordScanTests(unittest.TestCase):
             SKILL_ROOT / "references" / "problem-report.schema.json",
             SKILL_ROOT / "references" / "problem-report-policy.schema.json",
             SKILL_ROOT / "references" / "update-policy.schema.json",
+            SKILL_ROOT / "references" / "skill-quality-evaluation-manifest.schema.json",
+            SKILL_ROOT / "references" / "skill-quality-evaluation-result.schema.json",
             SKILL_ROOT / "references" / "package-version.json",
             SKILL_ROOT / "references" / "package-manifest.json",
             SKILL_ROOT / "scripts" / "update_policy.py",
@@ -105,6 +107,16 @@ class RecordScanTests(unittest.TestCase):
         json.loads((SKILL_ROOT / "references" / "update-policy.schema.json").read_text(encoding="utf-8"))
         json.loads((SKILL_ROOT / "references" / "problem-report.schema.json").read_text(encoding="utf-8"))
         json.loads((SKILL_ROOT / "references" / "problem-report-policy.schema.json").read_text(encoding="utf-8"))
+        json.loads(
+            (SKILL_ROOT / "references" / "skill-quality-evaluation-manifest.schema.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        json.loads(
+            (SKILL_ROOT / "references" / "skill-quality-evaluation-result.schema.json").read_text(
+                encoding="utf-8"
+            )
+        )
         json.loads((SKILL_ROOT / "references" / "package-version.json").read_text(encoding="utf-8"))
         json.loads((SKILL_ROOT / "references" / "package-manifest.json").read_text(encoding="utf-8"))
         self.assertFalse((ROOT / "CITATION.cff.template").exists())

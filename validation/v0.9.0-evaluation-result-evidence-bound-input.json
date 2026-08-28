@@ -1,0 +1,222 @@
+{
+  "schema_version": "2.0",
+  "objective": "State the strongest safe self-audit claim for the local v0.9.0 evaluation-result contract after exact component-map acceptance.",
+  "scope": [
+    "v0.9.0 local release-candidate tree",
+    "closed skill-quality evaluation manifest and result contracts",
+    "state-free exact-pair validation command",
+    "accepted component-map, package, engine, skill validator, and local test identities",
+    "same-package self-audit independence boundary"
+  ],
+  "authority": [
+    "validation/v0.9.0-evaluation-result-validation-receipt.json",
+    "validation/component-map/accepted-map.json"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "full-suite-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The post-acceptance Windows run executed 263 repository tests: 262 passed and one generic symlink test was skipped because link creation is privilege-dependent."
+    },
+    {
+      "evidence_id": "evaluation-result-contract",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "evaluation_result_contract"
+      },
+      "method": "executed_test",
+      "observed_summary": "Twenty-three post-acceptance tests passed for frozen thresholds, closed manifest/result schemas, digests, distinct exact-receipt coverage, frozen taxonomy dimensions, repetition binding, derived summaries and classifications, failed-gate precedence, malformed-input rejection, and state-free validation."
+    },
+    {
+      "evidence_id": "skill-validation-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "skill_validation"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The official local skill validator accepted the packaged analyzer."
+    },
+    {
+      "evidence_id": "package-verification-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "package_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The v0.9.0 package matches its rebuilt manifest and recorded package digest."
+    },
+    {
+      "evidence_id": "engine-verification-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "engine_verification"
+      },
+      "method": "schema_validated",
+      "observed_summary": "The embedded component-evidence 1.3.0 engine identity verified."
+    },
+    {
+      "evidence_id": "component-map-preflight-result",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "component_map_preflight"
+      },
+      "method": "schema_validated",
+      "observed_summary": "Owner-accepted component-map-9a8668d18008 passed the required unchanged reconciliation and preflight with its exact identity."
+    },
+    {
+      "evidence_id": "self-audit-scope",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.9.0-evaluation-result-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "artifact_key",
+        "value": "self_audit_scope"
+      },
+      "method": "inspected",
+      "observed_summary": "The repository used the same analyzer package, evidence engine, schemas, and recorder to audit its own candidate, so this is deterministic self-consistency evidence rather than independent validation."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "statement": "On this Windows host, analyze-project-claims applied its own accepted component-map and evidence-bound protocol to the local v0.9.0 candidate. The exact accepted map passed an unchanged reconciliation and preflight; the package, embedded engine, and official skill validator verified; 262 of 263 repository tests passed with one privilege-dependent symlink skip; and twenty-three focused tests validated the closed digest-bound evaluation manifest/result contract, distinct exact-receipt and frozen-taxonomy binding, exact repetition binding, recomputed gates, direct-failure precedence, malformed-input rejection, and state-free validation. This establishes local structural self-consistency only: no representative pilot, pinned model evaluation, quality improvement, independent implementation, trusted repair controller, release, installation, or activation was observed.",
+      "element_ref": {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "evaluation-first-learning-boundary"
+      },
+      "material": true,
+      "status": "partially_supported",
+      "rationale": "Exact local bytes, deterministic tests, package identities, and accepted structural evidence support the scoped self-consistency claim, while semantic independence, measured learning value, controller enforcement, and release lifecycle outcomes remain separate unobserved gates."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "full-suite-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "evaluation-result-contract",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "skill-validation-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "package-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "engine-verification-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "component-map-preflight-result",
+      "role": "supports"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "evaluation-result-contract",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "self-audit-scope",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "full-suite-result",
+      "role": "limits"
+    },
+    {
+      "claim_id": "local-v090-self-audit-result-contract-validated",
+      "evidence_id": "component-map-preflight-result",
+      "role": "limits"
+    }
+  ],
+  "limitations": [
+    {
+      "limitation_id": "artifact-contract-versus-measured-learning-boundary",
+      "text": "Closed manifest/result schemas and deterministic tests do not authenticate observations or establish representative pilot reproducibility, false-cluster rate, owner cost, model quality lift, or absence of regression.",
+      "claim_ids": [
+        "local-v090-self-audit-result-contract-validated"
+      ],
+      "evidence_ids": [
+        "evaluation-result-contract"
+      ]
+    },
+    {
+      "limitation_id": "self-application-versus-independent-validation-boundary",
+      "text": "The self-audit reuses the analyzer package, component-evidence engine, schemas, and recorder under test; it is not an independent implementation or scientific replication and may share semantic defects.",
+      "claim_ids": [
+        "local-v090-self-audit-result-contract-validated"
+      ],
+      "evidence_ids": [
+        "self-audit-scope"
+      ]
+    },
+    {
+      "limitation_id": "local-versus-controller-and-release-boundary",
+      "text": "Local tests and accepted-map preflight do not prove a trusted repair controller, commit-bound CI, release publication, managed installation, client routing, or fresh activation.",
+      "claim_ids": [
+        "local-v090-self-audit-result-contract-validated"
+      ],
+      "evidence_ids": [
+        "full-suite-result",
+        "component-map-preflight-result"
+      ]
+    }
+  ],
+  "summary": {
+    "strongest_safe_claim_id": "local-v090-self-audit-result-contract-validated",
+    "claim_boundary_ids": [
+      "artifact-contract-versus-measured-learning-boundary",
+      "self-application-versus-independent-validation-boundary",
+      "local-versus-controller-and-release-boundary"
+    ],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "A representative ten-to-twenty-receipt pilot and pinned model comparison have not run.",
+    "No independent implementation has replicated the self-audit's semantic conclusions.",
+    "A trusted attempt ledger and mechanically enforced repair controller remain unimplemented.",
+    "Commit-bound pull-request and exact-main CI have not run for v0.9.0.",
+    "The v0.9.0 release, managed installation, Codex or Claude routing, and fresh activation remain unobserved."
+  ]
+}

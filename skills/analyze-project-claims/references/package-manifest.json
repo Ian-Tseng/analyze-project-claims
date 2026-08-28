@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "c30585a2c54b9ed2e92049ceefa06f9b3a6efb886313cbfb592825e74156d451"
+      "sha256": "c96db14d576d287ae01cb541f156f07e05a9e28ef8ace4ca7e49cd8358938f49"
     },
     {
       "path": "agents/openai.yaml",
@@ -90,7 +90,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "4d89ee92272260570bffb866ba75c66e38adde5e4a0d259519060701d43a8251"
+      "sha256": "2d9e50f710aa022dbb683827813bea827b1676d41d8eb240b047550d7af6a070"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -114,19 +114,27 @@
     },
     {
       "path": "references/skill-outcome-receipt.schema.json",
-      "sha256": "3e4a4e8187eb94472454558f4c57ead56d764ed9921cbad27e8bc66846b29d96"
+      "sha256": "d44baaeea26c6349a3c9029d28455304ad4764632fd659342aed36050a5da750"
     },
     {
       "path": "references/skill-quality-contribution.schema.json",
       "sha256": "cb3ec27c98fcf95e16505bdbcd5106dfc24fb4fa2191bb3c2005a6a95f8617bd"
     },
     {
+      "path": "references/skill-quality-evaluation-manifest.schema.json",
+      "sha256": "457535857aa6d892d905cf83ccc8bb74b1a0b6c4f6220228882382350a15b25b"
+    },
+    {
+      "path": "references/skill-quality-evaluation-result.schema.json",
+      "sha256": "79f0672f37a647c7d97a5ee28cb6ce42f1459e9a4cacdeb6d9baa02858cebd6d"
+    },
+    {
       "path": "references/skill-quality-loop.md",
-      "sha256": "ce769aa8e4fe1561039c5f2bc422d560a122f0eda462a2c46bda58ca7c54f5a3"
+      "sha256": "7a188eb406d3b6bfd676bcb3725acd2017f907713d88a38fece174afaffb98a2"
     },
     {
       "path": "references/skill-quality-proposal.schema.json",
-      "sha256": "dfc3affbcfa499e9bdc0f543a8b9b0d7d9c3d4817b3dec4096c0dd1e622328a3"
+      "sha256": "33bb13c85f3bae9785b6941bebc4250bb86369ec8850f66a61ef5f78fd263806"
     },
     {
       "path": "references/update-policy.schema.json",
@@ -157,8 +165,12 @@
       "sha256": "7bd991085e96ce41386aceaf594ad176c465a6c445dcb8d6d5f9d1cd7a81277b"
     },
     {
+      "path": "scripts/_internal/skill_quality/attempt_contract.py",
+      "sha256": "1deaba8921ddd8d3018610c591f6c1190fd2a61a7c49ba599f65c6e9d9e66c6b"
+    },
+    {
       "path": "scripts/_internal/skill_quality/contract.py",
-      "sha256": "5f2b3e360ebc767b20ed5942dc149ac8c6aa0177c268af02ce508c764564fbef"
+      "sha256": "26f6076f98c82119300d15ff03b63b0e6d4693a59107b733f33a99c4fcafd247"
     },
     {
       "path": "scripts/_internal/skill_quality/contribution.py",
@@ -166,7 +178,7 @@
     },
     {
       "path": "scripts/_internal/skill_quality/store.py",
-      "sha256": "de3ef67f0af3f1283bf0bfbebb5716750b758a6f74e2b8e741f7e92bf8abeb33"
+      "sha256": "21ac1aad444cfd9b9c8c00dab1a4b84b7d5c5666731dd152254c8f0116006ec2"
     },
     {
       "path": "scripts/installation_analytics.py",
@@ -194,7 +206,7 @@
     },
     {
       "path": "scripts/skill_quality_loop.py",
-      "sha256": "2a91da4e608e5102eb1d503bb62cb81464b24f223a19999ce8cc5b6f307f0d5d"
+      "sha256": "f32a44fb103738f0c94731c56f347de12046d0903c22ec5b9e50c1d5e05d314f"
     },
     {
       "path": "scripts/update_policy.py",

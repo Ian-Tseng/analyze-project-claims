@@ -6,5 +6,8 @@
   "package_digest_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
   "outcome": "completed_with_limitations",
   "quality_signal": "lifecycle_inconsistency",
-  "requested_action": "analyze_quality"
+  "requested_action": "analyze_quality",
+  "capability_id": "lifecycle-monitoring",
+  "invariant_id": "declared-evidence-state",
+  "environment_class": "agent-host"
 }

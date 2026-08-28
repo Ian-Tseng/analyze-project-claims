@@ -1,4 +1,4 @@
-"""Closed, content-free SkillOutcomeReceipt v1 contract."""
+"""Closed, content-free SkillOutcomeReceipt v1/v2 contract."""
 
 from __future__ import annotations
 
@@ -11,12 +11,16 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Mapping
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 MAX_RECEIPT_BYTES = 3072
 MAX_MARKER_BYTES = 4096
 MAX_ASSISTANT_MESSAGE_BYTES = 65536
 MAX_FUTURE_SKEW_SECONDS = 300
-MARKER_PREFIX = "SKILL_OUTCOME_RECEIPT_V1:"
+MARKER_PREFIXES = {
+    1: "SKILL_OUTCOME_RECEIPT_V1:",
+    2: "SKILL_OUTCOME_RECEIPT_V2:",
+}
+MARKER_PREFIX = MARKER_PREFIXES[SCHEMA_VERSION]
 IDENTIFIER = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$")
 REPOSITORY = re.compile(r"^[A-Za-z0-9_.-]{1,100}$")
 SEMVER = re.compile(
@@ -48,6 +52,7 @@ RECEIPT_KEYS = {
     "prior_receipt_digest_sha256",
     "receipt_digest_sha256",
 }
+RECEIPT_V2_KEYS = RECEIPT_KEYS | {"context"}
 PRODUCER_KEYS = {
     "owner",
     "repository",
@@ -55,6 +60,14 @@ PRODUCER_KEYS = {
     "version",
     "package_digest_sha256",
     "identity_authority",
+}
+CONTEXT_KEYS = {"capability_id", "invariant_id", "environment_class"}
+ENVIRONMENT_CLASSES = {
+    "agent-host",
+    "local-cli",
+    "github-actions",
+    "documentation",
+    "unknown",
 }
 
 
@@ -112,7 +125,10 @@ def _validate_producer(value: object) -> dict[str, str]:
     if not isinstance(value, dict) or set(value) != PRODUCER_KEYS:
         raise QualityError("RECEIPT_SCHEMA_VIOLATION", "producer has unknown or missing fields.")
     if value.get("owner") != "Ian-Tseng":
-        raise QualityError("RECEIPT_PRODUCER_UNSUPPORTED", "Only declared Ian-Tseng producers are supported in v1.")
+        raise QualityError(
+            "RECEIPT_PRODUCER_UNSUPPORTED",
+            "Only declared Ian-Tseng producers are supported by this protocol.",
+        )
     if not isinstance(value.get("repository"), str) or not REPOSITORY.fullmatch(value["repository"]):
         raise QualityError("RECEIPT_SCHEMA_VIOLATION", "producer.repository is invalid.")
     if not isinstance(value.get("skill"), str) or not IDENTIFIER.fullmatch(value["skill"]):
@@ -134,20 +150,64 @@ def receipt_digest(value: Mapping[str, Any]) -> str:
     return hashlib.sha256(canonical_bytes(payload)).hexdigest()
 
 
+def _validate_context(value: object) -> dict[str, str]:
+    if not isinstance(value, dict) or set(value) != CONTEXT_KEYS:
+        raise QualityError("RECEIPT_SCHEMA_VIOLATION", "context has unknown or missing fields.")
+    for field in ("capability_id", "invariant_id"):
+        if not isinstance(value.get(field), str) or not IDENTIFIER.fullmatch(value[field]):
+            raise QualityError("RECEIPT_SCHEMA_VIOLATION", f"context.{field} is invalid.")
+    if value.get("environment_class") not in ENVIRONMENT_CLASSES:
+        raise QualityError("RECEIPT_SCHEMA_VIOLATION", "context.environment_class is invalid.")
+    return dict(value)
+
+
+def problem_signature(value: Mapping[str, Any]) -> str:
+    """Return an advisory, content-free problem family signature.
+
+    v2 deliberately excludes producer version, package digest, receipt identity, and
+    timestamps. Legacy v1 receipts lack the context needed for safe cross-version
+    clustering, so their exact receipt digest creates a private singleton family.
+    """
+
+    validated = validate_receipt(dict(value), require_unexpired=False)
+    if validated["schema_version"] == 1:
+        payload = {
+            "domain": "skill-quality-problem-signature-v1-legacy-singleton",
+            "receipt_digest_sha256": validated["receipt_digest_sha256"],
+        }
+    else:
+        producer = validated["producer"]
+        payload = {
+            "domain": "skill-quality-problem-signature-v2",
+            "producer": {
+                "owner": producer["owner"],
+                "repository": producer["repository"],
+                "skill": producer["skill"],
+            },
+            "quality_signal": validated["quality_signal"],
+            "context": validated["context"],
+        }
+    return hashlib.sha256(canonical_bytes(payload)).hexdigest()
+
+
 def validate_receipt(
     value: object,
     *,
     now: datetime | None = None,
     require_unexpired: bool = True,
 ) -> dict[str, Any]:
-    if not isinstance(value, dict) or set(value) != RECEIPT_KEYS:
+    if not isinstance(value, dict):
+        raise QualityError("RECEIPT_SCHEMA_VIOLATION", "Receipt has unknown or missing fields.")
+    schema_version = value.get("schema_version")
+    expected_keys = RECEIPT_KEYS if schema_version == 1 else RECEIPT_V2_KEYS
+    if schema_version not in {1, 2} or set(value) != expected_keys:
         raise QualityError("RECEIPT_SCHEMA_VIOLATION", "Receipt has unknown or missing fields.")
     if len(canonical_bytes(value)) > MAX_RECEIPT_BYTES:
-        raise QualityError("RECEIPT_TOO_LARGE", "Receipt exceeds the v1 size limit.")
-    if value.get("schema_version") != SCHEMA_VERSION:
-        raise QualityError("RECEIPT_SCHEMA_VIOLATION", "Receipt schema version is unsupported.")
+        raise QualityError("RECEIPT_TOO_LARGE", "Receipt exceeds the protocol size limit.")
     _canonical_uuid(value.get("receipt_id"))
     _validate_producer(value.get("producer"))
+    if schema_version == 2:
+        _validate_context(value.get("context"))
     if value.get("outcome") not in OUTCOMES:
         raise QualityError("RECEIPT_SCHEMA_VIOLATION", "Receipt outcome is invalid.")
     if value.get("quality_signal") not in QUALITY_SIGNALS:
@@ -202,9 +262,15 @@ def create_receipt(
     causal_depth: int = 0,
     prior_receipt_digest_sha256: str | None = None,
     receipt_id: str | None = None,
+    schema_version: int = SCHEMA_VERSION,
+    capability_id: str = "general",
+    invariant_id: str = "general-quality",
+    environment_class: str = "unknown",
 ) -> dict[str, Any]:
+    if schema_version not in {1, 2}:
+        raise QualityError("RECEIPT_SCHEMA_VIOLATION", "Receipt schema version is unsupported.")
     receipt: dict[str, Any] = {
-        "schema_version": SCHEMA_VERSION,
+        "schema_version": schema_version,
         "receipt_id": receipt_id or str(uuid.uuid4()),
         "producer": {
             "owner": owner,
@@ -223,6 +289,12 @@ def create_receipt(
         "causal_depth": causal_depth,
         "prior_receipt_digest_sha256": prior_receipt_digest_sha256,
     }
+    if schema_version == 2:
+        receipt["context"] = {
+            "capability_id": capability_id,
+            "invariant_id": invariant_id,
+            "environment_class": environment_class,
+        }
     receipt["receipt_digest_sha256"] = receipt_digest(receipt)
     return validate_receipt(receipt, now=created_at)
 
@@ -230,18 +302,21 @@ def create_receipt(
 def format_marker(receipt: Mapping[str, Any]) -> str:
     validated = validate_receipt(dict(receipt))
     token = base64.urlsafe_b64encode(canonical_bytes(validated)).decode("ascii").rstrip("=")
-    marker = MARKER_PREFIX + token
+    marker = MARKER_PREFIXES[validated["schema_version"]] + token
     if len(marker.encode("utf-8")) > MAX_MARKER_BYTES:
-        raise QualityError("RECEIPT_TOO_LARGE", "Receipt marker exceeds the v1 size limit.")
+        raise QualityError("RECEIPT_TOO_LARGE", "Receipt marker exceeds the protocol size limit.")
     return marker
 
 
 def parse_marker(marker: str, *, now: datetime | None = None) -> dict[str, Any]:
-    if not isinstance(marker, str) or not marker.startswith(MARKER_PREFIX):
-        raise QualityError("NO_COMPATIBLE_RECEIPT", "No v1 receipt marker was provided.")
+    if not isinstance(marker, str):
+        raise QualityError("NO_COMPATIBLE_RECEIPT", "No compatible receipt marker was provided.")
+    prefix = next((item for item in MARKER_PREFIXES.values() if marker.startswith(item)), None)
+    if prefix is None:
+        raise QualityError("NO_COMPATIBLE_RECEIPT", "No compatible receipt marker was provided.")
     if len(marker.encode("utf-8")) > MAX_MARKER_BYTES or "\n" in marker or "\r" in marker:
         raise QualityError("RECEIPT_TOO_LARGE", "Receipt marker is oversized or multiline.")
-    token = marker[len(MARKER_PREFIX) :]
+    token = marker[len(prefix) :]
     if not token or not re.fullmatch(r"[A-Za-z0-9_-]+", token):
         raise QualityError("RECEIPT_SCHEMA_VIOLATION", "Receipt marker encoding is invalid.")
     try:
@@ -251,7 +326,10 @@ def parse_marker(marker: str, *, now: datetime | None = None) -> dict[str, Any]:
         raise QualityError("RECEIPT_SCHEMA_VIOLATION", "Receipt marker is not canonical JSON.") from exc
     if canonical_bytes(value) != payload:
         raise QualityError("RECEIPT_SCHEMA_VIOLATION", "Receipt marker JSON is not canonical.")
-    return validate_receipt(value, now=now)
+    validated = validate_receipt(value, now=now)
+    if MARKER_PREFIXES[validated["schema_version"]] != prefix:
+        raise QualityError("RECEIPT_SCHEMA_VIOLATION", "Receipt marker version does not match its payload.")
+    return validated
 
 
 def extract_trailing_marker(message: str, *, now: datetime | None = None) -> dict[str, Any]:
