@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "candidate_version": "0.9.0",
+  "recorded_at_utc": "2026-08-28T09:24:31.925260Z",
+  "platform": "Windows",
+  "full_suite": {
+    "command": "py -3 -m unittest discover -s tests -v",
+    "status": "PASS",
+    "tests_run": 263,
+    "passed": 262,
+    "skipped": 1,
+    "skip_boundary": "The generic update-policy symlink test is privilege-dependent on Windows; the remaining 262 tests passed."
+  },
+  "skill_quality_contract": {
+    "commands": [
+      "py -3 -m unittest discover -s tests -p test_skill_quality_loop.py -v",
+      "py -3 -m unittest discover -s tests -p test_skill_quality_evaluation.py -v",
+      "py -3 -m unittest discover -s tests -p test_quality_contribution.py -v"
+    ],
+    "status": "PASS",
+    "tests_run": 62,
+    "assertion": "Focused tests cover v1/v2 receipt parsing, closed content-free context and advisory signatures, one proposal identity per exact receipt, analyzer-version revisions, order-independent v1 state migration, bounded no-action tombstones, distinct receipt and frozen-taxonomy evaluation binding, closed evaluation-manifest validation and pinning, and consent-gated contribution compatibility."
+  },
+  "skill_validation": {
+    "command": "quick_validate.py skills/analyze-project-claims",
+    "status": "PASS",
+    "validator_result": "Skill is valid!"
+  },
+  "quality_loop_conformance": {
+    "status": "PASS",
+    "result": "QUALITY_PROPOSAL_READY",
+    "replay_deduplicated": true,
+    "outbound": "NONE",
+    "proposal_id": "quality-proposal-a05b8aa51da33fe0431a576b",
+    "receipt_digest_sha256": "1dbf5a05a3c109a80f3b5aa3299a352cd546a434e789474e6760ec456751739f"
+  },
+  "evaluation_manifest": {
+    "command": "py -3 -m unittest discover -s tests -p test_skill_quality_evaluation.py -v",
+    "status": "PASS",
+    "readiness": "INCONCLUSIVE",
+    "synthetic_manifest_digest_sha256": "683de6b30fdeebe0bfd118a7f087c8a3072401fdd70da8d39d43835aa72ae81d",
+    "boundary": "The synthetic unpinned manifest validates the closed schema and pilot scaffold only; no representative model run or quality improvement was measured."
+  },
+  "package_verification": {
+    "status": "PASS",
+    "package_manifest_digest": "5ae0c3de5b73343fe302faa2870449710545f3b438b2fad355d39e041829c415",
+    "version": "0.9.0"
+  },
+  "engine_verification": {
+    "status": "PASS",
+    "engine_name": "component-evidence",
+    "engine_version": "1.3.0",
+    "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b"
+  },
+  "component_map_preflight": {
+    "status": "PASS",
+    "result": "READY",
+    "accepted_map_id": "component-map-a2e9cfaad704",
+    "accepted_map_sha256": "1d7bde45ffe33e37f13d52c2f7434bf942143765aa8c755daa97d5d35aa8e5a7",
+    "post_acceptance_reconciliation": "checked_unchanged"
+  },
+  "limitations": [
+    "These are local Windows v0.9.0 release-candidate results, not commit-bound remote CI, public release, installation, or fresh activation evidence.",
+    "The representative ten-to-twenty-receipt pilot has not run; the synthetic evaluation manifest is unpinned and remains INCONCLUSIVE.",
+    "A trusted attempt ledger, cycle and termination accounting, and mechanically enforced repair controller are not implemented by this first milestone.",
+    "No receipt, proposal, issue, workflow, map acceptance, merge, release, publication, update, or outbound action is automatically authorized."
+  ]
+}

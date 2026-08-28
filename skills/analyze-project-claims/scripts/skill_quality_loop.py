@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import stat
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -13,11 +14,37 @@ from typing import Any, Sequence
 
 from _internal.skill_quality import contract
 from _internal.skill_quality import contribution
+from _internal.skill_quality import attempt_contract
 from _internal.skill_quality.store import QualityStore
 
 
 ANALYZER_VERSION = "1.0.0"
 MAX_HOOK_EVENT_BYTES = contract.MAX_ASSISTANT_MESSAGE_BYTES + 8192
+
+
+def _read_bounded_json(path: Path, *, maximum_bytes: int, label: str) -> object:
+    try:
+        entry = path.lstat()
+    except OSError as exc:
+        raise contract.QualityError("EVALUATION_INPUT_INVALID", f"Cannot inspect {label}.") from exc
+    reparse_flag = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
+    if stat.S_ISLNK(entry.st_mode) or bool(getattr(entry, "st_file_attributes", 0) & reparse_flag):
+        raise contract.QualityError("EVALUATION_INPUT_INVALID", f"{label} must not be a link or reparse point.")
+    if not stat.S_ISREG(entry.st_mode):
+        raise contract.QualityError("EVALUATION_INPUT_INVALID", f"{label} must be a regular file.")
+    if entry.st_size > maximum_bytes:
+        raise contract.QualityError("EVALUATION_INPUT_TOO_LARGE", f"{label} exceeds its byte limit.")
+    try:
+        with path.open("rb") as handle:
+            raw = handle.read(maximum_bytes + 1)
+    except OSError as exc:
+        raise contract.QualityError("EVALUATION_INPUT_INVALID", f"Cannot read {label}.") from exc
+    if len(raw) > maximum_bytes:
+        raise contract.QualityError("EVALUATION_INPUT_TOO_LARGE", f"{label} exceeds its byte limit.")
+    try:
+        return json.loads(raw.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise contract.QualityError("EVALUATION_INPUT_INVALID", f"{label} is not UTF-8 JSON.") from exc
 
 
 def default_state_directory() -> Path:
@@ -52,9 +79,12 @@ def _error(exc: contract.QualityError) -> dict[str, Any]:
         "RECEIPT_BUSY": "Retry after the local lease expires.",
         "CONTRIBUTION_OUTCOME_UNKNOWN": "Search GitHub for the exact contribution ID before any retry.",
         "UPDATE_AUTHORITY_CONFLICT": "Keep exactly one update authority for this installation.",
+        "EVALUATION_INPUT_INVALID": "Provide ordinary UTF-8 JSON manifest and result files.",
+        "EVALUATION_INPUT_TOO_LARGE": "Reduce the closed manifest or result to its documented byte limit.",
     }
     uncertain_outbound = exc.code == "CONTRIBUTION_OUTCOME_UNKNOWN"
     contribution_network_possible = exc.code.startswith("CONTRIBUTION_") or exc.code == "PUBLIC_ISSUE_APPROVAL_REQUIRED"
+    evaluation_input_inspected = exc.code.startswith("EVALUATION_")
     return {
         "status": "ERROR",
         "code": exc.code,
@@ -70,6 +100,8 @@ def _error(exc: contract.QualityError) -> dict[str, Any]:
         "safety": (
             "No transcript or project file was inspected; GitHub may have been queried by the contribution command."
             if contribution_network_possible
+            else "Only the supplied evaluation manifest or result file was inspected; no network endpoint or local quality state was used."
+            if evaluation_input_inspected
             else "No transcript, project file, or network endpoint was inspected."
         ),
         "docs": "docs/SKILL_QUALITY_LOOP.md#error-contracts",
@@ -91,6 +123,14 @@ def _parser() -> argparse.ArgumentParser:
     emit.add_argument("--outcome", choices=sorted(contract.OUTCOMES), required=True)
     emit.add_argument("--quality-signal", choices=sorted(contract.QUALITY_SIGNALS), required=True)
     emit.add_argument("--requested-action", choices=sorted(contract.REQUESTED_ACTIONS))
+    emit.add_argument("--schema-version", type=int, choices=(1, 2), default=contract.SCHEMA_VERSION)
+    emit.add_argument("--capability-id", default="general")
+    emit.add_argument("--invariant-id", default="general-quality")
+    emit.add_argument(
+        "--environment-class",
+        choices=sorted(contract.ENVIRONMENT_CLASSES),
+        default="unknown",
+    )
     emit.add_argument("--ttl-seconds", type=int, default=3600)
     emit.add_argument("--causal-depth", type=int, choices=(0, 1), default=0)
     emit.add_argument("--prior-digest")
@@ -108,6 +148,13 @@ def _parser() -> argparse.ArgumentParser:
     subparsers.add_parser("conformance", help="Run the offline receipt-to-proposal fixture.")
     subparsers.add_parser("hook-stop", help=argparse.SUPPRESS)
 
+    evaluation_validate = subparsers.add_parser(
+        "evaluation-validate",
+        help="Validate an exact evaluation manifest and result without local state or network.",
+    )
+    evaluation_validate.add_argument("--manifest", type=Path, required=True)
+    evaluation_validate.add_argument("--result", type=Path, required=True)
+
     show = subparsers.add_parser("proposal-show", help="Show one local proposal.")
     show.add_argument("--proposal-id", required=True)
     dismiss = subparsers.add_parser("proposal-dismiss", help="Dismiss one local proposal.")
@@ -123,6 +170,27 @@ def _parser() -> argparse.ArgumentParser:
 
 
 def _run(args: argparse.Namespace) -> dict[str, Any]:
+    if args.command == "evaluation-validate":
+        manifest = _read_bounded_json(
+            args.manifest,
+            maximum_bytes=attempt_contract.MAX_MANIFEST_BYTES,
+            label="evaluation manifest",
+        )
+        result = _read_bounded_json(
+            args.result,
+            maximum_bytes=attempt_contract.MAX_RESULT_BYTES,
+            label="evaluation result",
+        )
+        validated = attempt_contract.validate_evaluation_result(manifest, result)
+        return {
+            "status": "EVALUATION_RESULT_VALID",
+            "evaluation_id": validated["evaluation_id"],
+            "classification": validated["classification"]["status"],
+            "reason_codes": validated["classification"]["reason_codes"],
+            "manifest_digest_sha256": validated["manifest_digest_sha256"],
+            "result_digest_sha256": validated["result_digest_sha256"],
+            "outbound": "NONE",
+        }
     store = QualityStore(args.state_dir)
     if args.command == "emit":
         if not 1 <= args.ttl_seconds <= 86400:
@@ -142,6 +210,10 @@ def _run(args: argparse.Namespace) -> dict[str, Any]:
             expires_at=now + timedelta(seconds=args.ttl_seconds),
             causal_depth=args.causal_depth,
             prior_receipt_digest_sha256=args.prior_digest,
+            schema_version=args.schema_version,
+            capability_id=args.capability_id,
+            invariant_id=args.invariant_id,
+            environment_class=args.environment_class,
         )
         return {"status": "RECEIPT_READY", "receipt": receipt, "marker": contract.format_marker(receipt)}
     if args.command == "validate":
@@ -164,7 +236,7 @@ def _run(args: argparse.Namespace) -> dict[str, Any]:
             "portable_handoff": "AVAILABLE",
             "update_authority": "plugin-manager" if plugin_managed else "github-cli-or-manual",
             "automatic_claim": "at-most-one-continuation-request",
-            "durable_claim": "one-idempotent-local-proposal-per-receipt-and-analyzer-version",
+            "durable_claim": "one-idempotent-local-proposal-per-exact-receipt-with-analyzer-revisions",
             "outbound": "NONE",
         }
     if args.command == "proposal-show":

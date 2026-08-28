@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "candidate_version": "0.9.0",
+  "recorded_at_utc": "2026-08-28T09:24:31.925260Z",
+  "platform": "Windows",
+  "full_suite": {
+    "command": "py -3 -m unittest discover -s tests -v",
+    "status": "PASS",
+    "tests_run": 263,
+    "passed": 262,
+    "skipped": 1,
+    "skip_boundary": "The generic update-policy symlink test is privilege-dependent on Windows; the remaining 262 tests passed."
+  },
+  "evaluation_result_contract": {
+    "command": "py -3 -m unittest discover -s tests -p test_skill_quality_evaluation.py -v",
+    "status": "PASS",
+    "tests_run": 23,
+    "synthetic_manifest_digest_sha256": "683de6b30fdeebe0bfd118a7f087c8a3072401fdd70da8d39d43835aa72ae81d",
+    "synthetic_readiness": "INCONCLUSIVE",
+    "assertion": "The post-acceptance focused suite validates frozen pilot thresholds, closed manifest and result schemas, canonical digests, distinct exact-receipt coverage, frozen taxonomy dimensions, repetition binding, recomputed summaries and classifications, direct-failure precedence, malformed-input rejection, and a state-free no-network validation command."
+  },
+  "skill_validation": {
+    "command": "quick_validate.py skills/analyze-project-claims",
+    "status": "PASS",
+    "validator_result": "Skill is valid!"
+  },
+  "package_verification": {
+    "status": "PASS",
+    "package_manifest_digest": "5ae0c3de5b73343fe302faa2870449710545f3b438b2fad355d39e041829c415",
+    "version": "0.9.0"
+  },
+  "engine_verification": {
+    "status": "PASS",
+    "engine_name": "component-evidence",
+    "engine_version": "1.3.0",
+    "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b"
+  },
+  "component_map_preflight": {
+    "status": "PASS",
+    "result": "READY",
+    "accepted_map_id": "component-map-a2e9cfaad704",
+    "accepted_map_sha256": "1d7bde45ffe33e37f13d52c2f7434bf942143765aa8c755daa97d5d35aa8e5a7",
+    "post_acceptance_reconciliation": "checked_unchanged"
+  },
+  "self_audit_scope": {
+    "status": "PARTIAL",
+    "method": "same-package structural self-application",
+    "assertion": "analyze-project-claims applied its own component-map and evidence-record protocols to its local candidate. This is useful deterministic self-consistency evidence, not an independent implementation, independent scientific replication, or proof of general reliability."
+  },
+  "limitations": [
+    "No representative ten-to-twenty-receipt pilot or pinned model comparison ran; the packaged synthetic manifest remains INCONCLUSIVE.",
+    "The self-audit reuses the same analyzer package, evidence engine, schemas, and recorder and therefore is not independent validation of their semantics.",
+    "A trusted attempt ledger, mechanically enforced repair controller, release, installation, and fresh activation remain unimplemented or unobserved.",
+    "No receipt, proposal, issue, workflow, merge, publication, update, or outbound action was automatically authorized."
+  ]
+}

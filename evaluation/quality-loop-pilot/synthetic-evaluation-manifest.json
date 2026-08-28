@@ -1,0 +1,56 @@
+{
+  "baseline_package": {
+    "owner": "Ian-Tseng",
+    "package_digest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "repository": "analyze-project-claims",
+    "skill": "analyze-project-claims",
+    "version": "0.8.3"
+  },
+  "candidate_package": {
+    "owner": "Ian-Tseng",
+    "package_digest_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "repository": "analyze-project-claims",
+    "skill": "analyze-project-claims",
+    "version": "0.9.0"
+  },
+  "created_at_utc": "2026-08-28T00:00:00Z",
+  "environment": {
+    "dependency_lock_digest_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "platform_id": "synthetic-offline",
+    "runner_image_digest_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "evaluation_id": "quality-loop-pilot-synthetic-001",
+  "fixtures": [
+    {
+      "capability_id": "managed-skill-quality-loop",
+      "environment_class": "synthetic-offline",
+      "fixture_digest_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "fixture_id": "synthetic-receipt-v2-001",
+      "invariant_id": "proposal-revision-identity",
+      "producer_repository": "analyze-project-claims",
+      "quality_signal": "lifecycle_inconsistency",
+      "taxonomy_id": "skill-quality-pilot-v1"
+    }
+  ],
+  "kind": "skill-quality-evaluation",
+  "manifest_digest_sha256": "683de6b30fdeebe0bfd118a7f087c8a3072401fdd70da8d39d43835aa72ae81d",
+  "model": {
+    "model": "not-executed",
+    "parameters_digest_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "pinned": false,
+    "provider": "none"
+  },
+  "problem_signature_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+  "rules": {
+    "maximum_false_cluster_basis_points": 500,
+    "maximum_receipt_count": 20,
+    "maximum_regression_basis_points": 100,
+    "minimum_baseline_reproducibility_basis_points": 8000,
+    "minimum_improvement_basis_points": 500,
+    "minimum_receipt_count": 10,
+    "repetitions": 3,
+    "ruleset_digest_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "ruleset_id": "quality-loop-pilot-v1"
+  },
+  "schema_version": 1
+}

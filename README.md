@@ -36,7 +36,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.8.3
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.9.0
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
@@ -96,15 +96,22 @@ eligibility are separate conclusions.
 ## Optional skill-quality loop
 
 Compatible Ian-Tseng-managed skills can end with a content-free
-`SkillOutcomeReceipt`. It permits enum and package identity only: no project
-text, prompt, transcript, path, log, finding, attachment, or credential.
+`SkillOutcomeReceipt`. v2 adds only capability, invariant, and environment
+identifiers to enum and package identity; exact v1 markers remain readable.
+No project text, prompt, transcript, path, log, finding, attachment, or
+credential is permitted.
 
 ```powershell
 py -3 .\skills\analyze-project-claims\scripts\skill_quality_loop.py --format json consume --marker "<exact-marker>"
 py -3 .\skills\analyze-project-claims\scripts\skill_quality_loop.py --format json --state-dir .\.quality-loop-smoke conformance
+py -3 .\skills\analyze-project-claims\scripts\skill_quality_loop.py --format json evaluation-validate --manifest <manifest.json> --result <result.json>
 ```
 
-Replay returns the same proposal ID. Conformance must report
+Replay returns the same intake proposal ID even across analyzer versions;
+versions become analysis revisions. Advisory problem clusters never authorize
+work. The evaluation command is state-free and validates one exact closed
+manifest/result pair; it does not run a model or attest that observations are
+authentic. Conformance must report
 `QUALITY_PROPOSAL_READY`, `replay_deduplicated: true`, and `outbound: NONE`.
 No issue, edit, update, or release is authorized. Read
 [Skill Quality Loop](docs/SKILL_QUALITY_LOOP.md), the

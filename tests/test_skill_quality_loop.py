@@ -46,6 +46,29 @@ class SkillOutcomeReceiptTests(unittest.TestCase):
         self.assertNotIn("Producer result", json.dumps(receipt))
         self.assertLessEqual(len(marker.encode("utf-8")), contract.MAX_MARKER_BYTES)
 
+    def test_marker_prefix_must_match_payload_schema_version(self) -> None:
+        marker = contract.format_marker(self.receipt())
+        mismatched = marker.replace(
+            contract.MARKER_PREFIXES[2],
+            contract.MARKER_PREFIXES[1],
+            1,
+        )
+        with self.assertRaisesRegex(contract.QualityError, "version does not match"):
+            contract.parse_marker(mismatched, now=datetime.now(timezone.utc))
+
+    def test_v2_context_rejects_invalid_identifiers_and_environment(self) -> None:
+        for field, value in (
+            ("capability_id", "contains spaces"),
+            ("invariant_id", "contains/slash"),
+            ("environment_class", "unsupported"),
+        ):
+            with self.subTest(field=field):
+                receipt = self.receipt()
+                receipt["context"][field] = value
+                receipt["receipt_digest_sha256"] = contract.receipt_digest(receipt)
+                with self.assertRaisesRegex(contract.QualityError, "RECEIPT_SCHEMA_VIOLATION"):
+                    contract.validate_receipt(receipt, now=datetime.now(timezone.utc))
+
     def test_unknown_or_content_bearing_fields_are_rejected(self) -> None:
         receipt = self.receipt()
         receipt["summary"] = "C:/private/project secret"
@@ -80,6 +103,55 @@ class SkillOutcomeReceiptTests(unittest.TestCase):
         with self.assertRaisesRegex(contract.QualityError, "RECEIPT_SCHEMA_VIOLATION"):
             contract.validate_receipt(receipt)
 
+    def test_v2_context_is_closed_and_content_free(self) -> None:
+        receipt = self.receipt()
+        receipt["context"]["details"] = "project text"
+        receipt["receipt_digest_sha256"] = contract.receipt_digest(receipt)
+        with self.assertRaisesRegex(contract.QualityError, "RECEIPT_SCHEMA_VIOLATION"):
+            contract.validate_receipt(receipt)
+
+    def test_v2_context_produces_version_independent_advisory_problem_signature(self) -> None:
+        receipt = self.receipt(
+            capability_id="receipt-handoff",
+            invariant_id="portable-explicit-consume",
+            environment_class="agent-host",
+        )
+        later = self.receipt(
+            version="9.9.9",
+            package_digest_sha256="c" * 64,
+            capability_id="receipt-handoff",
+            invariant_id="portable-explicit-consume",
+            environment_class="agent-host",
+        )
+        changed = self.receipt(
+            capability_id="receipt-handoff",
+            invariant_id="different-invariant",
+            environment_class="agent-host",
+        )
+        self.assertEqual(receipt["schema_version"], 2)
+        self.assertEqual(
+            receipt["context"],
+            {
+                "capability_id": "receipt-handoff",
+                "invariant_id": "portable-explicit-consume",
+                "environment_class": "agent-host",
+            },
+        )
+        self.assertEqual(contract.problem_signature(receipt), contract.problem_signature(later))
+        self.assertNotEqual(contract.problem_signature(receipt), contract.problem_signature(changed))
+        self.assertTrue(contract.format_marker(receipt).startswith("SKILL_OUTCOME_RECEIPT_V2:"))
+
+    def test_v1_receipts_remain_readable_without_cross_version_clustering(self) -> None:
+        receipt = self.receipt(schema_version=1)
+        self.assertEqual(receipt["schema_version"], 1)
+        self.assertNotIn("context", receipt)
+        self.assertTrue(contract.format_marker(receipt).startswith("SKILL_OUTCOME_RECEIPT_V1:"))
+        self.assertEqual(contract.parse_marker(contract.format_marker(receipt)), receipt)
+        self.assertNotEqual(
+            contract.problem_signature(receipt),
+            contract.problem_signature(self.receipt(schema_version=1)),
+        )
+
 
 class QualityStoreTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -111,6 +183,104 @@ class QualityStoreTests(unittest.TestCase):
         status = self.store.status()
         self.assertEqual(status["proposal_count"], 1)
         self.assertEqual(status["outbound_actions"], 0)
+
+    def test_analyzer_upgrade_adds_revision_without_duplicate_proposal(self) -> None:
+        first = self.store.consume(self.receipt, analyzer_version="1.0.0")
+        second = self.store.consume(self.receipt, analyzer_version="2.0.0")
+        self.assertEqual(first["proposal_id"], second["proposal_id"])
+        self.assertEqual(self.store.status()["proposal_count"], 1)
+        self.assertEqual(second["analyzer_version"], "2.0.0")
+        self.assertEqual(
+            [item["analyzer_version"] for item in second["analysis_revisions"]],
+            ["1.0.0", "2.0.0"],
+        )
+        self.assertTrue(second["analysis_revision_created"])
+        self.assertRegex(second["problem_signature_sha256"], r"^[0-9a-f]{64}$")
+
+    def test_v1_state_migrates_to_receipt_identity_and_revision_history(self) -> None:
+        digest = self.receipt["receipt_digest_sha256"]
+        created = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+        old_proposal_id = "quality-proposal-" + "1" * 24
+        old_proposal = {
+            "proposal_id": old_proposal_id,
+            "receipt_digest_sha256": digest,
+            "analyzer_version": "1.0.0",
+            "producer": self.receipt["producer"],
+            "outcome": self.receipt["outcome"],
+            "quality_signal": self.receipt["quality_signal"],
+            "recommended_action": "review_lifecycle_contract",
+            "status": "active",
+            "created_at_utc": created,
+            "outbound": "NONE",
+        }
+        legacy = {
+            "schema_version": 1,
+            "receipts": {},
+            "proposals": {old_proposal_id: old_proposal},
+            "hook_turns": {},
+            "outbound_contributions": {},
+        }
+        self.store.path.write_text(json.dumps(legacy), encoding="utf-8")
+
+        migrated = self.store.consume(self.receipt, analyzer_version="2.0.0")
+
+        self.assertNotEqual(migrated["proposal_id"], old_proposal_id)
+        self.assertEqual(self.store.status()["proposal_count"], 1)
+        self.assertEqual(
+            [item["analyzer_version"] for item in migrated["analysis_revisions"]],
+            ["1.0.0", "2.0.0"],
+        )
+
+    def test_v1_migration_merges_mixed_lifecycle_state_order_independently(self) -> None:
+        digest = self.receipt["receipt_digest_sha256"]
+        created = datetime.now(timezone.utc).replace(microsecond=0)
+        base = {
+            "receipt_digest_sha256": digest,
+            "producer": self.receipt["producer"],
+            "outcome": self.receipt["outcome"],
+            "quality_signal": self.receipt["quality_signal"],
+            "recommended_action": "review_lifecycle_contract",
+            "outbound": "NONE",
+        }
+        versions = [
+            {
+                **base,
+                "proposal_id": "quality-proposal-" + "1" * 24,
+                "analyzer_version": "1.0.0",
+                "status": "dismissed",
+                "created_at_utc": (created - timedelta(seconds=1)).isoformat().replace("+00:00", "Z"),
+                "dismissed_at_utc": created.isoformat().replace("+00:00", "Z"),
+            },
+            {
+                **base,
+                "proposal_id": "quality-proposal-" + "2" * 24,
+                "analyzer_version": "2.0.0",
+                "status": "active",
+                "created_at_utc": created.isoformat().replace("+00:00", "Z"),
+            },
+        ]
+        observed = []
+        for ordered in (versions, list(reversed(versions))):
+            legacy = {
+                "schema_version": 1,
+                "receipts": {},
+                "proposals": {item["proposal_id"]: item for item in ordered},
+                "hook_turns": {},
+                "outbound_contributions": {},
+            }
+            self.store.path.write_text(json.dumps(legacy), encoding="utf-8")
+            migrated = self.store.consume(self.receipt, analyzer_version="3.0.0")
+            observed.append(
+                (
+                    migrated["status"],
+                    [item["analyzer_version"] for item in migrated["analysis_revisions"]],
+                    "dismissed_at_utc" in migrated,
+                )
+            )
+        self.assertEqual(
+            observed,
+            [("active", ["1.0.0", "2.0.0", "3.0.0"], False)] * 2,
+        )
 
     def test_concurrent_replay_commits_one_proposal(self) -> None:
         with ThreadPoolExecutor(max_workers=8) as workers:
@@ -226,6 +396,9 @@ class QualityStoreTests(unittest.TestCase):
         result = self.store.consume(receipt, analyzer_version="1.0.0")
         self.assertEqual(result["status"], "no_action")
         self.assertEqual(self.store.status()["proposal_count"], 0)
+        replay = self.store.consume(receipt, analyzer_version="2.0.0")
+        self.assertTrue(replay["deduplicated"])
+        self.assertEqual(self.store.status()["no_action_receipts"], 1)
 
     def test_hook_requests_at_most_one_continuation_per_turn(self) -> None:
         message = "done\n" + contract.format_marker(self.receipt)
@@ -253,6 +426,30 @@ class QualityStoreTests(unittest.TestCase):
 
 
 class QualityLoopCliTests(unittest.TestCase):
+    def test_doctor_describes_exact_receipt_identity_with_analyzer_revisions(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="skill-quality-doctor-") as directory:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(CLI),
+                    "--format",
+                    "json",
+                    "--state-dir",
+                    directory,
+                    "doctor",
+                ],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        output = json.loads(result.stdout)
+        self.assertEqual(
+            output["durable_claim"],
+            "one-idempotent-local-proposal-per-exact-receipt-with-analyzer-revisions",
+        )
+
     def test_emit_defaults_no_issue_to_no_action(self) -> None:
         result = subprocess.run(
             [
@@ -280,7 +477,10 @@ class QualityLoopCliTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(json.loads(result.stdout)["receipt"]["requested_action"], "none")
+        receipt = json.loads(result.stdout)["receipt"]
+        self.assertEqual(receipt["requested_action"], "none")
+        self.assertEqual(receipt["schema_version"], 2)
+        self.assertEqual(receipt["context"]["environment_class"], "unknown")
 
     def test_cross_process_replay_has_one_proposal_and_truthful_status(self) -> None:
         now = datetime.now(timezone.utc).replace(microsecond=0)
@@ -418,14 +618,16 @@ class QualityLoopCliTests(unittest.TestCase):
                 created_at=now,
                 expires_at=now + timedelta(minutes=5),
             )
-            self.assertFalse(receipt_schema["additionalProperties"])
-            self.assertEqual(set(receipt), set(receipt_schema["required"]))
+            receipt_v2_schema = receipt_schema["$defs"]["receipt_v2"]
+            self.assertFalse(receipt_v2_schema["additionalProperties"])
+            self.assertEqual(set(receipt), set(receipt_v2_schema["required"]))
             with tempfile.TemporaryDirectory(prefix="producer-conformance-") as directory:
                 proposal = QualityStore(Path(directory)).consume(
                     receipt,
                     analyzer_version="1.0.0",
                 )
             proposal.pop("deduplicated")
+            proposal.pop("analysis_revision_created")
             self.assertFalse(proposal_schema["additionalProperties"])
             self.assertEqual(set(proposal), set(proposal_schema["required"]))
 

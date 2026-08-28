@@ -143,9 +143,9 @@ the active `SKILL.md` digest, mapper identity, quality-loop surfaces, plugin
 adapter, contribution boundary, updater doctor, and release preflight.
 
 ```powershell
-py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile --observation .\validation\component-map-observation-v083.json --map-root .\validation\component-map --project-root .
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile --observation .\validation\component-map-observation-v090.json --map-root .\validation\component-map --project-root .
 py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py accept --candidate <exact-candidate-from-reconcile> --map-root .\validation\component-map
-py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile --observation .\validation\component-map-observation-v083.json --map-root .\validation\component-map --project-root .
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile --observation .\validation\component-map-observation-v090.json --map-root .\validation\component-map --project-root .
 py -3 .\skills\analyze-project-claims\scripts\record_scan.py preflight --map-root .\validation\component-map --project-root .
 ```
 
@@ -387,15 +387,15 @@ next invocation must load the verified new version.
 ## 8. Record claim-to-evidence links
 
 Keep machine authority, human-readable views, and remote lifecycle evidence
-distinct. For v0.8.3, the evidence map is version-bound:
+distinct. For the v0.9.0 release candidate, the evidence map is version-bound:
 
 | Claim | Supporting authority |
 | --- | --- |
-| Released package bytes and version | [`package-manifest.json`](skills/analyze-project-claims/references/package-manifest.json), [`package-version.json`](skills/analyze-project-claims/references/package-version.json), and [GitHub release v0.8.3](https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.8.3) after publication |
+| Release-candidate package bytes and version | [`package-manifest.json`](skills/analyze-project-claims/references/package-manifest.json) and [`package-version.json`](skills/analyze-project-claims/references/package-version.json); a v0.9.0 GitHub release remains pending until publication |
 | Accepted repository structure | [`accepted-map.json`](validation/component-map/accepted-map.json) |
 | Formal evidence-bound audit | The newest applicable verified v2 record under `validation/history/`, interpreted under [validation authority](validation/README.md) |
 | Human-readable audit view | The matching deterministic view under `validation/reports/`; it is derived, not authority |
-| Cross-platform tests on released `main` | The exact v0.8.3 commit's required GitHub Actions run after merge |
+| Cross-platform tests on released `main` | The exact v0.9.0 commit's required GitHub Actions run after merge; local candidate tests are not a substitute |
 | Prior scope-limited Codex and Claude-targeted distribution evidence | [`CLAUDE_CODE_E2E_LOG.md`](docs/CLAUDE_CODE_E2E_LOG.md) |
 
 Markdown reports are derived views; do not treat them as a second authority.

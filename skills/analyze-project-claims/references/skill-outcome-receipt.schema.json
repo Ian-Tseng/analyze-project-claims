@@ -1,37 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/Ian-Tseng/analyze-project-claims/skill-outcome-receipt.schema.json",
-  "title": "SkillOutcomeReceipt v1",
-  "type": "object",
-  "additionalProperties": false,
-  "required": [
-    "schema_version",
-    "receipt_id",
-    "producer",
-    "outcome",
-    "quality_signal",
-    "requested_action",
-    "action_performed",
-    "created_at_utc",
-    "expires_at_utc",
-    "causal_depth",
-    "prior_receipt_digest_sha256",
-    "receipt_digest_sha256"
+  "title": "SkillOutcomeReceipt v1 and v2",
+  "oneOf": [
+    {"$ref": "#/$defs/receipt_v1"},
+    {"$ref": "#/$defs/receipt_v2"}
   ],
-  "properties": {
-    "schema_version": {"const": 1},
-    "receipt_id": {"type": "string", "format": "uuid", "maxLength": 36},
+  "$defs": {
     "producer": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "owner",
-        "repository",
-        "skill",
-        "version",
-        "package_digest_sha256",
-        "identity_authority"
-      ],
+      "required": ["owner", "repository", "skill", "version", "package_digest_sha256", "identity_authority"],
       "properties": {
         "owner": {"const": "Ian-Tseng"},
         "repository": {"type": "string", "pattern": "^[A-Za-z0-9_.-]{1,100}$"},
@@ -41,43 +20,71 @@
         "identity_authority": {"const": "producer_declared_untrusted"}
       }
     },
-    "outcome": {
-      "enum": ["completed", "completed_with_limitations", "failed"]
-    },
-    "quality_signal": {
-      "enum": [
-        "claim_evidence_gap",
-        "lifecycle_inconsistency",
-        "documentation_mismatch",
-        "internal_failure",
-        "no_issue"
-      ]
-    },
-    "requested_action": {"enum": ["analyze_quality", "none"]},
-    "action_performed": {"const": false},
-    "created_at_utc": {"type": "string", "format": "date-time", "maxLength": 20},
-    "expires_at_utc": {"type": "string", "format": "date-time", "maxLength": 20},
-    "causal_depth": {"type": "integer", "minimum": 0, "maximum": 1},
-    "prior_receipt_digest_sha256": {
-      "oneOf": [
-        {"type": "null"},
-        {"type": "string", "pattern": "^[0-9a-f]{64}$"}
-      ]
-    },
-    "receipt_digest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
-  },
-  "allOf": [
-    {
-      "if": {
-        "properties": {"quality_signal": {"const": "no_issue"}},
-        "required": ["quality_signal"]
-      },
-      "then": {
-        "properties": {"requested_action": {"const": "none"}}
-      },
-      "else": {
-        "properties": {"requested_action": {"const": "analyze_quality"}}
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capability_id", "invariant_id", "environment_class"],
+      "properties": {
+        "capability_id": {"type": "string", "pattern": "^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"},
+        "invariant_id": {"type": "string", "pattern": "^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"},
+        "environment_class": {
+          "enum": ["agent-host", "local-cli", "github-actions", "documentation", "unknown"]
+        }
       }
+    },
+    "receipt_v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "receipt_id", "producer", "outcome", "quality_signal",
+        "requested_action", "action_performed", "created_at_utc", "expires_at_utc",
+        "causal_depth", "prior_receipt_digest_sha256", "receipt_digest_sha256"
+      ],
+      "properties": {
+        "schema_version": {"const": 1},
+        "receipt_id": {"type": "string", "format": "uuid", "maxLength": 36},
+        "producer": {"$ref": "#/$defs/producer"},
+        "outcome": {"enum": ["completed", "completed_with_limitations", "failed"]},
+        "quality_signal": {"enum": ["claim_evidence_gap", "lifecycle_inconsistency", "documentation_mismatch", "internal_failure", "no_issue"]},
+        "requested_action": {"enum": ["analyze_quality", "none"]},
+        "action_performed": {"const": false},
+        "created_at_utc": {"type": "string", "format": "date-time", "maxLength": 20},
+        "expires_at_utc": {"type": "string", "format": "date-time", "maxLength": 20},
+        "causal_depth": {"type": "integer", "minimum": 0, "maximum": 1},
+        "prior_receipt_digest_sha256": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^[0-9a-f]{64}$"}]},
+        "receipt_digest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "allOf": [{"$ref": "#/$defs/action_pairing"}]
+    },
+    "receipt_v2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "receipt_id", "producer", "context", "outcome", "quality_signal",
+        "requested_action", "action_performed", "created_at_utc", "expires_at_utc",
+        "causal_depth", "prior_receipt_digest_sha256", "receipt_digest_sha256"
+      ],
+      "properties": {
+        "schema_version": {"const": 2},
+        "receipt_id": {"type": "string", "format": "uuid", "maxLength": 36},
+        "producer": {"$ref": "#/$defs/producer"},
+        "context": {"$ref": "#/$defs/context"},
+        "outcome": {"enum": ["completed", "completed_with_limitations", "failed"]},
+        "quality_signal": {"enum": ["claim_evidence_gap", "lifecycle_inconsistency", "documentation_mismatch", "internal_failure", "no_issue"]},
+        "requested_action": {"enum": ["analyze_quality", "none"]},
+        "action_performed": {"const": false},
+        "created_at_utc": {"type": "string", "format": "date-time", "maxLength": 20},
+        "expires_at_utc": {"type": "string", "format": "date-time", "maxLength": 20},
+        "causal_depth": {"type": "integer", "minimum": 0, "maximum": 1},
+        "prior_receipt_digest_sha256": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^[0-9a-f]{64}$"}]},
+        "receipt_digest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "allOf": [{"$ref": "#/$defs/action_pairing"}]
+    },
+    "action_pairing": {
+      "if": {"properties": {"quality_signal": {"const": "no_issue"}}, "required": ["quality_signal"]},
+      "then": {"properties": {"requested_action": {"const": "none"}}},
+      "else": {"properties": {"requested_action": {"const": "analyze_quality"}}}
     }
-  ]
+  }
 }

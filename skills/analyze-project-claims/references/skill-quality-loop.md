@@ -6,9 +6,10 @@ preparing an owner contribution.
 
 ## Promise and boundary
 
-Compatible Ian-Tseng-managed skills may emit a content-free v1 receipt. This
-skill validates it and creates one local proposal per receipt digest and
-analyzer version. It does not observe arbitrary skills, parse transcripts,
+Compatible Ian-Tseng-managed skills may emit a content-free v2 receipt; exact
+v1 receipts remain readable. This skill validates it and creates one local
+intake proposal per exact receipt digest. Analyzer versions create child
+analysis revisions, not duplicate proposals. It does not observe arbitrary skills, parse transcripts,
 authenticate producer claims, edit a running package, or publish automatically.
 
 The optional Codex plugin `Stop` hook can request at most one continuation for
@@ -18,19 +19,41 @@ routing is not deterministic. A persisted receipt remains available for the
 portable explicit path. The receipt adapter never recursively invokes this or
 another skill and never starts a repair loop.
 
+## Canonical terminology
+
+| Term | Contract |
+|---|---|
+| Receipt | Exact bounded producer outcome identified by its canonical digest. |
+| Intake proposal | One durable local record per exact actionable receipt. |
+| Analysis revision | One analyzer-version interpretation attached to that proposal. |
+| Problem signature | Advisory v2 cluster from producer origin, signal, capability, invariant, and environment class. It cannot deduplicate, reopen, or authorize. |
+| Evaluation manifest | Exact baseline, candidate, fixtures, environment, model, and rules for a comparison. |
+| Evaluation result | Digest-bound per-fixture observations and a classification recomputed against one exact manifest. It is evidence input, not execution attestation. |
+| Attempt / cycle receipt / termination receipt | Reserved for the later trusted-controller milestone; none is implemented by receipt intake. |
+| Improvement | A predefined evaluation delta with no forbidden baseline regression, never protocol conformance alone. |
+| Activation manifest | Exact release/package/install identity proved by a running skill; not implemented by this local loop. |
+| Observed recurrence | Recurrence within measured receipt coverage; never a fleet-wide absence claim. |
+
 ## Receipt contract
 
-Use `skill-outcome-receipt.schema.json`. Unknown fields fail closed. The
-receipt permits only version and UUID identity, producer-declared owner/repo/
-skill/version/package digest, outcome and signal enums, timestamps, bounded
-causal depth, optional prior digest, `action_performed: false`, and its
-canonical digest.
+Use `skill-outcome-receipt.schema.json`. Unknown fields fail closed. v2 adds a
+closed `context` of capability ID, invariant ID, and enumerated environment
+class to the v1 version/UUID, producer-declared package identity, outcome and
+signal enums, timestamps, bounded causal depth, optional prior digest,
+`action_performed: false`, and canonical digest. These fields remain
+content-free.
 
 `no_issue` must pair with `requested_action: none`; every other signal must
-pair with `analyze_quality`. A no-action receipt never requests a Stop
-continuation, creates a proposal, or becomes contribution-eligible. Creation
+pair with `analyze_quality`. A no-action receipt writes only a bounded local
+digest/provenance tombstone; it never requests a Stop continuation, creates a
+proposal, or becomes contribution-eligible. Creation
 time may be at most five minutes in the future and lifetime is at most 24
 hours.
+
+Problem signatures are explicitly advisory and their input authority is
+`advisory_untrusted_intake`. v2 excludes version, package digest, timestamps,
+receipt UUID, and project content from the signature. v1 lacks clustering
+context, so every v1 receipt remains a singleton signature.
 
 Reject free text, prompts, transcripts, paths, URLs, logs, tool data, project
 findings, errors, diffs, patches, tokens, credentials, and attachments. Do not
@@ -48,13 +71,26 @@ Use global options before the verb:
 <python-3> scripts/skill_quality_loop.py --format json consume
 <python-3> scripts/skill_quality_loop.py --format json proposal-show --proposal-id <id>
 <python-3> scripts/skill_quality_loop.py --format json proposal-dismiss --proposal-id <id>
+<python-3> scripts/skill_quality_loop.py --format json evaluation-validate --manifest <manifest.json> --result <result.json>
 <python-3> scripts/skill_quality_loop.py --format json --state-dir <disposable-dir> conformance
 ```
 
 With no marker, `consume` selects the oldest pending compatible receipt. Keep
 state machine-local. Never sync receipts, proposals, or consents. Expired and
-terminal receipt records are reclaimed. Active proposals apply backpressure at
-the bounded limit; dismissing proposals makes bounded capacity reusable.
+terminal receipt records and expired no-action tombstones are reclaimed.
+Active proposals apply backpressure at the bounded limit; dismissing proposals
+makes bounded capacity reusable.
+
+`skill-quality-evaluation-manifest.schema.json`,
+`skill-quality-evaluation-result.schema.json`, and
+`scripts/_internal/skill_quality/attempt_contract.py` define the independent
+comparison input and result. The manifest freezes receipt-count,
+reproducibility, false-cluster, improvement, and regression thresholds. The
+result must cover every frozen fixture exactly once and records only bounded
+metrics, owner disposition/time, and unauthorized-outbound counts. Its summary
+and classification are recomputed; observed failure dominates
+`INCONCLUSIVE`. A valid artifact does not authenticate its author, prove that
+an evaluation ran, or establish improvement beyond its exact evidence cell.
 
 ## Contribution
 

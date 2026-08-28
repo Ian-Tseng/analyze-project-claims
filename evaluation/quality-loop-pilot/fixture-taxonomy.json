@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "taxonomy_id": "skill-quality-pilot-v1",
+  "signals": [
+    "claim_evidence_gap",
+    "documentation_mismatch",
+    "internal_failure",
+    "lifecycle_inconsistency"
+  ],
+  "required_dimensions": [
+    "capability_id",
+    "environment_class",
+    "invariant_id",
+    "producer_repository",
+    "quality_signal"
+  ],
+  "prohibited_dimensions": [
+    "attachment",
+    "credential",
+    "diff",
+    "log",
+    "path",
+    "project_content",
+    "prompt",
+    "transcript"
+  ]
+}

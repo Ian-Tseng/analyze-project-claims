@@ -9,6 +9,17 @@ The bundled run uses two synthetic projects and two scripted output families.
 It is a workflow dry run, not a reliability experiment. Its scores only test
 metric arithmetic and failure paths.
 
+## Skill-quality learning pilot
+
+The separate [quality-loop pilot protocol](quality-loop-pilot/protocol.md)
+scaffolds evaluation-first, human-authored repairs for content-free v2 receipt
+families. Its packaged synthetic manifest is deliberately unpinned and
+`INCONCLUSIVE`. The package now includes separate closed manifest and result
+schemas plus a state-free validation command; classifications are recomputed
+from exact fixture rows and frozen thresholds. This proves only the artifact
+contract. No representative receipt pilot, repair attempt, model comparison,
+or improvement is claimed.
+
 ## Claim-expansion plan
 
 A broader reliability claim requires a frozen, independently labelled
@@ -209,4 +220,3 @@ repeats, findings, or elements as independent project replications.
 See `protocol.md` for metrics, gates, and the claim boundary. Exchange formats
 are documented in `schemas/` and are also enforced by the standard-library
 harness.
-

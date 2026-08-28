@@ -6,5 +6,8 @@
   "package_digest_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
   "outcome": "completed_with_limitations",
   "quality_signal": "documentation_mismatch",
-  "requested_action": "analyze_quality"
+  "requested_action": "analyze_quality",
+  "capability_id": "document-audit",
+  "invariant_id": "documentation-contract",
+  "environment_class": "agent-host"
 }

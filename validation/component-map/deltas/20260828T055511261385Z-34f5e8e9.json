@@ -1,0 +1,100 @@
+{
+  "accepted_map_id": "component-map-1621680027a2",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-be06e663f43e",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/quality-loop-pilot"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/quality-loop-pilot/protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "evaluation/quality-loop-pilot/synthetic-evaluation-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/skill-quality-evaluation-manifest.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/attempt_contract.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/store.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_skill_quality_evaluation.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_skill_quality_loop.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "f0216ef042363ed3a82b993782bb9ea6c92300069c1a7acab08f39bcf4de6a99"
+  },
+  "recorded_at_utc": "2026-08-28T05:55:11.261385Z",
+  "scan_id": "20260828T055511261385Z-34f5e8e9",
+  "schema_version": "1.0"
+}
