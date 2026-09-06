@@ -57,6 +57,9 @@ gh skill install Ian-Tseng/analyze-project-claims skills/analyze-project-claims/
 This proves managed distribution only until Claude `/skills` discovery and
 invocation are observed.
 
+For an existing project-local variant, follow the
+[reference and recorder migration guide](docs/PROJECT_LOCAL_MIGRATION.md).
+
 ## Quickstart
 
 In Codex:
