@@ -10,6 +10,28 @@ Produce an evidence-bounded account of what the project claims, what the
 evidence establishes, where inconsistencies remain, and what action should
 come next.
 
+## Recheck inconsistencies and retain useful lessons
+
+After a substantive audit, authorized repair, or changed controlling evidence,
+read [references/review-learning.md](references/review-learning.md). Recheck
+the complete applicable scope and affected dependencies, record useful lessons
+with their evidence and verification limits, and promote validated guidance
+into the appropriate project record, decision flow, or reusable workflow.
+Keep uncertain lessons provisional and reuse existing guidance before adding
+rules. The guide adds explicit stopping conditions to the repair loop below;
+it does not reduce required checks or turn read-only work into permission to edit.
+
+Trace changed evidence through claim and assumption IDs to dependent risks,
+recommendations, and decisions. Reclassify claims when same-scope evidence
+changes, then recheck each affected decision's success/failure signal and
+reversal trigger. Link lessons to the existing evidence-bound audit record and
+accepted component map; a learning note is not a second claims authority.
+Preserve separate lifecycle and acceptance states. A consistent negative or
+uncertain result may resolve an inconsistency without establishing benefit.
+Keep experiment-specific conclusions in the project record; promote a reusable
+decision rule only with explicit evidence prerequisites, applicability, and
+exceptions. Existing repair-attempt and receipt-reconciliation limits still apply.
+
 ## Select the analysis depth
 
 Use the lightest sufficient mode:

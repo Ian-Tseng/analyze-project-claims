@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "c96db14d576d287ae01cb541f156f07e05a9e28ef8ace4ca7e49cd8358938f49"
+      "sha256": "4d01ac355bdbe9d9fcb6f63f241fef547469d8b7f9666d2e272b030ddff9e03c"
     },
     {
       "path": "agents/openai.yaml",
@@ -99,6 +99,10 @@
     {
       "path": "references/problem-report.schema.json",
       "sha256": "44983ab807053256a7be4b70634adea04cfe11457961fd5d5752d49d2f1d7c1b"
+    },
+    {
+      "path": "references/review-learning.md",
+      "sha256": "b09803292166ef17a9a5bdcc1db1f2ca8663000616fa1cd8cb306f5ce9b508ca"
     },
     {
       "path": "references/scan-record-output-v2.schema.json",
