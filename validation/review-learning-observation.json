@@ -1,0 +1,1699 @@
+{
+  "authority": [
+    "skills/analyze-project-claims/SKILL.md",
+    "skills/analyze-project-claims/references/component-map-observation.schema.json",
+    "skills/analyze-project-claims/references/component-map.schema.json",
+    "skills/analyze-project-claims/references/scan-record.schema.json",
+    "skills/analyze-project-claims/scripts/reconcile_component_map.py",
+    "tests/test_component_map.py",
+    "evaluation/protocol.md",
+    "evaluation/quality-loop-pilot/protocol.md",
+    "evaluation/quality-loop-pilot/fixture-taxonomy.json",
+    "evaluation/configs/dry-run.json",
+    "evaluation/scripts/cross_project_reliability.py",
+    "tests/test_cross_project_reliability.py",
+    "validation/README.md",
+    "tests/test_strict_evidence_contract.py",
+    "evaluation/configs/natural-development-pilot.selection.json",
+    "evaluation/scripts/natural_project_pilot.py",
+    "tests/test_natural_project_pilot.py",
+    "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json",
+    "evaluation/annotation-codebook.md",
+    "evaluation/schemas/independent-annotation.schema.json",
+    "evaluation/schemas/natural-adjudicated-gold.schema.json",
+    "evaluation/schemas/natural-label-commitment.schema.json",
+    "tests/test_natural_project_label_freeze.py",
+    "tests/test_zero_finding_gold.py",
+    "evaluation/configs/annotation-calibration.selection.json",
+    "evaluation/scripts/annotation_calibration.py",
+    "tests/test_annotation_calibration.py",
+    "VERSION",
+    "PUBLISHING.md",
+    "CITATION.cff",
+    "LICENSE",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
+    "docs/PROBLEM_REPORTING.md",
+    "docs/PROBLEM_REPORTING_E2E_LOG.md",
+    "reporting_service/server.py",
+    "skills/analyze-project-claims/references/package-manifest.json",
+    "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
+    "skills/analyze-project-claims/references/package-version.json",
+    "skills/analyze-project-claims/references/problem-report-policy.schema.json",
+    "skills/analyze-project-claims/references/problem-report.schema.json",
+    "skills/analyze-project-claims/scripts/problem_report.py",
+    "skills/analyze-project-claims/scripts/update_policy.py",
+    "tests/test_problem_report.py",
+    "tests/test_reporting_service.py",
+    "tests/test_update_policy.py",
+    ".github/workflows/agent-maintainer.yml",
+    ".github/codex/prompts/resolve-internal-report.md",
+    "maintainer_service/intake.py",
+    "maintainer_service/patch_guard.py",
+    "docs/AGENT_MAINTAINER.md",
+    "docs/AGENT_MAINTAINER_E2E_LOG.md",
+    "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md",
+    "analytics_service/server.py",
+    "docs/INSTALLATION_ANALYTICS.md",
+    "skills/analyze-project-claims/references/installation-analytics-event.schema.json",
+    "skills/analyze-project-claims/references/installation-analytics-policy.schema.json",
+    "skills/analyze-project-claims/scripts/installation_analytics.py",
+    "tests/test_agent_maintainer.py",
+    "tests/test_installation_analytics.py",
+    "tests/test_analytics_service.py",
+    "tests/test_agent_compatibility.py",
+    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md",
+    "skills/analyze-project-claims/references/evidence-bound-audit-records.md",
+    "skills/analyze-project-claims/references/scan-record-v2.schema.json",
+    "skills/analyze-project-claims/references/scan-record-output-v2.schema.json",
+    "skills/analyze-project-claims/scripts/record_scan.py",
+    "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py",
+    "tests/test_evidence_bound_scan_release_blockers.py",
+    "skills/analyze-project-claims/references/lifecycle-verification-receipt.md",
+    "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
+    "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
+    "tests/test_lifecycle_receipt_consumer.py",
+    "skills/analyze-project-claims/references/skill-outcome-receipt.schema.json",
+    "skills/analyze-project-claims/references/skill-quality-evaluation-manifest.schema.json",
+    "skills/analyze-project-claims/references/skill-quality-proposal.schema.json",
+    "skills/analyze-project-claims/references/skill-quality-contribution.schema.json",
+    "skills/analyze-project-claims/references/skill-quality-loop.md",
+    "skills/analyze-project-claims/scripts/skill_quality_loop.py",
+    "skills/analyze-project-claims/scripts/_internal/skill_quality/attempt_contract.py",
+    "skills/analyze-project-claims/scripts/_internal/skill_quality",
+    "tests/test_skill_quality_loop.py",
+    "tests/test_skill_quality_evaluation.py",
+    "tests/test_quality_contribution.py",
+    ".codex-plugin/plugin.json",
+    ".agents/plugins/marketplace.json",
+    "hooks/hooks.json",
+    "tests/test_plugin_bundle.py",
+    "docs/CODEX_PLUGIN_E2E_LOG.md",
+    "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md",
+    "tests/test_component_evidence_engine.py",
+    "skills/analyze-project-claims/references/review-learning.md"
+  ],
+  "components": [
+    {
+      "component_id": "agent-maintainer",
+      "component_type": "service",
+      "elements": [
+        {
+          "element_id": "closed-managed-fleet-onboarding",
+          "evidence": [
+            {
+              "locator": "two-file LOCAL_READY onboarding and hosted-gate boundary",
+              "source": "docs/MANAGED_FLEET_QUICKSTART.md"
+            },
+            {
+              "locator": "closed owner, repository, path, environment, publication, compatibility, and workflow-pin contract",
+              "source": "skills/analyze-project-claims/references/managed-skill-policy.schema.json"
+            },
+            {
+              "locator": "closed policy validation, deterministic init, local doctor, canary preview, disable, and rollback-plan commands",
+              "source": "skills/analyze-project-claims/scripts/managed_fleet.py"
+            },
+            {
+              "locator": "strict policy, traversal, preview/apply, idempotency, pin, workflow, authorization, and documentation regressions",
+              "source": "tests/test_managed_fleet.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "An Ian-Tseng producer joins the managed fleet through one strict non-executable policy and one deterministic full-SHA-pinned caller; local scaffolding is preview-first, two-file-bounded, idempotent, and distinct from hosted readiness."
+        },
+        {
+          "element_id": "fleet-rollout-and-host-boundary",
+          "evidence": [
+            {
+              "locator": "central reusable adoption, four zones, lifecycle gates, cutover, and rollback",
+              "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
+            },
+            {
+              "locator": "repository versions, caller state, canary order, supported protocol, and observation boundary",
+              "source": "docs/MANAGED_FLEET_SUPPORT_MATRIX.md"
+            },
+            {
+              "locator": "standalone, Codex, Claude, publisher, and repository-repair authority separation",
+              "source": "docs/MULTI_AGENT_INSTALL_TOPOLOGY.md"
+            },
+            {
+              "locator": "managed fleet routing and guardrails",
+              "source": "skills/analyze-project-claims/SKILL.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Method, venue, and server callers are onboarded in code but activation is evidence-gated in canary order; managed repair, native installed replacement, Codex discovery, Claude discovery, release, and fresh activation remain distinct lifecycle states."
+        },
+        {
+          "element_id": "human-release-gate",
+          "evidence": [
+            {
+              "locator": "problem-report operations and release evidence",
+              "source": "PUBLISHING.md"
+            },
+            {
+              "locator": "owner review and completion",
+              "source": "docs/AGENT_MAINTAINER.md"
+            },
+            {
+              "locator": "local observations and hosted-execution limitations",
+              "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
+            },
+            {
+              "locator": "lifecycle contract, privilege zones, required tests, and evidence boundary",
+              "source": "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md"
+            },
+            {
+              "locator": "owner triage and public/private processing boundary",
+              "source": "docs/PROBLEM_REPORTING.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "An automated candidate never merges, releases, closes a report, or proves user update; owner review, ordinary CI, versioned publication, installed replacement, and fresh activation remain separate gates."
+        },
+        {
+          "element_id": "owner-gated-bounded-intake",
+          "evidence": [
+            {
+              "locator": "issues labeled trigger and prepare job",
+              "source": ".github/workflows/agent-maintainer.yml"
+            },
+            {
+              "locator": "prepare_task exact event, identity, body, disclosure, and event-code checks",
+              "source": "maintainer_service/intake.py"
+            },
+            {
+              "locator": "owner, exact-body, disclosure, malformed event, task minimization, and E2E rejection regressions",
+              "source": "tests/test_agent_maintainer.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Only an exact newly disclosed public report labeled agent-ready by the canonical owner becomes a minimal untrusted task; raw issue content, comments, reporter identity, installation identity, private API reports, and E2E probes remain excluded."
+        },
+        {
+          "element_id": "pinned-reusable-repair-boundary",
+          "evidence": [
+            {
+              "locator": "closed composite action interface and explicit token input",
+              "source": ".github/actions/managed-skill-core/action.yml"
+            },
+            {
+              "locator": "authorization binding, bounded convergence prompt, live refetch, root-owned collection, policy guard, validation, and idempotent publication",
+              "source": ".github/actions/managed-skill-core/managed_skill_core.py"
+            },
+            {
+              "locator": "workflow_call interface, central $/ helpers, job permissions, protected environments, candidate, validation, and draft publication",
+              "source": ".github/workflows/managed-skill-repair.yml"
+            },
+            {
+              "locator": "hosted provisioning, privilege zones, unknown-outcome reconciliation, disablement, and rollback",
+              "source": "docs/MANAGED_FLEET_OPERATIONS.md"
+            },
+            {
+              "locator": "receipt-to-issue-to-authorized-draft lifecycle boundaries",
+              "source": "docs/MANAGED_REPAIR_WALKTHROUGH.md"
+            },
+            {
+              "locator": "bounded convergence, privilege, provenance, protected-environment, and authorization-manifest contract regressions",
+              "source": "tests/test_managed_fleet.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A central GitHub Cloud reusable workflow binds immutable issue, repository, policy, base, workflow, nonce, and expiry identities; one credential-free agent invocation may perform at most three repair-and-recheck cycles with repeated finding-set, candidate-identity, and oscillation stops; separately approved publication validates a guarded exact patch, reconciles deterministic draft state, and retains human release authority."
+        },
+        {
+          "element_id": "privilege-separated-candidate",
+          "evidence": [
+            {
+              "locator": "untrusted evidence, bounded repair-and-recheck cycles, convergence stops, and forbidden owner-action instructions",
+              "source": ".github/codex/prompts/resolve-internal-report.md"
+            },
+            {
+              "locator": "prepare, fix, validate, and publish-draft jobs",
+              "source": ".github/workflows/agent-maintainer.yml"
+            },
+            {
+              "locator": "path, mode, UTF-8, size, sensitive-surface, and release-quartet checks",
+              "source": "maintainer_service/patch_guard.py"
+            },
+            {
+              "locator": "patch-guard, bounded convergence prompt, and privilege-separation workflow regressions",
+              "source": "tests/test_agent_maintainer.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Codex has no repository write credential; within one owner-authorized candidate attempt it may run at most three repair-and-recheck cycles with repeated finding-set, candidate-identity, and oscillation stops; trusted guards bound paths and release identity, a fresh secret-free job tests the exact patch, and only a later non-executing job can publish a new draft branch and pull request."
+        }
+      ]
+    },
+    {
+      "component_id": "annotation-codebook-calibration",
+      "component_type": "experiment",
+      "elements": [
+        {
+          "element_id": "calibration-human-completion",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/18",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "json-pointer:/source_snapshot/20",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "json-pointer:/source_snapshot/25",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "independent first passes, hashing, discussion, and new study identity rule",
+              "source": "evaluation/annotation-codebook.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Two distinct humans complete and hash independent practice annotations before a recorded disagreement discussion and any codebook revision decision."
+        },
+        {
+          "element_id": "calibration-human-only-lifecycle",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/18",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "calibration preflight, prepare, status, and human handoff commands",
+              "source": "evaluation/README.md"
+            },
+            {
+              "locator": "Non-study calibration exercise and independent-first-pass rule",
+              "source": "evaluation/annotation-codebook.md"
+            },
+            {
+              "locator": "training-only calibration label boundary and stage gate",
+              "source": "evaluation/protocol.md"
+            },
+            {
+              "locator": "blank discussion record, pending human status, and agent_execution_authorized=false",
+              "source": "evaluation/scripts/annotation_calibration.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Preparation creates no human labels and no agent-execution gate; two humans must complete independent first passes before discussion, and any resulting codebook change starts a new hash-bound study label identity."
+        },
+        {
+          "element_id": "calibration-selection-isolation",
+          "evidence": [
+            {
+              "locator": "training-only claim boundary, codebook hash, excluded study selection, and pinned project identity",
+              "source": "evaluation/configs/annotation-calibration.selection.json"
+            },
+            {
+              "locator": "machine-readable non-study constants and exact two-human-slot contract",
+              "source": "evaluation/schemas/annotation-calibration-selection.schema.json"
+            },
+            {
+              "locator": "validate_calibration_selection and dynamic frozen-development repository comparison",
+              "source": "evaluation/scripts/annotation_calibration.py"
+            },
+            {
+              "locator": "non-study contract acceptance and development-overlap rejection regressions",
+              "source": "tests/test_annotation_calibration.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "One commit-pinned natural practice repository is bound to the codebook hash, dynamically checked against the current frozen development repositories, and prohibited from development, confirmation, paper-table, or general-reliability evidence."
+        },
+        {
+          "element_id": "calibration-source-and-packet-integrity",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/19",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "json-pointer:/source_snapshot/25",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "prepare_calibration_workspace source validation, packet construction, and monitor artifact manifest",
+              "source": "evaluation/scripts/annotation_calibration.py"
+            },
+            {
+              "locator": "two practice packet construction and no execution-gate regression",
+              "source": "tests/test_annotation_calibration.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The practice source is acquired at one exact commit with archive and license hashes under frozen caps, remains outside the public wrapper, and yields two snapshot-identical independent human packets."
+        },
+        {
+          "element_id": "calibration-to-study-codebook-binding",
+          "evidence": [
+            {
+              "locator": "training-only frozen calibration commitment contract",
+              "source": "evaluation/schemas/annotation-calibration-commitment.schema.json"
+            },
+            {
+              "locator": "calibration-to-study binding contract",
+              "source": "evaluation/schemas/natural-codebook-commitment.schema.json"
+            },
+            {
+              "locator": "calibration_label_preflight, freeze_calibration, and frozen commitment revalidation",
+              "source": "evaluation/scripts/annotation_calibration.py"
+            },
+            {
+              "locator": "bind_codebook, label commitment propagation, and execution-gate byte revalidation",
+              "source": "evaluation/scripts/natural_project_pilot.py"
+            },
+            {
+              "locator": "two-human freeze and post-freeze tamper regressions",
+              "source": "tests/test_annotation_calibration_freeze.py"
+            },
+            {
+              "locator": "fail-closed binding, propagation, incomplete-calibration, and codebook-tamper regressions",
+              "source": "tests/test_natural_project_codebook_binding.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Before development labels begin, the final post-calibration codebook SHA-256 is consumed by and enforced in the study label identity and tamper-validation path."
+        },
+        {
+          "element_id": "human-calibration-ui",
+          "evidence": [
+            {
+              "locator": "Use the local Calibration Console",
+              "source": "evaluation/README.md"
+            },
+            {
+              "locator": "CalibrationUIService, create_server, role-token enforcement, immutable submit, freeze, and bind methods",
+              "source": "evaluation/scripts/calibration_ui.py"
+            },
+            {
+              "locator": "three-phase accessible offline workflow, source browser, structured forms, discussion, freeze, and bind controls",
+              "source": "evaluation/ui/calibration-console.html"
+            },
+            {
+              "locator": "role isolation, traversal, immutable submission, preflight, freeze/bind, HTTP authorization, and UI contract regressions",
+              "source": "tests/test_calibration_ui.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A loopback-only, role-isolated UI lets two humans inspect their own frozen packet and submit structured annotations, exposes comparison only after both hashes validate, and delegates final freeze and study binding to the existing fail-closed controllers."
+        }
+      ]
+    },
+    {
+      "component_id": "component-map-lifecycle",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "cache-insensitive-directory-identity",
+          "evidence": [
+            {
+              "locator": "_is_transient_python_artifact and directory branch of _hash_declared_source",
+              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_directory_hash_ignores_generated_python_cache_files and test_directory_hash_detects_regular_file_changes",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Directory source identity excludes generated Python bytecode caches while remaining sensitive to ordinary file additions and changes."
+        },
+        {
+          "element_id": "direct-dependency-evidence-contract",
+          "evidence": [
+            {
+              "locator": "Build or reconcile the component-to-element map",
+              "source": "skills/analyze-project-claims/SKILL.md"
+            },
+            {
+              "locator": "required evidence with minItems 1",
+              "source": "skills/analyze-project-claims/references/component-map-observation.schema.json"
+            },
+            {
+              "locator": "_is_test_source and test-only evidence rejection",
+              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_mapper_rejects_element_without_evidence and test_mapper_rejects_test_only_element_evidence",
+              "source": "tests/test_strict_evidence_contract.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Every mapped element has nonempty evidence, and any test-backed element also names a direct non-test dependency."
+        },
+        {
+          "element_id": "drift-and-conflict-preservation",
+          "evidence": [
+            {
+              "locator": "_compare and reconcile candidate preservation",
+              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_stale_source_produces_delta and test_conflict_produces_candidate_without_overwrite",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Source drift or same-ID semantic conflict emits candidate/delta evidence while preserving the accepted map."
+        },
+        {
+          "element_id": "embedded-engine-identity",
+          "evidence": [
+            {
+              "locator": "provider, version, protocol, file hashes, and engine_digest",
+              "source": "skills/analyze-project-claims/references/component-evidence-engine.json"
+            },
+            {
+              "locator": "strict embedded provider receipt contract",
+              "source": "skills/analyze-project-claims/references/component-map-receipt.schema.json"
+            },
+            {
+              "locator": "build_engine_descriptor, verify_engine_descriptor, and verified_engine_summary",
+              "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/identity.py"
+            },
+            {
+              "locator": "descriptor, tamper, semantic-boundary, import-boundary, and verify-self tests",
+              "source": "tests/test_component_evidence_engine.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "One analyzer package embeds a versioned component-evidence engine whose descriptor binds code, schemas, templates, protocol, and receipt identity without creating a second discoverable skill."
+        },
+        {
+          "element_id": "missing-map-bootstrap",
+          "evidence": [
+            {
+              "locator": "missing accepted-map branch",
+              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_missing_map_bootstraps_provisional",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A missing accepted map produces only a provisional candidate and an append-only history event."
+        },
+        {
+          "element_id": "observation-template-roundtrip",
+          "evidence": [
+            {
+              "locator": "observation element evidence field",
+              "source": "skills/analyze-project-claims/assets/component-map-observation.template.json"
+            },
+            {
+              "locator": "observation evidence contract",
+              "source": "skills/analyze-project-claims/references/component-map-observation.schema.json"
+            },
+            {
+              "locator": "test_observation_template_preserves_evidence_locators",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The documented observation template preserves declared evidence locators when passed through reconciliation."
+        },
+        {
+          "element_id": "runtime-schema-enforcement",
+          "evidence": [
+            {
+              "locator": "_validate_map and _accept",
+              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_accept_rejects_candidate_missing_schema_required_target",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Candidate acceptance enforces every required field in the published component-map schema."
+        },
+        {
+          "element_id": "unchanged-map-reuse",
+          "evidence": [
+            {
+              "locator": "checked_unchanged branch",
+              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "test_valid_map_is_checked_without_rebuild",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "An unchanged accepted map is checked and reused without a replacement candidate or delta."
+        }
+      ]
+    },
+    {
+      "component_id": "cross-agent-package-compatibility",
+      "component_type": "distribution",
+      "elements": [
+        {
+          "element_id": "separate-host-evidence",
+          "evidence": [
+            {
+              "locator": "separate Claude Code target validation",
+              "source": "PUBLISHING.md"
+            },
+            {
+              "locator": "Codex and Claude Code install and update boundaries",
+              "source": "README.md"
+            },
+            {
+              "locator": "cross-agent validation procedure",
+              "source": "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md"
+            },
+            {
+              "locator": "frontmatter, manual layout, package verification, and documentation regressions",
+              "source": "tests/test_agent_compatibility.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Codex managed installation and Claude Code package compatibility are documented and evaluated as separate host surfaces without extending Codex replacement evidence to Claude runtime behavior."
+        }
+      ]
+    },
+    {
+      "component_id": "cross-project-evaluation",
+      "component_type": "experiment",
+      "elements": [
+        {
+          "element_id": "blinded-packet-boundary",
+          "evidence": [
+            {
+              "locator": "_copy_packets and collect_study",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            },
+            {
+              "locator": "test_dry_run_completes_without_authorizing_reliability",
+              "source": "tests/test_cross_project_reliability.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Prepared agent packets exclude gold labels, fixture plans, adjudications, and prior condition outputs."
+        },
+        {
+          "element_id": "complete-comparison-grid",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/26",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "_spec_rows and collect_study",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Every declared project-condition-agent-family-repeat cell is required and missing submissions fail closed."
+        },
+        {
+          "element_id": "lifecycle-and-claim-gates",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/11",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "json-pointer:/source_snapshot/15",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "collect_study and audit_study",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Runner completion, audit completion, scientific support, and paper acceptance remain separate, and the scripted dry run cannot authorize reliability."
+        },
+        {
+          "element_id": "pilot-and-confirmatory-stages",
+          "evidence": [
+            {
+              "locator": "project_sampling, labels, analysis, and preregistration",
+              "source": "evaluation/configs/confirmatory.template.json"
+            },
+            {
+              "locator": "project_sampling, labels, and analysis",
+              "source": "evaluation/configs/development-pilot.template.json"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Development and confirmatory templates require natural projects, multiple live agent families, independent labels, project-level analysis, and frozen claim boundaries."
+        },
+        {
+          "element_id": "project-unit-metrics",
+          "evidence": [
+            {
+              "locator": "Metrics",
+              "source": "evaluation/protocol.md"
+            },
+            {
+              "locator": "_score_spec, _aggregate_conditions, and _comparison_deltas",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Finding, element, severe-recall, false-positive, repair, provenance, time, and token metrics are aggregated with project as the primary independent unit."
+        },
+        {
+          "element_id": "zero-finding-metric-policy",
+          "evidence": [
+            {
+              "locator": "zero-gold metric policy under Metrics",
+              "source": "evaluation/protocol.md"
+            },
+            {
+              "locator": "gold_findings permits an empty array",
+              "source": "evaluation/schemas/gold-labels.schema.json"
+            },
+            {
+              "locator": "_load_gold, _ratio, _f1, _difference, _aggregate_conditions, and _comparison_deltas",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            },
+            {
+              "locator": "empty-gold acceptance, false-positive penalty, and undefined-delta regressions",
+              "source": "tests/test_zero_finding_gold.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A project with zero adjudicated gold findings remains valid: undefined detection metrics and matched deltas remain null and are excluded from macro means, while submitted false positives and false-positive element rate remain penalized."
+        }
+      ]
+    },
+    {
+      "component_id": "distribution",
+      "component_type": "artifact",
+      "elements": [
+        {
+          "element_id": "canonical-managed-package",
+          "evidence": [
+            {
+              "locator": "repository release identity",
+              "source": "VERSION"
+            },
+            {
+              "locator": "normalized package file hashes",
+              "source": "skills/analyze-project-claims/references/package-manifest.json"
+            },
+            {
+              "locator": "installed package SemVer",
+              "source": "skills/analyze-project-claims/references/package-version.json"
+            },
+            {
+              "locator": "test_public_package_contract",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Exactly one GitHub CLI-discoverable package exists under skills/analyze-project-claims, with synchronized version and manifest identity."
+        },
+        {
+          "element_id": "managed-update-postcondition",
+          "evidence": [
+            {
+              "locator": "observed v0.4.2 to v0.5.0 to v0.5.1 installed transitions",
+              "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
+            },
+            {
+              "locator": "enable, maintain, native update, and postcondition verification",
+              "source": "skills/analyze-project-claims/scripts/update_policy.py"
+            },
+            {
+              "locator": "consent, eligibility, replacement, lease, and integrity regressions",
+              "source": "tests/test_update_policy.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A separately consented updater delegates replacement to GitHub CLI and verifies source, scope, pin, version, tree, and package integrity for next use."
+        }
+      ]
+    },
+    {
+      "component_id": "installation-analytics",
+      "component_type": "service",
+      "elements": [
+        {
+          "element_id": "aggregate-owner-metric",
+          "evidence": [
+            {
+              "locator": "Authenticator, AnalyticsStore, summary, purge, and HTTP handlers",
+              "source": "analytics_service/server.py"
+            },
+            {
+              "locator": "metric interpretation and owner API deployment boundary",
+              "source": "docs/INSTALLATION_ANALYTICS.md"
+            },
+            {
+              "locator": "authentication, aggregate, keyed-identity, erasure, schema, and retention regressions",
+              "source": "tests/test_analytics_service.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The optional owner API authenticates and deduplicates bounded events, stores keyed installation hashes, supports principal-scoped erasure and retention, and exposes only aggregate consenting-installation counts."
+        },
+        {
+          "element_id": "analytics-evidence-boundary",
+          "evidence": [
+            {
+              "locator": "Optional installation analytics",
+              "source": "README.md"
+            },
+            {
+              "locator": "Validation and evidence limits",
+              "source": "docs/INSTALLATION_ANALYTICS.md"
+            },
+            {
+              "locator": "public metric and consent-boundary documentation regression",
+              "source": "tests/test_installation_analytics.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Local analytics tests establish software contracts only; no public endpoint, population-level user count, privacy-law compliance, or production abuse resistance is claimed."
+        },
+        {
+          "element_id": "explicit-client-consent",
+          "evidence": [
+            {
+              "locator": "user controls and separate-consent contract",
+              "source": "docs/INSTALLATION_ANALYTICS.md"
+            },
+            {
+              "locator": "AnalyticsClient.prompt, enable, preview, check_in, disable, and erase",
+              "source": "skills/analyze-project-claims/scripts/installation_analytics.py"
+            },
+            {
+              "locator": "no-send default and enablement, version event, retry, and erasure regressions",
+              "source": "tests/test_installation_analytics.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Installation analytics remain off by default; enabling creates only local random identity, and a later explicit check-in sends the first exact-schema event."
+        }
+      ]
+    },
+    {
+      "component_id": "lifecycle-receipt-consumer",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "nonrecursive-followup-boundary",
+          "evidence": [
+            {
+              "locator": "closed read-only follow-up request contract",
+              "source": "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json"
+            },
+            {
+              "locator": "_validate_prior_requests, build_followup_request, repeated-signature and MAX_CYCLES gates",
+              "source": "skills/analyze-project-claims/scripts/lifecycle_receipt.py"
+            },
+            {
+              "locator": "single follow-up, repeated finding stop, and maximum-cycle regressions",
+              "source": "tests/test_lifecycle_receipt_consumer.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "An inconsistent or evidence-gap receipt can produce only a digest-bound read-only follow-up plan, stops on repeated evidence requirements, and stops after three distinct reconciliation cycles."
+        },
+        {
+          "element_id": "read-only-bounded-interpretation",
+          "evidence": [
+            {
+              "locator": "packaged read-only interpretation and follow-up boundaries",
+              "source": "skills/analyze-project-claims/references/lifecycle-verification-receipt.md"
+            },
+            {
+              "locator": "closed aggregate lifecycle receipt contract",
+              "source": "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json"
+            },
+            {
+              "locator": "_validate_receipt, interpret_receipt, imports, and actions_not_performed",
+              "source": "skills/analyze-project-claims/scripts/lifecycle_receipt.py"
+            },
+            {
+              "locator": "read-only consumer, digest tamper, complete, incomplete, and recovered receipt regressions",
+              "source": "tests/test_lifecycle_receipt_consumer.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Lifecycle verification receipts are schema- and digest-validated without importing or executing lifecycle, publication, reporting, cleanup, or live-install actions."
+        }
+      ]
+    },
+    {
+      "component_id": "managed-skill-quality-loop",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "consent-gated-owner-contribution",
+          "evidence": [
+            {
+              "locator": "exact quality body, owner, label, repository, title, and fingerprint validation",
+              "source": "maintainer_service/intake.py"
+            },
+            {
+              "locator": "bounded authorized repair and owner contribution boundary",
+              "source": "skills/analyze-project-claims/SKILL.md"
+            },
+            {
+              "locator": "closed enum and package-identity contribution schema",
+              "source": "skills/analyze-project-claims/references/skill-quality-contribution.schema.json"
+            },
+            {
+              "locator": "trusted absolute executable resolution excluding the current project",
+              "source": "skills/analyze-project-claims/scripts/_internal/safe_process.py"
+            },
+            {
+              "locator": "owner-fixed producer destination, content fingerprint, approval ID, visibility check, issue URL binding, and argv-only GitHub transport",
+              "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contribution.py"
+            },
+            {
+              "locator": "producer-repository routing, cross-repository rebinding refusal, local preview, stale approval, public two-step approval, and exact intake regressions",
+              "source": "tests/test_quality_contribution.py"
+            },
+            {
+              "locator": "current-project executable exclusion and relative-path rejection regressions",
+              "source": "tests/test_safe_process.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A proposal can create an enum-only local draft bound to Ian-Tseng and the originating producer repository, but submission requires exact draft approval and a second public-visibility confirmation; exact owner intake rejects cross-repository rebinding, never forwards raw issue content, and authorizes only one isolated candidate attempt with at most three non-recursive repair-and-recheck cycles where the protected workflow is installed."
+        },
+        {
+          "element_id": "content-free-receipt-contract",
+          "evidence": [
+            {
+              "locator": "closed SkillOutcomeReceipt v1/v2 schema and content-free context",
+              "source": "skills/analyze-project-claims/references/skill-outcome-receipt.schema.json"
+            },
+            {
+              "locator": "v1/v2 closed fields, canonical digest, versioned marker, advisory problem signature, TTL, byte, and producer validation",
+              "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/contract.py"
+            },
+            {
+              "locator": "v1/v2 marker, context allowlist, problem-signature, expiry, and producer fixture regressions",
+              "source": "tests/test_skill_quality_loop.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Compatible Ian-Tseng-managed producers can declare one closed, size- and time-bounded v2 receipt with content-free capability, invariant, and environment identity while exact v1 markers remain readable; unknown or content-bearing fields fail closed, producer identity remains explicitly untrusted, and v1 receipts cannot cross-cluster."
+        },
+        {
+          "element_id": "evaluation-first-learning-boundary",
+          "evidence": [
+            {
+              "locator": "closed signal and dimension vocabulary with prohibited content-bearing dimensions",
+              "source": "evaluation/quality-loop-pilot/fixture-taxonomy.json"
+            },
+            {
+              "locator": "manual pilot selection, learning-value gates, and pending-evidence boundary",
+              "source": "evaluation/quality-loop-pilot/protocol.md"
+            },
+            {
+              "locator": "unpinned synthetic INCONCLUSIVE manifest",
+              "source": "evaluation/quality-loop-pilot/synthetic-evaluation-manifest.json"
+            },
+            {
+              "locator": "closed baseline, candidate, fixture, environment, model, and complete pilot-threshold schema",
+              "source": "skills/analyze-project-claims/references/skill-quality-evaluation-manifest.schema.json"
+            },
+            {
+              "locator": "closed per-fixture observation, derived summary, classification, manifest-binding, and digest schema",
+              "source": "skills/analyze-project-claims/references/skill-quality-evaluation-result.schema.json"
+            },
+            {
+              "locator": "closed evaluation manifest and result validation, canonical digests, exact fixture coverage, derived summaries, and gate classification",
+              "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/attempt_contract.py"
+            },
+            {
+              "locator": "state-free bounded evaluation-validate command",
+              "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
+            },
+            {
+              "locator": "manifest and result round-trip, threshold, exact coverage, digest, classification, repetition, schema parity, stateless CLI, and packaged synthetic regressions",
+              "source": "tests/test_skill_quality_evaluation.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A closed content-free evaluation manifest binds exact baseline and candidate packages, fixtures, environment, model parameters, repetitions, and all pilot thresholds; a separate digest-bound result covers every fixture exactly once and recomputes PASS, FAIL, or INCONCLUSIVE with direct failed gates taking precedence. The bundled synthetic pilot remains explicitly inconclusive, and neither artifact validation nor protocol conformance authenticates execution or proves improvement, recurrence, or repair authorization."
+        },
+        {
+          "element_id": "explicit-update-authority",
+          "evidence": [
+            {
+              "locator": "standalone versus plugin installation and update authority",
+              "source": "README.md"
+            },
+            {
+              "locator": "trusted absolute executable resolution excluding the current project",
+              "source": "skills/analyze-project-claims/scripts/_internal/safe_process.py"
+            },
+            {
+              "locator": "diagnose_update_authority, doctor, ambiguity, and replacement gates",
+              "source": "skills/analyze-project-claims/scripts/update_policy.py"
+            },
+            {
+              "locator": "current-project executable exclusion and relative-path rejection regressions",
+              "source": "tests/test_safe_process.py"
+            },
+            {
+              "locator": "update authority topology regressions",
+              "source": "tests/test_update_policy.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The updater lists all same-name visible copies and the running copy, fails closed on ambiguity, and never blindly replaces plugin-managed, manual, pinned, project-scope, duplicated, or locally edited installations."
+        },
+        {
+          "element_id": "identity-drift-release-gate",
+          "evidence": [
+            {
+              "locator": "formal component-map preflight gate",
+              "source": ".github/workflows/validate.yml"
+            },
+            {
+              "locator": "identity drift and maintainer rebuild contract",
+              "source": "skills/analyze-project-claims/references/component-evidence-protocol.md"
+            },
+            {
+              "locator": "contract_changes, mapper v1.3.0, build-self, verify-self, reconcile, and accept",
+              "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
+            },
+            {
+              "locator": "descriptor rebuild and verification regressions",
+              "source": "tests/test_component_evidence_engine.py"
+            },
+            {
+              "locator": "stale skill identity produces promotable candidate",
+              "source": "tests/test_component_map.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Component reconciliation treats analyzer and mapper identity fields as contract drift, the evidence-engine descriptor has a deterministic rebuild command, and release CI requires formal preflight against the exact accepted map."
+        },
+        {
+          "element_id": "map-pending-maintainer-boundary",
+          "evidence": [
+            {
+              "locator": "map-pending draft disclosure and forbidden owner actions",
+              "source": ".github/workflows/agent-maintainer.yml"
+            },
+            {
+              "locator": "formal accepted-map preflight",
+              "source": ".github/workflows/validate.yml"
+            },
+            {
+              "locator": "exact map reconciliation and release order",
+              "source": "PUBLISHING.md"
+            },
+            {
+              "locator": "quality intake, map-pending state, and owner completion gates",
+              "source": "docs/AGENT_MAINTAINER.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Owner-labeled automation may produce one isolated draft but cannot edit or accept validation authority; the owner must reconcile and accept the exact map candidate, run an unchanged reconciliation and formal preflight, then separately review, merge, release, close, and verify installation."
+        },
+        {
+          "element_id": "portable-consumer-and-codex-adapter",
+          "evidence": [
+            {
+              "locator": "root canonical skill tree and plugin metadata",
+              "source": ".codex-plugin/plugin.json"
+            },
+            {
+              "locator": "local observations and live-host limitations",
+              "source": "docs/CODEX_PLUGIN_E2E_LOG.md"
+            },
+            {
+              "locator": "single Stop command, PLUGIN_ROOT, PLUGIN_DATA, timeout, and Windows command",
+              "source": "hooks/hooks.json"
+            },
+            {
+              "locator": "non-recursive receipt adapter and bounded owner-side convergence boundary",
+              "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
+            },
+            {
+              "locator": "consume, doctor, conformance, bounded hook input, and no-op failure paths",
+              "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
+            },
+            {
+              "locator": "single tree, version synchronization, and hook boundary regressions",
+              "source": "tests/test_plugin_bundle.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The explicit CLI is the portable quality-consumption path; the receipt adapter never recursively invokes a skill or starts a repair loop; the optional Codex plugin has one five-second Stop hook using plugin-private state and can request at most one continuation without claiming guaranteed routing or successful live-host continuation."
+        },
+        {
+          "element_id": "replay-safe-local-proposal",
+          "evidence": [
+            {
+              "locator": "closed v2 local proposal and analysis revision schema",
+              "source": "skills/analyze-project-claims/references/skill-quality-proposal.schema.json"
+            },
+            {
+              "locator": "v1 state migration, exact-receipt proposal key, revision and tombstone bounds, atomic locked state, lease recovery, and outbound counter",
+              "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/store.py"
+            },
+            {
+              "locator": "cross-version proposal identity, v1 migration, no-action tombstone, concurrency, lease, recursion, and conformance regressions",
+              "source": "tests/test_skill_quality_loop.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A private bounded atomic store creates one deterministic intake proposal per exact receipt digest, stores analyzer versions as bounded analysis revisions, migrates v1 proposal state, preserves no-issue replay with expiring local tombstones, deduplicates concurrent consumers, recovers expired leases, and performs no outbound action."
+        }
+      ]
+    },
+    {
+      "component_id": "natural-pilot-preparation",
+      "component_type": "experiment",
+      "elements": [
+        {
+          "element_id": "human-label-freeze-integrity",
+          "evidence": [
+            {
+              "locator": "roles, component-to-element units, finding semantics, operator definition, and file workflow",
+              "source": "evaluation/annotation-codebook.md"
+            },
+            {
+              "locator": "completed annotation identity, snapshot, attestation, element, and finding contract",
+              "source": "evaluation/schemas/independent-annotation.schema.json"
+            },
+            {
+              "locator": "third-human adjudication and source annotation hash contract",
+              "source": "evaluation/schemas/natural-adjudicated-gold.schema.json"
+            },
+            {
+              "locator": "frozen label-set and SHA-256 commitment contract",
+              "source": "evaluation/schemas/natural-label-commitment.schema.json"
+            },
+            {
+              "locator": "label_preflight, freeze_labels, _validate_label_commitment, and execution_gate_status",
+              "source": "evaluation/scripts/natural_project_pilot.py"
+            },
+            {
+              "locator": "coverage, forged-summary, successful freeze, and post-freeze tamper regressions",
+              "source": "tests/test_natural_project_label_freeze.py"
+            },
+            {
+              "locator": "machine-readable schema and claim/operator-boundary regressions",
+              "source": "tests/test_natural_project_label_schemas.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The controller freezes human evidence only after exact project-slot coverage, distinct stable human identities, selection and snapshot binding, blinded third-human adjudication, source-candidate validation, and raw/gold hash verification; forged summaries and post-freeze tampering fail closed."
+        },
+        {
+          "element_id": "independent-blinded-annotation-packets",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/23",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "human independence and blinding attestations",
+              "source": "evaluation/schemas/independent-annotation.schema.json"
+            },
+            {
+              "locator": "prepare_annotation_workspace packet construction",
+              "source": "evaluation/scripts/natural_project_pilot.py"
+            },
+            {
+              "locator": "test_prepares_two_identical_blinded_annotation_packets",
+              "source": "tests/test_natural_project_pilot.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Two human annotator slots receive snapshot-identical packets that exclude condition prompts, agent outputs, gold labels, and the other annotator's labels."
+        },
+        {
+          "element_id": "metadata-only-selection-freeze",
+          "evidence": [
+            {
+              "locator": "sampling_rule and four pinned project identities",
+              "source": "evaluation/configs/natural-development-pilot.selection.json"
+            },
+            {
+              "locator": "validate_selection",
+              "source": "evaluation/scripts/natural_project_pilot.py"
+            },
+            {
+              "locator": "selection diversity and outcome-known rejection tests",
+              "source": "tests/test_natural_project_pilot.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A diverse 4-6-project natural sample is bound to exact repositories and commits before inconsistency outcomes are inspected."
+        },
+        {
+          "element_id": "pre-execution-scientific-boundary",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/12",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "json-pointer:/source_snapshot/27",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "selection_contract and pre_execution_gate",
+              "source": "evaluation/configs/development-pilot.template.json"
+            },
+            {
+              "locator": "execution_gate_status",
+              "source": "evaluation/scripts/natural_project_pilot.py"
+            },
+            {
+              "locator": "test_gate_rejects_a_forged_summary_only_commitment and tamper revalidation",
+              "source": "tests/test_natural_project_label_freeze.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Agent execution remains blocked until independent labels, blinded adjudicated gold, and two exact live agent/model families exist; preparation cannot authorize scientific or paper claims."
+        },
+        {
+          "element_id": "source-provenance-and-distribution-boundary",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/24",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "commit, archive, and license hash contract",
+              "source": "evaluation/schemas/pinned-project-source.schema.json"
+            },
+            {
+              "locator": "validate_snapshot_root and _validate_project_snapshot",
+              "source": "evaluation/scripts/natural_project_pilot.py"
+            },
+            {
+              "locator": "public-tree rejection and snapshot validation paths",
+              "source": "tests/test_natural_project_pilot.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Every natural snapshot has commit-bound acquisition and license hashes, respects frozen size caps, and remains outside the public distribution."
+        }
+      ]
+    },
+    {
+      "component_id": "paper-facing-boundaries",
+      "component_type": "claim",
+      "elements": [
+        {
+          "element_id": "active-rag-claim-consistency",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/13",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "json-pointer:/source_snapshot/16",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "json-pointer:/source_snapshot/28",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "extracted repository-grounded RAG claim audit contract",
+              "source": "skills/analyze-project-claims/references/logic-guided-rag-audit.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Active RAG claim, lifecycle, audit-independence, and paper-table boundaries remain internally consistent after the skill change."
+        },
+        {
+          "element_id": "bounded-readme-claims",
+          "evidence": [
+            {
+              "locator": "Evidence and limitations",
+              "source": "README.md"
+            },
+            {
+              "locator": "workflow-dry-run and natural-project boundaries",
+              "source": "evaluation/README.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "README distinguishes deterministic behavior evidence from cross-project reliability and general RAG benefit."
+        },
+        {
+          "element_id": "cross-project-reliability",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/15",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "Stage gates and claim boundary",
+              "source": "evaluation/protocol.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "General reliability across projects, agents, models, and domains."
+        },
+        {
+          "element_id": "identified-release-metadata",
+          "evidence": [
+            {
+              "locator": "identified v0.6.2 software citation metadata",
+              "source": "CITATION.cff"
+            },
+            {
+              "locator": "MIT License and 2026 copyright notice",
+              "source": "LICENSE"
+            },
+            {
+              "locator": "public package citation and license contract",
+              "source": "tests/test_record_scan.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Release authorship, repository URL, and author-approved software license are explicit; no DOI is claimed."
+        },
+        {
+          "element_id": "legacy-self-scan-authority",
+          "evidence": [
+            {
+              "locator": "Validation authority",
+              "source": "validation/README.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Current and historical self-scan inputs have unambiguous authority and lifecycle labels."
+        },
+        {
+          "element_id": "public-security-guidance",
+          "evidence": [
+            {
+              "locator": "public issue, privacy, testing, and pull-request boundaries",
+              "source": "CONTRIBUTING.md"
+            },
+            {
+              "locator": "private vulnerability reporting and disclosure policy",
+              "source": "SECURITY.md"
+            },
+            {
+              "locator": "Publication postconditions",
+              "source": "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Public contribution and vulnerability-reporting channels separate ordinary issues from private security disclosure, and the live public repository has the intended security controls enabled."
+        },
+        {
+          "element_id": "validation-status-authority",
+          "evidence": [
+            {
+              "locator": "test_documentation_identifies_observation_and_history_authority",
+              "source": "tests/test_record_scan.py"
+            },
+            {
+              "locator": "Validation authority and explicit no-separate-table declaration",
+              "source": "validation/README.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Current status uses the accepted component map and newest applicable scan record; no separate active project check table is designated unless this authority document names its exact path and boundary."
+        }
+      ]
+    },
+    {
+      "component_id": "problem-reporting",
+      "component_type": "service",
+      "elements": [
+        {
+          "element_id": "bounded-private-report-contract",
+          "evidence": [
+            {
+              "locator": "closed outbound report schema",
+              "source": "skills/analyze-project-claims/references/problem-report.schema.json"
+            },
+            {
+              "locator": "EVENTS, validate_report, _safe_text, and transports",
+              "source": "skills/analyze-project-claims/scripts/problem_report.py"
+            },
+            {
+              "locator": "schema equality, redaction, tamper, and GitHub argument regressions",
+              "source": "tests/test_problem_report.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Only fixed internal events and bounded diagnostics can be delivered; project content, arbitrary fields, paths, secrets, prompts, raw logs, and attachments are excluded."
+        },
+        {
+          "element_id": "issue-to-release-gate",
+          "evidence": [
+            {
+              "locator": "problem-report operations, versioned release gates, and enforced-immutability claim boundary",
+              "source": "PUBLISHING.md"
+            },
+            {
+              "locator": "issue #1 to v0.5.1 evidence chain and limits",
+              "source": "docs/PROBLEM_REPORTING_E2E_LOG.md"
+            },
+            {
+              "locator": "verified update active next use",
+              "source": "skills/analyze-project-claims/scripts/update_policy.py"
+            },
+            {
+              "locator": "status schema-version regression from issue #1",
+              "source": "tests/test_problem_report.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "A report remains untrusted triage input until a red test, reviewed fix, commit-bound CI, a versioned release whose tag is not moved, installed postcondition, and fresh-host activation complete; release immutability is claimed only when GitHub enforcement verifies."
+        },
+        {
+          "element_id": "owner-api-lifecycle",
+          "evidence": [
+            {
+              "locator": "owner HTTPS deployment and triage contract",
+              "source": "docs/PROBLEM_REPORTING.md"
+            },
+            {
+              "locator": "Authenticator, ReportStore, rate limiter, and HTTP handlers",
+              "source": "reporting_service/server.py"
+            },
+            {
+              "locator": "authentication, isolation, deduplication, status, deletion, retention, and rate-limit regressions",
+              "source": "tests/test_reporting_service.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The optional owner API authenticates scoped principals, isolates tenants, deduplicates, triages, retains, and deletes bounded reports without exposing database access."
+        },
+        {
+          "element_id": "public-destination-privacy-guard",
+          "evidence": [
+            {
+              "locator": "GitHub visibility and private automatic-reporting contract",
+              "source": "docs/PROBLEM_REPORTING.md"
+            },
+            {
+              "locator": "Reporter.configure, Reporter.submit, and GitHubTransport.repository_visibility",
+              "source": "skills/analyze-project-claims/scripts/problem_report.py"
+            },
+            {
+              "locator": "private-only auto-minimal, legacy-policy stop, visibility fail-closed, and dedicated public-issue approval regressions",
+              "source": "tests/test_problem_report.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Automatic reports use only the private owner API; GitHub visibility is verified fail-closed and a public issue requires exact-report approval plus dedicated public-destination approval."
+        },
+        {
+          "element_id": "separate-consent-boundary",
+          "evidence": [
+            {
+              "locator": "exact mode and transport policy contract",
+              "source": "skills/analyze-project-claims/references/problem-report-policy.schema.json"
+            },
+            {
+              "locator": "PolicyStore, Reporter.prepare, and Reporter.submit",
+              "source": "skills/analyze-project-claims/scripts/problem_report.py"
+            },
+            {
+              "locator": "default consent and private-only auto-minimal regressions",
+              "source": "tests/test_problem_report.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Problem reporting is independent from update consent, defaults to a local preview, and requires the private owner API for automatic delivery."
+        }
+      ]
+    },
+    {
+      "component_id": "scan-logging",
+      "component_type": "code",
+      "elements": [
+        {
+          "element_id": "hierarchical-scan-record",
+          "evidence": [
+            {
+              "locator": "closed persisted evidence-bound audit record schema",
+              "source": "skills/analyze-project-claims/references/scan-record-output-v2.schema.json"
+            },
+            {
+              "locator": "normalized v2.1 append, render, persisted replay, and verify contracts",
+              "source": "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py"
+            },
+            {
+              "locator": "v1 compatibility dispatch and v2 command routing",
+              "source": "skills/analyze-project-claims/scripts/record_scan.py"
+            },
+            {
+              "locator": "adversarial identity, path, recovery, compatibility, and resource-boundary regressions",
+              "source": "tests/test_evidence_bound_scan_release_blockers.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The recorder preserves frozen v1 history while v2.1 appends normalized claims, exact accepted-map element references, evidence identities, explicit role bindings, limitations, strongest-safe-claim boundaries, deterministic reports, and live identity verification."
+        },
+        {
+          "element_id": "repository-regression",
+          "evidence": [
+            {
+              "locator": "json-pointer:/source_snapshot/26",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "json-pointer:/source_snapshot/27",
+              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+            },
+            {
+              "locator": "cross-project lifecycle implementation",
+              "source": "evaluation/scripts/cross_project_reliability.py"
+            },
+            {
+              "locator": "selection, snapshot, annotation-packet, and execution-gate contracts",
+              "source": "evaluation/scripts/natural_project_pilot.py"
+            },
+            {
+              "locator": "public dry-run regressions",
+              "source": "tests/test_cross_project_reliability.py"
+            },
+            {
+              "locator": "public label-freeze lifecycle regressions",
+              "source": "tests/test_natural_project_label_freeze.py"
+            },
+            {
+              "locator": "public human-label schema and codebook regressions",
+              "source": "tests/test_natural_project_label_schemas.py"
+            },
+            {
+              "locator": "public natural-pilot regressions",
+              "source": "tests/test_natural_project_pilot.py"
+            },
+            {
+              "locator": "zero-finding gold collector regressions",
+              "source": "tests/test_zero_finding_gold.py"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "The expanded package does not break active repository contracts."
+        }
+      ]
+    },
+    {
+      "component_id": "reusable-audit-learning",
+      "component_type": "workflow-guidance",
+      "elements": [
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "bounded-recheck",
+          "evidence": [
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/references/review-learning.md"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/SKILL.md"
+            }
+          ],
+          "method": "inspected",
+          "relation_type": "defines",
+          "required_repair": null,
+          "safe_interpretation": "The inspected source defines this workflow; this is not evidence of effective execution or scientific benefit.",
+          "target": "Defines complete applicable rechecks, preserved scope, recurrence stopping, and a maximum three-cycle bound."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "evidence-linked-lessons",
+          "evidence": [
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/references/review-learning.md"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/SKILL.md"
+            }
+          ],
+          "method": "inspected",
+          "relation_type": "defines",
+          "required_repair": null,
+          "safe_interpretation": "The inspected source defines this workflow; this is not evidence of effective execution or scientific benefit.",
+          "target": "Retains useful lessons with evidence, cause uncertainty, correction, verification, applicability, and reversal conditions."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "validated-promotion",
+          "evidence": [
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/references/review-learning.md"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/SKILL.md"
+            }
+          ],
+          "method": "inspected",
+          "relation_type": "defines",
+          "required_repair": null,
+          "safe_interpretation": "The inspected source defines this workflow; this is not evidence of effective execution or scientific benefit.",
+          "target": "Routes validated lessons into project records, decision flows, or reusable guidance without duplicate authority or unsupported generalization."
+        },
+        {
+          "check_status": "PASS",
+          "claim_status": "supported",
+          "element_id": "future-use-and-reopening",
+          "evidence": [
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/references/review-learning.md"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/SKILL.md"
+            }
+          ],
+          "method": "inspected",
+          "relation_type": "defines",
+          "required_repair": null,
+          "safe_interpretation": "The inspected source defines this workflow; this is not evidence of effective execution or scientific benefit.",
+          "target": "Links promoted guidance into later relevant invocations and reopens it when its evidence or assumptions change."
+        }
+      ]
+    }
+  ],
+  "objective": "Map the v0.9.0 managed skill-quality learning candidate, including backward-compatible content-free receipt v2 context, exact-receipt intake identity, analyzer analysis revisions, bounded no-action tombstones, advisory cross-version problem signatures, closed evaluation manifests and digest-bound results with recomputed gates, manual pilot scaffolding, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, and all retained audit, repair, reporting, analytics, and release boundaries without treating protocol conformance, an unpinned synthetic manifest, a structurally valid result, local tests, prompt contracts, or hook invocation as learning or hosted convergence proof. Extend the repository-source map with the unreleased bounded recheck and evidence-linked reusable-learning workflow; this candidate is not accepted and does not establish behavioral effectiveness or release readiness. Prior external-project sources are retained as historical context through the immutable baseline accepted-map snapshot, not reread or revalidated as current repository evidence.",
+  "scope": [
+    "README.md",
+    "CITATION.cff",
+    "LICENSE",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
+    "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
+    "skills/analyze-project-claims",
+    "tests/test_component_map.py",
+    "tests/test_cross_project_reliability.py",
+    "tests/test_record_scan.py",
+    "validation/README.md",
+    "evaluation/README.md",
+    "evaluation/quality-loop-pilot",
+    "evaluation/protocol.md",
+    "evaluation/configs/confirmatory.template.json",
+    "evaluation/configs/development-pilot.template.json",
+    "evaluation/configs/dry-run.json",
+    "evaluation/fixtures/dry-run/fixture-plan.json",
+    "evaluation/labels/dry-run/lifecycle_fixture.json",
+    "evaluation/labels/dry-run/provenance_fixture.json",
+    "evaluation/projects/dry-run/lifecycle_fixture",
+    "evaluation/projects/dry-run/provenance_fixture",
+    "evaluation/prompts",
+    "evaluation/schemas",
+    "evaluation/scripts/cross_project_reliability.py",
+    "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json",
+    "tests/test_strict_evidence_contract.py",
+    "evaluation/configs/natural-development-pilot.selection.json",
+    "evaluation/schemas/natural-pilot-selection.schema.json",
+    "evaluation/schemas/independent-annotation.schema.json",
+    "evaluation/schemas/pinned-project-source.schema.json",
+    "evaluation/templates/pinned-project-source.template.json",
+    "evaluation/scripts/natural_project_pilot.py",
+    "tests/test_natural_project_pilot.py",
+    "evaluation/annotation-codebook.md",
+    "evaluation/schemas/natural-adjudicated-gold.schema.json",
+    "evaluation/schemas/natural-label-commitment.schema.json",
+    "tests/test_natural_project_label_freeze.py",
+    "tests/test_natural_project_label_schemas.py",
+    "tests/test_zero_finding_gold.py",
+    "evaluation/configs/annotation-calibration.selection.json",
+    "evaluation/schemas/annotation-calibration-selection.schema.json",
+    "evaluation/scripts/annotation_calibration.py",
+    "tests/test_annotation_calibration.py",
+    "VERSION",
+    "PUBLISHING.md",
+    "docs/PROBLEM_REPORTING.md",
+    "docs/PROBLEM_REPORTING_E2E_LOG.md",
+    "reporting_service/server.py",
+    "tests/test_problem_report.py",
+    "tests/test_reporting_service.py",
+    "tests/test_update_policy.py",
+    ".github/workflows/agent-maintainer.yml",
+    ".github/workflows/validate.yml",
+    ".github/codex/prompts/resolve-internal-report.md",
+    "maintainer_service",
+    "docs/AGENT_MAINTAINER.md",
+    "docs/AGENT_MAINTAINER_E2E_LOG.md",
+    "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md",
+    "analytics_service",
+    "docs/INSTALLATION_ANALYTICS.md",
+    "tests/test_agent_maintainer.py",
+    "tests/test_installation_analytics.py",
+    "tests/test_analytics_service.py",
+    "tests/test_agent_compatibility.py",
+    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md",
+    "CHANGELOG.md",
+    "docs/LIFECYCLE_RECEIPT_GUIDE.md",
+    "examples/scan-input-v2.example.json",
+    "skills/analyze-project-claims/assets/scan-record-v2.template.json",
+    "skills/analyze-project-claims/references/evidence-bound-audit-records.md",
+    "skills/analyze-project-claims/references/scan-record-v2.schema.json",
+    "skills/analyze-project-claims/references/scan-record-output-v2.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-phase-receipt.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-verification-receipt.md",
+    "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
+    "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
+    "tests/test_evidence_bound_scan.py",
+    "tests/test_evidence_bound_scan_edge_cases.py",
+    "tests/test_evidence_bound_scan_invariants.py",
+    "tests/test_evidence_bound_scan_operational.py",
+    "tests/test_evidence_bound_scan_release_blockers.py",
+    "tests/test_evidence_bound_scan_security.py",
+    "tests/test_lifecycle_receipt_consumer.py",
+    ".codex-plugin/plugin.json",
+    ".agents/plugins/marketplace.json",
+    "hooks/hooks.json",
+    "examples/quality-loop-producers",
+    "docs/SKILL_OUTCOME_RECEIPT.md",
+    "docs/SKILL_QUALITY_LOOP.md",
+    "docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md",
+    "docs/CODEX_PLUGIN_E2E_LOG.md",
+    "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md",
+    "tests/test_skill_quality_loop.py",
+    "tests/test_skill_quality_evaluation.py",
+    "tests/test_quality_contribution.py",
+    "tests/test_plugin_bundle.py",
+    "tests/test_component_evidence_engine.py",
+    "skills/analyze-project-claims/references/review-learning.md"
+  ]
+}

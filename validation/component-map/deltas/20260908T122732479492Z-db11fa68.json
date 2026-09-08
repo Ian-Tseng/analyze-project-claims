@@ -1,0 +1,333 @@
+{
+  "accepted_map_id": "component-map-9a8668d18008",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-93f309c0081e",
+  "changes": {
+    "added_components": [
+      "reusable-audit-learning"
+    ],
+    "added_elements": [
+      {
+        "component_id": "reusable-audit-learning",
+        "element_id": "bounded-recheck"
+      },
+      {
+        "component_id": "reusable-audit-learning",
+        "element_id": "evidence-linked-lessons"
+      },
+      {
+        "component_id": "reusable-audit-learning",
+        "element_id": "future-use-and-reopening"
+      },
+      {
+        "component_id": "reusable-audit-learning",
+        "element_id": "validated-promotion"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-human-completion",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-human-only-lifecycle",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "annotation-codebook-calibration",
+        "element_id": "calibration-source-and-packet-integrity",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "cross-project-evaluation",
+        "element_id": "complete-comparison-grid",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "cross-project-evaluation",
+        "element_id": "lifecycle-and-claim-gates",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "natural-pilot-preparation",
+        "element_id": "independent-blinded-annotation-packets",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "natural-pilot-preparation",
+        "element_id": "pre-execution-scientific-boundary",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "natural-pilot-preparation",
+        "element_id": "source-provenance-and-distribution-boundary",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "active-rag-claim-consistency",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "cross-project-reliability",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_natural_pilot_monitor.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\configs\\rag_external_v55_manifest_monitor.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\data\\analyze_project_claims_annotation_calibration\\artifact_registry.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_EXTERNAL_V55_MANIFEST_RESULTS.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\calibration_manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\review\\calibration_discussion.template.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\execution_gate.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\selection_manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\source_manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "source"
+        ],
+        "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/review-learning.md"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "b022229ad4c3624d3dae500dbe7f1db9f33b64ca405e0491b654032f0d5e5ee8"
+  },
+  "recorded_at_utc": "2026-09-08T12:27:32.479492Z",
+  "scan_id": "20260908T122732479492Z-db11fa68",
+  "schema_version": "1.0"
+}
