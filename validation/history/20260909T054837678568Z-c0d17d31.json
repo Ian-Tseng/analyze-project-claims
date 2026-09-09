@@ -1,0 +1,226 @@
+{
+  "bindings": [
+    {
+      "claim_id": "claim:learning-bounded-recheck",
+      "evidence_id": "evidence:learning-guide",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-bounded-recheck",
+      "evidence_id": "evidence:learning-route",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-evidence-linked-lessons",
+      "evidence_id": "evidence:learning-guide",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-evidence-linked-lessons",
+      "evidence_id": "evidence:learning-route",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-validated-promotion",
+      "evidence_id": "evidence:learning-guide",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-validated-promotion",
+      "evidence_id": "evidence:learning-route",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-future-use-and-reopening",
+      "evidence_id": "evidence:learning-guide",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-future-use-and-reopening",
+      "evidence_id": "evidence:learning-route",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-effectiveness",
+      "evidence_id": "evidence:publication-boundary",
+      "role": "context"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "1926e032b4b14dbee8dc3d6895b1a86a301fe774e5380755d460cd6744f09415",
+      "claim_id": "claim:learning-bounded-recheck",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "bounded-recheck"
+      },
+      "material": true,
+      "rationale": "Direct inspection of the current source guide and its entrypoint establishes the presence of these instructions only; no execution-effectiveness claim follows.",
+      "statement": "The source defines complete applicable rechecks and stops on recurrence, oscillation, missing authority, or the existing bounded cycle limit.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "8927d5173ec9a0d2265b9305c88fb2f3e86875522f7c3d0b8c1d69caaf117f1b",
+      "claim_id": "claim:learning-evidence-linked-lessons",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "evidence-linked-lessons"
+      },
+      "material": true,
+      "rationale": "Direct inspection of the current source guide and its entrypoint establishes the presence of these instructions only; no execution-effectiveness claim follows.",
+      "statement": "The source requires useful retained lessons to link evidence, cause uncertainty, correction, verification limits, and applicability.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "857790d6c7107b46b9cd6879b1f24852a18b2d30e491eb31d96649eb8d847f48",
+      "claim_id": "claim:learning-validated-promotion",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "validated-promotion"
+      },
+      "material": true,
+      "rationale": "Direct inspection of the current source guide and its entrypoint establishes the presence of these instructions only; no execution-effectiveness claim follows.",
+      "statement": "The source routes validated lessons to project records, decision flows, or reusable guidance without duplicating authority or claiming unsupported generality.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "c06dc4c4baaa205eeed9ccb4526c98273b7a1d80ffb69d416de0b2bf01755b68",
+      "claim_id": "claim:learning-future-use-and-reopening",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "future-use-and-reopening"
+      },
+      "material": true,
+      "rationale": "Direct inspection of the current source guide and its entrypoint establishes the presence of these instructions only; no execution-effectiveness claim follows.",
+      "statement": "The source links reusable guidance into future relevant invocations and reopens it when evidence or assumptions change.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "fc7f3d4affb5c9cdf4b51d5a04ec700e38fa0af53d5b4ed37595d50c9f0ca982",
+      "claim_id": "claim:learning-effectiveness",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "future-use-and-reopening"
+      },
+      "material": true,
+      "rationale": "This scoped source inspection did not execute a cross-project effectiveness study or observe publication and fresh consumer activation of the new guidance.",
+      "statement": "The new reusable-learning workflow has demonstrated reliable execution across projects in freshly activated released installations.",
+      "status": "untested"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "evidence:learning-guide",
+      "freshness": "current",
+      "identity_sha256": "95644146a01c09c796ce685a84dcf3f17e2735f783e4840d0e439a7b56953339",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The guide defines bounded rechecks, evidence-linked lesson recording, promotion choices, and future-use reopening; these are source instructions, not observed effectiveness.",
+      "selection_sha256": "b09803292166ef17a9a5bdcc1db1f2ca8663000616fa1cd8cb306f5ce9b508ca",
+      "source": {
+        "byte_size": 6030,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "skills/analyze-project-claims/references/review-learning.md",
+        "sha256": "b09803292166ef17a9a5bdcc1db1f2ca8663000616fa1cd8cb306f5ce9b508ca"
+      }
+    },
+    {
+      "evidence_id": "evidence:learning-route",
+      "freshness": "current",
+      "identity_sha256": "dc82b337622810539f84b2e571cbf7196403347a5f5d84784a5d67138b170a00",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The skill entrypoint routes relevant substantive review and learning work to the packaged guide while retaining its existing evidence and authorization requirements.",
+      "selection_sha256": "4d01ac355bdbe9d9fcb6f63f241fef547469d8b7f9666d2e272b030ddff9e03c",
+      "source": {
+        "byte_size": 20325,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "skills/analyze-project-claims/SKILL.md",
+        "sha256": "4d01ac355bdbe9d9fcb6f63f241fef547469d8b7f9666d2e272b030ddff9e03c"
+      }
+    },
+    {
+      "evidence_id": "evidence:publication-boundary",
+      "freshness": "current",
+      "identity_sha256": "e74b05e02841eb430ffe3fb963be6ca5892ba9890e19ed84ed9a576dd48d1e74",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "not_tested",
+      "observed_summary": "Publication and fresh consumer activation are separate lifecycle gates; this source inspection does not execute them.",
+      "selection_sha256": "1f3bfac566c5515c3b9991b11288fded5a5fb98b62296c7aff4b6fa89cd310f9",
+      "source": {
+        "byte_size": 21759,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "PUBLISHING.md",
+        "sha256": "1f3bfac566c5515c3b9991b11288fded5a5fb98b62296c7aff4b6fa89cd310f9"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "5a81a3bc0e814751f4765b98ca0fe41e8e5f3f1fcac55a5ccea45ad399b88cec",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+  },
+  "limitations": [],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-93f309c0081e",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "f705440011311062fce1c61800ae012a43c530aa128d9d4696f497e1ee0588c4"
+    },
+    "authority": [
+      "skills/analyze-project-claims/references/review-learning.md",
+      "skills/analyze-project-claims/SKILL.md",
+      "PUBLISHING.md"
+    ],
+    "engine_identity": {
+      "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "Assess the presence and boundaries of the unreleased review-and-learning source guidance in analyze-project-claims.",
+    "recorded_at_utc": "2026-09-09T05:48:37.678568Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260909T054837678568Z-c0d17d31",
+    "scope": [
+      "review-and-learning source instructions",
+      "entrypoint discovery route",
+      "unobserved workflow effectiveness and released activation"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "4d01ac355bdbe9d9fcb6f63f241fef547469d8b7f9666d2e272b030ddff9e03c"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [],
+    "claim_count": 5,
+    "claim_counts": {
+      "supported": 4,
+      "untested": 1
+    },
+    "evidence_count": 3,
+    "material_claim_count": 5,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "The source defines complete applicable rechecks and stops on recurrence, oscillation, missing authority, or the existing bounded cycle limit.",
+    "strongest_safe_claim_id": "claim:learning-bounded-recheck",
+    "unresolved_uncertainties": [
+      "Cross-project effectiveness, publication of this new guidance, and fresh released-consumer activation have not yet been observed. Prior source/package tests do not establish those outcomes."
+    ]
+  }
+}
