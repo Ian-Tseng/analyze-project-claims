@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-09-09T05:47:10.774745Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1575,10 +1575,10 @@
   ],
   "created_at_utc": "2026-09-08T12:27:32.479492Z",
   "integrity": {
-    "canonical_payload_sha256": "21fc09a08765bdbcf4bce603af980ded9abf629e18e112a720179da27f86277f"
+    "canonical_payload_sha256": "936082e8e6aa8217b48afa937e6df8d6505b7c6b04545a0ee3f78068e949e0e0"
   },
   "map_id": "component-map-93f309c0081e",
-  "map_state": "accepted",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.9.0 managed skill-quality learning candidate, including backward-compatible content-free receipt v2 context, exact-receipt intake identity, analyzer analysis revisions, bounded no-action tombstones, advisory cross-version problem signatures, closed evaluation manifests and digest-bound results with recomputed gates, manual pilot scaffolding, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, and all retained audit, repair, reporting, analytics, and release boundaries without treating protocol conformance, an unpinned synthetic manifest, a structurally valid result, local tests, prompt contracts, or hook invocation as learning or hosted convergence proof. Extend the repository-source map with the unreleased bounded recheck and evidence-linked reusable-learning workflow; this candidate is not accepted and does not establish behavioral effectiveness or release readiness. Prior external-project sources are retained as historical context through the immutable baseline accepted-map snapshot, not reread or revalidated as current repository evidence.",
   "origin_scan_id": "20260908T122732479492Z-db11fa68",

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-09T05:47:10.833266+00:00",
+  "authority": "User explicitly accepted both exact reviewed candidates in the conversation before this command.",
+  "candidate_id": "component-map-93f309c0081e",
+  "candidate_file_sha256": "b776c4c8e3ce332aa3e593d068841aa600a416c5ebbea699ed9da720929d926f",
+  "previous_map_id": "component-map-9a8668d18008",
+  "scope": "Structural map acceptance only; does not establish scientific benefit, new release, or fresh activation."
+}

@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-09-09T05:47:10.774745Z",
+  "accepted_at_utc": "2026-08-28T10:14:52.148645Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -18,7 +18,10 @@
     "evaluation/configs/natural-development-pilot.selection.json",
     "evaluation/scripts/natural_project_pilot.py",
     "tests/test_natural_project_pilot.py",
-    "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json",
+    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\selection_manifest.json",
+    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\source_manifest.json",
+    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\execution_gate.json",
+    "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_natural_pilot_monitor.json",
     "evaluation/annotation-codebook.md",
     "evaluation/schemas/independent-annotation.schema.json",
     "evaluation/schemas/natural-adjudicated-gold.schema.json",
@@ -28,6 +31,8 @@
     "evaluation/configs/annotation-calibration.selection.json",
     "evaluation/scripts/annotation_calibration.py",
     "tests/test_annotation_calibration.py",
+    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\calibration_manifest.json",
+    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json",
     "VERSION",
     "PUBLISHING.md",
     "CITATION.cff",
@@ -93,8 +98,7 @@
     "tests/test_plugin_bundle.py",
     "docs/CODEX_PLUGIN_E2E_LOG.md",
     "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md",
-    "tests/test_component_evidence_engine.py",
-    "skills/analyze-project-claims/references/review-learning.md"
+    "tests/test_component_evidence_engine.py"
   ],
   "components": [
     {
@@ -257,20 +261,20 @@
           "element_id": "calibration-human-completion",
           "evidence_locators": [
             {
+              "locator": "calibration_state=pending_human_practice",
+              "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\calibration_manifest.json"
+            },
+            {
+              "locator": "blank discussion record; completed outcome absent",
+              "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\review\\calibration_discussion.template.json"
+            },
+            {
+              "locator": "raw-label and completed-discussion absence regression",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py"
+            },
+            {
               "locator": "independent first passes, hashing, discussion, and new study identity rule",
               "source": "evaluation/annotation-codebook.md"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/18",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/20",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/25",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
             }
           ],
           "relation_type": "contains",
@@ -279,6 +283,10 @@
         {
           "element_id": "calibration-human-only-lifecycle",
           "evidence_locators": [
+            {
+              "locator": "pending_human_practice and explicit study exclusions",
+              "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\calibration_manifest.json"
+            },
             {
               "locator": "calibration preflight, prepare, status, and human handoff commands",
               "source": "evaluation/README.md"
@@ -294,10 +302,6 @@
             {
               "locator": "blank discussion record, pending human status, and agent_execution_authorized=false",
               "source": "evaluation/scripts/annotation_calibration.py"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/18",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
             }
           ],
           "relation_type": "contains",
@@ -330,16 +334,16 @@
           "element_id": "calibration-source-and-packet-integrity",
           "evidence_locators": [
             {
+              "locator": "45-file, 360003-byte snapshot and content hashes",
+              "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json"
+            },
+            {
+              "locator": "archive, packet, source size, and prepared identity regressions",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py"
+            },
+            {
               "locator": "prepare_calibration_workspace source validation, packet construction, and monitor artifact manifest",
               "source": "evaluation/scripts/annotation_calibration.py"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/19",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/25",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
             },
             {
               "locator": "two practice packet construction and no execution-gate regression",
@@ -603,12 +607,12 @@
           "element_id": "complete-comparison-grid",
           "evidence_locators": [
             {
-              "locator": "_spec_rows and collect_study",
-              "source": "evaluation/scripts/cross_project_reliability.py"
+              "locator": "test_missing_submission_blocks_collection",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py"
             },
             {
-              "locator": "json-pointer:/source_snapshot/26",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+              "locator": "_spec_rows and collect_study",
+              "source": "evaluation/scripts/cross_project_reliability.py"
             }
           ],
           "relation_type": "contains",
@@ -618,16 +622,16 @@
           "element_id": "lifecycle-and-claim-gates",
           "evidence_locators": [
             {
+              "locator": "RESEARCH_ARCHITECTURE_MONITOR_V2 completion_evidence",
+              "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json"
+            },
+            {
+              "locator": "State dimensions",
+              "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+            },
+            {
               "locator": "collect_study and audit_study",
               "source": "evaluation/scripts/cross_project_reliability.py"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/11",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/15",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
             }
           ],
           "relation_type": "contains",
@@ -1116,16 +1120,16 @@
           "element_id": "independent-blinded-annotation-packets",
           "evidence_locators": [
             {
+              "locator": "annotation_packet_count and pending annotation state",
+              "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\selection_manifest.json"
+            },
+            {
               "locator": "human independence and blinding attestations",
               "source": "evaluation/schemas/independent-annotation.schema.json"
             },
             {
               "locator": "prepare_annotation_workspace packet construction",
               "source": "evaluation/scripts/natural_project_pilot.py"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/23",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
             },
             {
               "locator": "test_prepares_two_identical_blinded_annotation_packets",
@@ -1158,20 +1162,20 @@
           "element_id": "pre-execution-scientific-boundary",
           "evidence_locators": [
             {
+              "locator": "V2 partial experiment without completion, scientific, or acceptance evidence",
+              "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_natural_pilot_monitor.json"
+            },
+            {
+              "locator": "blocked gate and monitor-state regressions",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py"
+            },
+            {
               "locator": "selection_contract and pre_execution_gate",
               "source": "evaluation/configs/development-pilot.template.json"
             },
             {
               "locator": "execution_gate_status",
               "source": "evaluation/scripts/natural_project_pilot.py"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/12",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/27",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
             },
             {
               "locator": "test_gate_rejects_a_forged_summary_only_commitment and tamper revalidation",
@@ -1185,16 +1189,16 @@
           "element_id": "source-provenance-and-distribution-boundary",
           "evidence_locators": [
             {
+              "locator": "four validated source rows",
+              "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\source_manifest.json"
+            },
+            {
               "locator": "commit, archive, and license hash contract",
               "source": "evaluation/schemas/pinned-project-source.schema.json"
             },
             {
               "locator": "validate_snapshot_root and _validate_project_snapshot",
               "source": "evaluation/scripts/natural_project_pilot.py"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/24",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
             },
             {
               "locator": "public-tree rejection and snapshot validation paths",
@@ -1214,16 +1218,16 @@
           "element_id": "active-rag-claim-consistency",
           "evidence_locators": [
             {
-              "locator": "json-pointer:/source_snapshot/13",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+              "locator": "active accepted-run monitor declaration",
+              "source": "F:\\logic_guided_rag_experiment\\configs\\rag_external_v55_manifest_monitor.json"
             },
             {
-              "locator": "json-pointer:/source_snapshot/16",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+              "locator": "bounded lifecycle and audit-independence result claims",
+              "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_EXTERNAL_V55_MANIFEST_RESULTS.md"
             },
             {
-              "locator": "json-pointer:/source_snapshot/28",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+              "locator": "focused active-consistency tests",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
             },
             {
               "locator": "extracted repository-grounded RAG claim audit contract",
@@ -1252,12 +1256,12 @@
           "element_id": "cross-project-reliability",
           "evidence_locators": [
             {
-              "locator": "Stage gates and claim boundary",
-              "source": "evaluation/protocol.md"
+              "locator": "State dimensions and next gate",
+              "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
             },
             {
-              "locator": "json-pointer:/source_snapshot/15",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
+              "locator": "Stage gates and claim boundary",
+              "source": "evaluation/protocol.md"
             }
           ],
           "relation_type": "contains",
@@ -1435,72 +1439,6 @@
       ]
     },
     {
-      "component_id": "reusable-audit-learning",
-      "component_type": "workflow-guidance",
-      "elements": [
-        {
-          "element_id": "bounded-recheck",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/SKILL.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/review-learning.md"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Defines complete applicable rechecks, preserved scope, recurrence stopping, and a maximum three-cycle bound."
-        },
-        {
-          "element_id": "evidence-linked-lessons",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/SKILL.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/review-learning.md"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Retains useful lessons with evidence, cause uncertainty, correction, verification, applicability, and reversal conditions."
-        },
-        {
-          "element_id": "future-use-and-reopening",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/SKILL.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/review-learning.md"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Links promoted guidance into later relevant invocations and reopens it when its evidence or assumptions change."
-        },
-        {
-          "element_id": "validated-promotion",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/SKILL.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/review-learning.md"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Routes validated lessons into project records, decision flows, or reusable guidance without duplicate authority or unsupported generalization."
-        }
-      ]
-    },
-    {
       "component_id": "scan-logging",
       "component_type": "code",
       "elements": [
@@ -1531,20 +1469,20 @@
           "element_id": "repository-regression",
           "evidence_locators": [
             {
+              "locator": "focused repository regressions",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py"
+            },
+            {
+              "locator": "prepared-artifact and V2 monitor regressions",
+              "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py"
+            },
+            {
               "locator": "cross-project lifecycle implementation",
               "source": "evaluation/scripts/cross_project_reliability.py"
             },
             {
               "locator": "selection, snapshot, annotation-packet, and execution-gate contracts",
               "source": "evaluation/scripts/natural_project_pilot.py"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/26",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
-            },
-            {
-              "locator": "json-pointer:/source_snapshot/27",
-              "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
             },
             {
               "locator": "public dry-run regressions",
@@ -1573,16 +1511,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-09-08T12:27:32.479492Z",
+  "created_at_utc": "2026-08-28T09:47:27.373744Z",
   "integrity": {
-    "canonical_payload_sha256": "21fc09a08765bdbcf4bce603af980ded9abf629e18e112a720179da27f86277f"
+    "canonical_payload_sha256": "8b3419eb4b9f7299c51a97de1cb868403f6683eeb503b90340051f7beafc2424"
   },
-  "map_id": "component-map-93f309c0081e",
+  "map_id": "component-map-9a8668d18008",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.9.0 managed skill-quality learning candidate, including backward-compatible content-free receipt v2 context, exact-receipt intake identity, analyzer analysis revisions, bounded no-action tombstones, advisory cross-version problem signatures, closed evaluation manifests and digest-bound results with recomputed gates, manual pilot scaffolding, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, and all retained audit, repair, reporting, analytics, and release boundaries without treating protocol conformance, an unpinned synthetic manifest, a structurally valid result, local tests, prompt contracts, or hook invocation as learning or hosted convergence proof. Extend the repository-source map with the unreleased bounded recheck and evidence-linked reusable-learning workflow; this candidate is not accepted and does not establish behavioral effectiveness or release readiness. Prior external-project sources are retained as historical context through the immutable baseline accepted-map snapshot, not reread or revalidated as current repository evidence.",
-  "origin_scan_id": "20260908T122732479492Z-db11fa68",
-  "previous_map_id": "component-map-9a8668d18008",
+  "objective": "Map the v0.9.0 managed skill-quality learning candidate, including backward-compatible content-free receipt v2 context, exact-receipt intake identity, analyzer analysis revisions, bounded no-action tombstones, advisory cross-version problem signatures, closed evaluation manifests and digest-bound results with recomputed gates, manual pilot scaffolding, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, and all retained audit, repair, reporting, analytics, and release boundaries without treating protocol conformance, an unpinned synthetic manifest, a structurally valid result, local tests, prompt contracts, or hook invocation as learning or hosted convergence proof.",
+  "origin_scan_id": "20260828T094727373744Z-60870df1",
+  "previous_map_id": "component-map-a2e9cfaad704",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1610,7 +1548,9 @@
     "evaluation/prompts",
     "evaluation/schemas",
     "evaluation/scripts/cross_project_reliability.py",
-    "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json",
+    "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py",
+    "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json",
+    "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md",
     "tests/test_strict_evidence_contract.py",
     "evaluation/configs/natural-development-pilot.selection.json",
     "evaluation/schemas/natural-pilot-selection.schema.json",
@@ -1619,6 +1559,9 @@
     "evaluation/templates/pinned-project-source.template.json",
     "evaluation/scripts/natural_project_pilot.py",
     "tests/test_natural_project_pilot.py",
+    "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py",
+    "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_natural_pilot_monitor.json",
+    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller",
     "evaluation/annotation-codebook.md",
     "evaluation/schemas/natural-adjudicated-gold.schema.json",
     "evaluation/schemas/natural-label-commitment.schema.json",
@@ -1629,11 +1572,19 @@
     "evaluation/schemas/annotation-calibration-selection.schema.json",
     "evaluation/scripts/annotation_calibration.py",
     "tests/test_annotation_calibration.py",
+    "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py",
+    "F:\\logic_guided_rag_experiment\\data\\analyze_project_claims_annotation_calibration\\artifact_registry.json",
+    "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller",
     "VERSION",
+    "CITATION.cff",
+    "LICENSE",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
     "PUBLISHING.md",
     "docs/PROBLEM_REPORTING.md",
     "docs/PROBLEM_REPORTING_E2E_LOG.md",
     "reporting_service/server.py",
+    "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
     "tests/test_problem_report.py",
     "tests/test_reporting_service.py",
     "tests/test_update_policy.py",
@@ -1684,11 +1635,10 @@
     "tests/test_skill_quality_evaluation.py",
     "tests/test_quality_contribution.py",
     "tests/test_plugin_bundle.py",
-    "tests/test_component_evidence_engine.py",
-    "skills/analyze-project-claims/references/review-learning.md"
+    "tests/test_component_evidence_engine.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "4d01ac355bdbe9d9fcb6f63f241fef547469d8b7f9666d2e272b030ddff9e03c",
+  "skill_sha256": "c96db14d576d287ae01cb541f156f07e05a9e28ef8ace4ca7e49cd8358938f49",
   "source_snapshot": [
     {
       "exists": true,
@@ -1741,7 +1691,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "00494d1c5846b5401aaccdee4733561e53919b9e5d3b9dc0bbc86e8d268b2ab5",
+      "sha256": "c6ed2b67c35d9867560d398c3c63acd0f4eee8271c55b7f253897d75a895314c",
       "source": "CHANGELOG.md"
     },
     {
@@ -1759,6 +1709,114 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "f645940d6f2bcdb20d5d9bce70d79ffe4b81dbf339b28b78e53e482067469651",
+      "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_cross_project_reliability_monitor.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "59c591e0d741766c34a25a0153fe1c53a47394b840b13285d8a9cf3227ecb01f",
+      "source": "F:\\logic_guided_rag_experiment\\configs\\analyze_project_claims_natural_pilot_monitor.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "76e964ac8f3935420c26ac66cf17177ac15f70b45029a9b8796fc3b5fbfbd883",
+      "source": "F:\\logic_guided_rag_experiment\\configs\\rag_external_v55_manifest_monitor.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "eb3177f3c1ea4b53f9bcd22fa8ab1171cd81629fb86c3df56b2c8047a3a74e75",
+      "source": "F:\\logic_guided_rag_experiment\\data\\analyze_project_claims_annotation_calibration\\artifact_registry.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "62429cb605d0b2143d9ce14e717aa532f5649e9f2a19144469151c146d569645",
+      "source": "F:\\logic_guided_rag_experiment\\docs\\ANALYZE_PROJECT_CLAIMS_CROSS_PROJECT_RELIABILITY.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "31b165ac70c25bae83f2ac4572c8f9112e10a7d31fc79eaedf324ab4c2b8e360",
+      "source": "F:\\logic_guided_rag_experiment\\docs\\RAG_EXTERNAL_V55_MANIFEST_RESULTS.md"
+    },
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "4d9ad5c4e26a508b69c9f69c4f94c205984f82fcd74a15efd81a1f720a4f418f",
+      "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "fc4777d079b0a3a940cea6fa455a02bbb7f8177d9bdb1561ba82ef0760d5bb50",
+      "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\calibration_manifest.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "73e5e1e5c6ad29edc830b412194028103aeea8e73107567b2db0c3e58c80724d",
+      "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\controller\\source_manifest.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "62cba7b81f57a3d54552d39fe01da0d50abc59e41c4b705ba7709663b007fcdd",
+      "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_annotation_calibration\\apc-annotation-calibration-v1-71658a8eb720\\review\\calibration_discussion.template.json"
+    },
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "e610f37fbd6013ab0ec50bff0cbd06a2cbba80f928c34c5eca1a4d574260f568",
+      "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "e20610e9460c20d260889e428ec93234aac59087255611051522ff3d2e5ee98d",
+      "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\execution_gate.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "af2051b11e7fe811a278e973fd0727ebde547540a0ada85e5b1bb04f4d379a95",
+      "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\selection_manifest.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "41bbec571f9379b144d983ec376f82372487304315e239237200cb488bcf55df",
+      "source": "F:\\logic_guided_rag_experiment\\runs\\analyze_project_claims_natural_pilot\\apc-natural-development-pilot-v1-e02e94c6ac82\\controller\\source_manifest.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "60560a839b10a50fa420a60b827b4322088011a842b35b103c0dd59dc7c2d662",
+      "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_annotation_calibration.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "ede58e93356a7eb207e8f9a25184e61d6b78441dc0ee8e514c4651285f0c0941",
+      "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_cross_project_reliability.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "daed21b655f0898bb69548360d7b0fd6720a94140774d25af496e4544512d968",
+      "source": "F:\\logic_guided_rag_experiment\\tests\\test_analyze_project_claims_natural_pilot.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "c580d5ee8604de4733a01726f6c836eb8f18388eafa5b2427c030edd65ddf412",
+      "source": "F:\\logic_guided_rag_experiment\\tests\\test_rag_external_v55_active_consistency.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "f36e4e8795a747e3fc05393800891a07d4d93487fb031dbe1b895e5a29c8eb04",
       "source": "LICENSE"
     },
@@ -1771,7 +1829,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ef76fa5a53f4b2c320e278ef6cc165fe4a6145ee97aed4fbacc3a5f99a1f00ae",
+      "sha256": "8700da863e177202e480b0c5568da8839cd701b5822c7e764674a77599a3ed2a",
       "source": "README.md"
     },
     {
@@ -2135,12 +2193,6 @@
       "source": "hooks/hooks.json"
     },
     {
-      "exists": false,
-      "kind": "external_uri",
-      "sha256": null,
-      "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
-    },
-    {
       "exists": true,
       "kind": "directory",
       "sha256": "080f0c767fb80a61fa6d8b837e6c7df1a489a22b5a46e6fae41a844b3477e4ae",
@@ -2167,13 +2219,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "d33ff67bb53677ba8999b8c2942e566785ffa2cb7b338a8327cce9651b136252",
+      "sha256": "aca6ee4b1fd9434e7faacf9a79c87b966d007a6d1ec5695b04d05bc597ac6c2c",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4d01ac355bdbe9d9fcb6f63f241fef547469d8b7f9666d2e272b030ddff9e03c",
+      "sha256": "c96db14d576d287ae01cb541f156f07e05a9e28ef8ace4ca7e49cd8358938f49",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -2281,7 +2333,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "94ec7cc1476d33dcad43d452d6c79420ad4dbea3f8c5ebd58cdf65c10249e28a",
+      "sha256": "5ff41af9622e6345bf43a707c0acab7b68ac1b67161de42528a97d6a3d106a36",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
@@ -2301,12 +2353,6 @@
       "kind": "file",
       "sha256": "44983ab807053256a7be4b70634adea04cfe11457961fd5d5752d49d2f1d7c1b",
       "source": "skills/analyze-project-claims/references/problem-report.schema.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "b09803292166ef17a9a5bdcc1db1f2ca8663000616fa1cd8cb306f5ce9b508ca",
-      "source": "skills/analyze-project-claims/references/review-learning.md"
     },
     {
       "exists": true,

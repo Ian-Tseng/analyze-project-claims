@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here.
 
+## [Unreleased]
+
+### Added
+
+- Add a portable review-and-learning guide for bounded inconsistency rechecks,
+  evidence-linked lessons, and validated promotion into project Markdown,
+  decision flows, or reusable workflows.
+- Route substantive skill use to the guide while preserving read-only scope,
+  existing evidence authority, uncertainty, and stricter repair-attempt limits.
+
 ## [0.9.0] - 2026-08-28
 
 ### Added

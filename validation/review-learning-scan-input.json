@@ -1,0 +1,165 @@
+{
+  "schema_version": "2.0",
+  "objective": "Assess the presence and boundaries of the unreleased review-and-learning source guidance in analyze-project-claims.",
+  "scope": [
+    "review-and-learning source instructions",
+    "entrypoint discovery route",
+    "unobserved workflow effectiveness and released activation"
+  ],
+  "authority": [
+    "skills/analyze-project-claims/references/review-learning.md",
+    "skills/analyze-project-claims/SKILL.md",
+    "PUBLISHING.md"
+  ],
+  "claims": [
+    {
+      "claim_id": "claim:learning-bounded-recheck",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "bounded-recheck"
+      },
+      "material": true,
+      "rationale": "Direct inspection of the current source guide and its entrypoint establishes the presence of these instructions only; no execution-effectiveness claim follows.",
+      "statement": "The source defines complete applicable rechecks and stops on recurrence, oscillation, missing authority, or the existing bounded cycle limit.",
+      "status": "supported"
+    },
+    {
+      "claim_id": "claim:learning-evidence-linked-lessons",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "evidence-linked-lessons"
+      },
+      "material": true,
+      "rationale": "Direct inspection of the current source guide and its entrypoint establishes the presence of these instructions only; no execution-effectiveness claim follows.",
+      "statement": "The source requires useful retained lessons to link evidence, cause uncertainty, correction, verification limits, and applicability.",
+      "status": "supported"
+    },
+    {
+      "claim_id": "claim:learning-validated-promotion",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "validated-promotion"
+      },
+      "material": true,
+      "rationale": "Direct inspection of the current source guide and its entrypoint establishes the presence of these instructions only; no execution-effectiveness claim follows.",
+      "statement": "The source routes validated lessons to project records, decision flows, or reusable guidance without duplicating authority or claiming unsupported generality.",
+      "status": "supported"
+    },
+    {
+      "claim_id": "claim:learning-future-use-and-reopening",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "future-use-and-reopening"
+      },
+      "material": true,
+      "rationale": "Direct inspection of the current source guide and its entrypoint establishes the presence of these instructions only; no execution-effectiveness claim follows.",
+      "statement": "The source links reusable guidance into future relevant invocations and reopens it when evidence or assumptions change.",
+      "status": "supported"
+    },
+    {
+      "claim_id": "claim:learning-effectiveness",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "future-use-and-reopening"
+      },
+      "material": true,
+      "statement": "The new reusable-learning workflow has demonstrated reliable execution across projects in freshly activated released installations.",
+      "rationale": "This scoped source inspection did not execute a cross-project effectiveness study or observe publication and fresh consumer activation of the new guidance.",
+      "status": "untested"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "evidence:learning-guide",
+      "source": {
+        "kind": "file",
+        "path": "skills/analyze-project-claims/references/review-learning.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The guide defines bounded rechecks, evidence-linked lesson recording, promotion choices, and future-use reopening; these are source instructions, not observed effectiveness."
+    },
+    {
+      "evidence_id": "evidence:learning-route",
+      "source": {
+        "kind": "file",
+        "path": "skills/analyze-project-claims/SKILL.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The skill entrypoint routes relevant substantive review and learning work to the packaged guide while retaining its existing evidence and authorization requirements."
+    },
+    {
+      "evidence_id": "evidence:publication-boundary",
+      "source": {
+        "kind": "file",
+        "path": "PUBLISHING.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "not_tested",
+      "observed_summary": "Publication and fresh consumer activation are separate lifecycle gates; this source inspection does not execute them."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "claim:learning-bounded-recheck",
+      "evidence_id": "evidence:learning-guide",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-bounded-recheck",
+      "evidence_id": "evidence:learning-route",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-evidence-linked-lessons",
+      "evidence_id": "evidence:learning-guide",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-evidence-linked-lessons",
+      "evidence_id": "evidence:learning-route",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-validated-promotion",
+      "evidence_id": "evidence:learning-guide",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-validated-promotion",
+      "evidence_id": "evidence:learning-route",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-future-use-and-reopening",
+      "evidence_id": "evidence:learning-guide",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-future-use-and-reopening",
+      "evidence_id": "evidence:learning-route",
+      "role": "supports"
+    },
+    {
+      "claim_id": "claim:learning-effectiveness",
+      "evidence_id": "evidence:publication-boundary",
+      "role": "context"
+    }
+  ],
+  "limitations": [],
+  "summary": {
+    "strongest_safe_claim_id": "claim:learning-bounded-recheck",
+    "claim_boundary_ids": [],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "Cross-project effectiveness, publication of this new guidance, and fresh released-consumer activation have not yet been observed. Prior source/package tests do not establish those outcomes."
+  ]
+}
