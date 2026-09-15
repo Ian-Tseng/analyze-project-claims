@@ -6,6 +6,10 @@ All notable changes to this project are documented here.
 
 ### Added
 
+- T2 development CLI for local evidence preflight, nomination, inspection, and
+  deterministic verification, with bounded reads and exclusive artifact creation.
+  Candidate compilation and installation remain pending.
+
 - Frozen T1 evidence-nomination development contracts: five closed schemas,
   templates, identity and policy rules, synthetic golden fixtures, and contract
   regressions. Runtime search, adapters, packaging, and pilot gates remain pending.

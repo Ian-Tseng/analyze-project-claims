@@ -5,9 +5,10 @@ Repository: Ian-Tseng/analyze-project-claims
 Target branch: main
 
 Integration status (2026-09-16): this document preserves the approved plan.
-T1 development contracts are implemented on the contract branch; T2-T7 remain
-pending. The contracts do not establish that the evidence nominator exists or
-that its pilot gates passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md).
+T1 contracts and the T2 development nominator are implemented on the feature
+branch; T3-T7 remain pending. The CLI is not installed or released, and pilot
+gates have not passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md)
+and [development CLI](EVIDENCE_NOMINATION_DEVELOPMENT.md).
 
 ## Intent
 
@@ -397,9 +398,11 @@ Modify:
   rules, and golden fixtures before runtime code. Implemented in
   `contracts/evidence-nomination/v1/` with synthetic vectors and contract tests;
   installation/package authority remains T6.
-- [ ] **T2 (P1, human: 4 days / Codex: 6 hours) - Build the nominator.**
+- [x] **T2 (P1, human: 4 days / Codex: 6 hours) - Build the nominator.**
   Implement preflight, safe corpus enumeration, literal matching, deterministic
   ranking, bundle creation, show, verify, atomic no-clobber writes, and receipts.
+  Implemented as repository-level development scripts; compile remains T3 and
+  the broader cross-platform/adversarial audit remains T4.
 - [ ] **T3 (P1, human: 4 days / Codex: 8 hours) - Build adapters and drift guards.**
   Add selection validation, claim/component compilers, triple map-identity
   guards, and candidate-only existing-command handoffs.

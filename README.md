@@ -219,8 +219,9 @@ and public install/update gates. Reusable procedures and dated evidence:
 - [Claude Code E2E Log](docs/CLAUDE_CODE_E2E_LOG.md)
 - [Other-PC Claude Checklist](docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md)
 - [Codex Plugin E2E Log](docs/CODEX_PLUGIN_E2E_LOG.md)
-- [Search-assisted claim maintenance plan](docs/SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md) (runtime pending)
+- [Search-assisted claim maintenance plan](docs/SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md) (development implementation in progress)
 - [Evidence nomination development contracts](contracts/evidence-nomination/v1/README.md)
+- [Local nomination development CLI](docs/EVIDENCE_NOMINATION_DEVELOPMENT.md)
 - [Changelog](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md)
 
