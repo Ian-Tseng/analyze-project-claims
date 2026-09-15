@@ -1,4 +1,3 @@
-<!-- /autoplan restore point: C:\Users\chois\.gstack\projects\analyze-project-claims\feature-cross-skill-managed-lifecycle-v081-autoplan-restore-20260820-224822.md -->
 # Managed Skill Fleet Lifecycle v0.8.1 Plan
 
 Status: APPROVED — implementation authorized 2026-08-20
@@ -410,8 +409,8 @@ Every JSON result contains schema_version, status, code, effect, changed, retrya
 ## Plan file review report
 
 - Plan file: docs/MANAGED_SKILL_LIFECYCLE_V081_PLAN.md
-- Restore point: C:\Users\chois\.gstack\projects\analyze-project-claims\feature-cross-skill-managed-lifecycle-v081-autoplan-restore-20260820-224822.md
-- Engineering test plan: C:\Users\chois\.gstack\projects\Ian-Tseng-analyze-project-claims\chois-featurecross-skill-managed-lifecycle-v081-eng-review-test-plan-20260820-232924.md
+- Restore point: external gstack project state; not repository authority.
+- Engineering test plan: external gstack project state; not repository authority.
 - Required CEO, engineering, DX, scope, failure, implementation, evidence, and final-gate sections: present.
 - Visual-design phase: not applicable because no UI is in scope.
 - Markdown whitespace check: passed.

@@ -387,15 +387,16 @@ next invocation must load the verified new version.
 ## 8. Record claim-to-evidence links
 
 Keep machine authority, human-readable views, and remote lifecycle evidence
-distinct. For the v0.9.0 release candidate, the evidence map is version-bound:
+distinct. For the published v0.9.0 release and later candidate work, the
+evidence map is version-bound:
 
 | Claim | Supporting authority |
 | --- | --- |
-| Release-candidate package bytes and version | [`package-manifest.json`](skills/analyze-project-claims/references/package-manifest.json) and [`package-version.json`](skills/analyze-project-claims/references/package-version.json); a v0.9.0 GitHub release remains pending until publication |
+| Published v0.9.0 package bytes and version | [`package-manifest.json`](https://github.com/Ian-Tseng/analyze-project-claims/blob/f8447b95e2e50c09c7a960582efdca0e29c37ce2/skills/analyze-project-claims/references/package-manifest.json), [`package-version.json`](https://github.com/Ian-Tseng/analyze-project-claims/blob/f8447b95e2e50c09c7a960582efdca0e29c37ce2/skills/analyze-project-claims/references/package-version.json), and the bounded [`v0.9.0 public-release receipt`](validation/v0.9.0-public-release-receipt.json), which records the exact tag commit and publication observation |
 | Accepted repository structure | [`accepted-map.json`](validation/component-map/accepted-map.json) |
 | Formal evidence-bound audit | The newest applicable verified v2 record under `validation/history/`, interpreted under [validation authority](validation/README.md) |
 | Human-readable audit view | The matching deterministic view under `validation/reports/`; it is derived, not authority |
-| Cross-platform tests on released `main` | The exact v0.9.0 commit's required GitHub Actions run after merge; local candidate tests are not a substitute |
+| Cross-platform tests on released `main` | The [`v0.9.0 public-release receipt`](validation/v0.9.0-public-release-receipt.json) records the successful six-cell GitHub Actions matrix for the exact tagged `main` commit; local candidate tests remain a separate evidence cell |
 | Prior scope-limited Codex and Claude-targeted distribution evidence | [`CLAUDE_CODE_E2E_LOG.md`](docs/CLAUDE_CODE_E2E_LOG.md) |
 
 Markdown reports are derived views; do not treat them as a second authority.

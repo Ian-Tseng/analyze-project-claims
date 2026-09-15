@@ -182,6 +182,70 @@ class RecordScanTests(unittest.TestCase):
         self.assertIn("ruleset `20781141`", review)
         self.assertIn("immutable=false", review)
 
+    def test_v090_public_release_status_is_receipt_bound_and_current(self) -> None:
+        receipt_path = ROOT / "validation" / "v0.9.0-public-release-receipt.json"
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        self.assertEqual(
+            set(receipt),
+            {
+                "schema_version",
+                "release",
+                "exact_main_ci",
+                "tag_protection",
+                "verification",
+                "limitations",
+            },
+        )
+        self.assertEqual(receipt["schema_version"], 1)
+        self.assertEqual(receipt["release"]["version"], "0.9.0")
+        self.assertEqual(receipt["release"]["tag"], "v0.9.0")
+        self.assertEqual(
+            receipt["release"]["commit_sha"],
+            "f8447b95e2e50c09c7a960582efdca0e29c37ce2",
+        )
+        self.assertEqual(receipt["release"]["status"], "PUBLISHED")
+        self.assertEqual(receipt["exact_main_ci"]["status"], "PASS")
+        self.assertEqual(receipt["exact_main_ci"]["run_id"], 33163504135)
+        self.assertEqual(receipt["exact_main_ci"]["head_sha"], receipt["release"]["commit_sha"])
+        self.assertEqual(receipt["tag_protection"]["status"], "ACTIVE")
+        self.assertEqual(receipt["tag_protection"]["ruleset_id"], 20781141)
+        self.assertEqual(receipt["verification"]["status"], "PASS")
+        self.assertIn("gh release verify v0.9.0", receipt["verification"]["command"])
+
+        publishing = (ROOT / "PUBLISHING.md").read_text(encoding="utf-8")
+        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        authority = (ROOT / "validation" / "README.md").read_text(encoding="utf-8")
+        for text in (publishing, changelog):
+            self.assertNotIn("v0.9.0 GitHub release remains pending", text)
+        self.assertIn("v0.9.0-public-release-receipt.json", publishing)
+        self.assertIn("v0.9.0-public-release-receipt.json", authority)
+        self.assertIn("published from exact main commit", changelog)
+
+        observation = (ROOT / "validation" / "component-map-observation-v090.json").read_text(
+            encoding="utf-8"
+        )
+        self.assertNotIn("identified v0.6.2 software citation metadata", observation)
+        self.assertIn("v0.9.0-public-release-receipt.json", observation)
+
+    def test_plan_documents_are_portable_and_search_candidate_flow_is_branched(self) -> None:
+        managed_plan = (ROOT / "docs" / "MANAGED_SKILL_LIFECYCLE_V081_PLAN.md").read_text(
+            encoding="utf-8"
+        )
+        search_plan = (ROOT / "docs" / "SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md").read_text(
+            encoding="utf-8"
+        )
+        for plan in (managed_plan, search_plan):
+            self.assertNotIn("C:\\Users\\", plan)
+            self.assertNotIn("/Users/", plan)
+
+        self.assertIn("ClaimEvidenceCandidateV1 branch", search_plan)
+        self.assertIn("ComponentObservationCandidateV1 branch", search_plan)
+        self.assertIn("record validate -> human review -> append-only formal record", search_plan)
+        self.assertIn(
+            "reconcile -> exact human acceptance or rejection -> unchanged check and preflight",
+            search_plan,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

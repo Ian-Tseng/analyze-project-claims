@@ -23,6 +23,15 @@ historical evidence.
 - Input fixtures are not current status authority. Report current status from
   the accepted map and the newest applicable verified v2 record, while naming
   scope, freshness, contradictions, limitations, and unresolved uncertainty.
+- `v0.9.0-public-release-receipt.json` is the bounded post-release lifecycle
+  observation for exact-main CI, tag protection, release publication, and
+  `gh release verify`. It does not replace the pre-release v2 audit record and
+  does not prove installation, client discovery, activation, or scientific
+  improvement.
+
+The 2026-08-30 post-release records and component-map histories are retained
+as dated evidence. Their inclusion does not replace the current accepted map
+or establish current package, installation, or activation status.
 
 No separate active project check table is currently designated for this
 repository. If one is introduced, this file must name its exact path and

@@ -1,0 +1,92 @@
+{
+  "accepted_map_id": "component-map-9a8668d18008",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-91cc80a720ac",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "portable-approved-plan-contracts"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "public-release-lifecycle-evidence"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "identified-release-metadata",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "scope"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/MANAGED_SKILL_LIFECYCLE_V081_PLAN.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_record_scan.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "validation/README.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "validation/v0.9.0-public-release-receipt.json"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "cf72cc1946e4ad502e7f22426467cd621ac41cdbaa1e4a73b35089e7efa2529d"
+  },
+  "recorded_at_utc": "2026-08-30T15:37:46.333270Z",
+  "scan_id": "20260830T153746333270Z-d253490e",
+  "schema_version": "1.0"
+}
