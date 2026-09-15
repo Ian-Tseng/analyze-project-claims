@@ -24,7 +24,7 @@ class NominationCompileTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="nomination-compile-")
         self.addCleanup(self.temp.cleanup)
-        self.project = Path(self.temp.name) / "project"
+        self.project = Path(self.temp.name).resolve() / "project"
         shutil.copytree(GOLDEN / "project", self.project)
         self.output = self.project / ".analyze-project-claims/nominations"
         self.request = load(GOLDEN / "gap-request.json")

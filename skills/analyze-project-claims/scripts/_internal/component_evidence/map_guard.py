@@ -8,6 +8,8 @@ import re
 import stat
 from pathlib import Path
 
+from .local_io import LocalIOError, safe_read
+
 MAX_BYTES = 8 * 1024 * 1024
 FIELDS = ("expected_map_id", "expected_map_canonical_sha256", "expected_map_file_sha256")
 
@@ -41,26 +43,8 @@ def expected_identity(args):
 def snapshot(path, *, maximum=MAX_BYTES):
     """Bound one ordinary file read; parse exactly the bytes that were hashed."""
     maximum = min(maximum, MAX_BYTES)
-    path = Path(os.path.abspath(path))
-    if str(path).startswith(("//", "\\\\")):
-        raise MapGuardError("GUARDED_PATH_UNSAFE: network paths are excluded")
     try:
-        for part in (path, *path.parents):
-            info = part.lstat()
-            if stat.S_ISLNK(info.st_mode) or getattr(info, "st_file_attributes", 0) & 0x400:
-                raise MapGuardError("GUARDED_PATH_UNSAFE: link or reparse path")
-        flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
-        fd = os.open(path, flags)
-        with os.fdopen(fd, "rb") as handle:
-            before = os.fstat(handle.fileno())
-            if not stat.S_ISREG(before.st_mode) or before.st_size > maximum:
-                raise MapGuardError("GUARDED_INPUT_INVALID: bounded regular JSON file required")
-            raw = handle.read(maximum + 1)
-            after = os.fstat(handle.fileno())
-        current = path.lstat()
-        signature = lambda s: (s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns)
-        if len(raw) > maximum or signature(before) != signature(after) or signature(before) != signature(current):
-            raise MapGuardError("GUARDED_INPUT_CHANGED: file changed while reading")
+        raw = safe_read(path, maximum)
         def pairs(items):
             value = {}
             for key, item in items:
@@ -74,7 +58,7 @@ def snapshot(path, *, maximum=MAX_BYTES):
         if not isinstance(value, dict):
             raise ValueError("object required")
         return value, hashlib.sha256(raw).hexdigest()
-    except (OSError, UnicodeError, ValueError, RecursionError) as exc:
+    except (LocalIOError, OSError, UnicodeError, ValueError, RecursionError) as exc:
         if isinstance(exc, MapGuardError):
             raise
         raise MapGuardError("GUARDED_INPUT_INVALID: cannot read a stable local JSON object") from None

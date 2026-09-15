@@ -4,7 +4,8 @@ T1-T3 provide a repository-local, standard-library nomination CLI, reviewed
 claim/component compilers, and guarded native handoffs. The search CLI lives in
 `scripts/`; it is not installed or released. T3 also changes the development
 package's native validator/recorder/reconciler and rebuilds their content
-identities. T4's broader adversarial/platform audit, T5's public journey,
+identities. T4's Windows/Linux hardening is implemented; its macOS/Python 3.10
+platform gate, T5's public journey,
 T6's release authority, and T7's pilot remain pending. Search results propose
 excerpts; they do not establish claim status.
 
@@ -104,8 +105,8 @@ this decision or supply a history destination.
 Freshness is established at replay/guard checks, not indefinitely. These checks
 do not lock the whole project or make multiple reconcile writes one transaction.
 If a map changes between reconcile writes, earlier candidate artifacts can
-remain; inspect them before retrying. T4 still owes broader concurrent-filesystem
-and cross-platform testing. Re-run handoff immediately before a downstream
+remain; inspect them before retrying. Targeted Windows/Linux races are covered;
+macOS and other unrun matrix cells remain pending. Re-run handoff immediately before a downstream
 operation when evidence may have changed.
 
 ### Development identity boundary
@@ -162,9 +163,10 @@ Git because its excerpts may be private. Explicitly review any other output
 location before retaining or publishing its files.
 
 Reads walk ordinary directory components without following links. POSIX uses
-anchored directory descriptors with `O_NOFOLLOW`; Windows uses reparse-point
-opens and directory handles that deny replacement, plus file handles that deny
-concurrent writes/deletion. File identities, sizes, and timestamps are compared
+anchored directory descriptors with `O_NOFOLLOW`; Windows inspects opened
+reparse-point handles and rechecks directory identity. Directory handles alone
+do not prove rename prevention. File handles deny concurrent writes/deletion.
+File identities, sizes, and timestamps are compared
 around reads, then admitted source bytes are rechecked before publication.
 Windows ctime is excluded from cross-API comparison because Python's path and
 handle APIs expose different meanings; identity/size/mtime and handle locks remain.
@@ -221,3 +223,22 @@ budgets, no-clobber/recovery, UTF-8/CRLF, and process/network canaries. Compiler
 tests also cover raw-review provenance, native guard refusals, and separate
 synthetic downstream invocations. They do not establish scientific reliability
 or complete T4's platform and race audit.
+
+## T4 audit status and learning
+
+The shared native/nominator reader checks ordinary parent identities before and
+after access. Windows checks opened directory identities; POSIX uses descriptor-
+relative traversal and checks that ancestor names still identify those descriptors.
+Hard-linked source files are excluded. Supplied dot-dot paths and Windows-ambiguous
+filename characters are refused before path normalization can erase their meaning.
+
+Exclusive publication retains the written file handle, verifies the resulting
+file identity/content, and reports surviving artifacts when interference or cleanup
+fails. These checks do not lock an entire corpus or promise safety against an
+unrestricted same-user/privileged actor continuously changing files after checks.
+
+The [cross-stage learning log](EVIDENCE_NOMINATION_LEARNING_LOG.md) records T1?T4
+findings and T5?T7 checkpoints. `tests/nomination_platform_probe.py` compares bundle,
+selection, candidate, and extracted-payload bytes on actual platforms. The existing
+CI matrix runs it alongside the suite; configuring that step is not evidence that
+an unrun macOS/Python 3.10 cell passed. T4 remains open until those checks run.

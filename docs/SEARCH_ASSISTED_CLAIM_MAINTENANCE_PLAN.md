@@ -411,7 +411,9 @@ Modify:
   reconciliation, acceptance, and formal evidence remain pending.
 - [ ] **T4 (P1, human: 3 days / Codex: 6 hours) - Close adversarial paths.**
   Cover link/reparse, ADS/device, traversal, race, secrets, Unicode, binary,
-  LFS, caps, timeout, mutation canaries, and cross-platform replay.
+  LFS, caps, timeout, mutation canaries, and cross-platform replay. Windows/Linux
+  hardening and the platform byte probe are implemented; macOS/Python 3.10
+  executions remain pending. See the [cross-stage learning log](EVIDENCE_NOMINATION_LEARNING_LOG.md).
 - [ ] **T5 (P2, human: 2 days / Codex: 4 hours) - Finish the public journey.**
   Add the minimal fixture, Windows/POSIX quickstarts, reference guide, error
   recovery, artifact lifecycle, and Codex/Claude boundaries.

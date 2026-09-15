@@ -25,7 +25,7 @@ class NominationRuntimeTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="nomination-runtime-")
         self.addCleanup(self.temp.cleanup)
-        self.project = Path(self.temp.name) / "project"
+        self.project = Path(self.temp.name).resolve() / "project"
         shutil.copytree(GOLDEN / "project", self.project)
         self.request = self.project / "request.json"
         self.output = self.project / ".analyze-project-claims/nominations"

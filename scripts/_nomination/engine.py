@@ -42,6 +42,7 @@ def code_files():
         "scripts/reconcile_component_map.py", "scripts/record_scan.py", "scripts/_internal/__init__.py",
         "scripts/_internal/evidence_bound_scan.py", "scripts/_internal/component_evidence/__init__.py",
         "scripts/_internal/component_evidence/identity.py", "scripts/_internal/component_evidence/map_guard.py",
+        "scripts/_internal/component_evidence/local_io.py",
         "references/scan-record-v2.schema.json",
         "references/scan-record-output-v2.schema.json", "references/component-map-observation.schema.json")]
     return sorted(names)
@@ -193,7 +194,7 @@ class Context:
                     fail(2, "safety_refusal", "path_case_collision")
                 seen.add(casekey)
                 info = entry_stat(child)
-                if linked(info):
+                if linked(info) or (stat.S_ISREG(info.st_mode) and info.st_nlink != 1):
                     exclusions["link_or_reparse"] += 1
                     continue
                 if stat.S_ISDIR(info.st_mode):

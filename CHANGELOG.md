@@ -6,6 +6,11 @@ All notable changes to this project are documented here.
 
 ### Added
 
+- T4 shared guarded reads, ancestor identity checks, hard-link exclusions,
+  verified exclusive publication, adversarial regressions, and a platform-byte
+  probe. Windows/Linux validation is tracked separately from unrun matrix cells.
+  Added cross-stage lessons and future-stage review checkpoints.
+
 - T3 reviewed claim/component candidate compilers and explicit provenance-checked
   payload handoffs. Native reconcile and v2 validate/append accept all-or-none
   expected-map identities plus an optional exact-input digest; append/reconcile

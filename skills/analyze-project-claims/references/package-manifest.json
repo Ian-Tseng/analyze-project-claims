@@ -30,7 +30,7 @@
     },
     {
       "path": "references/component-evidence-engine.json",
-      "sha256": "34c6bed8f8bbb18f5b62bf85975b0a3166f3aac0c9e36d8320d91acf50d0f810"
+      "sha256": "6c5b3031c1e5aef94a1906695fff79dd4add5069abb31985bf049202483a75d0"
     },
     {
       "path": "references/component-evidence-protocol.md",
@@ -157,8 +157,12 @@
       "sha256": "6c0d6ce5c1df00674b0167e92b4ec072813b58277771cfa1ef2e391853f37565"
     },
     {
+      "path": "scripts/_internal/component_evidence/local_io.py",
+      "sha256": "80159988a22fe87f9c1f41a6ec2037f12b4e3dcf56ad114b856eb2a300a6fa5b"
+    },
+    {
       "path": "scripts/_internal/component_evidence/map_guard.py",
-      "sha256": "f7a375702b560d8d19372d54793a39ea3457655d721a107a61826f3c285dd3a1"
+      "sha256": "54168308c7c142c5ac26edbb5fa26fc717a4f92caab8f4e3c6f3582ba2bf45e2"
     },
     {
       "path": "scripts/_internal/evidence_bound_scan.py",

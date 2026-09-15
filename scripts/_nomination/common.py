@@ -6,12 +6,15 @@ import hashlib
 import json
 import re
 import time
+import sys
 import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CONTRACT = ROOT / "contracts/evidence-nomination/v1"
 SKILL = ROOT / "skills/analyze-project-claims"
+# The isolated CLI imports only this explicitly trusted sibling package.
+sys.path.insert(0, str(SKILL / "scripts"))
 SCHEMA_NAMES = ("bundle", "claim-candidate", "component-candidate", "gap-request", "selection")
 MAX_JSON_BYTES = 8 * 1024 * 1024
 SECRET_PATTERNS = (
@@ -184,7 +187,7 @@ def relative_path(value, allow_dot=False):
     if not isinstance(value, str) or not value or len(value) > 500 or not safe_text(value) or secret(value):
         fail(2, "safety_refusal", "path_policy")
     parts = value.split("/")
-    if any(not p or p in (".", "..") or p.endswith((" ", ".")) or "\\" in p or ":" in p for p in parts):
+    if any(not p or p in (".", "..") or p.endswith((" ", ".")) or "\\" in p or any(c in p for c in ':<>"|?*') for p in parts):
         fail(2, "safety_refusal", "path_policy")
     for part in parts:
         stem = part.split(".")[0].upper()
