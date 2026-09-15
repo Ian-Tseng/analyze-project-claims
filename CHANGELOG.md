@@ -6,6 +6,10 @@ All notable changes to this project are documented here.
 
 ### Added
 
+- Frozen T1 evidence-nomination development contracts: five closed schemas,
+  templates, identity and policy rules, synthetic golden fixtures, and contract
+  regressions. Runtime search, adapters, packaging, and pilot gates remain pending.
+
 - Preserved the approved search-assisted claim maintenance plan with its
   implementation tasks still pending, and restored dated v0.9.0 post-release
   evidence and receipt-bound publication documentation.

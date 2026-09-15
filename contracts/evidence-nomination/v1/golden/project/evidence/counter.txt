@@ -1,0 +1,1 @@
+Metric accuracy drops to 0.70 on held-out samples.

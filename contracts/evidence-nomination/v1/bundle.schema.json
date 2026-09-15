@@ -1,0 +1,343 @@
+{
+  "$id": "https://example.invalid/analyze-project-claims/evidence-nomination/v1/bundle.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_kind": {
+      "const": "nomination_bundle"
+    },
+    "bundle_id": {
+      "pattern": "^nomination-[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "canonical_payload_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "completeness": {
+      "enum": [
+        "complete",
+        "partial"
+      ]
+    },
+    "corpus": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 500,
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*[\\\\:\\u0000-\\u001f\\u007f])(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)(?!.*[. ](?:/|$))[^/]+(?:/[^/]+)*$",
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "size_bytes": {
+            "maximum": 1048576,
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "size_bytes"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2500,
+      "minItems": 0,
+      "type": "array"
+    },
+    "exclusions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "count": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "reason": {
+            "enum": [
+              "path_policy",
+              "link_or_reparse",
+              "archive",
+              "binary_or_encoding",
+              "lfs_pointer",
+              "unsafe_unicode",
+              "secret",
+              "oversize",
+              "empty_file"
+            ]
+          }
+        },
+        "required": [
+          "reason",
+          "count"
+        ],
+        "type": "object"
+      },
+      "maxItems": 9,
+      "minItems": 0,
+      "type": "array"
+    },
+    "finder": {
+      "additionalProperties": false,
+      "properties": {
+        "code_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "contract_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "finder_id": {
+          "const": "literal-line-v1"
+        },
+        "implementation_kind": {
+          "enum": [
+            "contract_fixture",
+            "runtime"
+          ]
+        },
+        "schemas": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "maxLength": 500,
+                "minLength": 1,
+                "pattern": "^(?!/)(?!.*[\\\\:\\u0000-\\u001f\\u007f])(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)(?!.*[. ](?:/|$))[^/]+(?:/[^/]+)*$",
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "type": "object"
+          },
+          "maxItems": 5,
+          "minItems": 5,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "unicode_version": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "finder_id",
+        "implementation_kind",
+        "code_sha256",
+        "contract_sha256",
+        "unicode_version",
+        "schemas"
+      ],
+      "type": "object"
+    },
+    "nominations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "byte_end": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "byte_start": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "excerpt": {
+            "maxLength": 2048,
+            "type": "string"
+          },
+          "excerpt_truncated": {
+            "type": "boolean"
+          },
+          "line_end": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "line_start": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "matches": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "query_id": {
+                  "pattern": "^query-[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "requested_role": {
+                  "enum": [
+                    "support",
+                    "counterevidence",
+                    "context"
+                  ]
+                },
+                "requirement_id": {
+                  "maxLength": 128,
+                  "pattern": "^[a-z][a-z0-9]*(?:[-:.][a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "score": {
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "query_id",
+                "requirement_id",
+                "requested_role",
+                "score"
+              ],
+              "type": "object"
+            },
+            "maxItems": 8,
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "nomination_id": {
+            "pattern": "^hit-[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "path": {
+            "maxLength": 500,
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*[\\\\:\\u0000-\\u001f\\u007f])(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*//)(?!.*[. ](?:/|$))[^/]+(?:/[^/]+)*$",
+            "type": "string"
+          },
+          "query_id": {
+            "pattern": "^query-[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "range_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "score": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "source_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "nomination_id",
+          "path",
+          "source_sha256",
+          "byte_start",
+          "byte_end",
+          "line_start",
+          "line_end",
+          "range_sha256",
+          "excerpt",
+          "excerpt_truncated",
+          "score",
+          "query_id",
+          "matches"
+        ],
+        "type": "object"
+      },
+      "maxItems": 20,
+      "minItems": 0,
+      "type": "array"
+    },
+    "queries": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "query_id": {
+            "pattern": "^query-[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "requirement": {
+            "$ref": "gap-request.schema.json#/$defs/requirement"
+          }
+        },
+        "required": [
+          "query_id",
+          "requirement"
+        ],
+        "type": "object"
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "type": "array"
+    },
+    "request": {
+      "$ref": "gap-request.schema.json"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "truncations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "budget": {
+            "enum": [
+              "max_files",
+              "max_total_bytes",
+              "max_file_bytes",
+              "max_requirements",
+              "max_raw_matches",
+              "max_per_requirement",
+              "max_nominations",
+              "max_excerpt_bytes",
+              "max_range_bytes"
+            ]
+          },
+          "limit": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "observed": {
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "budget",
+          "limit",
+          "observed"
+        ],
+        "type": "object"
+      },
+      "maxItems": 10,
+      "minItems": 0,
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "bundle_id",
+    "canonical_payload_sha256",
+    "request",
+    "finder",
+    "corpus",
+    "queries",
+    "nominations",
+    "exclusions",
+    "truncations",
+    "completeness"
+  ],
+  "title": "EvidenceNominationBundleV1",
+  "type": "object"
+}

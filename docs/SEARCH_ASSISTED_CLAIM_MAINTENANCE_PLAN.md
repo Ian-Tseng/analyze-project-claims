@@ -5,8 +5,9 @@ Repository: Ian-Tseng/analyze-project-claims
 Target branch: main
 
 Integration status (2026-09-16): this document preserves the approved plan.
-The implementation tasks below remain pending; merging this plan does not
-establish that the evidence nominator exists or that its pilot gates passed.
+T1 development contracts are implemented on the contract branch; T2-T7 remain
+pending. The contracts do not establish that the evidence nominator exists or
+that its pilot gates passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md).
 
 ## Intent
 
@@ -391,9 +392,11 @@ Modify:
 
 ## Implementation tasks
 
-- [ ] **T1 (P1, human: 2 days / Codex: 3 hours) - Freeze contracts.**
+- [x] **T1 (P1, human: 2 days / Codex: 3 hours) - Freeze contracts.**
   Add five schemas, templates, canonical identities, budgets, exit codes, path
-  rules, and golden fixtures before runtime code.
+  rules, and golden fixtures before runtime code. Implemented in
+  `contracts/evidence-nomination/v1/` with synthetic vectors and contract tests;
+  installation/package authority remains T6.
 - [ ] **T2 (P1, human: 4 days / Codex: 6 hours) - Build the nominator.**
   Implement preflight, safe corpus enumeration, literal matching, deterministic
   ranking, bundle creation, show, verify, atomic no-clobber writes, and receipts.
