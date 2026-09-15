@@ -1,0 +1,263 @@
+{
+  "bindings": [
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "evidence_id": "public-release-receipt",
+      "role": "supports"
+    },
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "evidence_id": "publishing-current-status",
+      "role": "supports"
+    },
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "evidence_id": "changelog-release-boundary",
+      "role": "supports"
+    },
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "evidence_id": "public-release-receipt",
+      "role": "limits"
+    },
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "evidence_id": "changelog-release-boundary",
+      "role": "limits"
+    },
+    {
+      "claim_id": "portable-search-assisted-maintenance-contract-documented",
+      "evidence_id": "search-assisted-maintenance-plan",
+      "role": "supports"
+    },
+    {
+      "claim_id": "portable-search-assisted-maintenance-contract-documented",
+      "evidence_id": "managed-lifecycle-plan",
+      "role": "supports"
+    },
+    {
+      "claim_id": "portable-search-assisted-maintenance-contract-documented",
+      "evidence_id": "search-assisted-maintenance-plan",
+      "role": "limits"
+    },
+    {
+      "claim_id": "portable-search-assisted-maintenance-contract-documented",
+      "evidence_id": "managed-lifecycle-plan",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "e46d59fbb340ff5a9dfcc0593413109f5a6219a86dde95444ef1e3de7ae5924d",
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "element_ref": {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "public-release-lifecycle-evidence"
+      },
+      "material": true,
+      "rationale": "The exact lifecycle observations are recorded consistently in the bounded receipt and active documentation, but the local receipt does not independently authenticate GitHub and does not establish consumer activation or scientific outcomes.",
+      "statement": "The repository now contains a bounded local receipt recording that v0.9.0 was published from exact main commit f8447b95e2e50c09c7a960582efdca0e29c37ce2 after a passing six-cell CI matrix, with an active no-bypass protected-tag ruleset and a passing GitHub release verification command; active release documentation no longer describes publication as pending.",
+      "status": "partially_supported"
+    },
+    {
+      "claim_digest": "a44cc6eaf3d06e6fd26e9a947a2d1f1bae38eb7b8d975d84a022d767e82b1d9b",
+      "claim_id": "portable-search-assisted-maintenance-contract-documented",
+      "element_ref": {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "portable-approved-plan-contracts"
+      },
+      "material": true,
+      "rationale": "The design and authority boundaries are explicit and portable, while no autonomous search executor or measured end-to-end maintenance deployment is claimed.",
+      "statement": "The repository documents a portable search-assisted maintenance design that treats search results as untrusted candidates and keeps claim-record validation separate from component-map reconciliation and exact human acceptance.",
+      "status": "partially_supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "public-release-receipt",
+      "freshness": "current",
+      "identity_sha256": "375e61c32c99dd8b63515416845a65edcad05bc8f3e281853a927df483357472",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The receipt records v0.9.0 at exact commit f8447b95e2e50c09c7a960582efdca0e29c37ce2, a passing six-cell exact-main CI run, an active no-bypass protected-tag ruleset, publication, and a passing GitHub release verification command.",
+      "selection_sha256": "fc92f50252e6b2a22f9ac4291045ea21a4dda905c7892cc4a0169895b2a0d676",
+      "source": {
+        "byte_size": 2587,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.9.0-public-release-receipt.json",
+        "sha256": "fc92f50252e6b2a22f9ac4291045ea21a4dda905c7892cc4a0169895b2a0d676"
+      }
+    },
+    {
+      "evidence_id": "publishing-current-status",
+      "freshness": "current",
+      "identity_sha256": "5ef7469c95c5469a2242e2fd4662acb32990108d41d120c5459f480c6bcc6281",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The active publishing guide identifies the bounded v0.9.0 public-release receipt and separates completed publication gates from unobserved consumer install and activation gates.",
+      "selection_sha256": "6bf2c5ae35a88c3692fef01b71cb78fb5e09bda7fdc08850cb4e6a6910c5e0f9",
+      "source": {
+        "byte_size": 22002,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "PUBLISHING.md",
+        "sha256": "6bf2c5ae35a88c3692fef01b71cb78fb5e09bda7fdc08850cb4e6a6910c5e0f9"
+      }
+    },
+    {
+      "evidence_id": "changelog-release-boundary",
+      "freshness": "current",
+      "identity_sha256": "17100b2fef26475dd94cf3003a5fb2ea0bbb09b8ef8289fff77943763c2ee7b4",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The active changelog records the v0.9.0 public release and retains explicit limits for installation, activation, pilot execution, and measured scientific improvement.",
+      "selection_sha256": "f4af6ec36eaba2febbf33ee3faacef7c50eb2c8474732ae0c37ccba75313dce7",
+      "source": {
+        "byte_size": 7329,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "CHANGELOG.md",
+        "sha256": "f4af6ec36eaba2febbf33ee3faacef7c50eb2c8474732ae0c37ccba75313dce7"
+      }
+    },
+    {
+      "evidence_id": "search-assisted-maintenance-plan",
+      "freshness": "current",
+      "identity_sha256": "e90dc8e9d4221632aa05b8f608ae33705834fd19f4d4f3b114ff36438c2adb69",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The portable plan keeps searched material as untrusted candidates, routes claim candidates through v2 record validation and human review, and routes component candidates through reconciliation, exact owner acceptance or rejection, unchanged reconciliation, and preflight.",
+      "selection_sha256": "362a804ddd2f8aa7728eec6bc7c2077b3316631e8204800b07e85960734dcc7f",
+      "source": {
+        "byte_size": 25500,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "docs/SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md",
+        "sha256": "362a804ddd2f8aa7728eec6bc7c2077b3316631e8204800b07e85960734dcc7f"
+      }
+    },
+    {
+      "evidence_id": "managed-lifecycle-plan",
+      "freshness": "current",
+      "identity_sha256": "d7377aee3bbae5bdee02da37aca278f687ea31af33683be09b9479cd4bf3cebb",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The lifecycle plan uses repository-relative, host-portable paths and preserves human authority for material updates.",
+      "selection_sha256": "beab029bfd6c5a48febbf0c11b978eb73630c4f403ea87c89c6bc79b29912ff2",
+      "source": {
+        "byte_size": 36772,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "docs/MANAGED_SKILL_LIFECYCLE_V081_PLAN.md",
+        "sha256": "beab029bfd6c5a48febbf0c11b978eb73630c4f403ea87c89c6bc79b29912ff2"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "518e3b056b5c8685cc424ff8edf76b84bbcf7afde2faa09ef9b973f0c751c504",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "v090-public-release-lifecycle-recorded"
+      ],
+      "evidence_ids": [
+        "public-release-receipt"
+      ],
+      "limitation_id": "local-receipt-versus-remote-authentication",
+      "text": "The checked-in receipt records read-only GitHub observations but its local JSON bytes do not independently authenticate the remote service."
+    },
+    {
+      "claim_ids": [
+        "v090-public-release-lifecycle-recorded"
+      ],
+      "evidence_ids": [
+        "public-release-receipt",
+        "changelog-release-boundary"
+      ],
+      "limitation_id": "release-versus-consumer-and-scientific-outcomes",
+      "text": "Publication, CI, tag protection, and release verification do not prove standalone or plugin installation, client discovery, fresh activation, representative pilot performance, or measured scientific improvement."
+    },
+    {
+      "claim_ids": [
+        "portable-search-assisted-maintenance-contract-documented"
+      ],
+      "evidence_ids": [
+        "search-assisted-maintenance-plan",
+        "managed-lifecycle-plan"
+      ],
+      "limitation_id": "documented-design-versus-deployed-automation",
+      "text": "The portable search-assisted workflow is a reviewed design contract; this record does not claim that autonomous search, candidate generation, or owner submission has been deployed end to end."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-91cc80a720ac",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "fe5f726c5fa00be75b59d5a54c69292d840dfe92d4ac3277588881842bc1be0f"
+    },
+    "authority": [
+      "validation/v0.9.0-public-release-receipt.json",
+      "validation/component-map/accepted-map.json"
+    ],
+    "engine_identity": {
+      "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "State the strongest safe post-release claim for v0.9.0 and the repaired search-assisted claim-maintenance design.",
+    "recorded_at_utc": "2026-08-30T15:53:26.529741Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260830T155326529741Z-ad54e5d9",
+    "scope": [
+      "v0.9.0 public release lifecycle observations",
+      "active release documentation",
+      "portable search-assisted claim and component maintenance plans",
+      "accepted component-map identity"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "c96db14d576d287ae01cb541f156f07e05a9e28ef8ace4ca7e49cd8358938f49"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "local-receipt-versus-remote-authentication",
+      "release-versus-consumer-and-scientific-outcomes"
+    ],
+    "claim_count": 2,
+    "claim_counts": {
+      "partially_supported": 2
+    },
+    "evidence_count": 5,
+    "material_claim_count": 2,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "The repository now contains a bounded local receipt recording that v0.9.0 was published from exact main commit f8447b95e2e50c09c7a960582efdca0e29c37ce2 after a passing six-cell CI matrix, with an active no-bypass protected-tag ruleset and a passing GitHub release verification command; active release documentation no longer describes publication as pending.",
+    "strongest_safe_claim_id": "v090-public-release-lifecycle-recorded",
+    "unresolved_uncertainties": [
+      "Standalone and plugin installation, client discovery, invocation, replacement, and fresh activation remain unobserved for v0.9.0.",
+      "No representative ten-to-twenty-receipt pilot, pinned model comparison, measured quality improvement, or independent semantic replication has been completed.",
+      "The search-assisted maintenance design has not been deployed as an autonomous executor; exact human acceptance remains required for material component-map changes."
+    ]
+  }
+}

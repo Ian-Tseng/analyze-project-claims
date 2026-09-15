@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "release": {
+    "version": "0.9.0",
+    "tag": "v0.9.0",
+    "commit_sha": "f8447b95e2e50c09c7a960582efdca0e29c37ce2",
+    "published_at_utc": "2026-08-28T10:34:01Z",
+    "status": "PUBLISHED",
+    "release_url": "https://github.com/Ian-Tseng/analyze-project-claims/releases/tag/v0.9.0",
+    "evidence_method": "gh release view v0.9.0 --repo Ian-Tseng/analyze-project-claims and git rev-parse v0.9.0^{}"
+  },
+  "exact_main_ci": {
+    "workflow": "validate",
+    "event": "push",
+    "run_id": 33163504135,
+    "head_sha": "f8447b95e2e50c09c7a960582efdca0e29c37ce2",
+    "created_at_utc": "2026-08-28T10:28:47Z",
+    "completed_at_utc": "2026-08-28T10:30:05Z",
+    "status": "PASS",
+    "matrix": [
+      "ubuntu-latest/python-3.10",
+      "ubuntu-latest/python-3.12",
+      "windows-latest/python-3.10",
+      "windows-latest/python-3.12",
+      "macos-latest/python-3.10",
+      "macos-latest/python-3.12"
+    ],
+    "run_url": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/33163504135",
+    "evidence_method": "gh run view 33163504135 --repo Ian-Tseng/analyze-project-claims --json databaseId,workflowName,event,headSha,conclusion,createdAt,updatedAt,url,jobs"
+  },
+  "tag_protection": {
+    "ruleset_id": 20781141,
+    "name": "Protect version release tags",
+    "target": "tag",
+    "include": [
+      "refs/tags/v*"
+    ],
+    "rules": [
+      "update",
+      "deletion"
+    ],
+    "bypass_actor_count": 0,
+    "status": "ACTIVE",
+    "evidence_method": "gh api repos/Ian-Tseng/analyze-project-claims/rulesets/20781141"
+  },
+  "verification": {
+    "command": "gh release verify v0.9.0 --repo Ian-Tseng/analyze-project-claims",
+    "status": "PASS",
+    "result": "Release v0.9.0 verified after resolving the tag to f8447b95e2e50c09c7a960582efdca0e29c37ce2 and loading the GitHub attestation.",
+    "recorded_at_utc": "2026-08-30T15:34:23.3297954Z"
+  },
+  "limitations": [
+    "This receipt records read-only GitHub lifecycle observations; its local JSON bytes do not independently authenticate GitHub.",
+    "A published tag, successful CI matrix, active tag ruleset, and release verification do not prove standalone or plugin installation, client discovery, invocation, replacement, or fresh activation.",
+    "No representative ten-to-twenty-receipt pilot, pinned model comparison, measured quality improvement, or independent semantic replication is established by this receipt.",
+    "Historical pre-release audit records remain immutable and correctly describe what had not yet been observed at their own creation times."
+  ]
+}

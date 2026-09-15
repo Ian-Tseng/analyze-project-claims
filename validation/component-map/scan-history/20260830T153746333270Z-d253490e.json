@@ -1,0 +1,101 @@
+{
+  "accepted_map_id": "component-map-9a8668d18008",
+  "action": "conflict_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20260830T153746333270Z-d253490e-component-map-91cc80a720ac.json",
+    "delta": "deltas/20260830T153746333270Z-d253490e.json"
+  },
+  "candidate_map_id": "component-map-91cc80a720ac",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "portable-approved-plan-contracts"
+      },
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "public-release-lifecycle-evidence"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "identified-release-metadata",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "scope"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/MANAGED_SKILL_LIFECYCLE_V081_PLAN.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_record_scan.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "validation/README.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "validation/v0.9.0-public-release-receipt.json"
+      }
+    ]
+  },
+  "event_id": "20260830T153746333270Z-d253490e",
+  "integrity": {
+    "canonical_payload_sha256": "f01281131d8b20eb88898bdc5149830bb2570587cfa0a1d47eb510bbfd4d4394"
+  },
+  "map_state_after": "conflict_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.3.0",
+  "recorded_at_utc": "2026-08-30T15:37:46.333270Z",
+  "schema_version": "1.0",
+  "skill_sha256": "c96db14d576d287ae01cb541f156f07e05a9e28ef8ace4ca7e49cd8358938f49"
+}

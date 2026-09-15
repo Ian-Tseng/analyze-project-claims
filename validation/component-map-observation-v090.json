@@ -80,7 +80,10 @@
                   "tests/test_analytics_service.py",
                   "tests/test_agent_compatibility.py",
                   "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md",
+                  "docs/MANAGED_SKILL_LIFECYCLE_V081_PLAN.md",
+                  "docs/SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md",
                   "CHANGELOG.md",
+                  "validation/v0.9.0-public-release-receipt.json",
                   "docs/LIFECYCLE_RECEIPT_GUIDE.md",
                   "examples/scan-input-v2.example.json",
                   "skills/analyze-project-claims/assets/scan-record-v2.template.json",
@@ -474,7 +477,7 @@
                                                 "evidence":  [
                                                                  {
                                                                      "source":  "CITATION.cff",
-                                                                     "locator":  "identified v0.6.2 software citation metadata"
+                                                                     "locator":  "current versioned software citation metadata"
                                                                  },
                                                                  {
                                                                      "source":  "LICENSE",
@@ -513,6 +516,48 @@
                                                                  {
                                                                      "source":  "validation/README.md",
                                                                      "locator":  "Validation authority"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "portable-approved-plan-contracts",
+                                                "target":  "Approved plan documents use repository-portable references, remain explicit about unimplemented work, and keep claim-record append authority separate from component-map reconciliation and acceptance authority.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "docs/MANAGED_SKILL_LIFECYCLE_V081_PLAN.md",
+                                                                     "locator":  "portable plan-review provenance boundary"
+                                                                 },
+                                                                 {
+                                                                     "source":  "docs/SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md",
+                                                                     "locator":  "candidate workflow branches and implementation task state"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_record_scan.py",
+                                                                     "locator":  "test_plan_documents_are_portable_and_search_candidate_flow_is_branched"
+                                                                 }
+                                                             ]
+                                            },
+                                            {
+                                                "element_id":  "public-release-lifecycle-evidence",
+                                                "target":  "Published v0.9.0 lifecycle status is bound to the exact tag commit, successful exact-main CI matrix, active protected-tag ruleset, and release verification while installation, activation, and scientific improvement remain separate unobserved gates.",
+                                                "relation_type":  "contains",
+                                                "evidence":  [
+                                                                 {
+                                                                     "source":  "validation/v0.9.0-public-release-receipt.json",
+                                                                     "locator":  "bounded release, exact-main CI, tag-protection, verification, and limitation fields"
+                                                                 },
+                                                                 {
+                                                                     "source":  "PUBLISHING.md",
+                                                                     "locator":  "version-bound claim-to-evidence table"
+                                                                 },
+                                                                 {
+                                                                     "source":  "CHANGELOG.md",
+                                                                     "locator":  "v0.9.0 post-release evidence boundary"
+                                                                 },
+                                                                 {
+                                                                     "source":  "tests/test_record_scan.py",
+                                                                     "locator":  "test_v090_public_release_status_is_receipt_bound_and_current"
                                                                  }
                                                              ]
                                             },

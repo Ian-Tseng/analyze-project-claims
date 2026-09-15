@@ -1,0 +1,194 @@
+{
+  "schema_version": "2.0",
+  "objective": "State the strongest safe post-release claim for v0.9.0 and the repaired search-assisted claim-maintenance design.",
+  "scope": [
+    "v0.9.0 public release lifecycle observations",
+    "active release documentation",
+    "portable search-assisted claim and component maintenance plans",
+    "accepted component-map identity"
+  ],
+  "authority": [
+    "validation/v0.9.0-public-release-receipt.json",
+    "validation/component-map/accepted-map.json"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "public-release-receipt",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.9.0-public-release-receipt.json"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The receipt records v0.9.0 at exact commit f8447b95e2e50c09c7a960582efdca0e29c37ce2, a passing six-cell exact-main CI run, an active no-bypass protected-tag ruleset, publication, and a passing GitHub release verification command."
+    },
+    {
+      "evidence_id": "publishing-current-status",
+      "source": {
+        "kind": "file",
+        "path": "PUBLISHING.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The active publishing guide identifies the bounded v0.9.0 public-release receipt and separates completed publication gates from unobserved consumer install and activation gates."
+    },
+    {
+      "evidence_id": "changelog-release-boundary",
+      "source": {
+        "kind": "file",
+        "path": "CHANGELOG.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The active changelog records the v0.9.0 public release and retains explicit limits for installation, activation, pilot execution, and measured scientific improvement."
+    },
+    {
+      "evidence_id": "search-assisted-maintenance-plan",
+      "source": {
+        "kind": "file",
+        "path": "docs/SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The portable plan keeps searched material as untrusted candidates, routes claim candidates through v2 record validation and human review, and routes component candidates through reconciliation, exact owner acceptance or rejection, unchanged reconciliation, and preflight."
+    },
+    {
+      "evidence_id": "managed-lifecycle-plan",
+      "source": {
+        "kind": "file",
+        "path": "docs/MANAGED_SKILL_LIFECYCLE_V081_PLAN.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The lifecycle plan uses repository-relative, host-portable paths and preserves human authority for material updates."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "statement": "The repository now contains a bounded local receipt recording that v0.9.0 was published from exact main commit f8447b95e2e50c09c7a960582efdca0e29c37ce2 after a passing six-cell CI matrix, with an active no-bypass protected-tag ruleset and a passing GitHub release verification command; active release documentation no longer describes publication as pending.",
+      "element_ref": {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "public-release-lifecycle-evidence"
+      },
+      "material": true,
+      "status": "partially_supported",
+      "rationale": "The exact lifecycle observations are recorded consistently in the bounded receipt and active documentation, but the local receipt does not independently authenticate GitHub and does not establish consumer activation or scientific outcomes."
+    },
+    {
+      "claim_id": "portable-search-assisted-maintenance-contract-documented",
+      "statement": "The repository documents a portable search-assisted maintenance design that treats search results as untrusted candidates and keeps claim-record validation separate from component-map reconciliation and exact human acceptance.",
+      "element_ref": {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "portable-approved-plan-contracts"
+      },
+      "material": true,
+      "status": "partially_supported",
+      "rationale": "The design and authority boundaries are explicit and portable, while no autonomous search executor or measured end-to-end maintenance deployment is claimed."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "evidence_id": "public-release-receipt",
+      "role": "supports"
+    },
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "evidence_id": "publishing-current-status",
+      "role": "supports"
+    },
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "evidence_id": "changelog-release-boundary",
+      "role": "supports"
+    },
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "evidence_id": "public-release-receipt",
+      "role": "limits"
+    },
+    {
+      "claim_id": "v090-public-release-lifecycle-recorded",
+      "evidence_id": "changelog-release-boundary",
+      "role": "limits"
+    },
+    {
+      "claim_id": "portable-search-assisted-maintenance-contract-documented",
+      "evidence_id": "search-assisted-maintenance-plan",
+      "role": "supports"
+    },
+    {
+      "claim_id": "portable-search-assisted-maintenance-contract-documented",
+      "evidence_id": "managed-lifecycle-plan",
+      "role": "supports"
+    },
+    {
+      "claim_id": "portable-search-assisted-maintenance-contract-documented",
+      "evidence_id": "search-assisted-maintenance-plan",
+      "role": "limits"
+    },
+    {
+      "claim_id": "portable-search-assisted-maintenance-contract-documented",
+      "evidence_id": "managed-lifecycle-plan",
+      "role": "limits"
+    }
+  ],
+  "limitations": [
+    {
+      "limitation_id": "local-receipt-versus-remote-authentication",
+      "text": "The checked-in receipt records read-only GitHub observations but its local JSON bytes do not independently authenticate the remote service.",
+      "claim_ids": [
+        "v090-public-release-lifecycle-recorded"
+      ],
+      "evidence_ids": [
+        "public-release-receipt"
+      ]
+    },
+    {
+      "limitation_id": "release-versus-consumer-and-scientific-outcomes",
+      "text": "Publication, CI, tag protection, and release verification do not prove standalone or plugin installation, client discovery, fresh activation, representative pilot performance, or measured scientific improvement.",
+      "claim_ids": [
+        "v090-public-release-lifecycle-recorded"
+      ],
+      "evidence_ids": [
+        "public-release-receipt",
+        "changelog-release-boundary"
+      ]
+    },
+    {
+      "limitation_id": "documented-design-versus-deployed-automation",
+      "text": "The portable search-assisted workflow is a reviewed design contract; this record does not claim that autonomous search, candidate generation, or owner submission has been deployed end to end.",
+      "claim_ids": [
+        "portable-search-assisted-maintenance-contract-documented"
+      ],
+      "evidence_ids": [
+        "search-assisted-maintenance-plan",
+        "managed-lifecycle-plan"
+      ]
+    }
+  ],
+  "summary": {
+    "strongest_safe_claim_id": "v090-public-release-lifecycle-recorded",
+    "claim_boundary_ids": [
+      "local-receipt-versus-remote-authentication",
+      "release-versus-consumer-and-scientific-outcomes"
+    ],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "Standalone and plugin installation, client discovery, invocation, replacement, and fresh activation remain unobserved for v0.9.0.",
+    "No representative ten-to-twenty-receipt pilot, pinned model comparison, measured quality improvement, or independent semantic replication has been completed.",
+    "The search-assisted maintenance design has not been deployed as an autonomous executor; exact human acceptance remains required for material component-map changes."
+  ]
+}

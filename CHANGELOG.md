@@ -6,6 +6,10 @@ All notable changes to this project are documented here.
 
 ### Added
 
+- Preserved the approved search-assisted claim maintenance plan with its
+  implementation tasks still pending, and restored dated v0.9.0 post-release
+  evidence and receipt-bound publication documentation.
+
 - Add a portable review-and-learning guide for bounded inconsistency rechecks,
   evidence-linked lessons, and validated promotion into project Markdown,
   decision flows, or reusable workflows.
@@ -39,8 +43,11 @@ All notable changes to this project are documented here.
 
 - Focused contract tests prove v1/v2 parsing, local migration, replay,
   tombstones, and manifest/result fail-closed behavior. The representative 10-20
-  receipt pilot, model evaluation, improvement, trusted controller, release,
-  and installed activation remain pending.
+  receipt pilot, model evaluation, improvement, trusted controller, and
+  installed activation remain pending. Version 0.9.0 was published from exact main commit
+  `f8447b95e2e50c09c7a960582efdca0e29c37ce2` after the six-cell GitHub Actions
+  matrix passed; the bounded lifecycle observation is retained in
+  [`validation/v0.9.0-public-release-receipt.json`](validation/v0.9.0-public-release-receipt.json).
 
 ## [0.8.3] - 2026-08-25
 
