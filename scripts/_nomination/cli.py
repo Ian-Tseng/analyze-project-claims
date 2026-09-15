@@ -9,6 +9,7 @@ from pathlib import Path
 
 from .common import Failure, MAX_JSON_BYTES, canonical, fail, sha
 from .engine import Context, read_bundle, read_request, verify
+from .compiler import compile_review, handoff, native_command, sidecar
 from .filesystem import absolute, atomic_create, entry_stat, linked, make_directories, safe_read
 
 DOC = "docs/EVIDENCE_NOMINATION_DEVELOPMENT.md"
@@ -22,7 +23,7 @@ class Parser(argparse.ArgumentParser):
 def parser():
     p = Parser(description="Development-only local evidence nominations; no acceptance or append.")
     sub = p.add_subparsers(dest="command", required=True)
-    for name in ("preflight", "nominate", "show", "verify"):
+    for name in ("preflight", "nominate", "show", "verify", "compile", "handoff"):
         cmd = sub.add_parser(name)
         cmd.add_argument("--format", choices=("human", "json"), default="human")
         if name in ("preflight", "nominate"):
@@ -33,6 +34,11 @@ def parser():
             cmd.add_argument("--project-root", required=True, type=Path)
             cmd.add_argument("--map-root", required=True, type=Path)
             cmd.add_argument("--record", type=Path)
+        if name in ("compile", "handoff"):
+            cmd.add_argument("--selection", required=True, type=Path)
+            cmd.add_argument("--output", required=True, type=Path)
+        if name == "handoff":
+            cmd.add_argument("--candidate", required=True, type=Path)
         if name == "nominate":
             cmd.add_argument("--out-dir", required=True, type=Path)
     return p
@@ -103,7 +109,58 @@ def publish(ctx, bundle):
     return result
 
 
+
+def publish_sidecar(path, value):
+    raw = canonical(value) + b"\n"
+    if len(raw) > MAX_JSON_BYTES:
+        fail(2, "invalid_input", "artifact_size")
+    info = entry_stat(path, missing_ok=True)
+    if info is not None:
+        if safe_read(path, MAX_JSON_BYTES) == raw:
+            return raw, False
+        fail(5, "recovery_required", "existing_different_bytes")
+    try:
+        atomic_create(path, raw)
+    except (OSError, Failure) as exc:
+        if isinstance(exc, Failure) and exc.changed:
+            raise
+        try:
+            if safe_read(path, MAX_JSON_BYTES) == raw:
+                return raw, False
+        except (OSError, Failure):
+            pass
+        fail(5, "atomic_write_failure", "exclusive_publication")
+    return raw, True
+
+
+def compile_or_handoff(args):
+    protected = [args.selection]
+    if args.command == "handoff":
+        protected.append(args.candidate)
+    output = sidecar(args.output, args.bundle, protected)
+    if args.command == "compile":
+        candidate, bundle = compile_review(args.bundle, args.selection, args.project_root, args.map_root, args.record)
+        raw, changed = publish_sidecar(output, candidate)
+        next_command = ["handoff", "--candidate", str(output), "--bundle", str(absolute(args.bundle)),
+                        "--selection", str(absolute(args.selection)), "--project-root", str(absolute(args.project_root)),
+                        "--map-root", str(absolute(args.map_root)), "--output", str(output.with_name(output.name + ".payload.json"))]
+        if args.record:
+            next_command += ["--record", str(absolute(args.record))]
+        code = "compiled"
+    else:
+        candidate, bundle = handoff(args.candidate, args.bundle, args.selection, args.project_root, args.map_root, args.record)
+        raw, changed = publish_sidecar(output, candidate["payload"])
+        next_command = native_command(candidate, output, args.project_root, args.map_root)
+        code = "handoff_prepared"
+    result = receipt(code if changed else "reused_identical", value=bundle, path=output, raw=raw, changed=changed)
+    result.update(next_command=next_command, selected_count=len(candidate["provenance"]["selected_nomination_ids"]),
+                  candidate_id=candidate["candidate_id"], verification="current_local_replay_and_review_binding")
+    return result
+
+
 def run(args):
+    if args.command in ("compile", "handoff"):
+        return compile_or_handoff(args)
     if args.command in ("preflight", "nominate"):
         request = read_request(args.request)
         ctx = Context(request, args.project_root, args.map_root, request_path=args.request,
@@ -157,6 +214,8 @@ def main(argv=None):
         print(f"{result['code']}: {result['nomination_count']} nominations; {result['completeness'] or result['status']}.")
         if result["artifact_path"]:
             print(result["artifact_path"])
+        if result.get("next_command"):
+            print("Next command arguments (not executed): " + json.dumps(result["next_command"], ensure_ascii=False))
         if code:
             for key in ("problem", "cause", "effect", "fix", "retry"):
                 print(f"{key.title()}: {result[key]}")

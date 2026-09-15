@@ -30,7 +30,7 @@
     },
     {
       "path": "references/component-evidence-engine.json",
-      "sha256": "7a6d988645d316b0659afacff7764f0d1e1dd46b91857e7a43f4f6a5dfb28267"
+      "sha256": "34c6bed8f8bbb18f5b62bf85975b0a3166f3aac0c9e36d8320d91acf50d0f810"
     },
     {
       "path": "references/component-evidence-protocol.md",
@@ -157,8 +157,12 @@
       "sha256": "6c0d6ce5c1df00674b0167e92b4ec072813b58277771cfa1ef2e391853f37565"
     },
     {
+      "path": "scripts/_internal/component_evidence/map_guard.py",
+      "sha256": "f7a375702b560d8d19372d54793a39ea3457655d721a107a61826f3c285dd3a1"
+    },
+    {
       "path": "scripts/_internal/evidence_bound_scan.py",
-      "sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63"
+      "sha256": "9faebbac050665c7029f870b3684ed14d11a81eca74ba059487a968d68bd9ab5"
     },
     {
       "path": "scripts/_internal/safe_process.py",
@@ -202,7 +206,7 @@
     },
     {
       "path": "scripts/reconcile_component_map.py",
-      "sha256": "08ea2b34784ea1ab35bfd36410329637108481816054c539f61bd8bff7874554"
+      "sha256": "8f8e4b65fb1ef7aab38b7c3e88dd30479c505c3fd421dd7114e267a559013c62"
     },
     {
       "path": "scripts/record_scan.py",

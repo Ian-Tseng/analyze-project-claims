@@ -35,12 +35,14 @@ def code_files():
     names = ["scripts/evidence_nomination.py", "scripts/_nomination/__init__.py",
              "scripts/_nomination/common.py", "scripts/_nomination/filesystem.py",
              "scripts/_nomination/engine.py", "scripts/_nomination/cli.py",
+             "scripts/_nomination/compiler.py",
              "contracts/evidence-nomination/v1/policy.json"]
     prefix = "skills/analyze-project-claims/"
     names += [prefix + n for n in (
-        "scripts/reconcile_component_map.py", "scripts/_internal/__init__.py",
+        "scripts/reconcile_component_map.py", "scripts/record_scan.py", "scripts/_internal/__init__.py",
         "scripts/_internal/evidence_bound_scan.py", "scripts/_internal/component_evidence/__init__.py",
-        "scripts/_internal/component_evidence/identity.py", "references/scan-record-v2.schema.json",
+        "scripts/_internal/component_evidence/identity.py", "scripts/_internal/component_evidence/map_guard.py",
+        "references/scan-record-v2.schema.json",
         "references/scan-record-output-v2.schema.json", "references/component-map-observation.schema.json")]
     return sorted(names)
 
@@ -83,10 +85,10 @@ def validate_output(path, project, roots, map_root):
 
 
 class Context:
-    def __init__(self, request, project, map_root, *, request_path=None, record_path=None, output=None):
+    def __init__(self, request, project, map_root, *, request_path=None, record_path=None, output=None, deadline=None):
         self.schemas = Schemas()
         self.request = normalize_request(request, self.schemas)
-        self.deadline = Deadline(self.request["resource_policy"]["timeout_seconds"])
+        self.deadline = deadline or Deadline(self.request["resource_policy"]["timeout_seconds"])
         self.project = directory(project)
         self.map_root = directory(map_root)
         if not self.map_root.is_relative_to(self.project):
@@ -380,10 +382,10 @@ def read_bundle(path):
     return raw, value
 
 
-def verify(path, project, map_root, record_path=None):
+def verify(path, project, map_root, record_path=None, *, deadline=None):
     raw, value = read_bundle(path)
     # Output artifacts and equivalent request sidecars are excluded during replay.
-    ctx = Context(value["request"], project, map_root, record_path=record_path, output=Path(path).parent)
+    ctx = Context(value["request"], project, map_root, record_path=record_path, output=Path(path).parent, deadline=deadline)
     if ctx.finder != value["finder"]:
         fail(4, "stale_identity", "finder_identity")
     fresh = ctx.build()

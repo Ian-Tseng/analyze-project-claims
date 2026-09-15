@@ -201,7 +201,7 @@ class EvidenceNominationContractTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 check_schema(candidate, CONTRACT / f"{name}.schema.json")
 
-    def test_existing_record_validator_accepts_extracted_claim_payload(self):
+    def test_native_validator_accepts_payload_and_marks_historical_recorder_stale(self):
         script = ROOT / "skills" / "analyze-project-claims" / "scripts" / "record_scan.py"
         with tempfile.TemporaryDirectory(prefix="nomination-contract-") as temporary:
             project = Path(temporary) / "project"
@@ -211,7 +211,12 @@ class EvidenceNominationContractTests(unittest.TestCase):
             before = (project / "map" / "accepted-map.json").read_bytes()
             for action, record in (("validate", record_path), ("verify", project / "record.json")):
                 result = subprocess.run([sys.executable, str(script), action, "--record", str(record), "--project-root", str(project), "--map-root", str(project / "map")], capture_output=True, text=True, encoding="utf-8", timeout=60)
-                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                # Frozen v0.9.0 record bytes are historical after T3 changes the
+                # recorder/engine. Validation of the native input still passes;
+                # current-code verification must refuse the old code identity.
+                self.assertEqual(result.returncode, 0 if action == "validate" else 3, result.stdout + result.stderr)
+                if action == "verify":
+                    self.assertIn("RECORDER_IDENTITY_MISMATCH", result.stdout + result.stderr)
             self.assertEqual((project / "map" / "accepted-map.json").read_bytes(), before)
 
     def test_raw_byte_identity_distinguishes_line_endings(self):

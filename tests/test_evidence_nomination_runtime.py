@@ -13,6 +13,7 @@ from unittest.mock import patch
 from pathlib import Path
 
 from nomination_contract_support import canonical, check_schema, digest, load
+from nomination_runtime_fixtures import refresh_claim_record
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT = ROOT / "contracts/evidence-nomination/v1"
@@ -109,7 +110,7 @@ class NominationRuntimeTests(unittest.TestCase):
         self.assertEqual(selection.read_bytes(), before)
 
     def test_claim_target_requires_bound_record(self):
-        self.value = load(GOLDEN / "claim-gap-request.json"); self.save()
+        self.value = refresh_claim_record(self.project, load(GOLDEN / "claim-gap-request.json")); self.save()
         self.cli(expected=2)
         receipt = self.cli("nominate", "--record", str(self.project / "record.json"))
         self.assertEqual(load(receipt["artifact_path"])["request"]["target"], self.value["target"])

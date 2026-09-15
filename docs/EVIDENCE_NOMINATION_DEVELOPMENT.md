@@ -1,10 +1,12 @@
 # Local evidence nomination development CLI
 
-T2 provides a repository-local, standard-library implementation of `preflight`,
-`nominate`, `show`, and `verify`. It is development code in `scripts/`, not part
-of the installed v0.9.0 package. T3's compile/adapters and downstream guards,
-T4's broader adversarial/cross-platform audit, and T6 release authority remain
-pending. Search results propose excerpts; they do not establish claim status.
+T1-T3 provide a repository-local, standard-library nomination CLI, reviewed
+claim/component compilers, and guarded native handoffs. The search CLI lives in
+`scripts/`; it is not installed or released. T3 also changes the development
+package's native validator/recorder/reconciler and rebuilds their content
+identities. T4's broader adversarial/platform audit, T5's public journey,
+T6's release authority, and T7's pilot remain pending. Search results propose
+excerpts; they do not establish claim status.
 
 ## Inputs and commands
 
@@ -24,10 +26,12 @@ py -I scripts/evidence_nomination.py preflight --request <request.json> --projec
 py -I scripts/evidence_nomination.py nominate --request <request.json> --project-root <project> --map-root <map-directory> --out-dir <project>/.analyze-project-claims/nominations --format json
 py -I scripts/evidence_nomination.py show --bundle <bundle.json> --format json
 py -I scripts/evidence_nomination.py verify --bundle <bundle.json> --project-root <project> --map-root <map-directory> --format json
+py -I scripts/evidence_nomination.py compile --bundle <bundle.json> --selection <selection.json> --project-root <project> --map-root <map-directory> --output <candidate.json> --format json
+py -I scripts/evidence_nomination.py handoff --bundle <bundle.json> --selection <selection.json> --candidate <candidate.json> --project-root <project> --map-root <map-directory> --output <native.payload.json> --format json
 ```
 
-Add `--record <persisted-v2-record.json>` to preflight, nominate, and verify for
-a claim target. A component target rejects an unexpected record argument.
+Add `--record <persisted-v2-record.json>` to preflight, nominate, verify, compile,
+and handoff for a claim target. A component target rejects an unexpected record argument.
 `--format human` is the default. JSON mode emits one receipt on stdout and
 sanitized diagnostics on stderr. CLI arguments are data, never shell commands.
 
@@ -38,9 +42,83 @@ Nominate scans the bounded local corpus and creates two files:
 - `<bundle-id>.bundle.json`: canonical UTF-8 JSON plus LF;
 - `<bundle-id>.selection.json`: a bound empty reviewer template.
 
-T2 intentionally has no `compile` command. Edit the selection only as an
-explicit reviewer action; an empty template grants no acceptance authority.
-T3 will validate those choices and produce the two different candidate types.
+Edit the selection as an explicit reviewer action. An empty selection or null
+reviewer input cannot compile. Keep the reviewed selection, candidate, and
+extracted payload in the same directory as their bundle. These sidecars remain
+outside accepted-map and formal validation/history directories.
+
+## Review, compile, and hand off
+
+1. Use `show` to inspect the nominations. In the generated selection, choose
+   unique nomination IDs and explicitly write each evidence role, observed
+   summary, and rationale. The reviewer label is informational, not authenticated.
+2. Supply the complete native reviewer input for the target kind:
+   - **Claim:** a scan-record v2 input. Each selection needs a unique evidence ID
+     and an exact local file/line-range evidence item using `method=inspected`,
+     the reviewed summary, and an explicit role binding to the target claim.
+     Keep that claim's ID, statement, and element reference. The entire payload
+     remains reviewer-authored, including statuses and limitations.
+   - **Component:** a complete observation retaining every accepted component,
+     element, component type, and target. Compilation adds selected local
+     `lines:start-end` evidence only to the bound element, deduplicates exact
+     evidence objects, and preserves conflicting observations and other fields.
+     Do not supply claim evidence IDs. Roles and rationales remain in the sidecar.
+3. Run `compile`. It replays the bundle, checks all three map identities and the
+   exact raw selection bytes, and creates one candidate envelope. It does not
+   run the native validator, append, reconcile, or accept operations.
+4. Run the `handoff` arguments printed in the receipt. This rechecks the bundle,
+   sources, selection bytes, and exact compiler result before extracting the
+   native payload. It prints the appropriate native **validate** or **reconcile**
+   command with expected map and payload digests. It never executes that command.
+5. Run that native command separately when ready. The receipt's command is an
+   argument array, not a shell-escaped string: invoke its script with `py` or
+   `python3` and pass each argument separately, quoting paths for your shell.
+   Native validation still decides semantic validity. Reconcile may create
+   candidate/delta/history artifacts; map acceptance remains a separate action.
+
+The native `reconcile`, v2 `validate`, and v2 `append` commands accept:
+
+| Argument | Identity checked |
+| --- | --- |
+| `--expected-map-id` | Exact accepted-map ID |
+| `--expected-map-canonical-sha256` | Canonical accepted-map payload digest |
+| `--expected-map-file-sha256` | Full accepted-map file bytes, including formatting |
+| `--expected-input-sha256` | Exact extracted native payload bytes |
+
+Map guards are optional for ordinary existing invocations, but supplying any
+requires all three. The payload guard requires the map guards. Generated
+handoffs include all four. The native command hashes and parses one bounded
+snapshot, then validates it with its existing schema authority. The recorder
+retains its existing 5 MiB map/input limit; the reconciler guard caps reads at
+8 MiB. Append rechecks
+the map after evidence materialization; reconcile rechecks before each write.
+Missing, invalid, changed, or partially specified expected identities refuse the
+operation. Native guard failures use the native CLI's exit 2, while nomination
+staleness uses exit 4. An unguarded invocation does not retain nomination guards.
+
+To append a reviewed claim later, refresh the handoff, retain all four guard
+arguments, change its native `validate` action to `append`, and explicitly supply
+`--log-dir` (and optionally `--report-dir`). Compilation and handoff do not make
+this decision or supply a history destination.
+
+Freshness is established at replay/guard checks, not indefinitely. These checks
+do not lock the whole project or make multiple reconcile writes one transaction.
+If a map changes between reconcile writes, earlier candidate artifacts can
+remain; inspect them before retrying. T4 still owes broader concurrent-filesystem
+and cross-platform testing. Re-run handoff immediately before a downstream
+operation when evidence may have changed.
+
+### Development identity boundary
+
+T3 rebuilds the embedded engine descriptor and package manifest to match its
+changed native source. This is development integrity, not release approval or
+acceptance of a new project map. Frozen T1 examples and dated v0.9.0 validation
+records retain their original bytes. Current-code verification correctly marks
+old recorder/engine identities stale. Runtime claim tests build fresh synthetic
+records; they do not rewrite the historical examples or accept a real map.
+Existing T1/T2 runtime bundles also require fresh nomination after code changes.
+T6 still requires the exact release package, map reconciliation, explicit human
+acceptance, and a fresh formal record.
 
 ## Replay and publication behavior
 
@@ -121,7 +199,7 @@ errors may have null artifact/target fields where no validated artifact exists.
 
 | Exit | Meaning |
 | --- | --- |
-| 0 | ready, complete, partial, zero nominations, identical reuse, inspected, verified |
+| 0 | ready, complete, partial, zero nominations, identical reuse, inspected, verified, compiled, handoff prepared |
 | 2 | invalid input or safety refusal |
 | 3 | retryable local I/O or detected timeout |
 | 4 | stale or tampered identity |
@@ -132,11 +210,14 @@ Run development checks with:
 ```text
 py -m unittest discover -s tests -p test_evidence_nomination_runtime.py -v
 py -m unittest discover -s tests -p test_evidence_nomination_contracts.py -v
+py -m unittest discover -s tests -p test_evidence_nomination_compile.py -v
 ```
 
 The T1 golden bundle intentionally has a fixture-producer identity. Runtime
 tests compare its request/corpus/query/nomination semantics, while runtime bundles
 bind the actual code/schema/Unicode identities. Fixture and runtime bundle IDs
 therefore differ. Tests cover both target types, replay, drift, input rejection,
-budgets, no-clobber/recovery, UTF-8/CRLF, and process/network canaries. They do
-not establish scientific reliability or complete T4's platform and race audit.
+budgets, no-clobber/recovery, UTF-8/CRLF, and process/network canaries. Compiler
+tests also cover raw-review provenance, native guard refusals, and separate
+synthetic downstream invocations. They do not establish scientific reliability
+or complete T4's platform and race audit.

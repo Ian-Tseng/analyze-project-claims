@@ -6,13 +6,20 @@ All notable changes to this project are documented here.
 
 ### Added
 
+- T3 reviewed claim/component candidate compilers and explicit provenance-checked
+  payload handoffs. Native reconcile and v2 validate/append accept all-or-none
+  expected-map identities plus an optional exact-input digest; append/reconcile
+  recheck the map before writes. Development engine/package identities rebuilt;
+  historical examples preserved and release/acceptance/pilot gates still pending.
+
 - T2 development CLI for local evidence preflight, nomination, inspection, and
   deterministic verification, with bounded reads and exclusive artifact creation.
-  Candidate compilation and installation remain pending.
+  Installation and release authority remain pending.
 
 - Frozen T1 evidence-nomination development contracts: five closed schemas,
   templates, identity and policy rules, synthetic golden fixtures, and contract
-  regressions. Runtime search, adapters, packaging, and pilot gates remain pending.
+  regressions. T2/T3 now implement runtime search and adapters; release and pilot
+  gates remain pending.
 
 - Preserved the approved search-assisted claim maintenance plan with its
   implementation tasks still pending, and restored dated v0.9.0 post-release
