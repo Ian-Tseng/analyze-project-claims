@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "record_kind": "prepublication_release_map_acceptance",
+  "recorded_at": "2026-09-16T10:55:32+08:00",
+  "source_commit_before_acceptance": "b146f69ac63d24f92d71b2c850c3ca6a3d791627",
+  "version": "0.10.0",
+  "proposed_release_date": "2026-09-16",
+  "approval": {
+    "source": "explicit user approval of revised map for already authorized release",
+    "candidate_map_id": "component-map-3df56ac1a6d5",
+    "candidate_sha256": "c6d2068739baf776aa4129774eb28306b5be5f10ada760f0b64ff300477c38a4",
+    "publication": "authorized after exact acceptance, verification, merge and final CI",
+    "authenticated_github_identity_claimed": false
+  },
+  "map_id": "component-map-3df56ac1a6d5",
+  "accepted_map_sha256": "45e72420bb1e763817eae2af00fd9e338109c023b39a9bf218091511a9503d6c",
+  "source_changes": [
+    "CHANGELOG.md",
+    "CITATION.cff",
+    "PUBLISHING.md",
+    "README.md"
+  ],
+  "source_snapshots_verified": 200,
+  "reconciliation": "checked_unchanged",
+  "preflight": "ready",
+  "acceptance": {
+    "accepted_map": "validation/component-map/accepted-map.json",
+    "action": "accepted_candidate",
+    "archived_previous": "validation/component-map/accepted-history/20260916T025538817075Z-37fef2e3-component-map-92872d9a90de.json",
+    "candidate": "validation/component-map/candidates/20260916T025027515508Z-82f43e31-component-map-3df56ac1a6d5.json",
+    "history": "validation/component-map/scan-history/20260916T025538817075Z-37fef2e3.json",
+    "map_id": "component-map-3df56ac1a6d5"
+  },
+  "unchanged_check": {
+    "accepted_map": "validation/component-map/accepted-map.json",
+    "action": "checked_unchanged",
+    "candidate": null,
+    "changes": {
+      "added_components": [],
+      "added_elements": [],
+      "changed_components": [],
+      "changed_elements": [],
+      "contract_changes": [],
+      "removed_components": [],
+      "removed_elements": [],
+      "source_changes": []
+    },
+    "delta": null,
+    "history": "validation/component-map/scan-history/20260916T025539468518Z-e0d4c1e4.json"
+  },
+  "previous_history_preserved": true,
+  "runtime_and_package_unchanged": true,
+  "publication_state_at_recording": "not_yet_published",
+  "installation_state": "not_performed",
+  "human_pilot": "deferred_no_reviewers"
+}

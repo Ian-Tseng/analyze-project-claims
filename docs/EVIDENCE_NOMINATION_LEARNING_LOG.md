@@ -229,3 +229,15 @@ This refines the missed execution step rather than duplicating acceptance rules.
 The earlier release map remains preserved as a superseded proposal. A revised
 exact map requires human acceptance; publication authorization is retained,
 but execution waits for the revised source gate. No release has been published.
+
+### Release-map acceptance checkpoint
+
+Review ID: NOMINATION-RELEASE-20260916. Timestamp: 2026-09-16T10:57:08+08:00.
+The user approved revised map `component-map-3df56ac1a6d5`. Its exact candidate
+bytes and all 200 source snapshots were rechecked before native acceptance;
+unchanged reconciliation and preflight passed. The [pre-publication report](../validation/reports/20260916T025624981743Z-a75b37ce.md)
+verifies. This supersedes the pending-map observation above, while preserving
+the earlier proposal and failure of the metadata-only instruction inventory.
+Conditional publication authorization is retained. Publication follows final
+merged-commit CI, and its hosted result remains a separate observation.
+The existing personal workflow already records the corrected inventory step.

@@ -1,0 +1,268 @@
+{
+  "bindings": [
+    {
+      "claim_id": "release-source-aligned",
+      "evidence_id": "citation",
+      "role": "supports"
+    },
+    {
+      "claim_id": "release-source-aligned",
+      "evidence_id": "changelog",
+      "role": "supports"
+    },
+    {
+      "claim_id": "release-source-aligned",
+      "evidence_id": "readme",
+      "role": "supports"
+    },
+    {
+      "claim_id": "release-source-aligned",
+      "evidence_id": "publishing",
+      "role": "supports"
+    },
+    {
+      "claim_id": "release-source-aligned",
+      "evidence_id": "accepted-map-observation",
+      "role": "supports"
+    },
+    {
+      "claim_id": "release-source-aligned",
+      "evidence_id": "accepted-map-observation",
+      "role": "limits"
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "evidence_id": "pilot-protocol",
+      "role": "context"
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "evidence_id": "pilot-protocol",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "7d47492dec77b756f0d983bef46d4ce78c1d3138c9516d9982668b40fc8c81bc",
+      "claim_id": "release-source-aligned",
+      "element_ref": {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "identified-release-metadata"
+      },
+      "material": true,
+      "rationale": "Direct source inspection and the native acceptance observation support this pre-publication source-identity checkpoint.",
+      "statement": "The v0.10.0 citation, changelog, installation pin and release observation commands are aligned, and their source hashes are covered by exact approved map acceptance, unchanged reconciliation and ready preflight.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "60bc7555ee817558a2c9e174ee7504fc4a2394049d074f42d2384e7969dbc2e7",
+      "claim_id": "nomination-usefulness",
+      "element_ref": {
+        "component_id": "local-evidence-nomination",
+        "element_id": "pilot-boundary"
+      },
+      "material": true,
+      "rationale": "The user reports no human reviewers available; the study is deferred and no independent labels or timing measurements exist.",
+      "statement": "The finder improves human evidence-review efficiency while meeting all frozen development usefulness thresholds.",
+      "status": "untested"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "citation",
+      "freshness": "current",
+      "identity_sha256": "8fb4bc8e4bf360e96da451dc58b51d05338de7b8062d2c3f803a63084e9ce1bf",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "Citation version is 0.10.0 with proposed release date 2026-09-16.",
+      "selection_sha256": "cd7fcd9042790623d7baf81f7b9815abda4cd18ff6b38a99a6dbdb78a41d6151",
+      "source": {
+        "byte_size": 387,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "CITATION.cff",
+        "sha256": "cd7fcd9042790623d7baf81f7b9815abda4cd18ff6b38a99a6dbdb78a41d6151"
+      }
+    },
+    {
+      "evidence_id": "changelog",
+      "freshness": "current",
+      "identity_sha256": "3702099a24f85d78f9f51503edc22a83a12444ad1533b00c986aeb179f684b00",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The dated 0.10.0 entry retains implemented nomination behavior and separate human pilot boundaries.",
+      "selection_sha256": "cdb2c5ca22d0000337717aaa2075602c61f84a572d05aa1772548451fca12b8f",
+      "source": {
+        "byte_size": 10026,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "CHANGELOG.md",
+        "sha256": "cdb2c5ca22d0000337717aaa2075602c61f84a572d05aa1772548451fca12b8f"
+      }
+    },
+    {
+      "evidence_id": "readme",
+      "freshness": "current",
+      "identity_sha256": "e116e0efc40b4299ac8845a3f00f32dbd91e5de9b4ad0cf79d9dbe0016fb5bf1",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The plugin example targets v0.10.0, and the nomination section retains human usefulness limits.",
+      "selection_sha256": "91aefbd64b067fae80baa3db7dd765e1c7d2421e5fd9cfbfbfe172c707b043f2",
+      "source": {
+        "byte_size": 11175,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "README.md",
+        "sha256": "91aefbd64b067fae80baa3db7dd765e1c7d2421e5fd9cfbfbfe172c707b043f2"
+      }
+    },
+    {
+      "evidence_id": "publishing",
+      "freshness": "current",
+      "identity_sha256": "683379e0d55e910ebec50f5521de37daa11af273f8041765a5cb1ea08270bd53",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "Both release reconciliation commands select component-map-observation-v0100.json; publication and installation remain separate gates.",
+      "selection_sha256": "b19266489d6c4539e4b6bf2b078fc13f78d2edf5225522c3f6fa67cd30831769",
+      "source": {
+        "byte_size": 22819,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "PUBLISHING.md",
+        "sha256": "b19266489d6c4539e4b6bf2b078fc13f78d2edf5225522c3f6fa67cd30831769"
+      }
+    },
+    {
+      "evidence_id": "accepted-map-observation",
+      "freshness": "current",
+      "identity_sha256": "69f90bf1e1891b22eca28e33bb83ba36e5ee87fce57211af7e1c87b4d772ccfd",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The receipt records explicit revised-map approval, 200 rechecked source snapshots, native acceptance, checked_unchanged reconciliation and ready preflight.",
+      "selection_sha256": "30aed6dd1adb1576310fb6259f1991a278adc474b2eea7a2a7874a1cbb1c8fd7",
+      "source": {
+        "byte_size": 2269,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.10.0-release-map-acceptance-receipt.json",
+        "sha256": "30aed6dd1adb1576310fb6259f1991a278adc474b2eea7a2a7874a1cbb1c8fd7"
+      }
+    },
+    {
+      "evidence_id": "pilot-protocol",
+      "freshness": "current",
+      "identity_sha256": "48064ab6db38b767ff4950406a9ae74e4951799f25e26b24c83b3a980e89a32a",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The draft study requires independent labels and paired human timings; no execution result is reported.",
+      "selection_sha256": "5421760b7daab750a6f9b39e8aeca7eaa009e54ed01cd607e0e21a7963056bc1",
+      "source": {
+        "byte_size": 5377,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "evaluation/evidence-nomination-pilot/PROTOCOL.md",
+        "sha256": "5421760b7daab750a6f9b39e8aeca7eaa009e54ed01cd607e0e21a7963056bc1"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "c04df67daf63fcea09ab37d34a4718a98da6bb6992dee6047730e84dcf6efac9",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "9faebbac050665c7029f870b3684ed14d11a81eca74ba059487a968d68bd9ab5",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "9faebbac050665c7029f870b3684ed14d11a81eca74ba059487a968d68bd9ab5"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "release-source-aligned"
+      ],
+      "evidence_ids": [
+        "accepted-map-observation"
+      ],
+      "limitation_id": "prepublication-scope",
+      "text": "This checkpoint establishes source alignment and native map operations. The local receipt is not authenticated service attestation and does not prove publication, installed replacement, client discovery or fresh activation."
+    },
+    {
+      "claim_ids": [
+        "nomination-usefulness"
+      ],
+      "evidence_ids": [
+        "pilot-protocol"
+      ],
+      "limitation_id": "human-pilot-deferred",
+      "text": "The protocol is not an executed human study; labels and paired reviewer timings remain unavailable."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-3df56ac1a6d5",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "45e72420bb1e763817eae2af00fd9e338109c023b39a9bf218091511a9503d6c"
+    },
+    "authority": [
+      "CITATION.cff",
+      "CHANGELOG.md",
+      "README.md",
+      "PUBLISHING.md",
+      "validation/v0.10.0-release-map-acceptance-receipt.json"
+    ],
+    "engine_identity": {
+      "engine_digest": "8e13b7d894deefa840ce1b5dc68a547a68f14a902c68cc3fe76b37946e6cf540",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "Record the pre-publication v0.10.0 source-metadata and exact map acceptance checkpoint; keep publication and human-usefulness evidence separate.",
+    "recorded_at_utc": "2026-09-16T02:56:24.981743Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260916T025624981743Z-a75b37ce",
+    "scope": [
+      "release citation and changelog",
+      "README plugin pin",
+      "publication observation commands",
+      "accepted source-map identity",
+      "deferred human usefulness study"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "7b944431552e728d1f23f730f472ac5a5c92d87010ed9a271160b1dc9cbc9cd0"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "prepublication-scope"
+    ],
+    "claim_count": 2,
+    "claim_counts": {
+      "supported": 1,
+      "untested": 1
+    },
+    "evidence_count": 6,
+    "material_claim_count": 2,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "The v0.10.0 citation, changelog, installation pin and release observation commands are aligned, and their source hashes are covered by exact approved map acceptance, unchanged reconciliation and ready preflight.",
+    "strongest_safe_claim_id": "release-source-aligned",
+    "unresolved_uncertainties": [
+      "Final merged-commit CI and immutable publication verification occur after this pre-publication record.",
+      "Installation, client discovery and fresh activation are outside the current authorized release scope.",
+      "Human usefulness remains untested while reviewers are unavailable."
+    ]
+  }
+}

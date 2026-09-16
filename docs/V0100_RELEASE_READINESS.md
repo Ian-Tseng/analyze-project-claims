@@ -1,44 +1,42 @@
-# v0.10.0 release preparation
+# v0.10.0 pre-publication checkpoint
 
-Status: publication authorized; revised exact map acceptance remains pending.
+Recorded: 2026-09-16T10:57:08+08:00. This is a dated source-readiness observation, before
+publication. Hosted release status is recorded on the
+[release page](https://github.com/Ian-Tseng/analyze-project-claims/releases).
 
-The release candidate sets the citation date to 2026-09-16 and moves the accumulated
-change descriptions into a dated v0.10.0 changelog entry. The README plugin pin
-and publisher observation commands also target v0.10.0. No runtime, package,
-contract, test or installed skill bytes are changed by this preparation.
+## Accepted source authority
 
-## Source authority
+The user approved exact map `component-map-3df56ac1a6d5`, candidate SHA-256
+`c6d2068739baf776aa4129774eb28306b5be5f10ada760f0b64ff300477c38a4`.
+The [acceptance receipt](../validation/v0.10.0-release-map-acceptance-receipt.json)
+records native acceptance, 200 matching source snapshots, subsequent
+`checked_unchanged` reconciliation and ready recorder preflight. The
+[formal report](../validation/reports/20260916T025624981743Z-a75b37ce.md) verifies.
 
-The native candidate is `component-map-3df56ac1a6d5` with SHA-256
-`c6d2068739baf776aa4129774eb28306b5be5f10ada760f0b64ff300477c38a4`. CHANGELOG.md, CITATION.cff, README.md and PUBLISHING.md source hashes differ; component
-and element definitions are unchanged. The candidate is in the native candidates
-directory. Human approval precedes acceptance and unchanged reconciliation.
-The prior accepted map and formal history remain preserved.
+Only citation/changelog release metadata, the README installation pin and
+publication observation commands changed from the prior accepted source state.
+Runtime, contracts, tests, package manifests and approved release notes are
+unchanged. Historical maps, proposals and formal records are preserved.
 
 ## Validation observed
 
-- Package manifest and embedded engine verification passed.
-- Official skill and plugin validators passed.
-- Offline quality-loop conformance produced QUALITY_PROPOSAL_READY, deduplicated
-  replay and outbound NONE.
-- The publication dry-run completed without warnings.
-- GitHub release immutability is enabled. The active v* ruleset prevents updates
-  and deletion and has no bypass actor.
-- The unchanged runtime previously passed all six platform/Python cells on main
-  commit `7e5b50609b9e946b808f4dae6a6bba079b317a72`. Final release-tree PR and
-  main checks must pass after exact map acceptance.
+Package/engine verification, official skill/plugin validation, offline quality-loop
+conformance and publication dry-run passed. Conformance retained replay deduplication
+and outbound NONE. All six platform/Python cells passed on the revised preparation
+commit `b146f69ac63d24f92d71b2c850c3ca6a3d791627`; final PR and merged-commit
+checks precede immutable publication. Release immutability and version-tag
+update/deletion protection were observed enabled and are rechecked at publication.
 
-## Remaining gates
+## Evidence boundaries
 
-Approve the exact map, reconcile unchanged, verify a fresh formal record, merge
-and require CI on the resulting release commit. Publish v0.10.0 exactly once and
-verify the immutable release. Publishing does not establish installed replacement,
-client discovery or fresh activation.
+The source map and conditional publication are authorized. Publication, immutable
+release verification, installation, client discovery and fresh activation retain
+separate evidence. This checkpoint does not claim any later step occurred.
 
-T7 is deferred because human reviewers are unavailable. No human labels, timings,
-review-time improvement or general reliability result is claimed. Four public
-source candidates are retained locally for future preparation, outside this repo.
+T7 is deferred because human reviewers are unavailable. The formal scan remains
+PARTIAL for that untested usefulness claim. No human labels, timings, review-time
+improvement or general reliability result is claimed. Candidate study snapshots
+are retained locally outside this repository.
 
-The earlier metadata-only proposal `component-map-0790d947d18d` remains preserved.
-The release-instruction inventory found two more mapped source corrections; the
-revised candidate requires exact approval. The authorized release notes are unchanged.
+The earlier metadata-only map proposal remains historical. The release instruction
+inventory superseded it before acceptance by adding the README and publisher paths.
