@@ -8,8 +8,8 @@ skill package; `scripts/evidence_nomination.py` is a repository shortcut to that
 same implementation. No installed release has been changed.
 
 T4 tests and byte probes passed on Windows/Linux/macOS with Python 3.10/3.12
-at `1fcfbba`; see the [candidate receipt](../validation/v0.10.0-candidate-validation-receipt.json). T6 awaits exact human map
-acceptance, unchanged reconciliation and a fresh formal record. T7 awaits its
+at `1fcfbba`; see the [candidate receipt](../validation/v0.10.0-candidate-validation-receipt.json). T6 now has exact user-approved map acceptance, unchanged reconciliation,
+preflight, and a verified fresh formal record. See the [acceptance receipt](../validation/v0.10.0-acceptance-receipt.json). T7 awaits its
 [independent-label and human-timing study](../evaluation/evidence-nomination-pilot/PROTOCOL.md).
 Search results propose excerpts; they do not establish claim status.
 
@@ -122,8 +122,9 @@ records retain their original bytes. Current-code verification correctly marks
 old recorder/engine identities stale. Runtime claim tests build fresh synthetic
 records; they do not rewrite the historical examples or accept a real map.
 Existing T1/T2 runtime bundles also require fresh nomination after code changes.
-The source package is now prepared for T6; exact map reconciliation, explicit
-human acceptance, and a fresh formal record remain required.
+T6 source packaging, exact approved map acceptance, unchanged reconciliation
+and the fresh formal record are complete. Publication and installed activation
+remain separate future actions.
 
 ## Replay and publication behavior
 
@@ -247,4 +248,4 @@ selection, candidate, and extracted-payload bytes on actual platforms. The six-c
 CI run at `1fcfbba` ran 349 tests per cell with no failures and explicit skips, plus the
 probe. All five artifact hashes agree across OS within each Python/Unicode
 identity. The [receipt](../validation/v0.10.0-candidate-validation-receipt.json) records exact counts and URLs.
-This closes T4's executed platform gate; T6 map preflight remains pending.
+This closes T4's executed platform gate. The later [T6 acceptance receipt](../validation/v0.10.0-acceptance-receipt.json) supersedes that run's pending-map status; current preflight passes.

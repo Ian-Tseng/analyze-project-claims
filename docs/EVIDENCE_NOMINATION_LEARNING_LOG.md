@@ -16,7 +16,7 @@ or a second accepted component map. Existing structural references include
 | T3 adapters | `46f08f5`, 27 compiler tests, 328-test historical suite | Reviewed candidate/handoff behavior implemented. Native input caps and entrypoint identity are preserved; T4 strengthens shared reads. |
 | T4 adversarial audit | New security tests, Windows NTFS and native WSL/Linux runs, cross-platform byte probe | Superseded by T56 continuation: six-cell tests/probes passed at `1fcfbba`, with matching bytes within each Python/Unicode identity. See the candidate receipt; capability skips remain explicit. |
 | T5 public journey | Runnable example, full guide, and fresh-process journey passed all six CI cells | T5 complete for the source candidate; literal Windows/Linux quickstarts also executed locally. |
-| T6 release authority | Relocatable 0.10.0 source candidate prepared, with copied-package tests | Integrity is separate from release identity, exact map reconciliation, human acceptance, and a fresh formal record. Source package integrity/copy validation passed; exact map acceptance, formal append, merge/release and activation remain pending. |
+| T6 release authority | Relocatable 0.10.0 source candidate prepared, with copied-package tests | Integrity is separate from release identity, exact map reconciliation, human acceptance, and a fresh formal record. Source package integrity/copy validation passed; exact map acceptance, unchanged reconciliation and verified formal append are now complete. Merge/release, activation and T7 remain separate. |
 | T7 pilot | Protocol and 20-row intake template prepared; selection/labels are not frozen and pilot has not run | Freeze labels, inputs, comparator, and thresholds before measurements. No usefulness or scientific-benefit result exists yet. |
 
 Historical report counts describe their original commits, not current-code
@@ -113,5 +113,35 @@ The literal example also exposed that the old Git ignore pattern covered only
 root-level sidecars. It now covers nested example outputs, verified with actual
 generated paths and `git status`. The proposed map scopes only tracked example
 sources, so running the example cannot silently alter its structural snapshot.
-T4/T5 are complete within this tested scope. T6 needs exact human map acceptance;
+That pre-acceptance notice is superseded by the [T6 acceptance receipt](../validation/v0.10.0-acceptance-receipt.json). T4/T5 are complete and T6 now has exact user-approved acceptance and a verified formal record;
 T7 remains an unfrozen, unexecuted study awaiting independent human inputs.
+
+## T6 acceptance and learning closure
+
+Review ID: NOMINATION-T6-ACCEPTANCE-20260916. Timestamp: 2026-09-16T09:07:47+08:00.
+The [acceptance receipt](../validation/v0.10.0-acceptance-receipt.json) records
+exact candidate approval, accepted-map identity, prior-map archive, unchanged
+reconciliation, preflight and the newly verified formal record/report. The
+record's PARTIAL status preserves the untested usefulness claim; it is not a
+structural verification failure. Earlier CI receipts remain immutable observations
+of their earlier commits and do not describe the current accepted-map state.
+
+The prepared command pointed from an isolated review directory directly at the
+native accept operation. The native tool refused with `candidate must be inside
+map-root/candidates`, before any acceptance. The correction copied the approved
+candidate and its relative delta/history lineage into the required map directory,
+checked identical raw SHA-256, and then used the native acceptance operation.
+The original candidate and refusal log were retained. No fresh candidate was
+generated or substituted under the old approval.
+
+Reusable rule: check native destination/lineage constraints while preparing an
+approval packet. On approval, stage exact bytes with no clobber, verify source
+snapshots and the previously accepted map, then perform acceptance and unchanged
+reconciliation. A changed candidate or source snapshot requires re-review; moving
+identical approved bytes to the required native location does not invent a new
+semantic approval. This procedure is saved in the personal staged-tooling overlay.
+
+Active T6 notices were checked against their source authority. Unmapped stage
+status and learning documents were updated; map-bound release checklists retain
+their valid procedural requirements. Historical validation receipts and formal
+records were not rewritten. T7 still needs independent labels and human timings.

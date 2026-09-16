@@ -6,9 +6,9 @@ Target branch: main
 
 Integration status (2026-09-16): this document preserves the approved plan.
 T1 contracts, the T2 development nominator, and T3 reviewed adapters/native
-guards are implemented on the feature branch. T4 platform validation and T5 example/documentation are complete; T6 source
-packaging is prepared. Acceptance and pilot gates remain
-explicit below. The CLI is not installed or released, and pilot gates have not passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md)
+guards are implemented on the feature branch. T4 platform validation and T5 example/documentation are complete; T6 source packaging, exact map acceptance and verified formal record
+are complete; its post-acceptance suite is being checked. The pilot remains
+explicitly pending below. The CLI is not installed or released, and pilot gates have not passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md)
 and [development CLI](EVIDENCE_NOMINATION_DEVELOPMENT.md).
 
 ## Intent
@@ -398,7 +398,7 @@ Modify:
   Add five schemas, templates, canonical identities, budgets, exit codes, path
   rules, and golden fixtures before runtime code. Implemented in
   `contracts/evidence-nomination/v1/` with synthetic vectors and contract tests;
-  installation/package authority remains T6.
+  installation/publication remains separate from the completed T6 source authority.
 - [x] **T2 (P1, human: 4 days / Codex: 6 hours) - Build the nominator.**
   Implement preflight, safe corpus enumeration, literal matching, deterministic
   ranking, bundle creation, show, verify, atomic no-clobber writes, and receipts.
@@ -408,14 +408,14 @@ Modify:
   Add selection validation, claim/component compilers, triple map-identity
   guards, and candidate-only existing-command handoffs. Implemented with an
   explicit provenance-checking `handoff` before native payload use. Native
-  development identities were rebuilt for these source changes; T6 release
-  reconciliation, acceptance, and formal evidence remain pending.
+  development identities were rebuilt for these source changes. The later
+  [T6 acceptance receipt](../validation/v0.10.0-acceptance-receipt.json) closes reconciliation, acceptance and formal-record work.
 - [x] **T4 (P1, human: 3 days / Codex: 6 hours) - Close adversarial paths.**
   Cover link/reparse, ADS/device, traversal, race, secrets, Unicode, binary,
   LFS, caps, timeout, mutation canaries, and cross-platform replay. The six-cell Windows/Linux/macOS x Python 3.10/3.12 test and byte-probe
   gates passed at `1fcfbba`; hashes agree across OS within each Python/Unicode
   identity. Platform-specific skips remain explicit in the
-  [candidate receipt](../validation/v0.10.0-candidate-validation-receipt.json). Map preflight is a separate pending T6 gate.
+  [candidate receipt](../validation/v0.10.0-candidate-validation-receipt.json). The later T6 acceptance closes its separate map-preflight gate.
 - [x] **T5 (P2, human: 2 days / Codex: 4 hours) - Finish the public journey.**
   The minimal fixture, Windows/POSIX quickstarts, packaged reference, error
   recovery, artifact lifecycle, and Codex/Claude boundaries are implemented.
@@ -425,7 +425,8 @@ Modify:
   Update package identities, reconcile the exact map, obtain explicit
   acceptance, reconcile unchanged, run the complete suite, and append a fresh
   formal record/report without rewriting history. The relocatable 0.10.0 source
-  package is prepared; exact human map acceptance remains a separate gate.
+  package has been accepted through the exact approved map, unchanged
+  reconciliation, preflight and verified formal record. Publication remains separate.
 - [ ] **T7 (P2, human: 3-5 days / Codex: 1 day) - Run the frozen pilot.**
   Freeze 20 labeled gaps, collect paired manual/nominator measurements, compute
   every advance gate, and retain external/skill search as deferred unless all
