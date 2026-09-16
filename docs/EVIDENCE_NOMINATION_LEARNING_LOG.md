@@ -64,3 +64,38 @@ These checkpoints apply to T5 through T7 without asserting those stages have exe
 The existing [review-learning contract](../skills/analyze-project-claims/references/review-learning.md)
 owns bounded rechecks and promotion rules. The personal claims overlay receives
 a linked generic procedure; installed release files are not customized.
+
+## T5/T6 continuation: 2026-09-16
+
+Review ID: NOMINATION-T56-20260916. The first candidate is `a9cfe84`.
+Its Windows full suite ran 349 tests: 346 passed and three skipped. The first
+hosted Linux cells passed tests and the platform probe; macOS exposed the
+case-capability fixture assumption described below. These are stage results,
+not evidence of map acceptance or release. Exact final CI results supersede
+these interim observations in the continuation report.
+
+- The public journey now reaches a native candidate through fresh processes.
+  The two-command PowerShell first result took about one second on the local
+  host; this is CLI elapsed time, not a pilot reviewer-time measurement.
+- A package-only copy originally lacked repository contracts, runtime imports,
+  and receipt documentation. The runtime now lives inside the skill package;
+  a copied-package regression checks identical nomination bytes from a neutral
+  working directory. Packaged schemas relocate only native `$ref` paths, with
+  a test preserving every other frozen byte. T1 originals remain unchanged.
+- Changing SKILL.md intentionally stales old map identities. Runtime tests
+  now rebind only explicit test-owned fixture copies, while the historical
+  recorder rejection and real-map acceptance requirement remain enforced.
+- The initial journey harness incorrectly added `-I` to the existing native
+  reconciler. The documentation specifies ordinary Python for that entrypoint;
+  the harness now preserves each command's actual startup contract.
+- macOS CI falsified the fixture assumption that POSIX means case-sensitive
+  storage. The collision test now detects actual case-distinct-name capability;
+  capable filesystems still exercise rejection, while other filesystems report
+  an explicit skip. OS names alone cannot establish filesystem behavior.
+- Directory-wide map scope would bind generated example sidecars after a user
+  runs the demo. The proposal scopes the example to its tracked source files,
+  preserving output separation without weakening the native hash authority.
+
+The personal staged-tooling workflow receives the filesystem-capability lesson.
+All raw failures and execution evidence remain in the local T5/T6 artifact
+bundles. No independent pilot labels or timings have been invented.

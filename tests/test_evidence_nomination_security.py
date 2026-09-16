@@ -235,11 +235,14 @@ class NominationSecurityTests(unittest.TestCase):
         self.assertEqual(hits[0]["line_start"], 1)
         self.assertEqual(hits[0]["range_sha256"], hashlib.sha256("caf\u00e9\n".encode()).hexdigest())
 
-    @unittest.skipIf(os.name == "nt", "Case-distinct names require a case-sensitive filesystem")
     def test_case_colliding_names_abort(self):
         project, request = self.project()
-        for name in ("Same.txt", "same.txt"):
-            (project / "evidence" / name).write_bytes(b"Metric accuracy 0.91")
+        upper = project / "evidence/Same.txt"
+        lower = project / "evidence/same.txt"
+        upper.write_bytes(b"Metric accuracy 0.91")
+        if lower.exists():
+            self.skipTest("This filesystem cannot hold case-distinct names")
+        lower.write_bytes(b"Metric accuracy 0.91")
         with self.assertRaisesRegex(Failure, "safety_refusal"):
             Context(request, project, project / "map", output=project / ".analyze-project-claims/nominations").build()
 
