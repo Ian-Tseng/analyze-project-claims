@@ -6,6 +6,14 @@ All notable changes to this project are documented here.
 
 ### Added
 
+- T5 runnable synthetic example with support, counterevidence and context,
+  Windows/POSIX commands, explicit prerecorded review, and fresh-process tests.
+- T6 relocatable 0.10.0 candidate package with internal finder, closed contracts,
+  templates, reference guide and repository compatibility entrypoint. Copied
+  package execution is checked separately; map acceptance and release remain pending.
+- T7 independent-label and paired-human-timing protocol with a 20-row intake
+  template. No pilot measurements or usefulness conclusions are claimed.
+
 - T4 shared guarded reads, ancestor identity checks, hard-link exclusions,
   verified exclusive publication, adversarial regressions, and a platform-byte
   probe. Windows/Linux validation is tracked separately from unrun matrix cells.

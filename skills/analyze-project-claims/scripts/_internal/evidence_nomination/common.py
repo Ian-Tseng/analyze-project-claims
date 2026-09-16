@@ -10,9 +10,9 @@ import sys
 import unicodedata
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-CONTRACT = ROOT / "contracts/evidence-nomination/v1"
-SKILL = ROOT / "skills/analyze-project-claims"
+ROOT = Path(__file__).resolve().parents[3]
+SKILL = ROOT
+CONTRACT = SKILL / "references/evidence-nomination/v1"
 # The isolated CLI imports only this explicitly trusted sibling package.
 sys.path.insert(0, str(SKILL / "scripts"))
 SCHEMA_NAMES = ("bundle", "claim-candidate", "component-candidate", "gap-request", "selection")

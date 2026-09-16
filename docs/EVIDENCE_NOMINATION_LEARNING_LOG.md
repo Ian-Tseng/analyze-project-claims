@@ -15,9 +15,9 @@ or a second accepted component map. Existing structural references include
 | T2 nominator | `0a28efdc`, 23 runtime tests, 301-test historical suite | Runtime feature work completed; T4 found publication/path race gaps beyond those fixtures. Earlier passes remain dated evidence. |
 | T3 adapters | `46f08f5`, 27 compiler tests, 328-test historical suite | Reviewed candidate/handoff behavior implemented. Native input caps and entrypoint identity are preserved; T4 strengthens shared reads. |
 | T4 adversarial audit | New security tests, Windows NTFS and native WSL/Linux runs, cross-platform byte probe | Local corrections implemented; final verification is recorded in the local T4 artifact bundle. macOS and Python 3.10 executions remain unrun. Do not mark the complete platform gate passed. |
-| T5 public journey | Development commands exist; complete public example/guide work is pending | Run each documented command as a fresh isolated process before declaring the journey complete. |
-| T6 release authority | Development engine descriptor/manifest rebuilt after native changes | Integrity is separate from release identity, exact map reconciliation, human acceptance, and a fresh formal record. All release gates remain pending. |
-| T7 pilot | Frozen 20-gap pilot has not run | Freeze labels, inputs, comparator, and thresholds before measurements. No usefulness or scientific-benefit result exists yet. |
+| T5 public journey | Runnable example, full guide, and fresh-process journey implemented; final evidence pending | Run each documented command as a fresh isolated process before declaring the journey complete. |
+| T6 release authority | Relocatable 0.10.0 source candidate prepared, with copied-package tests | Integrity is separate from release identity, exact map reconciliation, human acceptance, and a fresh formal record. All release gates remain pending. |
+| T7 pilot | Protocol and 20-row intake template prepared; selection/labels are not frozen and pilot has not run | Freeze labels, inputs, comparator, and thresholds before measurements. No usefulness or scientific-benefit result exists yet. |
 
 Historical report counts describe their original commits, not current-code
 certification. Local evidence bundles are `nomination-t1-20260916` through
@@ -38,7 +38,7 @@ candidate identities are retained in the local `learning-evidence.json` and
 | L3 / T1,T4 | A Unicode regression fixture used text-mode output, which introduced CRLF on Windows. The scanner correctly hashed those actual bytes. | Write byte-identity fixtures as explicit bytes; distinguish a fixture error from a product defect. Keep normalization-sensitive examples frozen. | `security-cycle-1.log`, `test_unicode_spellings_remain_distinct`. Applies to exact byte comparisons; text-mode application output can legitimately use platform line endings. |
 | L4 / T3,T5,T6 | Earlier T3 review found an omitted native entrypoint identity and a generic guard reader exceeding the recorder's 5 MiB cap. | Bind delegated entrypoints and direct dependencies. Adapters retain the stricter authority's limits rather than silently replacing them. | T3 `native-entry-red/green.log`, `native-limit-red/green.log`, [compiler tests](../tests/test_evidence_nomination_compile.py). Reopen when dependencies or native contracts change. |
 | L5 / T2,T4,T5 | The shared-reader refactor initially lacked isolated CLI import wiring. In-process tests already had the package path and hid the launch defect. | Test the real entrypoint in a fresh isolated process. Assert edit preconditions and inspect saved code when applying scripted substitutions. | T4 `windows-full-cycle-2.log` and `linux-full-cycle-2.log`; [platform probe](../tests/nomination_platform_probe.py). Applies to import/startup boundaries; unit tests still cover smaller algorithms. |
-| L6 / all stages | Implementation, regression coverage, platform execution, acceptance, and pilot outcomes are different evidence dimensions. | Record each separately. A source change invalidates current-code replay while historical evidence keeps its identity. Keep unrun platform and human gates explicit. | [stage plan](SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md), T1?T4 records. Reopen if a completion statement loses its exact version/platform/scope. |
+| L6 / all stages | Implementation, regression coverage, platform execution, acceptance, and pilot outcomes are different evidence dimensions. | Record each separately. A source change invalidates current-code replay while historical evidence keeps its identity. Keep unrun platform and human gates explicit. | [stage plan](SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md), T1 through T4 records. Reopen if a completion statement loses its exact version/platform/scope. |
 
 The reader's Windows handle comparison uses the volume/file identifiers described
 by [Microsoft's handle-information API](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getfileinformationbyhandle).
@@ -60,7 +60,7 @@ also limits the uniqueness guarantee on ReFS; this work does not claim ReFS vali
 6. Recheck active plan/docs/status rows, including superseded pending notices.
    Preserve frozen schemas, historical logs, and acceptance boundaries.
 
-These checkpoints apply to T5?T7 without asserting those stages have executed.
+These checkpoints apply to T5 through T7 without asserting those stages have executed.
 The existing [review-learning contract](../skills/analyze-project-claims/references/review-learning.md)
 owns bounded rechecks and promotion rules. The personal claims overlay receives
 a linked generic procedure; installed release files are not customized.

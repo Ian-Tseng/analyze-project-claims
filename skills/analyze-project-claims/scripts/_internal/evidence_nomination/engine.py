@@ -32,12 +32,12 @@ ARCHIVE_MAGIC = (b"PK\x03\x04", b"PK\x05\x06", b"\x1f\x8b", b"7z\xbc\xaf\x27\x1c
 
 def code_files():
     # Closed trusted implementation list; adding a helper requires updating this list.
-    names = ["scripts/evidence_nomination.py", "scripts/_nomination/__init__.py",
-             "scripts/_nomination/common.py", "scripts/_nomination/filesystem.py",
-             "scripts/_nomination/engine.py", "scripts/_nomination/cli.py",
-             "scripts/_nomination/compiler.py",
-             "contracts/evidence-nomination/v1/policy.json"]
-    prefix = "skills/analyze-project-claims/"
+    names = ["scripts/evidence_nomination.py", "scripts/_internal/evidence_nomination/__init__.py",
+             "scripts/_internal/evidence_nomination/common.py", "scripts/_internal/evidence_nomination/filesystem.py",
+             "scripts/_internal/evidence_nomination/engine.py", "scripts/_internal/evidence_nomination/cli.py",
+             "scripts/_internal/evidence_nomination/compiler.py",
+             "references/evidence-nomination/v1/policy.json"]
+    prefix = ""
     names += [prefix + n for n in (
         "scripts/reconcile_component_map.py", "scripts/record_scan.py", "scripts/_internal/__init__.py",
         "scripts/_internal/evidence_bound_scan.py", "scripts/_internal/component_evidence/__init__.py",

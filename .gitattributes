@@ -2,3 +2,4 @@
 
 # Preserve intentional CRLF bytes in the nomination identity fixture.
 contracts/evidence-nomination/v1/golden/project/evidence/counter.txt -text whitespace=cr-at-eol
+examples/evidence-nomination/minimal/project/evidence/counter.txt -text whitespace=cr-at-eol

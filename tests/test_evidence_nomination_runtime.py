@@ -13,7 +13,7 @@ from unittest.mock import patch
 from pathlib import Path
 
 from nomination_contract_support import canonical, check_schema, digest, load
-from nomination_runtime_fixtures import refresh_claim_record
+from nomination_runtime_fixtures import refresh_claim_record, refresh_component_map
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT = ROOT / "contracts/evidence-nomination/v1"
@@ -29,7 +29,7 @@ class NominationRuntimeTests(unittest.TestCase):
         shutil.copytree(GOLDEN / "project", self.project)
         self.request = self.project / "request.json"
         self.output = self.project / ".analyze-project-claims/nominations"
-        self.value = load(GOLDEN / "gap-request.json")
+        self.value = refresh_component_map(self.project, load(GOLDEN / "gap-request.json"))
         self.save()
         self.before = (self.project / "map/accepted-map.json").read_bytes()
 
@@ -64,6 +64,7 @@ class NominationRuntimeTests(unittest.TestCase):
         self.assertEqual(receipt["code"], "complete")
         check_schema(bundle, CONTRACT / "bundle.schema.json")
         expected = load(GOLDEN / "bundle.json")
+        expected["request"]["map"] = self.value["map"]
         for key in ("request", "corpus", "queries", "nominations", "exclusions", "truncations", "completeness"):
             self.assertEqual(bundle[key], expected[key], key)
         self.assertEqual(bundle["finder"]["implementation_kind"], "runtime")
@@ -122,7 +123,7 @@ class NominationRuntimeTests(unittest.TestCase):
         self.value["requirements"][0]["all_terms"] = ["accuracy", "Metric", "Metric"]
         self.save()
         _, bundle, _ = self.bundle()
-        self.assertEqual(bundle["request"], load(GOLDEN / "gap-request.json"))
+        self.assertEqual(bundle["request"], refresh_component_map(self.project, load(GOLDEN / "gap-request.json")))
 
     def test_invalid_roots_queries_and_json_are_refused(self):
         original = copy.deepcopy(self.value)
@@ -147,7 +148,7 @@ class NominationRuntimeTests(unittest.TestCase):
         self.save(); _, bundle, receipt = self.bundle()
         self.assertEqual(receipt["code"], "zero_nominations")
         self.assertEqual(bundle["nominations"], [])
-        self.value = load(GOLDEN / "gap-request.json")
+        self.value = refresh_component_map(self.project, load(GOLDEN / "gap-request.json"))
         self.value["resource_policy"]["max_nominations"] = 1
         self.value["resource_policy"]["max_per_requirement"] = 1
         self.save(); _, bundle, receipt = self.bundle()
@@ -275,7 +276,7 @@ class NominationRuntimeTests(unittest.TestCase):
         _, bundle, _ = self.bundle()
         self.assertEqual(len(bundle["corpus"]), 1)
         self.assertEqual(bundle["truncations"][0]["budget"], "max_files")
-        self.value = load(GOLDEN / "gap-request.json")
+        self.value = refresh_component_map(self.project, load(GOLDEN / "gap-request.json"))
         self.value["resource_policy"]["max_raw_matches"] = 1; self.save()
         _, bundle, _ = self.bundle()
         self.assertEqual(bundle["completeness"], "partial")

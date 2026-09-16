@@ -6,8 +6,9 @@ Target branch: main
 
 Integration status (2026-09-16): this document preserves the approved plan.
 T1 contracts, the T2 development nominator, and T3 reviewed adapters/native
-guards are implemented on the feature branch; T4-T7 remain pending. The CLI is
-not installed or released, and pilot gates have not passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md)
+guards are implemented on the feature branch. T5 example/documentation and T6
+source packaging are prepared; platform, acceptance, and pilot gates remain
+explicit below. The CLI is not installed or released, and pilot gates have not passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md)
 and [development CLI](EVIDENCE_NOMINATION_DEVELOPMENT.md).
 
 ## Intent
@@ -415,16 +416,19 @@ Modify:
   hardening and the platform byte probe are implemented; macOS/Python 3.10
   executions remain pending. See the [cross-stage learning log](EVIDENCE_NOMINATION_LEARNING_LOG.md).
 - [ ] **T5 (P2, human: 2 days / Codex: 4 hours) - Finish the public journey.**
-  Add the minimal fixture, Windows/POSIX quickstarts, reference guide, error
-  recovery, artifact lifecycle, and Codex/Claude boundaries.
+  The minimal fixture, Windows/POSIX quickstarts, packaged reference, error
+  recovery, artifact lifecycle, and Codex/Claude boundaries are implemented.
+  Final fresh-process and platform evidence is required before closure.
 - [ ] **T6 (P1, human: 2 days / Codex: 4 hours) - Rebuild release authority.**
   Update package identities, reconcile the exact map, obtain explicit
   acceptance, reconcile unchanged, run the complete suite, and append a fresh
-  formal record/report without rewriting history.
+  formal record/report without rewriting history. The relocatable 0.10.0 source
+  package is prepared; exact human map acceptance remains a separate gate.
 - [ ] **T7 (P2, human: 3-5 days / Codex: 1 day) - Run the frozen pilot.**
   Freeze 20 labeled gaps, collect paired manual/nominator measurements, compute
   every advance gate, and retain external/skill search as deferred unless all
-  thresholds pass.
+  thresholds pass. The [study protocol and 20-row intake template](../evaluation/evidence-nomination-pilot/PROTOCOL.md)
+  are prepared; no labels or reviewer timings have been fabricated or frozen.
 
 ## GSTACK REVIEW REPORT
 

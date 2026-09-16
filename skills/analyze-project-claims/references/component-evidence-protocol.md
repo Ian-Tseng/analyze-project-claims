@@ -31,3 +31,7 @@ The engine emits structural component evidence only. It does not make semantic
 project recommendations, perform updates, use network transports, or create
 owner reports. Existing v1 accepted maps remain historical authority; protocol
 v2 binds them to an engine identity without silently rewriting them.
+
+## Local nomination sidecars
+
+For an explicit component-element evidence gap, the [local nomination guide](evidence-nomination.md) describes reviewed locator-only observation candidates and guarded native handoffs. Search/compile/handoff do not reconcile or accept. Reconcile separately, inspect the exact candidate, retain human acceptance, and require the unchanged check. Sidecars are not accepted structural authority.

@@ -12,7 +12,7 @@ from unittest.mock import patch
 from pathlib import Path
 
 from nomination_contract_support import canonical, digest, load
-from nomination_runtime_fixtures import refresh_claim_record
+from nomination_runtime_fixtures import refresh_claim_record, refresh_component_map
 
 ROOT = Path(__file__).resolve().parents[1]
 GOLDEN = ROOT / "contracts/evidence-nomination/v1/golden"
@@ -27,7 +27,7 @@ class NominationCompileTests(unittest.TestCase):
         self.project = Path(self.temp.name).resolve() / "project"
         shutil.copytree(GOLDEN / "project", self.project)
         self.output = self.project / ".analyze-project-claims/nominations"
-        self.request = load(GOLDEN / "gap-request.json")
+        self.request = refresh_component_map(self.project, load(GOLDEN / "gap-request.json"))
         self.map_before = (self.project / "map/accepted-map.json").read_bytes()
 
     def cli(self, command, *args, expected=0):

@@ -1,0 +1,110 @@
+{
+  "$id": "https://example.invalid/analyze-project-claims/evidence-nomination/v1/component-candidate.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_kind": {
+      "const": "component_candidate"
+    },
+    "candidate_id": {
+      "pattern": "^candidate-[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "canonical_payload_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "payload": {
+      "$ref": "../../component-map-observation.schema.json"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "bundle": {
+          "additionalProperties": false,
+          "properties": {
+            "bundle_id": {
+              "pattern": "^nomination-[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "canonical_payload_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "file_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "bundle_id",
+            "canonical_payload_sha256",
+            "file_sha256"
+          ],
+          "type": "object"
+        },
+        "map": {
+          "additionalProperties": false,
+          "properties": {
+            "canonical_payload_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "file_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "map_id": {
+              "pattern": "^component-map-[0-9a-f]{12}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "map_id",
+            "canonical_payload_sha256",
+            "file_sha256"
+          ],
+          "type": "object"
+        },
+        "selected_nomination_ids": {
+          "items": {
+            "pattern": "^hit-[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "selection_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "target": {
+          "$ref": "gap-request.schema.json#/$defs/component_target"
+        }
+      },
+      "required": [
+        "bundle",
+        "selection_sha256",
+        "map",
+        "target",
+        "selected_nomination_ids"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "1.0"
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "candidate_id",
+    "canonical_payload_sha256",
+    "provenance",
+    "payload"
+  ],
+  "title": "ComponentObservationCandidateV1",
+  "type": "object"
+}

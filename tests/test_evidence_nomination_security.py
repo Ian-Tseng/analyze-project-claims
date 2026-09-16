@@ -21,6 +21,8 @@ from _internal.component_evidence import map_guard, local_io
 from _nomination.engine import Context
 from _nomination.common import canonical
 
+from nomination_runtime_fixtures import refresh_component_map
+
 GOLDEN = ROOT / "contracts/evidence-nomination/v1/golden"
 
 
@@ -94,7 +96,7 @@ class NominationSecurityTests(unittest.TestCase):
     def project(self):
         project = self.root / "project"
         shutil.copytree(GOLDEN / "project", project)
-        request = json.loads((GOLDEN / "gap-request.json").read_bytes())
+        request = refresh_component_map(project, json.loads((GOLDEN / "gap-request.json").read_bytes()))
         return project, request
 
     def test_shared_read_pins_or_detects_parent_rename(self):
@@ -256,7 +258,7 @@ class NominationSecurityTests(unittest.TestCase):
         self.assertEqual(bundle["completeness"], "partial")
         self.assertEqual(bundle["nominations"], [])
         self.assertEqual(bundle["truncations"][0]["budget"], "max_range_bytes")
-        request = json.loads((GOLDEN / "gap-request.json").read_bytes())
+        request = refresh_component_map(project, json.loads((GOLDEN / "gap-request.json").read_bytes()))
         request["resource_policy"]["max_total_bytes"] = 50
         request["resource_policy"]["max_file_bytes"] = 50
         bundle = Context(request, project, project / "map", output=project / ".analyze-project-claims/nominations").build()

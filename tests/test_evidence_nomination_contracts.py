@@ -11,6 +11,7 @@ import unittest
 from pathlib import Path
 
 from nomination_contract_support import canonical, check_schema, digest, load
+from nomination_runtime_fixtures import refresh_component_map
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT = ROOT / "contracts" / "evidence-nomination" / "v1"
@@ -204,8 +205,9 @@ class EvidenceNominationContractTests(unittest.TestCase):
     def test_native_validator_accepts_payload_and_marks_historical_recorder_stale(self):
         script = ROOT / "skills" / "analyze-project-claims" / "scripts" / "record_scan.py"
         with tempfile.TemporaryDirectory(prefix="nomination-contract-") as temporary:
-            project = Path(temporary) / "project"
+            project = Path(temporary).resolve() / "project"
             shutil.copytree(GOLDEN / "project", project)
+            refresh_component_map(project, load(GOLDEN / "gap-request.json"))
             record_path = project / "candidate-payload.json"
             record_path.write_bytes(canonical(load(GOLDEN / "claim-candidate.json")["payload"]) + b"\n")
             before = (project / "map" / "accepted-map.json").read_bytes()

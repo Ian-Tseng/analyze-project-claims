@@ -9,6 +9,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+from nomination_runtime_fixtures import refresh_component_map
+
 ROOT = Path(__file__).resolve().parents[1]
 GOLDEN = ROOT / "contracts/evidence-nomination/v1/golden"
 
@@ -24,7 +26,7 @@ def main():
         shutil.copytree(GOLDEN / "project", project)
         output = project / ".analyze-project-claims/nominations"
         request = project / "request.json"
-        request.write_bytes((GOLDEN / "gap-request.json").read_bytes())
+        request.write_bytes(canonical(refresh_component_map(project, json.loads((GOLDEN / "gap-request.json").read_bytes()))))
         scope = ["--project-root", str(project), "--map-root", str(project / "map")]
         def run(command, *arguments):
             result = subprocess.run([sys.executable, "-I", str(ROOT / "scripts/evidence_nomination.py"), command,

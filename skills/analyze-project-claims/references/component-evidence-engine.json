@@ -1,6 +1,6 @@
 {
   "algorithm": "sha256",
-  "engine_digest": "af2d6955598bcf6d1c2ba219b1baee7fdb7b717a55328a0089c3ce8110b4e912",
+  "engine_digest": "8e13b7d894deefa840ce1b5dc68a547a68f14a902c68cc3fe76b37946e6cf540",
   "engine_name": "component-evidence",
   "engine_version": "1.3.0",
   "files": [
@@ -14,7 +14,7 @@
     },
     {
       "path": "references/component-evidence-protocol.md",
-      "sha256": "d6a0bc88603e2605d6f0841c5de40972d09a578dae8feafc9f8486a2130410eb"
+      "sha256": "b100f06968e99031607817b08acc8378280c3c308d812430be087e8fde7bb0ce"
     },
     {
       "path": "references/component-map-observation.schema.json",

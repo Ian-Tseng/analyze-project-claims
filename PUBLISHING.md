@@ -488,3 +488,14 @@ prove that the repository was pushed, that a release was published, that Codex
 or Claude Code loaded it, or that automatic replacement works across supported
 operating systems. Record those observations separately before claiming
 release readiness.
+
+## 0.10.0 nomination candidate checklist
+
+Before publication, run the copied-package nomination journey, the six-cell
+platform suite and byte comparison, and all existing package/plugin/quality-loop
+gates. Set the citation release date when publishing. Reconcile the prepared
+`validation/component-map-observation-v0100.json`, inspect its exact candidate,
+and obtain human acceptance before the unchanged check and formal append.
+Keep the [nomination pilot](evaluation/evidence-nomination-pilot/PROTOCOL.md)
+pending until independent labels and paired human timings exist; do not infer
+usefulness from regression tests.

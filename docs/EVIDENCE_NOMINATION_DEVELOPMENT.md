@@ -1,13 +1,16 @@
-# Local evidence nomination development CLI
+# Local evidence nomination CLI and development history
 
-T1-T3 provide a repository-local, standard-library nomination CLI, reviewed
-claim/component compilers, and guarded native handoffs. The search CLI lives in
-`scripts/`; it is not installed or released. T3 also changes the development
-package's native validator/recorder/reconciler and rebuilds their content
-identities. T4's Windows/Linux hardening is implemented; its macOS/Python 3.10
-platform gate, T5's public journey,
-T6's release authority, and T7's pilot remain pending. Search results propose
-excerpts; they do not establish claim status.
+T1-T3 implementation and T4 Windows/Linux hardening are preserved in the feature
+history. T5 adds a [runnable minimal example](../examples/evidence-nomination/minimal/README.md)
+and the [packaged reference](../skills/analyze-project-claims/references/evidence-nomination.md).
+The 0.10.0 source candidate now contains the runtime and contracts inside the
+skill package; `scripts/evidence_nomination.py` is a repository shortcut to that
+same implementation. No installed release has been changed.
+
+T4 still needs the remaining platform checks. T6 awaits exact human map
+acceptance, unchanged reconciliation and a fresh formal record. T7 awaits its
+[independent-label and human-timing study](../evaluation/evidence-nomination-pilot/PROTOCOL.md).
+Search results propose excerpts; they do not establish claim status.
 
 ## Inputs and commands
 
@@ -118,8 +121,8 @@ records retain their original bytes. Current-code verification correctly marks
 old recorder/engine identities stale. Runtime claim tests build fresh synthetic
 records; they do not rewrite the historical examples or accept a real map.
 Existing T1/T2 runtime bundles also require fresh nomination after code changes.
-T6 still requires the exact release package, map reconciliation, explicit human
-acceptance, and a fresh formal record.
+The source package is now prepared for T6; exact map reconciliation, explicit
+human acceptance, and a fresh formal record remain required.
 
 ## Replay and publication behavior
 
@@ -237,8 +240,8 @@ file identity/content, and reports surviving artifacts when interference or clea
 fails. These checks do not lock an entire corpus or promise safety against an
 unrestricted same-user/privileged actor continuously changing files after checks.
 
-The [cross-stage learning log](EVIDENCE_NOMINATION_LEARNING_LOG.md) records T1?T4
-findings and T5?T7 checkpoints. `tests/nomination_platform_probe.py` compares bundle,
+The [cross-stage learning log](EVIDENCE_NOMINATION_LEARNING_LOG.md) records T1 through T4
+findings and T5 through T7 checkpoints. `tests/nomination_platform_probe.py` compares bundle,
 selection, candidate, and extracted-payload bytes on actual platforms. The existing
 CI matrix runs it alongside the suite; configuring that step is not evidence that
 an unrun macOS/Python 3.10 cell passed. T4 remains open until those checks run.

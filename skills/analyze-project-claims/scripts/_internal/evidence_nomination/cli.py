@@ -1,4 +1,4 @@
-"""Developer CLI: preflight, nominate, show and verify; no acceptance actions."""
+"""Local CLI: preflight, nominate, show and verify; no acceptance actions."""
 from __future__ import annotations
 
 import argparse
@@ -12,7 +12,7 @@ from .engine import Context, read_bundle, read_request, verify
 from .compiler import compile_review, handoff, native_command, sidecar
 from .filesystem import absolute, atomic_create, entry_stat, linked, make_directories, safe_read
 
-DOC = "docs/EVIDENCE_NOMINATION_DEVELOPMENT.md"
+DOC = "references/evidence-nomination.md"
 
 
 class Parser(argparse.ArgumentParser):
@@ -21,7 +21,7 @@ class Parser(argparse.ArgumentParser):
 
 
 def parser():
-    p = Parser(description="Development-only local evidence nominations; no acceptance or append.")
+    p = Parser(description="Local evidence nominations; no acceptance or append.")
     sub = p.add_subparsers(dest="command", required=True)
     for name in ("preflight", "nominate", "show", "verify", "compile", "handoff"):
         cmd = sub.add_parser(name)
