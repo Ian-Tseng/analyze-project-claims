@@ -10,10 +10,10 @@ unchanged reconciliation and a verified formal follow-up. T1-T6 are complete
 within the recorded scope. The final PR and main CI remain merge checkpoints;
 T7 still requires independent human study evidence.
 T1 contracts, the T2 development nominator, and T3 reviewed adapters/native
-guards are implemented on the feature branch. T4 platform validation and T5 example/documentation are complete; T6 source packaging, exact map acceptance and verified formal record
+guards are merged into main. T4 platform validation and T5 example/documentation are complete; T6 source packaging, exact map acceptance and verified formal record
 are complete; the post-acceptance full suite, byte probe and map preflight
 passed in all six platform/Python cells. The pilot remains
-explicitly pending below. The CLI is not installed or released, and pilot gates have not passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md)
+explicitly pending below. Publication and installed activation have separate evidence gates; pilot gates have not passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md)
 and [development CLI](EVIDENCE_NOMINATION_DEVELOPMENT.md).
 
 ## Intent
