@@ -1,0 +1,202 @@
+{
+  "schema_version": "2.0",
+  "objective": "Publish a bounded checkpoint of the observed v0.10.0 release, native Windows plugin installation, unchanged accepted map and deferred activation/usefulness evidence.",
+  "scope": [
+    "analyzer release identity",
+    "native Windows plugin installation",
+    "accepted component map freshness",
+    "fresh host activation boundary",
+    "T7 human usefulness boundary"
+  ],
+  "authority": [
+    "validation/component-map/accepted-map.json",
+    "validation/v0.10.0-installed-audit-public.json",
+    "evaluation/evidence-nomination-pilot/PROTOCOL.md"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "published-release",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.10.0-installed-audit-public.json"
+      },
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/release"
+      },
+      "method": "inspected",
+      "observed_summary": "GitHub release and tag observations identify the immutable published v0.10.0 commit."
+    },
+    {
+      "evidence_id": "native-installation",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.10.0-installed-audit-public.json"
+      },
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/installation"
+      },
+      "method": "inspected",
+      "observed_summary": "Native plugin listing, pinned marketplace configuration and all 846 tracked files match the released commit; package verification passes and other plugin listing entries are unchanged."
+    },
+    {
+      "evidence_id": "current-map",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.10.0-installed-audit-public.json"
+      },
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/map"
+      },
+      "method": "inspected",
+      "observed_summary": "The v0.10.0 installed engine verified, reconciliation found no changes, and the prior formal record reverified."
+    },
+    {
+      "evidence_id": "pilot-protocol",
+      "source": {
+        "kind": "file",
+        "path": "evaluation/evidence-nomination-pilot/PROTOCOL.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The pilot remains unfrozen and requires independently labeled gaps and actual paired human review timings."
+    },
+    {
+      "evidence_id": "observed-boundaries",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.10.0-installed-audit-public.json"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "No fresh Codex conversation activation or complete live staged lifecycle run was observed; no human study executed."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "release-published",
+      "statement": "Analyzer v0.10.0 is published as an immutable GitHub release at a9e51a08481355864ed46e0dde7bb2f5e7de8ffc.",
+      "element_ref": {
+        "component_id": "paper-facing-boundaries",
+        "element_id": "identified-release-metadata"
+      },
+      "material": true,
+      "status": "supported",
+      "rationale": "The current release API and tag observations match the accepted released source."
+    },
+    {
+      "claim_id": "plugin-installation-verified",
+      "statement": "The requested user plugin is enabled at v0.10.0, pinned to that release, and its 846 tracked files and package manifest match the released source.",
+      "element_ref": {
+        "component_id": "distribution",
+        "element_id": "canonical-managed-package"
+      },
+      "material": true,
+      "status": "supported",
+      "rationale": "Native host discovery and byte comparisons establish installation identity for this Windows profile."
+    },
+    {
+      "claim_id": "accepted-map-current",
+      "statement": "The installed v0.10.0 engine reconciles the accepted project component map unchanged and verifies the prepublication formal record.",
+      "element_ref": {
+        "component_id": "component-map-lifecycle",
+        "element_id": "unchanged-map-reuse"
+      },
+      "material": true,
+      "status": "supported",
+      "rationale": "The persisted native reconciler and verifier results match the current source snapshots."
+    },
+    {
+      "claim_id": "fresh-host-activation",
+      "statement": "A new Codex conversation discovers and activates the updated v0.10.0 plugin.",
+      "element_ref": {
+        "component_id": "cross-agent-package-compatibility",
+        "element_id": "separate-host-evidence"
+      },
+      "material": true,
+      "status": "untested",
+      "rationale": "Native listing and direct fresh Python helper execution do not establish fresh Codex host activation."
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "statement": "The finder improves human evidence-review efficiency while meeting all frozen development usefulness thresholds.",
+      "element_ref": {
+        "component_id": "local-evidence-nomination",
+        "element_id": "pilot-boundary"
+      },
+      "material": true,
+      "status": "untested",
+      "rationale": "No human reviewers are available; labels and timings remain absent and the study is deferred."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "release-published",
+      "evidence_id": "published-release",
+      "role": "supports"
+    },
+    {
+      "claim_id": "plugin-installation-verified",
+      "evidence_id": "native-installation",
+      "role": "supports"
+    },
+    {
+      "claim_id": "accepted-map-current",
+      "evidence_id": "current-map",
+      "role": "supports"
+    },
+    {
+      "claim_id": "plugin-installation-verified",
+      "evidence_id": "observed-boundaries",
+      "role": "limits"
+    },
+    {
+      "claim_id": "fresh-host-activation",
+      "evidence_id": "observed-boundaries",
+      "role": "limits"
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "evidence_id": "observed-boundaries",
+      "role": "limits"
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "evidence_id": "pilot-protocol",
+      "role": "context"
+    }
+  ],
+  "limitations": [
+    {
+      "limitation_id": "installation-is-not-activation-or-usefulness",
+      "text": "This local installation observation and helper execution do not establish a fresh Codex conversation activation, a complete live staged A-to-B lifecycle, independent human usefulness or general reliability. Raw native captures remain local; the public checkpoint is agent-observed and not independently authenticated host evidence.",
+      "claim_ids": [
+        "plugin-installation-verified",
+        "fresh-host-activation",
+        "nomination-usefulness"
+      ],
+      "evidence_ids": [
+        "observed-boundaries"
+      ]
+    }
+  ],
+  "summary": {
+    "strongest_safe_claim_id": "plugin-installation-verified",
+    "claim_boundary_ids": [
+      "installation-is-not-activation-or-usefulness"
+    ],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "Fresh Codex conversation activation remains unobserved.",
+    "T7 remains deferred_no_human_reviewers; no synthetic labels or CLI timings substitute for the required human evidence.",
+    "Historical already-published A-to-B replay remains unsupported; the companion verifier repair has not been used for a complete live staged lifecycle.",
+    "Raw host captures remain local; the published checkpoint is an agent observation and not independently authenticated host evidence."
+  ]
+}
