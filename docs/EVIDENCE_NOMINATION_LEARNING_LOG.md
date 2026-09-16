@@ -145,3 +145,17 @@ Active T6 notices were checked against their source authority. Unmapped stage
 status and learning documents were updated; map-bound release checklists retain
 their valid procedural requirements. Historical validation receipts and formal
 records were not rewritten. T7 still needs independent labels and human timings.
+
+### Accepted-tree validation closure
+
+Timestamp: 2026-09-16T09:19:11+08:00. Review ID: NOMINATION-T6-ACCEPTANCE-20260916.
+The [accepted-tree CI](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35043189493) at
+`2540dbff3576799a79ddad6e87e9c7a110cb2ec6` passed all six Windows/Linux/macOS
+x Python 3.10/3.12 cells, including the complete suite, byte probe and map
+preflight. The local Windows full suite also passed: 349 tests, three skipped.
+T1 through T6 are complete within their recorded scope. The active plan and
+development guide now link this observation; the PR description must reflect
+the same accepted state. Earlier failed preflight receipts remain historical.
+T7 is unexecuted and still requires independent labels and paired human timings.
+The saved personal workflow is linked from the claims overlay under staged
+evidence tooling; released skill files were not customized.

@@ -9,7 +9,8 @@ same implementation. No installed release has been changed.
 
 T4 tests and byte probes passed on Windows/Linux/macOS with Python 3.10/3.12
 at `1fcfbba`; see the [candidate receipt](../validation/v0.10.0-candidate-validation-receipt.json). T6 now has exact user-approved map acceptance, unchanged reconciliation,
-preflight, and a verified fresh formal record. See the [acceptance receipt](../validation/v0.10.0-acceptance-receipt.json). T7 awaits its
+preflight, and a verified fresh formal record. The [accepted-tree CI](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35043189493)
+passed the complete suite, byte probe and preflight in all six cells at `2540dbf`. See the [acceptance receipt](../validation/v0.10.0-acceptance-receipt.json). T7 awaits its
 [independent-label and human-timing study](../evaluation/evidence-nomination-pilot/PROTOCOL.md).
 Search results propose excerpts; they do not establish claim status.
 

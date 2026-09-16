@@ -7,7 +7,8 @@ Target branch: main
 Integration status (2026-09-16): this document preserves the approved plan.
 T1 contracts, the T2 development nominator, and T3 reviewed adapters/native
 guards are implemented on the feature branch. T4 platform validation and T5 example/documentation are complete; T6 source packaging, exact map acceptance and verified formal record
-are complete; its post-acceptance suite is being checked. The pilot remains
+are complete; the post-acceptance full suite, byte probe and map preflight
+passed in all six platform/Python cells. The pilot remains
 explicitly pending below. The CLI is not installed or released, and pilot gates have not passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md)
 and [development CLI](EVIDENCE_NOMINATION_DEVELOPMENT.md).
 
@@ -421,12 +422,14 @@ Modify:
   recovery, artifact lifecycle, and Codex/Claude boundaries are implemented.
   Fresh-process journey tests passed in all six cells. The literal Windows
   and Linux two-command quickstarts also ran locally.
-- [ ] **T6 (P1, human: 2 days / Codex: 4 hours) - Rebuild release authority.**
+- [x] **T6 (P1, human: 2 days / Codex: 4 hours) - Rebuild release authority.**
   Update package identities, reconcile the exact map, obtain explicit
   acceptance, reconcile unchanged, run the complete suite, and append a fresh
   formal record/report without rewriting history. The relocatable 0.10.0 source
   package has been accepted through the exact approved map, unchanged
-  reconciliation, preflight and verified formal record. Publication remains separate.
+  reconciliation, preflight and verified formal record. The [accepted-tree CI](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35043189493)
+  passed all six cells at `2540dbf`; the local Windows suite also passed
+  349 tests with three skips. Publication remains separate.
 - [ ] **T7 (P2, human: 3-5 days / Codex: 1 day) - Run the frozen pilot.**
   Freeze 20 labeled gaps, collect paired manual/nominator measurements, compute
   every advance gate, and retain external/skill search as deferred unless all
