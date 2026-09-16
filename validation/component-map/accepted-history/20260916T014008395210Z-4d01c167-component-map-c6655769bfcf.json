@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-09-16T01:40:08.395210Z",
+  "accepted_at_utc": "2026-09-16T01:05:19.590628Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1733,16 +1733,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-09-16T01:32:59.235091Z",
+  "created_at_utc": "2026-09-16T00:57:01.381706Z",
   "integrity": {
-    "canonical_payload_sha256": "7003394c7972605712ff28e9f7b6cdffc1fba60b9c243b363ecfa94857cb31a6"
+    "canonical_payload_sha256": "539b94e260971db8ee35bfd92e0b87404b923af588360a7f50c7ba673d63ec87"
   },
-  "map_id": "component-map-92872d9a90de",
+  "map_id": "component-map-c6655769bfcf",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
   "objective": "Map the 0.10.0 local evidence nomination source candidate and retained audit workflows, separating deterministic candidates from human evidence acceptance, formal append, release, installed activation, and pilot usefulness.",
-  "origin_scan_id": "20260916T013259235091Z-c93fc5a9",
-  "previous_map_id": "component-map-c6655769bfcf",
+  "origin_scan_id": "20260916T005701381706Z-b5be972b",
+  "previous_map_id": "component-map-93f309c0081e",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1925,7 +1925,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3e59f8eec77858ce73f0287a89325e8d5c570b9ab23ab106b95db6c86870340b",
+      "sha256": "e99d5c277e918ad53045311978804cef2eec6484a4ef3fc42109b6d708ed405c",
       "source": "CHANGELOG.md"
     },
     {

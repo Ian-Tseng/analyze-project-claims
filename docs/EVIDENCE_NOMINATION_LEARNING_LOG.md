@@ -159,3 +159,55 @@ the same accepted state. Earlier failed preflight receipts remain historical.
 T7 is unexecuted and still requires independent labels and paired human timings.
 The saved personal workflow is linked from the claims overlay under staged
 evidence tooling; released skill files were not customized.
+
+## Changelog coverage correction
+
+Review ID: NOMINATION-CHANGELOG-20260916. Timestamp: 2026-09-16T09:32:58+08:00.
+
+The preceding closure missed four active Unreleased changelog notices while
+checking the stage plan and guide. CHANGELOG.md still described acceptance,
+preflight and completed implementation tasks as pending. The wider pre-merge
+scan found the conflict. The claim of no remaining in-scope conflicts at the
+prior checkpoint was too broad; this finding reopens T6 source acceptance.
+
+Correction: describe the implemented gates and locate dated outcomes in their
+receipts and stage plan, rather than embedding changing pending statuses in
+map-bound change descriptions. Released changelog sections, historical maps,
+records and receipts remain unchanged. The only mapped source change is
+CHANGELOG.md; runtime, package identities, contracts and tests are unchanged.
+
+Workflow lesson: inventory root release documents as well as stage-specific
+documents before declaring closure. Compare the inventory with map source
+snapshots and inspect every active pending notice. Map-bound documentation
+corrections require a new candidate even when executable behavior is unchanged.
+The personal staged-tooling overlay now includes this explicit inventory step.
+A walkthrough covers this missed changelog and the counterexample of a dated
+released changelog entry, whose historical status must be preserved.
+
+Pre-approval observation (superseded by the acceptance closure below): the old
+accepted map and historical record were retained while the new map awaited exact
+human approval. T7 still needs independent human study evidence.
+
+The verification also observed that recorder preflight reports `ready` while
+the reconciler reports CHANGELOG.md source drift. Preflight alone therefore
+does not establish unchanged reconciliation for this case. Both gates must be
+recorded independently; a ready preflight cannot substitute for exact acceptance.
+
+### Changelog acceptance closure
+
+Review ID: NOMINATION-CHANGELOG-20260916. Timestamp: 2026-09-16T09:41:43+08:00.
+The user approved exact candidate `component-map-92872d9a90de`, SHA-256
+`2d2163e5d7bb8d4883756f652e743976ec615916b34da7e84527450b754dd0c1`,
+including conditional merge after passing checks. All 200 source snapshots were
+rechecked before native acceptance. The [acceptance receipt](../validation/v0.10.0-changelog-acceptance-receipt.json)
+records acceptance, `checked_unchanged` reconciliation and ready preflight.
+The [fresh formal report](../validation/reports/20260916T014102515403Z-369e52b8.md) verifies; its PARTIAL
+scan state preserves the untested human-usefulness claim. Previous accepted maps,
+records and released changelog sections retain their original bytes.
+
+The plan and development guide now reflect this accepted source correction.
+The exact reusable update is applied in the personal claims overlay reference
+`references/staged-evidence-tooling.md`, sections ?Root release documents in the
+closure inventory? and its separate reconciliation/preflight check. The motivating
+case and historical-entry exception are documented there. No installed release
+was customized. T7 remains unexecuted; publication and activation are separate.

@@ -1,5 +1,10 @@
 # Local evidence nomination CLI and development history
 
+Current follow-up: the changelog correction has [exact map acceptance](../validation/v0.10.0-changelog-acceptance-receipt.json),
+unchanged reconciliation, ready preflight and a [verified formal record](../validation/reports/20260916T014102515403Z-369e52b8.md).
+The earlier accepted-tree test results below retain their original commit scope.
+Final PR and main checks are verified separately during merge.
+
 T1-T3 implementation and T4 Windows/Linux hardening are preserved in the feature
 history. T5 adds a [runnable minimal example](../examples/evidence-nomination/minimal/README.md)
 and the [packaged reference](../skills/analyze-project-claims/references/evidence-nomination.md).

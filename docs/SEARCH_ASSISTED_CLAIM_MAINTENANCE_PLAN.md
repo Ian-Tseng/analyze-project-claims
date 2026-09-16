@@ -5,6 +5,10 @@ Repository: Ian-Tseng/analyze-project-claims
 Target branch: main
 
 Integration status (2026-09-16): this document preserves the approved plan.
+The changelog correction now has [exact map acceptance](../validation/v0.10.0-changelog-acceptance-receipt.json),
+unchanged reconciliation and a verified formal follow-up. T1-T6 are complete
+within the recorded scope. The final PR and main CI remain merge checkpoints;
+T7 still requires independent human study evidence.
 T1 contracts, the T2 development nominator, and T3 reviewed adapters/native
 guards are implemented on the feature branch. T4 platform validation and T5 example/documentation are complete; T6 source packaging, exact map acceptance and verified formal record
 are complete; the post-acceptance full suite, byte probe and map preflight
@@ -429,7 +433,9 @@ Modify:
   package has been accepted through the exact approved map, unchanged
   reconciliation, preflight and verified formal record. The [accepted-tree CI](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35043189493)
   passed all six cells at `2540dbf`; the local Windows suite also passed
-  349 tests with three skips. Publication remains separate.
+  349 tests with three skips. The later CHANGELOG-only correction also has
+  exact map acceptance, unchanged reconciliation, ready preflight and a
+  [verified formal follow-up](../validation/reports/20260916T014102515403Z-369e52b8.md). Publication remains separate.
 - [ ] **T7 (P2, human: 3-5 days / Codex: 1 day) - Run the frozen pilot.**
   Freeze 20 labeled gaps, collect paired manual/nominator measurements, compute
   every advance gate, and retain external/skill search as deferred unless all

@@ -10,21 +10,25 @@ All notable changes to this project are documented here.
   Windows/POSIX commands, explicit prerecorded review, and fresh-process tests.
 - T6 relocatable 0.10.0 candidate package with internal finder, closed contracts,
   templates, reference guide and repository compatibility entrypoint. Copied
-  package execution is checked separately; map acceptance and release remain pending.
+  package execution is checked separately. Exact map acceptance, unchanged
+  reconciliation and formal verification are separate native gates; dated
+  results are retained in validation receipts. Publication is a later action.
 - T7 independent-label and paired-human-timing protocol with a 20-row intake
   template. No pilot measurements or usefulness conclusions are claimed.
 
 - T4 shared guarded reads, ancestor identity checks, hard-link exclusions,
   verified exclusive publication, adversarial regressions, and a platform-byte
   probe. All six Windows/Linux/macOS x Python 3.10/3.12 test and byte-probe
-  cells passed; release-map preflight remains a separate pending gate.
+  cells passed. Release-map preflight is a separate gate whose result is bound
+  to the exact source snapshot.
   Added cross-stage lessons and future-stage review checkpoints.
 
 - T3 reviewed claim/component candidate compilers and explicit provenance-checked
   payload handoffs. Native reconcile and v2 validate/append accept all-or-none
   expected-map identities plus an optional exact-input digest; append/reconcile
   recheck the map before writes. Development engine/package identities rebuilt;
-  historical examples preserved and release/acceptance/pilot gates still pending.
+  historical examples preserved. Release, map acceptance and pilot outcomes
+  retain separate evidence and authority requirements.
 
 - T2 development CLI for local evidence preflight, nomination, inspection, and
   deterministic verification, with bounded reads and exclusive artifact creation.
@@ -36,7 +40,7 @@ All notable changes to this project are documented here.
   gates remain pending.
 
 - Preserved the approved search-assisted claim maintenance plan with its
-  implementation tasks still pending, and restored dated v0.9.0 post-release
+  implementation tasks tracked in that plan, and restored dated v0.9.0 post-release
   evidence and receipt-bound publication documentation.
 
 - Add a portable review-and-learning guide for bounded inconsistency rechecks,

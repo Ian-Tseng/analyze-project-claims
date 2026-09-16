@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "record_kind": "human_approved_changelog_map_correction",
+  "recorded_at": "2026-09-16T09:40:09+08:00",
+  "source_commit_before_correction": "4da3feaefbc21482b1ecedf058c29f8133538ddc",
+  "approval": {
+    "source": "explicit user yes to exact map review and conditional merge",
+    "candidate_sha256": "2d2163e5d7bb8d4883756f652e743976ec615916b34da7e84527450b754dd0c1",
+    "scope": "exact map acceptance, formal validation and PR 17 merge after passing checks",
+    "authenticated_github_identity_claimed": false
+  },
+  "map_id": "component-map-92872d9a90de",
+  "accepted_map_sha256": "861181c5c85d15dbf29df60f3ebb130a308988559aae06de76aad042f9094d0f",
+  "mapped_source_changes": [
+    "CHANGELOG.md"
+  ],
+  "components_and_runtime_unchanged": true,
+  "reconciliation": "checked_unchanged",
+  "preflight": "ready",
+  "acceptance": {
+    "accepted_map": "validation/component-map/accepted-map.json",
+    "action": "accepted_candidate",
+    "archived_previous": "validation/component-map/accepted-history/20260916T014008395210Z-4d01c167-component-map-c6655769bfcf.json",
+    "candidate": "validation/component-map/candidates/20260916T013259235091Z-c93fc5a9-component-map-92872d9a90de.json",
+    "history": "validation/component-map/scan-history/20260916T014008395210Z-4d01c167.json",
+    "map_id": "component-map-92872d9a90de"
+  },
+  "unchanged_check": {
+    "accepted_map": "validation/component-map/accepted-map.json",
+    "action": "checked_unchanged",
+    "candidate": null,
+    "changes": {
+      "added_components": [],
+      "added_elements": [],
+      "changed_components": [],
+      "changed_elements": [],
+      "contract_changes": [],
+      "removed_components": [],
+      "removed_elements": [],
+      "source_changes": []
+    },
+    "delta": null,
+    "history": "validation/component-map/scan-history/20260916T014009454763Z-79eef210.json"
+  },
+  "prior_history_preserved": true,
+  "scientific_pilot": "not_run",
+  "published": false,
+  "installed": false
+}
