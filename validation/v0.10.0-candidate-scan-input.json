@@ -89,6 +89,36 @@
       "claim_id": "nomination-usefulness",
       "evidence_id": "pilot-protocol",
       "role": "context"
+    },
+    {
+      "claim_id": "nomination-candidate-tested",
+      "evidence_id": "candidate-ci",
+      "role": "limits"
+    },
+    {
+      "claim_id": "nomination-candidate-tested",
+      "evidence_id": "nomination-guide",
+      "role": "limits"
+    },
+    {
+      "claim_id": "nomination-candidate-tested",
+      "evidence_id": "pilot-protocol",
+      "role": "limits"
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "evidence_id": "candidate-ci",
+      "role": "limits"
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "evidence_id": "nomination-guide",
+      "role": "limits"
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "evidence_id": "pilot-protocol",
+      "role": "limits"
     }
   ],
   "limitations": [
