@@ -346,3 +346,7 @@ printed `render` recovery command.
 
 A filesystem operation failed. Correct paths or permissions and retry; inspect
 the printed effect before assuming any output exists.
+
+## Local nomination sidecars
+
+For an explicit claim gap, the [local nomination guide](evidence-nomination.md) describes reviewer-authored v2 input and exact-byte native guards. Compilation and handoff do not infer claim status or append. Validate separately; an append still requires reviewed semantics, current accepted map, and an explicit history destination. Sidecars are not formal records.

@@ -1,0 +1,1 @@
+T1 hand-authored synthetic contract vectors. Not a finder runtime or a pilot.

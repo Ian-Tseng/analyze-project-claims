@@ -1,6 +1,6 @@
 {
   "algorithm": "sha256",
-  "engine_digest": "7e713ae78e8bd0008926008c75fc4ae0a977f82cc9cc23158cc927c212255f6b",
+  "engine_digest": "8e13b7d894deefa840ce1b5dc68a547a68f14a902c68cc3fe76b37946e6cf540",
   "engine_name": "component-evidence",
   "engine_version": "1.3.0",
   "files": [
@@ -14,7 +14,7 @@
     },
     {
       "path": "references/component-evidence-protocol.md",
-      "sha256": "d6a0bc88603e2605d6f0841c5de40972d09a578dae8feafc9f8486a2130410eb"
+      "sha256": "b100f06968e99031607817b08acc8378280c3c308d812430be087e8fde7bb0ce"
     },
     {
       "path": "references/component-map-observation.schema.json",
@@ -41,8 +41,16 @@
       "sha256": "6c0d6ce5c1df00674b0167e92b4ec072813b58277771cfa1ef2e391853f37565"
     },
     {
+      "path": "scripts/_internal/component_evidence/local_io.py",
+      "sha256": "80159988a22fe87f9c1f41a6ec2037f12b4e3dcf56ad114b856eb2a300a6fa5b"
+    },
+    {
+      "path": "scripts/_internal/component_evidence/map_guard.py",
+      "sha256": "54168308c7c142c5ac26edbb5fa26fc717a4f92caab8f4e3c6f3582ba2bf45e2"
+    },
+    {
       "path": "scripts/reconcile_component_map.py",
-      "sha256": "08ea2b34784ea1ab35bfd36410329637108481816054c539f61bd8bff7874554"
+      "sha256": "8f8e4b65fb1ef7aab38b7c3e88dd30479c505c3fd421dd7114e267a559013c62"
     }
   ],
   "map_schema_version": "1.0",

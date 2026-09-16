@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "record_kind": "human_approved_map_acceptance_observation",
+  "recorded_at": "2026-09-16T09:07:47+08:00",
+  "source_commit_before_acceptance": "d02dabb3b9d539d3303827d7ce03945f0d144a4a",
+  "approval": {
+    "source": "explicit user go reply to exact candidate request",
+    "candidate_sha256": "bde9681743f0e02bc13ffaa1b34c8e1c482a845de2d15cc79b7bc79b137773b8",
+    "scope": "component-map-c6655769bfcf and subsequent T6 validation",
+    "authenticated_github_identity_claimed": false
+  },
+  "map_id": "component-map-c6655769bfcf",
+  "accepted_map_file_sha256": "d7dffd94cbea77efce8dd3e91b03ad126c4b6affb890029bda89e48396b9c32a",
+  "candidate": "validation/component-map/candidates/20260916T005701381706Z-b5be972b-component-map-c6655769bfcf.json",
+  "archived_previous": "validation/component-map/accepted-history/20260916T010519590628Z-74980524-component-map-93f309c0081e.json",
+  "acceptance_history": "validation/component-map/scan-history/20260916T010519590628Z-74980524.json",
+  "unchanged_history": "validation/component-map/scan-history/20260916T010521896569Z-d27e1584.json",
+  "reconciliation": "checked_unchanged",
+  "preflight": "ready",
+  "formal_record": "validation/history/20260916T010526308389Z-53f67423.json",
+  "formal_report": "validation/reports/20260916T010526308389Z-53f67423.md",
+  "formal_record_verification": "verified",
+  "formal_scan_status": "PARTIAL",
+  "scientific_pilot": "not_run",
+  "published": false,
+  "installed": false
+}

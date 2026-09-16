@@ -1,0 +1,195 @@
+{
+  "bindings": [
+    {
+      "claim_id": "changelog-consistency-corrected",
+      "evidence_id": "corrected-changelog",
+      "role": "supports"
+    },
+    {
+      "claim_id": "changelog-consistency-corrected",
+      "evidence_id": "acceptance-observation",
+      "role": "supports"
+    },
+    {
+      "claim_id": "changelog-consistency-corrected",
+      "evidence_id": "acceptance-observation",
+      "role": "limits"
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "evidence_id": "pilot-protocol",
+      "role": "context"
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "evidence_id": "pilot-protocol",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "a7c176a684dee5476281059ef3ef955e20a31dc41f81d11338c0f19b944c3964",
+      "claim_id": "changelog-consistency-corrected",
+      "element_ref": {
+        "component_id": "reusable-audit-learning",
+        "element_id": "bounded-recheck"
+      },
+      "material": true,
+      "rationale": "Direct inspection of the corrected notices and the native-operation receipt supports this documentation and source-identity scope.",
+      "statement": "The four identified active changelog notices are corrected and their changed source hash is covered by exact approved map acceptance followed by unchanged reconciliation and ready preflight.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "60bc7555ee817558a2c9e174ee7504fc4a2394049d074f42d2384e7969dbc2e7",
+      "claim_id": "nomination-usefulness",
+      "element_ref": {
+        "component_id": "local-evidence-nomination",
+        "element_id": "pilot-boundary"
+      },
+      "material": true,
+      "rationale": "The independent-label and paired human-time study has not run.",
+      "statement": "The finder improves human evidence-review efficiency while meeting all frozen development usefulness thresholds.",
+      "status": "untested"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "corrected-changelog",
+      "freshness": "current",
+      "identity_sha256": "5f9eddcbef8a777d1082509ebe7aa9cfbd2e9998a9ef90415de59ac81a267a79",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "Four active Unreleased entries now describe implemented gates and refer current outcomes to dated validation receipts or the stage plan, rather than saying completed acceptance or implementation is pending.",
+      "selection_sha256": "3e59f8eec77858ce73f0287a89325e8d5c570b9ab23ab106b95db6c86870340b",
+      "source": {
+        "byte_size": 9953,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "CHANGELOG.md",
+        "sha256": "3e59f8eec77858ce73f0287a89325e8d5c570b9ab23ab106b95db6c86870340b"
+      }
+    },
+    {
+      "evidence_id": "acceptance-observation",
+      "freshness": "current",
+      "identity_sha256": "058db662b368ab87ba2a9aabc0a859d40dfa47328cdb7c4d21ce7dd51077e968",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The receipt records exact user-approved candidate acceptance, only CHANGELOG.md source drift, subsequent checked_unchanged reconciliation and ready recorder preflight.",
+      "selection_sha256": "e8e09e42805b34c5752d07f99ecb1e2e15668f9d465ab95df7aa68d6f1e1dcf6",
+      "source": {
+        "byte_size": 1997,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.10.0-changelog-acceptance-receipt.json",
+        "sha256": "e8e09e42805b34c5752d07f99ecb1e2e15668f9d465ab95df7aa68d6f1e1dcf6"
+      }
+    },
+    {
+      "evidence_id": "pilot-protocol",
+      "freshness": "current",
+      "identity_sha256": "48064ab6db38b767ff4950406a9ae74e4951799f25e26b24c83b3a980e89a32a",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The draft protocol requires independent labels, frozen inputs and paired human timings; it reports no executed pilot.",
+      "selection_sha256": "5421760b7daab750a6f9b39e8aeca7eaa009e54ed01cd607e0e21a7963056bc1",
+      "source": {
+        "byte_size": 5377,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "evaluation/evidence-nomination-pilot/PROTOCOL.md",
+        "sha256": "5421760b7daab750a6f9b39e8aeca7eaa009e54ed01cd607e0e21a7963056bc1"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "302cf95b23b9526655f2e5397faefc4400c56a442c605fca71a40d56892fe3d1",
+    "output_schema_sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65",
+    "recorder_sha256": "9faebbac050665c7029f870b3684ed14d11a81eca74ba059487a968d68bd9ab5",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "9faebbac050665c7029f870b3684ed14d11a81eca74ba059487a968d68bd9ab5"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "changelog-consistency-corrected"
+      ],
+      "evidence_ids": [
+        "acceptance-observation"
+      ],
+      "limitation_id": "correction-scope",
+      "text": "This review covers four identified notices and exact native source-map operations. The local receipt is not authenticated service attestation or proof of general reliability, merge, publication or installed activation."
+    },
+    {
+      "claim_ids": [
+        "nomination-usefulness"
+      ],
+      "evidence_ids": [
+        "pilot-protocol"
+      ],
+      "limitation_id": "human-study-missing",
+      "text": "The draft protocol is not executed study evidence; independent labels and paired human timings remain missing."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-92872d9a90de",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "861181c5c85d15dbf29df60f3ebb130a308988559aae06de76aad042f9094d0f"
+    },
+    "authority": [
+      "CHANGELOG.md",
+      "validation/v0.10.0-changelog-acceptance-receipt.json",
+      "validation/component-map/accepted-map.json"
+    ],
+    "engine_identity": {
+      "engine_digest": "8e13b7d894deefa840ce1b5dc68a547a68f14a902c68cc3fe76b37946e6cf540",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "Verify the bounded changelog consistency correction and exact approved source-map acceptance without claiming human pilot benefit.",
+    "recorded_at_utc": "2026-09-16T01:41:02.515403Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20260916T014102515403Z-369e52b8",
+    "scope": [
+      "Unreleased changelog notices",
+      "approved map source correction",
+      "separate preflight and reconciliation results",
+      "unrun usefulness pilot"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "7b944431552e728d1f23f730f472ac5a5c92d87010ed9a271160b1dc9cbc9cd0"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "correction-scope"
+    ],
+    "claim_count": 2,
+    "claim_counts": {
+      "supported": 1,
+      "untested": 1
+    },
+    "evidence_count": 3,
+    "material_claim_count": 2,
+    "no_supported_claim": false,
+    "scan_status": "PARTIAL",
+    "strongest_safe_claim": "The four identified active changelog notices are corrected and their changed source hash is covered by exact approved map acceptance followed by unchanged reconciliation and ready preflight.",
+    "strongest_safe_claim_id": "changelog-consistency-corrected",
+    "unresolved_uncertainties": [
+      "T7 requires actual independent labels and paired human measurements.",
+      "Merge verification, release publication and installed activation are separate later checkpoints."
+    ]
+  }
+}

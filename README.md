@@ -96,6 +96,16 @@ making the result claim.
 Process completion, structural validity, scientific success, and publication
 eligibility are separate conclusions.
 
+## Local evidence nominations (0.10.0 candidate)
+
+Supply one explicit gap and search approved local files for reproducible excerpts.
+The [two-command walkthrough](examples/evidence-nomination/minimal/README.md)
+works from this checkout on Windows and POSIX, with a ready synthetic request.
+Review nominations before compiling a candidate; search never accepts evidence.
+See the [reference guide](skills/analyze-project-claims/references/evidence-nomination.md).
+This source candidate is unreleased. The install commands above retain the
+published v0.9.0 plugin pin until release gates pass.
+
 ## Optional skill-quality loop
 
 Compatible Ian-Tseng-managed skills can end with a content-free
@@ -219,7 +229,9 @@ and public install/update gates. Reusable procedures and dated evidence:
 - [Claude Code E2E Log](docs/CLAUDE_CODE_E2E_LOG.md)
 - [Other-PC Claude Checklist](docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md)
 - [Codex Plugin E2E Log](docs/CODEX_PLUGIN_E2E_LOG.md)
-- [Search-assisted claim maintenance plan](docs/SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md) (implementation pending)
+- [Search-assisted claim maintenance plan](docs/SEARCH_ASSISTED_CLAIM_MAINTENANCE_PLAN.md) (development implementation in progress)
+- [Evidence nomination development contracts](contracts/evidence-nomination/v1/README.md)
+- [Local nomination development CLI](docs/EVIDENCE_NOMINATION_DEVELOPMENT.md)
 - [Changelog](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md)
 

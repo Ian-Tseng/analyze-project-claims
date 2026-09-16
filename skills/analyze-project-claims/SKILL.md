@@ -449,3 +449,7 @@ Keep one explicit update authority; never remove a copy automatically.
 - Do not treat one dataset or task as proof of general RAG performance.
 - Do not rewrite historical evidence to make a project appear consistent.
 - Keep `unknown`, `failed`, `not_eligible`, and `not_proved` distinct.
+
+## Nominate local evidence for an explicit gap
+
+When the user supplies an explicit unresolved claim or component gap and asks to find local evidence, read `references/evidence-nomination.md`. Use `scripts/evidence_nomination.py` with an explicit request, accepted-map identities, terms, roots, and budgets. Search proposes excerpts only. Reviewer selection, native validation/reconciliation, exact human acceptance, and formal append remain separate. Do not infer statuses, silently choose terms or roles, run printed handoffs automatically, or add external/skill search. No hook invokes nomination.

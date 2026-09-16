@@ -22,6 +22,9 @@ from _internal.component_evidence.identity import (
     verified_engine_summary,
 )
 
+from _internal.component_evidence.map_guard import (
+    MapGuardError, add_guard_arguments, guarded_input, guarded_map,
+)
 
 SCHEMA_VERSION = "1.0"
 MAPPER_VERSION = "1.3.0"
@@ -744,7 +747,16 @@ def _write_history(map_root: Path, event_id: str, event: dict[str, Any]) -> Path
 
 
 def _reconcile(args: argparse.Namespace, skill_path: Path) -> dict[str, Any]:
-    observation_raw = _load_json(args.observation)
+    guarded = guarded_map(args.map_root / "accepted-map.json", args, _validate_map)
+    observation_raw = guarded_input(args.observation, args, _load_json)
+    def write_candidate(path, value):
+        guarded_map(args.map_root / "accepted-map.json", args, _validate_map)
+        _write_exclusive(path, value)
+
+    def write_history(root, event_id, value):
+        guarded_map(args.map_root / "accepted-map.json", args, _validate_map)
+        return _write_history(root, event_id, value)
+
     observation = _normalize_observation(observation_raw, args.project_root)
     recorded_at, scan_id = _now()
     map_root = args.map_root.resolve()
@@ -770,7 +782,7 @@ def _reconcile(args: argparse.Namespace, skill_path: Path) -> dict[str, Any]:
             None,
         )
         candidate_path = map_root / "candidates" / f"{scan_id}-{candidate['map_id']}.json"
-        _write_exclusive(candidate_path, candidate)
+        write_candidate(candidate_path, candidate)
         event = _history_event(
             event_id=scan_id,
             recorded_at=recorded_at,
@@ -787,7 +799,7 @@ def _reconcile(args: argparse.Namespace, skill_path: Path) -> dict[str, Any]:
             },
             skill_path=skill_path,
         )
-        history_path = _write_history(map_root, scan_id, event)
+        history_path = write_history(map_root, scan_id, event)
         return {
             "action": "bootstrapped_provisional",
             "accepted_map": None,
@@ -797,7 +809,7 @@ def _reconcile(args: argparse.Namespace, skill_path: Path) -> dict[str, Any]:
             "changes": empty_changes,
         }
 
-    accepted = _load_json(accepted_path)
+    accepted = guarded[0] if guarded is not None else _load_json(accepted_path)
     try:
         _validate_map(accepted, "accepted-map.json")
         if accepted["map_state"] != "accepted":
@@ -812,7 +824,7 @@ def _reconcile(args: argparse.Namespace, skill_path: Path) -> dict[str, Any]:
             accepted.get("map_id") if isinstance(accepted.get("map_id"), str) else None,
         )
         candidate_path = map_root / "candidates" / f"{scan_id}-{candidate['map_id']}.json"
-        _write_exclusive(candidate_path, candidate)
+        write_candidate(candidate_path, candidate)
         changes = copy.deepcopy(empty_changes)
         changes["contract_changes"] = [f"accepted_map_invalid:{exc}"]
         event = _history_event(
@@ -831,7 +843,7 @@ def _reconcile(args: argparse.Namespace, skill_path: Path) -> dict[str, Any]:
             },
             skill_path=skill_path,
         )
-        history_path = _write_history(map_root, scan_id, event)
+        history_path = write_history(map_root, scan_id, event)
         return {
             "action": "accepted_map_invalid",
             "accepted_map": str(accepted_path.resolve()),
@@ -863,7 +875,7 @@ def _reconcile(args: argparse.Namespace, skill_path: Path) -> dict[str, Any]:
             artifacts={"accepted_map": "accepted-map.json", "candidate": None, "delta": None},
             skill_path=skill_path,
         )
-        history_path = _write_history(map_root, scan_id, event)
+        history_path = write_history(map_root, scan_id, event)
         return {
             "action": "checked_unchanged",
             "accepted_map": str(accepted_path.resolve()),
@@ -877,7 +889,7 @@ def _reconcile(args: argparse.Namespace, skill_path: Path) -> dict[str, Any]:
     observed_map["map_state"] = "conflict_candidate" if action == "conflict_detected" else "drift_candidate"
     observed_map = _add_integrity(observed_map)
     candidate_path = map_root / "candidates" / f"{scan_id}-{observed_map['map_id']}.json"
-    _write_exclusive(candidate_path, observed_map)
+    write_candidate(candidate_path, observed_map)
     delta = _add_integrity(
         {
             "schema_version": SCHEMA_VERSION,
@@ -890,7 +902,7 @@ def _reconcile(args: argparse.Namespace, skill_path: Path) -> dict[str, Any]:
         }
     )
     delta_path = map_root / "deltas" / f"{scan_id}.json"
-    _write_exclusive(delta_path, delta)
+    write_candidate(delta_path, delta)
     event = _history_event(
         event_id=scan_id,
         recorded_at=recorded_at,
@@ -907,7 +919,7 @@ def _reconcile(args: argparse.Namespace, skill_path: Path) -> dict[str, Any]:
         },
         skill_path=skill_path,
     )
-    history_path = _write_history(map_root, scan_id, event)
+    history_path = write_history(map_root, scan_id, event)
     return {
         "action": action,
         "accepted_map": str(accepted_path.resolve()),
@@ -992,6 +1004,7 @@ def main() -> int:
     reconcile.add_argument("--observation", required=True, type=Path)
     reconcile.add_argument("--map-root", required=True, type=Path)
     reconcile.add_argument("--project-root", required=True, type=Path)
+    add_guard_arguments(reconcile)
 
     accept = subparsers.add_parser("accept", help="Explicitly promote a validated candidate")
     accept.add_argument("--candidate", required=True, type=Path)
@@ -1045,7 +1058,7 @@ def main() -> int:
     skill_path = Path(__file__).resolve().parents[1] / "SKILL.md"
     try:
         output = _reconcile(args, skill_path) if args.command == "reconcile" else _accept(args, skill_path)
-    except (MapError, OSError) as exc:
+    except (MapError, MapGuardError, OSError) as exc:
         print(f"reconcile_component_map: {exc}", file=sys.stderr)
         return 2
     print(json.dumps(output, ensure_ascii=False, indent=2, sort_keys=True))

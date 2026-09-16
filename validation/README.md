@@ -40,3 +40,7 @@ authority boundary before that table can participate in a status claim.
 A newer scan does not erase an older failure. An accepted map describes what is
 structurally addressable; it does not by itself prove a claim. A failed verify
 never rewrites history: create a new record after refreshing the evidence.
+
+## Nomination candidate boundary
+
+Local nomination bundles, reviewed selections, candidates, and extracted payloads are sidecars outside formal validation/history. They do not accept a map or append a scan. See the [nomination reference](../skills/analyze-project-claims/references/evidence-nomination.md). The 0.10.0 candidate must reconcile its exact source map and receive explicit human acceptance before a new formal record can be appended; v0.9.0 records retain their historical identity.

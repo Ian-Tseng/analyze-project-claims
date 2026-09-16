@@ -1,0 +1,74 @@
+{
+  "contract_version": "1.0",
+  "defaults_and_hard_maxima": {
+    "max_excerpt_bytes": 2048,
+    "max_file_bytes": 1048576,
+    "max_files": 2500,
+    "max_nominations": 20,
+    "max_per_requirement": 5,
+    "max_range_bytes": 65536,
+    "max_raw_matches": 5000,
+    "max_requirements": 8,
+    "max_total_bytes": 67108864,
+    "timeout_seconds": 10
+  },
+  "exclusion_codes": [
+    "path_policy",
+    "link_or_reparse",
+    "archive",
+    "binary_or_encoding",
+    "lfs_pointer",
+    "unsafe_unicode",
+    "secret",
+    "oversize",
+    "empty_file"
+  ],
+  "exit_codes": {
+    "0": [
+      "complete",
+      "partial",
+      "zero_nominations",
+      "reused_identical"
+    ],
+    "2": [
+      "invalid_input",
+      "safety_refusal",
+      "selection_incomplete"
+    ],
+    "3": [
+      "local_io_retry",
+      "timeout"
+    ],
+    "4": [
+      "stale_identity",
+      "tampered_identity"
+    ],
+    "5": [
+      "atomic_write_failure",
+      "recovery_required"
+    ]
+  },
+  "semantic_errors": [
+    "overlapping_roots",
+    "path_case_collision",
+    "noncanonical_path",
+    "duplicate_requirement_id",
+    "duplicate_selection_id",
+    "dangling_reference",
+    "byte_budget_exceeded",
+    "invalid_byte_range",
+    "map_identity_mismatch",
+    "record_identity_mismatch",
+    "source_identity_mismatch",
+    "bundle_identity_mismatch",
+    "selection_identity_mismatch",
+    "candidate_identity_mismatch",
+    "reviewer_payload_mismatch",
+    "component_target_change",
+    "empty_selection",
+    "nonfinite_number",
+    "duplicate_json_key",
+    "unsafe_unicode",
+    "secret"
+  ]
+}

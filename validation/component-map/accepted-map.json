@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-09-09T05:47:10.774745Z",
+  "accepted_at_utc": "2026-09-16T01:40:08.395210Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -848,6 +848,166 @@
       ]
     },
     {
+      "component_id": "local-evidence-nomination",
+      "component_type": "local-tool",
+      "elements": [
+        {
+          "element_id": "explicit-gap-contract",
+          "evidence_locators": [
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/references/evidence-nomination/v1/CONTRACT.md"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/references/evidence-nomination/v1/policy.json"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination/common.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination/engine.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "tests/test_evidence_nomination_contracts.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "tests/test_evidence_nomination_runtime.py"
+            }
+          ],
+          "relation_type": "defines",
+          "target": "Closed explicit requests, deterministic identities and bounded local search never infer claim status."
+        },
+        {
+          "element_id": "filesystem-boundary",
+          "evidence_locators": [
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/local_io.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination/filesystem.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "tests/nomination_platform_probe.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "tests/test_evidence_nomination_security.py"
+            }
+          ],
+          "relation_type": "defines",
+          "target": "Bounded ordinary-file reads and exclusive publication detect the tested aliases, drift and interference and preserve accurate recovery outputs."
+        },
+        {
+          "element_id": "pilot-boundary",
+          "evidence_locators": [
+            {
+              "locator": "whole-file",
+              "source": "evaluation/evidence-nomination-pilot/PROTOCOL.md"
+            },
+            {
+              "locator": "whole-file",
+              "source": "evaluation/evidence-nomination-pilot/study.template.json"
+            }
+          ],
+          "relation_type": "defines",
+          "target": "The planned 20-gap development study needs independently adjudicated labels and actual paired human timings before usefulness gates can be evaluated."
+        },
+        {
+          "element_id": "public-journey",
+          "evidence_locators": [
+            {
+              "locator": "recursive nomination sidecar exclusion",
+              "source": ".gitignore"
+            },
+            {
+              "locator": "whole-file",
+              "source": "examples/evidence-nomination/minimal/README.md"
+            },
+            {
+              "locator": "whole-file",
+              "source": "examples/evidence-nomination/minimal/prepare_selection.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "examples/evidence-nomination/minimal/request.json"
+            },
+            {
+              "locator": "whole-file",
+              "source": "examples/evidence-nomination/minimal/review.json"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/references/evidence-nomination.md"
+            },
+            {
+              "locator": "whole-file",
+              "source": "tests/test_evidence_nomination_journey.py"
+            }
+          ],
+          "relation_type": "defines",
+          "target": "The synthetic example retains support, counterevidence and context and reaches a separate native candidate without accepting a map."
+        },
+        {
+          "element_id": "relocatable-package",
+          "evidence_locators": [
+            {
+              "locator": "whole-file",
+              "source": "scripts/evidence_nomination.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/references/package-manifest.json"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/references/package-version.json"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/scripts/evidence_nomination.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "tests/test_evidence_nomination_package.py"
+            }
+          ],
+          "relation_type": "defines",
+          "target": "A copied source package contains its finder, contracts, native dependencies and documentation; repository and copied execution use the same runtime authority."
+        },
+        {
+          "element_id": "reviewed-handoff",
+          "evidence_locators": [
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/map_guard.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination/cli.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination/compiler.py"
+            },
+            {
+              "locator": "whole-file",
+              "source": "tests/test_evidence_nomination_compile.py"
+            }
+          ],
+          "relation_type": "defines",
+          "target": "Reviewer-authored claim/component candidates retain exact map, source, selection and native payload guards; handoff prints commands without executing them."
+        }
+      ]
+    },
+    {
       "component_id": "managed-skill-quality-loop",
       "component_type": "code",
       "elements": [
@@ -1573,16 +1733,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-09-08T12:27:32.479492Z",
+  "created_at_utc": "2026-09-16T01:32:59.235091Z",
   "integrity": {
-    "canonical_payload_sha256": "21fc09a08765bdbcf4bce603af980ded9abf629e18e112a720179da27f86277f"
+    "canonical_payload_sha256": "7003394c7972605712ff28e9f7b6cdffc1fba60b9c243b363ecfa94857cb31a6"
   },
-  "map_id": "component-map-93f309c0081e",
+  "map_id": "component-map-92872d9a90de",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.9.0 managed skill-quality learning candidate, including backward-compatible content-free receipt v2 context, exact-receipt intake identity, analyzer analysis revisions, bounded no-action tombstones, advisory cross-version problem signatures, closed evaluation manifests and digest-bound results with recomputed gates, manual pilot scaffolding, an optional bounded Codex adapter, producer-repository-bound consent-gated owner contribution, explicit update authority, and all retained audit, repair, reporting, analytics, and release boundaries without treating protocol conformance, an unpinned synthetic manifest, a structurally valid result, local tests, prompt contracts, or hook invocation as learning or hosted convergence proof. Extend the repository-source map with the unreleased bounded recheck and evidence-linked reusable-learning workflow; this candidate is not accepted and does not establish behavioral effectiveness or release readiness. Prior external-project sources are retained as historical context through the immutable baseline accepted-map snapshot, not reread or revalidated as current repository evidence.",
-  "origin_scan_id": "20260908T122732479492Z-db11fa68",
-  "previous_map_id": "component-map-9a8668d18008",
+  "objective": "Map the 0.10.0 local evidence nomination source candidate and retained audit workflows, separating deterministic candidates from human evidence acceptance, formal append, release, installed activation, and pilot usefulness.",
+  "origin_scan_id": "20260916T013259235091Z-c93fc5a9",
+  "previous_map_id": "component-map-c6655769bfcf",
   "schema_version": "1.0",
   "scope": [
     "README.md",
@@ -1685,10 +1845,28 @@
     "tests/test_quality_contribution.py",
     "tests/test_plugin_bundle.py",
     "tests/test_component_evidence_engine.py",
-    "skills/analyze-project-claims/references/review-learning.md"
+    "skills/analyze-project-claims/references/review-learning.md",
+    "skills/analyze-project-claims/scripts/_internal/evidence_nomination",
+    "evaluation/evidence-nomination-pilot/PROTOCOL.md",
+    "evaluation/evidence-nomination-pilot/study.template.json",
+    "examples/evidence-nomination/minimal/README.md",
+    "examples/evidence-nomination/minimal/expected-observation.json",
+    "examples/evidence-nomination/minimal/golden/bundle.json",
+    "examples/evidence-nomination/minimal/golden/candidate.json",
+    "examples/evidence-nomination/minimal/golden/identity.json",
+    "examples/evidence-nomination/minimal/golden/selection.json",
+    "examples/evidence-nomination/minimal/prepare_selection.py",
+    "examples/evidence-nomination/minimal/project/evidence/context.txt",
+    "examples/evidence-nomination/minimal/project/evidence/counter.txt",
+    "examples/evidence-nomination/minimal/project/evidence/support.txt",
+    "examples/evidence-nomination/minimal/project/map/accepted-map.json",
+    "examples/evidence-nomination/minimal/project/record-input.json",
+    "examples/evidence-nomination/minimal/project/record.json",
+    "examples/evidence-nomination/minimal/request.json",
+    "examples/evidence-nomination/minimal/review.json"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "4d01ac355bdbe9d9fcb6f63f241fef547469d8b7f9666d2e272b030ddff9e03c",
+  "skill_sha256": "7b944431552e728d1f23f730f472ac5a5c92d87010ed9a271160b1dc9cbc9cd0",
   "source_snapshot": [
     {
       "exists": true,
@@ -1699,7 +1877,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ff6c4f55e083f1d56546e6c3b3162a1dbf88f5b22b52535b97c8a6121d72428d",
+      "sha256": "1e5772f1b390cef7a1ad43fed949f23970046e0dc3b9a1afabac01da2615aa4a",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -1735,19 +1913,25 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d19bea8749520ee71e662a2d919a53ae84e02ee69cab7b4e616ccf1347ed6f4a",
+      "sha256": "7b293d734c51cab33d83fc5a82f0824a905380248594e30c03d74416cc684a39",
       "source": ".github/workflows/validate.yml"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "00494d1c5846b5401aaccdee4733561e53919b9e5d3b9dc0bbc86e8d268b2ab5",
+      "sha256": "e229e378f27b6cb6e03b1f7118743c5b971afc83bd7ad68b35dfb07266adfa6d",
+      "source": ".gitignore"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "3e59f8eec77858ce73f0287a89325e8d5c570b9ab23ab106b95db6c86870340b",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "7d34b3126a9794e89d5458eda099f259ae25cf3c2572efa9ddb7f68cd46aaa97",
+      "sha256": "add894da93689d1776ebc8844347f5104f2306695ff703833818b2d631dced8d",
       "source": "CITATION.cff"
     },
     {
@@ -1765,13 +1949,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1f3bfac566c5515c3b9991b11288fded5a5fb98b62296c7aff4b6fa89cd310f9",
+      "sha256": "7f6df2268398002f153f5f19ed89de863f2981574d94fbf2a85482e2b067680c",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ef76fa5a53f4b2c320e278ef6cc165fe4a6145ee97aed4fbacc3a5f99a1f00ae",
+      "sha256": "1836f801960bc4a4f135d76f48b4fde9ac8c6f64c1b4490a1d6574e3e67045b9",
       "source": "README.md"
     },
     {
@@ -1783,7 +1967,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "9d8c94f1ad3ea96b1e2ac4914fda4cb93c76b4a3e0d8cc6dd8976d6c0b227d15",
+      "sha256": "dc24feb5bd35084d8ae32a4eafbec12352707d4662401fcbcc9bbd696cde77a9",
       "source": "VERSION"
     },
     {
@@ -1957,6 +2141,18 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "5421760b7daab750a6f9b39e8aeca7eaa009e54ed01cd607e0e21a7963056bc1",
+      "source": "evaluation/evidence-nomination-pilot/PROTOCOL.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "026173261a1a294c6a3ebb72d55accb3463e2f1e7b7b86cfe3818e117329f210",
+      "source": "evaluation/evidence-nomination-pilot/study.template.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "9ae1b46cadbfdb866f937c0fd05306decbccf2a942474cf8ac2b02b48f0e0e50",
       "source": "evaluation/fixtures/dry-run/fixture-plan.json"
     },
@@ -2118,6 +2314,96 @@
     },
     {
       "exists": true,
+      "kind": "file",
+      "sha256": "cf92ddad315af5795dd0d23cd09d234ba891143661423065428fc5a16eab5f3d",
+      "source": "examples/evidence-nomination/minimal/README.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "d669a295316c3149e2a408387fe8682206d51642f46236fbe5a731044fe003aa",
+      "source": "examples/evidence-nomination/minimal/expected-observation.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "a309c85a20ef38539173685ead0fa00b6877bc4ef26da10eee29959c20328459",
+      "source": "examples/evidence-nomination/minimal/golden/bundle.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "32f96bd58964d49dd84b92b76b8353ed051a14fd046a8c3f550404e03c1c9584",
+      "source": "examples/evidence-nomination/minimal/golden/candidate.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "43d91fe2a6638d48cc89b7d9f52bdff50c0167eef25c718576a50704ca561d52",
+      "source": "examples/evidence-nomination/minimal/golden/identity.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "c042df4f06f36039448a0149d3538b534247fa015d4dbae3352486f349ea1f0b",
+      "source": "examples/evidence-nomination/minimal/golden/selection.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "341912ce4ab7a01bce68b675352e96a1c43cf97df4d642f3aedc04c7a0b542ad",
+      "source": "examples/evidence-nomination/minimal/prepare_selection.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "4fcc98382a85ed6598c0444ab8535d88723312f2a5f6c70bbc8dd6e62b43ad2f",
+      "source": "examples/evidence-nomination/minimal/project/evidence/context.txt"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "e28630d2c66d5677d1f62b271921918a7519acce10eff2da127362d82c246ebd",
+      "source": "examples/evidence-nomination/minimal/project/evidence/counter.txt"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "62f5876bceff756e03fc816d1630857e631e70e799884d1d2f5441ce26e78581",
+      "source": "examples/evidence-nomination/minimal/project/evidence/support.txt"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "d1dcdcc6851e0b4032fff1b11eecfbc0c405f358b655357ea44bbe196f1f7867",
+      "source": "examples/evidence-nomination/minimal/project/map/accepted-map.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "4af1f46d7b42c616915c79330157b8af810fe0c2395216164ff7ba725ff2529c",
+      "source": "examples/evidence-nomination/minimal/project/record-input.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "fe1415de26cee4264367a6c0c7a0b3691ea806f9ef89b2262ce881ab8e0ec8f3",
+      "source": "examples/evidence-nomination/minimal/project/record.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "42101ed8e9df6b21d174a5819c4331de75bcd87b6984ba07acfea86c4f2d247a",
+      "source": "examples/evidence-nomination/minimal/request.json"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "c042df4f06f36039448a0149d3538b534247fa015d4dbae3352486f349ea1f0b",
+      "source": "examples/evidence-nomination/minimal/review.json"
+    },
+    {
+      "exists": true,
       "kind": "directory",
       "sha256": "20d00fa25205b0282c61ee10235896d059592b9afae1f0dff5002f71c7bb0691",
       "source": "examples/quality-loop-producers"
@@ -2166,14 +2452,20 @@
     },
     {
       "exists": true,
+      "kind": "file",
+      "sha256": "72344f76d7f617865651ce0be94a31d31899784a461d95f85946e881c2d06af5",
+      "source": "scripts/evidence_nomination.py"
+    },
+    {
+      "exists": true,
       "kind": "directory",
-      "sha256": "d33ff67bb53677ba8999b8c2942e566785ffa2cb7b338a8327cce9651b136252",
+      "sha256": "b59e02a35cc3d186f929434fbff44095aec24d251539f0b2325f7c2d2cf57731",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4d01ac355bdbe9d9fcb6f63f241fef547469d8b7f9666d2e272b030ddff9e03c",
+      "sha256": "7b944431552e728d1f23f730f472ac5a5c92d87010ed9a271160b1dc9cbc9cd0",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -2191,13 +2483,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "7a6d988645d316b0659afacff7764f0d1e1dd46b91857e7a43f4f6a5dfb28267",
+      "sha256": "abe5f79e75749c5237c2058bf0096858584f139d103db54e06fe097e8790ccbe",
       "source": "skills/analyze-project-claims/references/component-evidence-engine.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d6a0bc88603e2605d6f0841c5de40972d09a578dae8feafc9f8486a2130410eb",
+      "sha256": "b100f06968e99031607817b08acc8378280c3c308d812430be087e8fde7bb0ce",
       "source": "skills/analyze-project-claims/references/component-evidence-protocol.md"
     },
     {
@@ -2221,8 +2513,26 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "81827d8b331a13fb9e8aeabf52211c7b7dfa8f6093e870ada69b504d2a00cb36",
+      "sha256": "d573c8f645200bc3e568175ad862e387fe359db8379af30135ef360a6f13edbc",
       "source": "skills/analyze-project-claims/references/evidence-bound-audit-records.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "6f504e875dbda29cad9c389e6603d6a3ba22724e9ff4c49baf4edc5f61961065",
+      "source": "skills/analyze-project-claims/references/evidence-nomination.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "b112e24d6c697bf224ee69df6cfc1c88786a6816459dafa35dcaf7ae33b1d545",
+      "source": "skills/analyze-project-claims/references/evidence-nomination/v1/CONTRACT.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "99773da6bfb2e823e4a051c754270a1d1056cb42a225ad0da8b9e34950283010",
+      "source": "skills/analyze-project-claims/references/evidence-nomination/v1/policy.json"
     },
     {
       "exists": true,
@@ -2281,13 +2591,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "94ec7cc1476d33dcad43d452d6c79420ad4dbea3f8c5ebd58cdf65c10249e28a",
+      "sha256": "da5ee9b69913f0bd386343a5a812874055fd104f9aea724330b9b11f573ad6ad",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "2d9e50f710aa022dbb683827813bea827b1676d41d8eb240b047550d7af6a070",
+      "sha256": "581bcca051616c9835212ff98b3ca18046b954d3cb899c40c256f293e38eb06f",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -2371,8 +2681,56 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c95e9ac13e8156b5c959153556a86d4e182ffeba5195530133cda9c675fb5d63",
+      "sha256": "80159988a22fe87f9c1f41a6ec2037f12b4e3dcf56ad114b856eb2a300a6fa5b",
+      "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/local_io.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "54168308c7c142c5ac26edbb5fa26fc717a4f92caab8f4e3c6f3582ba2bf45e2",
+      "source": "skills/analyze-project-claims/scripts/_internal/component_evidence/map_guard.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "9faebbac050665c7029f870b3684ed14d11a81eca74ba059487a968d68bd9ab5",
       "source": "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py"
+    },
+    {
+      "exists": true,
+      "kind": "directory",
+      "sha256": "b43bb1c0c5dbbe3316fcdeee0551975c1b0c7f50ac4322beffefe426a914d5da",
+      "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "1f0bb2bf5f745209490c4e2e9dce5ab38cedbcf682d76e052474f67e75c7e53d",
+      "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination/cli.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "308034021a2248a6829c25cab4e51c8a47ae4c7726f0ea76779cc3246f376511",
+      "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination/common.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "a956dd63f6f9340a0be528d0b70ab667ba74e2a693153b987a7e8bc7bb270cad",
+      "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination/compiler.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "bf5fa285008f7d9530885e2d70994d6502aa8018e9d8153430665fe7a41e188e",
+      "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination/engine.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "a1f1d5b6a39287a628c72667eec0504defcd46f44731d4533ff0bf1751d12faa",
+      "source": "skills/analyze-project-claims/scripts/_internal/evidence_nomination/filesystem.py"
     },
     {
       "exists": true,
@@ -2413,6 +2771,12 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "202500b8694df67c2996031ec0a7f7549a30c6132799e9f3e56c82e9c1a85ecc",
+      "source": "skills/analyze-project-claims/scripts/evidence_nomination.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "62c4ffad8440fcc4d8a876313d487fca9cdfb25f4ec37e69695830190e4cebe6",
       "source": "skills/analyze-project-claims/scripts/installation_analytics.py"
     },
@@ -2437,7 +2801,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "08ea2b34784ea1ab35bfd36410329637108481816054c539f61bd8bff7874554",
+      "sha256": "8f8e4b65fb1ef7aab38b7c3e88dd30479c505c3fd421dd7114e267a559013c62",
       "source": "skills/analyze-project-claims/scripts/reconcile_component_map.py"
     },
     {
@@ -2457,6 +2821,12 @@
       "kind": "file",
       "sha256": "601909435e8023fecbb072f9c9108721f39c058f3ae1732af516697601b5808f",
       "source": "skills/analyze-project-claims/scripts/update_policy.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "f9a5ec226540e9bb4e55e047112d606bb8ae1dd9067294a55838fed2846adb50",
+      "source": "tests/nomination_platform_probe.py"
     },
     {
       "exists": true,
@@ -2551,6 +2921,42 @@
     {
       "exists": true,
       "kind": "file",
+      "sha256": "b65bc26f7e5e342ad8032449b2b2a47abbf21d4d9525cf735df6f0d0574c4632",
+      "source": "tests/test_evidence_nomination_compile.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "5a2f732428eabf60b39d765840fc473c0d3402ced5d3db8380f8a13028c36093",
+      "source": "tests/test_evidence_nomination_contracts.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "adcc22525c08559fc8d996046580bc297fd3e870b1ac9b7cb87cfd380d903e12",
+      "source": "tests/test_evidence_nomination_journey.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "3f74c870d67d9d28e4d541320c6496a4807122b69c5b2297fbd51be899967452",
+      "source": "tests/test_evidence_nomination_package.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "971adccd14ca2c38ed27d13e21eb2b14b1c4cb08f4a48aae02364739b1e7192b",
+      "source": "tests/test_evidence_nomination_runtime.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "def485488f69f841e05550f8327870f2905d6a1c79433be3acc9937ef821058d",
+      "source": "tests/test_evidence_nomination_security.py"
+    },
+    {
+      "exists": true,
+      "kind": "file",
       "sha256": "179eaec0104462a3848a57d954bdb7043f66a932bf6f9ded9b207190b18c6f4c",
       "source": "tests/test_installation_analytics.py"
     },
@@ -2611,7 +3017,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a637013e0a0fcef7a26cd209f921434c3d4ecd91bed96774bf0cf96aecf92eb8",
+      "sha256": "88ed7ea3a240ce8ec5cb3b51346874de61b619deeb288ec56986ac8ea691ecb9",
       "source": "tests/test_record_scan.py"
     },
     {
@@ -2659,7 +3065,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "860eaf9ae49e3e530c0378c0f837aac7db4b3185721366a4015268307e40f22a",
+      "sha256": "1899d66062a896c9638c8252b7098db441bbf2d4db1823432bcb34e0deda00b4",
       "source": "validation/README.md"
     }
   ]

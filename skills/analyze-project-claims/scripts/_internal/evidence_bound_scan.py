@@ -24,6 +24,9 @@ from _internal.component_evidence.identity import (
     verified_engine_summary,
 )
 from reconcile_component_map import MapError, _validate_map
+from _internal.component_evidence.map_guard import (
+    MapGuardError, add_guard_arguments, guarded_input, guarded_map,
+)
 
 
 SCHEMA_VERSION = "2.0"
@@ -594,7 +597,7 @@ def _normalize_source(raw: Any, field: str) -> dict[str, Any]:
     )
 
 
-def _load_map(map_root: Path, project_root: Path, skill_root: Path) -> dict[str, Any]:
+def _load_map(map_root: Path, project_root: Path, skill_root: Path, expected_args=None) -> dict[str, Any]:
     declared_project = Path(os.path.abspath(project_root))
     declared_map = Path(os.path.abspath(map_root / "accepted-map.json"))
     if declared_project.is_symlink() or _is_reparse(declared_project):
@@ -646,7 +649,8 @@ def _load_map(map_root: Path, project_root: Path, skill_root: Path) -> dict[str,
             "The scan cannot bind to this map.",
             "Provide an ordinary accepted-map.json file.",
         )
-    value = _load_json(map_path, "MAP_NOT_ACCEPTED")
+    guarded = guarded_map(map_path, expected_args, _validate_map, maximum=MAX_RECORD_BYTES) if expected_args is not None else None
+    value = guarded[0] if guarded is not None else _load_json(map_path, "MAP_NOT_ACCEPTED")
     try:
         _validate_map(value, str(map_path))
     except MapError as exc:
@@ -700,7 +704,7 @@ def _load_map(map_root: Path, project_root: Path, skill_root: Path) -> dict[str,
         "value": value,
         "path": map_path,
         "relative_path": relative_map,
-        "sha256": _sha256_file(map_path),
+        "sha256": guarded[1] if guarded is not None else _sha256_file(map_path),
         "elements": elements,
     }
 
@@ -1650,17 +1654,18 @@ def _evidence_digest(args: argparse.Namespace) -> int:
 
 
 def _validate(args: argparse.Namespace, skill_root: Path) -> int:
-    map_info = _load_map(args.map_root, args.project_root, skill_root)
-    normalized = _normalize_input(_load_json(args.record), map_info)
+    map_info = _load_map(args.map_root, args.project_root, skill_root, args)
+    normalized = _normalize_input(guarded_input(args.record, args, _load_json, maximum=MAX_RECORD_BYTES), map_info)
     print(json.dumps({"status": "valid", "schema_version": SCHEMA_VERSION, "accepted_map_id": map_info["value"]["map_id"], "claim_count": len(normalized["claims"]), "evidence_count": len(normalized["evidence_items"]), "binding_count": len(normalized["bindings"])}, indent=2, sort_keys=True))
     return 0
 
 
 def _append(args: argparse.Namespace, skill_root: Path) -> int:
-    map_info = _load_map(args.map_root, args.project_root, skill_root)
-    normalized = _normalize_input(_load_json(args.record), map_info)
+    map_info = _load_map(args.map_root, args.project_root, skill_root, args)
+    normalized = _normalize_input(guarded_input(args.record, args, _load_json, maximum=MAX_RECORD_BYTES), map_info)
     record = _build_record(normalized, map_info, skill_root, args.project_root)
     output = args.log_dir / f"{record['scan']['scan_id']}.json"
+    guarded_map(args.map_root / "accepted-map.json", args, _validate_map, maximum=MAX_RECORD_BYTES)
     _write_json_exclusive(output, record)
     report_path: Path | None = None
     if args.report_dir is not None:
@@ -1875,8 +1880,10 @@ def _parser() -> argparse.ArgumentParser:
 
     validate = subparsers.add_parser("validate", help="Validate v2 structure and accepted-map references")
     map_args(validate, record=True)
+    add_guard_arguments(validate)
     append = subparsers.add_parser("append", help="Resolve evidence and append a canonical v2 record")
     map_args(append, record=True)
+    add_guard_arguments(append)
     append.add_argument("--log-dir", required=True, type=Path)
     append.add_argument("--report-dir", type=Path)
     render = subparsers.add_parser("render", help="Render a deterministic Markdown view")
@@ -1915,7 +1922,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "verify":
             return _verify(args, skill_root)
         return _draft_v2(args, skill_root)
-    except (AuditRecordError, EngineIdentityError) as exc:
+    except (AuditRecordError, EngineIdentityError, MapGuardError) as exc:
         print(f"record_scan: {exc}", file=os.sys.stderr)
         return 2
     except (KeyError, TypeError, IndexError, AttributeError, StopIteration) as exc:

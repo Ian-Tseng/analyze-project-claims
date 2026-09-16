@@ -1,0 +1,134 @@
+{
+  "$id": "https://example.invalid/analyze-project-claims/evidence-nomination/v1/selection.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_kind": {
+      "const": "nomination_selection"
+    },
+    "bundle": {
+      "additionalProperties": false,
+      "properties": {
+        "bundle_id": {
+          "pattern": "^nomination-[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "canonical_payload_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "file_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "bundle_id",
+        "canonical_payload_sha256",
+        "file_sha256"
+      ],
+      "type": "object"
+    },
+    "reviewer_input": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "claim"
+            },
+            "record_input": {
+              "$ref": "../../../skills/analyze-project-claims/references/scan-record-v2.schema.json"
+            }
+          },
+          "required": [
+            "kind",
+            "record_input"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "component"
+            },
+            "observation": {
+              "$ref": "../../../skills/analyze-project-claims/references/component-map-observation.schema.json"
+            }
+          },
+          "required": [
+            "kind",
+            "observation"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reviewer_label": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "selections": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence_id": {
+            "maxLength": 128,
+            "pattern": "^[a-z][a-z0-9]*(?:[-:.][a-z0-9]+)*$",
+            "type": "string"
+          },
+          "evidence_role": {
+            "enum": [
+              "supports",
+              "contradicts",
+              "limits",
+              "context"
+            ]
+          },
+          "nomination_id": {
+            "pattern": "^hit-[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "observed_summary": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "rationale": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "nomination_id",
+          "evidence_role",
+          "observed_summary",
+          "rationale"
+        ],
+        "type": "object"
+      },
+      "maxItems": 20,
+      "minItems": 0,
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "artifact_kind",
+    "bundle",
+    "reviewer_label",
+    "selections",
+    "reviewer_input"
+  ],
+  "title": "EvidenceNominationSelectionV1",
+  "type": "object"
+}

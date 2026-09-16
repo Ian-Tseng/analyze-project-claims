@@ -25,6 +25,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Run standard-library tests
         run: python -m unittest discover -s tests -v
+      - name: Probe evidence nomination byte reproducibility
+        run: python tests/nomination_platform_probe.py --output nomination-platform.json
       - name: Verify released-tree component-map preflight
         run: >-
           python skills/analyze-project-claims/scripts/record_scan.py
