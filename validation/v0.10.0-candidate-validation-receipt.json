@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "record_kind": "candidate_validation_observation",
+  "source_commit": "1fcfbba5af2f32a159016462a5f2b769ac2bd5f7",
+  "ci_run_url": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35041659388",
+  "ci_conclusion": "failure",
+  "tests_and_probes": "passed_all_six_cells",
+  "cross_os_byte_replay": "passed_within_each_python_unicode_identity",
+  "map_acceptance": "pending",
+  "release": "not_published",
+  "jobs": [
+    {
+      "name": "test (macos-latest, 3.10)",
+      "job_url": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35041659388/job/104622633455",
+      "tests_run": 349,
+      "passed": 347,
+      "skipped": 2,
+      "seconds": 65.936,
+      "probe": {
+        "artifact_sha256": {
+          "bundle": "78060c3d3cd320778fa405a5a906f48f29d3339e4d4be9e36389e4df30b36c88",
+          "candidate": "d0fa1b37d301407e7e917b4483230861b4c0cdc41428c1ea7cf072793baaa58a",
+          "payload": "3407631f2cfcf670293fcefa87aea42ae116c802ef9f86d4c9059552f4049ee3",
+          "reviewed_selection": "6ecb04f076b009c7f9b7e6b33c6c10c64dcf70201c3422d6fcbace04f16043fd",
+          "selection_draft": "037817242e1bfb53dce1e723a00ecac57a5ef78aa0a42aea2556134b068b2d26"
+        },
+        "platform": "macOS-26.6.2-arm64-arm-64bit",
+        "python": "3.10.11",
+        "status": "passed"
+      },
+      "map_preflight": "MAP_IDENTITY_MISMATCH",
+      "log_sha256": "42d2379373c9d445e7c48f0c5ba334cfc60322a2614f759353f4e8626f2bda36"
+    },
+    {
+      "name": "test (windows-latest, 3.12)",
+      "job_url": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35041659388/job/104622633486",
+      "tests_run": 349,
+      "passed": 346,
+      "skipped": 3,
+      "seconds": 94.52,
+      "probe": {
+        "artifact_sha256": {
+          "bundle": "a309c85a20ef38539173685ead0fa00b6877bc4ef26da10eee29959c20328459",
+          "candidate": "1cc61e723b831aba1c9a7b3b22cda16beb35707da9e1662967cd3fad456ebd86",
+          "payload": "3407631f2cfcf670293fcefa87aea42ae116c802ef9f86d4c9059552f4049ee3",
+          "reviewed_selection": "518b19ed6b215be5531b6882a164b7c6a530aafd6b592d9ef3a615f890087fd4",
+          "selection_draft": "909b16f634f1ba8ffaa9f35dfc0325919a35149ccd1dee1ba02b57b69f45d6ff"
+        },
+        "platform": "Windows-2025Server-10.0.26100-SP0",
+        "python": "3.12.10",
+        "status": "passed"
+      },
+      "map_preflight": "MAP_IDENTITY_MISMATCH",
+      "log_sha256": "fd9d574873b61944a0498ec2226fb4dbb2fcae875d38f2f416f7003fc8dac360"
+    },
+    {
+      "name": "test (ubuntu-latest, 3.10)",
+      "job_url": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35041659388/job/104622633529",
+      "tests_run": 349,
+      "passed": 348,
+      "skipped": 1,
+      "seconds": 29.119,
+      "probe": {
+        "artifact_sha256": {
+          "bundle": "78060c3d3cd320778fa405a5a906f48f29d3339e4d4be9e36389e4df30b36c88",
+          "candidate": "d0fa1b37d301407e7e917b4483230861b4c0cdc41428c1ea7cf072793baaa58a",
+          "payload": "3407631f2cfcf670293fcefa87aea42ae116c802ef9f86d4c9059552f4049ee3",
+          "reviewed_selection": "6ecb04f076b009c7f9b7e6b33c6c10c64dcf70201c3422d6fcbace04f16043fd",
+          "selection_draft": "037817242e1bfb53dce1e723a00ecac57a5ef78aa0a42aea2556134b068b2d26"
+        },
+        "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+        "python": "3.10.21",
+        "status": "passed"
+      },
+      "map_preflight": "MAP_IDENTITY_MISMATCH",
+      "log_sha256": "74b2106a3f13fc7dfeae9f170c98379b164b0ce37745abc5a1a80e35a8e9108d"
+    },
+    {
+      "name": "test (windows-latest, 3.10)",
+      "job_url": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35041659388/job/104622633576",
+      "tests_run": 349,
+      "passed": 346,
+      "skipped": 3,
+      "seconds": 89.746,
+      "probe": {
+        "artifact_sha256": {
+          "bundle": "78060c3d3cd320778fa405a5a906f48f29d3339e4d4be9e36389e4df30b36c88",
+          "candidate": "d0fa1b37d301407e7e917b4483230861b4c0cdc41428c1ea7cf072793baaa58a",
+          "payload": "3407631f2cfcf670293fcefa87aea42ae116c802ef9f86d4c9059552f4049ee3",
+          "reviewed_selection": "6ecb04f076b009c7f9b7e6b33c6c10c64dcf70201c3422d6fcbace04f16043fd",
+          "selection_draft": "037817242e1bfb53dce1e723a00ecac57a5ef78aa0a42aea2556134b068b2d26"
+        },
+        "platform": "Windows-10-10.0.26100-SP0",
+        "python": "3.10.11",
+        "status": "passed"
+      },
+      "map_preflight": "MAP_IDENTITY_MISMATCH",
+      "log_sha256": "caf9f7b52d39236de3a2f9669ef677a15e582330df3115ed93a2807d16c71fb1"
+    },
+    {
+      "name": "test (macos-latest, 3.12)",
+      "job_url": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35041659388/job/104622633630",
+      "tests_run": 349,
+      "passed": 347,
+      "skipped": 2,
+      "seconds": 70.856,
+      "probe": {
+        "artifact_sha256": {
+          "bundle": "a309c85a20ef38539173685ead0fa00b6877bc4ef26da10eee29959c20328459",
+          "candidate": "1cc61e723b831aba1c9a7b3b22cda16beb35707da9e1662967cd3fad456ebd86",
+          "payload": "3407631f2cfcf670293fcefa87aea42ae116c802ef9f86d4c9059552f4049ee3",
+          "reviewed_selection": "518b19ed6b215be5531b6882a164b7c6a530aafd6b592d9ef3a615f890087fd4",
+          "selection_draft": "909b16f634f1ba8ffaa9f35dfc0325919a35149ccd1dee1ba02b57b69f45d6ff"
+        },
+        "platform": "macOS-26.6.2-arm64-arm-64bit",
+        "python": "3.12.10",
+        "status": "passed"
+      },
+      "map_preflight": "MAP_IDENTITY_MISMATCH",
+      "log_sha256": "0234d0a0b48205e5d5f26fa0c73e5dc1cecdbf6f6f91649eb38d7aa41f86b03b"
+    },
+    {
+      "name": "test (ubuntu-latest, 3.12)",
+      "job_url": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/35041659388/job/104622633685",
+      "tests_run": 349,
+      "passed": 348,
+      "skipped": 1,
+      "seconds": 35.49,
+      "probe": {
+        "artifact_sha256": {
+          "bundle": "a309c85a20ef38539173685ead0fa00b6877bc4ef26da10eee29959c20328459",
+          "candidate": "1cc61e723b831aba1c9a7b3b22cda16beb35707da9e1662967cd3fad456ebd86",
+          "payload": "3407631f2cfcf670293fcefa87aea42ae116c802ef9f86d4c9059552f4049ee3",
+          "reviewed_selection": "518b19ed6b215be5531b6882a164b7c6a530aafd6b592d9ef3a615f890087fd4",
+          "selection_draft": "909b16f634f1ba8ffaa9f35dfc0325919a35149ccd1dee1ba02b57b69f45d6ff"
+        },
+        "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+        "python": "3.12.14",
+        "status": "passed"
+      },
+      "map_preflight": "MAP_IDENTITY_MISMATCH",
+      "log_sha256": "b37ee89dabf3263d400ba7c344f0b0b81b565b07da241e48bfcac41215321355"
+    }
+  ],
+  "pilot": "not_run"
+}

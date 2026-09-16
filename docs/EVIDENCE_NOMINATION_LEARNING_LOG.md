@@ -14,9 +14,9 @@ or a second accepted component map. Existing structural references include
 | T1 contracts | `18b52e62`, frozen schemas/golden vectors, 13 contract tests | Completed historical contract work; schema validity never proved hostile-filesystem safety. Keep raw examples unchanged. |
 | T2 nominator | `0a28efdc`, 23 runtime tests, 301-test historical suite | Runtime feature work completed; T4 found publication/path race gaps beyond those fixtures. Earlier passes remain dated evidence. |
 | T3 adapters | `46f08f5`, 27 compiler tests, 328-test historical suite | Reviewed candidate/handoff behavior implemented. Native input caps and entrypoint identity are preserved; T4 strengthens shared reads. |
-| T4 adversarial audit | New security tests, Windows NTFS and native WSL/Linux runs, cross-platform byte probe | Local corrections implemented; final verification is recorded in the local T4 artifact bundle. macOS and Python 3.10 executions remain unrun. Do not mark the complete platform gate passed. |
-| T5 public journey | Runnable example, full guide, and fresh-process journey implemented; final evidence pending | Run each documented command as a fresh isolated process before declaring the journey complete. |
-| T6 release authority | Relocatable 0.10.0 source candidate prepared, with copied-package tests | Integrity is separate from release identity, exact map reconciliation, human acceptance, and a fresh formal record. All release gates remain pending. |
+| T4 adversarial audit | New security tests, Windows NTFS and native WSL/Linux runs, cross-platform byte probe | Superseded by T56 continuation: six-cell tests/probes passed at `1fcfbba`, with matching bytes within each Python/Unicode identity. See the candidate receipt; capability skips remain explicit. |
+| T5 public journey | Runnable example, full guide, and fresh-process journey passed all six CI cells | T5 complete for the source candidate; literal Windows/Linux quickstarts also executed locally. |
+| T6 release authority | Relocatable 0.10.0 source candidate prepared, with copied-package tests | Integrity is separate from release identity, exact map reconciliation, human acceptance, and a fresh formal record. Source package integrity/copy validation passed; exact map acceptance, formal append, merge/release and activation remain pending. |
 | T7 pilot | Protocol and 20-row intake template prepared; selection/labels are not frozen and pilot has not run | Freeze labels, inputs, comparator, and thresholds before measurements. No usefulness or scientific-benefit result exists yet. |
 
 Historical report counts describe their original commits, not current-code
@@ -99,3 +99,19 @@ these interim observations in the continuation report.
 The personal staged-tooling workflow receives the filesystem-capability lesson.
 All raw failures and execution evidence remain in the local T5/T6 artifact
 bundles. No independent pilot labels or timings have been invented.
+
+### Closure and supersession
+
+The [six-cell candidate receipt](../validation/v0.10.0-candidate-validation-receipt.json)
+for `1fcfbba` supersedes the interim platform notices above. Each cell ran 349
+tests: Windows 346 passed/3 skipped, macOS 347/2, Linux 348/1. All five probe
+hashes match across OS within Python 3.10 and separately within Python 3.12.
+The original macOS failure remains preserved. All cells still refuse release
+preflight with `MAP_IDENTITY_MISMATCH`; acceptance is not inferred from test success.
+
+The literal example also exposed that the old Git ignore pattern covered only
+root-level sidecars. It now covers nested example outputs, verified with actual
+generated paths and `git status`. The proposed map scopes only tracked example
+sources, so running the example cannot silently alter its structural snapshot.
+T4/T5 are complete within this tested scope. T6 needs exact human map acceptance;
+T7 remains an unfrozen, unexecuted study awaiting independent human inputs.

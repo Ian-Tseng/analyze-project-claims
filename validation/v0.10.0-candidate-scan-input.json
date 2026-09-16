@@ -1,0 +1,121 @@
+{
+  "schema_version": "2.0",
+  "objective": "Record the bounded validation result for the 0.10.0 local evidence nomination source candidate after exact human map acceptance.",
+  "scope": [
+    "local nomination implementation",
+    "public synthetic journey",
+    "copied package",
+    "six-cell platform validation",
+    "unrun usefulness pilot"
+  ],
+  "authority": [
+    "validation/v0.10.0-candidate-validation-receipt.json",
+    "validation/component-map/accepted-map.json"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "candidate-ci",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.10.0-candidate-validation-receipt.json"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The receipt records six passing 349-test/probe cells at 1fcfbba, exact per-cell skip counts, matching artifact hashes by Python identity, and MAP_IDENTITY_MISMATCH preflight failures."
+    },
+    {
+      "evidence_id": "nomination-guide",
+      "source": {
+        "kind": "file",
+        "path": "skills/analyze-project-claims/references/evidence-nomination.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The source guide documents explicit request/review inputs, replay, sidecar recovery and separate native/human authority."
+    },
+    {
+      "evidence_id": "pilot-protocol",
+      "source": {
+        "kind": "file",
+        "path": "evaluation/evidence-nomination-pilot/PROTOCOL.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The protocol is a draft requiring independent labels and paired human timings; no pilot run or frozen selection is claimed."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "nomination-candidate-tested",
+      "statement": "The 0.10.0 source candidate passes the exercised nomination, copied-package, public-journey and retained regression checks on Windows, macOS and Linux with Python 3.10 and 3.12; full probe artifact hashes agree across OS within each Python identity.",
+      "element_ref": {
+        "component_id": "local-evidence-nomination",
+        "element_id": "relocatable-package"
+      },
+      "material": true,
+      "status": "supported",
+      "rationale": "The exact commit-bound hosted observations cover these fixtures and invariants, with platform skips retained. They do not establish release acceptance or universal safety."
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "statement": "The finder improves human evidence-review efficiency while meeting all frozen development usefulness thresholds.",
+      "element_ref": {
+        "component_id": "local-evidence-nomination",
+        "element_id": "pilot-boundary"
+      },
+      "material": true,
+      "status": "untested",
+      "rationale": "The independent-label and paired human-time study has not run; synthetic regression or CLI elapsed time cannot answer this claim."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "nomination-candidate-tested",
+      "evidence_id": "candidate-ci",
+      "role": "supports"
+    },
+    {
+      "claim_id": "nomination-candidate-tested",
+      "evidence_id": "nomination-guide",
+      "role": "context"
+    },
+    {
+      "claim_id": "nomination-usefulness",
+      "evidence_id": "pilot-protocol",
+      "role": "context"
+    }
+  ],
+  "limitations": [
+    {
+      "limitation_id": "tested-scope",
+      "text": "The local receipt records hosted observations but is not independent service attestation. Platform skips and finite synthetic cases do not establish all filesystems, malicious-writer safety, installation, client activation or human review benefit.",
+      "claim_ids": [
+        "nomination-candidate-tested",
+        "nomination-usefulness"
+      ],
+      "evidence_ids": [
+        "candidate-ci",
+        "nomination-guide",
+        "pilot-protocol"
+      ]
+    }
+  ],
+  "summary": {
+    "strongest_safe_claim_id": "nomination-candidate-tested",
+    "claim_boundary_ids": [
+      "tested-scope"
+    ],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "Exact human map acceptance and unchanged reconciliation precede formal append.",
+    "Release publication and installed activation have not occurred.",
+    "Twenty naturally sourced, independently labeled gaps and paired human timings are missing."
+  ]
+}

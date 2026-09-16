@@ -16,7 +16,8 @@ All notable changes to this project are documented here.
 
 - T4 shared guarded reads, ancestor identity checks, hard-link exclusions,
   verified exclusive publication, adversarial regressions, and a platform-byte
-  probe. Windows/Linux validation is tracked separately from unrun matrix cells.
+  probe. All six Windows/Linux/macOS x Python 3.10/3.12 test and byte-probe
+  cells passed; release-map preflight remains a separate pending gate.
   Added cross-stage lessons and future-stage review checkpoints.
 
 - T3 reviewed claim/component candidate compilers and explicit provenance-checked

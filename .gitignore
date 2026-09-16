@@ -6,4 +6,4 @@ __pycache__/
 problem-reports.sqlite3*
 
 # Local nomination sidecars may contain private excerpts.
-.analyze-project-claims/nominations/
+**/.analyze-project-claims/nominations/

@@ -7,7 +7,8 @@ The 0.10.0 source candidate now contains the runtime and contracts inside the
 skill package; `scripts/evidence_nomination.py` is a repository shortcut to that
 same implementation. No installed release has been changed.
 
-T4 still needs the remaining platform checks. T6 awaits exact human map
+T4 tests and byte probes passed on Windows/Linux/macOS with Python 3.10/3.12
+at `1fcfbba`; see the [candidate receipt](../validation/v0.10.0-candidate-validation-receipt.json). T6 awaits exact human map
 acceptance, unchanged reconciliation and a fresh formal record. T7 awaits its
 [independent-label and human-timing study](../evaluation/evidence-nomination-pilot/PROTOCOL.md).
 Search results propose excerpts; they do not establish claim status.
@@ -108,8 +109,8 @@ this decision or supply a history destination.
 Freshness is established at replay/guard checks, not indefinitely. These checks
 do not lock the whole project or make multiple reconcile writes one transaction.
 If a map changes between reconcile writes, earlier candidate artifacts can
-remain; inspect them before retrying. Targeted Windows/Linux races are covered;
-macOS and other unrun matrix cells remain pending. Re-run handoff immediately before a downstream
+remain; inspect them before retrying. Targeted Windows/Linux/macOS tests passed with platform-capability skips
+recorded per cell. Re-run handoff immediately before a downstream
 operation when evidence may have changed.
 
 ### Development identity boundary
@@ -225,7 +226,7 @@ therefore differ. Tests cover both target types, replay, drift, input rejection,
 budgets, no-clobber/recovery, UTF-8/CRLF, and process/network canaries. Compiler
 tests also cover raw-review provenance, native guard refusals, and separate
 synthetic downstream invocations. They do not establish scientific reliability
-or complete T4's platform and race audit.
+or establish universal filesystem safety.
 
 ## T4 audit status and learning
 
@@ -242,6 +243,8 @@ unrestricted same-user/privileged actor continuously changing files after checks
 
 The [cross-stage learning log](EVIDENCE_NOMINATION_LEARNING_LOG.md) records T1 through T4
 findings and T5 through T7 checkpoints. `tests/nomination_platform_probe.py` compares bundle,
-selection, candidate, and extracted-payload bytes on actual platforms. The existing
-CI matrix runs it alongside the suite; configuring that step is not evidence that
-an unrun macOS/Python 3.10 cell passed. T4 remains open until those checks run.
+selection, candidate, and extracted-payload bytes on actual platforms. The six-cell
+CI run at `1fcfbba` ran 349 tests per cell with no failures and explicit skips, plus the
+probe. All five artifact hashes agree across OS within each Python/Unicode
+identity. The [receipt](../validation/v0.10.0-candidate-validation-receipt.json) records exact counts and URLs.
+This closes T4's executed platform gate; T6 map preflight remains pending.

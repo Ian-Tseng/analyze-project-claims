@@ -6,8 +6,8 @@ Target branch: main
 
 Integration status (2026-09-16): this document preserves the approved plan.
 T1 contracts, the T2 development nominator, and T3 reviewed adapters/native
-guards are implemented on the feature branch. T5 example/documentation and T6
-source packaging are prepared; platform, acceptance, and pilot gates remain
+guards are implemented on the feature branch. T4 platform validation and T5 example/documentation are complete; T6 source
+packaging is prepared. Acceptance and pilot gates remain
 explicit below. The CLI is not installed or released, and pilot gates have not passed. See the [v1 contracts](../contracts/evidence-nomination/v1/README.md)
 and [development CLI](EVIDENCE_NOMINATION_DEVELOPMENT.md).
 
@@ -410,15 +410,17 @@ Modify:
   explicit provenance-checking `handoff` before native payload use. Native
   development identities were rebuilt for these source changes; T6 release
   reconciliation, acceptance, and formal evidence remain pending.
-- [ ] **T4 (P1, human: 3 days / Codex: 6 hours) - Close adversarial paths.**
+- [x] **T4 (P1, human: 3 days / Codex: 6 hours) - Close adversarial paths.**
   Cover link/reparse, ADS/device, traversal, race, secrets, Unicode, binary,
-  LFS, caps, timeout, mutation canaries, and cross-platform replay. Windows/Linux
-  hardening and the platform byte probe are implemented; macOS/Python 3.10
-  executions remain pending. See the [cross-stage learning log](EVIDENCE_NOMINATION_LEARNING_LOG.md).
-- [ ] **T5 (P2, human: 2 days / Codex: 4 hours) - Finish the public journey.**
+  LFS, caps, timeout, mutation canaries, and cross-platform replay. The six-cell Windows/Linux/macOS x Python 3.10/3.12 test and byte-probe
+  gates passed at `1fcfbba`; hashes agree across OS within each Python/Unicode
+  identity. Platform-specific skips remain explicit in the
+  [candidate receipt](../validation/v0.10.0-candidate-validation-receipt.json). Map preflight is a separate pending T6 gate.
+- [x] **T5 (P2, human: 2 days / Codex: 4 hours) - Finish the public journey.**
   The minimal fixture, Windows/POSIX quickstarts, packaged reference, error
   recovery, artifact lifecycle, and Codex/Claude boundaries are implemented.
-  Final fresh-process and platform evidence is required before closure.
+  Fresh-process journey tests passed in all six cells. The literal Windows
+  and Linux two-command quickstarts also ran locally.
 - [ ] **T6 (P1, human: 2 days / Codex: 4 hours) - Rebuild release authority.**
   Update package identities, reconcile the exact map, obtain explicit
   acceptance, reconcile unchanged, run the complete suite, and append a fresh

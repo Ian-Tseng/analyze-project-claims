@@ -1802,6 +1802,10 @@
             {
               "source": "skills/analyze-project-claims/references/evidence-nomination.md",
               "locator": "whole-file"
+            },
+            {
+              "source": ".gitignore",
+              "locator": "recursive nomination sidecar exclusion"
             }
           ]
         },
