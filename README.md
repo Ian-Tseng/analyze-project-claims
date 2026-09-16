@@ -36,7 +36,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.9.0
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.10.0
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
@@ -96,15 +96,17 @@ making the result claim.
 Process completion, structural validity, scientific success, and publication
 eligibility are separate conclusions.
 
-## Local evidence nominations (0.10.0 candidate)
+## Local evidence nominations (0.10.0)
 
 Supply one explicit gap and search approved local files for reproducible excerpts.
 The [two-command walkthrough](examples/evidence-nomination/minimal/README.md)
 works from this checkout on Windows and POSIX, with a ready synthetic request.
 Review nominations before compiling a candidate; search never accepts evidence.
 See the [reference guide](skills/analyze-project-claims/references/evidence-nomination.md).
-This source candidate is unreleased. The install commands above retain the
-published v0.9.0 plugin pin until release gates pass.
+Use the published v0.10.0 tag for this version?s plugin installation. The
+[release page](https://github.com/Ian-Tseng/analyze-project-claims/releases)
+is the authority for available releases. The human usefulness pilot remains
+deferred; regression checks do not establish reviewer-time improvement.
 
 ## Optional skill-quality loop
 

@@ -211,3 +211,21 @@ The exact reusable update is applied in the personal claims overlay reference
 closure inventory? and its separate reconciliation/preflight check. The motivating
 case and historical-entry exception are documented there. No installed release
 was customized. T7 remains unexecuted; publication and activation are separate.
+
+## Release-facing instruction inventory
+
+Review ID: NOMINATION-RELEASE-20260916. Timestamp: 2026-09-16T10:50:26+08:00.
+The final release cross-check found that the README still described v0.10.0
+as unreleased and pinned plugin installation to v0.9.0. The main publication
+commands also selected the older v090 observation. Earlier metadata-only
+preparation had missed these literal instructions; its approval cannot accept
+a changed candidate. The README now targets v0.10.0, publication commands use
+the prepared v0100 observation, and the stage plan distinguishes publication,
+installation and the deferred human pilot. Dated v0.9.0 evidence is preserved.
+
+The personal root-release inventory guidance now includes executable command
+examples, install pins and observation paths before presenting a map for approval.
+This refines the missed execution step rather than duplicating acceptance rules.
+The earlier release map remains preserved as a superseded proposal. A revised
+exact map requires human acceptance; publication authorization is retained,
+but execution waits for the revised source gate. No release has been published.

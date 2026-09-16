@@ -8,7 +8,7 @@ Final PR and main checks are verified separately during merge.
 T1-T3 implementation and T4 Windows/Linux hardening are preserved in the feature
 history. T5 adds a [runnable minimal example](../examples/evidence-nomination/minimal/README.md)
 and the [packaged reference](../skills/analyze-project-claims/references/evidence-nomination.md).
-The 0.10.0 source candidate now contains the runtime and contracts inside the
+The 0.10.0 source package contains the runtime and contracts inside the
 skill package; `scripts/evidence_nomination.py` is a repository shortcut to that
 same implementation. No installed release has been changed.
 

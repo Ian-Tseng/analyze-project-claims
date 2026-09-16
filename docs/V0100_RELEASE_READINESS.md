@@ -1,15 +1,16 @@
 # v0.10.0 release preparation
 
-Status: prepared; exact release-map acceptance and publication remain pending.
+Status: publication authorized; revised exact map acceptance remains pending.
 
 The release candidate sets the citation date to 2026-09-16 and moves the accumulated
-change descriptions into a dated v0.10.0 changelog entry. No runtime, package,
+change descriptions into a dated v0.10.0 changelog entry. The README plugin pin
+and publisher observation commands also target v0.10.0. No runtime, package,
 contract, test or installed skill bytes are changed by this preparation.
 
 ## Source authority
 
-The native candidate is `component-map-0790d947d18d` with SHA-256
-`c8fd3ce25f0b13882f921a32a2a615f4839aeced11f0134c55b808e8b7f0b68b`. Only CHANGELOG.md and CITATION.cff source hashes differ; component
+The native candidate is `component-map-3df56ac1a6d5` with SHA-256
+`c6d2068739baf776aa4129774eb28306b5be5f10ada760f0b64ff300477c38a4`. CHANGELOG.md, CITATION.cff, README.md and PUBLISHING.md source hashes differ; component
 and element definitions are unchanged. The candidate is in the native candidates
 directory. Human approval precedes acceptance and unchanged reconciliation.
 The prior accepted map and formal history remain preserved.
@@ -37,3 +38,7 @@ client discovery or fresh activation.
 T7 is deferred because human reviewers are unavailable. No human labels, timings,
 review-time improvement or general reliability result is claimed. Four public
 source candidates are retained locally for future preparation, outside this repo.
+
+The earlier metadata-only proposal `component-map-0790d947d18d` remains preserved.
+The release-instruction inventory found two more mapped source corrections; the
+revised candidate requires exact approval. The authorized release notes are unchanged.
