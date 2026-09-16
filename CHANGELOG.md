@@ -4,15 +4,18 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-09-16
+
 ### Added
 
 - T5 runnable synthetic example with support, counterevidence and context,
   Windows/POSIX commands, explicit prerecorded review, and fresh-process tests.
-- T6 relocatable 0.10.0 candidate package with internal finder, closed contracts,
+- T6 relocatable 0.10.0 package with internal finder, closed contracts,
   templates, reference guide and repository compatibility entrypoint. Copied
   package execution is checked separately. Exact map acceptance, unchanged
   reconciliation and formal verification are separate native gates; dated
-  results are retained in validation receipts. Publication is a later action.
+  results are retained in validation receipts. Publication and installed
+  activation retain their own evidence requirements.
 - T7 independent-label and paired-human-timing protocol with a 20-row intake
   template. No pilot measurements or usefulness conclusions are claimed.
 
@@ -32,12 +35,12 @@ All notable changes to this project are documented here.
 
 - T2 development CLI for local evidence preflight, nomination, inspection, and
   deterministic verification, with bounded reads and exclusive artifact creation.
-  Installation and release authority remain pending.
+  Installation and release remain separate authorized operations.
 
 - Frozen T1 evidence-nomination development contracts: five closed schemas,
   templates, identity and policy rules, synthetic golden fixtures, and contract
-  regressions. T2/T3 now implement runtime search and adapters; release and pilot
-  gates remain pending.
+  regressions. T2/T3 implement runtime search and adapters; the human usefulness
+  pilot has not run.
 
 - Preserved the approved search-assisted claim maintenance plan with its
   implementation tasks tracked in that plan, and restored dated v0.9.0 post-release

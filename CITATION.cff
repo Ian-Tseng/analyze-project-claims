@@ -3,6 +3,7 @@ message: "If you use this software, please cite this software artifact."
 title: "Analyze Project Claims: Evidence-Bounded Auditing for Agent-Managed Projects"
 type: software
 version: "0.10.0"
+date-released: "2026-09-16"
 authors:
   - family-names: "Tseng"
     given-names: "Yin-Yan"
