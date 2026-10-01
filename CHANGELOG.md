@@ -4,6 +4,27 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+### Added
+
+- 0.11.0 source candidate: optional durable long-running controller and sequential
+  claim-guided subagent mode. Actual host delegation routes every substantive work
+  outcome to claims review before dependent work continues.
+- Source-bound claim updates, counterevidence dispositions, dependency closure,
+  derived reports, and sampled CURRENT/STALE/UNKNOWN freshness independent of
+  recorded claim decisions and completion.
+- Portable instructions, source provenance, deterministic regressions, and a
+  copied-package lifecycle fixture. No background service, automatic evidence
+  acceptance, scientific benefit or review-accuracy improvement is implied.
+
+### Fixed
+
+- Reject evidence and report-directory reparse points using filesystem metadata,
+  including Windows Python 3.10 where `Path.is_junction` is unavailable.
+- Keep the synthetic nomination walkthrough runnable after skill updates by
+  creating a fresh test-owned copy, preserving frozen fixtures and real map
+  acceptance. Prerecorded review still requires exact synthetic content.
+
+
 ## [0.10.0] - 2026-09-16
 
 ### Added

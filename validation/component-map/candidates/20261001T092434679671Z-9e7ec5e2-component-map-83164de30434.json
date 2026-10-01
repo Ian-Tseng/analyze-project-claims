@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T09:33:01.671771Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1872,10 +1872,10 @@
   ],
   "created_at_utc": "2026-10-01T09:24:34.679671Z",
   "integrity": {
-    "canonical_payload_sha256": "93c0f9e8b0265140a93bb280bd1c3509e847cc62718e5c31d4bcdf7cf6e0d3c4"
+    "canonical_payload_sha256": "243e9908197ada49ab9c9257d50c1302885d2c31d3e9e0d4c5b38809c869adda"
   },
   "map_id": "component-map-83164de30434",
-  "map_state": "accepted",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the 0.11.0 source candidate, including retained local evidence nomination and retained audit workflows, separating deterministic candidates from human evidence acceptance, formal append, release, installed activation, and pilot usefulness. Add the optional bounded claim-guided long-running subagent controller and sampled report currency; preserve human map acceptance and release boundaries.",
   "origin_scan_id": "20261001T092434679671Z-9e7ec5e2",

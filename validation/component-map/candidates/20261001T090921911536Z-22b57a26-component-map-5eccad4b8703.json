@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T09:33:01.671771Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -945,10 +945,6 @@
             },
             {
               "locator": "whole-file",
-              "source": "examples/evidence-nomination/minimal/setup_project.py"
-            },
-            {
-              "locator": "whole-file",
               "source": "skills/analyze-project-claims/references/evidence-nomination.md"
             },
             {
@@ -1870,15 +1866,15 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-01T09:24:34.679671Z",
+  "created_at_utc": "2026-10-01T09:09:21.911536Z",
   "integrity": {
-    "canonical_payload_sha256": "93c0f9e8b0265140a93bb280bd1c3509e847cc62718e5c31d4bcdf7cf6e0d3c4"
+    "canonical_payload_sha256": "d5807d1fdca311ad42eee5872436c9482b3bfbf2fed2206f9e49130a670f60c0"
   },
-  "map_id": "component-map-83164de30434",
-  "map_state": "accepted",
+  "map_id": "component-map-5eccad4b8703",
+  "map_state": "drift_candidate",
   "mapper_version": "1.3.0",
-  "objective": "Map the 0.11.0 source candidate, including retained local evidence nomination and retained audit workflows, separating deterministic candidates from human evidence acceptance, formal append, release, installed activation, and pilot usefulness. Add the optional bounded claim-guided long-running subagent controller and sampled report currency; preserve human map acceptance and release boundaries.",
-  "origin_scan_id": "20261001T092434679671Z-9e7ec5e2",
+  "objective": "Map the 0.10.0 local evidence nomination source candidate and retained audit workflows, separating deterministic candidates from human evidence acceptance, formal append, release, installed activation, and pilot usefulness. Add the optional bounded claim-guided long-running subagent controller and sampled report currency; preserve human map acceptance and release boundaries.",
+  "origin_scan_id": "20261001T090921911536Z-22b57a26",
   "previous_map_id": "component-map-3df56ac1a6d5",
   "schema_version": "1.0",
   "scope": [
@@ -1954,7 +1950,6 @@
     "examples/evidence-nomination/minimal/project/record.json",
     "examples/evidence-nomination/minimal/request.json",
     "examples/evidence-nomination/minimal/review.json",
-    "examples/evidence-nomination/minimal/setup_project.py",
     "examples/quality-loop-producers",
     "examples/scan-input-v2.example.json",
     "hooks/hooks.json",
@@ -2076,7 +2071,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4e27eda7753730e3c78d020f439814244629990abe7e11b84dd7265c19630ff7",
+      "sha256": "8f82d4e5dbe3ff883bd169338289b78ee7041c18bf76eae617a6a4b7bf205d91",
       "source": "CHANGELOG.md"
     },
     {
@@ -2472,7 +2467,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ca7931599f030fe8be400958a391fcd0e18f47a8d4ab57dd83038a7c27bfb373",
+      "sha256": "cf92ddad315af5795dd0d23cd09d234ba891143661423065428fc5a16eab5f3d",
       "source": "examples/evidence-nomination/minimal/README.md"
     },
     {
@@ -2508,7 +2503,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a1ce779e2d529184b1b6ab68de75d29862999778a185372badb05e1807368871",
+      "sha256": "341912ce4ab7a01bce68b675352e96a1c43cf97df4d642f3aedc04c7a0b542ad",
       "source": "examples/evidence-nomination/minimal/prepare_selection.py"
     },
     {
@@ -2558,12 +2553,6 @@
       "kind": "file",
       "sha256": "c042df4f06f36039448a0149d3538b534247fa015d4dbae3352486f349ea1f0b",
       "source": "examples/evidence-nomination/minimal/review.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "1cfcf0cad608e25a3266b640aeea52cca1e6e67037154554caf0b798fbf80fa9",
-      "source": "examples/evidence-nomination/minimal/setup_project.py"
     },
     {
       "exists": true,
@@ -2622,7 +2611,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "adb8274a56f1b1e27bc6beca0eaf9c0b122a052ff13c26dc08e906753f6cef57",
+      "sha256": "33d985fa6529702f4597b5675cbf593a567c4ff0ccf5971022bf749b914280c4",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -2748,7 +2737,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1d783d9618ba4dd7c341ea1d14b7a1b5f2519854af27905aa4052b154ff5d68e",
+      "sha256": "ef709c9abc551cf2e4a61cbbfe4f229304ad1549e2913e68ca275bbdba7e4299",
       "source": "skills/analyze-project-claims/references/long-running-mode.md"
     },
     {
@@ -2760,7 +2749,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6ed8a5f8a9f5a23e2bfe3b86656959ac378cfee769497ffb6feefbb6da5cca1a",
+      "sha256": "53ed1a470a9abe9ab589e8f3a81d678ef4cd0b3ee6d7148be8ed4ea0a4379c9b",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
@@ -2856,7 +2845,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "74cf5f1c647604e4bc781dd1df1cc14b4effe38d490936b8eebb29923d359f09",
+      "sha256": "89510467f55ec794099d1ba639d7e43b82a74442ed67fc1079e94582f7f3729b",
       "source": "skills/analyze-project-claims/references/subagent-mode.md"
     },
     {
@@ -2976,7 +2965,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "02d5c03b0fcf5aeca97e4769653d758cdfc839d05d37da62c63af13ab65dad9f",
+      "sha256": "1752972a1853c954c1b9b036996e5a0c5279a052b50b4721f0f3537e3d57f245",
       "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
     },
     {
@@ -3012,7 +3001,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ff8d4f0d12c84b7c0aae0123557df903c5fc2af491805e7a0af044f018aac8ba",
+      "sha256": "fde4c7f71063c7c357aea2703702b6c5a881955f80d36b2ae25c1515b78f73fe",
       "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
     },
     {
@@ -3132,7 +3121,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "39e6a8ca3fa25e3c3de92f6bf8f22412bdacc764e585c2ac049f2b4954942aac",
+      "sha256": "adcc22525c08559fc8d996046580bc297fd3e870b1ac9b7cb87cfd380d903e12",
       "source": "tests/test_evidence_nomination_journey.py"
     },
     {
@@ -3174,7 +3163,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3bc4cb0860d3521235903f0627ff05a3c94ebf94273fd8c8f8af8c28cb6f3242",
+      "sha256": "97bb3938dd4d4273ee8028cbfc95eed9262dc430f56d4fa5cb0f3c5050aa10df",
       "source": "tests/test_long_running_edges.py"
     },
     {

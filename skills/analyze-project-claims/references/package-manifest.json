@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "7b944431552e728d1f23f730f472ac5a5c92d87010ed9a271160b1dc9cbc9cd0"
+      "sha256": "165902b1127771e64c66cc4de5aefd77df0e38bad4480a7d207bd65090822e71"
     },
     {
       "path": "agents/openai.yaml",
@@ -129,12 +129,16 @@
       "sha256": "cc2d9c86b2a1194fae64d209448be765a8fe9e4273f6410b91846aedc02811ed"
     },
     {
+      "path": "references/long-running-mode.md",
+      "sha256": "1d783d9618ba4dd7c341ea1d14b7a1b5f2519854af27905aa4052b154ff5d68e"
+    },
+    {
       "path": "references/managed-skill-policy.schema.json",
       "sha256": "cf5649a822d8af36f7cdfe02e4f3a484ffb359b666f94a284314106e3d0f439b"
     },
     {
       "path": "references/package-version.json",
-      "sha256": "581bcca051616c9835212ff98b3ca18046b954d3cb899c40c256f293e38eb06f"
+      "sha256": "380cc0b30689a72a02313e4cf7c3ab3e1107cd3b97550199f544c10a3364a4c7"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -183,6 +187,18 @@
     {
       "path": "references/skill-quality-proposal.schema.json",
       "sha256": "33bb13c85f3bae9785b6941bebc4250bb86369ec8850f66a61ef5f78fd263806"
+    },
+    {
+      "path": "references/subagent-design-sources.md",
+      "sha256": "579739682a3eb2dd03e141aa8e76d29dd1564673140a7b14562467a2d1d8ef80"
+    },
+    {
+      "path": "references/subagent-host-protocol.md",
+      "sha256": "5bfa4f0b84a9955d0220ae7b93ce0833a68fa5b7b576497d3f182cd2930cd469"
+    },
+    {
+      "path": "references/subagent-mode.md",
+      "sha256": "74cf5f1c647604e4bc781dd1df1cc14b4effe38d490936b8eebb29923d359f09"
     },
     {
       "path": "references/update-policy.schema.json",
@@ -273,6 +289,10 @@
       "sha256": "9d5c38103b98c74bb30a8d86a6e84294ce2c943eb33663679b950420168e6585"
     },
     {
+      "path": "scripts/long_running_controller.py",
+      "sha256": "02d5c03b0fcf5aeca97e4769653d758cdfc839d05d37da62c63af13ab65dad9f"
+    },
+    {
       "path": "scripts/managed_fleet.py",
       "sha256": "4ecc65dc2feec04b34695e69020427a23366ea9c2d97fa0229bfa0af553b96e0"
     },
@@ -291,6 +311,10 @@
     {
       "path": "scripts/skill_quality_loop.py",
       "sha256": "f32a44fb103738f0c94731c56f347de12046d0903c22ec5b9e50c1d5e05d314f"
+    },
+    {
+      "path": "scripts/subagent_mode.py",
+      "sha256": "ff8d4f0d12c84b7c0aae0123557df903c5fc2af491805e7a0af044f018aac8ba"
     },
     {
       "path": "scripts/update_policy.py",

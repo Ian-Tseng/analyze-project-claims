@@ -6,6 +6,8 @@ import sys
 from pathlib import Path
 
 EXAMPLE = Path(__file__).resolve().parent
+sys.path.insert(0, str(EXAMPLE))
+from setup_project import fixture_payloads
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -18,7 +20,10 @@ def main():
         expected = json.loads((EXAMPLE / "golden/bundle.json").read_bytes())
         # Runtime/Unicode identities can differ; the prerecorded review only
         # applies to these exact request, corpus, queries, and nominations.
-        for key in ("request", "corpus", "queries", "nominations", "exclusions", "truncations", "completeness"):
+        current_request = fixture_payloads()[1]
+        if bundle["request"] not in (expected["request"], current_request):
+            raise ValueError("example request differs")
+        for key in ("corpus", "queries", "nominations", "exclusions", "truncations", "completeness"):
             if bundle[key] != expected[key]:
                 raise ValueError("example differs")
         if args.output.absolute().parent != args.bundle.absolute().parent:

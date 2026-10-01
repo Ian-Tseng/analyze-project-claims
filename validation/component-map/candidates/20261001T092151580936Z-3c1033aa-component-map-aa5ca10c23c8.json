@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T09:33:01.671771Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1870,15 +1870,15 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-01T09:24:34.679671Z",
+  "created_at_utc": "2026-10-01T09:21:51.580936Z",
   "integrity": {
-    "canonical_payload_sha256": "93c0f9e8b0265140a93bb280bd1c3509e847cc62718e5c31d4bcdf7cf6e0d3c4"
+    "canonical_payload_sha256": "2937b23bb51ca3aaf0427be07ea886735ad4657345977c5745d3ed8003158733"
   },
-  "map_id": "component-map-83164de30434",
-  "map_state": "accepted",
+  "map_id": "component-map-aa5ca10c23c8",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the 0.11.0 source candidate, including retained local evidence nomination and retained audit workflows, separating deterministic candidates from human evidence acceptance, formal append, release, installed activation, and pilot usefulness. Add the optional bounded claim-guided long-running subagent controller and sampled report currency; preserve human map acceptance and release boundaries.",
-  "origin_scan_id": "20261001T092434679671Z-9e7ec5e2",
+  "origin_scan_id": "20261001T092151580936Z-3c1033aa",
   "previous_map_id": "component-map-3df56ac1a6d5",
   "schema_version": "1.0",
   "scope": [
@@ -2622,7 +2622,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "adb8274a56f1b1e27bc6beca0eaf9c0b122a052ff13c26dc08e906753f6cef57",
+      "sha256": "5c65e6c1b36672a02c9d0b799f11f902643db620be6537fd467f131597ba5808",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -2760,7 +2760,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6ed8a5f8a9f5a23e2bfe3b86656959ac378cfee769497ffb6feefbb6da5cca1a",
+      "sha256": "2cff1de708cabf6816c8bb20b92efd3d09fd2c847becb04059dd697d5fec27bc",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
@@ -2856,7 +2856,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "74cf5f1c647604e4bc781dd1df1cc14b4effe38d490936b8eebb29923d359f09",
+      "sha256": "f28cf2f5e17f634e90e478904f1b8248937fa7bf911710314c2bee24ce932b6d",
       "source": "skills/analyze-project-claims/references/subagent-mode.md"
     },
     {

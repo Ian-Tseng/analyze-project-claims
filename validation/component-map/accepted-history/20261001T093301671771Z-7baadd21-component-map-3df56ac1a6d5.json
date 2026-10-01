@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T09:33:01.671771Z",
+  "accepted_at_utc": "2026-09-16T02:55:38.817075Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -945,10 +945,6 @@
             },
             {
               "locator": "whole-file",
-              "source": "examples/evidence-nomination/minimal/setup_project.py"
-            },
-            {
-              "locator": "whole-file",
               "source": "skills/analyze-project-claims/references/evidence-nomination.md"
             },
             {
@@ -1008,139 +1004,6 @@
           ],
           "relation_type": "defines",
           "target": "Reviewer-authored claim/component candidates retain exact map, source, selection and native payload guards; handoff prints commands without executing them."
-        }
-      ]
-    },
-    {
-      "component_id": "long-running-subagents",
-      "component_type": "module",
-      "elements": [
-        {
-          "element_id": "claim-gated-review",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_long_running_edges.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_long_running_subagents.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Substantive work outcomes require source-bound claims review and dependent closure; work completion alone does not promote support."
-        },
-        {
-          "element_id": "durable-controller",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/long-running-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_long_running_plan_revision.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "One in-flight request, hash-linked history, stale work checks, bounded repairs and authorized plan revisions preserve explicit user controls."
-        },
-        {
-          "element_id": "native-host-boundary",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/SKILL.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-mode.md"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "The host owns actual agent launch and skill invocation; declarations do not authenticate semantic support or authorize formal acceptance or background wake."
-        },
-        {
-          "element_id": "portable-package-and-design-sources",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-design-sources.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_long_running_subagents.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "The synthetic copied-package lifecycle checks portable wiring; literature and host documentation motivate design without establishing efficacy."
-        },
-        {
-          "element_id": "sampled-report-freshness",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_long_running_freshness.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Reports distinguish recorded decisions from CURRENT, STALE or UNKNOWN sampled identities while preserving pending tokens and previous reports."
         }
       ]
     },
@@ -1870,75 +1733,122 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-01T09:24:34.679671Z",
+  "created_at_utc": "2026-09-16T02:50:27.515508Z",
   "integrity": {
-    "canonical_payload_sha256": "93c0f9e8b0265140a93bb280bd1c3509e847cc62718e5c31d4bcdf7cf6e0d3c4"
+    "canonical_payload_sha256": "cb0f7287506fa6a904a47f31f60dd3c0367440f095e3f6550c2af43990b7a960"
   },
-  "map_id": "component-map-83164de30434",
+  "map_id": "component-map-3df56ac1a6d5",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the 0.11.0 source candidate, including retained local evidence nomination and retained audit workflows, separating deterministic candidates from human evidence acceptance, formal append, release, installed activation, and pilot usefulness. Add the optional bounded claim-guided long-running subagent controller and sampled report currency; preserve human map acceptance and release boundaries.",
-  "origin_scan_id": "20261001T092434679671Z-9e7ec5e2",
-  "previous_map_id": "component-map-3df56ac1a6d5",
+  "objective": "Map the 0.10.0 local evidence nomination source candidate and retained audit workflows, separating deterministic candidates from human evidence acceptance, formal append, release, installed activation, and pilot usefulness.",
+  "origin_scan_id": "20260916T025027515508Z-82f43e31",
+  "previous_map_id": "component-map-92872d9a90de",
   "schema_version": "1.0",
   "scope": [
-    ".agents/plugins/marketplace.json",
-    ".codex-plugin/plugin.json",
-    ".github/codex/prompts/resolve-internal-report.md",
-    ".github/workflows/agent-maintainer.yml",
-    ".github/workflows/validate.yml",
-    "CHANGELOG.md",
-    "CITATION.cff",
-    "CONTRIBUTING.md",
-    "LICENSE",
-    "PUBLISHING.md",
     "README.md",
+    "CITATION.cff",
+    "LICENSE",
     "SECURITY.md",
-    "VERSION",
-    "analytics_service",
-    "docs/AGENT_MAINTAINER.md",
-    "docs/AGENT_MAINTAINER_E2E_LOG.md",
-    "docs/CLAIM_GUIDED_SUBAGENTS.md",
-    "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md",
-    "docs/CODEX_PLUGIN_E2E_LOG.md",
-    "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md",
-    "docs/INSTALLATION_ANALYTICS.md",
-    "docs/LIFECYCLE_RECEIPT_GUIDE.md",
-    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md",
-    "docs/PROBLEM_REPORTING.md",
-    "docs/PROBLEM_REPORTING_E2E_LOG.md",
+    "CONTRIBUTING.md",
     "docs/PUBLIC_RELEASE_SECURITY_REVIEW.md",
-    "docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md",
-    "docs/SKILL_OUTCOME_RECEIPT.md",
-    "docs/SKILL_QUALITY_LOOP.md",
+    "skills/analyze-project-claims",
+    "tests/test_component_map.py",
+    "tests/test_cross_project_reliability.py",
+    "tests/test_record_scan.py",
+    "validation/README.md",
     "evaluation/README.md",
-    "evaluation/annotation-codebook.md",
-    "evaluation/configs/annotation-calibration.selection.json",
+    "evaluation/quality-loop-pilot",
+    "evaluation/protocol.md",
     "evaluation/configs/confirmatory.template.json",
     "evaluation/configs/development-pilot.template.json",
     "evaluation/configs/dry-run.json",
-    "evaluation/configs/natural-development-pilot.selection.json",
-    "evaluation/evidence-nomination-pilot/PROTOCOL.md",
-    "evaluation/evidence-nomination-pilot/study.template.json",
     "evaluation/fixtures/dry-run/fixture-plan.json",
     "evaluation/labels/dry-run/lifecycle_fixture.json",
     "evaluation/labels/dry-run/provenance_fixture.json",
     "evaluation/projects/dry-run/lifecycle_fixture",
     "evaluation/projects/dry-run/provenance_fixture",
     "evaluation/prompts",
-    "evaluation/protocol.md",
-    "evaluation/quality-loop-pilot",
     "evaluation/schemas",
-    "evaluation/schemas/annotation-calibration-selection.schema.json",
+    "evaluation/scripts/cross_project_reliability.py",
+    "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json",
+    "tests/test_strict_evidence_contract.py",
+    "evaluation/configs/natural-development-pilot.selection.json",
+    "evaluation/schemas/natural-pilot-selection.schema.json",
     "evaluation/schemas/independent-annotation.schema.json",
+    "evaluation/schemas/pinned-project-source.schema.json",
+    "evaluation/templates/pinned-project-source.template.json",
+    "evaluation/scripts/natural_project_pilot.py",
+    "tests/test_natural_project_pilot.py",
+    "evaluation/annotation-codebook.md",
     "evaluation/schemas/natural-adjudicated-gold.schema.json",
     "evaluation/schemas/natural-label-commitment.schema.json",
-    "evaluation/schemas/natural-pilot-selection.schema.json",
-    "evaluation/schemas/pinned-project-source.schema.json",
+    "tests/test_natural_project_label_freeze.py",
+    "tests/test_natural_project_label_schemas.py",
+    "tests/test_zero_finding_gold.py",
+    "evaluation/configs/annotation-calibration.selection.json",
+    "evaluation/schemas/annotation-calibration-selection.schema.json",
     "evaluation/scripts/annotation_calibration.py",
-    "evaluation/scripts/cross_project_reliability.py",
-    "evaluation/scripts/natural_project_pilot.py",
-    "evaluation/templates/pinned-project-source.template.json",
+    "tests/test_annotation_calibration.py",
+    "VERSION",
+    "PUBLISHING.md",
+    "docs/PROBLEM_REPORTING.md",
+    "docs/PROBLEM_REPORTING_E2E_LOG.md",
+    "reporting_service/server.py",
+    "tests/test_problem_report.py",
+    "tests/test_reporting_service.py",
+    "tests/test_update_policy.py",
+    ".github/workflows/agent-maintainer.yml",
+    ".github/workflows/validate.yml",
+    ".github/codex/prompts/resolve-internal-report.md",
+    "maintainer_service",
+    "docs/AGENT_MAINTAINER.md",
+    "docs/AGENT_MAINTAINER_E2E_LOG.md",
+    "docs/GITHUB_AGENT_MAINTAINER_GUIDE.md",
+    "analytics_service",
+    "docs/INSTALLATION_ANALYTICS.md",
+    "tests/test_agent_maintainer.py",
+    "tests/test_installation_analytics.py",
+    "tests/test_analytics_service.py",
+    "tests/test_agent_compatibility.py",
+    "docs/MULTI_AGENT_SKILL_COMPATIBILITY_GUIDE.md",
+    "CHANGELOG.md",
+    "docs/LIFECYCLE_RECEIPT_GUIDE.md",
+    "examples/scan-input-v2.example.json",
+    "skills/analyze-project-claims/assets/scan-record-v2.template.json",
+    "skills/analyze-project-claims/references/evidence-bound-audit-records.md",
+    "skills/analyze-project-claims/references/scan-record-v2.schema.json",
+    "skills/analyze-project-claims/references/scan-record-output-v2.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-phase-receipt.schema.json",
+    "skills/analyze-project-claims/references/lifecycle-verification-receipt.md",
+    "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
+    "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
+    "tests/test_evidence_bound_scan.py",
+    "tests/test_evidence_bound_scan_edge_cases.py",
+    "tests/test_evidence_bound_scan_invariants.py",
+    "tests/test_evidence_bound_scan_operational.py",
+    "tests/test_evidence_bound_scan_release_blockers.py",
+    "tests/test_evidence_bound_scan_security.py",
+    "tests/test_lifecycle_receipt_consumer.py",
+    ".codex-plugin/plugin.json",
+    ".agents/plugins/marketplace.json",
+    "hooks/hooks.json",
+    "examples/quality-loop-producers",
+    "docs/SKILL_OUTCOME_RECEIPT.md",
+    "docs/SKILL_QUALITY_LOOP.md",
+    "docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md",
+    "docs/CODEX_PLUGIN_E2E_LOG.md",
+    "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md",
+    "tests/test_skill_quality_loop.py",
+    "tests/test_skill_quality_evaluation.py",
+    "tests/test_quality_contribution.py",
+    "tests/test_plugin_bundle.py",
+    "tests/test_component_evidence_engine.py",
+    "skills/analyze-project-claims/references/review-learning.md",
+    "skills/analyze-project-claims/scripts/_internal/evidence_nomination",
+    "evaluation/evidence-nomination-pilot/PROTOCOL.md",
+    "evaluation/evidence-nomination-pilot/study.template.json",
     "examples/evidence-nomination/minimal/README.md",
     "examples/evidence-nomination/minimal/expected-observation.json",
     "examples/evidence-nomination/minimal/golden/bundle.json",
@@ -1953,71 +1863,10 @@
     "examples/evidence-nomination/minimal/project/record-input.json",
     "examples/evidence-nomination/minimal/project/record.json",
     "examples/evidence-nomination/minimal/request.json",
-    "examples/evidence-nomination/minimal/review.json",
-    "examples/evidence-nomination/minimal/setup_project.py",
-    "examples/quality-loop-producers",
-    "examples/scan-input-v2.example.json",
-    "hooks/hooks.json",
-    "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json",
-    "maintainer_service",
-    "reporting_service/server.py",
-    "skills/analyze-project-claims",
-    "skills/analyze-project-claims/SKILL.md",
-    "skills/analyze-project-claims/assets/scan-record-v2.template.json",
-    "skills/analyze-project-claims/references/evidence-bound-audit-records.md",
-    "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
-    "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
-    "skills/analyze-project-claims/references/lifecycle-phase-receipt.schema.json",
-    "skills/analyze-project-claims/references/lifecycle-verification-receipt.md",
-    "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
-    "skills/analyze-project-claims/references/long-running-mode.md",
-    "skills/analyze-project-claims/references/review-learning.md",
-    "skills/analyze-project-claims/references/scan-record-output-v2.schema.json",
-    "skills/analyze-project-claims/references/scan-record-v2.schema.json",
-    "skills/analyze-project-claims/references/subagent-design-sources.md",
-    "skills/analyze-project-claims/references/subagent-host-protocol.md",
-    "skills/analyze-project-claims/references/subagent-mode.md",
-    "skills/analyze-project-claims/scripts/_internal/evidence_nomination",
-    "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
-    "skills/analyze-project-claims/scripts/long_running_controller.py",
-    "skills/analyze-project-claims/scripts/subagent_mode.py",
-    "tests/test_agent_compatibility.py",
-    "tests/test_agent_maintainer.py",
-    "tests/test_analytics_service.py",
-    "tests/test_annotation_calibration.py",
-    "tests/test_component_evidence_engine.py",
-    "tests/test_component_map.py",
-    "tests/test_cross_project_reliability.py",
-    "tests/test_evidence_bound_scan.py",
-    "tests/test_evidence_bound_scan_edge_cases.py",
-    "tests/test_evidence_bound_scan_invariants.py",
-    "tests/test_evidence_bound_scan_operational.py",
-    "tests/test_evidence_bound_scan_release_blockers.py",
-    "tests/test_evidence_bound_scan_security.py",
-    "tests/test_installation_analytics.py",
-    "tests/test_lifecycle_receipt_consumer.py",
-    "tests/test_long_running_controller.py",
-    "tests/test_long_running_edges.py",
-    "tests/test_long_running_freshness.py",
-    "tests/test_long_running_plan_revision.py",
-    "tests/test_long_running_subagents.py",
-    "tests/test_natural_project_label_freeze.py",
-    "tests/test_natural_project_label_schemas.py",
-    "tests/test_natural_project_pilot.py",
-    "tests/test_plugin_bundle.py",
-    "tests/test_problem_report.py",
-    "tests/test_quality_contribution.py",
-    "tests/test_record_scan.py",
-    "tests/test_reporting_service.py",
-    "tests/test_skill_quality_evaluation.py",
-    "tests/test_skill_quality_loop.py",
-    "tests/test_strict_evidence_contract.py",
-    "tests/test_update_policy.py",
-    "tests/test_zero_finding_gold.py",
-    "validation/README.md"
+    "examples/evidence-nomination/minimal/review.json"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "165902b1127771e64c66cc4de5aefd77df0e38bad4480a7d207bd65090822e71",
+  "skill_sha256": "7b944431552e728d1f23f730f472ac5a5c92d87010ed9a271160b1dc9cbc9cd0",
   "source_snapshot": [
     {
       "exists": true,
@@ -2028,7 +1877,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0e99e640835883c2b33577dae7f3ae0a4825c1a2b68ae1e8ba4e649d8b5880af",
+      "sha256": "1e5772f1b390cef7a1ad43fed949f23970046e0dc3b9a1afabac01da2615aa4a",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2076,13 +1925,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4e27eda7753730e3c78d020f439814244629990abe7e11b84dd7265c19630ff7",
+      "sha256": "cdb2c5ca22d0000337717aaa2075602c61f84a572d05aa1772548451fca12b8f",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "cea0857b3570e4939c6a88936ffdf49e53f13325a3a729085886f5b566008416",
+      "sha256": "cd7fcd9042790623d7baf81f7b9815abda4cd18ff6b38a99a6dbdb78a41d6151",
       "source": "CITATION.cff"
     },
     {
@@ -2106,7 +1955,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "410d5ba571f15072b408e641b4ab4d6b4cba034ec96cf22119a8434334975069",
+      "sha256": "91aefbd64b067fae80baa3db7dd765e1c7d2421e5fd9cfbfbfe172c707b043f2",
       "source": "README.md"
     },
     {
@@ -2118,7 +1967,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "795d6bc79574d2aec03ad9cfec404bb95083c9dd210e6521e0d4199772d28d44",
+      "sha256": "dc24feb5bd35084d8ae32a4eafbec12352707d4662401fcbcc9bbd696cde77a9",
       "source": "VERSION"
     },
     {
@@ -2144,12 +1993,6 @@
       "kind": "file",
       "sha256": "ee361484ce077dccb725d9960371b6bd8320459fc1e59398ca3ae3494ada6dff",
       "source": "docs/AGENT_MAINTAINER_E2E_LOG.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "79b2dd4ff574e0f35f4c40fae780998ad6150218ddadbd8d81e6fbbd23db793d",
-      "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
     },
     {
       "exists": true,
@@ -2472,7 +2315,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ca7931599f030fe8be400958a391fcd0e18f47a8d4ab57dd83038a7c27bfb373",
+      "sha256": "cf92ddad315af5795dd0d23cd09d234ba891143661423065428fc5a16eab5f3d",
       "source": "examples/evidence-nomination/minimal/README.md"
     },
     {
@@ -2508,7 +2351,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a1ce779e2d529184b1b6ab68de75d29862999778a185372badb05e1807368871",
+      "sha256": "341912ce4ab7a01bce68b675352e96a1c43cf97df4d642f3aedc04c7a0b542ad",
       "source": "examples/evidence-nomination/minimal/prepare_selection.py"
     },
     {
@@ -2558,12 +2401,6 @@
       "kind": "file",
       "sha256": "c042df4f06f36039448a0149d3538b534247fa015d4dbae3352486f349ea1f0b",
       "source": "examples/evidence-nomination/minimal/review.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "1cfcf0cad608e25a3266b640aeea52cca1e6e67037154554caf0b798fbf80fa9",
-      "source": "examples/evidence-nomination/minimal/setup_project.py"
     },
     {
       "exists": true,
@@ -2622,13 +2459,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "adb8274a56f1b1e27bc6beca0eaf9c0b122a052ff13c26dc08e906753f6cef57",
+      "sha256": "b59e02a35cc3d186f929434fbff44095aec24d251539f0b2325f7c2d2cf57731",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "165902b1127771e64c66cc4de5aefd77df0e38bad4480a7d207bd65090822e71",
+      "sha256": "7b944431552e728d1f23f730f472ac5a5c92d87010ed9a271160b1dc9cbc9cd0",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -2748,25 +2585,19 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1d783d9618ba4dd7c341ea1d14b7a1b5f2519854af27905aa4052b154ff5d68e",
-      "source": "skills/analyze-project-claims/references/long-running-mode.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
       "sha256": "cf5649a822d8af36f7cdfe02e4f3a484ffb359b666f94a284314106e3d0f439b",
       "source": "skills/analyze-project-claims/references/managed-skill-policy.schema.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6ed8a5f8a9f5a23e2bfe3b86656959ac378cfee769497ffb6feefbb6da5cca1a",
+      "sha256": "da5ee9b69913f0bd386343a5a812874055fd104f9aea724330b9b11f573ad6ad",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "380cc0b30689a72a02313e4cf7c3ab3e1107cd3b97550199f544c10a3364a4c7",
+      "sha256": "581bcca051616c9835212ff98b3ca18046b954d3cb899c40c256f293e38eb06f",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -2840,24 +2671,6 @@
       "kind": "file",
       "sha256": "33bb13c85f3bae9785b6941bebc4250bb86369ec8850f66a61ef5f78fd263806",
       "source": "skills/analyze-project-claims/references/skill-quality-proposal.schema.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "579739682a3eb2dd03e141aa8e76d29dd1564673140a7b14562467a2d1d8ef80",
-      "source": "skills/analyze-project-claims/references/subagent-design-sources.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "5bfa4f0b84a9955d0220ae7b93ce0833a68fa5b7b576497d3f182cd2930cd469",
-      "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "74cf5f1c647604e4bc781dd1df1cc14b4effe38d490936b8eebb29923d359f09",
-      "source": "skills/analyze-project-claims/references/subagent-mode.md"
     },
     {
       "exists": true,
@@ -2976,12 +2789,6 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "02d5c03b0fcf5aeca97e4769653d758cdfc839d05d37da62c63af13ab65dad9f",
-      "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
       "sha256": "4ecc65dc2feec04b34695e69020427a23366ea9c2d97fa0229bfa0af553b96e0",
       "source": "skills/analyze-project-claims/scripts/managed_fleet.py"
     },
@@ -3008,12 +2815,6 @@
       "kind": "file",
       "sha256": "f32a44fb103738f0c94731c56f347de12046d0903c22ec5b9e50c1d5e05d314f",
       "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "ff8d4f0d12c84b7c0aae0123557df903c5fc2af491805e7a0af044f018aac8ba",
-      "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
     },
     {
       "exists": true,
@@ -3132,7 +2933,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "39e6a8ca3fa25e3c3de92f6bf8f22412bdacc764e585c2ac049f2b4954942aac",
+      "sha256": "adcc22525c08559fc8d996046580bc297fd3e870b1ac9b7cb87cfd380d903e12",
       "source": "tests/test_evidence_nomination_journey.py"
     },
     {
@@ -3164,36 +2965,6 @@
       "kind": "file",
       "sha256": "81778ebc0291ae1d8c89475672689e08f6e1e974db5e7721f33673399019a1a7",
       "source": "tests/test_lifecycle_receipt_consumer.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "76525583fc93cc70a6e96849a6b3080efd8ebab27d88b46a938ad2fcaee47fa7",
-      "source": "tests/test_long_running_controller.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "3bc4cb0860d3521235903f0627ff05a3c94ebf94273fd8c8f8af8c28cb6f3242",
-      "source": "tests/test_long_running_edges.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "f9c3494f5bcecd801283335e48bbf0b18c54d63d6e69126a977207eac271c7d4",
-      "source": "tests/test_long_running_freshness.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "382028133942c8510b4cbe3842b6665aa754c76bcf029c97216ab8ccd443cc90",
-      "source": "tests/test_long_running_plan_revision.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "d5b6906ca9cb94962d7b4b8c5042d9fe7ffe9c2735aa27986b9c91b941ffb23d",
-      "source": "tests/test_long_running_subagents.py"
     },
     {
       "exists": true,
@@ -3294,7 +3065,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0e09bee038b2c17f1ec87e45f89f1ab2e91f5288aaf681c30869d9f2e0494846",
+      "sha256": "1899d66062a896c9638c8252b7098db441bbf2d4db1823432bcb34e0deda00b4",
       "source": "validation/README.md"
     }
   ]

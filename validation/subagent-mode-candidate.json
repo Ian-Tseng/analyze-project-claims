@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "kind": "bounded_development_validation",
+  "candidate_version": "0.11.0",
+  "observed_at": "2026-10-01T09:24:35.023325+00:00",
+  "authority": "Development observation only; not a formal scan, accepted map, release receipt or native activation proof.",
+  "environment": {
+    "os": "Windows",
+    "python": "3.12.4"
+  },
+  "source_sha256": {
+    ".codex-plugin/plugin.json": "0e99e640835883c2b33577dae7f3ae0a4825c1a2b68ae1e8ba4e649d8b5880af",
+    "CHANGELOG.md": "4e27eda7753730e3c78d020f439814244629990abe7e11b84dd7265c19630ff7",
+    "CITATION.cff": "cea0857b3570e4939c6a88936ffdf49e53f13325a3a729085886f5b566008416",
+    "README.md": "410d5ba571f15072b408e641b4ab4d6b4cba034ec96cf22119a8434334975069",
+    "VERSION": "795d6bc79574d2aec03ad9cfec404bb95083c9dd210e6521e0d4199772d28d44",
+    "docs/CLAIM_GUIDED_SUBAGENTS.md": "79b2dd4ff574e0f35f4c40fae780998ad6150218ddadbd8d81e6fbbd23db793d",
+    "examples/evidence-nomination/minimal/README.md": "ca7931599f030fe8be400958a391fcd0e18f47a8d4ab57dd83038a7c27bfb373",
+    "examples/evidence-nomination/minimal/prepare_selection.py": "a1ce779e2d529184b1b6ab68de75d29862999778a185372badb05e1807368871",
+    "examples/evidence-nomination/minimal/setup_project.py": "1cfcf0cad608e25a3266b640aeea52cca1e6e67037154554caf0b798fbf80fa9",
+    "skills/analyze-project-claims/SKILL.md": "165902b1127771e64c66cc4de5aefd77df0e38bad4480a7d207bd65090822e71",
+    "skills/analyze-project-claims/references/long-running-mode.md": "1d783d9618ba4dd7c341ea1d14b7a1b5f2519854af27905aa4052b154ff5d68e",
+    "skills/analyze-project-claims/references/package-manifest.json": "6ed8a5f8a9f5a23e2bfe3b86656959ac378cfee769497ffb6feefbb6da5cca1a",
+    "skills/analyze-project-claims/references/package-version.json": "380cc0b30689a72a02313e4cf7c3ab3e1107cd3b97550199f544c10a3364a4c7",
+    "skills/analyze-project-claims/references/subagent-design-sources.md": "579739682a3eb2dd03e141aa8e76d29dd1564673140a7b14562467a2d1d8ef80",
+    "skills/analyze-project-claims/references/subagent-host-protocol.md": "5bfa4f0b84a9955d0220ae7b93ce0833a68fa5b7b576497d3f182cd2930cd469",
+    "skills/analyze-project-claims/references/subagent-mode.md": "74cf5f1c647604e4bc781dd1df1cc14b4effe38d490936b8eebb29923d359f09",
+    "skills/analyze-project-claims/scripts/long_running_controller.py": "02d5c03b0fcf5aeca97e4769653d758cdfc839d05d37da62c63af13ab65dad9f",
+    "skills/analyze-project-claims/scripts/subagent_mode.py": "ff8d4f0d12c84b7c0aae0123557df903c5fc2af491805e7a0af044f018aac8ba",
+    "tests/test_evidence_nomination_journey.py": "39e6a8ca3fa25e3c3de92f6bf8f22412bdacc764e585c2ac049f2b4954942aac",
+    "tests/test_long_running_controller.py": "76525583fc93cc70a6e96849a6b3080efd8ebab27d88b46a938ad2fcaee47fa7",
+    "tests/test_long_running_edges.py": "3bc4cb0860d3521235903f0627ff05a3c94ebf94273fd8c8f8af8c28cb6f3242",
+    "tests/test_long_running_freshness.py": "f9c3494f5bcecd801283335e48bbf0b18c54d63d6e69126a977207eac271c7d4",
+    "tests/test_long_running_plan_revision.py": "382028133942c8510b4cbe3842b6665aa754c76bcf029c97216ab8ccd443cc90",
+    "tests/test_long_running_subagents.py": "d5b6906ca9cb94962d7b4b8c5042d9fe7ffe9c2735aa27986b9c91b941ffb23d"
+  },
+  "checks": {
+    "engine": {
+      "exit_code": 0,
+      "log_sha256": "838a4ccdb1944aa06a3e3bf30ed4c15b6bb7751200ce3050603609e44e3124b3"
+    },
+    "manifest": {
+      "exit_code": 0,
+      "log_sha256": "419a44cb91e8922da23a32614c33a6cbdf2cddbe358c501011e388b67cc35d1a"
+    },
+    "package": {
+      "exit_code": 0,
+      "log_sha256": "6ec64064b0d5993f84d128e8f27083e78ba51ff9d3608a46f6b3b49dd5508642"
+    },
+    "full-suite": {
+      "exit_code": 0,
+      "log_sha256": "b9e2d43658b677db28ed3b1d564d3dfbffd8dc1a883987a0d1de0ac5d13ef7d7"
+    },
+    "platform-probe": {
+      "exit_code": 0,
+      "log_sha256": "85b2534acc7e541c487e7083c9b2ff15cbeb11102d17f006a1d4726d0ad03828"
+    },
+    "map-preflight": {
+      "exit_code": 2,
+      "log_sha256": "9d95c503036ce64d5e336a9fac027f1931e9a37ebb7c2575bc4e5bce6bd9856d"
+    }
+  },
+  "full_suite": {
+    "total": 455,
+    "passed": 452,
+    "skipped": 3,
+    "failed": 0,
+    "sources_unchanged_during_run": true,
+    "command": "python -m unittest discover -s tests -v"
+  },
+  "post_suite_changes": [
+    "Removed one trailing blank line from subagent-mode.md and rebuilt the package manifest; runtime and test bytes are unchanged. Package verification repeated."
+  ],
+  "additional_checks": {
+    "plugin_validator": "passed",
+    "skill_validator": "passed",
+    "offline_quality_loop": {
+      "status": "QUALITY_PROPOSAL_READY",
+      "outbound": "NONE",
+      "replay_deduplicated": true
+    }
+  },
+  "retained_adverse_observations": [
+    {
+      "finding": "Initial full suite public synthetic nomination example had an old skill identity.",
+      "total": 449,
+      "passed": 445,
+      "failed": 1,
+      "skipped": 3,
+      "log_sha256": "616d9ae4a47c7a0fd539dfdf928d1825ec11e7213fa0cc9eb00bfb9437a3d5f2",
+      "correction": "Fresh synthetic setup creates a current copy; frozen examples and real accepted maps remain unchanged. Exact prerecorded content checks and negative cases retained."
+    },
+    {
+      "finding": "An adjacent legacy controller filename could be hashed instead of the packaged controller.",
+      "correction": "Pin long_running_controller.py; a decoy-neighbor regression checks its identity."
+    },
+    {
+      "finding": "Windows Python 3.10 lacks Path.is_junction, leaving the older conditional link check incomplete.",
+      "correction": "Check lstat reparse attributes independently of Path.is_junction; focused regression records retained locally."
+    }
+  ],
+  "independent_review": {
+    "method": "Read-only AI Scientist-derived evidence and dependency review; no SakanaAI software execution.",
+    "result": "No remaining material findings in the port review and bounded portability-delta rereview; Python 3.10 syntax parsing passed, without establishing runtime coverage.",
+    "limits": "Not an empirical review-quality comparison or fresh native activation."
+  },
+  "claims": [
+    {
+      "id": "C-CONTROLLER",
+      "status": "supported",
+      "statement": "The candidate passes the listed local deterministic regression and copied-package cases.",
+      "limitations": [
+        "Bounded synthetic cases and local platform only.",
+        "Declared evidence and host behavior remain trust boundaries."
+      ],
+      "evidence": [
+        "tests/test_long_running_controller.py",
+        "tests/test_long_running_plan_revision.py",
+        "tests/test_long_running_subagents.py",
+        "tests/test_long_running_edges.py",
+        "tests/test_long_running_freshness.py"
+      ]
+    },
+    {
+      "id": "C-PORT-NATIVE",
+      "status": "untested",
+      "statement": "This exact packaged port has been activated through a native agent host.",
+      "limitations": [
+        "Precursor native success is not transferred to changed package bytes."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "C-EFFICACY",
+      "status": "untested",
+      "statement": "Subagent mode improves scientific outcomes, review accuracy, speed or cost.",
+      "limitations": [
+        "No controlled efficacy or performance evaluation."
+      ],
+      "evidence": []
+    }
+  ],
+  "gates": {
+    "component_map": "Exact human acceptance pending; previous accepted map untouched; preflight expected to reject current skill identity.",
+    "hosted_ci": "Not established by this local observation.",
+    "release": "Not published.",
+    "fresh_native_activation": "Not tested for this portable candidate."
+  },
+  "provenance": "skills/analyze-project-claims/references/subagent-design-sources.md",
+  "log_disclosure": "Only bounded summaries and log digests are included; raw local logs are not redistributed."
+}
