@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T12:34:37.633944Z",
+  "accepted_at_utc": "2026-10-01T09:58:14.613919Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1064,37 +1064,10 @@
             {
               "locator": "whole-file",
               "source": "tests/test_long_running_plan_revision.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_long_running_repair_budget.py"
             }
           ],
           "relation_type": "defines",
-          "target": "One in-flight request and hash-linked history preserve user controls; new configurations persist a 32-cycle repair default or explicit cap while old journals retain three across restart and plan/goal revision."
-        },
-        {
-          "element_id": "evidence-guided-agent-policy",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/SKILL.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/evidence-guided-agents.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/review-learning.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_long_running_subagents.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Provisional claims may guide investigation; negative results update claims and reports. Review ownership stays coordinated. Prospective +16 budget adjustments require three progressing cap hits among five comparable recorded audits; no global runtime hook or automatic tuner is asserted."
+          "target": "One in-flight request, hash-linked history, stale work checks, bounded repairs and authorized plan revisions preserve explicit user controls."
         },
         {
           "element_id": "native-host-boundary",
@@ -1897,16 +1870,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-01T12:11:03.776664Z",
+  "created_at_utc": "2026-10-01T09:54:42.057405Z",
   "integrity": {
-    "canonical_payload_sha256": "422137bfea33be9ebfe8b8fa837852afaabac4f6fddc2a3585ec6a46d92ac5b2"
+    "canonical_payload_sha256": "68f8aa6c5fa2183932eaa91583971285662e75706f5ccded7b1feaf598f5fc24"
   },
-  "map_id": "component-map-1c4bcfd9607f",
+  "map_id": "component-map-c39800623112",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the 0.12.0 evidence-guided agent workflow and configurable repair budgets, preserving legacy journal semantics and separating deterministic tests from native activation and scientific benefit.",
-  "origin_scan_id": "20261001T121103776664Z-99bfce2d",
-  "previous_map_id": "component-map-c39800623112",
+  "objective": "Map the 0.11.0 source candidate, including retained local evidence nomination and retained audit workflows, separating deterministic candidates from human evidence acceptance, formal append, release, installed activation, and pilot usefulness. Add the optional bounded claim-guided long-running subagent controller and sampled report currency; preserve human map acceptance and release boundaries.",
+  "origin_scan_id": "20261001T095442057405Z-8290ce57",
+  "previous_map_id": "component-map-83164de30434",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2041,12 +2014,10 @@
     "tests/test_strict_evidence_contract.py",
     "tests/test_update_policy.py",
     "tests/test_zero_finding_gold.py",
-    "validation/README.md",
-    "skills/analyze-project-claims/references/evidence-guided-agents.md",
-    "tests/test_long_running_repair_budget.py"
+    "validation/README.md"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "fffc22cbe086a68601d7e2dfd77bd8e676b42cee1be62fb93fe862dc03fa110c",
+  "skill_sha256": "165902b1127771e64c66cc4de5aefd77df0e38bad4480a7d207bd65090822e71",
   "source_snapshot": [
     {
       "exists": true,
@@ -2057,7 +2028,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ee2f0cb548240627fa534e8b738f87be8ca20cb145e307e5650b67d820681372",
+      "sha256": "0e99e640835883c2b33577dae7f3ae0a4825c1a2b68ae1e8ba4e649d8b5880af",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2105,13 +2076,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f9193490c7b9a36c19c432803e4140eaf28f5d5f338bc0343d5bd5dcee6073d7",
+      "sha256": "6d097cdb6c82f093369d2d16d691e6a4003b69c79a7bf07bbbff9d87be495913",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "19bef386046719aa626de0977bbd84beac9f568120414154f0f23f4463d6ca5b",
+      "sha256": "ea8b0276da4272605acd5ce6a3ba8e68d898e25b94648e942cf45b451bfa3da1",
       "source": "CITATION.cff"
     },
     {
@@ -2135,7 +2106,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "78c94f5e7e49d47f6dd5e54e388b0066b44dac8f0fb95bc73e32ca121b46767b",
+      "sha256": "d066166b82117a54deb48b8565725fdefc2a9c340b15054da5f835613a487d65",
       "source": "README.md"
     },
     {
@@ -2147,7 +2118,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "8a932413d42f95082f8323447652379a4885e328329efca3a67ec9c793c09940",
+      "sha256": "795d6bc79574d2aec03ad9cfec404bb95083c9dd210e6521e0d4199772d28d44",
       "source": "VERSION"
     },
     {
@@ -2177,7 +2148,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "e76b9ac061304cfe33aef0db8e9e56121da83df87baecfc88183a2ab72c037f3",
+      "sha256": "79b2dd4ff574e0f35f4c40fae780998ad6150218ddadbd8d81e6fbbd23db793d",
       "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
     },
     {
@@ -2651,13 +2622,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "26116e6beacc03d521959d469bc467bb25bf59a9c8a62889f33ee1a7a6437cc3",
+      "sha256": "adb8274a56f1b1e27bc6beca0eaf9c0b122a052ff13c26dc08e906753f6cef57",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "fffc22cbe086a68601d7e2dfd77bd8e676b42cee1be62fb93fe862dc03fa110c",
+      "sha256": "165902b1127771e64c66cc4de5aefd77df0e38bad4480a7d207bd65090822e71",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -2707,12 +2678,6 @@
       "kind": "file",
       "sha256": "d573c8f645200bc3e568175ad862e387fe359db8379af30135ef360a6f13edbc",
       "source": "skills/analyze-project-claims/references/evidence-bound-audit-records.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "0ca012d9c995d05450f1cd24bdef441564f80ca533909e39e04d7aef5e78eb1a",
-      "source": "skills/analyze-project-claims/references/evidence-guided-agents.md"
     },
     {
       "exists": true,
@@ -2783,7 +2748,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "cb91175d8d6995d2b99375a00f8466ac7a1be38d3771ceac9448f6bbab5d1846",
+      "sha256": "1d783d9618ba4dd7c341ea1d14b7a1b5f2519854af27905aa4052b154ff5d68e",
       "source": "skills/analyze-project-claims/references/long-running-mode.md"
     },
     {
@@ -2795,13 +2760,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "70b15c4c4e9405f25527d0458914d912319770f81986f61188d18f67e187ea0b",
+      "sha256": "6ed8a5f8a9f5a23e2bfe3b86656959ac378cfee769497ffb6feefbb6da5cca1a",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "415b203ac8d6e9cd089602a170c0e590378139e03f895b3ac3a8da0f713b2238",
+      "sha256": "380cc0b30689a72a02313e4cf7c3ab3e1107cd3b97550199f544c10a3364a4c7",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -2819,7 +2784,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "fa314c22dfac34858a1260c28800ae7c1e29a3b6fbe3abf42bd4c4af7351aef4",
+      "sha256": "b09803292166ef17a9a5bdcc1db1f2ca8663000616fa1cd8cb306f5ce9b508ca",
       "source": "skills/analyze-project-claims/references/review-learning.md"
     },
     {
@@ -2885,13 +2850,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "831289b3523aa24c222dc2cbf5e3a2c414abe43d05be56b1c8923dd1643c653e",
+      "sha256": "5bfa4f0b84a9955d0220ae7b93ce0833a68fa5b7b576497d3f182cd2930cd469",
       "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "04a11ac91906d5cd782373c08dab0ac2581f02bc8f17393512baf3e6973832f6",
+      "sha256": "74cf5f1c647604e4bc781dd1df1cc14b4effe38d490936b8eebb29923d359f09",
       "source": "skills/analyze-project-claims/references/subagent-mode.md"
     },
     {
@@ -3011,7 +2976,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6c2925d3978cf7bd8c57eafa0f04dd58b9704f7aad7a07bcf73cc506fd0c6a31",
+      "sha256": "02d5c03b0fcf5aeca97e4769653d758cdfc839d05d37da62c63af13ab65dad9f",
       "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
     },
     {
@@ -3203,7 +3168,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6b67ef9a2a63210598850c9078ae0cd7aeae87041862d4a56548c3204584a42a",
+      "sha256": "76525583fc93cc70a6e96849a6b3080efd8ebab27d88b46a938ad2fcaee47fa7",
       "source": "tests/test_long_running_controller.py"
     },
     {
@@ -3227,13 +3192,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6c592935b74a1429284323871018649666d890dd61217a8fb4ecce9c1def673b",
-      "source": "tests/test_long_running_repair_budget.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "de6c1f751ed10d3d178ecf37684fb27d3bb11e9d50a75779a64dfc6e87e8ebfa",
+      "sha256": "d5b6906ca9cb94962d7b4b8c5042d9fe7ffe9c2735aa27986b9c91b941ffb23d",
       "source": "tests/test_long_running_subagents.py"
     },
     {
