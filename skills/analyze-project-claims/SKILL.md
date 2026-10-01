@@ -32,6 +32,20 @@ Keep experiment-specific conclusions in the project record; promote a reusable
 decision rule only with explicit evidence prerequisites, applicability, and
 exceptions. Existing repair-attempt and receipt-reconciliation limits still apply.
 
+## Continue authorized work with claims review
+
+For an authorized long-running goal, read [long-running mode](references/long-running-mode.md).
+When the user explicitly requests delegated work, also read
+[subagent mode](references/subagent-mode.md) and its
+[host protocol](references/subagent-host-protocol.md). Use the packaged controller
+to retain one in-flight unit, supported premises, bounded attempts and pauses.
+After each substantive done, failed or uncertain work unit, invoke this skill,
+review affected claims and their dependents, and update evidence, limitations and
+report projections before continuing eligible work. Work completion alone never
+promotes a claim. Report sampled source freshness separately from recorded review
+status. The host must actually perform delegation and skill invocation; this mode
+installs no background wake mechanism and grants no formal evidence acceptance.
+
 ## Select the analysis depth
 
 Use the lightest sufficient mode:

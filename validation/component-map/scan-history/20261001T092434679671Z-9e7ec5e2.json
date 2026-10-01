@@ -1,0 +1,261 @@
+{
+  "accepted_map_id": "component-map-3df56ac1a6d5",
+  "action": "conflict_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20261001T092434679671Z-9e7ec5e2-component-map-83164de30434.json",
+    "delta": "deltas/20261001T092434679671Z-9e7ec5e2.json"
+  },
+  "candidate_map_id": "component-map-83164de30434",
+  "changes": {
+    "added_components": [
+      "long-running-subagents"
+    ],
+    "added_elements": [
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "claim-gated-review"
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "durable-controller"
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "native-host-boundary"
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "portable-package-and-design-sources"
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "sampled-report-freshness"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "local-evidence-nomination",
+        "element_id": "public-journey",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".codex-plugin/plugin.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "examples/evidence-nomination/minimal/README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "examples/evidence-nomination/minimal/prepare_selection.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "examples/evidence-nomination/minimal/setup_project.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/long-running-mode.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-design-sources.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-mode.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_evidence_nomination_journey.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_long_running_controller.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_long_running_edges.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_long_running_freshness.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_long_running_plan_revision.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_long_running_subagents.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "validation/README.md"
+      }
+    ]
+  },
+  "event_id": "20261001T092434679671Z-9e7ec5e2",
+  "integrity": {
+    "canonical_payload_sha256": "a2db7fe8d9d058b280171cbd037cda6c197602857596767f20808053448aa806"
+  },
+  "map_state_after": "conflict_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.3.0",
+  "recorded_at_utc": "2026-10-01T09:24:34.679671Z",
+  "schema_version": "1.0",
+  "skill_sha256": "165902b1127771e64c66cc4de5aefd77df0e38bad4480a7d207bd65090822e71"
+}

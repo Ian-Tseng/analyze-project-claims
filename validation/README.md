@@ -44,3 +44,14 @@ never rewrites history: create a new record after refreshing the evidence.
 ## Nomination candidate boundary
 
 Local nomination bundles, reviewed selections, candidates, and extracted payloads are sidecars outside formal validation/history. They do not accept a map or append a scan. See the [nomination reference](../skills/analyze-project-claims/references/evidence-nomination.md). The 0.10.0 candidate must reconcile its exact source map and receive explicit human acceptance before a new formal record can be appended; v0.9.0 records retain their historical identity.
+
+
+## Long-running subagent source candidate
+
+`subagent-mode-candidate.json` is a bounded development validation summary for
+this source candidate, not a formal v2 audit or accepted component map. The
+observation in `component-map-observation-v0110.json` proposes the new controller,
+host protocol, report freshness and portable regression surfaces. Reconciliation
+and exact human acceptance remain separate; a draft PR or passing unit suite
+does not accept that map, publish a release, or prove activation of this package.
+Existing accepted maps and dated validation histories retain their identities.
