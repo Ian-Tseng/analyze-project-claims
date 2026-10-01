@@ -2,8 +2,9 @@
 
 An authorized host can delegate one substantive work unit, invoke
 `analyze-project-claims` on its outcome, update affected working claims and
-regenerate dependent reports before continuing. Supported, current prerequisite
-claims gate execution. Failed and uncertain work also return to claims review.
+regenerate dependent reports before continuing. Provisional hypotheses may guide
+work; only declared execution prerequisites require current support. Negative
+observations revise claims and dependent plans instead of being hidden. Failed and uncertain work also return to claims review.
 This is sequential active-session orchestration; it does not install a scheduler
 or wake a host after its process ends.
 
@@ -54,3 +55,8 @@ neither the example nor source provenance establishes semantic review accuracy,
 scientific benefit, unattended recovery or a performance improvement.
 The [source log](../skills/analyze-project-claims/references/subagent-design-sources.md)
 separates design guidance, local choices and AI Scientist-derived review provenance.
+
+New goals persist `max_repair_cycles` (default 32); existing journals without the
+field keep their three-cycle limit. Recorded repeated progressing cap hits may
+justify a prospective +16 adjustment under the
+[review-learning policy](../skills/analyze-project-claims/references/review-learning.md#repair-cycle-budget-and-adaptation).

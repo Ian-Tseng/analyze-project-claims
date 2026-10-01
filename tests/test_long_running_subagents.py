@@ -112,6 +112,33 @@ class SubagentModeTests(unittest.TestCase):
         self.assertEqual(read_json(directory / "claims.json")["working_claims"]["C2"]["status"], "supported")
         self.assertIn("C1", (directory / "summary.md").read_text(encoding="utf-8"))
 
+    def test_investigation_completes_with_contradicted_targets(self):
+        self.config['actions'][0].update(required_claims=[],
+            premise_free_reason='Measure a fixture without assuming its sign')
+        self.config['success_criteria'] = ['Fixture sign assessed']
+        self.config['subagent_mode']['claims'][0]['statement'] = 'Fixture is positive'
+        self.config['subagent_mode']['claims'][1]['statement'] = 'Fixture is positive and even'
+        request = self.start()
+        self.finish_review(request, claim_updates=[self.update(request, c, 'untested') for c in ('C1', 'C2')])
+        self.assertFalse(self.controller.status()['claim_dirty'])
+        worker = self.controller.next()['request']
+        self.assertEqual(worker['role'], 'worker')
+        (self.root/'evidence.txt').write_text('-1')
+        self.controller.finish(worker['token'], {'status':'done'})
+        request = self.controller.next()['request']
+        updates = [self.update(request, c, 'contradicted') for c in ('C1', 'C2')]
+        for update in updates:
+            update['evidence'][0]['relation'] = 'contradicts'
+            update['rationale'] = 'The saved fixture value -1 is not positive'
+        self.finish_review(request, claim_updates=updates, cleared_actions=[], next_action=None,
+                           goal_complete=True, verified_criteria=['Fixture sign assessed'], evidence_refs=['evidence.txt'])
+        state = self.controller.status()
+        self.assertTrue(state['complete'])
+        self.assertFalse(state['claim_dirty'])
+        self.assertTrue(all(c['status']=='contradicted' for c in state['working_claims'].values()))
+        _, directory = self.report_files()
+        self.assertEqual(read_json(directory/'claims.json')['working_claims'], state['working_claims'])
+
     def test_missing_required_action_fields_are_rejected(self):
         for field in ("required_claims", "affected_claims"):
             with self.subTest(field=field):

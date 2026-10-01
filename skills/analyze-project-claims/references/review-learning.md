@@ -24,12 +24,36 @@ contracts, maintenance, receipt, acceptance, or authorization rules.
    material in-scope inconsistency. Use the host workflow's readiness statuses;
    missing evidence or a required external action remains explicitly open.
 
-Use at most three repair-and-recheck cycles per invocation, or the host's
-stricter bound. Stop earlier if the finding set and candidate are unchanged,
-a previous candidate recurs, repairs oscillate, or progress requires missing
-evidence or authority. Record remaining findings and the concrete resumption
-condition. Do not reset the counter through recursive skills or automatic
-restarts. A cycle limit is a stopping condition, never evidence of convergence.
+## Repair-cycle budget and adaptation
+
+Use a default of **32 repair-and-recheck cycles per authorized attempt**, unless
+an explicit task budget or host limit is lower. One cycle is a substantive repair
+batch and complete applicable recheck, not one tool call or one reviewer. Stop
+as soon as a scoped pass needs no repair. Preserve the cumulative count across
+handoffs and resumptions; a ceiling is not a target or evidence of convergence.
+Stop earlier for unchanged/repeated findings or candidates, oscillation, no
+verified progress, or missing evidence/authority. Report remaining findings and
+the concrete resumption condition without resetting the attempt through another
+skill, agent, issue or workflow.
+
+Record the configured cap, cycles used, outcome, stop reason, residual finding
+IDs and progress evidence in the existing audit record. If **three of the last
+five comparable, distinct audits** reached their cap while still making verified
+progress, inspect the cause and increase the default for future comparable
+attempts by **16** (32 -> 48 -> 64). Stalled or oscillating runs do not qualify.
+With fewer than five comparable records, retain the current default. Record the
+five audit references, old/new cap, evidence and workflow scope; do not invent
+history or extend the current exhausted attempt by renaming it.
+
+This is a coordinator instruction, not a background tuner. Apply an adjusted cap
+within the existing user authority and any explicit budget. Persist a scoped
+default in the project's existing workflow/learning record. For a new controller
+goal set `max_repair_cycles` to that value before initialization. New goals default
+to 32; pre-0.12 journals without that field retain their legacy limit of three.
+The controller validates and enforces the saved cap; it does not infer adaptation
+from audit prose or raise a running attempt's budget. See [long-running mode](long-running-mode.md).
+Separate formal receipt-reconciliation or hosted-ledger limits remain explicit;
+this guidance does not edit their code or change acceptance authority.
 
 For read-only work, return findings and proposed lessons without writing or
 repairing. Existing task authorization continues to apply; this guide neither

@@ -6,6 +6,10 @@ claims-guided goal with `subagent_mode` configured. The parent coordinator owns
 the controller state. One token and one delegated worker or reviewer may be
 active at a time; host capacity does not authorize parallel mutations.
 
+Include [evidence-guided agents](evidence-guided-agents.md) and the scoped claims
+in each handoff. Provisional targets guide investigation; only declared execution
+prerequisites require current support. The coordinator commits shared updates.
+
 ## Coordinator loop
 
 Use the packaged `scripts/long_running_controller.py` with the existing goal
@@ -67,7 +71,7 @@ verification.
 Include this instruction with the exact request:
 
 > Wait for the coordinator's start message. Work only on the authorized action
-> in this token. Read its instruction, supported prerequisite claims, affected
+> in this token. Read its instruction, declared execution prerequisites, provisional targets, affected
 > claims, evidence scope, dependencies, holds, and limits. Call the controller's
 > `check` for this token immediately before starting; proceed only on `READY`.
 > Perform the substantial work unit and persist its actual output evidence in

@@ -13,12 +13,20 @@ contract without `subagent_mode` or claim fields. Use Python 3.10 or later.
 Local candidate validation used Windows and Python 3.12; compatibility across the
 repository's remaining OS/Python matrix requires the corresponding CI results.
 
+Apply [evidence-guided agents](evidence-guided-agents.md) to all participating
+roles. Investigation targets need not be supported before work.
+
 ## Manifest and action contract
 
 Required top-level fields are nonempty `goal_id`, `goal_revision`, `objective`,
 `authorization_ref`, an existing `project_root`, nonempty project-relative
 `evidence`, nonempty `success_criteria`, and nonempty `actions`.
 `max_dispatches` is a finite integer from 1 through 10000 (default 100).
+`max_repair_cycles` is an integer from 1 through 10000, defaulting to 32 for new
+goals. Initialization persists it; `status.repair_cycle_limit` reports the effective
+cap. Old journals without the field retain three, including after goal/plan
+revision. No existing attempt is expanded by an upgrade. Review dispatches consume
+`max_dispatches` too; that independent budget may stop a run earlier.
 Declare all controlling protocols, implementation, configuration and finalized
 output evidence. Missing files have a null hash and prevent goal completion.
 Paths cannot escape the project or cross links. Keep state and generated
@@ -36,9 +44,11 @@ Dependencies retain premises as well as execution order. A hold on an ancestor
 blocks dependent work even after that ancestor finished. Actions are one-shot
 units; do not rename them or start another state store to bypass history.
 Reserve optional repairs under the same authorized attempt. Done, failed and
-uncertain execution count toward its three-cycle limit; `not_started` does not.
-Repeated findings, unchanged/repeated candidate identities or three cycles stop
-that attempt. New sessions, clock changes and goal revisions do not reset it.
+uncertain execution count toward its saved repair-cycle limit; `not_started`
+does not. Repeated findings, unchanged/repeated candidate identities or reaching
+the saved cap stop that attempt. The [review-learning rule](review-learning.md#repair-cycle-budget-and-adaptation)
+allows evidence-based adjustments for future goals, not budget changes through
+plan patches or new attempt IDs that evade an exhausted attempt. New sessions, clock changes and goal revisions do not reset it.
 
 ## Cooperative execution
 

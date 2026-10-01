@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T12:34:37.633944Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1899,10 +1899,10 @@
   ],
   "created_at_utc": "2026-10-01T12:11:03.776664Z",
   "integrity": {
-    "canonical_payload_sha256": "422137bfea33be9ebfe8b8fa837852afaabac4f6fddc2a3585ec6a46d92ac5b2"
+    "canonical_payload_sha256": "84228b07f8453909d301dacf1eaa3db91fc6dba83b5f28c8be13adfd9c56b14b"
   },
   "map_id": "component-map-1c4bcfd9607f",
-  "map_state": "accepted",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the 0.12.0 evidence-guided agent workflow and configurable repair budgets, preserving legacy journal semantics and separating deterministic tests from native activation and scientific benefit.",
   "origin_scan_id": "20261001T121103776664Z-99bfce2d",

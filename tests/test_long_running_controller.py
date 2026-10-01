@@ -165,6 +165,7 @@ class ControllerTests(unittest.TestCase):
         self.assertTrue(self.controller.status()['attempts']['A']['stopped'])
 
     def test_three_cycle_budget_survives_restart(self):
+        self.config["max_repair_cycles"] = 3
         self.config['actions'] = [{'id': f'fix{i}', 'kind': 'repair', 'instruction': 'Fix evidence',
                                   'attempt_id': 'A', 'attempt_authorization_ref': 'owner instruction'} for i in range(4)]
         request = self.start()

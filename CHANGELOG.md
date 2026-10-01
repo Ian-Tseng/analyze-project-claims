@@ -4,6 +4,18 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.12.0] - 2026-10-01
+
+- Clarify evidence-guided work for parent, planner, worker and reviewer roles:
+  provisional claims may guide investigation and negative results update claims
+  and dependent plans. Pending review is distinct from missing support.
+- Default new controller configurations to 32 repair cycles and enforce explicit
+  `max_repair_cycles` values. Old journals without the field retain their original
+  three-cycle cap; restarts and plan/goal revisions cannot replenish it.
+- Define evidence-based prospective +16 budget adjustments after three progressing
+  cap hits among five comparable audits. This is coordinator guidance, not an
+  automatic background tuner or a way to extend an exhausted running attempt.
+
 ## [0.11.0] - 2026-10-01
 
 ### Added
