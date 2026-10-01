@@ -17,7 +17,7 @@ recommends the smallest useful next check.
 - contradictions across code, configuration, monitors, tables, and prose;
 - provenance, split, leakage, and publication boundaries.
 
-## Claim-guided subagent mode (0.11.0 candidate)
+## Claim-guided subagent mode (0.11.0)
 
 For explicitly authorized delegated goals, the optional controller runs one work
 unit at a time and routes each substantive outcome to `analyze-project-claims`.
@@ -25,8 +25,8 @@ It tracks supported premises, evidence links, limitations, dependent reports and
 sampled freshness while preserving pauses and bounded retries. Native subagents
 require an active host; the Python helper does not start a model or wake a session.
 See [setup, example and evidence limits](docs/CLAIM_GUIDED_SUBAGENTS.md).
-This source candidate is not a published release; the installation instructions
-below still identify the existing published version.
+Version 0.11.0 includes this optional mode. See the linked guide for native-host
+requirements and the boundary between tested helpers and host activation.
 
 ## Install
 
@@ -47,7 +47,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.10.0
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.11.0
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 

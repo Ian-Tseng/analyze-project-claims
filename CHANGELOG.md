@@ -4,9 +4,11 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.11.0] - 2026-10-01
+
 ### Added
 
-- 0.11.0 source candidate: optional durable long-running controller and sequential
+- Optional durable long-running controller and sequential
   claim-guided subagent mode. Actual host delegation routes every substantive work
   outcome to claims review before dependent work continues.
 - Source-bound claim updates, counterevidence dispositions, dependency closure,
