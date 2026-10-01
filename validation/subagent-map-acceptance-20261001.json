@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "kind": "map_acceptance_observation",
+  "observed_at": "2026-10-01T09:33:27.654695+00:00",
+  "map_id": "component-map-83164de30434",
+  "approved_source_commit": "1a96ee795eff8879ffa874862f0e8f217fc24d38",
+  "authorization": "User explicitly accepted the exact map candidate in the conversation after review of PR #22.",
+  "candidate": "validation/component-map/candidates/20261001T092434679671Z-9e7ec5e2-component-map-83164de30434.json",
+  "candidate_sha256": "5d958b95b3d5540a120577050f230494f9d8c193eaac34b970949a3295fe497a",
+  "candidate_canonical_payload_sha256": "243e9908197ada49ab9c9257d50c1302885d2c31d3e9e0d4c5b38809c869adda",
+  "accepted_map_sha256": "40ca5ba1982d00f3f879d96be0e590019634e2927cefef24413f04a6ba6b13d6",
+  "checks": {
+    "unchanged": {
+      "exit_code": 0,
+      "log_sha256": "fd43825614cef7d78e0232712d46120f8914e0933f1d3c43406d33f3b3ad62b1"
+    },
+    "preflight": {
+      "exit_code": 0,
+      "log_sha256": "fc8d2b64af76f4da2a56e212676414b06a9b070c1c8ae7f8ffbfb3fb63bba0a0"
+    },
+    "package": {
+      "exit_code": 0,
+      "log_sha256": "7baccc252c2e97f94fd0dc85fff206d912ab6c135977bbe26dd66eae2727d62c"
+    }
+  },
+  "unchanged_reconciliation": "checked_unchanged",
+  "formal_preflight": "passed",
+  "prior_observation": "validation/subagent-mode-candidate.json",
+  "scope": "Structural map acceptance only; not a semantic audit, merge, release, native activation, or scientific-efficacy claim.",
+  "historical_ci": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/36842647095",
+  "historical_ci_status": "All six test and byte-probe steps passed; previous map-preflight failures remain historical. New commit CI pending."
+}
