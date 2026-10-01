@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T13:55:14.377660Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1941,10 +1941,10 @@
   ],
   "created_at_utc": "2026-10-01T13:49:55.957654Z",
   "integrity": {
-    "canonical_payload_sha256": "48f85d3b36b42f1fafb6b2cafde88ab32cf2f9eeef31aa0cd8cf9d0b70c0d257"
+    "canonical_payload_sha256": "8364d60bc2e6bf0dd6bece51044cefb6f8fe4b5656cb750bc4f4f337f2b758dc"
   },
   "map_id": "component-map-0a4cb5147803",
-  "map_state": "accepted",
+  "map_state": "drift_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map v0.14.0 durable thread-limit recovery, bounded spawn reservations and evidence-gated retries, retaining cleanup and claims-review boundaries.",
   "origin_scan_id": "20261001T134955957654Z-d9a10fe2",

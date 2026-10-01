@@ -4,6 +4,17 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.14.0] - 2026-10-01
+
+- Journal native spawn reservations and results, including explicit recognition
+  of a confirmed `agent thread limit reached` rejection.
+- Bound spawning to `max_spawn_attempts` (default 3 total calls per token).
+  Require fresh capacity evidence before retry; recover uncertain or existing
+  agents without duplicate spawning, including after coordinator restart.
+- Preserve pending requests, work/repair budgets, pauses, evidence and required
+  separate claims review. Host close capability and actual capacity remain
+  external prerequisites; the controller does not launch or close agents.
+
 ## [0.13.0] - 2026-10-01
 
 - Add `agent-cleanup` planning from fresh native host observations and recorded

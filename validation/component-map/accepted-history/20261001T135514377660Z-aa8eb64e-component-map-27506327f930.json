@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T13:55:14.377660Z",
+  "accepted_at_utc": "2026-10-01T13:02:44.467346Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1016,25 +1016,6 @@
       "component_type": "module",
       "elements": [
         {
-          "element_id": "bounded-thread-limit-recovery",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_spawn_recovery.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Persisted spawn reservations bound host calls per token; confirmed thread-limit rejections require fresh capacity evidence, while ambiguous calls require identity recovery. Pending claims, review obligations and work budgets remain unchanged. Synthetic tests do not establish host capacity release."
-        },
-        {
           "element_id": "claim-gated-review",
           "evidence_locators": [
             {
@@ -1939,16 +1920,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-01T13:49:55.957654Z",
+  "created_at_utc": "2026-10-01T12:58:02.503225Z",
   "integrity": {
-    "canonical_payload_sha256": "48f85d3b36b42f1fafb6b2cafde88ab32cf2f9eeef31aa0cd8cf9d0b70c0d257"
+    "canonical_payload_sha256": "959d0a5a551fa3d524e2c6d466f90c563e32b500aa15405b335f5fea9bf1eec6"
   },
-  "map_id": "component-map-0a4cb5147803",
+  "map_id": "component-map-27506327f930",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map v0.14.0 durable thread-limit recovery, bounded spawn reservations and evidence-gated retries, retaining cleanup and claims-review boundaries.",
-  "origin_scan_id": "20261001T134955957654Z-d9a10fe2",
-  "previous_map_id": "component-map-27506327f930",
+  "objective": "Map v0.13.0 completed-agent lifecycle planning, scoped host closure and preserved claims-review/evidence boundaries, retaining v0.12.0 budget semantics.",
+  "origin_scan_id": "20261001T125802503225Z-f08f15b9",
+  "previous_map_id": "component-map-1c4bcfd9607f",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2087,11 +2068,10 @@
     "skills/analyze-project-claims/references/evidence-guided-agents.md",
     "tests/test_long_running_repair_budget.py",
     "skills/analyze-project-claims/scripts/agent_cleanup.py",
-    "tests/test_agent_cleanup.py",
-    "tests/test_spawn_recovery.py"
+    "tests/test_agent_cleanup.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "0e9c1dffd63446dedcfaf16c7beb7e6dfc8652efb378cc4caf098c2107af419f",
+  "skill_sha256": "14800876952adf4d408c75eac74c7720ceeb57b0ad8cc106f684b380c89c6707",
   "source_snapshot": [
     {
       "exists": true,
@@ -2102,7 +2082,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "13924a4b26a35b4cf9b10e28ad1e89f4ea098a70db2f2bf14ed83d7016e3e47a",
+      "sha256": "1b91e2e84d7795be7c3ae2fa8d8413c6043f0d3c1d711b3081e3228d37a469bf",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2150,13 +2130,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "2e377ef448274397abf6f59e74bb26e883cc17e3ed6ab87bf0e4da3513eebd69",
+      "sha256": "0a7ceee223bc695211b041f1f459d53d18cdd667d0afce71509640f283c79c09",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "aa2192d47480436dccd2366efaa76fde0fb9d5c1d748579262a4472569468010",
+      "sha256": "7241a8157594cc111f68657ca980f50ada629b098dff156c922703ac4e82868c",
       "source": "CITATION.cff"
     },
     {
@@ -2180,7 +2160,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ce22cdbd9180b408d3e2a196d7ca301882718a3b41739f4e4064584c9b32ad3b",
+      "sha256": "8a328c8dd39dccb7ce5ee9851f7a261164773d5c5186373b8a020bdfdc03ff53",
       "source": "README.md"
     },
     {
@@ -2192,7 +2172,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "065582655aacd6fc83ff742a5715c04bb4a57395bf3ee4559798fa42c2ce4589",
+      "sha256": "d84c9e596c7d6a94e5f74579ef8d8912a807b0d28582474900ad35dfb3edfcf4",
       "source": "VERSION"
     },
     {
@@ -2222,7 +2202,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c5913150faeea331adb19a33fdb433555b139e19fc2f42f4bc0ac6031609130c",
+      "sha256": "478b47168ce92d23811ad5815faac3536b20e7544542d4dd7e4b6947541ae1dc",
       "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
     },
     {
@@ -2696,13 +2676,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "1858eaca47eb4ff6a54a85760a8c9c3f48bc562e2b91a683d7e5f7b14d6eeee6",
+      "sha256": "f5ec2203dac20f26e9f130db0feead4273cba975678df973bae9efa753aa1e4c",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0e9c1dffd63446dedcfaf16c7beb7e6dfc8652efb378cc4caf098c2107af419f",
+      "sha256": "14800876952adf4d408c75eac74c7720ceeb57b0ad8cc106f684b380c89c6707",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -2840,13 +2820,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ef57c98a8f297e641d97a24303f3622bdee8a9581f2c7eeabd70db1dce3617b2",
+      "sha256": "47055f52cb2cba7a6d82980df27224cb3460013beb8b777cbf969586231935b6",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "75efa3cfa57b5f27f02391d36a729a26bf2a362d863cc1316194e4c9d6913583",
+      "sha256": "c20bfde8e3bd39ea1e3570c1ca4b7b28858ef9c801f09512524b2994c9638992",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -2930,13 +2910,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "928d8d9e98ba3b05cf5438229010cde689044c1022a483d214c28473768331f6",
+      "sha256": "b34f4a0d86ff0f4107c403f55d023426224cf5156b2476d57a98ee728cc6b20b",
       "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d7b5e6255a3201f37b1eac49c5daf853b264a5a9eab29b13fbcdd3e5138a572e",
+      "sha256": "9701b2d59ec4696bc99ba0dc0190e4a1c79b258710d47b85ce5adb17856913f6",
       "source": "skills/analyze-project-claims/references/subagent-mode.md"
     },
     {
@@ -3062,7 +3042,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "82fc7a5bf75cabaea017d653c0e6d8e95cb3b5a6b54ff7c94d7d2fb1346548c4",
+      "sha256": "d7b26c3dfba8e7654482ece3fb00022fcb4089b9f768869dab59c2442057089e",
       "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
     },
     {
@@ -3370,12 +3350,6 @@
       "kind": "file",
       "sha256": "6a78f8ca160864247a2913b01fb566048f432a2d7fc0337b79439754f0b7c9ba",
       "source": "tests/test_skill_quality_loop.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "77e6f6419ed656e2a7fff2f4444d260ed9fde1c4771c50cc8406ee03cf89502c",
-      "source": "tests/test_spawn_recovery.py"
     },
     {
       "exists": true,

@@ -150,7 +150,7 @@ relevant human authority can accept an exact component-map candidate.
 
 ## Continuation and limits
 
-The host follows `next -> check -> spawn waiting agent -> bind-agent -> check -> START -> wait/recover -> finish
+The host follows `next -> check -> spawn-attempt -> check -> spawn waiting agent -> bind-agent -> check -> START -> wait/recover -> finish
 -> next`. One persisted token covers the active worker or reviewer. This version
 supports sequential delegation; it does not run competing work mutations in
 parallel. Calling `next` while a token is in flight recovers that request and must
@@ -280,7 +280,8 @@ The host retains the complete returned token and request, then performs:
 
 ```text
 python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state check --token TOKEN
-# Native host: spawn the appropriate agent, instructed to wait for START.
+python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state spawn-attempt --token TOKEN
+# Only SPAWN_RESERVED permits one native call; recheck READY, then spawn waiting for START.
 python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state bind-agent --token TOKEN --agent-id OBSERVED_HOST_AGENT_ID
 python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state check --token TOKEN
 # Native host: send START to this bound agent only on READY; wait for its actual result.
@@ -309,3 +310,9 @@ that actual review. `failed` and `uncertain` outcomes also schedule review;
 they are not evidence of completion or permission to repeat unknown work.
 
 Use the [completed-agent lifecycle check](subagent-host-protocol.md#check-completion-and-release-host-resources) after results and before new dispatch. The `agent-cleanup` command produces a conservative plan; actual host closure is capability-dependent and never deletes evidence or clears pending claims review.
+
+For `agent thread limit reached`, use [bounded spawn recovery](subagent-host-protocol.md#recover-agent-thread-limit-reached).
+`spawn-attempt` and `spawn-result` journal up to `max_spawn_attempts` calls per
+token (default 3, including the initial call). Retry only after a confirmed
+non-creation rejection and new capacity evidence. Uncertain calls require identity
+recovery; the pending token, work budgets and separate claims review remain.
