@@ -40,6 +40,12 @@ def write_json(path, value):
 def read_json(path):
     return json.loads(Path(path).read_text(encoding="utf-8-sig"))
 
+def repair_cycle_limit(config):
+    # Missing field identifies a pre-0.12 journal; never expand its authority.
+    value = config.get("max_repair_cycles", 3)
+    require(type(value) is int and 1 <= value <= 10000, "Invalid repair cycle budget")
+    return value
+
 def validate_config(config):
     require(isinstance(config, dict), "Config must be an object")
     for key in ("goal_id", "goal_revision", "objective", "authorization_ref"):
@@ -79,6 +85,7 @@ def validate_config(config):
     require(type(config.get("max_dispatches", 100)) is int and 1 <= config.get("max_dispatches", 100) <= 10000, "Invalid dispatch budget")
     command = config.get("reviewer_command")
     require(command is None or (isinstance(command, list) and command and all(isinstance(x, str) for x in command)), "Invalid reviewer command")
+    repair_cycle_limit(config)
     subagent_mode.validate_config(config)
     return config
 
@@ -171,6 +178,9 @@ class Controller:
             self._materialize(state)
 
     def init(self, config):
+        require(isinstance(config, dict), "Config must be an object")
+        config = copy.deepcopy(config)
+        config.setdefault("max_repair_cycles", 32)
         config = validate_config(config)
         current = snapshot(config)
         with self.locked():
@@ -188,7 +198,10 @@ class Controller:
         with self.locked():
             state = self._load(sync_reports=False)[0]
             freshness = self._materialize(state)
-            return dict(state, freshness=freshness) if freshness is not None else state
+            result = dict(state, repair_cycle_limit=repair_cycle_limit(state["config"]))
+            if freshness is not None:
+                result["freshness"] = freshness
+            return result
 
     def control(self, value, reason):
         require(value in ("paused", "stopped", "active"), "Invalid control")
@@ -412,7 +425,7 @@ class Controller:
                         continue
                     if action.get("kind") == "repair":
                         attempt = state["attempts"].setdefault(action["attempt_id"], {"cycles": 0, "stopped": False, "candidates": [], "finding_sets": []})
-                        if attempt["stopped"] or attempt["cycles"] >= 3:
+                        if attempt["stopped"] or attempt["cycles"] >= repair_cycle_limit(state["config"]):
                             continue
                     request = {"kind": action.get("kind", "work"), "action_id": key, "instruction": action["instruction"],
                                "command": action.get("command"), "timeout_seconds": action.get("timeout_seconds", 300)}
@@ -422,7 +435,8 @@ class Controller:
             if request is None:
                 if digest(state) != unchanged:
                     self._save(state, "waiting", seq, prev)
-                return {"status": "WAITING", "holds": state["holds"], "review_failures": state["review_failures"], "wake_condition": "Evidence change, authorized reconciliation, or concrete owner decision"}
+                return {"status": "WAITING", "holds": state["holds"], "review_failures": state["review_failures"],
+                        "repair_cycle_limit": repair_cycle_limit(state["config"]), "wake_condition": "Evidence change, authorized reconciliation, or concrete owner decision"}
             request.update(token=uuid.uuid4().hex, goal_revision=state["config"]["goal_revision"], snapshot=current,
                            actions=state["actions"], holds=state["holds"], findings=state["findings"],
                            attempts=state["attempts"], config=state["config"])

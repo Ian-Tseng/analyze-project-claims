@@ -11,6 +11,9 @@ It extends the durable [controller](../scripts/long_running_controller.py) and i
 [long-running contract](long-running-mode.md). The native host integration is
 specified in [host protocol](subagent-host-protocol.md). This is an optional packaged helper; formal evidence-acceptance procedures remain unchanged.
 
+Apply [evidence-guided agents](evidence-guided-agents.md) to every participating
+role and include it with controlling files in `reviewer_sources`.
+
 ## Configure a goal
 
 When initializing a new authorized goal, add `subagent_mode` and the action
@@ -42,8 +45,9 @@ claim-specific locator. Keep the controller state and generated report
 projections outside that list: generated reports do not supply their own support
 and their regeneration must not create a source-change review loop.
 
-Each action declares nonempty `affected_claims`. Its `required_claims` are the
-premises needed before starting; they must be `supported` under the current
+Each action declares nonempty `affected_claims`, including hypotheses it tests.
+Its `required_claims` are only genuine execution prerequisites, not every working
+assumption or desired experimental result; they must be `supported` under the current
 review. The controller also retains action dependencies, review clearances,
 holds, repair limits, and pause checks. A worker cannot bypass a missing premise
 by claiming its own proposed implementation is already supported.
@@ -63,7 +67,9 @@ evidence or reviewer-contract drift conservatively marks all claims for review. 
 an extra updated claim also requires updates to its dependent closure. All
 `claim_dirty` entries must be resolved before any work proceeds, including
 premise-free work. Preserve same-scope counterevidence and historical review results when replacing the
-current working projection.
+current working projection. Clearing dirty claims records a review; it does not
+require promoting them to supported. An eligible investigation may proceed while
+its target is untested or contradicted, with genuine prerequisites still enforced.
 
 The reviewer uses exactly the installed skill's five statuses:
 
@@ -217,7 +223,7 @@ if len(sys.argv) != 3 or not sys.argv[1].strip():
 authority = sys.argv[1]
 skill = Path(sys.argv[2]).resolve(strict=True)
 sources = [skill / "SKILL.md"] + [skill / "references" / name for name in (
-    "review-learning.md", "long-running-mode.md", "subagent-mode.md",
+    "review-learning.md", "evidence-guided-agents.md", "long-running-mode.md", "subagent-mode.md",
     "subagent-host-protocol.md")]
 assert all(path.is_file() for path in sources)
 project = (Path.cwd() / "claims-demo").resolve()

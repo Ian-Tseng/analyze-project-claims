@@ -32,13 +32,22 @@ Keep experiment-specific conclusions in the project record; promote a reusable
 decision rule only with explicit evidence prerequisites, applicability, and
 exceptions. Existing repair-attempt and receipt-reconciliation limits still apply.
 
+## Evidence-guided work for all participating agents
+
+Read [evidence-guided agents](references/evidence-guided-agents.md) for parent,
+worker, planner and reviewer roles. Work from current claims and evidence;
+provisional claims may guide investigation. Test them and revise affected claims
+and dependent plans when observations support, qualify or contradict them.
+
 ## Continue authorized work with claims review
 
 For an authorized long-running goal, read [long-running mode](references/long-running-mode.md).
 When the user explicitly requests delegated work, also read
 [subagent mode](references/subagent-mode.md) and its
 [host protocol](references/subagent-host-protocol.md). Use the packaged controller
-to retain one in-flight unit, supported premises, bounded attempts and pauses.
+to retain one in-flight unit, scoped claims, bounded attempts and pauses.
+Only declared execution prerequisites require support; hypotheses being tested
+may remain untested or contradicted.
 After each substantive done, failed or uncertain work unit, invoke this skill,
 review affected claims and their dependents, and update evidence, limitations and
 report projections before continuing eligible work. Work completion alone never
@@ -196,15 +205,21 @@ When repairs are authorized:
 5. Re-run tests, preflight, monitors, and stale-language scans.
 6. Reinspect the original scope and every changed surface.
 
-Use at most three repair-and-recheck cycles inside one owner-authorized
-candidate attempt. After each cycle, record the sorted active
+Use a default of 32 repair-and-recheck cycles inside one owner-authorized
+candidate attempt, subject to explicit task budgets. Apply the prospective
+adjustment rule in [review-learning](references/review-learning.md#repair-cycle-budget-and-adaptation). After each cycle, record the sorted active
 `(path, rule-or-test, evidence-locator)` finding set and the SHA-256 candidate
 diff identity. Stop successfully when validation passes and no material
 same-scope inconsistency remains. Stop without claiming convergence on a
 repeated finding set, an unchanged or previously seen candidate diff identity,
 oscillation, a required forbidden edit, missing external evidence, an owner
-decision, or the third cycle. Preserve the last bounded candidate for owner
+decision, or the configured cycle limit. Preserve the last bounded candidate for owner
 review.
+
+The separately authorized protected maintainer workflow remains limited to
+at most three repair-and-recheck cycles for its hosted draft attempt; see
+[quality-loop authority](references/skill-quality-loop.md). Its owner-applied
+label is not a grant of the broader local default.
 
 Do not invoke another skill recursively, emit another quality receipt, open a
 second issue, or trigger another workflow to continue the loop. When the user
