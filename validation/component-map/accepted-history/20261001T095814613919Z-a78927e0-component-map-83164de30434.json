@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T09:58:14.613919Z",
+  "accepted_at_utc": "2026-10-01T09:33:01.671771Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1870,16 +1870,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-01T09:54:42.057405Z",
+  "created_at_utc": "2026-10-01T09:24:34.679671Z",
   "integrity": {
-    "canonical_payload_sha256": "68f8aa6c5fa2183932eaa91583971285662e75706f5ccded7b1feaf598f5fc24"
+    "canonical_payload_sha256": "93c0f9e8b0265140a93bb280bd1c3509e847cc62718e5c31d4bcdf7cf6e0d3c4"
   },
-  "map_id": "component-map-c39800623112",
+  "map_id": "component-map-83164de30434",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
   "objective": "Map the 0.11.0 source candidate, including retained local evidence nomination and retained audit workflows, separating deterministic candidates from human evidence acceptance, formal append, release, installed activation, and pilot usefulness. Add the optional bounded claim-guided long-running subagent controller and sampled report currency; preserve human map acceptance and release boundaries.",
-  "origin_scan_id": "20261001T095442057405Z-8290ce57",
-  "previous_map_id": "component-map-83164de30434",
+  "origin_scan_id": "20261001T092434679671Z-9e7ec5e2",
+  "previous_map_id": "component-map-3df56ac1a6d5",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2076,13 +2076,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6d097cdb6c82f093369d2d16d691e6a4003b69c79a7bf07bbbff9d87be495913",
+      "sha256": "4e27eda7753730e3c78d020f439814244629990abe7e11b84dd7265c19630ff7",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ea8b0276da4272605acd5ce6a3ba8e68d898e25b94648e942cf45b451bfa3da1",
+      "sha256": "cea0857b3570e4939c6a88936ffdf49e53f13325a3a729085886f5b566008416",
       "source": "CITATION.cff"
     },
     {
@@ -2106,7 +2106,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d066166b82117a54deb48b8565725fdefc2a9c340b15054da5f835613a487d65",
+      "sha256": "410d5ba571f15072b408e641b4ab4d6b4cba034ec96cf22119a8434334975069",
       "source": "README.md"
     },
     {
