@@ -19,7 +19,7 @@ Read the [base controller contract](../skills/analyze-project-claims/references/
 
 Use the packaged [complete synthetic startup example](../skills/analyze-project-claims/references/subagent-mode.md#synthetic-startup-example).
 It constructs the whole manifest, initializes one durable state directory, and
-shows the native `next -> check -> spawn waiting agent -> bind-agent -> check ->
+shows the native `next -> check -> spawn-attempt -> check -> spawn waiting agent -> bind-agent -> check ->
 START -> wait/recover -> finish -> next` sequence. Supply actual delegation
 authority and resolve the active installed skill before initialization.
 
@@ -62,3 +62,9 @@ justify a prospective +16 adjustment under the
 [review-learning policy](../skills/analyze-project-claims/references/review-learning.md#repair-cycle-budget-and-adaptation).
 
 Use the [completed-agent lifecycle check](../skills/analyze-project-claims/references/subagent-host-protocol.md#check-completion-and-release-host-resources) after results and before new dispatch. The `agent-cleanup` command produces a conservative plan; actual host closure is capability-dependent and never deletes evidence or clears pending claims review.
+
+For `agent thread limit reached`, use [bounded spawn recovery](../skills/analyze-project-claims/references/subagent-host-protocol.md#recover-agent-thread-limit-reached).
+`spawn-attempt` and `spawn-result` journal up to `max_spawn_attempts` calls per
+token (default 3, including the initial call). Retry only after a confirmed
+non-creation rejection and new capacity evidence. Uncertain calls require identity
+recovery; the pending token, work budgets and separate claims review remain.

@@ -49,7 +49,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.13.0
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.14.0
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
@@ -271,3 +271,9 @@ automatically publish feedback or accept evidence on the user's behalf.
 Version 0.13.0 adds completed-agent cleanup planning: inspect fresh host state,
 retain unrecorded/live work and release eligible host resources where supported.
 See the [lifecycle contract](skills/analyze-project-claims/references/subagent-host-protocol.md#check-completion-and-release-host-resources).
+
+Version 0.14.0 thread-limit recovery uses durable spawn reservations and a default maximum of
+three host calls per pending token. Confirmed `agent thread limit reached`
+rejections require fresh capacity evidence before retry; ambiguous calls require
+recovery of the existing host identity. See the
+[host recovery protocol](skills/analyze-project-claims/references/subagent-host-protocol.md#recover-agent-thread-limit-reached).

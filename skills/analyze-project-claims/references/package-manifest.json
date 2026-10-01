@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "14800876952adf4d408c75eac74c7720ceeb57b0ad8cc106f684b380c89c6707"
+      "sha256": "0e9c1dffd63446dedcfaf16c7beb7e6dfc8652efb378cc4caf098c2107af419f"
     },
     {
       "path": "agents/openai.yaml",
@@ -142,7 +142,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "c20bfde8e3bd39ea1e3570c1ca4b7b28858ef9c801f09512524b2994c9638992"
+      "sha256": "75efa3cfa57b5f27f02391d36a729a26bf2a362d863cc1316194e4c9d6913583"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -198,11 +198,11 @@
     },
     {
       "path": "references/subagent-host-protocol.md",
-      "sha256": "b34f4a0d86ff0f4107c403f55d023426224cf5156b2476d57a98ee728cc6b20b"
+      "sha256": "928d8d9e98ba3b05cf5438229010cde689044c1022a483d214c28473768331f6"
     },
     {
       "path": "references/subagent-mode.md",
-      "sha256": "9701b2d59ec4696bc99ba0dc0190e4a1c79b258710d47b85ce5adb17856913f6"
+      "sha256": "d7b5e6255a3201f37b1eac49c5daf853b264a5a9eab29b13fbcdd3e5138a572e"
     },
     {
       "path": "references/update-policy.schema.json",
@@ -298,7 +298,7 @@
     },
     {
       "path": "scripts/long_running_controller.py",
-      "sha256": "d7b26c3dfba8e7654482ece3fb00022fcb4089b9f768869dab59c2442057089e"
+      "sha256": "82fc7a5bf75cabaea017d653c0e6d8e95cb3b5a6b54ff7c94d7d2fb1346548c4"
     },
     {
       "path": "scripts/managed_fleet.py",

@@ -1,0 +1,118 @@
+{
+  "accepted_map_id": "component-map-27506327f930",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-0a4cb5147803",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "bounded-thread-limit-recovery"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".codex-plugin/plugin.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-mode.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_spawn_recovery.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "b317ba11cdd1f9d5d7c5b20fb100a97693223b2ec55acd88e47c18ba29eaa643"
+  },
+  "recorded_at_utc": "2026-10-01T13:49:55.957654Z",
+  "scan_id": "20261001T134955957654Z-d9a10fe2",
+  "schema_version": "1.0"
+}

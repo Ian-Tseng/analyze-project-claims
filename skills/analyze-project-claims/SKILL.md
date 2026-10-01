@@ -49,6 +49,9 @@ to retain one in-flight unit, scoped claims, bounded attempts and pauses.
 At recovery, after results and before further dispatch, check completed agents
 through the host protocol and `agent-cleanup`; release eligible owned agents only
 through an available native close operation, preserving evidence and pending review.
+On `agent thread limit reached`, follow the host protocol's durable spawn
+reservation and bounded recovery procedure; retain the pending token and claims
+review when capacity or a close capability is unavailable.
 Only declared execution prerequisites require support; hypotheses being tested
 may remain untested or contradicted.
 After each substantive done, failed or uncertain work unit, invoke this skill,

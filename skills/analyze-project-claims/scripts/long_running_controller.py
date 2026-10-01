@@ -6,6 +6,7 @@ import copy
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -86,6 +87,9 @@ def validate_config(config):
     require(type(config.get("max_dispatches", 100)) is int and 1 <= config.get("max_dispatches", 100) <= 10000, "Invalid dispatch budget")
     command = config.get("reviewer_command")
     require(command is None or (isinstance(command, list) and command and all(isinstance(x, str) for x in command)), "Invalid reviewer command")
+    require(type(config.get("max_spawn_attempts", 3)) is int and
+            1 <= config.get("max_spawn_attempts", 3) <= 100,
+            "max_spawn_attempts must be an integer from 1 to 100")
     repair_cycle_limit(config)
     subagent_mode.validate_config(config)
     return config
@@ -182,6 +186,7 @@ class Controller:
         require(isinstance(config, dict), "Config must be an object")
         config = copy.deepcopy(config)
         config.setdefault("max_repair_cycles", 32)
+        config.setdefault("max_spawn_attempts", 3)
         config = validate_config(config)
         current = snapshot(config)
         with self.locked():
@@ -211,6 +216,83 @@ class Controller:
             result = agent_cleanup.plan(state, observation)
             result.update(journal_seq=seq, journal_digest=previous)
             return result
+
+    def spawn_attempt(self, token, observation=None):
+        """Reserve one host call durably; a repeated reservation never permits a retry."""
+        with self.locked():
+            state, seq, previous = self._load(sync_reports=False)
+            require(subagent_mode.enabled(state['config']), 'Subagent mode is not enabled')
+            require(state['pending'] and state['pending']['token'] == token,
+                    'No matching in-flight action')
+            if token in state['delegations']:
+                return {'status': 'RECOVER_BOUND_AGENT', 'delegation': state['delegations'][token]}
+            if state['control'] != 'active':
+                return {'status': state['control'].upper()}
+            if (state['pending']['snapshot'] != snapshot(state['config']) or
+                    state['reviewer_contract'] != subagent_mode.reviewer_snapshot(state['config'])):
+                return {'status': 'STALE'}
+            history = state.get('spawn_attempts', {}).get(token, [])
+            limit = state['config'].get('max_spawn_attempts', 3)
+            if history and history[-1]['outcome'] != 'thread_limit':
+                return {'status': 'RECOVER_SPAWN', 'attempt': history[-1]}
+            if len(history) >= limit:
+                return {'status': 'SPAWN_BUDGET_EXHAUSTED', 'attempts_used': len(history), 'limit': limit}
+            if history:
+                if observation is None:
+                    return {'status': 'WAITING_FOR_CAPACITY', 'attempts_used': len(history)}
+                require(isinstance(observation, dict) and set(observation) == {
+                    'host', 'matching_agent_ids', 'capacity_available', 'capacity_evidence_ref'},
+                    'Invalid spawn recovery observation')
+                agent_cleanup.plan(state, observation['host'])
+                require(observation['host']['observed_at'] >= history[-1]['recorded_at'],
+                        'Observe the host after the rejected spawn')
+                matches = observation['matching_agent_ids']
+                require(isinstance(matches, list) and all(isinstance(x, str) and x.strip() for x in matches),
+                        'Record token-matching host identities')
+                require(type(observation['capacity_available']) is bool, 'capacity_available must be boolean')
+                ref = observation['capacity_evidence_ref']
+                require(isinstance(ref, str) and ref.strip(), 'Record capacity evidence')
+                if matches:
+                    return {'status': 'RECOVER_SPAWN', 'matching_agent_ids': matches}
+                if not observation['capacity_available']:
+                    return {'status': 'WAITING_FOR_CAPACITY', 'attempts_used': len(history)}
+                require(all((item.get('recovery') or {}).get('capacity_evidence_ref') != ref for item in history),
+                        'Retry needs new capacity evidence, not a reused observation')
+            elif observation is not None:
+                raise ContractError('Recovery observation applies only after a thread-limit rejection')
+            attempt = {'attempt_id': uuid.uuid4().hex, 'number': len(history) + 1,
+                       'outcome': 'reserved', 'reserved_at': time.time(), 'recovery': observation}
+            state.setdefault('spawn_attempts', {}).setdefault(token, []).append(attempt)
+            self._save(state, 'spawn_reserved', seq, previous, sync_reports=False)
+            return {'status': 'SPAWN_RESERVED', 'token': token, 'attempt_id': attempt['attempt_id'],
+                    'attempts_used': attempt['number'], 'limit': limit}
+
+    def spawn_result(self, token, result):
+        """Record rejected/uncertain host calls, without finishing the work token."""
+        require(isinstance(result, dict) and set(result) == {
+            'attempt_id', 'error', 'source_ref', 'no_agent_created'}, 'Invalid spawn result fields')
+        require(all(isinstance(result[k], str) and result[k].strip()
+                    for k in ('attempt_id', 'error', 'source_ref')), 'Record attempt, error and host source')
+        require(type(result['no_agent_created']) is bool, 'no_agent_created must be boolean')
+        with self.locked():
+            state, seq, previous = self._load(sync_reports=False)
+            require(subagent_mode.enabled(state['config']), 'Subagent mode is not enabled')
+            history = state.get('spawn_attempts', {}).get(token, [])
+            attempt = next((x for x in history if x['attempt_id'] == result['attempt_id']), None)
+            require(attempt is not None, 'Unknown spawn attempt')
+            if 'result' in attempt:
+                require(attempt['result'] == result, 'Spawn result already recorded with different evidence')
+                return {'status': 'ALREADY_RECORDED', 'outcome': attempt['outcome']}
+            require(state['pending'] and state['pending']['token'] == token and attempt is history[-1],
+                    'No matching in-flight spawn attempt')
+            require(token not in state['delegations'], 'Recover the bound agent instead')
+            # Exact known host diagnostic plus explicit host evidence of no creation.
+            # Substrings in quoted explanations are not recognized as rejections.
+            is_limit = re.fullmatch(r'agent thread limit reached[.!]?', result['error'].strip(), re.I)
+            attempt.update(result=copy.deepcopy(result), recorded_at=time.time(),
+                           outcome='thread_limit' if is_limit and result['no_agent_created'] else 'uncertain')
+            self._save(state, 'spawn_result', seq, previous, sync_reports=False)
+            return {'status': 'SPAWN_RESULT_RECORDED', 'outcome': attempt['outcome']}
 
     def control(self, value, reason):
         require(value in ("paused", "stopped", "active"), "Invalid control")
@@ -636,6 +718,8 @@ def main():
     init = commands.add_parser("init"); init.add_argument("--config", required=True)
     commands.add_parser("status"); commands.add_parser("next")
     bind = commands.add_parser("bind-agent"); bind.add_argument("--token", required=True); bind.add_argument("--agent-id", required=True)
+    spawn = commands.add_parser("spawn-attempt"); spawn.add_argument("--token", required=True); spawn.add_argument("--observation")
+    spawned = commands.add_parser("spawn-result"); spawned.add_argument("--token", required=True); spawned.add_argument("--result", required=True)
     cleanup = commands.add_parser("agent-cleanup"); cleanup.add_argument("--observation", required=True)
     check = commands.add_parser("check"); check.add_argument("--token", required=True)
     revise = commands.add_parser("revise"); revise.add_argument("--revision", required=True); revise.add_argument("--objective", required=True); revise.add_argument("--criterion", action="append", required=True); revise.add_argument("--authority", required=True)
@@ -653,6 +737,8 @@ def main():
         elif args.command == "status": result = controller.status()
         elif args.command == "next": result = controller.next()
         elif args.command == "bind-agent": result = controller.bind_agent(args.token, args.agent_id)
+        elif args.command == "spawn-attempt": result = controller.spawn_attempt(args.token, read_json(args.observation) if args.observation else None)
+        elif args.command == "spawn-result": result = controller.spawn_result(args.token, read_json(args.result))
         elif args.command == "agent-cleanup": result = controller.agent_cleanup(read_json(args.observation))
         elif args.command == "check": result = controller.check(args.token)
         elif args.command == "revise": result = controller.revise(args.revision, args.objective, args.criterion, args.authority)

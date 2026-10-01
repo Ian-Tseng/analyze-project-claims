@@ -25,7 +25,19 @@ synthetic example. In the following commands, `$ClaimsController` and
 2. Run `check --token TOKEN`. Dispatch only on `READY`. `STALE` requires the
    base protocol's not-started/failed-review handling and a fresh review;
    pause or stop prevents execution. Do not silently run the old request.
-3. Call the native `collaboration.spawn_agent` with a task name containing the
+3. Inspect the current host for an existing task bearing this token (including
+   an unbound task left by an earlier host call). Recover it if present; do not
+   reserve another spawn. Otherwise reserve one call durably:
+
+   ```powershell
+   py -3 $ClaimsController --state $ClaimsState spawn-attempt --token TOKEN
+   ```
+
+   Only the invocation returning `SPAWN_RESERVED` permits one native call.
+   Recheck `check` immediately before that call; a pause or source change still
+   prevents spawning. Repeating `spawn-attempt` after a lost response returns
+   `RECOVER_SPAWN`, not another permission. Use the recovery procedure below.
+   Call the native `collaboration.spawn_agent` with a task name containing the
    token and the complete role-specific request. Use a worker for a work action
    and a `claims_reviewer` for a review. Tell the agent to wait for the
    coordinator's start message before doing task work. This separates spawning
@@ -271,3 +283,100 @@ worker's result is recorded and before the separate claims reviewer starts, whic
 allows the reviewer to use the freed capacity. It does not clear dirty claims or
 permit dependent work before review. The reviewer's own recorded result is cleaned
 up the same way without recursively launching another claims review.
+
+## Recover `agent thread limit reached`
+
+A host thread limit is independent of the 32-cycle repair budget and may count
+retained threads as well as running agents. A finished agent is not necessarily
+a freed slot. Do not increase concurrency, reset the controller, create another
+conversation, or interrupt active agents to bypass it.
+
+Before each native spawn, `spawn-attempt` reserves one attempt in the existing
+hash-linked journal. New goals persist `max_spawn_attempts` (default **3 total
+calls per token**, initial call included; configurable from 1 to 100 at init).
+Older journals without this setting use 3 for newly recorded reservations;
+this does not reconstruct earlier unrecorded host calls. Keep existing controller
+bindings. Inspect historical calls before adopting this protocol for a pending
+token; if its execution is uncertain, recover it instead of reserving a call.
+The helper never launches agents and cannot intercept host calls that bypass it.
+
+On an unsuccessful native call, preserve the raw response and record:
+
+```json
+{
+  "attempt_id": "ID_FROM_SPAWN_RESERVED",
+  "error": "agent thread limit reached.",
+  "source_ref": "local-log/raw-spawn-response.json",
+  "no_agent_created": true
+}
+```
+
+```powershell
+py -3 $ClaimsController --state $ClaimsState spawn-result --token TOKEN --result spawn-result.json
+```
+
+Use the actual diagnostic. Recognition is case-insensitive for the complete
+`agent thread limit reached` diagnostic, with optional final period/exclamation.
+Do not truncate another error into that phrase. `no_agent_created` must be backed
+by a definitive host rejection; timeout, missing output, or an absent list entry
+alone cannot establish it. Only that diagnostic plus confirmed non-creation
+records `thread_limit`; other failures record `uncertain`. Preserve the raw host
+source; declarations are validated structurally, not independently authenticated.
+Recording a failure remains allowed after pause or source drift, without starting
+work or changing the pending token, claims, review state, or work budgets.
+
+For a confirmed rejection:
+
+1. Inspect actual agents and associated execution; collect and persist completed
+   results. Apply `agent-cleanup` and the native close procedure above only when
+   supported and eligible. Absence of a close tool remains `CLOSE_UNAVAILABLE`.
+2. If capacity has not demonstrably become available, retain this pending token
+   and report `WAITING_FOR_CAPACITY`. Use bounded waits only while a real operation
+   can change capacity; stop recovery on no progress, missing capability/evidence,
+   pause, stale sources or exhausted budget. Waiting does not consume spawn calls.
+3. After a verified capacity change, write a new observation:
+
+   ```json
+   {
+     "host": {
+       "observed_at": 1790856000,
+       "source_ref": "local-log/fresh-host-list.json",
+       "close_supported": false,
+       "agents": []
+     },
+     "matching_agent_ids": [],
+     "capacity_available": true,
+     "capacity_evidence_ref": "local-log/verified-capacity-change.json"
+   }
+   ```
+
+   Replace illustrative time/entries with the real host observation. Search
+   token-bearing names and retained outputs as well as bound IDs. Include every
+   matching identity even if capacity is free. `capacity_available` requires
+   observed available capacity or confirmed release with the host's capacity
+   semantics; merely requesting close, waiting or observing an idle agent is
+   insufficient. Each retry requires new evidence after the last rejection.
+4. Run `spawn-attempt --token TOKEN --observation recovery.json`. The helper
+   requires an observation no older than 60 seconds and no earlier than the last
+   rejection. A matching agent yields `RECOVER_SPAWN`; unavailable capacity yields
+   `WAITING_FOR_CAPACITY`. Only `SPAWN_RESERVED` allows one call with the same
+   request/token/role, after rechecking `READY`. On success, bind its actual ID
+   and follow the normal START handshake. On failure, record that attempt's
+   result. `SPAWN_BUDGET_EXHAUSTED` ends retries for this token.
+
+A reserved call with no result or an uncertain failure yields `RECOVER_SPAWN`:
+inspect the actual host and recover/bind the existing agent. Do not infer that a
+crash happened before the call. If execution cannot be resolved, retain the token
+and report the concrete blocker. `RECOVER_BOUND_AGENT` directs recovery of the
+already bound identity. Never use `finish`, a new token, goal revision, or a new
+state directory solely to replenish capacity retries. No automatic retry follows
+budget exhaustion. Explicit execution reconciliation uses the base protocol and
+must preserve this history. Source drift, pause, stop and required separate claims
+review still apply; capacity failure never authorizes the worker to approve its
+own claims or the parent to silently replace the delegated reviewer.
+
+The same evidence and lifecycle rules apply outside controller mode: keep a
+three-call maximum in the existing task history unless an explicit budget was
+set, record uncertain calls, recover identities and require new capacity evidence
+before retrying. This guidance does not install a runtime interceptor or change
+the host's own thread limit.
