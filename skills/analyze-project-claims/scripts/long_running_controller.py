@@ -12,6 +12,7 @@ import sys
 import time
 import uuid
 import subagent_mode
+import agent_cleanup
 
 ContractError = subagent_mode.ContractError
 
@@ -201,6 +202,14 @@ class Controller:
             result = dict(state, repair_cycle_limit=repair_cycle_limit(state["config"]))
             if freshness is not None:
                 result["freshness"] = freshness
+            return result
+
+    def agent_cleanup(self, observation):
+        with self.locked():
+            state, seq, previous = self._load(sync_reports=False)
+            require(subagent_mode.enabled(state['config']), 'Subagent mode is not enabled')
+            result = agent_cleanup.plan(state, observation)
+            result.update(journal_seq=seq, journal_digest=previous)
             return result
 
     def control(self, value, reason):
@@ -627,6 +636,7 @@ def main():
     init = commands.add_parser("init"); init.add_argument("--config", required=True)
     commands.add_parser("status"); commands.add_parser("next")
     bind = commands.add_parser("bind-agent"); bind.add_argument("--token", required=True); bind.add_argument("--agent-id", required=True)
+    cleanup = commands.add_parser("agent-cleanup"); cleanup.add_argument("--observation", required=True)
     check = commands.add_parser("check"); check.add_argument("--token", required=True)
     revise = commands.add_parser("revise"); revise.add_argument("--revision", required=True); revise.add_argument("--objective", required=True); revise.add_argument("--criterion", action="append", required=True); revise.add_argument("--authority", required=True)
     grant = commands.add_parser("authorize-plan"); grant.add_argument("--proposal", required=True); grant.add_argument("--scope", choices=("existing", "expanded"), required=True); grant.add_argument("--authority", required=True); grant.add_argument("--rationale", required=True)
@@ -643,6 +653,7 @@ def main():
         elif args.command == "status": result = controller.status()
         elif args.command == "next": result = controller.next()
         elif args.command == "bind-agent": result = controller.bind_agent(args.token, args.agent_id)
+        elif args.command == "agent-cleanup": result = controller.agent_cleanup(read_json(args.observation))
         elif args.command == "check": result = controller.check(args.token)
         elif args.command == "revise": result = controller.revise(args.revision, args.objective, args.criterion, args.authority)
         elif args.command == "authorize-plan": result = controller.authorize_plan(read_json(args.proposal), args.scope, args.authority, args.rationale)

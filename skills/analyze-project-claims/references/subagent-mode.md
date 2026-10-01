@@ -305,3 +305,5 @@ claims with current source hashes, locators, limitations and rationale, then
 applies the complete goal-completion gate. No example result substitutes for
 that actual review. `failed` and `uncertain` outcomes also schedule review;
 they are not evidence of completion or permission to repeat unknown work.
+
+Use the [completed-agent lifecycle check](subagent-host-protocol.md#check-completion-and-release-host-resources) after results and before new dispatch. The `agent-cleanup` command produces a conservative plan; actual host closure is capability-dependent and never deletes evidence or clears pending claims review.

@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "fffc22cbe086a68601d7e2dfd77bd8e676b42cee1be62fb93fe862dc03fa110c"
+      "sha256": "14800876952adf4d408c75eac74c7720ceeb57b0ad8cc106f684b380c89c6707"
     },
     {
       "path": "agents/openai.yaml",
@@ -134,7 +134,7 @@
     },
     {
       "path": "references/long-running-mode.md",
-      "sha256": "cb91175d8d6995d2b99375a00f8466ac7a1be38d3771ceac9448f6bbab5d1846"
+      "sha256": "cb6d3c429aa59498f32f9bb16577b59d4f564f0c8ec021472166b049c34362f0"
     },
     {
       "path": "references/managed-skill-policy.schema.json",
@@ -142,7 +142,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "415b203ac8d6e9cd089602a170c0e590378139e03f895b3ac3a8da0f713b2238"
+      "sha256": "c20bfde8e3bd39ea1e3570c1ca4b7b28858ef9c801f09512524b2994c9638992"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -198,11 +198,11 @@
     },
     {
       "path": "references/subagent-host-protocol.md",
-      "sha256": "831289b3523aa24c222dc2cbf5e3a2c414abe43d05be56b1c8923dd1643c653e"
+      "sha256": "b34f4a0d86ff0f4107c403f55d023426224cf5156b2476d57a98ee728cc6b20b"
     },
     {
       "path": "references/subagent-mode.md",
-      "sha256": "04a11ac91906d5cd782373c08dab0ac2581f02bc8f17393512baf3e6973832f6"
+      "sha256": "30a45f610ff51bcaa33a4890127769ef505f9999b1f06c32350448e75a05401b"
     },
     {
       "path": "references/update-policy.schema.json",
@@ -281,6 +281,10 @@
       "sha256": "21ac1aad444cfd9b9c8c00dab1a4b84b7d5c5666731dd152254c8f0116006ec2"
     },
     {
+      "path": "scripts/agent_cleanup.py",
+      "sha256": "415851d3a6276ccf6e7748271dccaa147083ef21655dd38a7c599ece82a395e0"
+    },
+    {
       "path": "scripts/evidence_nomination.py",
       "sha256": "202500b8694df67c2996031ec0a7f7549a30c6132799e9f3e56c82e9c1a85ecc"
     },
@@ -294,7 +298,7 @@
     },
     {
       "path": "scripts/long_running_controller.py",
-      "sha256": "6c2925d3978cf7bd8c57eafa0f04dd58b9704f7aad7a07bcf73cc506fd0c6a31"
+      "sha256": "d7b26c3dfba8e7654482ece3fb00022fcb4089b9f768869dab59c2442057089e"
     },
     {
       "path": "scripts/managed_fleet.py",
@@ -318,7 +322,7 @@
     },
     {
       "path": "scripts/subagent_mode.py",
-      "sha256": "ff8d4f0d12c84b7c0aae0123557df903c5fc2af491805e7a0af044f018aac8ba"
+      "sha256": "98a1c93040cefc185a6580a7a6ce7bebfda7b63021151276f8ec69784ccb7d43"
     },
     {
       "path": "scripts/update_policy.py",
