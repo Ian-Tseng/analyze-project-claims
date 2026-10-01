@@ -134,7 +134,7 @@
     },
     {
       "path": "references/long-running-mode.md",
-      "sha256": "cb6d3c429aa59498f32f9bb16577b59d4f564f0c8ec021472166b049c34362f0"
+      "sha256": "ae8b46a3bef738cb3c244c3df35e5ddcd1a91cfd1d9364c8d51199221a446f44"
     },
     {
       "path": "references/managed-skill-policy.schema.json",
@@ -202,7 +202,7 @@
     },
     {
       "path": "references/subagent-mode.md",
-      "sha256": "30a45f610ff51bcaa33a4890127769ef505f9999b1f06c32350448e75a05401b"
+      "sha256": "9701b2d59ec4696bc99ba0dc0190e4a1c79b258710d47b85ce5adb17856913f6"
     },
     {
       "path": "references/update-policy.schema.json",
