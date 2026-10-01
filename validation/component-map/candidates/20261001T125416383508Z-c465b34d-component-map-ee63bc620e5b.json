@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T13:02:44.467346Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1920,15 +1920,15 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-01T12:58:02.503225Z",
+  "created_at_utc": "2026-10-01T12:54:16.383508Z",
   "integrity": {
-    "canonical_payload_sha256": "959d0a5a551fa3d524e2c6d466f90c563e32b500aa15405b335f5fea9bf1eec6"
+    "canonical_payload_sha256": "c0301d704d3cdef49b75c03e9bdca9cc688069d82af555318a31e3de7217d191"
   },
-  "map_id": "component-map-27506327f930",
-  "map_state": "accepted",
+  "map_id": "component-map-ee63bc620e5b",
+  "map_state": "drift_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map v0.13.0 completed-agent lifecycle planning, scoped host closure and preserved claims-review/evidence boundaries, retaining v0.12.0 budget semantics.",
-  "origin_scan_id": "20261001T125802503225Z-f08f15b9",
+  "origin_scan_id": "20261001T125416383508Z-c465b34d",
   "previous_map_id": "component-map-1c4bcfd9607f",
   "schema_version": "1.0",
   "scope": [
@@ -2676,7 +2676,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "f5ec2203dac20f26e9f130db0feead4273cba975678df973bae9efa753aa1e4c",
+      "sha256": "e693c484aa9c6d9bc778625434563add8d839ba7389645f6fb9d4b9171b5f188",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -2808,7 +2808,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ae8b46a3bef738cb3c244c3df35e5ddcd1a91cfd1d9364c8d51199221a446f44",
+      "sha256": "cb6d3c429aa59498f32f9bb16577b59d4f564f0c8ec021472166b049c34362f0",
       "source": "skills/analyze-project-claims/references/long-running-mode.md"
     },
     {
@@ -2820,7 +2820,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "47055f52cb2cba7a6d82980df27224cb3460013beb8b777cbf969586231935b6",
+      "sha256": "428f643807417c22e2628d28ca728b82d02eca82faddff81a476a2bf94415c0c",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
@@ -2916,7 +2916,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "9701b2d59ec4696bc99ba0dc0190e4a1c79b258710d47b85ce5adb17856913f6",
+      "sha256": "30a45f610ff51bcaa33a4890127769ef505f9999b1f06c32350448e75a05401b",
       "source": "skills/analyze-project-claims/references/subagent-mode.md"
     },
     {

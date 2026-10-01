@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-10-01
+
+- Add `agent-cleanup` planning from fresh native host observations and recorded
+  token results. Retain live, unknown, unrecorded and unresolved execution.
+- Require result harvesting before host resource release, immediate rechecks and
+  verified close outcomes. Explicitly report hosts without a close capability.
+- Preserve evidence, journal history, repair budgets and pending claims review;
+  cleanup planning does not close agents or delete files itself.
+
 ## [0.12.0] - 2026-10-01
 
 - Clarify evidence-guided work for parent, planner, worker and reviewer roles:

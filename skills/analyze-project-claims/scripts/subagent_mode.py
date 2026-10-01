@@ -115,7 +115,8 @@ def reviewer_snapshot(config):
     paths = config['subagent_mode']['reviewer_sources']
     # Include the executed orchestration implementation, not just its guide.
     controller = Path(__file__).with_name('long_running_controller.py')
-    paths = sorted(set(paths + [str(Path(__file__).resolve()), str(controller.resolve())]))
+    cleanup = Path(__file__).with_name('agent_cleanup.py')
+    paths = sorted(set(paths + [str(Path(__file__).resolve()), str(controller.resolve()), str(cleanup.resolve())]))
     files = {}
     for name in paths:
         path = Path(name)

@@ -50,8 +50,10 @@ synthetic example. In the following commands, `$ClaimsController` and
 
    ```powershell
    py -3 $ClaimsController --state $ClaimsState finish --token TOKEN --result result.json
-   py -3 $ClaimsController --state $ClaimsState next
    ```
+
+7. Check completed agents and release eligible host resources using the lifecycle
+   procedure below, then call `next` to continue the controller loop.
 
    Continue immediately after routine review and work results while eligible
    authorized work remains. Do not ask the user to repeat permission to
@@ -206,3 +208,66 @@ claim decisions. `check` still blocks a stale worker; recover its existing token
 before continuing. Saved reports describe the last sampled identities, not continuous
 monitoring. Read status again before relying on their freshness. Earlier report
 revisions remain historical evidence.
+
+## Check completion and release host resources
+
+At coordinator startup/recovery, after a result is persisted, before spawning a
+replacement and when host capacity is exhausted, inspect the host's actual agent
+list. On a long wait, use bounded waits and repeat the observation; do not busy
+poll. Normalize observed native statuses to the schema below, retaining unknown
+states as `unknown`. A completion message is not a resource-release receipt.
+
+Harvest each result, verify its token/agent association, persist the actual output
+and call `finish` before considering that agent for release. Failed and cancelled
+agents also need a recorded outcome; unresolved side effects remain uncertain.
+Inspect associated tool sessions and child operations: a terminal agent does not
+prove its processes stopped. Do not mark `execution_quiescent` true without evidence.
+
+Use the current native list and operation evidence to write a local observation:
+
+```json
+{
+  "observed_at": 1790856000,
+  "source_ref": "local-log/native-list-and-operation-check.json",
+  "close_supported": true,
+  "agents": [
+    {"agent_id": "actual-host-id", "status": "completed", "execution_quiescent": true}
+  ]
+}
+```
+
+The timestamp is illustrative: record the actual observation's Unix time. Supported
+statuses are `running`, `idle`, `completed`, `failed`, `cancelled`, `closed` and
+`unknown`. `close_supported` means the current host exposes a suitable close/release
+operation, not that an interrupt operation exists. Save the raw host response at
+`source_ref`; the planner checks the declaration, not the truth of that observation.
+
+```text
+<python-3> <skill-root>/scripts/long_running_controller.py --state <state> agent-cleanup --observation <host-observation.json>
+```
+
+The command verifies the journal, requires an observation no older than 60 seconds,
+and reports each bound agent. Unbound agents are ignored; missing, idle, live,
+unrecorded or unresolved agents are retained. Any unresolved token using the same
+agent ID prevents cleanup. The plan contains the observed journal sequence/digest
+and recorded result digests; it changes no claims, reports, budgets or journal.
+
+For `ELIGIBLE_FOR_HOST_CLOSE`, immediately recheck the actual host and current
+binding/result state. If either changed, regenerate the plan. Only the coordinator
+calls the host's documented close/release operation for that exact owned agent.
+Record its returned outcome and verify closure or capacity release through the host;
+a timeout or absent agent is not proof of success. Recover an ambiguous close by
+inspection, not by interrupting or relaunching work. Never close a running agent,
+parent, unrelated agent, or an agent with unresolved execution to free capacity.
+
+If closing is unavailable, record `CLOSE_UNAVAILABLE` and leave host management to
+the host; do not invent a close call or substitute `interrupt_agent`. Keep that
+limitation explicit if capacity blocks progress. `ALREADY_CLOSED` records an
+observed terminal host state and needs no additional close.
+
+This cleanup releases host resources only. Preserve outputs, claim/evidence links,
+source checkouts, journals and review history. Resource release may happen after a
+worker's result is recorded and before the separate claims reviewer starts, which
+allows the reviewer to use the freed capacity. It does not clear dirty claims or
+permit dependent work before review. The reviewer's own recorded result is cleaned
+up the same way without recursively launching another claims review.

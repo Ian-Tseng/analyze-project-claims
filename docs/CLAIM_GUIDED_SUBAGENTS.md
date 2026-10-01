@@ -60,3 +60,5 @@ New goals persist `max_repair_cycles` (default 32); existing journals without th
 field keep their three-cycle limit. Recorded repeated progressing cap hits may
 justify a prospective +16 adjustment under the
 [review-learning policy](../skills/analyze-project-claims/references/review-learning.md#repair-cycle-budget-and-adaptation).
+
+Use the [completed-agent lifecycle check](../skills/analyze-project-claims/references/subagent-host-protocol.md#check-completion-and-release-host-resources) after results and before new dispatch. The `agent-cleanup` command produces a conservative plan; actual host closure is capability-dependent and never deletes evidence or clears pending claims review.

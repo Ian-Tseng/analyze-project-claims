@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-01T13:02:44.467346Z",
+  "accepted_at_utc": "2026-10-01T12:34:37.633944Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1043,29 +1043,6 @@
           "target": "Substantive work outcomes require source-bound claims review and dependent closure; work completion alone does not promote support."
         },
         {
-          "element_id": "completed-agent-lifecycle",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_cleanup.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_cleanup.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Fresh host observations and recorded bound-token results yield conservative cleanup candidates; live or unresolved execution is retained. Actual closure requires a supported host operation, preserves evidence and does not clear claims review."
-        },
-        {
           "element_id": "durable-controller",
           "evidence_locators": [
             {
@@ -1920,16 +1897,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-01T12:58:02.503225Z",
+  "created_at_utc": "2026-10-01T12:11:03.776664Z",
   "integrity": {
-    "canonical_payload_sha256": "959d0a5a551fa3d524e2c6d466f90c563e32b500aa15405b335f5fea9bf1eec6"
+    "canonical_payload_sha256": "422137bfea33be9ebfe8b8fa837852afaabac4f6fddc2a3585ec6a46d92ac5b2"
   },
-  "map_id": "component-map-27506327f930",
+  "map_id": "component-map-1c4bcfd9607f",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map v0.13.0 completed-agent lifecycle planning, scoped host closure and preserved claims-review/evidence boundaries, retaining v0.12.0 budget semantics.",
-  "origin_scan_id": "20261001T125802503225Z-f08f15b9",
-  "previous_map_id": "component-map-1c4bcfd9607f",
+  "objective": "Map the 0.12.0 evidence-guided agent workflow and configurable repair budgets, preserving legacy journal semantics and separating deterministic tests from native activation and scientific benefit.",
+  "origin_scan_id": "20261001T121103776664Z-99bfce2d",
+  "previous_map_id": "component-map-c39800623112",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2066,12 +2043,10 @@
     "tests/test_zero_finding_gold.py",
     "validation/README.md",
     "skills/analyze-project-claims/references/evidence-guided-agents.md",
-    "tests/test_long_running_repair_budget.py",
-    "skills/analyze-project-claims/scripts/agent_cleanup.py",
-    "tests/test_agent_cleanup.py"
+    "tests/test_long_running_repair_budget.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "14800876952adf4d408c75eac74c7720ceeb57b0ad8cc106f684b380c89c6707",
+  "skill_sha256": "fffc22cbe086a68601d7e2dfd77bd8e676b42cee1be62fb93fe862dc03fa110c",
   "source_snapshot": [
     {
       "exists": true,
@@ -2082,7 +2057,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1b91e2e84d7795be7c3ae2fa8d8413c6043f0d3c1d711b3081e3228d37a469bf",
+      "sha256": "ee2f0cb548240627fa534e8b738f87be8ca20cb145e307e5650b67d820681372",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2130,13 +2105,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0a7ceee223bc695211b041f1f459d53d18cdd667d0afce71509640f283c79c09",
+      "sha256": "f9193490c7b9a36c19c432803e4140eaf28f5d5f338bc0343d5bd5dcee6073d7",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "7241a8157594cc111f68657ca980f50ada629b098dff156c922703ac4e82868c",
+      "sha256": "19bef386046719aa626de0977bbd84beac9f568120414154f0f23f4463d6ca5b",
       "source": "CITATION.cff"
     },
     {
@@ -2160,7 +2135,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "8a328c8dd39dccb7ce5ee9851f7a261164773d5c5186373b8a020bdfdc03ff53",
+      "sha256": "78c94f5e7e49d47f6dd5e54e388b0066b44dac8f0fb95bc73e32ca121b46767b",
       "source": "README.md"
     },
     {
@@ -2172,7 +2147,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d84c9e596c7d6a94e5f74579ef8d8912a807b0d28582474900ad35dfb3edfcf4",
+      "sha256": "8a932413d42f95082f8323447652379a4885e328329efca3a67ec9c793c09940",
       "source": "VERSION"
     },
     {
@@ -2202,7 +2177,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "478b47168ce92d23811ad5815faac3536b20e7544542d4dd7e4b6947541ae1dc",
+      "sha256": "e76b9ac061304cfe33aef0db8e9e56121da83df87baecfc88183a2ab72c037f3",
       "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
     },
     {
@@ -2676,13 +2651,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "f5ec2203dac20f26e9f130db0feead4273cba975678df973bae9efa753aa1e4c",
+      "sha256": "26116e6beacc03d521959d469bc467bb25bf59a9c8a62889f33ee1a7a6437cc3",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "14800876952adf4d408c75eac74c7720ceeb57b0ad8cc106f684b380c89c6707",
+      "sha256": "fffc22cbe086a68601d7e2dfd77bd8e676b42cee1be62fb93fe862dc03fa110c",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -2808,7 +2783,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ae8b46a3bef738cb3c244c3df35e5ddcd1a91cfd1d9364c8d51199221a446f44",
+      "sha256": "cb91175d8d6995d2b99375a00f8466ac7a1be38d3771ceac9448f6bbab5d1846",
       "source": "skills/analyze-project-claims/references/long-running-mode.md"
     },
     {
@@ -2820,13 +2795,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "47055f52cb2cba7a6d82980df27224cb3460013beb8b777cbf969586231935b6",
+      "sha256": "70b15c4c4e9405f25527d0458914d912319770f81986f61188d18f67e187ea0b",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c20bfde8e3bd39ea1e3570c1ca4b7b28858ef9c801f09512524b2994c9638992",
+      "sha256": "415b203ac8d6e9cd089602a170c0e590378139e03f895b3ac3a8da0f713b2238",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -2910,13 +2885,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b34f4a0d86ff0f4107c403f55d023426224cf5156b2476d57a98ee728cc6b20b",
+      "sha256": "831289b3523aa24c222dc2cbf5e3a2c414abe43d05be56b1c8923dd1643c653e",
       "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "9701b2d59ec4696bc99ba0dc0190e4a1c79b258710d47b85ce5adb17856913f6",
+      "sha256": "04a11ac91906d5cd782373c08dab0ac2581f02bc8f17393512baf3e6973832f6",
       "source": "skills/analyze-project-claims/references/subagent-mode.md"
     },
     {
@@ -3018,12 +2993,6 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "415851d3a6276ccf6e7748271dccaa147083ef21655dd38a7c599ece82a395e0",
-      "source": "skills/analyze-project-claims/scripts/agent_cleanup.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
       "sha256": "202500b8694df67c2996031ec0a7f7549a30c6132799e9f3e56c82e9c1a85ecc",
       "source": "skills/analyze-project-claims/scripts/evidence_nomination.py"
     },
@@ -3042,7 +3011,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d7b26c3dfba8e7654482ece3fb00022fcb4089b9f768869dab59c2442057089e",
+      "sha256": "6c2925d3978cf7bd8c57eafa0f04dd58b9704f7aad7a07bcf73cc506fd0c6a31",
       "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
     },
     {
@@ -3078,7 +3047,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "98a1c93040cefc185a6580a7a6ce7bebfda7b63021151276f8ec69784ccb7d43",
+      "sha256": "ff8d4f0d12c84b7c0aae0123557df903c5fc2af491805e7a0af044f018aac8ba",
       "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
     },
     {
@@ -3092,12 +3061,6 @@
       "kind": "file",
       "sha256": "f9a5ec226540e9bb4e55e047112d606bb8ae1dd9067294a55838fed2846adb50",
       "source": "tests/nomination_platform_probe.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "8e364ff22dddf4f18ab1e88a21b892e61735a0fc7844dc9a44b34980ac4a42ec",
-      "source": "tests/test_agent_cleanup.py"
     },
     {
       "exists": true,
@@ -3270,7 +3233,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ca6b99ff2bfb23bd66350e727e748bb65c5df8238d2fd64d740b706c7f5a9c80",
+      "sha256": "de6c1f751ed10d3d178ecf37684fb27d3bb11e9d50a75779a64dfc6e87e8ebfa",
       "source": "tests/test_long_running_subagents.py"
     },
     {

@@ -46,6 +46,9 @@ When the user explicitly requests delegated work, also read
 [subagent mode](references/subagent-mode.md) and its
 [host protocol](references/subagent-host-protocol.md). Use the packaged controller
 to retain one in-flight unit, scoped claims, bounded attempts and pauses.
+At recovery, after results and before further dispatch, check completed agents
+through the host protocol and `agent-cleanup`; release eligible owned agents only
+through an available native close operation, preserving evidence and pending review.
 Only declared execution prerequisites require support; hypotheses being tested
 may remain untested or contradicted.
 After each substantive done, failed or uncertain work unit, invoke this skill,

@@ -49,7 +49,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.12.0
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.13.0
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
@@ -267,3 +267,7 @@ validated guidance into project Markdown, decision flows, or reusable workflows.
 Unverified explanations stay provisional. Read-only audits remain read-only,
 and bounded retries cannot be reported as convergence. This workflow does not
 automatically publish feedback or accept evidence on the user's behalf.
+
+Version 0.13.0 adds completed-agent cleanup planning: inspect fresh host state,
+retain unrecorded/live work and release eligible host resources where supported.
+See the [lifecycle contract](skills/analyze-project-claims/references/subagent-host-protocol.md#check-completion-and-release-host-resources).

@@ -1,0 +1,154 @@
+{
+  "accepted_map_id": "component-map-1c4bcfd9607f",
+  "action": "drift_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20261001T125416383508Z-c465b34d-component-map-ee63bc620e5b.json",
+    "delta": "deltas/20261001T125416383508Z-c465b34d.json"
+  },
+  "candidate_map_id": "component-map-ee63bc620e5b",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "completed-agent-lifecycle"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".codex-plugin/plugin.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/long-running-mode.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-mode.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/agent_cleanup.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_agent_cleanup.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_long_running_subagents.py"
+      }
+    ]
+  },
+  "event_id": "20261001T125416383508Z-c465b34d",
+  "integrity": {
+    "canonical_payload_sha256": "58c705b09184bd48f3d3bbb77df77d2f006fc5ef96a3d1faa33b32663e55cedf"
+  },
+  "map_state_after": "drift_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.3.0",
+  "recorded_at_utc": "2026-10-01T12:54:16.383508Z",
+  "schema_version": "1.0",
+  "skill_sha256": "14800876952adf4d408c75eac74c7720ceeb57b0ad8cc106f684b380c89c6707"
+}

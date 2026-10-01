@@ -36,7 +36,7 @@ Resolve the active skill at setup. Every reviewer source must be an existing
 absolute file path. Include the active SKILL.md, applicable user instructions,
 and referenced guides needed for this audit. The request binds their SHA-256
 identities through `reviewer_contract.digest`, together with the running
-controller and subagent module. Hashes identify pinned bytes; the host must
+controller, subagent module and agent-cleanup module. Hashes identify pinned bytes; the host must
 actually invoke the skill and observe the review.
 
 Declare all source evidence in the base manifest's project-relative `evidence`
@@ -283,8 +283,10 @@ python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --stat
 # Native host: spawn the appropriate agent, instructed to wait for START.
 python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state bind-agent --token TOKEN --agent-id OBSERVED_HOST_AGENT_ID
 python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state check --token TOKEN
-# Native host: release this bound agent only on READY; wait for its actual result.
+# Native host: send START to this bound agent only on READY; wait for its actual result.
 python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state finish --token TOKEN --result result.json
+# Native host: inspect completion, run agent-cleanup with fresh observations,
+# and close eligible owned agents if supported, preserving pending claims review.
 python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state next
 ```
 
@@ -305,3 +307,5 @@ claims with current source hashes, locators, limitations and rationale, then
 applies the complete goal-completion gate. No example result substitutes for
 that actual review. `failed` and `uncertain` outcomes also schedule review;
 they are not evidence of completion or permission to repeat unknown work.
+
+Use the [completed-agent lifecycle check](subagent-host-protocol.md#check-completion-and-release-host-resources) after results and before new dispatch. The `agent-cleanup` command produces a conservative plan; actual host closure is capability-dependent and never deletes evidence or clears pending claims review.
