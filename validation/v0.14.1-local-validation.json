@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "release_candidate": "0.14.1",
+  "base_commit": "601fa35ac2b54421ee4843ddd94fde8bb4869c30",
+  "full_suite": {
+    "command": "python -B -m unittest discover -s tests -v",
+    "exit_code": 0,
+    "output_summary": "Ran 490 tests in 175.735s; OK (skipped=7)",
+    "passed": 483,
+    "skipped": 7,
+    "total": 490
+  },
+  "other_checks": {
+    "engine_verify": 0,
+    "package_verify": 0,
+    "metadata": 0,
+    "conformance": 0,
+    "platform_probe": 0
+  },
+  "plugin_validator": {
+    "repository": "https://github.com/openai/codex",
+    "commit": "985cf47a4eb6084b2ff6b30ebdb1216acda85bb4",
+    "validator_sha256": "f4eeadb733b28b0c3e714de263a76d6542866a672f3e99bdffcf4dbcdf85e944",
+    "exit_code": 0,
+    "boundary": "Historical official validator; removed from later upstream main."
+  },
+  "boundary": "Local candidate evidence only. Hosted release-commit CI, publication, installation and fresh-client invocation remain separate."
+}

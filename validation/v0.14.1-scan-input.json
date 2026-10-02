@@ -1,0 +1,55 @@
+{
+  "schema_version": "2.0",
+  "objective": "Record bounded local v0.14.1 release-candidate validation without inferring publication or installed activation.",
+  "scope": [
+    "validation/v0.14.1-local-validation.json"
+  ],
+  "authority": [
+    "PUBLISHING.md",
+    "CONTRIBUTING.md"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "release-local-suite",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.14.1-local-validation.json"
+      },
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The executed standard-library suite completed 490 tests: 483 passed and 7 skipped, exit 0."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "release-local-tests",
+      "statement": "The v0.14.1 candidate passed its executed local standard-library suite with 483 passed and 7 skipped tests.",
+      "element_ref": {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression"
+      },
+      "material": true,
+      "status": "supported",
+      "rationale": "The retained executed command summary reports exit zero, exact total and explicit skips. This claim is limited to local tested behavior."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "release-local-tests",
+      "evidence_id": "release-local-suite",
+      "role": "supports"
+    }
+  ],
+  "limitations": [],
+  "summary": {
+    "strongest_safe_claim_id": "release-local-tests",
+    "claim_boundary_ids": [],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "Skipped privileged cases are not local passes. Hosted matrix, release verification, actual installation and client invocation require separate observations."
+  ]
+}
