@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-02T09:02:35.572138Z",
+  "accepted_at_utc": "2026-10-02T08:49:13.624487Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1939,16 +1939,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-02T08:59:43.987617Z",
+  "created_at_utc": "2026-10-02T08:45:51.469306Z",
   "integrity": {
-    "canonical_payload_sha256": "a613ab9fe1e4e70bc858538fa4e43fb220d357a617619371c47293913bcb900c"
+    "canonical_payload_sha256": "5b3b57449cbdb604e49f60f1ac04e02f7e9e32825a38532771e7c08294469fac"
   },
-  "map_id": "component-map-b255f9ff38be",
+  "map_id": "component-map-ce34ad60d23b",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.14.1 recorder identifier and report-path compatibility release, preserving explicit map acceptance, bounded evidence claims, thread-limit recovery and installed-activation boundaries.",
-  "origin_scan_id": "20261002T085943987617Z-b43b3917",
-  "previous_map_id": "component-map-ce34ad60d23b",
+  "objective": "Map v0.14.0 durable thread-limit recovery, bounded spawn reservations and evidence-gated retries, retaining cleanup and claims-review boundaries.",
+  "origin_scan_id": "20261002T084551469306Z-71ab0b55",
+  "previous_map_id": "component-map-6988398ab696",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2102,7 +2102,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c22b5bd494be7ba234d1688ede5b80038d55cfe5c50c9169d4f50e6c55333584",
+      "sha256": "13924a4b26a35b4cf9b10e28ad1e89f4ea098a70db2f2bf14ed83d7016e3e47a",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2150,13 +2150,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "fd3f60b351ece4ec31e08082fbabb2a19e357095903da3deff1469b0cc3aedc0",
+      "sha256": "2e377ef448274397abf6f59e74bb26e883cc17e3ed6ab87bf0e4da3513eebd69",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "88b7e05b27fbc22f30588833f4e4262e6d5d3469950c8feac9bee149694ae86a",
+      "sha256": "aa2192d47480436dccd2366efaa76fde0fb9d5c1d748579262a4472569468010",
       "source": "CITATION.cff"
     },
     {
@@ -2180,7 +2180,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "61fdc78fb99ea3f170411e21f2924ecee4e99937282b53178a4a8d2666d9b45c",
+      "sha256": "ce22cdbd9180b408d3e2a196d7ca301882718a3b41739f4e4064584c9b32ad3b",
       "source": "README.md"
     },
     {
@@ -2192,7 +2192,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c6fb87657a4ee72e2b549cdd39c12854fdbecbdfef033c04f523d4bfcb02aa4c",
+      "sha256": "065582655aacd6fc83ff742a5715c04bb4a57395bf3ee4559798fa42c2ce4589",
       "source": "VERSION"
     },
     {
@@ -2696,7 +2696,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "788bb0aeb2ad243f7520157565605dc7a59cda974bdb397c65d1233c3a23a9c9",
+      "sha256": "1f95ad737203979530c9612d52ad81372219f824f1f5953eb64a07b880f3823a",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -2840,13 +2840,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4e3bf689c74a583662524c0a46358f04ca83302607abbe798ee957b704b8c551",
+      "sha256": "a0a7600326e021725a78bc97f9c5aaeb59a700e251805e926c679caa483926ec",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c1a7dee0b47672a457bb9133c7c19beb6aa3a1cc0a757506cef6500e4a62d5a4",
+      "sha256": "75efa3cfa57b5f27f02391d36a729a26bf2a362d863cc1316194e4c9d6913583",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {

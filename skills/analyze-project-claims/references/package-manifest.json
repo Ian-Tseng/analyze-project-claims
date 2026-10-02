@@ -142,7 +142,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "75efa3cfa57b5f27f02391d36a729a26bf2a362d863cc1316194e4c9d6913583"
+      "sha256": "c1a7dee0b47672a457bb9133c7c19beb6aa3a1cc0a757506cef6500e4a62d5a4"
     },
     {
       "path": "references/problem-report-policy.schema.json",

@@ -4,6 +4,14 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.14.1] - 2026-10-02
+
+- Accept authoritative component-map reference identifiers independently from
+  strict recorder-owned IDs; retain text-safety and exact membership checks.
+- Keep append/verify report links stable across directory aliases.
+- Add native init-to-validate guidance and synthetic identifier, path-safety,
+  rendering and alias regressions.
+
 ## [0.14.0] - 2026-10-01
 
 - Journal native spawn reservations and results, including explicit recognition
