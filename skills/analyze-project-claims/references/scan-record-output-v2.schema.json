@@ -17,6 +17,7 @@
     "integrity": {"$ref": "#/$defs/integrity"}
   },
   "$defs": {
+    "mapReferenceId": {"type": "string", "minLength": 1, "maxLength": 2000, "pattern": "\\S", "description": "Non-empty accepted-map identifier; recorder text-safety and exact membership checks also apply."},
     "id": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-z][a-z0-9]*(?:[-:.][a-z0-9]+)*$"},
     "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "text": {"type": "string", "minLength": 1, "maxLength": 2000},
@@ -123,7 +124,7 @@
     },
     "element_ref": {
       "type": "object", "additionalProperties": false, "required": ["component_id", "element_id"],
-      "properties": {"component_id": {"$ref": "#/$defs/id"}, "element_id": {"$ref": "#/$defs/id"}}
+      "properties": {"component_id": {"$ref": "#/$defs/mapReferenceId"}, "element_id": {"$ref": "#/$defs/mapReferenceId"}}
     },
     "claim": {
       "type": "object",

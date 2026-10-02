@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-02T08:32:56.477629Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1939,15 +1939,15 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-02T08:23:58.222005Z",
+  "created_at_utc": "2026-10-02T08:21:02.736194Z",
   "integrity": {
-    "canonical_payload_sha256": "c1a2cd8444e4c42ef15f8f6f5e0bbfb6c9cf6ce79e5fa16a927f01f513a5a60f"
+    "canonical_payload_sha256": "c019029b3bcf18b9b2e20913e3036f307ae94b061c06edb0a93da5d32de6d7d4"
   },
-  "map_id": "component-map-6988398ab696",
-  "map_state": "accepted",
+  "map_id": "component-map-5ec600f58079",
+  "map_state": "drift_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map v0.14.0 durable thread-limit recovery, bounded spawn reservations and evidence-gated retries, retaining cleanup and claims-review boundaries.",
-  "origin_scan_id": "20261002T082358222005Z-cda6f11e",
+  "origin_scan_id": "20261002T082102736194Z-4e0562c7",
   "previous_map_id": "component-map-0a4cb5147803",
   "schema_version": "1.0",
   "scope": [
@@ -2696,7 +2696,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "61db6cae893da23b00dd5d17e0a429fae720a9de561638b95feffd5305830c20",
+      "sha256": "4fe990e59f9b97c6cec090349dd1bfdce4ec10fa559c000b72da11fccee25960",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -2750,7 +2750,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "bfb0f711dfeadb8883115b711c062eb24f8de0dbcd29abbe0eac07cc3014463b",
+      "sha256": "921e3aab79d590c3169f92f76bdfd693a0bb0d26c6ddbc24860c4c3d62b12cd6",
       "source": "skills/analyze-project-claims/references/evidence-bound-audit-records.md"
     },
     {
@@ -2840,7 +2840,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6623e0aa169e4271428db71793a01abfd627ed7cfe4c4031d605ca1f4109c432",
+      "sha256": "1346d0e7415bb8a1d8290f90b3f0842e0e5f4af3ac13bd810f55becd246095f3",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
@@ -2870,13 +2870,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c381756b5c2dd32f6be29b48f4532d834546f381bb571daebfac87216aec4dd3",
+      "sha256": "720a90d3fcefedee8eb3741962ffa49914a162f12536fcee5c7e6c7842b8806f",
       "source": "skills/analyze-project-claims/references/scan-record-output-v2.schema.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3cc60307bf626246763550fc5df37078bc252ff316dea79205dcccbda3fb4faf",
+      "sha256": "57011c333969b6ade53d45abccca38c989e39607893840b57ada1f1d64f80a62",
       "source": "skills/analyze-project-claims/references/scan-record-v2.schema.json"
     },
     {
@@ -2960,7 +2960,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b354b31dd26c029ebc83c48011b0e243d5be3ab50375eeaa089dc76848bc3f78",
+      "sha256": "a9c704833795f61c7f1be8c9c944b46f56a45cf6e79a3db1bd67bb9221b4dead",
       "source": "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py"
     },
     {
@@ -3176,7 +3176,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "17094067e6af37fbce7f56d5ad0caa0a7eeec9242b57de8d90a8fdae711b504e",
+      "sha256": "66ddbc3f09e35d212cc780591d609482d5d771a2f2eedb01f9b054b098122a89",
       "source": "tests/test_evidence_bound_scan.py"
     },
     {

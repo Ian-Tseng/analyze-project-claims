@@ -811,8 +811,10 @@ def _normalize_input(raw: Any, map_info: dict[str, Any]) -> dict[str, Any]:
         if not isinstance(element_ref, dict):
             _raise("CLAIM_ELEMENT_UNKNOWN", f"{field}.element_ref must be an object.", "The claim has no structural reference.", "The claim cannot be validated.", "Reference an accepted component and element ID.")
         _reject_unknown(element_ref, {"component_id", "element_id"}, f"{field}.element_ref")
-        component_id = _identifier(element_ref.get("component_id"), f"{field}.element_ref.component_id")
-        element_id = _identifier(element_ref.get("element_id"), f"{field}.element_ref.element_id")
+        # Map IDs are non-empty text, not recorder-owned claim/evidence slugs.
+        # Retain bounded text safety and exact accepted-map membership below.
+        component_id = _text(element_ref.get("component_id"), f"{field}.element_ref.component_id")
+        element_id = _text(element_ref.get("element_id"), f"{field}.element_ref.element_id")
         if (component_id, element_id) not in map_info["elements"]:
             _raise("CLAIM_ELEMENT_UNKNOWN", f"Claim {claim_id!r} references unknown element {component_id}/{element_id}.", "The pair is absent from the bound accepted map.", "The claim cannot be appended.", "Choose an element printed by preflight or explicitly accept a new map.")
         material = claim.get("material")
