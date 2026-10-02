@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -34,6 +36,8 @@ class EvidenceBoundScanTests(unittest.TestCase):
             [sys.executable, str(RECORDER), *args],
             cwd=cwd,
             text=True,
+            encoding="utf-8",
+            env={**os.environ, "PYTHONIOENCODING": "utf-8"},
             capture_output=True,
             check=False,
         )
@@ -119,6 +123,115 @@ class EvidenceBoundScanTests(unittest.TestCase):
             encoding="utf-8",
         )
         return self.write_map(root), self.write_input(root)
+
+    def test_map_reference_identifiers_round_trip_without_slug_restrictions(self) -> None:
+        for component_id, element_id in (
+            ("synthetic_component", "measured_value"),
+            ("Results V2", "Accuracy/Mean"),
+            ("[link](https://example.invalid)", "../../`<b>metric</b>`"),
+            ("Synthetic-\u0394", "metric_" + "x" * 129),
+        ):
+            with self.subTest(component_id=component_id), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                map_root, input_path = self.prepare(root)
+                record = accepted_map_record(SKILL_ROOT, [{
+                    "component_id": component_id, "component_type": "artifact",
+                    "elements": [{"element_id": element_id, "target": "synthetic metric",
+                                  "relation_type": "measures", "evidence_locators": []}],
+                }])
+                (map_root / "accepted-map.json").write_text(json.dumps(record), encoding="utf-8")
+                common = ("--map-root", str(map_root), "--project-root", str(root))
+                preflight = self.run_cli(root, "preflight", *common)
+                self.assertEqual(preflight.returncode, 0, preflight.stderr)
+                draft = root / "initialized.json"
+                initialized = self.run_cli(root, "init", *common, "--output", str(draft))
+                self.assertEqual(initialized.returncode, 0, initialized.stderr)
+                validated = self.run_cli(root, "validate", *common, "--record", str(draft))
+                self.assertEqual(validated.returncode, 0, validated.stderr)
+                value = json.loads(input_path.read_text(encoding="utf-8"))
+                expected = {"component_id": component_id, "element_id": element_id}
+                value["claims"][0]["element_ref"] = expected
+                input_path.write_text(json.dumps(value), encoding="utf-8")
+                appended = self.run_cli(root, "append", *common, "--record", str(input_path),
+                                        "--log-dir", str(root / "history"),
+                                        "--report-dir", str(root / "reports"))
+                self.assertEqual(appended.returncode, 0, appended.stderr)
+                receipt = json.loads(appended.stdout)
+                persisted = json.loads(Path(receipt["log"]).read_text(encoding="utf-8"))
+                self.assertEqual(persisted["claims"][0]["element_ref"], expected)
+                self.assertEqual(Path(receipt["log"]).parent.resolve(), (root / "history").resolve())
+                self.assertEqual(Path(receipt["report"]).parent.resolve(), (root / "reports").resolve())
+                rendered = Path(receipt["report"]).read_text(encoding="utf-8")
+                if component_id.startswith("[link]"):
+                    self.assertNotIn("[link](https://example.invalid)", rendered)
+                    self.assertNotIn("<b>metric</b>", rendered)
+                    self.assertIn(r"\[link\]\(https://example.invalid\)", rendered)
+                    self.assertIn(r"\<b\>metric\</b\>", rendered)
+                verified = self.run_cli(root, "verify", *common, "--record", receipt["log"],
+                                        "--report", receipt["report"])
+                self.assertEqual(verified.returncode, 0, verified.stdout + verified.stderr)
+                for schema_name in ("scan-record-v2.schema.json", "scan-record-output-v2.schema.json"):
+                    schema = json.loads((SKILL_ROOT / "references" / schema_name).read_text(encoding="utf-8"))
+                    ref = schema["$defs"]["element_ref"]["properties"]["component_id"]["$ref"]
+                    contract = schema["$defs"][ref.rsplit("/", 1)[-1]]
+                    self.assertIsNotNone(re.search(contract["pattern"], component_id))
+                    self.assertIsNone(re.search(contract["pattern"], " \t\n"))
+                    self.assertLessEqual(len(element_id), contract["maxLength"])
+
+    def test_report_round_trip_preserves_links_with_temporary_directory_alias(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="recorder-alias-roundtrip-") as temp:
+            root = Path(temp)
+            if os.name == "nt":
+                import ctypes
+
+                buffer = ctypes.create_unicode_buffer(32768)
+                length = ctypes.windll.kernel32.GetShortPathNameW(temp, buffer, len(buffer))
+                if length and length < len(buffer):
+                    root = Path(buffer.value)
+            if root == root.resolve():
+                self.skipTest("Temporary directory has no filesystem alias on this host")
+            map_root, input_path = self.prepare(root)
+            common = ("--map-root", str(map_root), "--project-root", str(root))
+            appended = self.run_cli(root, "append", *common, "--record", str(input_path),
+                                    "--log-dir", str(root / "history"),
+                                    "--report-dir", str(root / "reports"))
+            self.assertEqual(appended.returncode, 0, appended.stdout + appended.stderr)
+            receipt = json.loads(appended.stdout)
+            verified = self.run_cli(root, "verify", *common, "--record", receipt["log"],
+                                    "--report", receipt["report"])
+            self.assertEqual(verified.returncode, 0, verified.stdout + verified.stderr)
+            report = Path(receipt["report"]).read_text(encoding="utf-8")
+            self.assertIn("(<../results.json>)", report)
+
+    def test_map_reference_fix_keeps_claim_and_evidence_ids_strict(self) -> None:
+        for collection, key in (("claims", "claim_id"), ("evidence_items", "evidence_id")):
+            with self.subTest(collection=collection), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                map_root, input_path = self.prepare(root)
+                value = json.loads(input_path.read_text(encoding="utf-8"))
+                value[collection][0][key] = "invalid_own_id"
+                input_path.write_text(json.dumps(value), encoding="utf-8")
+                result = self.run_cli(root, "validate", "--record", str(input_path),
+                                      "--map-root", str(map_root), "--project-root", str(root))
+                self.assertEqual(result.returncode, 2)
+                self.assertIn("invalid stable identifier", result.stderr)
+
+    def test_map_reference_fix_rejects_unknown_and_unsafe_references(self) -> None:
+        for identifier, error in (("unknown_component", "CLAIM_ELEMENT_UNKNOWN"),
+                                  ("bad\\u202evalue", "RECORD_TEXT_UNSAFE"),
+                                  ("", "RECORD_SCHEMA_UNSUPPORTED"),
+                                  (" \t ", "RECORD_SCHEMA_UNSUPPORTED")):
+            identifier = identifier.replace("\\u202e", "\u202e")
+            with self.subTest(identifier=repr(identifier)), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                map_root, input_path = self.prepare(root)
+                value = json.loads(input_path.read_text(encoding="utf-8"))
+                value["claims"][0]["element_ref"]["component_id"] = identifier
+                input_path.write_text(json.dumps(value), encoding="utf-8")
+                result = self.run_cli(root, "validate", "--record", str(input_path),
+                                      "--map-root", str(map_root), "--project-root", str(root))
+                self.assertEqual(result.returncode, 2)
+                self.assertIn(error, result.stderr)
 
     def test_validate_and_append_create_exact_evidence_and_report(self) -> None:
         with tempfile.TemporaryDirectory(prefix="evidence-bound-") as temp:

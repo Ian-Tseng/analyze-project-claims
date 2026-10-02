@@ -62,7 +62,7 @@
     },
     {
       "path": "references/evidence-bound-audit-records.md",
-      "sha256": "d573c8f645200bc3e568175ad862e387fe359db8379af30135ef360a6f13edbc"
+      "sha256": "09a1ad51f96eae60f31f33099e882e0ba333f38f49aa648ef9c126a419d01fc7"
     },
     {
       "path": "references/evidence-guided-agents.md",
@@ -158,11 +158,11 @@
     },
     {
       "path": "references/scan-record-output-v2.schema.json",
-      "sha256": "a2a009aeb319922010cdf3e5702884fbe55d013dc3f2f09c3f64914299820e65"
+      "sha256": "c381756b5c2dd32f6be29b48f4532d834546f381bb571daebfac87216aec4dd3"
     },
     {
       "path": "references/scan-record-v2.schema.json",
-      "sha256": "2389d2cd60a4ed178e62e132574ae86fd97a8a449617cf722ba573a41356a715"
+      "sha256": "3cc60307bf626246763550fc5df37078bc252ff316dea79205dcccbda3fb4faf"
     },
     {
       "path": "references/scan-record.schema.json",
@@ -230,7 +230,7 @@
     },
     {
       "path": "scripts/_internal/evidence_bound_scan.py",
-      "sha256": "9faebbac050665c7029f870b3684ed14d11a81eca74ba059487a968d68bd9ab5"
+      "sha256": "513a7d481139de74df0e3ba6f504abf56466001150ff0f64c90fd9ad71b89a25"
     },
     {
       "path": "scripts/_internal/evidence_nomination/__init__.py",

@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-02T08:49:13.624487Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1939,16 +1939,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-02T08:45:51.469306Z",
+  "created_at_utc": "2026-10-02T08:23:58.222005Z",
   "integrity": {
-    "canonical_payload_sha256": "5b3b57449cbdb604e49f60f1ac04e02f7e9e32825a38532771e7c08294469fac"
+    "canonical_payload_sha256": "e06e706682cbec922d47b828fa9ceb80baad0717be2cd7b301c41ed502306201"
   },
-  "map_id": "component-map-ce34ad60d23b",
-  "map_state": "accepted",
+  "map_id": "component-map-6988398ab696",
+  "map_state": "drift_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map v0.14.0 durable thread-limit recovery, bounded spawn reservations and evidence-gated retries, retaining cleanup and claims-review boundaries.",
-  "origin_scan_id": "20261002T084551469306Z-71ab0b55",
-  "previous_map_id": "component-map-6988398ab696",
+  "origin_scan_id": "20261002T082358222005Z-cda6f11e",
+  "previous_map_id": "component-map-0a4cb5147803",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2696,7 +2696,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "1f95ad737203979530c9612d52ad81372219f824f1f5953eb64a07b880f3823a",
+      "sha256": "61db6cae893da23b00dd5d17e0a429fae720a9de561638b95feffd5305830c20",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -2750,7 +2750,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "09a1ad51f96eae60f31f33099e882e0ba333f38f49aa648ef9c126a419d01fc7",
+      "sha256": "bfb0f711dfeadb8883115b711c062eb24f8de0dbcd29abbe0eac07cc3014463b",
       "source": "skills/analyze-project-claims/references/evidence-bound-audit-records.md"
     },
     {
@@ -2840,7 +2840,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a0a7600326e021725a78bc97f9c5aaeb59a700e251805e926c679caa483926ec",
+      "sha256": "6623e0aa169e4271428db71793a01abfd627ed7cfe4c4031d605ca1f4109c432",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
@@ -2960,7 +2960,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "513a7d481139de74df0e3ba6f504abf56466001150ff0f64c90fd9ad71b89a25",
+      "sha256": "b354b31dd26c029ebc83c48011b0e243d5be3ab50375eeaa089dc76848bc3f78",
       "source": "skills/analyze-project-claims/scripts/_internal/evidence_bound_scan.py"
     },
     {
@@ -3176,7 +3176,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "5bbfef4a9cb400ec4ff2559e6551d823f474aa7c1570e331c0b3c1dbcd4f375f",
+      "sha256": "17094067e6af37fbce7f56d5ad0caa0a7eeec9242b57de8d90a8fdae711b504e",
       "source": "tests/test_evidence_bound_scan.py"
     },
     {

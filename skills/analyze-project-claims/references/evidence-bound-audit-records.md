@@ -17,6 +17,11 @@ the claim status and rationale as an explicit human or audited judgment.
 - Historical v1 records remain immutable and render as
   `LEGACY_RECORD_UNBOUND`.
 
+Claim, evidence and limitation IDs use the recorder's lowercase slug grammar.
+Component and element references instead preserve the accepted map's non-empty
+text identifiers, including underscores, case and spaces. Recorder text-safety
+and 2,000-character bounds still apply; exact pair membership is mandatory.
+
 V2 claims reference one accepted `{component_id, element_id}` pair. Claims do
 not alter the component map or its engine digest.
 
@@ -55,6 +60,11 @@ py -3 $Recorder append `
   --log-dir .\validation\history `
   --report-dir .\validation\reports
 ```
+
+After reconciliation or map recovery, run `init` followed by `validate` on its
+unchanged draft before calling the recorder ready. Preflight alone checks the
+map, not whether its references round-trip through the recorder. Preserve a
+failed draft and do not rename accepted identifiers to bypass incompatibility.
 
 `validate` checks the closed input contract, accepted-map identity, references,
 roles, and status combinations. `append` additionally reads local artifacts,
@@ -350,3 +360,9 @@ the printed effect before assuming any output exists.
 ## Local nomination sidecars
 
 For an explicit claim gap, the [local nomination guide](evidence-nomination.md) describes reviewer-authored v2 input and exact-byte native guards. Compilation and handoff do not infer claim status or append. Validate separately; an append still requires reviewed semantics, current accepted map, and an explicit history destination. Sidecars are not formal records.
+## Filesystem aliases in report links
+
+Report links use canonical project and report-directory paths so that a report
+appended through an ordinary directory alias verifies using its returned
+canonical receipt path. This presentation rule does not relax evidence-path,
+symlink, reparse-point, or containment checks.

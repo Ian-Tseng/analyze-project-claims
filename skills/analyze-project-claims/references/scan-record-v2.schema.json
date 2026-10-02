@@ -46,6 +46,7 @@
     "unresolved_uncertainties": {"$ref": "#/$defs/text_array"}
   },
   "$defs": {
+    "mapReferenceId": {"type": "string", "minLength": 1, "maxLength": 2000, "pattern": "\\S", "description": "Non-empty accepted-map identifier; recorder text-safety and exact membership checks also apply."},
     "id": {
       "type": "string",
       "minLength": 1,
@@ -136,8 +137,8 @@
       "additionalProperties": false,
       "required": ["component_id", "element_id"],
       "properties": {
-        "component_id": {"$ref": "#/$defs/id"},
-        "element_id": {"$ref": "#/$defs/id"}
+        "component_id": {"$ref": "#/$defs/mapReferenceId"},
+        "element_id": {"$ref": "#/$defs/mapReferenceId"}
       }
     },
     "claim": {
