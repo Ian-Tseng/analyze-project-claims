@@ -169,7 +169,7 @@ class EvidenceBoundScanTests(unittest.TestCase):
                     self.assertIn(r"\<b\>metric\</b\>", rendered)
                 verified = self.run_cli(root, "verify", *common, "--record", receipt["log"],
                                         "--report", receipt["report"])
-                self.assertEqual(verified.returncode, 0, verified.stderr)
+                self.assertEqual(verified.returncode, 0, verified.stdout + verified.stderr)
                 for schema_name in ("scan-record-v2.schema.json", "scan-record-output-v2.schema.json"):
                     schema = json.loads((SKILL_ROOT / "references" / schema_name).read_text(encoding="utf-8"))
                     ref = schema["$defs"]["element_ref"]["properties"]["component_id"]["$ref"]
@@ -177,6 +177,31 @@ class EvidenceBoundScanTests(unittest.TestCase):
                     self.assertIsNotNone(re.search(contract["pattern"], component_id))
                     self.assertIsNone(re.search(contract["pattern"], " \t\n"))
                     self.assertLessEqual(len(element_id), contract["maxLength"])
+
+    def test_report_round_trip_preserves_links_with_temporary_directory_alias(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="recorder-alias-roundtrip-") as temp:
+            root = Path(temp)
+            if os.name == "nt":
+                import ctypes
+
+                buffer = ctypes.create_unicode_buffer(32768)
+                length = ctypes.windll.kernel32.GetShortPathNameW(temp, buffer, len(buffer))
+                if length and length < len(buffer):
+                    root = Path(buffer.value)
+            if root == root.resolve():
+                self.skipTest("Temporary directory has no filesystem alias on this host")
+            map_root, input_path = self.prepare(root)
+            common = ("--map-root", str(map_root), "--project-root", str(root))
+            appended = self.run_cli(root, "append", *common, "--record", str(input_path),
+                                    "--log-dir", str(root / "history"),
+                                    "--report-dir", str(root / "reports"))
+            self.assertEqual(appended.returncode, 0, appended.stdout + appended.stderr)
+            receipt = json.loads(appended.stdout)
+            verified = self.run_cli(root, "verify", *common, "--record", receipt["log"],
+                                    "--report", receipt["report"])
+            self.assertEqual(verified.returncode, 0, verified.stdout + verified.stderr)
+            report = Path(receipt["report"]).read_text(encoding="utf-8")
+            self.assertIn("(<../results.json>)", report)
 
     def test_map_reference_fix_keeps_claim_and_evidence_ids_strict(self) -> None:
         for collection, key in (("claims", "claim_id"), ("evidence_items", "evidence_id")):

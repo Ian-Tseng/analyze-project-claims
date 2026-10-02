@@ -1545,8 +1545,8 @@ def render_record(
             if source["kind"] == "file":
                 link_path = source["path"]
                 if project_root is not None and report_path is not None:
-                    target = Path(os.path.abspath(project_root)) / Path(*PurePosixPath(source["path"]).parts)
-                    link_path = Path(os.path.relpath(target, Path(os.path.abspath(report_path)).parent)).as_posix()
+                    target = Path(project_root).resolve() / Path(*PurePosixPath(source["path"]).parts)
+                    link_path = Path(os.path.relpath(target, Path(report_path).resolve().parent)).as_posix()
                 destination = quote(link_path, safe="/.")
                 source_label = f"[{_markdown_text(source['path'])}](<{destination}>)"
             else:

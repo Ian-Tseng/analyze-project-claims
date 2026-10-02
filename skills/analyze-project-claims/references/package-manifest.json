@@ -62,7 +62,7 @@
     },
     {
       "path": "references/evidence-bound-audit-records.md",
-      "sha256": "bfb0f711dfeadb8883115b711c062eb24f8de0dbcd29abbe0eac07cc3014463b"
+      "sha256": "09a1ad51f96eae60f31f33099e882e0ba333f38f49aa648ef9c126a419d01fc7"
     },
     {
       "path": "references/evidence-guided-agents.md",
@@ -230,7 +230,7 @@
     },
     {
       "path": "scripts/_internal/evidence_bound_scan.py",
-      "sha256": "b354b31dd26c029ebc83c48011b0e243d5be3ab50375eeaa089dc76848bc3f78"
+      "sha256": "513a7d481139de74df0e3ba6f504abf56466001150ff0f64c90fd9ad71b89a25"
     },
     {
       "path": "scripts/_internal/evidence_nomination/__init__.py",
