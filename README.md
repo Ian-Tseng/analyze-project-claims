@@ -33,7 +33,7 @@ requirements and the boundary between tested helpers and host activation.
 New goals can opt into [concurrent agent-pool scheduling](skills/analyze-project-claims/references/agent-pool.md),
 with scoped evidence, per-unit review and safe reuse of finished agents. Existing
 goals keep their serialized mode. In a [local three-pair CPU-subprocess pilot](evaluation/agent-pool/observed-result.json),
-pooling reduced elapsed time by 21.6% at the median pair, with equal outputs and
+pooling reduced elapsed time by 23.0% at the median pair, with equal outputs and
 observed worker reuse. This bounded fixture used deterministic reviews; native
 AI-agent speed and general performance remain untested.
 

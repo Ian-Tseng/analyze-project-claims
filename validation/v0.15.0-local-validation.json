@@ -1,58 +1,74 @@
 {
-    "schema_version":  1,
-    "release_candidate":  "0.15.0",
-    "base_commit":  "efdbb8c6d80c979850f4652da867f4829c081cff",
-    "full_suite":  {
-                       "command":  "py -3 -m unittest discover -s tests -v",
-                       "exit_code":  0,
-                       "output_summary":  "Ran 523 tests in 176.931s; OK (skipped=3)",
-                       "passed":  520,
-                       "skipped":  3,
-                       "total":  523
-                   },
-    "other_checks":  {
-                         "engine_verify":  0,
-                         "package_verify":  0,
-                         "skill_validate":  0,
-                         "plugin_validate":  0,
-                         "offline_conformance":  0,
-                         "platform_probe":  0,
-                         "git_diff_check":  0
-                     },
-    "recursive_review":  {
-                             "status":  "PASS",
-                             "scope":  "Changed controller, serialized compatibility, pool docs, runtime results and bounded benchmark provenance",
-                             "resolved_findings":  [
-                                                       "revision and reconciliation liveness",
-                                                       "scoped evidence and pre-start freshness",
-                                                       "paused dispatch replay",
-                                                       "hardlink conflict detection",
-                                                       "malformed review rejection",
-                                                       "completion status freshness",
-                                                       "copied runtime dependency closure",
-                                                       "benchmark pool-full wait handling"
-                                                   ],
-                             "limitations":  [
-                                                 "Cooperative access declarations are not operating-system isolation",
-                                                 "Three descriptive local subprocess pairs with synthetic deterministic reviews",
-                                                 "No native AI speed or general performance claim"
-                                             ]
-                         },
-    "benchmark":  {
-                      "report":  "evaluation/agent-pool/observed-result.json",
-                      "sha256":  "0c29a51ee7d8ee249989392238042dc48b29601685fb41265fba7954f0eb52e2",
-                      "run_id":  "paired-benchmark-b2-03",
-                      "median_paired_speed_ratio":  1.275305928968404,
-                      "median_pair_elapsed_reduction_percent":  21.587442096430868879367399010,
-                      "outputs_equal":  true,
-                      "overlap_and_refill":  true,
-                      "source_hashes_match":  true
-                  },
-    "map":  {
-                "status":  "awaiting exact human acceptance",
-                "candidate":  "validation/component-map/candidates/20261004T153122439427Z-6a3a2615-component-map-255ccfc816db.json",
-                "candidate_sha256":  "3faa3bf7f0eafdd46aa8f8569945afd2bf1d91356d6feadb5edfcc09c22d6487",
-                "map_id":  "component-map-255ccfc816db"
-            },
-    "boundary":  "Local source candidate only. Map acceptance, formal audit append/preflight, hosted CI, merge, publication, installation and fresh client activation remain separate."
+  "schema_version": 1,
+  "release_candidate": "0.15.0",
+  "base_commit": "efdbb8c6d80c979850f4652da867f4829c081cff",
+  "full_suite": {
+    "command": "py -3 -m unittest discover -s tests -v",
+    "exit_code": 0,
+    "output_summary": "Ran 523 tests in 176.931s; OK (skipped=3)",
+    "passed": 520,
+    "skipped": 3,
+    "total": 523
+  },
+  "other_checks": {
+    "engine_verify": 0,
+    "package_verify": 0,
+    "skill_validate": 0,
+    "plugin_validate": 0,
+    "offline_conformance": 0,
+    "platform_probe": 0,
+    "git_diff_check": 0
+  },
+  "recursive_review": {
+    "status": "PASS",
+    "scope": "Changed controller, serialized compatibility, pool docs, runtime results and bounded benchmark provenance",
+    "resolved_findings": [
+      "revision and reconciliation liveness",
+      "scoped evidence and pre-start freshness",
+      "paused dispatch replay",
+      "hardlink conflict detection",
+      "malformed review rejection",
+      "completion status freshness",
+      "copied runtime dependency closure",
+      "benchmark pool-full wait handling"
+    ],
+    "limitations": [
+      "Cooperative access declarations are not operating-system isolation",
+      "Three descriptive local subprocess pairs with synthetic deterministic reviews",
+      "No native AI speed or general performance claim"
+    ],
+    "cycles_completed": 4,
+    "cycle_limit": 32,
+    "early_stop": "Complete scoped R4 recheck clean; no blocking findings",
+    "canonical_provenance_review_sha256": "1cc65318d6e8264a6ec32740274bb8efc14e5b49cb419dfc625d0ee2c2c458bd"
+  },
+  "benchmark": {
+    "report": "evaluation/agent-pool/observed-result.json",
+    "sha256": "ac067ff5ca4596110478a8a37b60735a40877c8e5c386cfa7fdd163faa8775eb",
+    "run_id": "paired-benchmark-b2-04",
+    "median_paired_speed_ratio": 1.2979453372463865,
+    "median_pair_elapsed_reduction_percent": 22.955152940298905,
+    "outputs_equal": true,
+    "overlap_and_refill": true,
+    "source_hashes_match": true
+  },
+  "map": {
+    "status": "awaiting exact human acceptance",
+    "candidate": "validation/component-map/candidates/20261004T154144993827Z-71019163-component-map-097e0def8545.json",
+    "candidate_sha256": "092eb0f0c4901afef7604fb6b5011d6aeb850a9980f188edf8b877982e1733d3",
+    "map_id": "component-map-097e0def8545",
+    "supersedes_pending_candidate": "validation/component-map/candidates/20261004T153122439427Z-6a3a2615-component-map-255ccfc816db.json",
+    "reason": "Canonical LF release bytes and same-protocol benchmark rerun supersede prior pending candidate; earlier map remains immutable historical evidence"
+  },
+  "boundary": "Local source candidate only. Map acceptance, formal audit append/preflight, hosted CI, merge, publication, installation and fresh client activation remain separate.",
+  "canonical_byte_recheck": {
+    "reason": "Five new working files had CRLF bytes while Git stores LF; preserved prior evidence and repeated unchanged benchmark protocol on canonical LF",
+    "production_sources_unchanged": true,
+    "python_ast_equivalent": true,
+    "post_normalization_pool_regressions_passed": 31,
+    "historical_benchmark_run": "paired-benchmark-b2-03",
+    "current_benchmark_run": "paired-benchmark-b2-04",
+    "mapped_file_count": 214,
+    "all_mapped_files_match_staged_git": true
+  }
 }
