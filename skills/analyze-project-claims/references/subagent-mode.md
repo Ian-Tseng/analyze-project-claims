@@ -1,6 +1,6 @@
 # Claims-guided subagent mode
 
-This optional mode delegates one substantial work unit at a time, then routes
+By default this optional mode delegates one substantial work unit at a time, then routes
 its outcome to a separate `analyze-project-claims` reviewer. The coordinator
 continues eligible work automatically and commits the affected working claims,
 evidence links, limitations, and dependent report projections after review.
@@ -13,6 +13,10 @@ specified in [host protocol](subagent-host-protocol.md). This is an optional pac
 
 Apply [evidence-guided agents](evidence-guided-agents.md) to every participating
 role and include it with controlling files in `reviewer_sources`.
+
+For a new concurrent goal, also read [agent-pool mode](agent-pool.md). Its scoped
+readiness and review rules specialize the global serialized gates below; absence
+of that explicit configuration preserves those gates and existing journals.
 
 ## Configure a goal
 

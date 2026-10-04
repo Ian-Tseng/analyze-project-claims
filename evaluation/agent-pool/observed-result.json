@@ -1,0 +1,429 @@
+{
+  "manifest": {
+    "cpu_count": 12,
+    "dag": {
+      "a": [],
+      "b": [],
+      "c": [],
+      "d": [
+        "a"
+      ],
+      "e": [
+        "b"
+      ],
+      "f": [
+        "d",
+        "e",
+        "c"
+      ]
+    },
+    "expected": {
+      "a": {
+        "dependency_digests": [],
+        "digest": "84e1ab00295eeec85f501255bf77afc935c051e4f8c16d2c000e7b9370c4c1bf",
+        "iterations": 8000000,
+        "task": "a"
+      },
+      "b": {
+        "dependency_digests": [],
+        "digest": "88590a02019d4287d80f5fe1ca26247f316c1ee4c4f2d4336031d35884e95909",
+        "iterations": 2000000,
+        "task": "b"
+      },
+      "c": {
+        "dependency_digests": [],
+        "digest": "ea8b33b74ac855ff41c05ec803b363f3a4a3afe647901104077da725707c76a5",
+        "iterations": 2000000,
+        "task": "c"
+      },
+      "d": {
+        "dependency_digests": [
+          "84e1ab00295eeec85f501255bf77afc935c051e4f8c16d2c000e7b9370c4c1bf"
+        ],
+        "digest": "58394e20002e779cb92a7049db28767f9395557489073def7bd7c56e6b0d3cf3",
+        "iterations": 2000000,
+        "task": "d"
+      },
+      "e": {
+        "dependency_digests": [
+          "88590a02019d4287d80f5fe1ca26247f316c1ee4c4f2d4336031d35884e95909"
+        ],
+        "digest": "bf821ed29c4cdf4a30a203e0fd957d191a4d7b5ddd5c38a6a8dff7b48695ca67",
+        "iterations": 2000000,
+        "task": "e"
+      },
+      "f": {
+        "dependency_digests": [
+          "58394e20002e779cb92a7049db28767f9395557489073def7bd7c56e6b0d3cf3",
+          "bf821ed29c4cdf4a30a203e0fd957d191a4d7b5ddd5c38a6a8dff7b48695ca67",
+          "ea8b33b74ac855ff41c05ec803b363f3a4a3afe647901104077da725707c76a5"
+        ],
+        "digest": "a9cb1e5547f9791ac751c50b98be9933c7bde01c595da6a318416053851b8838",
+        "iterations": 2000000,
+        "task": "f"
+      }
+    },
+    "iterations": {
+      "a": 8000000,
+      "b": 2000000,
+      "c": 2000000,
+      "d": 2000000,
+      "e": 2000000,
+      "f": 2000000
+    },
+    "limitation": "Real Python subprocesses and controller operations; deterministic synthetic reviewer, no LLM invocation, semantic-review accuracy or general speed guarantee.",
+    "permitted_workers": 2,
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:03:56) [MSC v.1929 64 bit (AMD64)]",
+    "repeats": 3,
+    "source_hashes": {
+      "evaluation\\agent-pool\\benchmark.py": "f9a2a72f38996f3d34ef4eabacbbea9696d6dd774b2351c9fab64b9c169d4ad4",
+      "skills\\analyze-project-claims\\scripts\\agent_cleanup.py": "e5c7c1d3ecf8fb99c9c010077cdf88df519deee98a46d1617f94122ee0177a59",
+      "skills\\analyze-project-claims\\scripts\\agent_pool.py": "e0fe4172c7ba2a4e6933fbcaff875edc4095858c030c43fc919843b3c3a4006b",
+      "skills\\analyze-project-claims\\scripts\\long_running_controller.py": "d27cf2e7071f50fa59510287989a16c25dfc07d76c452e7c64ea446c263acbd9",
+      "skills\\analyze-project-claims\\scripts\\subagent_mode.py": "b891f287c30e7f12fa91c155b2abbf02b338ca3eceb6743a036b915f1aeb8492"
+    },
+    "timing_boundary": "After controller init; includes subprocess startup, all dispatch/work/review/integration until controller COMPLETE; excludes expected-value setup and host shutdown."
+  },
+  "method": "Executed local subprocess/controller benchmark, synthetic deterministic reviews",
+  "result": {
+    "acceleration_evidence": "OBSERVED_BOUNDED_WORKLOAD",
+    "acceleration_observed": true,
+    "all_outputs_equal": true,
+    "functional_status": "PASS",
+    "limitation": "Real Python subprocesses and controller operations; deterministic synthetic reviewer, no LLM invocation, semantic-review accuracy or general speed guarantee.",
+    "median_paired_speed_ratio": 1.275305928968404,
+    "paired_speed_ratios": [
+      1.2680553318675494,
+      1.35956669311142,
+      1.275305928968404
+    ],
+    "pool_overlap_all_trials": true,
+    "pool_refill_all_trials": true,
+    "statistical_limit": "Paired descriptive measurements only; no significance or generalization claim.",
+    "status": "PASS",
+    "trials": [
+      {
+        "claim_dirty": [],
+        "complete": true,
+        "controller_seconds": 12.748365000181366,
+        "dependency_review_to_dispatch_seconds": {
+          "d": 3.6084633,
+          "e": 3.7131569,
+          "f": 0.2512816
+        },
+        "elapsed_seconds": 14.2878818,
+        "limitation": "Real Python subprocesses and controller operations; deterministic synthetic reviewer, no LLM invocation, semantic-review accuracy or general speed guarantee.",
+        "mode": "serialized",
+        "output_digest": "82194dc72ce34f9821d7c3693fadea28a8e921bed8b53d935488ab5c2c48cd12",
+        "outputs_equal": true,
+        "overlap_observed": false,
+        "pair": 0,
+        "per_task_work_seconds": {
+          "a": {
+            "cpu": 4.15625,
+            "wall": 4.2738065
+          },
+          "b": {
+            "cpu": 1.109375,
+            "wall": 1.1782694
+          },
+          "c": {
+            "cpu": 1.109375,
+            "wall": 1.1225756
+          },
+          "d": {
+            "cpu": 1.125,
+            "wall": 1.1722492
+          },
+          "e": {
+            "cpu": 1.109375,
+            "wall": 1.1609784
+          },
+          "f": {
+            "cpu": 1.03125,
+            "wall": 1.0818679
+          }
+        },
+        "reassignment_before_straggler_done": false,
+        "review_process_seconds": 0.00971070007653907,
+        "sources_unchanged": true,
+        "unique_tasks": 6,
+        "worker_count": 2,
+        "worker_cpu_seconds": 9.640625,
+        "worker_cpu_work_wall_sum_seconds": 9.989747,
+        "worker_executions": 6
+      },
+      {
+        "claim_dirty": [],
+        "complete": true,
+        "controller_seconds": 10.42469690006692,
+        "dependency_review_to_dispatch_seconds": {
+          "d": 0.2766962,
+          "e": 2.1325711,
+          "f": 0.3034681
+        },
+        "elapsed_seconds": 11.2675539,
+        "limitation": "Real Python subprocesses and controller operations; deterministic synthetic reviewer, no LLM invocation, semantic-review accuracy or general speed guarantee.",
+        "mode": "pool",
+        "output_digest": "82194dc72ce34f9821d7c3693fadea28a8e921bed8b53d935488ab5c2c48cd12",
+        "outputs_equal": true,
+        "overlap_observed": true,
+        "pair": 0,
+        "per_task_work_seconds": {
+          "a": {
+            "cpu": 4.796875,
+            "wall": 4.9526286
+          },
+          "b": {
+            "cpu": 1.21875,
+            "wall": 1.2403114
+          },
+          "c": {
+            "cpu": 1.296875,
+            "wall": 1.3269714
+          },
+          "d": {
+            "cpu": 1.09375,
+            "wall": 1.1270671
+          },
+          "e": {
+            "cpu": 1.265625,
+            "wall": 1.3147839
+          },
+          "f": {
+            "cpu": 1.015625,
+            "wall": 1.1195918
+          }
+        },
+        "reassignment_before_straggler_done": true,
+        "review_process_seconds": 0.007825300039257854,
+        "sources_unchanged": true,
+        "unique_tasks": 6,
+        "worker_count": 2,
+        "worker_cpu_seconds": 10.6875,
+        "worker_cpu_work_wall_sum_seconds": 11.0813542,
+        "worker_executions": 6
+      },
+      {
+        "claim_dirty": [],
+        "complete": true,
+        "controller_seconds": 11.223086000594776,
+        "dependency_review_to_dispatch_seconds": {
+          "d": 0.6146704,
+          "e": 2.2159574,
+          "f": 0.3285449
+        },
+        "elapsed_seconds": 12.1769585,
+        "limitation": "Real Python subprocesses and controller operations; deterministic synthetic reviewer, no LLM invocation, semantic-review accuracy or general speed guarantee.",
+        "mode": "pool",
+        "output_digest": "82194dc72ce34f9821d7c3693fadea28a8e921bed8b53d935488ab5c2c48cd12",
+        "outputs_equal": true,
+        "overlap_observed": true,
+        "pair": 1,
+        "per_task_work_seconds": {
+          "a": {
+            "cpu": 5.03125,
+            "wall": 5.3231873
+          },
+          "b": {
+            "cpu": 1.203125,
+            "wall": 1.2495493
+          },
+          "c": {
+            "cpu": 1.328125,
+            "wall": 1.3569574
+          },
+          "d": {
+            "cpu": 1.15625,
+            "wall": 1.2006274
+          },
+          "e": {
+            "cpu": 1.3125,
+            "wall": 1.4104686
+          },
+          "f": {
+            "cpu": 1.21875,
+            "wall": 1.244383
+          }
+        },
+        "reassignment_before_straggler_done": true,
+        "review_process_seconds": 0.00759050011401996,
+        "sources_unchanged": true,
+        "unique_tasks": 6,
+        "worker_count": 2,
+        "worker_cpu_seconds": 11.25,
+        "worker_cpu_work_wall_sum_seconds": 11.785173,
+        "worker_executions": 6
+      },
+      {
+        "claim_dirty": [],
+        "complete": true,
+        "controller_seconds": 15.05348959931871,
+        "dependency_review_to_dispatch_seconds": {
+          "d": 4.2785394,
+          "e": 4.2371632,
+          "f": 0.2780529
+        },
+        "elapsed_seconds": 16.5553872,
+        "limitation": "Real Python subprocesses and controller operations; deterministic synthetic reviewer, no LLM invocation, semantic-review accuracy or general speed guarantee.",
+        "mode": "serialized",
+        "output_digest": "82194dc72ce34f9821d7c3693fadea28a8e921bed8b53d935488ab5c2c48cd12",
+        "outputs_equal": true,
+        "overlap_observed": false,
+        "pair": 1,
+        "per_task_work_seconds": {
+          "a": {
+            "cpu": 4.96875,
+            "wall": 5.1400361
+          },
+          "b": {
+            "cpu": 1.328125,
+            "wall": 1.649223
+          },
+          "c": {
+            "cpu": 1.1875,
+            "wall": 1.2666369
+          },
+          "d": {
+            "cpu": 1.28125,
+            "wall": 1.4016251
+          },
+          "e": {
+            "cpu": 1.25,
+            "wall": 1.3127976
+          },
+          "f": {
+            "cpu": 1.125,
+            "wall": 1.1564325
+          }
+        },
+        "reassignment_before_straggler_done": false,
+        "review_process_seconds": 0.008917200088035315,
+        "sources_unchanged": true,
+        "unique_tasks": 6,
+        "worker_count": 2,
+        "worker_cpu_seconds": 11.140625,
+        "worker_cpu_work_wall_sum_seconds": 11.9267512,
+        "worker_executions": 6
+      },
+      {
+        "claim_dirty": [],
+        "complete": true,
+        "controller_seconds": 13.025381499028299,
+        "dependency_review_to_dispatch_seconds": {
+          "d": 3.4249088,
+          "e": 3.8000416,
+          "f": 0.3075658
+        },
+        "elapsed_seconds": 14.5775988,
+        "limitation": "Real Python subprocesses and controller operations; deterministic synthetic reviewer, no LLM invocation, semantic-review accuracy or general speed guarantee.",
+        "mode": "serialized",
+        "output_digest": "82194dc72ce34f9821d7c3693fadea28a8e921bed8b53d935488ab5c2c48cd12",
+        "outputs_equal": true,
+        "overlap_observed": false,
+        "pair": 2,
+        "per_task_work_seconds": {
+          "a": {
+            "cpu": 4.328125,
+            "wall": 4.4460837
+          },
+          "b": {
+            "cpu": 1.140625,
+            "wall": 1.1545447
+          },
+          "c": {
+            "cpu": 1.109375,
+            "wall": 1.1616423
+          },
+          "d": {
+            "cpu": 1.171875,
+            "wall": 1.2230443
+          },
+          "e": {
+            "cpu": 1.125,
+            "wall": 1.1409986
+          },
+          "f": {
+            "cpu": 1.09375,
+            "wall": 1.1150625
+          }
+        },
+        "reassignment_before_straggler_done": false,
+        "review_process_seconds": 0.008691600058227777,
+        "sources_unchanged": true,
+        "unique_tasks": 6,
+        "worker_count": 2,
+        "worker_cpu_seconds": 9.96875,
+        "worker_cpu_work_wall_sum_seconds": 10.2413761,
+        "worker_executions": 6
+      },
+      {
+        "claim_dirty": [],
+        "complete": true,
+        "controller_seconds": 10.622726900153793,
+        "dependency_review_to_dispatch_seconds": {
+          "d": 0.2629818,
+          "e": 2.1156936,
+          "f": 0.3124302
+        },
+        "elapsed_seconds": 11.4306681,
+        "limitation": "Real Python subprocesses and controller operations; deterministic synthetic reviewer, no LLM invocation, semantic-review accuracy or general speed guarantee.",
+        "mode": "pool",
+        "output_digest": "82194dc72ce34f9821d7c3693fadea28a8e921bed8b53d935488ab5c2c48cd12",
+        "outputs_equal": true,
+        "overlap_observed": true,
+        "pair": 2,
+        "per_task_work_seconds": {
+          "a": {
+            "cpu": 4.859375,
+            "wall": 5.0852467
+          },
+          "b": {
+            "cpu": 1.21875,
+            "wall": 1.2715964
+          },
+          "c": {
+            "cpu": 1.171875,
+            "wall": 1.2048048
+          },
+          "d": {
+            "cpu": 1.125,
+            "wall": 1.1503797
+          },
+          "e": {
+            "cpu": 1.28125,
+            "wall": 1.3357093
+          },
+          "f": {
+            "cpu": 1.1875,
+            "wall": 1.2665698
+          }
+        },
+        "reassignment_before_straggler_done": true,
+        "review_process_seconds": 0.007216199999675155,
+        "sources_unchanged": true,
+        "unique_tasks": 6,
+        "worker_count": 2,
+        "worker_cpu_seconds": 10.84375,
+        "worker_cpu_work_wall_sum_seconds": 11.3143067,
+        "worker_executions": 6
+      }
+    ]
+  },
+  "retained_prior_attempts": [
+    {
+      "outcome": "functional pass; tiny workload showed no overlap/refill; acceleration inconclusive",
+      "run_id": "functional-smoke-b2-01"
+    },
+    {
+      "outcome": "interrupted before first trial; implementation freeze lifted; invalid for speed claims",
+      "run_id": "paired-benchmark-b2-01"
+    },
+    {
+      "outcome": "failed benchmark adapter: POOL_FULL was omitted from normal wait statuses; one serialized row preserved, no paired speed claim",
+      "run_id": "paired-benchmark-b2-02"
+    }
+  ],
+  "run_id": "paired-benchmark-b2-03"
+}

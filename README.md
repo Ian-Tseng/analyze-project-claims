@@ -19,7 +19,7 @@ recommends the smallest useful next check.
 
 ## Evidence-guided agents and subagent mode (0.12.0)
 
-For explicitly authorized delegated goals, the optional controller runs one work
+For explicitly authorized delegated goals, the optional controller defaults to one work
 unit at a time and routes each substantive outcome to `analyze-project-claims`.
 It tracks provisional claims, evidence links, limitations, dependent reports and
 sampled freshness while preserving pauses and bounded retries. Native subagents
@@ -29,6 +29,13 @@ Version 0.12.0 defaults new repair attempts to 32 cycles, supports explicit caps
 and preserves legacy journal limits. Claims guide investigation and are updated
 when results contradict them. See the linked guide for native-host
 requirements and the boundary between tested helpers and host activation.
+
+New goals can opt into [concurrent agent-pool scheduling](skills/analyze-project-claims/references/agent-pool.md),
+with scoped evidence, per-unit review and safe reuse of finished agents. Existing
+goals keep their serialized mode. In a [local three-pair CPU-subprocess pilot](evaluation/agent-pool/observed-result.json),
+pooling reduced elapsed time by 21.6% at the median pair, with equal outputs and
+observed worker reuse. This bounded fixture used deterministic reviews; native
+AI-agent speed and general performance remain untested.
 
 ## Install
 
@@ -49,7 +56,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.14.1
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.15.0
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
