@@ -1,0 +1,224 @@
+{
+  "bindings": [
+    {
+      "claim_id": "pool-contract",
+      "evidence_id": "pool-tests",
+      "role": "supports"
+    },
+    {
+      "claim_id": "serial-compatibility",
+      "evidence_id": "full-tests",
+      "role": "supports"
+    },
+    {
+      "claim_id": "bounded-acceleration",
+      "evidence_id": "benchmark",
+      "role": "supports"
+    },
+    {
+      "claim_id": "pool-contract",
+      "evidence_id": "limits",
+      "role": "limits"
+    },
+    {
+      "claim_id": "serial-compatibility",
+      "evidence_id": "limits",
+      "role": "limits"
+    },
+    {
+      "claim_id": "bounded-acceleration",
+      "evidence_id": "limits",
+      "role": "limits"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "0235be1df955c4d42d0b77ac771f973c492d1b4e4de86c97bde2185043eb13e0",
+      "claim_id": "pool-contract",
+      "element_ref": {
+        "component_id": "long-running-subagents",
+        "element_id": "opt-in-concurrent-worker-pool"
+      },
+      "material": true,
+      "rationale": "Execution receipts and independently reviewed raw evidence support this bounded claim; broader runtime and performance conclusions remain outside scope.",
+      "statement": "The opt-in concurrent agent pool passes its 31 behavioral regressions, including reviewed reassignment and declared-scope conflict handling.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "c44f55901602b215a4331d48c06c6272f03942a3a94057c60d7b0c179a5c1c0e",
+      "claim_id": "serial-compatibility",
+      "element_ref": {
+        "component_id": "long-running-subagents",
+        "element_id": "durable-controller"
+      },
+      "material": true,
+      "rationale": "Execution receipts and independently reviewed raw evidence support this bounded claim; broader runtime and performance conclusions remain outside scope.",
+      "statement": "The local full repository suite completed with 520 passed tests and 3 skipped tests; existing serialized mode remains covered.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "20dbec8083c40d948f4d6b541d191ba973753b285cf44b35cb5b42dba3319d5e",
+      "claim_id": "bounded-acceleration",
+      "element_ref": {
+        "component_id": "long-running-subagents",
+        "element_id": "bounded-agent-pool-benchmark"
+      },
+      "material": true,
+      "rationale": "Execution receipts and independently reviewed raw evidence support this bounded claim; broader runtime and performance conclusions remain outside scope.",
+      "statement": "Three paired local CPU-subprocess trials using canonical release sources observed median elapsed reduction of 22.955 percent, equal outputs and worker reuse before the straggler completed.",
+      "status": "supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "pool-tests",
+      "freshness": "current",
+      "identity_sha256": "94d37f3ab0018f20f57a95503ea958bb499ef0c72c473b5b08d4c78b88fbb997",
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/canonical_byte_recheck"
+      },
+      "method": "executed_test",
+      "observed_summary": "31 pool regressions passed after CRLF-to-LF canonicalization; production sources unchanged and Python ASTs equivalent.",
+      "selection_sha256": "b6b1d378a53d6493d8763c0d60eb810e40d8b756d50e80b18aff888443d7a136",
+      "source": {
+        "byte_size": 3420,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.15.0-local-validation.json",
+        "sha256": "ae0d054449ea3ec18808622eaf0fed2397f6b311936cfcc24a46905e92eb9f75"
+      }
+    },
+    {
+      "evidence_id": "full-tests",
+      "freshness": "current",
+      "identity_sha256": "a6d6a915a308592a29a45dde28181d96c0c41ac88d3664511f9013e6d2262a77",
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "Recorded full command exited0: Ran523 tests,520 passed and3 skipped.",
+      "selection_sha256": "a9108d91255d35668521f319c294a5de3b4e4b985b95810e179f3564210971dc",
+      "source": {
+        "byte_size": 3420,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.15.0-local-validation.json",
+        "sha256": "ae0d054449ea3ec18808622eaf0fed2397f6b311936cfcc24a46905e92eb9f75"
+      }
+    },
+    {
+      "evidence_id": "benchmark",
+      "freshness": "current",
+      "identity_sha256": "17797e97ccb33f5471c3aeca71538b010e518e7d9898f1ef3fc6d0d2a795453c",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "executed_test",
+      "observed_summary": "Canonical LF run b2-04 has three paired ratios with median1.2979453372463865, exact accepted outputs, overlap and prompt reassignment in every pool trial.",
+      "selection_sha256": "ac067ff5ca4596110478a8a37b60735a40877c8e5c386cfa7fdd163faa8775eb",
+      "source": {
+        "byte_size": 14910,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "evaluation/agent-pool/observed-result.json",
+        "sha256": "ac067ff5ca4596110478a8a37b60735a40877c8e5c386cfa7fdd163faa8775eb"
+      }
+    },
+    {
+      "evidence_id": "limits",
+      "freshness": "current",
+      "identity_sha256": "85a4b7bcc4b18bb4843e39fb07feab4935f00d7898cbf084d7cd399935146ad5",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "Protocol uses deterministic synthetic reviews in persistent Python subprocesses; native AI runtime, semantic review quality, statistical significance and general speed are untested.",
+      "selection_sha256": "f9bac790bab44db0a4b15c7dfceeb5a3669669273b2e2733a48f323af7541f8b",
+      "source": {
+        "byte_size": 4448,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "evaluation/agent-pool/README.md",
+        "sha256": "f9bac790bab44db0a4b15c7dfceeb5a3669669273b2e2733a48f323af7541f8b"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "72048606bd804d79991fef4db79093041044a4c5378bc0f47dbc38896f7ed334",
+    "output_schema_sha256": "c381756b5c2dd32f6be29b48f4532d834546f381bb571daebfac87216aec4dd3",
+    "recorder_sha256": "513a7d481139de74df0e3ba6f504abf56466001150ff0f64c90fd9ad71b89a25",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "513a7d481139de74df0e3ba6f504abf56466001150ff0f64c90fd9ad71b89a25"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "pool-contract",
+        "serial-compatibility",
+        "bounded-acceleration"
+      ],
+      "evidence_ids": [
+        "limits"
+      ],
+      "limitation_id": "local-fixture-boundary",
+      "text": "Local Windows/Python3.12 validation and three descriptive CPU-subprocess pairs with synthetic reviews; no native AI speed, semantic review-quality or general performance claim. Hosted release and installation are not established by this record."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-097e0def8545",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "c46d05f1cf6f1e44ea9c8f855734419359a4f24c4883f3cc7a8e75daa46bc328"
+    },
+    "authority": [
+      "skills/analyze-project-claims/SKILL.md",
+      "validation/component-map/accepted-map.json",
+      "PUBLISHING.md"
+    ],
+    "engine_identity": {
+      "engine_digest": "8e13b7d894deefa840ce1b5dc68a547a68f14a902c68cc3fe76b37946e6cf540",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "Audit the accepted v0.15.0 concurrent pool source, compatibility regressions and bounded acceleration evidence before release.",
+    "recorded_at_utc": "2026-10-04T15:48:47.069305Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20261004T154847069305Z-4dc6b6e6",
+    "scope": [
+      "skills/analyze-project-claims",
+      "tests/test_agent_pool.py",
+      "tests/test_agent_pool_cli.py",
+      "evaluation/agent-pool",
+      "validation/v0.15.0-local-validation.json"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "6fbbb2ba0d16ed640deb25f1125e3441f0060641751ad04ba58394f35c2e37f8"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "local-fixture-boundary"
+    ],
+    "claim_count": 3,
+    "claim_counts": {
+      "supported": 3
+    },
+    "evidence_count": 4,
+    "material_claim_count": 3,
+    "no_supported_claim": false,
+    "scan_status": "PASS",
+    "strongest_safe_claim": "Three paired local CPU-subprocess trials using canonical release sources observed median elapsed reduction of 22.955 percent, equal outputs and worker reuse before the straggler completed.",
+    "strongest_safe_claim_id": "bounded-acceleration",
+    "unresolved_uncertainties": [
+      "Native AI-agent acceleration and cross-workload performance remain unmeasured.",
+      "Hosted CI, immutable release and installation/activation are subsequent lifecycle observations."
+    ]
+  }
+}

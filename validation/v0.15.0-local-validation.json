@@ -53,14 +53,17 @@
     "source_hashes_match": true
   },
   "map": {
-    "status": "awaiting exact human acceptance",
+    "status": "accepted by exact human confirmation",
     "candidate": "validation/component-map/candidates/20261004T154144993827Z-71019163-component-map-097e0def8545.json",
     "candidate_sha256": "092eb0f0c4901afef7604fb6b5011d6aeb850a9980f188edf8b877982e1733d3",
     "map_id": "component-map-097e0def8545",
     "supersedes_pending_candidate": "validation/component-map/candidates/20261004T153122439427Z-6a3a2615-component-map-255ccfc816db.json",
-    "reason": "Canonical LF release bytes and same-protocol benchmark rerun supersede prior pending candidate; earlier map remains immutable historical evidence"
+    "reason": "Canonical LF release bytes and same-protocol benchmark rerun supersede prior pending candidate; earlier map remains immutable historical evidence",
+    "acceptance_event": "20261004T154739259370Z-5071d554",
+    "unchanged_reconciliation": true,
+    "formal_preflight": true
   },
-  "boundary": "Local source candidate only. Map acceptance, formal audit append/preflight, hosted CI, merge, publication, installation and fresh client activation remain separate.",
+  "boundary": "Local implementation validation and exact map acceptance complete. Hosted CI, merge, publication, installation and fresh activation remain subsequent release checks.",
   "canonical_byte_recheck": {
     "reason": "Five new working files had CRLF bytes while Git stores LF; preserved prior evidence and repeated unchanged benchmark protocol on canonical LF",
     "production_sources_unchanged": true,
