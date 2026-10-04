@@ -116,7 +116,8 @@ def reviewer_snapshot(config):
     # Include the executed orchestration implementation, not just its guide.
     controller = Path(__file__).with_name('long_running_controller.py')
     cleanup = Path(__file__).with_name('agent_cleanup.py')
-    paths = sorted(set(paths + [str(Path(__file__).resolve()), str(controller.resolve()), str(cleanup.resolve())]))
+    implementations = [Path(__file__), controller, cleanup, Path(__file__).with_name('agent_pool.py')]
+    paths = sorted(set(paths + [str(p.resolve()) for p in implementations]))
     files = {}
     for name in paths:
         path = Path(name)
@@ -153,7 +154,11 @@ def ready(state, action):
     if not enabled(state['config']):
         return True
     claims, dirty = state['working_claims'], set(state['claim_dirty'])
-    if dirty:
+    if 'agent_pool' in state['config']:
+        import agent_pool
+        if dirty.intersection(agent_pool.action_claims(state['config'], action)):
+            return False
+    elif dirty:
         return False
     def supported(key):
         return key not in dirty and claims[key]['status'] == 'supported' and all(supported(p) for p in definitions(state['config'])[key].get('depends_on', []))

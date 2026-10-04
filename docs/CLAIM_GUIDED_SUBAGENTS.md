@@ -5,7 +5,8 @@ An authorized host can delegate one substantive work unit, invoke
 regenerate dependent reports before continuing. Provisional hypotheses may guide
 work; only declared execution prerequisites require current support. Negative
 observations revise claims and dependent plans instead of being hidden. Failed and uncertain work also return to claims review.
-This is sequential active-session orchestration; it does not install a scheduler
+Default execution is sequential; new [agent-pool goals](../skills/analyze-project-claims/references/agent-pool.md) support concurrent independent workers and serialized review.
+Both are active-session orchestration; neither installs a scheduler
 or wake a host after its process ends.
 
 Use a host with native subagent creation, messages, waiting and recovery. The

@@ -14,6 +14,7 @@ import time
 import uuid
 import subagent_mode
 import agent_cleanup
+import agent_pool
 
 ContractError = subagent_mode.ContractError
 
@@ -92,11 +93,13 @@ def validate_config(config):
             "max_spawn_attempts must be an integer from 1 to 100")
     repair_cycle_limit(config)
     subagent_mode.validate_config(config)
+    agent_pool.validate_config(config)
     return config
 
 def snapshot(config):
     root = Path(config["project_root"])
     files = {}
+    identities = set()
     for name in sorted(config["evidence"]):
         rel = Path(name)
         require(not rel.is_absolute() and ".." not in rel.parts and rel.parts, "Evidence must be project-relative")
@@ -111,11 +114,17 @@ def snapshot(config):
             continue
         require(path.is_file(), "Evidence must name a file")
         before = path.stat()
+        if "agent_pool" in config:
+            identity = (before.st_dev, before.st_ino)
+            require(before.st_nlink <= 1 and identity not in identities, "Pool evidence cannot use hardlink aliases")
+            identities.add(identity)
         sha = hashlib.sha256()
         with path.open("rb") as stream:
             for chunk in iter(lambda: stream.read(1024 * 1024), b""):
                 sha.update(chunk)
         after = path.stat()
+        if "agent_pool" in config:
+            require(after.st_nlink <= 1 and (before.st_dev, before.st_ino) == (after.st_dev, after.st_ino), "Pool evidence identity changed while reading")
         require((before.st_size, before.st_mtime_ns) == (after.st_size, after.st_mtime_ns), "Evidence changed while reading")
         files[name] = sha.hexdigest()
     return {"files": files, "digest": digest(files)}
@@ -197,6 +206,7 @@ class Controller:
                      "snapshot": current, "review_due": True, "review_failures": 0, "preferred": None,
                      "last_review": None}
             subagent_mode.initialize(state, self.root)
+            agent_pool.initialize(state)
             self._save(state, "initialized", 0, None)
             return state
 
@@ -222,14 +232,13 @@ class Controller:
         with self.locked():
             state, seq, previous = self._load(sync_reports=False)
             require(subagent_mode.enabled(state['config']), 'Subagent mode is not enabled')
-            require(state['pending'] and state['pending']['token'] == token,
-                    'No matching in-flight action')
+            pending = agent_pool.get_pending(state, token)
+            require(pending is not None, 'No matching in-flight action')
             if token in state['delegations']:
                 return {'status': 'RECOVER_BOUND_AGENT', 'delegation': state['delegations'][token]}
             if state['control'] != 'active':
                 return {'status': state['control'].upper()}
-            if (state['pending']['snapshot'] != snapshot(state['config']) or
-                    state['reviewer_contract'] != subagent_mode.reviewer_snapshot(state['config'])):
+            if not agent_pool.request_current(state, pending, snapshot(state['config'])):
                 return {'status': 'STALE'}
             history = state.get('spawn_attempts', {}).get(token, [])
             limit = state['config'].get('max_spawn_attempts', 3)
@@ -283,7 +292,7 @@ class Controller:
             if 'result' in attempt:
                 require(attempt['result'] == result, 'Spawn result already recorded with different evidence')
                 return {'status': 'ALREADY_RECORDED', 'outcome': attempt['outcome']}
-            require(state['pending'] and state['pending']['token'] == token and attempt is history[-1],
+            require(agent_pool.get_pending(state, token) is not None and attempt is history[-1],
                     'No matching in-flight spawn attempt')
             require(token not in state['delegations'], 'Recover the bound agent instead')
             # Exact known host diagnostic plus explicit host evidence of no creation.
@@ -316,16 +325,23 @@ class Controller:
         with self.locked():
             state, seq, prev = self._load()
             require(revision != state["config"]["goal_revision"], "Use a new goal revision")
-            require(state["pending"] is None, "Reconcile in-flight action before revising goal")
+            require(not agent_pool.has_pending(state), "Reconcile in-flight action before revising goal")
             state["config"].update(goal_revision=revision, objective=objective, success_criteria=criteria)
             state["config_digest"] = digest(state["config"])
             state.update(complete=False, clearances={}, review_due=True, review_failures=0)
             subagent_mode.invalidate(state)
+            agent_pool.invalidate_external(state)
             state["revision_authority"] = authority
             self._save(state, "goal_revised", seq, prev)
             return {"status": "REVISED", "goal_revision": revision}
 
+    def start_agent(self, token, agent_id, source_ref):
+        require(agent_pool.is_pool(self), "start-agent requires agent_pool")
+        return agent_pool.start_agent(self, token, agent_id, source_ref)
+
     def check(self, token):
+        if agent_pool.is_pool(self):
+            return agent_pool.check(self, token)
         with self.locked():
             state, _, _ = self._load()
             require(state["pending"] and state["pending"]["token"] == token, "No matching in-flight action")
@@ -336,7 +352,10 @@ class Controller:
                 return {"status": "STALE"}
             return {"status": "READY"}
 
-    def bind_agent(self, token, agent_id):
+    def bind_agent(self, token, agent_id, observation=None):
+        if agent_pool.is_pool(self):
+            return agent_pool.bind_agent(self, token, agent_id, observation)
+        require(observation is None, "Reuse observation requires agent_pool")
         """Record observed native host identity; never spawn or repeat a task."""
         require(isinstance(agent_id, str) and agent_id.strip(), "Agent ID required")
         with self.locked():
@@ -361,7 +380,7 @@ class Controller:
             "revision_id", "base_config_digest", "add_actions", "dependencies"}, "Invalid plan patch fields")
         require(isinstance(patch["revision_id"], str) and patch["revision_id"].strip(), "Missing plan revision ID")
         require(patch["base_config_digest"] == state["config_digest"], "Stale plan base")
-        require(state["pending"] is None, "Reconcile in-flight action before revising plan")
+        require(not agent_pool.has_pending(state), "Reconcile in-flight action before revising plan")
         require(state["control"] != "stopped", "Stopped goal cannot revise plan")
         require(patch["revision_id"] not in state.get("plan_revisions", {}), "Plan revision ID already used")
         additions, dependencies = patch["add_actions"], patch["dependencies"]
@@ -378,9 +397,12 @@ class Controller:
         executed, tokens = set(), {}
         for path in sorted((self.root / "journal").glob("*.json")):
             prior = read_json(path)["state"]
-            request = prior.get("pending")
-            if request and request["kind"] != "review":
-                tokens[request["token"]] = request["action_id"]
+            requests = list(prior.get("pool_pending", {}).values())
+            if prior.get("pending"):
+                requests.append(prior["pending"])
+            for request in requests:
+                if request["kind"] != "review":
+                    tokens[request["token"]] = request["action_id"]
             result = prior.get("last_result")
             if result and result["token"] in tokens and result["result"].get("status") != "not_started":
                 executed.add(tokens[result["token"]])
@@ -466,6 +488,7 @@ class Controller:
             state.update(snapshot=current, complete=False, review_due=True)
             if evidence_changed:
                 subagent_mode.invalidate(state)
+            agent_pool.invalidate_external(state)
             # Plan changes cannot replenish failed-review or execution budgets.
             if state["preferred"] in affected:
                 state["preferred"] = None
@@ -473,7 +496,10 @@ class Controller:
             self._save(state, "plan_revised", seq, prev)
             return {"status": "PLAN_REVISED", **record}
 
-    def next(self):
+    def next(self, dispatch_id=None):
+        if agent_pool.is_pool(self):
+            return agent_pool.next_request(self, dispatch_id)
+        require(dispatch_id is None, "dispatch_id requires agent_pool")
         with self.locked():
             state, seq, prev = self._load()
             unchanged = digest(state)
@@ -599,6 +625,8 @@ class Controller:
             state["complete"] = True
 
     def finish(self, token, result):
+        if agent_pool.is_pool(self):
+            return agent_pool.finish(self, token, result)
         require(isinstance(result, dict), "Result must be an object")
         with self.locked():
             state, seq, prev = self._load()
@@ -648,16 +676,19 @@ class Controller:
         require(outcome in ("done", "pending") and evidence.strip(), "Supply actual outcome and evidence")
         with self.locked():
             state, seq, prev = self._load()
-            require(state["pending"] is None, "Finish/reconcile the in-flight token first")
+            require(not agent_pool.has_pending(state), "Finish/reconcile the in-flight token first")
             require(state["actions"].get(action_id) in ("uncertain", "failed"), "Only reconcile uncertain/failed actions")
             state["actions"][action_id] = outcome
             state.update(review_due=True, review_failures=0, clearances={}, complete=False)
             subagent_mode.invalidate(state)
+            agent_pool.invalidate_external(state)
             state["reconciliation"] = {"action": action_id, "outcome": outcome, "evidence": evidence}
+            agent_pool.record_reconciliation(state, action_id, outcome, evidence)
             self._save(state, "reconciled", seq, prev)
             return {"status": "RECONCILED"}
 
     def run(self, execute=False, watch_seconds=0):
+        require(not agent_pool.is_pool(self), "Pool execution requires an explicit concurrent host adapter; run is serial-only")
         require(execute, "Command execution needs --execute; use next/finish for cooperative work")
         require(0 <= watch_seconds <= 86400, "Invalid watch deadline")
         deadline = time.monotonic() + watch_seconds
@@ -716,8 +747,9 @@ def main():
     parser.add_argument("--state", required=True, help="Dedicated project-local controller directory")
     commands = parser.add_subparsers(dest="command", required=True)
     init = commands.add_parser("init"); init.add_argument("--config", required=True)
-    commands.add_parser("status"); commands.add_parser("next")
-    bind = commands.add_parser("bind-agent"); bind.add_argument("--token", required=True); bind.add_argument("--agent-id", required=True)
+    commands.add_parser("status"); nxt = commands.add_parser("next"); nxt.add_argument("--dispatch-id")
+    bind = commands.add_parser("bind-agent"); bind.add_argument("--token", required=True); bind.add_argument("--agent-id", required=True); bind.add_argument("--observation")
+    start = commands.add_parser("start-agent"); start.add_argument("--token", required=True); start.add_argument("--agent-id", required=True); start.add_argument("--source-ref", required=True)
     spawn = commands.add_parser("spawn-attempt"); spawn.add_argument("--token", required=True); spawn.add_argument("--observation")
     spawned = commands.add_parser("spawn-result"); spawned.add_argument("--token", required=True); spawned.add_argument("--result", required=True)
     cleanup = commands.add_parser("agent-cleanup"); cleanup.add_argument("--observation", required=True)
@@ -735,8 +767,9 @@ def main():
     try:
         if args.command == "init": result = controller.init(read_json(args.config))
         elif args.command == "status": result = controller.status()
-        elif args.command == "next": result = controller.next()
-        elif args.command == "bind-agent": result = controller.bind_agent(args.token, args.agent_id)
+        elif args.command == "next": result = controller.next(args.dispatch_id)
+        elif args.command == "bind-agent": result = controller.bind_agent(args.token, args.agent_id, read_json(args.observation) if args.observation else None)
+        elif args.command == "start-agent": result = controller.start_agent(args.token, args.agent_id, args.source_ref)
         elif args.command == "spawn-attempt": result = controller.spawn_attempt(args.token, read_json(args.observation) if args.observation else None)
         elif args.command == "spawn-result": result = controller.spawn_result(args.token, read_json(args.result))
         elif args.command == "agent-cleanup": result = controller.agent_cleanup(read_json(args.observation))

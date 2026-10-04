@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "0e9c1dffd63446dedcfaf16c7beb7e6dfc8652efb378cc4caf098c2107af419f"
+      "sha256": "6fbbb2ba0d16ed640deb25f1125e3441f0060641751ad04ba58394f35c2e37f8"
     },
     {
       "path": "agents/openai.yaml",
@@ -39,6 +39,10 @@
     {
       "path": "assets/scan-record.template.json",
       "sha256": "a8a6ce5281aa6197c3c2c2dd294e05e31dc4bdc4fc851fd42c1e147e9fe86b9c"
+    },
+    {
+      "path": "references/agent-pool.md",
+      "sha256": "2eba8c23b69e80a84773305590fa78983559ab1e5db42d5e7228ebe80ebff5b4"
     },
     {
       "path": "references/component-evidence-engine.json",
@@ -134,7 +138,7 @@
     },
     {
       "path": "references/long-running-mode.md",
-      "sha256": "ae8b46a3bef738cb3c244c3df35e5ddcd1a91cfd1d9364c8d51199221a446f44"
+      "sha256": "db227e93a04b62c5623d7f375392fb9220ea78eadd92577b92cf70b394d70890"
     },
     {
       "path": "references/managed-skill-policy.schema.json",
@@ -142,7 +146,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "c1a7dee0b47672a457bb9133c7c19beb6aa3a1cc0a757506cef6500e4a62d5a4"
+      "sha256": "6aca53c3b961242fb7f0c6919a0a08a6e6d75b3994344ba67e1f4bed46577ef8"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -198,11 +202,11 @@
     },
     {
       "path": "references/subagent-host-protocol.md",
-      "sha256": "928d8d9e98ba3b05cf5438229010cde689044c1022a483d214c28473768331f6"
+      "sha256": "c7daf8af9e6b09af123f1a83a3b994f70266de2689671ddf740925e6810ad7d3"
     },
     {
       "path": "references/subagent-mode.md",
-      "sha256": "d7b5e6255a3201f37b1eac49c5daf853b264a5a9eab29b13fbcdd3e5138a572e"
+      "sha256": "dbf425f884699a2b7f78fe038b8c7486006cb22fca07434b32063680ab4b5db8"
     },
     {
       "path": "references/update-policy.schema.json",
@@ -282,7 +286,11 @@
     },
     {
       "path": "scripts/agent_cleanup.py",
-      "sha256": "415851d3a6276ccf6e7748271dccaa147083ef21655dd38a7c599ece82a395e0"
+      "sha256": "e5c7c1d3ecf8fb99c9c010077cdf88df519deee98a46d1617f94122ee0177a59"
+    },
+    {
+      "path": "scripts/agent_pool.py",
+      "sha256": "e0fe4172c7ba2a4e6933fbcaff875edc4095858c030c43fc919843b3c3a4006b"
     },
     {
       "path": "scripts/evidence_nomination.py",
@@ -298,7 +306,7 @@
     },
     {
       "path": "scripts/long_running_controller.py",
-      "sha256": "82fc7a5bf75cabaea017d653c0e6d8e95cb3b5a6b54ff7c94d7d2fb1346548c4"
+      "sha256": "d27cf2e7071f50fa59510287989a16c25dfc07d76c452e7c64ea446c263acbd9"
     },
     {
       "path": "scripts/managed_fleet.py",
@@ -322,7 +330,7 @@
     },
     {
       "path": "scripts/subagent_mode.py",
-      "sha256": "98a1c93040cefc185a6580a7a6ce7bebfda7b63021151276f8ec69784ccb7d43"
+      "sha256": "b891f287c30e7f12fa91c155b2abbf02b338ca3eceb6743a036b915f1aeb8492"
     },
     {
       "path": "scripts/update_policy.py",

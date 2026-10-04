@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-04T15:47:39.259370Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -2246,15 +2246,15 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-04T15:41:44.993827Z",
+  "created_at_utc": "2026-10-04T15:31:22.439427Z",
   "integrity": {
-    "canonical_payload_sha256": "c3c0cd9112513ed01ebcf4fe3430908ce5272f705fa7eca03fa99699ed2bb314"
+    "canonical_payload_sha256": "1960bb804c6b9c7e909865b870882309dab7f10f81e0ab5627c71b874a754c8f"
   },
-  "map_id": "component-map-097e0def8545",
-  "map_state": "accepted",
+  "map_id": "component-map-255ccfc816db",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.15.0 opt-in concurrent claim-guided agent pool, durable reassignment and scoped review contracts, preserving serial journal compatibility, exact human map acceptance, and bounded subprocess benchmark evidence without inferring native AI or scientific acceleration.",
-  "origin_scan_id": "20261004T154144993827Z-71019163",
+  "origin_scan_id": "20261004T153122439427Z-6a3a2615",
   "previous_map_id": "component-map-b255f9ff38be",
   "schema_version": "1.0",
   "scope": [
@@ -2495,7 +2495,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "fcfd3194d42ab82012f58e511793cc879b984b2ce60b9874cc1a4ad1accd4195",
+      "sha256": "84c5182a12cb6e00319525cc30fcf7101c3459264cfc0df39ae6eadb8142b8f3",
       "source": "README.md"
     },
     {
@@ -2651,25 +2651,25 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f9bac790bab44db0a4b15c7dfceeb5a3669669273b2e2733a48f323af7541f8b",
+      "sha256": "ec3bb1e2ede4f467e36560170888d683aaae1c9f60a717276581b4251c33d44d",
       "source": "evaluation/agent-pool/README.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0d435c43b1cad1f81bc64143e78861761495b0716d763707d09536185e262abc",
+      "sha256": "f9a2a72f38996f3d34ef4eabacbbea9696d6dd774b2351c9fab64b9c169d4ad4",
       "source": "evaluation/agent-pool/benchmark.py"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0957a204e5a5a12692ccd01bc41b8099180934b438cca1f295b2fba8f1a4749b",
+      "sha256": "0c84dc93abc4f31d9726813081a2e48ddeea4fb86ac4da367a16e1575396cebb",
       "source": "evaluation/agent-pool/fail-first.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ac067ff5ca4596110478a8a37b60735a40877c8e5c386cfa7fdd163faa8775eb",
+      "sha256": "0c29a51ee7d8ee249989392238042dc48b29601685fb41265fba7954f0eb52e2",
       "source": "evaluation/agent-pool/observed-result.json"
     },
     {
@@ -3485,7 +3485,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "332f6432f877bc640f76b2e6fa34ecc60a377a28a53e929be9e2de0bd9c05d62",
+      "sha256": "003761aa0edf90941e9d32e2c4d941891022c0ed28c4f6e9ef88a932af794980",
       "source": "tests/test_agent_pool.py"
     },
     {

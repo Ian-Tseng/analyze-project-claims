@@ -1,0 +1,5 @@
+{
+    "observed_at":  "2026-10-04T23:07:16.8856697+08:00",
+    "note":  "Pre-implementation behavioral tests: 16 tests, 14 missing dispatch_id API errors, one invalid-config acceptance failure, legacy test passes.",
+    "exit_code":  1
+}

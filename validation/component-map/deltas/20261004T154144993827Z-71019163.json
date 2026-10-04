@@ -1,0 +1,272 @@
+{
+  "accepted_map_id": "component-map-b255f9ff38be",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-097e0def8545",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "bounded-agent-pool-benchmark"
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "opt-in-concurrent-worker-pool"
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "review-safe-agent-reassignment"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "bounded-thread-limit-recovery",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "claim-gated-review",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "completed-agent-lifecycle",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "durable-controller",
+        "fields": [
+          "target",
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "native-host-boundary",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "portable-package-and-design-sources",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "sampled-report-freshness",
+        "fields": [
+          "evidence_locators"
+        ]
+      },
+      {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression",
+        "fields": [
+          "evidence_locators"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".codex-plugin/plugin.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/agent-pool/README.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/agent-pool/benchmark.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/agent-pool/fail-first.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "evaluation/agent-pool/observed-result.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/agent-pool.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/long-running-mode.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-mode.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/agent_cleanup.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/agent_pool.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_agent_pool.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_agent_pool_cli.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_long_running_subagents.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "afd5ce1bd24f24ff121c32c3f27bba97a33b4307973ae69aaa7858aa0909aeba"
+  },
+  "recorded_at_utc": "2026-10-04T15:41:44.993827Z",
+  "scan_id": "20261004T154144993827Z-71019163",
+  "schema_version": "1.0"
+}

@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-04T15:47:39.259370Z",
+  "accepted_at_utc": "2026-10-02T09:02:35.572138Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -94,9 +94,7 @@
     "docs/CODEX_PLUGIN_E2E_LOG.md",
     "docs/CLAUDE_CODE_OTHER_PC_CHECKLIST.md",
     "tests/test_component_evidence_engine.py",
-    "skills/analyze-project-claims/references/review-learning.md",
-    "skills/analyze-project-claims/references/agent-pool.md",
-    "evaluation/agent-pool/README.md"
+    "skills/analyze-project-claims/references/review-learning.md"
   ],
   "components": [
     {
@@ -1018,82 +1016,15 @@
       "component_type": "module",
       "elements": [
         {
-          "element_id": "bounded-agent-pool-benchmark",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "evaluation/agent-pool/README.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "evaluation/agent-pool/benchmark.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "evaluation/agent-pool/fail-first.json"
-            },
-            {
-              "locator": "whole-file",
-              "source": "evaluation/agent-pool/observed-result.json"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_cleanup.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "The fixed DAG protocol compares serialized and pool execution using the same frozen controller, real PBKDF2 subprocess work, resource ceiling and deterministic synthetic reviewer. The retained three-pair observation records equal outputs, overlap, refill and descriptive wall-time ratios for that workload. It does not establish native Codex or LLM review quality, statistical significance, scientific benefit or general project acceleration; source identities and the fail-first observation remain explicit."
-        },
-        {
           "element_id": "bounded-thread-limit-recovery",
           "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
             {
               "locator": "whole-file",
               "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
             },
             {
               "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
               "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
             },
             {
               "locator": "whole-file",
@@ -1108,15 +1039,7 @@
           "evidence_locators": [
             {
               "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
-            {
-              "locator": "whole-file",
               "source": "skills/analyze-project-claims/references/subagent-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
             },
             {
               "locator": "whole-file",
@@ -1125,14 +1048,6 @@
             {
               "locator": "whole-file",
               "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
             },
             {
               "locator": "whole-file",
@@ -1151,10 +1066,6 @@
           "evidence_locators": [
             {
               "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
-            {
-              "locator": "whole-file",
               "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
             },
             {
@@ -1163,23 +1074,11 @@
             },
             {
               "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
               "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
             },
             {
               "locator": "whole-file",
               "source": "tests/test_agent_cleanup.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
             }
           ],
           "relation_type": "defines",
@@ -1190,15 +1089,7 @@
           "evidence_locators": [
             {
               "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
-            {
-              "locator": "whole-file",
               "source": "skills/analyze-project-claims/references/long-running-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
             },
             {
               "locator": "whole-file",
@@ -1207,14 +1098,6 @@
             {
               "locator": "whole-file",
               "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
             },
             {
               "locator": "whole-file",
@@ -1230,7 +1113,7 @@
             }
           ],
           "relation_type": "defines",
-          "target": "Absent agent_pool, one in-flight request and hash-linked history preserve existing serial behavior. New explicitly configured pool goals retain independent per-task tokens under one journal lock, bounded worker slots and one reviewer; existing journals are not migrated. Repair budgets, user controls and execution history survive restart and plan or goal revision."
+          "target": "One in-flight request and hash-linked history preserve user controls; new configurations persist a 32-cycle repair default or explicit cap while old journals retain three across restart and plan/goal revision."
         },
         {
           "element_id": "evidence-guided-agent-policy",
@@ -1268,82 +1151,15 @@
             },
             {
               "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
-            {
-              "locator": "whole-file",
               "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
             },
             {
               "locator": "whole-file",
               "source": "skills/analyze-project-claims/references/subagent-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
             }
           ],
           "relation_type": "defines",
           "target": "The host owns actual agent launch and skill invocation; declarations do not authenticate semantic support or authorize formal acceptance or background wake."
-        },
-        {
-          "element_id": "opt-in-concurrent-worker-pool",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/long-running-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_cleanup.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "New goals with explicit worker limits and exact read/write evidence scopes can reserve and refill independent actions while other workers execute. Durable dispatch intents prevent duplicate reservations; evidence and dependency-closed claim conflicts serialize work. Scoped snapshots, claim generations and per-unit review obligations preserve separate serialized review and final whole-goal acceptance; undeclared drift requires a global review barrier. Scope contracts are cooperative, not an operating-system sandbox."
         },
         {
           "element_id": "portable-package-and-design-sources",
@@ -1354,15 +1170,7 @@
             },
             {
               "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
-            {
-              "locator": "whole-file",
               "source": "skills/analyze-project-claims/references/subagent-design-sources.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
             },
             {
               "locator": "whole-file",
@@ -1371,14 +1179,6 @@
             {
               "locator": "whole-file",
               "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
             },
             {
               "locator": "whole-file",
@@ -1389,78 +1189,11 @@
           "target": "The synthetic copied-package lifecycle checks portable wiring; literature and host documentation motivate design without establishing efficacy."
         },
         {
-          "element_id": "review-safe-agent-reassignment",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/long-running-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_cleanup.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_cleanup.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_spawn_recovery.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Recorded prior results and fresh quiescent host observations permit rebinding an owned identity to a distinct token. Recorded start acknowledgements remain separate from host execution, ambiguous delivery requires identity recovery, and reviewers cannot reuse a contributing worker identity to approve that work. Pause, stale sources, unresolved operations and bounded retry history retain authority across restart; cleanup examines every pooled token and does not itself release a native agent."
-        },
-        {
           "element_id": "sampled-report-freshness",
           "evidence_locators": [
             {
               "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
-            {
-              "locator": "whole-file",
               "source": "skills/analyze-project-claims/references/subagent-mode.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
             },
             {
               "locator": "whole-file",
@@ -1469,14 +1202,6 @@
             {
               "locator": "whole-file",
               "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
             },
             {
               "locator": "whole-file",
@@ -2172,14 +1897,6 @@
           "element_id": "repository-regression",
           "evidence_locators": [
             {
-              "locator": "whole-file",
-              "source": "evaluation/agent-pool/README.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "evaluation/agent-pool/benchmark.py"
-            },
-            {
               "locator": "cross-project lifecycle implementation",
               "source": "evaluation/scripts/cross_project_reliability.py"
             },
@@ -2194,30 +1911,6 @@
             {
               "locator": "json-pointer:/source_snapshot/27",
               "source": "https://github.com/Ian-Tseng/analyze-project-claims/blob/06fa1437fcbe5fa4a0d359f98cbdd9eb9d21ec06/validation/component-map/accepted-map.json"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_cleanup.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_agent_pool_cli.py"
             },
             {
               "locator": "public dry-run regressions",
@@ -2246,16 +1939,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-04T15:41:44.993827Z",
+  "created_at_utc": "2026-10-02T08:59:43.987617Z",
   "integrity": {
-    "canonical_payload_sha256": "c3c0cd9112513ed01ebcf4fe3430908ce5272f705fa7eca03fa99699ed2bb314"
+    "canonical_payload_sha256": "a613ab9fe1e4e70bc858538fa4e43fb220d357a617619371c47293913bcb900c"
   },
-  "map_id": "component-map-097e0def8545",
+  "map_id": "component-map-b255f9ff38be",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.15.0 opt-in concurrent claim-guided agent pool, durable reassignment and scoped review contracts, preserving serial journal compatibility, exact human map acceptance, and bounded subprocess benchmark evidence without inferring native AI or scientific acceleration.",
-  "origin_scan_id": "20261004T154144993827Z-71019163",
-  "previous_map_id": "component-map-b255f9ff38be",
+  "objective": "Map the v0.14.1 recorder identifier and report-path compatibility release, preserving explicit map acceptance, bounded evidence claims, thread-limit recovery and installed-activation boundaries.",
+  "origin_scan_id": "20261002T085943987617Z-b43b3917",
+  "previous_map_id": "component-map-ce34ad60d23b",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2288,10 +1981,6 @@
     "docs/SKILL_OUTCOME_RECEIPT.md",
     "docs/SKILL_QUALITY_LOOP.md",
     "evaluation/README.md",
-    "evaluation/agent-pool/README.md",
-    "evaluation/agent-pool/benchmark.py",
-    "evaluation/agent-pool/fail-first.json",
-    "evaluation/agent-pool/observed-result.json",
     "evaluation/annotation-codebook.md",
     "evaluation/configs/annotation-calibration.selection.json",
     "evaluation/configs/confirmatory.template.json",
@@ -2344,9 +2033,7 @@
     "skills/analyze-project-claims",
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/assets/scan-record-v2.template.json",
-    "skills/analyze-project-claims/references/agent-pool.md",
     "skills/analyze-project-claims/references/evidence-bound-audit-records.md",
-    "skills/analyze-project-claims/references/evidence-guided-agents.md",
     "skills/analyze-project-claims/references/lifecycle-followup-request.schema.json",
     "skills/analyze-project-claims/references/lifecycle-interpretation.schema.json",
     "skills/analyze-project-claims/references/lifecycle-phase-receipt.schema.json",
@@ -2360,16 +2047,11 @@
     "skills/analyze-project-claims/references/subagent-host-protocol.md",
     "skills/analyze-project-claims/references/subagent-mode.md",
     "skills/analyze-project-claims/scripts/_internal/evidence_nomination",
-    "skills/analyze-project-claims/scripts/agent_cleanup.py",
-    "skills/analyze-project-claims/scripts/agent_pool.py",
     "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
     "skills/analyze-project-claims/scripts/long_running_controller.py",
     "skills/analyze-project-claims/scripts/subagent_mode.py",
-    "tests/test_agent_cleanup.py",
     "tests/test_agent_compatibility.py",
     "tests/test_agent_maintainer.py",
-    "tests/test_agent_pool.py",
-    "tests/test_agent_pool_cli.py",
     "tests/test_analytics_service.py",
     "tests/test_annotation_calibration.py",
     "tests/test_component_evidence_engine.py",
@@ -2387,7 +2069,6 @@
     "tests/test_long_running_edges.py",
     "tests/test_long_running_freshness.py",
     "tests/test_long_running_plan_revision.py",
-    "tests/test_long_running_repair_budget.py",
     "tests/test_long_running_subagents.py",
     "tests/test_natural_project_label_freeze.py",
     "tests/test_natural_project_label_schemas.py",
@@ -2399,14 +2080,18 @@
     "tests/test_reporting_service.py",
     "tests/test_skill_quality_evaluation.py",
     "tests/test_skill_quality_loop.py",
-    "tests/test_spawn_recovery.py",
     "tests/test_strict_evidence_contract.py",
     "tests/test_update_policy.py",
     "tests/test_zero_finding_gold.py",
-    "validation/README.md"
+    "validation/README.md",
+    "skills/analyze-project-claims/references/evidence-guided-agents.md",
+    "tests/test_long_running_repair_budget.py",
+    "skills/analyze-project-claims/scripts/agent_cleanup.py",
+    "tests/test_agent_cleanup.py",
+    "tests/test_spawn_recovery.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "6fbbb2ba0d16ed640deb25f1125e3441f0060641751ad04ba58394f35c2e37f8",
+  "skill_sha256": "0e9c1dffd63446dedcfaf16c7beb7e6dfc8652efb378cc4caf098c2107af419f",
   "source_snapshot": [
     {
       "exists": true,
@@ -2417,7 +2102,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "02c83f24fdabb8e70c5f2e26b69049d90dda5e76e06d8516f996dace0e918631",
+      "sha256": "c22b5bd494be7ba234d1688ede5b80038d55cfe5c50c9169d4f50e6c55333584",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2465,13 +2150,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a374f75b032399ad75412402fa2513d79717404b1156f8fee53a3c7923984610",
+      "sha256": "fd3f60b351ece4ec31e08082fbabb2a19e357095903da3deff1469b0cc3aedc0",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b20e3e8fbf2f719211bcfe5a36d80117f1f881feea21c46b3c2e38af6be64703",
+      "sha256": "88b7e05b27fbc22f30588833f4e4262e6d5d3469950c8feac9bee149694ae86a",
       "source": "CITATION.cff"
     },
     {
@@ -2495,7 +2180,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "fcfd3194d42ab82012f58e511793cc879b984b2ce60b9874cc1a4ad1accd4195",
+      "sha256": "61fdc78fb99ea3f170411e21f2924ecee4e99937282b53178a4a8d2666d9b45c",
       "source": "README.md"
     },
     {
@@ -2507,7 +2192,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f8405a7330c287028d470c3ee3506f878f1ad85ed79c1d1adc19df2ff7398915",
+      "sha256": "c6fb87657a4ee72e2b549cdd39c12854fdbecbdfef033c04f523d4bfcb02aa4c",
       "source": "VERSION"
     },
     {
@@ -2537,7 +2222,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c79a5287ce446cd4562c688d8bc9773e27da37e46ef05469f4265414a7c02c0b",
+      "sha256": "c5913150faeea331adb19a33fdb433555b139e19fc2f42f4bc0ac6031609130c",
       "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
     },
     {
@@ -2647,30 +2332,6 @@
       "kind": "file",
       "sha256": "29e7f6f83603b06238fb0b7925586d6c947a82ed324f8098bfab65199c61b050",
       "source": "evaluation/README.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "f9bac790bab44db0a4b15c7dfceeb5a3669669273b2e2733a48f323af7541f8b",
-      "source": "evaluation/agent-pool/README.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "0d435c43b1cad1f81bc64143e78861761495b0716d763707d09536185e262abc",
-      "source": "evaluation/agent-pool/benchmark.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "0957a204e5a5a12692ccd01bc41b8099180934b438cca1f295b2fba8f1a4749b",
-      "source": "evaluation/agent-pool/fail-first.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "ac067ff5ca4596110478a8a37b60735a40877c8e5c386cfa7fdd163faa8775eb",
-      "source": "evaluation/agent-pool/observed-result.json"
     },
     {
       "exists": true,
@@ -3035,13 +2696,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "fd4bdbc7b83c26f705ae01103c03b404595a39aeb65e0d1e821a40e4a3502634",
+      "sha256": "788bb0aeb2ad243f7520157565605dc7a59cda974bdb397c65d1233c3a23a9c9",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6fbbb2ba0d16ed640deb25f1125e3441f0060641751ad04ba58394f35c2e37f8",
+      "sha256": "0e9c1dffd63446dedcfaf16c7beb7e6dfc8652efb378cc4caf098c2107af419f",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -3055,12 +2716,6 @@
       "kind": "file",
       "sha256": "5a9c35e6c12db1ebb5fd9d6e0f412a8ff64e09ce84fda02ad39d59d3568dfa44",
       "source": "skills/analyze-project-claims/assets/scan-record-v2.template.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "2eba8c23b69e80a84773305590fa78983559ab1e5db42d5e7228ebe80ebff5b4",
-      "source": "skills/analyze-project-claims/references/agent-pool.md"
     },
     {
       "exists": true,
@@ -3173,7 +2828,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "db227e93a04b62c5623d7f375392fb9220ea78eadd92577b92cf70b394d70890",
+      "sha256": "ae8b46a3bef738cb3c244c3df35e5ddcd1a91cfd1d9364c8d51199221a446f44",
       "source": "skills/analyze-project-claims/references/long-running-mode.md"
     },
     {
@@ -3185,13 +2840,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3df033f44ae1c6514167f9f6a326a056ee12e89d9af5d4ddcc47a19546a9ea88",
+      "sha256": "4e3bf689c74a583662524c0a46358f04ca83302607abbe798ee957b704b8c551",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6aca53c3b961242fb7f0c6919a0a08a6e6d75b3994344ba67e1f4bed46577ef8",
+      "sha256": "c1a7dee0b47672a457bb9133c7c19beb6aa3a1cc0a757506cef6500e4a62d5a4",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -3275,13 +2930,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c7daf8af9e6b09af123f1a83a3b994f70266de2689671ddf740925e6810ad7d3",
+      "sha256": "928d8d9e98ba3b05cf5438229010cde689044c1022a483d214c28473768331f6",
       "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "dbf425f884699a2b7f78fe038b8c7486006cb22fca07434b32063680ab4b5db8",
+      "sha256": "d7b5e6255a3201f37b1eac49c5daf853b264a5a9eab29b13fbcdd3e5138a572e",
       "source": "skills/analyze-project-claims/references/subagent-mode.md"
     },
     {
@@ -3383,14 +3038,8 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "e5c7c1d3ecf8fb99c9c010077cdf88df519deee98a46d1617f94122ee0177a59",
+      "sha256": "415851d3a6276ccf6e7748271dccaa147083ef21655dd38a7c599ece82a395e0",
       "source": "skills/analyze-project-claims/scripts/agent_cleanup.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "e0fe4172c7ba2a4e6933fbcaff875edc4095858c030c43fc919843b3c3a4006b",
-      "source": "skills/analyze-project-claims/scripts/agent_pool.py"
     },
     {
       "exists": true,
@@ -3413,7 +3062,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d27cf2e7071f50fa59510287989a16c25dfc07d76c452e7c64ea446c263acbd9",
+      "sha256": "82fc7a5bf75cabaea017d653c0e6d8e95cb3b5a6b54ff7c94d7d2fb1346548c4",
       "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
     },
     {
@@ -3449,7 +3098,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b891f287c30e7f12fa91c155b2abbf02b338ca3eceb6743a036b915f1aeb8492",
+      "sha256": "98a1c93040cefc185a6580a7a6ce7bebfda7b63021151276f8ec69784ccb7d43",
       "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
     },
     {
@@ -3481,18 +3130,6 @@
       "kind": "file",
       "sha256": "58c104266d3b31f168cde321b879163f50983c374163d2feec778920b58246a2",
       "source": "tests/test_agent_maintainer.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "332f6432f877bc640f76b2e6fa34ecc60a377a28a53e929be9e2de0bd9c05d62",
-      "source": "tests/test_agent_pool.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "20b2184d564d633680ca1f19dc26ea2ad39888d7162131cd02981d90d3b30e26",
-      "source": "tests/test_agent_pool_cli.py"
     },
     {
       "exists": true,
@@ -3653,7 +3290,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "bf6f4cc96122b16f922f6e2d62bb273b98edffb38533493427e5feda6800ea9f",
+      "sha256": "ca6b99ff2bfb23bd66350e727e748bb65c5df8238d2fd64d740b706c7f5a9c80",
       "source": "tests/test_long_running_subagents.py"
     },
     {

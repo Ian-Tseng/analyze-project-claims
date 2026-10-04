@@ -443,7 +443,7 @@ class CopiedPackageLifecycleTests(unittest.TestCase):
     def test_packaged_contract_pins_canonical_controller_despite_adjacent_decoy(self):
         with tempfile.TemporaryDirectory(prefix="claims-contract-") as temporary:
             package = Path(temporary)
-            for name in ("long_running_controller.py", "subagent_mode.py", "agent_cleanup.py"):
+            for name in ("long_running_controller.py", "subagent_mode.py", "agent_cleanup.py", "agent_pool.py"):
                 shutil.copy2(SCRIPTS / name, package / name)
             canonical = package / "long_running_controller.py"
             decoy = package / "controller.py"
@@ -464,6 +464,7 @@ class CopiedPackageLifecycleTests(unittest.TestCase):
             files = json.loads(child.stdout)["files"]
             self.assertIn(str(canonical.resolve()), files)
             self.assertNotIn(str(decoy.resolve()), files)
+            self.assertIn(str((package / "agent_pool.py").resolve()), files)
             self.assertEqual(files[str(canonical.resolve())], hashlib.sha256(canonical.read_bytes()).hexdigest())
 
     def test_copied_package_completes_review_work_review_and_reports(self):

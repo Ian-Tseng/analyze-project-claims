@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-04T15:47:39.259370Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -2248,10 +2248,10 @@
   ],
   "created_at_utc": "2026-10-04T15:41:44.993827Z",
   "integrity": {
-    "canonical_payload_sha256": "c3c0cd9112513ed01ebcf4fe3430908ce5272f705fa7eca03fa99699ed2bb314"
+    "canonical_payload_sha256": "5fca287d9fc0e0c18da0e412b39d47b5a258e761a7a5b8c8ab251ad07afc822d"
   },
   "map_id": "component-map-097e0def8545",
-  "map_state": "accepted",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.15.0 opt-in concurrent claim-guided agent pool, durable reassignment and scoped review contracts, preserving serial journal compatibility, exact human map acceptance, and bounded subprocess benchmark evidence without inferring native AI or scientific acceleration.",
   "origin_scan_id": "20261004T154144993827Z-71019163",

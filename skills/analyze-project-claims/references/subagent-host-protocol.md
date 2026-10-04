@@ -3,12 +3,16 @@
 This contract joins the durable controller to a host that exposes native
 subagents, such as the `collaboration` tools. Use it only for an authorized
 claims-guided goal with `subagent_mode` configured. The parent coordinator owns
-the controller state. One token and one delegated worker or reviewer may be
+the controller state. In default serialized mode, one token and one delegated worker or reviewer may be
 active at a time; host capacity does not authorize parallel mutations.
 
 Include [evidence-guided agents](evidence-guided-agents.md) and the scoped claims
 in each handoff. Provisional targets guide investigation; only declared execution
 prerequisites require current support. The coordinator commits shared updates.
+
+For a new explicitly configured concurrent goal, use [agent-pool mode](agent-pool.md)
+for token reservation, scoped reviews and new-task identity reuse. The scalar loop
+and same-unresolved-task reuse rule below apply to serialized mode.
 
 ## Coordinator loop
 

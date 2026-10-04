@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-10-04
+
+- Add opt-in concurrent agent-pool goals with scoped evidence and claim locks,
+  durable dispatch intents, independent per-unit reviews and goal-directed refill.
+- Reuse finished native identities only after a fresh quiescence observation;
+  retain worker/reviewer separation, recovery history, holds and finite budgets.
+- Preserve existing serialized goals and journals. Add behavioral/CLI regressions
+  and a reproducible CPU-subprocess benchmark with explicit performance limits.
+
 ## [0.14.1] - 2026-10-02
 
 - Accept authoritative component-map reference identifiers independently from

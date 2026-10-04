@@ -35,11 +35,13 @@ def plan(state, observation, now=None):
     owned = {}
     for token, binding in state.get('delegations', {}).items():
         owned.setdefault(binding['agent_id'], []).append(token)
-    pending = (state.get('pending') or {}).get('token')
+    pending = set(state.get('pool_pending', {}))
+    if state.get('pending'):
+        pending.add(state['pending']['token'])
     entries = []
     for key, tokens in sorted(owned.items()):
         item = observed.get(key)
-        if pending in tokens or any(t not in state['receipts'] for t in tokens):
+        if pending.intersection(tokens) or any(t not in state['receipts'] for t in tokens):
             decision = 'RETAIN_UNRECORDED_RESULT'
         elif item is None or item['status'] in ('unknown', 'idle'):
             decision = 'RETAIN_UNKNOWN_EXECUTION'
