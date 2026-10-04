@@ -146,7 +146,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "6aca53c3b961242fb7f0c6919a0a08a6e6d75b3994344ba67e1f4bed46577ef8"
+      "sha256": "9d8dababce5c31a8ed72c72884689bcaa7c2c30d3db6ccafbdd006c43f9332f1"
     },
     {
       "path": "references/problem-report-policy.schema.json",
