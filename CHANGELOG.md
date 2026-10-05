@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.15.2] - 2026-10-06
+
+- Add session-recovery guidance separating command parsing, front-end exit,
+  thread-writer ownership and actual reviewer-capacity recovery.
+- Clarify owner-requested handoffs while preserving existing controllers,
+  pending reviews, source freshness, cumulative allowances and other jobs.
+- Keep installation and active-session discovery distinct; this documentation
+  update does not implement host release or controller migration.
+
 ## [0.15.1] - 2026-10-05
 
 - Resolve Windows receipt-hook paths inside Python so the same command works

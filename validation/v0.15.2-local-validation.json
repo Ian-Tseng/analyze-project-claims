@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "version": "0.15.2",
+  "recorded_at": "2026-10-05T18:00:04.993466+00:00",
+  "scope": "Documentation-only session recovery guidance; local candidate checks",
+  "full_suite": {
+    "command": "python -B -m unittest discover -s tests -v",
+    "exit_code": 0,
+    "seconds": 194.968,
+    "source_unchanged": true,
+    "completed_at": "2026-10-05T17:52:37.780698+00:00",
+    "total": 524,
+    "passed": 521,
+    "skipped": 3
+  },
+  "focused_suite": {
+    "review_source_pins_match": true,
+    "results": [
+      {
+        "pattern": "test_evidence_bound_scan*.py",
+        "exit_code": 0,
+        "seconds": 21.672,
+        "summary": [
+          "----------------------------------------------------------------------",
+          "Ran 45 tests in 21.391s",
+          "",
+          "OK"
+        ]
+      },
+      {
+        "pattern": "test_skill_quality_loop.py",
+        "exit_code": 0,
+        "seconds": 11.625,
+        "summary": [
+          "----------------------------------------------------------------------",
+          "Ran 30 tests in 11.352s",
+          "",
+          "OK"
+        ]
+      },
+      {
+        "pattern": "test_quality_contribution.py",
+        "exit_code": 0,
+        "seconds": 0.453,
+        "summary": [
+          "----------------------------------------------------------------------",
+          "Ran 9 tests in 0.141s",
+          "",
+          "OK"
+        ]
+      },
+      {
+        "pattern": "test_plugin_bundle.py",
+        "exit_code": 0,
+        "seconds": 2.906,
+        "summary": [
+          "----------------------------------------------------------------------",
+          "Ran 4 tests in 2.733s",
+          "",
+          "OK"
+        ]
+      },
+      {
+        "pattern": "test_problem_report.py",
+        "exit_code": 0,
+        "seconds": 0.875,
+        "summary": [
+          "----------------------------------------------------------------------",
+          "Ran 13 tests in 0.699s",
+          "",
+          "OK"
+        ]
+      },
+      {
+        "pattern": "test_reporting_service.py",
+        "exit_code": 0,
+        "seconds": 4.234,
+        "summary": [
+          "----------------------------------------------------------------------",
+          "Ran 8 tests in 4.031s",
+          "",
+          "OK"
+        ]
+      }
+    ]
+  },
+  "independent_review": {
+    "verdict": "no_material_in_scope_findings",
+    "scenarios": 6,
+    "mapped_claims": 2,
+    "review_digest": "9178ed6cce8d0fede39911b77d5b1ce1714fe4ef7ac3953a0e9f0725d909fe7d",
+    "source_hashes": {
+      ".codex-plugin/plugin.json": "0bb9dae44a0079a64fe53e440df9eb28661b33f18c40de4cb63c91d43f830680",
+      "CHANGELOG.md": "098cfb810bb11d6f53a2adacf01e4ea83fa94bc150fe3e37acd65e6f746be320",
+      "CITATION.cff": "ef4e0649bf90743e70c488e881690488b5941c19bd0bcd25161a0ccf72474f20",
+      "PUBLISHING.md": "702732ad91fae1c23a2733e879490d8a4451b5a5a5bf2dbdae02eaa848e3d281",
+      "README.md": "515bb89901463d4f2d43d0b5d630ed1698d4a45b939953d45bc093dbf3fb3bc9",
+      "VERSION": "355a2e14f6a7f2cb387d9d3b75a3550980d020ee1d005b139b62290c1645068a",
+      "skills/analyze-project-claims/SKILL.md": "b2f92aeac0458996df5e3bfff0bad599c53b2fde65c99e76af4fc0501b22fe5e",
+      "skills/analyze-project-claims/references/session-recovery.md": "5afea5197eb237798bd0c8a6eaf95b6ad6149565fa0fcfc3e624305b221fccbd",
+      "skills/analyze-project-claims/references/evidence-guided-agents.md": "445fa5c45fa63d01e5d615b655e095740cd1bc463fabb2ede98f4cd7dc1788d8",
+      "skills/analyze-project-claims/references/subagent-host-protocol.md": "a707c0f12357f7917a22a2e7e527eb353579a4ff5e56bb17a0a9016b7dbad5a9",
+      "skills/analyze-project-claims/references/review-learning.md": "fa314c22dfac34858a1260c28800ae7c1e29a3b6fbe3abf42bd4c4af7351aef4",
+      "skills/analyze-project-claims/references/package-manifest.json": "ed58b8145f09471b00cadc5696e5ed1740d31b3dfc2bc6116ce363a41801315b",
+      "skills/analyze-project-claims/references/package-version.json": "4168b5558da1921e4bae0a658ffd6788b61f8b0b4ae7dd8687eb93503cfb5441",
+      "validation/component-map-observation-v0152.json": "dd6962e7c5ca81514d5338c87ba72b44db588db4f03f338af1d7f9e5a0ea6d90",
+      "validation/component-map/candidates/20261005T174903987442Z-654affbb-component-map-682ba91e2770.json": "5f7a89582f385d3dcba8ff7c494213df2133c41488bf9a12488640e9704e1412"
+    },
+    "limitation": "Reasoned guidance review, not host-recovery execution."
+  },
+  "accepted_map": {
+    "id": "component-map-682ba91e2770",
+    "candidate_sha256": "5f7a89582f385d3dcba8ff7c494213df2133c41488bf9a12488640e9704e1412",
+    "owner_acceptance": "Explicit yes to exact reviewed candidate on 2026-10-06 Asia/Taipei",
+    "reconcile": "checked_unchanged",
+    "preflight": "ready",
+    "init_validate_roundtrip": "valid"
+  },
+  "limitations": [
+    "No successful host writer release, reviewer capacity recovery or controller migration demonstrated.",
+    "Hosted CI, publication, installation and fresh activation are subsequent separate evidence.",
+    "Publication dry-run warned code scanning was not configured."
+  ]
+}

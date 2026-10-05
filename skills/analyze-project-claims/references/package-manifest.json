@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "6fbbb2ba0d16ed640deb25f1125e3441f0060641751ad04ba58394f35c2e37f8"
+      "sha256": "b2f92aeac0458996df5e3bfff0bad599c53b2fde65c99e76af4fc0501b22fe5e"
     },
     {
       "path": "agents/openai.yaml",
@@ -70,7 +70,7 @@
     },
     {
       "path": "references/evidence-guided-agents.md",
-      "sha256": "0ca012d9c995d05450f1cd24bdef441564f80ca533909e39e04d7aef5e78eb1a"
+      "sha256": "445fa5c45fa63d01e5d615b655e095740cd1bc463fabb2ede98f4cd7dc1788d8"
     },
     {
       "path": "references/evidence-nomination.md",
@@ -146,7 +146,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "9d8dababce5c31a8ed72c72884689bcaa7c2c30d3db6ccafbdd006c43f9332f1"
+      "sha256": "4168b5558da1921e4bae0a658ffd6788b61f8b0b4ae7dd8687eb93503cfb5441"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -171,6 +171,10 @@
     {
       "path": "references/scan-record.schema.json",
       "sha256": "7e92c3fd696fae083f3310b03f7e12303311d7dc0637c9b002eb1d1164ec387e"
+    },
+    {
+      "path": "references/session-recovery.md",
+      "sha256": "5afea5197eb237798bd0c8a6eaf95b6ad6149565fa0fcfc3e624305b221fccbd"
     },
     {
       "path": "references/skill-outcome-receipt.schema.json",
@@ -202,7 +206,7 @@
     },
     {
       "path": "references/subagent-host-protocol.md",
-      "sha256": "c7daf8af9e6b09af123f1a83a3b994f70266de2689671ddf740925e6810ad7d3"
+      "sha256": "a707c0f12357f7917a22a2e7e527eb353579a4ff5e56bb17a0a9016b7dbad5a9"
     },
     {
       "path": "references/subagent-mode.md",

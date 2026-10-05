@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-05T17:59:22.501370Z",
+  "accepted_at_utc": "2026-10-05T01:36:58.995158Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -96,8 +96,7 @@
     "tests/test_component_evidence_engine.py",
     "skills/analyze-project-claims/references/review-learning.md",
     "skills/analyze-project-claims/references/agent-pool.md",
-    "evaluation/agent-pool/README.md",
-    "skills/analyze-project-claims/references/session-recovery.md"
+    "evaluation/agent-pool/README.md"
   ],
   "components": [
     {
@@ -1486,25 +1485,6 @@
           ],
           "relation_type": "defines",
           "target": "Reports distinguish recorded decisions from CURRENT, STALE or UNKNOWN sampled identities while preserving pending tokens and previous reports."
-        },
-        {
-          "element_id": "session-recovery-handoff",
-          "evidence_locators": [
-            {
-              "locator": "Continue authorized work with claims review",
-              "source": "skills/analyze-project-claims/SKILL.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/session-recovery.md"
-            },
-            {
-              "locator": "Recover agent thread limit reached",
-              "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "Guidance distinguishes command parsing, front-end exit, writer ownership and reviewer capacity. Owner-requested handoffs preserve existing controller history, pending independent review and cumulative authority; no host release or migration is implemented."
         }
       ]
     },
@@ -2112,7 +2092,7 @@
             }
           ],
           "relation_type": "defines",
-          "target": "Defines complete applicable rechecks, preserved scope, recurrence stopping and a default of 32 cycles per authorized attempt, subject to explicit limits and evidence-based prospective adjustment; historical controller budgets remain unchanged."
+          "target": "Defines complete applicable rechecks, preserved scope, recurrence stopping, and a maximum three-cycle bound."
         },
         {
           "element_id": "evidence-linked-lessons",
@@ -2266,16 +2246,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-05T17:49:03.987442Z",
+  "created_at_utc": "2026-10-04T17:16:41.344885Z",
   "integrity": {
-    "canonical_payload_sha256": "885d240e70b45f0e27bb090e33e15059bdb4d5a0d532b89b01a437454c717962"
+    "canonical_payload_sha256": "e29c105bac9132fc82394f3dd65be2a0ff3dbb69008a72bb02a92a4451da44c7"
   },
-  "map_id": "component-map-682ba91e2770",
+  "map_id": "component-map-d63c448e0e42",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the 0.15.2 session-recovery guidance and retained claims workflows; distinguish documented handoff safeguards from actual host recovery, controller migration, acceptance and fresh installation.",
-  "origin_scan_id": "20261005T174903987442Z-654affbb",
-  "previous_map_id": "component-map-d63c448e0e42",
+  "objective": "Map the v0.15.1 Windows native receipt-hook repair: resolve paths as Python environment data under Command Prompt and PowerShell, retaining bounded receipt validation, replay/private-state/outbound boundaries and unchanged agent-pool controller; exact human map acceptance, release, native activation and measured speed remain separate.",
+  "origin_scan_id": "20261004T171641344885Z-04815bc2",
+  "previous_map_id": "component-map-097e0def8545",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2423,11 +2403,10 @@
     "tests/test_strict_evidence_contract.py",
     "tests/test_update_policy.py",
     "tests/test_zero_finding_gold.py",
-    "validation/README.md",
-    "skills/analyze-project-claims/references/session-recovery.md"
+    "validation/README.md"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "b2f92aeac0458996df5e3bfff0bad599c53b2fde65c99e76af4fc0501b22fe5e",
+  "skill_sha256": "6fbbb2ba0d16ed640deb25f1125e3441f0060641751ad04ba58394f35c2e37f8",
   "source_snapshot": [
     {
       "exists": true,
@@ -2438,7 +2417,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0bb9dae44a0079a64fe53e440df9eb28661b33f18c40de4cb63c91d43f830680",
+      "sha256": "e412022a05a80ab45bb920246a654f784a8b0a617f3d51ac3002188ffb639fbf",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2486,13 +2465,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "098cfb810bb11d6f53a2adacf01e4ea83fa94bc150fe3e37acd65e6f746be320",
+      "sha256": "116b8beb8bfacf0fa0950d069f5d9c64bf6fc0fbd381cd03db3d1367a0cd88e0",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ef4e0649bf90743e70c488e881690488b5941c19bd0bcd25161a0ccf72474f20",
+      "sha256": "b60a5c74e79c829982ad0106776ae41b7fcc65ccf2e21ba0216f942c2f03057f",
       "source": "CITATION.cff"
     },
     {
@@ -2510,13 +2489,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "702732ad91fae1c23a2733e879490d8a4451b5a5a5bf2dbdae02eaa848e3d281",
+      "sha256": "b19266489d6c4539e4b6bf2b078fc13f78d2edf5225522c3f6fa67cd30831769",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "515bb89901463d4f2d43d0b5d630ed1698d4a45b939953d45bc093dbf3fb3bc9",
+      "sha256": "fcfd3194d42ab82012f58e511793cc879b984b2ce60b9874cc1a4ad1accd4195",
       "source": "README.md"
     },
     {
@@ -2528,7 +2507,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "355a2e14f6a7f2cb387d9d3b75a3550980d020ee1d005b139b62290c1645068a",
+      "sha256": "44abf66b02260179b3a509b0f10b5f26f431f316ef4ca50f18764c9e4b8cfd4a",
       "source": "VERSION"
     },
     {
@@ -3056,13 +3035,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "a33153e39b2126cfa75d385692fbeda136e6cb42fc09205624fb630e6d28b319",
+      "sha256": "45cbbb35c3295138499c97ad377d995abd6f4ccd1eb53c8a0528ed3a0978aee6",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b2f92aeac0458996df5e3bfff0bad599c53b2fde65c99e76af4fc0501b22fe5e",
+      "sha256": "6fbbb2ba0d16ed640deb25f1125e3441f0060641751ad04ba58394f35c2e37f8",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -3122,7 +3101,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "445fa5c45fa63d01e5d615b655e095740cd1bc463fabb2ede98f4cd7dc1788d8",
+      "sha256": "0ca012d9c995d05450f1cd24bdef441564f80ca533909e39e04d7aef5e78eb1a",
       "source": "skills/analyze-project-claims/references/evidence-guided-agents.md"
     },
     {
@@ -3206,13 +3185,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ed58b8145f09471b00cadc5696e5ed1740d31b3dfc2bc6116ce363a41801315b",
+      "sha256": "2466dfd30069b89b590d796ba4e09fb8214066da87e6e2534614f36ad9e8cbb2",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4168b5558da1921e4bae0a658ffd6788b61f8b0b4ae7dd8687eb93503cfb5441",
+      "sha256": "9d8dababce5c31a8ed72c72884689bcaa7c2c30d3db6ccafbdd006c43f9332f1",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -3250,12 +3229,6 @@
       "kind": "file",
       "sha256": "7e92c3fd696fae083f3310b03f7e12303311d7dc0637c9b002eb1d1164ec387e",
       "source": "skills/analyze-project-claims/references/scan-record.schema.json"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "5afea5197eb237798bd0c8a6eaf95b6ad6149565fa0fcfc3e624305b221fccbd",
-      "source": "skills/analyze-project-claims/references/session-recovery.md"
     },
     {
       "exists": true,
@@ -3302,7 +3275,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a707c0f12357f7917a22a2e7e527eb353579a4ff5e56bb17a0a9016b7dbad5a9",
+      "sha256": "c7daf8af9e6b09af123f1a83a3b994f70266de2689671ddf740925e6810ad7d3",
       "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
     },
     {

@@ -45,3 +45,8 @@ Use [review-learning](review-learning.md#repair-cycle-budget-and-adaptation) for
 the 32-cycle repair/recheck default and evidence-based prospective adjustments.
 Preserve user budgets, pauses, execution authority and formal acceptance rules.
 A skill invocation is not independent replication or proof of scientific benefit.
+
+For a host writer conflict or an owner-requested session handoff, use
+[session recovery](session-recovery.md). Preserve source bindings, reviewer
+independence, pending tokens and cumulative allowances; host changes are not
+claims acceptance or automatic controller migration.
