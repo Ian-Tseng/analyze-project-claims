@@ -1,0 +1,290 @@
+{
+  "bindings": [
+    {
+      "claim_id": "windows-hook-repair",
+      "evidence_id": "hook-tests",
+      "role": "supports"
+    },
+    {
+      "claim_id": "windows-hook-repair",
+      "evidence_id": "evaluation-boundaries",
+      "role": "limits"
+    },
+    {
+      "claim_id": "candidate-regressions",
+      "evidence_id": "regressions",
+      "role": "supports"
+    },
+    {
+      "claim_id": "candidate-regressions",
+      "evidence_id": "evaluation-boundaries",
+      "role": "limits"
+    },
+    {
+      "claim_id": "isolated-native-hooks",
+      "evidence_id": "native-results",
+      "role": "supports"
+    },
+    {
+      "claim_id": "isolated-native-hooks",
+      "evidence_id": "evaluation-boundaries",
+      "role": "limits"
+    },
+    {
+      "claim_id": "bounded-native-timing",
+      "evidence_id": "native-timing",
+      "role": "supports"
+    },
+    {
+      "claim_id": "bounded-native-timing",
+      "evidence_id": "evaluation-boundaries",
+      "role": "limits"
+    },
+    {
+      "claim_id": "candidate-regressions",
+      "evidence_id": "ci-results",
+      "role": "supports"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "e89398defd8f243077789a1c5c09bb68fc662efa5f9407c81215b96c5e1351ae",
+      "claim_id": "windows-hook-repair",
+      "element_ref": {
+        "component_id": "managed-skill-quality-loop",
+        "element_id": "portable-consumer-and-codex-adapter"
+      },
+      "material": true,
+      "rationale": "Persisted execution outcomes and scoped candidate observations support this finite evaluation; limitations separate native behavior, semantic quality and release lifecycle.",
+      "statement": "The candidate Windows Stop hook executes the real bounded receipt lifecycle under cmd.exe and PowerShell, including paths containing shell metacharacters.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "58402df418f8fd83e4c7cc3db61e1c3b5d47006097c8c95d0ddc8a7b3926cde1",
+      "claim_id": "candidate-regressions",
+      "element_ref": {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression"
+      },
+      "material": true,
+      "rationale": "Persisted execution outcomes and scoped candidate observations support this finite evaluation; limitations separate native behavior, semantic quality and release lifecycle.",
+      "statement": "The local candidate suite completed with 521 passed and 3 skipped tests; six recorded pre-acceptance CI jobs succeeded on source 30385f7.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "567e811053b6a8f87d5598ed12aada2f0fbb7fdc886049aa077dae3320909188",
+      "claim_id": "isolated-native-hooks",
+      "element_ref": {
+        "component_id": "long-running-subagents",
+        "element_id": "native-host-boundary"
+      },
+      "material": true,
+      "rationale": "Persisted execution outcomes and scoped candidate observations support this finite evaluation; limitations separate native behavior, semantic quality and release lifecycle.",
+      "statement": "The isolated native candidate completed 32 benchmark Stop hooks and one separate smoke hook successfully, retaining 20 AI reviews and 128 independently graded case rows.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "6544693c925c91a27fe71c64901bc175bef6976676a00c181e43be1b644a941c",
+      "claim_id": "bounded-native-timing",
+      "element_ref": {
+        "component_id": "long-running-subagents",
+        "element_id": "bounded-agent-pool-benchmark"
+      },
+      "material": true,
+      "rationale": "Persisted execution outcomes and scoped candidate observations support this finite evaluation; limitations separate native behavior, semantic quality and release lifecycle.",
+      "statement": "Two paired isolated native trials observed 40.070 percent lower combined elapsed time with two workers than one, with overlap and refill in both pool trials.",
+      "status": "supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "hook-tests",
+      "freshness": "current",
+      "identity_sha256": "acdf50cbd356ad5c69d48ae2c328307c40242c0e25e1f9de6f8e78c157c631b6",
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/hook_repair"
+      },
+      "method": "executed_test",
+      "observed_summary": "The candidate Windows Stop hook executes the real bounded receipt lifecycle under cmd.exe and PowerShell, including paths containing shell metacharacters.",
+      "selection_sha256": "58b363333906cc718df2919966505c7087108649e4901ec320c5e0da396e3fa5",
+      "source": {
+        "byte_size": 5290,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.15.1-local-validation.json",
+        "sha256": "dc623224eba0596223c05532160c84915f284e29004a0543bb5c1c2191b2e1d6"
+      }
+    },
+    {
+      "evidence_id": "regressions",
+      "freshness": "current",
+      "identity_sha256": "cc993f4c46b86bdde173ca1dd2db68a385b087e0ef71c89ee0bf8563d0cce072",
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The local candidate suite completed with 521 passed and 3 skipped tests; six recorded pre-acceptance CI jobs succeeded on source 30385f7.",
+      "selection_sha256": "5fa269cef59a5a2e3cf0f57aea077253311616761faa416f56d6e272f6f36837",
+      "source": {
+        "byte_size": 5290,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.15.1-local-validation.json",
+        "sha256": "dc623224eba0596223c05532160c84915f284e29004a0543bb5c1c2191b2e1d6"
+      }
+    },
+    {
+      "evidence_id": "native-results",
+      "freshness": "current",
+      "identity_sha256": "a4980dfd20c093b8b647cbcc28314d2b8ea54492a4664400562addad5d319173",
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/native_candidate"
+      },
+      "method": "executed_test",
+      "observed_summary": "The isolated native candidate completed 32 benchmark Stop hooks and one separate smoke hook successfully, retaining 20 AI reviews and 128 independently graded case rows.",
+      "selection_sha256": "d54879a5dd9af823533fb875ad0a53e59f65aeb7857bf80aa6c42f05456ea118",
+      "source": {
+        "byte_size": 5290,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.15.1-local-validation.json",
+        "sha256": "dc623224eba0596223c05532160c84915f284e29004a0543bb5c1c2191b2e1d6"
+      }
+    },
+    {
+      "evidence_id": "native-timing",
+      "freshness": "current",
+      "identity_sha256": "a4980dfd20c093b8b647cbcc28314d2b8ea54492a4664400562addad5d319173",
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/native_candidate"
+      },
+      "method": "executed_test",
+      "observed_summary": "Two paired isolated native trials observed 40.070 percent lower combined elapsed time with two workers than one, with overlap and refill in both pool trials.",
+      "selection_sha256": "d54879a5dd9af823533fb875ad0a53e59f65aeb7857bf80aa6c42f05456ea118",
+      "source": {
+        "byte_size": 5290,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.15.1-local-validation.json",
+        "sha256": "dc623224eba0596223c05532160c84915f284e29004a0543bb5c1c2191b2e1d6"
+      }
+    },
+    {
+      "evidence_id": "ci-results",
+      "freshness": "current",
+      "identity_sha256": "beed22ff4b10b3887e9b3843199665945796ad86d4d04123ebd7333409c87a71",
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/pr_ci_before_acceptance"
+      },
+      "method": "executed_test",
+      "observed_summary": "Six persisted pre-acceptance CI jobs are SUCCESS.",
+      "selection_sha256": "e06a3726250494264d48bc468e39ce265cc8cae79e7e77ffdcf8fe784e17592e",
+      "source": {
+        "byte_size": 5290,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.15.1-local-validation.json",
+        "sha256": "dc623224eba0596223c05532160c84915f284e29004a0543bb5c1c2191b2e1d6"
+      }
+    },
+    {
+      "evidence_id": "evaluation-boundaries",
+      "freshness": "current",
+      "identity_sha256": "0bab3a24d313c4739c01fb213d2dde24d1a2ea81445b7b6b1499d9875381d151",
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/limitations"
+      },
+      "method": "inspected",
+      "observed_summary": "Candidate-only lifecycle, two-pair synthetic workload, differing global context, native no-receipt scope and preserved prior failures.",
+      "selection_sha256": "8bbeaa6f898803c29d8a21c6b91dca79a6b6c8fdea021385893233c4a9d2bb9b",
+      "source": {
+        "byte_size": 5290,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.15.1-local-validation.json",
+        "sha256": "dc623224eba0596223c05532160c84915f284e29004a0543bb5c1c2191b2e1d6"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "4364a42be748b545005f985b8b129c9b264f9de45785e2d1071aec2b1c141f13",
+    "output_schema_sha256": "c381756b5c2dd32f6be29b48f4532d834546f381bb571daebfac87216aec4dd3",
+    "recorder_sha256": "513a7d481139de74df0e3ba6f504abf56466001150ff0f64c90fd9ad71b89a25",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "513a7d481139de74df0e3ba6f504abf56466001150ff0f64c90fd9ad71b89a25"
+  },
+  "limitations": [
+    {
+      "claim_ids": [
+        "windows-hook-repair",
+        "candidate-regressions",
+        "isolated-native-hooks",
+        "bounded-native-timing"
+      ],
+      "evidence_ids": [
+        "evaluation-boundaries"
+      ],
+      "limitation_id": "candidate-evaluation-boundary",
+      "text": "Candidate source and isolated native installation only; publication, normal installation and global activation remain separate gates. Two AB/BA pairs on one fixed synthetic 24/4/4-case workload with gpt-6-astra/high are descriptive, not a significance test or general speed guarantee. Both modes use the opt-in pool protocol with one versus two workers. Isolated global skill context differs from the original pilot; do not attribute cross-pilot speed differences to the hook fix. Native hook successes used no-receipt turns. Valid receipt handoff/replay is tested separately through real cmd.exe and PowerShell subprocesses. Exact grading does not establish general semantic quality. Original failed-hook pilot evidence remains historical counterevidence."
+    }
+  ],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-d63c448e0e42",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "28baec3aa5ef1ba7b0ef63657e91bbeeb97f73390674d704ea2f541fa985b8ce"
+    },
+    "authority": [
+      "skills/analyze-project-claims/SKILL.md",
+      "validation/component-map/accepted-map.json",
+      "PUBLISHING.md"
+    ],
+    "engine_identity": {
+      "engine_digest": "8e13b7d894deefa840ce1b5dc68a547a68f14a902c68cc3fe76b37946e6cf540",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "Audit the accepted v0.15.1 Windows Stop-hook repair, candidate regressions and bounded isolated native evidence before release.",
+    "recorded_at_utc": "2026-10-05T01:41:40.852302Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20261005T014140852302Z-630e0e4b",
+    "scope": [
+      "hooks/hooks.json",
+      "tests/test_plugin_bundle.py",
+      "validation/v0.15.1-local-validation.json"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "6fbbb2ba0d16ed640deb25f1125e3441f0060641751ad04ba58394f35c2e37f8"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [
+      "candidate-evaluation-boundary"
+    ],
+    "claim_count": 4,
+    "claim_counts": {
+      "supported": 4
+    },
+    "evidence_count": 6,
+    "material_claim_count": 4,
+    "no_supported_claim": false,
+    "scan_status": "PASS",
+    "strongest_safe_claim": "The candidate Windows Stop hook executes the real bounded receipt lifecycle under cmd.exe and PowerShell, including paths containing shell metacharacters.",
+    "strongest_safe_claim_id": "windows-hook-repair",
+    "unresolved_uncertainties": [
+      "Final post-audit CI, publication, normal installation and fresh global activation remain subsequent gates.",
+      "No general speed, scientific benefit, GPU concurrency or cross-workload semantic-quality guarantee is established."
+    ]
+  }
+}

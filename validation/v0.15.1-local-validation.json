@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-05T01:41:40.272834+00:00",
+  "candidate_version": "0.15.1",
+  "source_commit": "30385f7b8106ae15d195cde34abcab5ee852ce87",
+  "map_id": "component-map-d63c448e0e42",
+  "lifecycle": "ACCEPTED_MAP_CANDIDATE_AUDIT_BEFORE_RELEASE",
+  "hook_repair": {
+    "mechanism": "Static Python resolves environment paths through os.environ and runpy; UNIX command and five-second timeout unchanged.",
+    "fixed_cmd_exit": 0,
+    "fixed_powershell_exit": 0,
+    "focused_tests": {
+      "plugin_bundle": 4,
+      "skill_quality_loop": 30,
+      "status": "PASS"
+    },
+    "regression_scope": "Real cmd.exe and PowerShell helper lifecycle using spaces and shell metacharacters; no receipt, initial block, replay, recursion guard, private state, zero outbound actions."
+  },
+  "full_suite": {
+    "status": "PASS",
+    "total": 524,
+    "passed": 521,
+    "skipped": 3,
+    "seconds": 173.095
+  },
+  "pr_ci_before_acceptance": {
+    "source_commit": "30385f7",
+    "jobs": [
+      {
+        "link": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/37220610369/job/111490004383",
+        "name": "test (macos-latest, 3.10)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/37220610369/job/111490004533",
+        "name": "test (macos-latest, 3.12)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/37220610369/job/111490004171",
+        "name": "test (windows-latest, 3.10)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/37220610369/job/111490004444",
+        "name": "test (ubuntu-latest, 3.10)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/37220610369/job/111490004425",
+        "name": "test (ubuntu-latest, 3.12)",
+        "state": "SUCCESS"
+      },
+      {
+        "link": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/37220610369/job/111490004448",
+        "name": "test (windows-latest, 3.12)",
+        "state": "SUCCESS"
+      }
+    ],
+    "passed": 6
+  },
+  "native_candidate": {
+    "status": "PASS_BOUNDED_CANDIDATE_NATIVE_VALIDATION",
+    "benchmark_successful_hooks": 32,
+    "separate_smoke_successful_hooks": 1,
+    "independent_ai_reviews": 20,
+    "independently_graded_rows": 128,
+    "trials": [
+      {
+        "trial": "0s",
+        "elapsed_seconds": 126.178764900018,
+        "successful_hooks": 8,
+        "raw_native_overlap_seconds": 0,
+        "refill_tasks": [],
+        "cleanup_and_journal_verified": true
+      },
+      {
+        "trial": "0p",
+        "elapsed_seconds": 73.59434830001555,
+        "successful_hooks": 8,
+        "raw_native_overlap_seconds": 21.76500000001397,
+        "refill_tasks": [
+          "c"
+        ],
+        "cleanup_and_journal_verified": true
+      },
+      {
+        "trial": "1p",
+        "elapsed_seconds": 78.19755629997235,
+        "successful_hooks": 8,
+        "raw_native_overlap_seconds": 21.109000000054948,
+        "refill_tasks": [
+          "c"
+        ],
+        "cleanup_and_journal_verified": true
+      },
+      {
+        "trial": "1s",
+        "elapsed_seconds": 127.102745399985,
+        "successful_hooks": 8,
+        "raw_native_overlap_seconds": 0,
+        "refill_tasks": [],
+        "cleanup_and_journal_verified": true
+      }
+    ],
+    "serial_seconds": 253.281510300003,
+    "pool_seconds": 151.7919045999879,
+    "pooled_elapsed_reduction_percent": 40.06988334040027,
+    "pair_reductions_percent": [
+      41.67453742447827,
+      38.47689437872553
+    ],
+    "median_speed_ratio": 1.669961321399795
+  },
+  "limitations": [
+    "Candidate source and isolated native installation only; publication, normal installation and global activation remain separate gates.",
+    "Two AB/BA pairs on one fixed synthetic 24/4/4-case workload with gpt-6-astra/high are descriptive, not a significance test or general speed guarantee. Both modes use the opt-in pool protocol with one versus two workers.",
+    "Isolated global skill context differs from the original pilot; do not attribute cross-pilot speed differences to the hook fix.",
+    "Native hook successes used no-receipt turns. Valid receipt handoff/replay is tested separately through real cmd.exe and PowerShell subprocesses. Exact grading does not establish general semantic quality.",
+    "Original failed-hook pilot evidence remains historical counterevidence."
+  ],
+  "retained_private_receipt_sha256": {
+    "full-tests.log": "1555174222a1dd75034c8c8829f4878838af25d47ba4ff3355cc7414128a388c",
+    "pr-ci.json": "55a517263702e1ed064c33bd1cf382a355b9d522fa92899fcde9416f44dc4dd3",
+    "independent-review.json": "a5a7eda35f90d6f37c59e8210d7350eea27ec017c331e81348499b7023e8c3c6",
+    "native-result-review.json": "13f043f6ac4bf9b4efd810e3465a54439cce7c70482af7d291ec0d59ace6d878",
+    "analysis.json": "24424b369dd2ac597e6a51fde0b8ee316f4ea1fbed6986a0dee38fca54d4019b",
+    "summary.json": "a2d006bfbb3532871fca97c03275875439659b4069c1e09ee5f6e2271fffe4d5",
+    "result.json": "9dc13fba2df018cf3b0f62e282b9b97577bb700f18b4cac82faf764d91f1a921"
+  }
+}

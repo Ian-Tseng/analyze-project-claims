@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-05T01:36:58.995158Z",
+  "accepted_at_utc": "2026-10-04T15:47:39.259370Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1691,7 +1691,7 @@
             }
           ],
           "relation_type": "contains",
-          "target": "The explicit CLI is the portable quality-consumption path; the receipt adapter never recursively invokes a skill or starts a repair loop; the optional Codex plugin has one five-second Stop hook using plugin-private state and can request at most one continuation without claiming guaranteed routing or successful live-host continuation. The Windows command resolves plugin paths inside Python, independently of shell variable syntax; actual cmd.exe and PowerShell receipt regressions include spaces and shell metacharacters."
+          "target": "The explicit CLI is the portable quality-consumption path; the receipt adapter never recursively invokes a skill or starts a repair loop; the optional Codex plugin has one five-second Stop hook using plugin-private state and can request at most one continuation without claiming guaranteed routing or successful live-host continuation."
         },
         {
           "element_id": "replay-safe-local-proposal",
@@ -2246,16 +2246,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-04T17:16:41.344885Z",
+  "created_at_utc": "2026-10-04T15:41:44.993827Z",
   "integrity": {
-    "canonical_payload_sha256": "e29c105bac9132fc82394f3dd65be2a0ff3dbb69008a72bb02a92a4451da44c7"
+    "canonical_payload_sha256": "c3c0cd9112513ed01ebcf4fe3430908ce5272f705fa7eca03fa99699ed2bb314"
   },
-  "map_id": "component-map-d63c448e0e42",
+  "map_id": "component-map-097e0def8545",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.15.1 Windows native receipt-hook repair: resolve paths as Python environment data under Command Prompt and PowerShell, retaining bounded receipt validation, replay/private-state/outbound boundaries and unchanged agent-pool controller; exact human map acceptance, release, native activation and measured speed remain separate.",
-  "origin_scan_id": "20261004T171641344885Z-04815bc2",
-  "previous_map_id": "component-map-097e0def8545",
+  "objective": "Map the v0.15.0 opt-in concurrent claim-guided agent pool, durable reassignment and scoped review contracts, preserving serial journal compatibility, exact human map acceptance, and bounded subprocess benchmark evidence without inferring native AI or scientific acceleration.",
+  "origin_scan_id": "20261004T154144993827Z-71019163",
+  "previous_map_id": "component-map-b255f9ff38be",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2417,7 +2417,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "e412022a05a80ab45bb920246a654f784a8b0a617f3d51ac3002188ffb639fbf",
+      "sha256": "02c83f24fdabb8e70c5f2e26b69049d90dda5e76e06d8516f996dace0e918631",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2465,13 +2465,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "116b8beb8bfacf0fa0950d069f5d9c64bf6fc0fbd381cd03db3d1367a0cd88e0",
+      "sha256": "a374f75b032399ad75412402fa2513d79717404b1156f8fee53a3c7923984610",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b60a5c74e79c829982ad0106776ae41b7fcc65ccf2e21ba0216f942c2f03057f",
+      "sha256": "b20e3e8fbf2f719211bcfe5a36d80117f1f881feea21c46b3c2e38af6be64703",
       "source": "CITATION.cff"
     },
     {
@@ -2507,7 +2507,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "44abf66b02260179b3a509b0f10b5f26f431f316ef4ca50f18764c9e4b8cfd4a",
+      "sha256": "f8405a7330c287028d470c3ee3506f878f1ad85ed79c1d1adc19df2ff7398915",
       "source": "VERSION"
     },
     {
@@ -2993,7 +2993,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "5837c80450184c46faa76c26c53901582d369d09814b63827adf7a45aae498be",
+      "sha256": "bd36b7259f2dc3bf2499f6f2c3a403d13499ac26a3cbfc005745400ca89870bf",
       "source": "hooks/hooks.json"
     },
     {
@@ -3035,7 +3035,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "45cbbb35c3295138499c97ad377d995abd6f4ccd1eb53c8a0528ed3a0978aee6",
+      "sha256": "fd4bdbc7b83c26f705ae01103c03b404595a39aeb65e0d1e821a40e4a3502634",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -3185,13 +3185,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "2466dfd30069b89b590d796ba4e09fb8214066da87e6e2534614f36ad9e8cbb2",
+      "sha256": "3df033f44ae1c6514167f9f6a326a056ee12e89d9af5d4ddcc47a19546a9ea88",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "9d8dababce5c31a8ed72c72884689bcaa7c2c30d3db6ccafbdd006c43f9332f1",
+      "sha256": "6aca53c3b961242fb7f0c6919a0a08a6e6d75b3994344ba67e1f4bed46577ef8",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -3689,7 +3689,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "869883502b19b3795e2ec711c2221870a675ee8075c3af35283b9e553e976ec0",
+      "sha256": "5e1a2e29e8c813738fb3faf26e2752621a0d66b5533a880ae2980a60b2b568ac",
       "source": "tests/test_plugin_bundle.py"
     },
     {
