@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-05T01:36:58.995158Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -2248,10 +2248,10 @@
   ],
   "created_at_utc": "2026-10-04T17:16:41.344885Z",
   "integrity": {
-    "canonical_payload_sha256": "e29c105bac9132fc82394f3dd65be2a0ff3dbb69008a72bb02a92a4451da44c7"
+    "canonical_payload_sha256": "ea5e50dbfbb487bbcfa797148aab215f695ec93158d386fd0ea720eb2c7a789b"
   },
   "map_id": "component-map-d63c448e0e42",
-  "map_state": "accepted",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.15.1 Windows native receipt-hook repair: resolve paths as Python environment data under Command Prompt and PowerShell, retaining bounded receipt validation, replay/private-state/outbound boundaries and unchanged agent-pool controller; exact human map acceptance, release, native activation and measured speed remain separate.",
   "origin_scan_id": "20261004T171641344885Z-04815bc2",

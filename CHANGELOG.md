@@ -4,6 +4,14 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.15.1] - 2026-10-05
+
+- Resolve Windows receipt-hook paths inside Python so the same command works
+  under native PowerShell and Command Prompt. Preserve receipt validation,
+  private state, timeout and outbound boundaries.
+- Exercise the real hook through both Windows shells, including paths that
+  contain spaces and shell metacharacters.
+
 ## [0.15.0] - 2026-10-04
 
 - Add opt-in concurrent agent-pool goals with scoped evidence and claim locks,
