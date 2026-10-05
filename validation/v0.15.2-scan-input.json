@@ -1,0 +1,85 @@
+{
+  "schema_version": "2.0",
+  "objective": "Record bounded local v0.15.2 release-candidate validation without inferring publication or installed activation.",
+  "scope": [
+    "validation/v0.15.2-local-validation.json",
+    "skills/analyze-project-claims/references/session-recovery.md"
+  ],
+  "authority": [
+    "PUBLISHING.md",
+    "CONTRIBUTING.md"
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "release-local-suite",
+      "source": {
+        "kind": "file",
+        "path": "validation/v0.15.2-local-validation.json"
+      },
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The executed standard-library suite completed 524 tests: 521 passed and 3 skipped, exit 0."
+    },
+    {
+      "evidence_id": "recovery-guidance",
+      "source": {
+        "kind": "file",
+        "path": "skills/analyze-project-claims/references/session-recovery.md"
+      },
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The guide explicitly preserves controller state, bounded authority and independent review while distinguishing recovery layers."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "release-local-tests",
+      "statement": "The v0.15.2 candidate passed its executed local standard-library suite with 521 passed and 3 skipped tests.",
+      "element_ref": {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression"
+      },
+      "material": true,
+      "status": "supported",
+      "rationale": "The retained executed command summary reports exit zero, exact total and explicit skips. This claim is limited to local tested behavior."
+    },
+    {
+      "claim_id": "recovery-defined",
+      "statement": "The candidate defines evidence-bounded session recovery and owner-requested handoff guidance without adding runtime recovery authority.",
+      "element_ref": {
+        "component_id": "long-running-subagents",
+        "element_id": "session-recovery-handoff"
+      },
+      "material": true,
+      "status": "supported",
+      "rationale": "Direct inspection and independent six-scenario review support the documentation definition only."
+    }
+  ],
+  "bindings": [
+    {
+      "claim_id": "release-local-tests",
+      "evidence_id": "release-local-suite",
+      "role": "supports"
+    },
+    {
+      "claim_id": "recovery-defined",
+      "evidence_id": "recovery-guidance",
+      "role": "supports"
+    }
+  ],
+  "limitations": [],
+  "summary": {
+    "strongest_safe_claim_id": "release-local-tests",
+    "claim_boundary_ids": [],
+    "no_supported_claim": false
+  },
+  "unresolved_uncertainties": [
+    "Skipped privileged cases are not local passes. Hosted matrix, release verification, actual installation and client invocation require separate observations.",
+    "Actual host recovery, capacity release and controller migration remain untested by this documentation release."
+  ]
+}

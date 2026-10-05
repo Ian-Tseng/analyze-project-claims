@@ -293,7 +293,9 @@ up the same way without recursively launching another claims review.
 A host thread limit is independent of the 32-cycle repair budget and may count
 retained threads as well as running agents. A finished agent is not necessarily
 a freed slot. Do not increase concurrency, reset the controller, create another
-conversation, or interrupt active agents to bypass it.
+conversation, or interrupt active agents to bypass it. For an owner-requested
+session handoff, follow [session recovery](session-recovery.md); preserve the
+existing controller, pending tokens and cumulative authority.
 
 Before each native spawn, `spawn-attempt` reserves one attempt in the existing
 hash-linked journal. New goals persist `max_spawn_attempts` (default **3 total

@@ -58,6 +58,9 @@ through an available native close operation, preserving evidence and pending rev
 On `agent thread limit reached`, follow the host protocol's durable spawn
 reservation and bounded recovery procedure; retain the pending token and claims
 review when capacity or a close capability is unavailable.
+For writer conflicts or an owner-requested session handoff, read
+[session recovery](references/session-recovery.md). A new client or conversation
+is not evidence of recovered capacity and must preserve the existing controller.
 Only declared execution prerequisites require support; hypotheses being tested
 may remain untested or contradicted.
 After each substantive done, failed or uncertain work unit, invoke this skill,
