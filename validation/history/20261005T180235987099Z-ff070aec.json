@@ -1,0 +1,136 @@
+{
+  "bindings": [
+    {
+      "claim_id": "release-local-tests",
+      "evidence_id": "release-local-suite",
+      "role": "supports"
+    },
+    {
+      "claim_id": "recovery-defined",
+      "evidence_id": "recovery-guidance",
+      "role": "supports"
+    }
+  ],
+  "claims": [
+    {
+      "claim_digest": "2d7c0fbe38f2a948b089b7a22cacc744be1dd743f6950da95836595d1f168bba",
+      "claim_id": "release-local-tests",
+      "element_ref": {
+        "component_id": "scan-logging",
+        "element_id": "repository-regression"
+      },
+      "material": true,
+      "rationale": "The retained executed command summary reports exit zero, exact total and explicit skips. This claim is limited to local tested behavior.",
+      "statement": "The v0.15.2 candidate passed its executed local standard-library suite with 521 passed and 3 skipped tests.",
+      "status": "supported"
+    },
+    {
+      "claim_digest": "38e2709079ec63ee5913de85e1e037b0761ed39e8021cef0325b2c11abfa293a",
+      "claim_id": "recovery-defined",
+      "element_ref": {
+        "component_id": "long-running-subagents",
+        "element_id": "session-recovery-handoff"
+      },
+      "material": true,
+      "rationale": "Direct inspection and independent six-scenario review support the documentation definition only.",
+      "statement": "The candidate defines evidence-bounded session recovery and owner-requested handoff guidance without adding runtime recovery authority.",
+      "status": "supported"
+    }
+  ],
+  "evidence_items": [
+    {
+      "evidence_id": "release-local-suite",
+      "freshness": "current",
+      "identity_sha256": "0a6b2b3f407ebf4c721f979d05601a282ede7c4829e6a74842d28e10142fac4f",
+      "locator": {
+        "kind": "json_pointer",
+        "value": "/full_suite"
+      },
+      "method": "executed_test",
+      "observed_summary": "The executed standard-library suite completed 524 tests: 521 passed and 3 skipped, exit 0.",
+      "selection_sha256": "9c933bd0edd6c6464ac741ee3334e76e7b273b39191978959c85e55d2383ae82",
+      "source": {
+        "byte_size": 5087,
+        "kind": "file",
+        "media_type": "application/json",
+        "path": "validation/v0.15.2-local-validation.json",
+        "sha256": "d55020dd1353aa63aed179da6b9b87e49b22fe2e52475b5ebbe94e64201408f7"
+      }
+    },
+    {
+      "evidence_id": "recovery-guidance",
+      "freshness": "current",
+      "identity_sha256": "aee24a920cca2db4b1b6bf095a3d47c03340c05537014e698d62ba9515bcbfa9",
+      "locator": {
+        "kind": "whole_file"
+      },
+      "method": "inspected",
+      "observed_summary": "The guide explicitly preserves controller state, bounded authority and independent review while distinguishing recovery layers.",
+      "selection_sha256": "5afea5197eb237798bd0c8a6eaf95b6ad6149565fa0fcfc3e624305b221fccbd",
+      "source": {
+        "byte_size": 5153,
+        "kind": "file",
+        "media_type": "application/octet-stream",
+        "path": "skills/analyze-project-claims/references/session-recovery.md",
+        "sha256": "5afea5197eb237798bd0c8a6eaf95b6ad6149565fa0fcfc3e624305b221fccbd"
+      }
+    }
+  ],
+  "integrity": {
+    "canonical_payload_sha256": "1b6bd7ee7267e9816641fcd9551cc3fd9942d65f5179b774890c8f0187e61ffd",
+    "output_schema_sha256": "c381756b5c2dd32f6be29b48f4532d834546f381bb571daebfac87216aec4dd3",
+    "recorder_sha256": "513a7d481139de74df0e3ba6f504abf56466001150ff0f64c90fd9ad71b89a25",
+    "renderer_id": "evidence-bound-markdown-v1",
+    "renderer_sha256": "513a7d481139de74df0e3ba6f504abf56466001150ff0f64c90fd9ad71b89a25"
+  },
+  "limitations": [],
+  "record_kind": "evidence_bound_audit_record",
+  "scan": {
+    "accepted_map": {
+      "map_id": "component-map-682ba91e2770",
+      "path": "validation/component-map/accepted-map.json",
+      "sha256": "35d758d243be64987ad871fdbe787b56a6cc84d2fa1341b62fb4e0e8118763ca"
+    },
+    "authority": [
+      "PUBLISHING.md",
+      "CONTRIBUTING.md"
+    ],
+    "engine_identity": {
+      "engine_digest": "8e13b7d894deefa840ce1b5dc68a547a68f14a902c68cc3fe76b37946e6cf540",
+      "engine_name": "component-evidence",
+      "engine_version": "1.3.0",
+      "map_schema_version": "1.0",
+      "provider_kind": "embedded",
+      "receipt_protocol_version": "2.0",
+      "status": "verified"
+    },
+    "objective": "Record bounded local v0.15.2 release-candidate validation without inferring publication or installed activation.",
+    "recorded_at_utc": "2026-10-05T18:02:35.987099Z",
+    "recorder_version": "2.1.0",
+    "scan_id": "20261005T180235987099Z-ff070aec",
+    "scope": [
+      "validation/v0.15.2-local-validation.json",
+      "skills/analyze-project-claims/references/session-recovery.md"
+    ],
+    "skill_name": "analyze-project-claims",
+    "skill_sha256": "b2f92aeac0458996df5e3bfff0bad599c53b2fde65c99e76af4fc0501b22fe5e"
+  },
+  "schema_version": "2.0",
+  "summary": {
+    "claim_boundary_ids": [],
+    "claim_count": 2,
+    "claim_counts": {
+      "supported": 2
+    },
+    "evidence_count": 2,
+    "material_claim_count": 2,
+    "no_supported_claim": false,
+    "scan_status": "PASS",
+    "strongest_safe_claim": "The v0.15.2 candidate passed its executed local standard-library suite with 521 passed and 3 skipped tests.",
+    "strongest_safe_claim_id": "release-local-tests",
+    "unresolved_uncertainties": [
+      "Skipped privileged cases are not local passes. Hosted matrix, release verification, actual installation and client invocation require separate observations.",
+      "Actual host recovery, capacity release and controller migration remain untested by this documentation release."
+    ]
+  }
+}
