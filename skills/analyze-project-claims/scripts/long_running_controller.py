@@ -197,6 +197,7 @@ class Controller:
         config.setdefault("max_repair_cycles", 32)
         config.setdefault("max_spawn_attempts", 3)
         config = validate_config(config)
+        config = validate_config(agent_pool.configure_new(config))
         current = snapshot(config)
         with self.locked():
             require(not list((self.root / "journal").glob("*.json")), "Already initialized")
@@ -497,6 +498,10 @@ class Controller:
             return {"status": "PLAN_REVISED", **record}
 
     def next(self, dispatch_id=None):
+        if dispatch_id is not None:
+            transition = agent_pool.migrate_for_dispatch(self, dispatch_id)
+            if transition is not None:
+                return transition
         if agent_pool.is_pool(self):
             return agent_pool.next_request(self, dispatch_id)
         require(dispatch_id is None, "dispatch_id requires agent_pool")

@@ -19,8 +19,8 @@ recommends the smallest useful next check.
 
 ## Evidence-guided agents and subagent mode (0.12.0)
 
-For explicitly authorized delegated goals, the optional controller defaults to one work
-unit at a time and routes each substantive outcome to `analyze-project-claims`.
+For explicitly authorized delegated goals, the optional controller uses reusable
+agent pools and routes each substantive outcome to `analyze-project-claims`.
 It tracks provisional claims, evidence links, limitations, dependent reports and
 sampled freshness while preserving pauses and bounded retries. Native subagents
 require an active host; the Python helper does not start a model or wake a session.
@@ -30,9 +30,11 @@ and preserves legacy journal limits. Claims guide investigation and are updated
 when results contradict them. See the linked guide for native-host
 requirements and the boundary between tested helpers and host activation.
 
-New goals can opt into [concurrent agent-pool scheduling](skills/analyze-project-claims/references/agent-pool.md),
-with scoped evidence, per-unit review and safe reuse of finished agents. Existing
-goals keep their serialized mode. In a [local three-pair CPU-subprocess pilot](evaluation/agent-pool/observed-result.json),
+Delegated goals default to [agent-pool scheduling](skills/analyze-project-claims/references/agent-pool.md),
+with scoped evidence, per-unit review and safe reuse of finished agents. Resumed
+delegated goals migrate at a quiescent `next --dispatch-id` boundary, preserving
+history and budgets and requiring global review. Explicit serialized choices remain
+available; unknown scopes conservatively prevent overlap. In a [local three-pair CPU-subprocess pilot](evaluation/agent-pool/observed-result.json),
 pooling reduced elapsed time by 23.0% at the median pair, with equal outputs and
 observed worker reuse. This bounded fixture used deterministic reviews; native
 AI-agent speed and general performance remain untested.
@@ -56,7 +58,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.15.2
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.16.0
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 

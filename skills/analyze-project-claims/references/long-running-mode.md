@@ -50,11 +50,13 @@ the saved cap stop that attempt. The [review-learning rule](review-learning.md#r
 allows evidence-based adjustments for future goals, not budget changes through
 plan patches or new attempt IDs that evade an exhausted attempt. New sessions, clock changes and goal revisions do not reset it.
 
-## Cooperative execution (default serialized mode)
+## Cooperative execution
 
-For new goals configured with `agent_pool`, use the [concurrent agent contract](agent-pool.md).
-Pool dispatch requires an explicit intent ID; the single-token sequence below
-continues to apply to existing and default serialized goals.
+Delegated goals default to the [agent-pool contract](agent-pool.md). Pool dispatch
+uses durable `next --dispatch-id INTENT` calls; the same route automatically
+migrates eligible existing delegated journals. Explicit `scheduling_mode: serialized`
+opts out. Base goals without `subagent_mode` stay serial. The single-token sequence
+below applies only to base goals and explicitly serialized delegated execution.
 
 The host retains one state directory and loops:
 

@@ -45,12 +45,14 @@ For an authorized long-running goal, read [long-running mode](references/long-ru
 When the user explicitly requests delegated work, also read
 [subagent mode](references/subagent-mode.md) and its
 [host protocol](references/subagent-host-protocol.md). Use the packaged controller
-to retain scoped claims, bounded attempts and pauses. Its default is one in-flight
-unit; new explicitly configured [agent-pool goals](references/agent-pool.md) can
-run independent workers concurrently with serialized claims review. Prefer that
-explicit configuration for newly authorized multi-agent goals with independent
-evidence/claim scopes and sufficient reviewer capacity; retain serialized mode
-when those conditions do not hold. Inspect every owned agent after results and
+to retain scoped claims, bounded attempts and pauses. Authorized delegated goals
+default to [agent-pool scheduling](references/agent-pool.md), allowing safe reuse
+of finished agents and concurrent independent work with serialized claims review.
+Use durable `next --dispatch-id` intents for new and resumed delegated goals;
+legacy delegated journals migrate automatically at a quiescent boundary and require
+a new global claims review. Preserve explicit `scheduling_mode: serialized` choices.
+Unknown action scopes conservatively lock all evidence; actual concurrency still
+requires independent scopes and host capacity for a separate reviewer. Inspect every owned agent after results and
 refill eligible capacity promptly, prioritizing reviews and goal dependencies.
 At recovery, after results and before further dispatch, check completed agents
 through the host protocol and `agent-cleanup`; release eligible owned agents only

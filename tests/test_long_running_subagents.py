@@ -26,6 +26,7 @@ class SubagentModeTests(unittest.TestCase):
         self.skill = self.root / "SKILL.md"
         self.skill.write_text("Test fixture reviewer contract, not a real skill.\n", encoding="utf-8")
         self.config = {
+            "scheduling_mode": "serialized",
             "goal_id": "subagent-fixture", "goal_revision": "1",
             "objective": "Produce reviewed fixture output", "authorization_ref": "fixture",
             "project_root": str(self.root), "evidence": ["evidence.txt"],
@@ -542,14 +543,15 @@ class CopiedPackageLifecycleTests(unittest.TestCase):
                 return cli("finish", "--token", request["token"], "--result", str(result_file))
 
             cli("init", "--config", str(config_path))
-            initial = cli("next")["request"]
+            initial = cli("next", "--dispatch-id", "initial")["request"]
             self.assertEqual(initial["role"], "claims_reviewer")
             pinned_files = initial["reviewer_contract"]["files"]
             self.assertIn(str(script.resolve()), pinned_files)
             self.assertIn(str((package / "scripts" / "subagent_mode.py").resolve()), pinned_files)
             self.assertIn(str((package / "scripts" / "agent_cleanup.py").resolve()), pinned_files)
+            cli("bind-agent", "--token", initial["token"], "--agent-id", "initial-reviewer")
             finish(initial, synthetic_review(initial))
-            worker = cli("next")["request"]
+            worker = cli("next", "--dispatch-id", "work")["request"]
             self.assertEqual(worker["role"], "worker")
             cli("bind-agent", "--token", worker["token"], "--agent-id", "synthetic-worker-fixture")
             self.assertEqual(cli("check", "--token", worker["token"])["status"], "READY")
@@ -558,9 +560,16 @@ class CopiedPackageLifecycleTests(unittest.TestCase):
             interim = cli("status")
             self.assertFalse(interim["complete"])
             self.assertEqual(interim["working_claims"]["C2"]["status"], "untested")
-            review = cli("next")["request"]
+            review = cli("next", "--dispatch-id", "unit-review")["request"]
             self.assertEqual(review["role"], "claims_reviewer")
-            finish(review, synthetic_review(review, final=True))
+            cli("bind-agent", "--token", review["token"], "--agent-id", "unit-reviewer")
+            result = synthetic_review(review, final=True)
+            result.pop("goal_complete")
+            finish(review, result)
+            final = cli("next", "--dispatch-id", "final-review")["request"]
+            self.assertEqual(final["review_scope"], "global")
+            cli("bind-agent", "--token", final["token"], "--agent-id", "final-reviewer")
+            finish(final, synthetic_review(final, final=True))
             self.assertEqual(cli("next")["status"], "COMPLETE")
             current = cli("status")
             self.assertTrue(current["freshness"]["completion_current"])

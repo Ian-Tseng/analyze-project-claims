@@ -1,8 +1,12 @@
 # Concurrent claim-guided agents
 
-Use this opt-in contract for a new goal whose independent work can run concurrently.
-The default controller remains serialized. Existing journals retain their mode;
-there is no automatic migration or permission to replace an unfinished goal.
+Authorized delegated goals default to this contract. Initialization supplies
+`agent_pool: {max_workers: 2}` when `subagent_mode` is present and no pool limit
+was given. Explicit `scheduling_mode: serialized` retains the single-token contract;
+it cannot be combined with `agent_pool`. Base goals without delegation stay serial.
+Pooling permits agent reuse even when dependencies require sequential execution.
+Use durable `next --dispatch-id` intents for every delegated scheduling action,
+including resumed goals; this also enables the safe migration described below.
 Read the base [controller](long-running-mode.md), [claims](subagent-mode.md) and
 [native host](subagent-host-protocol.md) contracts first. Pool rules below specialize
 scheduling and evidence scope; they retain authority, evidence acceptance and
@@ -10,15 +14,21 @@ finite work/retry budgets.
 
 ## Declare independent work
 
-Add `"agent_pool": {"max_workers": 2}` at the top level of a new controller
-manifest that also enables `subagent_mode`.
-`max_workers` is an integer from 1 through 32. Every action declares
+Override the default with `"agent_pool": {"max_workers": N}` if needed.
+`max_workers` is an integer from 1 through 32. Match it to actual host capacity,
+reserving a separate reviewer; a configured ceiling does not promise available slots.
+Every action should declare
 `read_paths` and `write_paths`, lists of exact project-relative
 files from the manifest's `evidence` inventory. Include all actual inputs and
 outputs. Shared read-only inputs are allowed. Conflicting writes, a writer and
 reader of the same path, and conflicting claim dependencies prevent overlap.
 Path aliases and links must not conceal a conflict. These are cooperative access
 contracts, not an operating-system sandbox; the host still enforces write scope.
+For automatic selection only, an action missing both scope fields receives
+`read_paths: []` and the complete evidence inventory as `write_paths`. This is a
+conservative conflict lock, not additional write authorization. Its instruction
+and original permissions still control writes. Missing one field or supplying
+invalid scopes is an error. Explicit pool configurations retain strict validation.
 
 For example, two actions can read `protocol.txt` while writing separate
 `a.json` and `b.json`. An integration action reading both outputs depends on
@@ -62,6 +72,36 @@ Continue the scheduling loop after each recorded result. Dispatch required revie
 and independent ready work as permitted; do not wait for all workers in a batch.
 Dependent tasks wait for the producer's review. Keep useful work on the goal's
 dependency chain moving without manufacturing tasks to occupy agents.
+
+## Migrate an existing delegated goal automatically
+
+Run this controller against the same state directory and call
+`next --dispatch-id INTENT`. For a legacy journal with `subagent_mode`, the first
+eligible intent appends one `pool_migrated` event before reserving the global review.
+No separate migration approval or replacement goal is needed within existing
+work/delegation authority. The old journal prefix remains byte-for-byte intact.
+The event records old/new configuration and reviewer bindings and the source journal
+digest. Historical results and worker identities are imported so reuse and reviewer
+independence remain enforceable; a fresh native observation is still required for reuse.
+
+An in-flight token returns `IN_FLIGHT` with `migration: DEFERRED_UNTIL_FINISH`.
+Finish or reconcile that exact assignment, then retry the same unconsumed intent.
+Paused/stopped goals, currently complete goals, exhausted dispatch budgets and
+explicit serialized choices are not migrated. Source drift in a completed goal
+reopens global review through migration without repeating completed work. `status` and inspection calls do not migrate state; a legacy
+host still using `next` without an intent retains its old serial behavior.
+
+Migration preserves goal identity, action outcomes, holds, findings, receipts,
+spawn reservations, repair counters and failed-review allowances. Actual source
+or reviewer-contract drift reopens failed review under the existing freshness rule;
+migration alone does not reset that allowance. It invalidates
+execution clearances and requires global claims review before any new work;
+that review consumes the existing dispatch budget. It grants no scientific support.
+Unverifiable historical worker identity, missing results or invalid evidence scope
+returns `MIGRATION_BLOCKED` with the reason and source journal digest, leaving
+state unchanged. Inspect the named evidence; never invent identity, reset budgets,
+rewrite old events or initialize another state to bypass the block. Base journals
+without `subagent_mode` require a separately supported delegation transition.
 
 ## Reuse a finished agent
 

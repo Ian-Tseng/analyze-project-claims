@@ -5,7 +5,10 @@ An authorized host can delegate one substantive work unit, invoke
 regenerate dependent reports before continuing. Provisional hypotheses may guide
 work; only declared execution prerequisites require current support. Negative
 observations revise claims and dependent plans instead of being hidden. Failed and uncertain work also return to claims review.
-Default execution is sequential; new [agent-pool goals](../skills/analyze-project-claims/references/agent-pool.md) support concurrent independent workers and serialized review.
+Default [agent-pool scheduling](../skills/analyze-project-claims/references/agent-pool.md)
+reuses finished agents and supports concurrent independent workers with serialized
+review. Use `next --dispatch-id INTENT` for new and resumed delegated goals; legacy
+delegated goals migrate when quiescent. Explicit serialized mode remains available.
 Both are active-session orchestration; neither installs a scheduler
 or wake a host after its process ends.
 
@@ -39,9 +42,13 @@ historical decisions. Historical `complete` can remain true while
 resolve pending review. Reports are snapshots, so sample status again before
 relying on freshness.
 
-On `IN_FLIGHT`, recover the returned token and top-level `delegation`; do not
-spawn another worker. Resolve actual agent/process state before retrying unknown
-work. Preserve pauses, holds, attempt limits and finite dispatch budgets.
+For pooled goals, `next` without an intent inspects the `inflight` list. Repeat
+`next --dispatch-id INTENT` with the original durable intent to recover its exact
+request and delegation; a recovered `DISPATCH` is not permission to start it again.
+For serialized goals or deferred legacy migration, `IN_FLIGHT` returns the
+original request and top-level `delegation`. Recover that assignment rather than
+spawning another worker. Resolve actual agent/process state before retrying
+unknown work. Preserve pauses, holds, attempt limits and finite dispatch budgets.
 Generated reports and journal files cannot be their own source evidence.
 Operational working claims do not accept a formal component map: substantive
 formal scans retain the skill's verification, reconciliation, audit records and

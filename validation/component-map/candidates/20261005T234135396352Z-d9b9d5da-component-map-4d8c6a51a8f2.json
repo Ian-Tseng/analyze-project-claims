@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-06T00:12:02.289115Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -2302,16 +2302,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-06T00:10:39.795862Z",
+  "created_at_utc": "2026-10-05T23:41:35.396352Z",
   "integrity": {
-    "canonical_payload_sha256": "afa83b5ab8f55dcb9884ba152fa5e3d65f10998217576a1d1d9dce185ef070a4"
+    "canonical_payload_sha256": "159d3fbc749708a510a327113f1f69aa4b57c2ab6210114d5f738c2d94593958"
   },
-  "map_id": "component-map-ae1298a629b9",
-  "map_state": "accepted",
+  "map_id": "component-map-4d8c6a51a8f2",
+  "map_state": "drift_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the unreleased automatic delegated-pool selection and append-only legacy migration candidate, preserving reviewed history, budgets, identity separation and installed-release boundaries.",
-  "origin_scan_id": "20261006T001039795862Z-e36c5f49",
-  "previous_map_id": "component-map-4d8c6a51a8f2",
+  "origin_scan_id": "20261005T234135396352Z-d9b9d5da",
+  "previous_map_id": "component-map-000e71af5d91",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2553,7 +2553,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "89a78a59d2cfdce9ba3c74c3ab7f05c176cb7382a04cb2312055bcefbf9864f4",
+      "sha256": "636a51899938b193add47792cd8812cfd1fc7a68f7b26ef3141f8d1f173b5927",
       "source": "README.md"
     },
     {
@@ -2595,7 +2595,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "9c44c4bbfcac4c3c66ddc629b284381a9e572e06f052a2b48f52cb99f1c7bcd6",
+      "sha256": "0665fa965ec6a4956a27ffd12b14211640ebaa3dc15f573d56f2f20dfaf2c93a",
       "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
     },
     {

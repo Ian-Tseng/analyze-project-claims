@@ -95,8 +95,9 @@ class AgentPoolTests(unittest.TestCase):
                 with self.assertRaises(ContractError):
                     self.controller.init(config)
 
-    def test_legacy_configuration_stays_single_token(self):
+    def test_explicit_serialized_configuration_stays_single_token(self):
         del self.config['agent_pool']
+        self.config['scheduling_mode'] = 'serialized'
         self.controller.init(self.config)
         initial = self.controller.next()['request']
         self.controller.finish(initial['token'], self.review_result(initial))

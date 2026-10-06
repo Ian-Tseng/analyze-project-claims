@@ -186,6 +186,8 @@ def make_config(root, expected, iterations, pool, workers):
             'reports': [{'id': 'summary', 'title': 'Benchmark fixture', 'claim_ids': ['P'] + list(DAG)}]}}
     if pool:
         config['agent_pool'] = {'max_workers': workers}
+    else:
+        config['scheduling_mode'] = 'serialized'
     return config
 
 

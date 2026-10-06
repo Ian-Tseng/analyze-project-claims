@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-06T00:12:02.289115Z",
+  "accepted_at_utc": "2026-10-05T17:59:22.501370Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -97,8 +97,7 @@
     "skills/analyze-project-claims/references/review-learning.md",
     "skills/analyze-project-claims/references/agent-pool.md",
     "evaluation/agent-pool/README.md",
-    "skills/analyze-project-claims/references/session-recovery.md",
-    "tests/test_automatic_agent_pool.py"
+    "skills/analyze-project-claims/references/session-recovery.md"
   ],
   "components": [
     {
@@ -1020,37 +1019,6 @@
       "component_type": "module",
       "elements": [
         {
-          "element_id": "automatic-pool-migration",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/agent-pool.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_automatic_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_long_running_subagents.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "New authorized delegated goals select pooling automatically. Eligible older delegated journals migrate when a pool-capable host supplies a durable dispatch intent and no assignment is in flight. Historical results and worker identities are imported without rewriting the old journal prefix. Pauses, explicit serialization, unresolved execution and exhausted budgets remain controlling. Migration requires global review; only actual source drift reopens a spent failed-review allowance. Synthetic tests support the bounded helper behavior, not installed activation or native host reuse."
-        },
-        {
           "element_id": "bounded-agent-pool-benchmark",
           "evidence_locators": [
             {
@@ -1251,10 +1219,6 @@
             },
             {
               "locator": "whole-file",
-              "source": "tests/test_automatic_agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
               "source": "tests/test_long_running_controller.py"
             },
             {
@@ -1267,7 +1231,7 @@
             }
           ],
           "relation_type": "defines",
-          "target": "Authorized delegated goals default to reusable pool scheduling; explicit serialized mode and base goals retain single-token execution. Durable dispatch intents automatically migrate eligible legacy delegated journals through an append-only event and a global review barrier, preserving original goal identity, action outcomes, holds, execution history and dispatch/repair/spawn budgets."
+          "target": "Absent agent_pool, one in-flight request and hash-linked history preserve existing serial behavior. New explicitly configured pool goals retain independent per-task tokens under one journal lock, bounded worker slots and one reviewer; existing journals are not migrated. Repair budgets, user controls and execution history survive restart and plan or goal revision."
         },
         {
           "element_id": "evidence-guided-agent-policy",
@@ -2302,16 +2266,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-06T00:10:39.795862Z",
+  "created_at_utc": "2026-10-05T17:49:03.987442Z",
   "integrity": {
-    "canonical_payload_sha256": "afa83b5ab8f55dcb9884ba152fa5e3d65f10998217576a1d1d9dce185ef070a4"
+    "canonical_payload_sha256": "885d240e70b45f0e27bb090e33e15059bdb4d5a0d532b89b01a437454c717962"
   },
-  "map_id": "component-map-ae1298a629b9",
+  "map_id": "component-map-682ba91e2770",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the unreleased automatic delegated-pool selection and append-only legacy migration candidate, preserving reviewed history, budgets, identity separation and installed-release boundaries.",
-  "origin_scan_id": "20261006T001039795862Z-e36c5f49",
-  "previous_map_id": "component-map-4d8c6a51a8f2",
+  "objective": "Map the 0.15.2 session-recovery guidance and retained claims workflows; distinguish documented handoff safeguards from actual host recovery, controller migration, acceptance and fresh installation.",
+  "origin_scan_id": "20261005T174903987442Z-654affbb",
+  "previous_map_id": "component-map-d63c448e0e42",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2460,11 +2424,10 @@
     "tests/test_update_policy.py",
     "tests/test_zero_finding_gold.py",
     "validation/README.md",
-    "skills/analyze-project-claims/references/session-recovery.md",
-    "tests/test_automatic_agent_pool.py"
+    "skills/analyze-project-claims/references/session-recovery.md"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "62784c455a7866423b57c472ac5d1fef8eee9763a574db84b7b1e782b3a4a912",
+  "skill_sha256": "b2f92aeac0458996df5e3bfff0bad599c53b2fde65c99e76af4fc0501b22fe5e",
   "source_snapshot": [
     {
       "exists": true,
@@ -2475,7 +2438,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "81fee4f875dfa63b2fdb6d4ab9cf7f6b960c54a1a1852194168b6936c5f868ee",
+      "sha256": "0bb9dae44a0079a64fe53e440df9eb28661b33f18c40de4cb63c91d43f830680",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2523,13 +2486,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f537bbbfddd8e34f6490741c16757ca348b1233a98de4a31c17f0a4025c93c4c",
+      "sha256": "098cfb810bb11d6f53a2adacf01e4ea83fa94bc150fe3e37acd65e6f746be320",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "214e187de71aba98e6c6c617066098770e0a522e87fafc9c56dce20cfd2def32",
+      "sha256": "ef4e0649bf90743e70c488e881690488b5941c19bd0bcd25161a0ccf72474f20",
       "source": "CITATION.cff"
     },
     {
@@ -2547,13 +2510,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ae8ac0c519b92201a09bdafbbf2e905ed6ed54b991487946ae97d49c9edcd577",
+      "sha256": "702732ad91fae1c23a2733e879490d8a4451b5a5a5bf2dbdae02eaa848e3d281",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "89a78a59d2cfdce9ba3c74c3ab7f05c176cb7382a04cb2312055bcefbf9864f4",
+      "sha256": "515bb89901463d4f2d43d0b5d630ed1698d4a45b939953d45bc093dbf3fb3bc9",
       "source": "README.md"
     },
     {
@@ -2565,7 +2528,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "aa037454b5e8320521a32b278a3f4aff05fc79009ab5503f5d4a1b9a33b38c47",
+      "sha256": "355a2e14f6a7f2cb387d9d3b75a3550980d020ee1d005b139b62290c1645068a",
       "source": "VERSION"
     },
     {
@@ -2595,7 +2558,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "9c44c4bbfcac4c3c66ddc629b284381a9e572e06f052a2b48f52cb99f1c7bcd6",
+      "sha256": "c79a5287ce446cd4562c688d8bc9773e27da37e46ef05469f4265414a7c02c0b",
       "source": "docs/CLAIM_GUIDED_SUBAGENTS.md"
     },
     {
@@ -2715,7 +2678,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "d5eb83f6eec268838124c4a85caa3861598283a33da42e747d2f94fe33d342cc",
+      "sha256": "0d435c43b1cad1f81bc64143e78861761495b0716d763707d09536185e262abc",
       "source": "evaluation/agent-pool/benchmark.py"
     },
     {
@@ -3093,13 +3056,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "c9280c23c8da0c9402276676dbbdc1a79104862662decf7257ecc3e3b45adf8a",
+      "sha256": "a33153e39b2126cfa75d385692fbeda136e6cb42fc09205624fb630e6d28b319",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "62784c455a7866423b57c472ac5d1fef8eee9763a574db84b7b1e782b3a4a912",
+      "sha256": "b2f92aeac0458996df5e3bfff0bad599c53b2fde65c99e76af4fc0501b22fe5e",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -3117,7 +3080,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "0aade412422b58c08132c236a25f620a35f48887cbd45d8699e1f8640e04590c",
+      "sha256": "2eba8c23b69e80a84773305590fa78983559ab1e5db42d5e7228ebe80ebff5b4",
       "source": "skills/analyze-project-claims/references/agent-pool.md"
     },
     {
@@ -3231,7 +3194,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "080c60065318f043de4934a4691947397fa80ed68d5cbda74de00da64a21a78e",
+      "sha256": "db227e93a04b62c5623d7f375392fb9220ea78eadd92577b92cf70b394d70890",
       "source": "skills/analyze-project-claims/references/long-running-mode.md"
     },
     {
@@ -3243,13 +3206,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f70da480874270620004add13f5c72e07e13b04ec3cf08001be17d7c084e64f0",
+      "sha256": "ed58b8145f09471b00cadc5696e5ed1740d31b3dfc2bc6116ce363a41801315b",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "8c558ec45a904103d27ce2ead9a4d165055b867ac421cc6a8874424c612509ee",
+      "sha256": "4168b5558da1921e4bae0a658ffd6788b61f8b0b4ae7dd8687eb93503cfb5441",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -3339,13 +3302,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "75e38e09f809202e6391a50f683cc4448081152d8c4438cab0ed9042e3a9162d",
+      "sha256": "a707c0f12357f7917a22a2e7e527eb353579a4ff5e56bb17a0a9016b7dbad5a9",
       "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "7a3d1d3e01e73847312a50a7ca3ca5ba2d15d6ed150ee34dd5ecf3db9be078ff",
+      "sha256": "dbf425f884699a2b7f78fe038b8c7486006cb22fca07434b32063680ab4b5db8",
       "source": "skills/analyze-project-claims/references/subagent-mode.md"
     },
     {
@@ -3453,7 +3416,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "e1377ef17610e565be93660f4d928b759d1d8a605078aa59c742a80165eda390",
+      "sha256": "e0fe4172c7ba2a4e6933fbcaff875edc4095858c030c43fc919843b3c3a4006b",
       "source": "skills/analyze-project-claims/scripts/agent_pool.py"
     },
     {
@@ -3477,7 +3440,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "05ff27c082753b0cf0b6fc287c97049ac66096dcf460ac0bda6a18f54dcb17dc",
+      "sha256": "d27cf2e7071f50fa59510287989a16c25dfc07d76c452e7c64ea446c263acbd9",
       "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
     },
     {
@@ -3549,7 +3512,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ad5db7a6bf2a65cc10a3214b06b19beeada927d5a011f139ed07c1b42c3d17c7",
+      "sha256": "332f6432f877bc640f76b2e6fa34ecc60a377a28a53e929be9e2de0bd9c05d62",
       "source": "tests/test_agent_pool.py"
     },
     {
@@ -3575,12 +3538,6 @@
       "kind": "file",
       "sha256": "ed7decd3106d10e2652d61700dd7c09bbb51dc22a1df4c7e6338ffbe57106087",
       "source": "tests/test_annotation_calibration_freeze.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "85706d63726ffd5ff9db3ea95e7133f08c2574b6e24f1c98a7bc676b1e00ba69",
-      "source": "tests/test_automatic_agent_pool.py"
     },
     {
       "exists": true,
@@ -3723,7 +3680,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "84a1be1e7b4a8333c69a5c3ee7c3bd9f86b1e29f9c3f5314078df7f41b9e604f",
+      "sha256": "bf6f4cc96122b16f922f6e2d62bb273b98edffb38533493427e5feda6800ea9f",
       "source": "tests/test_long_running_subagents.py"
     },
     {

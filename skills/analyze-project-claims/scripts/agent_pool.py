@@ -1,7 +1,7 @@
-"""Opt-in cooperative worker pool. Hosts execute tasks; this module only journals decisions.
+"""Cooperative worker pool with automatic selection and append-only migration.
 
-Conservative scopes are exact evidence files and dependency-closed affected claims.
-Legacy single-token journals never enter this path or acquire new configuration.
+Hosts execute tasks; this module only journals decisions. Unknown action scopes
+lock the full evidence inventory, allowing identity reuse without unsafe overlap.
 """
 from __future__ import annotations
 import copy
@@ -15,7 +15,129 @@ require = sm.require
 digest = sm.digest
 
 
+def configure_new(config):
+    """Select pooling for delegated goals unless serialization was explicit."""
+    config = copy.deepcopy(config)
+    mode = config.get('scheduling_mode', 'auto')
+    require(mode in ('auto', 'serialized'), 'Invalid scheduling_mode')
+    require(not (mode == 'serialized' and 'agent_pool' in config),
+            'Serialized scheduling conflicts with agent_pool')
+    if not sm.enabled(config) or mode == 'serialized':
+        return config
+    if 'agent_pool' not in config:
+        config['agent_pool'] = {'max_workers': 2}
+        # Absence of both fields means unknown scope, not read-only work.
+        for action in config['actions']:
+            if 'read_paths' not in action and 'write_paths' not in action:
+                action.update(read_paths=[], write_paths=list(config['evidence']))
+    return config
+
+
+def _import_serial_history(controller, state):
+    """Recover recorded outcomes from validated history, never synthesize receipts."""
+    from long_running_controller import read_json
+    requests, results = {}, {}
+    reconciliations = {}
+    for path in sorted((controller.root / 'journal').glob('*.json')):
+        event = read_json(path)
+        prior = event['state']
+        request = prior.get('pending')
+        if request:
+            requests[request['token']] = request
+        record = prior.get('last_result')
+        if record and record['token'] not in results:
+            token = record['token']
+            require(state['receipts'].get(token) == digest(record['result']),
+                    'Historical result does not match its receipt')
+            results[token] = dict(copy.deepcopy(record), recorded_at=event['time'])
+        if event['kind'] == 'reconciled':
+            reconciliation = prior['reconciliation']
+            reconciliations[reconciliation['action']] = {
+                'outcome': reconciliation['outcome'], 'evidence': reconciliation['evidence'], 'reviewed': False}
+    require(set(state['receipts']) == set(results), 'Historical result coverage is incomplete')
+    require(set(state['delegations']) <= set(results), 'Historical bound execution is unresolved')
+    state['pool_results'] = results
+    state['pool_reconciliations'] = reconciliations
+    for token, record in results.items():
+        request = requests.get(token)
+        require(request is not None, 'Historical request is missing')
+        if request['kind'] == 'review':
+            continue
+        binding = state['delegations'].get(token)
+        require(binding is not None, 'Historical worker identity is missing; cannot verify review independence')
+        result = record['result']
+        action = next(a for a in request['config']['actions'] if a['id'] == request['action_id'])
+        claims = set(action['affected_claims']) | set(result.get('affected_claims', []))
+        state['pool_units'][token] = {
+            'token': token, 'action_id': request['action_id'], 'result': copy.deepcopy(result),
+            'status': result['status'], 'agent_id': binding['agent_id'],
+            'claims': sm.closure(state['config'], claims), 'reviewed': False}
+
+
+def migrate_for_dispatch(controller, dispatch_id):
+    """A durable dispatch intent identifies a pool-capable host. Never migrate reads."""
+    from long_running_controller import snapshot, validate_config as validate_controller
+    require(isinstance(dispatch_id, str) and dispatch_id.strip(), 'Invalid dispatch_id')
+    with controller.locked():
+        state, seq, previous = controller._load(sync_reports=False)
+        if 'agent_pool' in state['config']:
+            return None
+        require(sm.enabled(state['config']), 'Pool migration requires authorized subagent_mode')
+        require(state['config'].get('scheduling_mode', 'auto') != 'serialized',
+                'Explicit serialized scheduling disables automatic pool migration')
+        if state['control'] != 'active':
+            return {'status': state['control'].upper()}
+        if state['pending']:
+            return {'status': 'IN_FLIGHT', 'request': state['pending'],
+                    'delegation': state['delegations'].get(state['pending']['token']),
+                    'migration': 'DEFERRED_UNTIL_FINISH'}
+        if state['complete']:
+            freshness = sm.observe_freshness(state, snapshot)
+            if freshness['completion_current']:
+                return {'status': 'COMPLETE', 'freshness': freshness,
+                        'migration': 'TERMINAL_GOAL_UNCHANGED'}
+        if state['dispatches'] >= state['config'].get('max_dispatches', 100):
+            return {'status': 'BUDGET_EXHAUSTED'}
+        before_config = state['config_digest']
+        before_contract = copy.deepcopy(state['reviewer_contract'])
+        try:
+            candidate = validate_controller(configure_new(state['config']))
+            current = snapshot(candidate)
+            contract = sm.reviewer_snapshot(candidate)
+            source_changed = current != state['snapshot'] or contract != before_contract
+            state['config'] = candidate
+            state['config_digest'] = digest(candidate)
+            initialize(state)
+            _import_serial_history(controller, state)
+            state['snapshot'] = current
+            state['reviewer_contract'] = contract
+            if source_changed:
+                # Normal next() reopens failed reviews on actual source drift.
+                # Migration itself is not new evidence or another retry allowance.
+                state['review_failures'] = 0
+            sm.invalidate(state)
+            # Historical findings, holds, budgets, failed-review counts, work
+            # results and retry reservations stay intact. Only clearance expires.
+            state.update(clearances={}, review_due=True, preferred=None, complete=False)
+            state['pool_migration'] = {
+                'from_config_digest': before_config, 'to_config_digest': state['config_digest'],
+                'from_reviewer_contract': before_contract,
+                'to_reviewer_contract': copy.deepcopy(state['reviewer_contract']),
+                'source_journal_digest': previous, 'source_journal_seq': seq,
+                'trigger_dispatch_id': dispatch_id, 'recorded_at': time.time(),
+                'source_changed': source_changed,
+                'reason': 'Automatic pool transition at a quiescent dispatch boundary'}
+        except (sm.ContractError, OSError, KeyError, TypeError) as exc:
+            return {'status': 'MIGRATION_BLOCKED', 'reason': str(exc),
+                    'source_journal_digest': previous}
+        controller._save(state, 'pool_migrated', seq, previous)
+        return None
+
+
 def validate_config(config):
+    require(config.get('scheduling_mode', 'auto') in ('auto', 'serialized'), 'Invalid scheduling_mode')
+    require(not (config.get('scheduling_mode') == 'serialized' and 'agent_pool' in config),
+            'Serialized scheduling conflicts with agent_pool')
     if 'agent_pool' not in config:
         return
     pool = config['agent_pool']

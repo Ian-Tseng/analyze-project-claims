@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-10-06
+
+- Default authorized delegated goals to reusable agent pools; preserve explicit
+  serialized mode and conservatively lock unknown action scopes.
+- Automatically migrate legacy delegated journals at an eligible durable dispatch
+  boundary, retaining history, worker identities, holds and cumulative budgets.
+- Require global claims review after migration; defer active tokens and retain
+  pauses, terminal goals, failed-review limits and honest migration blockers.
+
 ## [0.15.2] - 2026-10-06
 
 - Add session-recovery guidance separating command parsing, front-end exit,
