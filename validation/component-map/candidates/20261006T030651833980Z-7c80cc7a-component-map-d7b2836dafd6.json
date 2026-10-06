@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-06T03:23:55.854113Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -2344,15 +2344,15 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-06T03:11:37.594945Z",
+  "created_at_utc": "2026-10-06T03:06:51.833980Z",
   "integrity": {
-    "canonical_payload_sha256": "76656f21b0b8a0643842d048e1bec9f8b2743c35db7125149a9676e789108498"
+    "canonical_payload_sha256": "4090c4880b714ffa6eb2febcf90f08172648488ef378a1651d11289b56ad96e2"
   },
-  "map_id": "component-map-a46cc7ee8ca8",
-  "map_state": "accepted",
+  "map_id": "component-map-d7b2836dafd6",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the v0.17.0 native lifecycle coordinator candidate: executable provider integration, result harvesting, bounded reuse, safe recovery, and verified closure; preserve current host capability and activation limits.",
-  "origin_scan_id": "20261006T031137594945Z-a21a4eb6",
+  "origin_scan_id": "20261006T030651833980Z-7c80cc7a",
   "previous_map_id": "component-map-ae1298a629b9",
   "schema_version": "1.0",
   "scope": [
@@ -2509,7 +2509,7 @@
     "validation/README.md"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "6fb050d33be10eed61f359a42322b97224ff9669b59943b94d67daec61a85e32",
+  "skill_sha256": "d2413022eb3509c22f3f9e6255351ad71d039d21bb20921bd0731542203ccb37",
   "source_snapshot": [
     {
       "exists": true,
@@ -2520,7 +2520,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "88a3da021ab9179d25ac3a7678a81a0574ab0c750b9ca984cd7dd998b940c1c0",
+      "sha256": "251e345bea0daa3be01da2e2e51bb7c66d3c1404f8fbb0be992549a0075f20cd",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2568,13 +2568,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "64871ecea8f162f5c0299ccaec4f753f8d6f1edbdf1c4017db536820738731c1",
+      "sha256": "6adbf18258d01a7bd88b2fb8d929f39765332b9ed219fd40a5ea60580181e984",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "8c3766eeb78b54c035b8671f6fbf689cc6e23dfd022cdbf025f7406bbef17b5b",
+      "sha256": "4574f54490d6424a4b03a83bba0acfc5b2f5a32b4bee0f9bd9fbb8e9198f7321",
       "source": "CITATION.cff"
     },
     {
@@ -2592,13 +2592,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "70d1bbf790c067659cc537ae6d927d6fa8a6d12112e3f38f412c45d20a4a1694",
+      "sha256": "0922ce24a31043bdfa326a49bc1e205952ecd25e1865e2216fc7eb1c6f0bc2cd",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1a6c3bb5085706e3ea4d33103a6f6e4ea1338087f52222f01c3f3dade510229e",
+      "sha256": "a8db455192e3c789a3c7b8bc269bbe74cc31a21bd3cd4bd89dbb96659462b41e",
       "source": "README.md"
     },
     {
@@ -2610,7 +2610,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "02d38e98e88f4a8dc2ea40dbb769338601066fc94920b52882a14f21ad97f7ee",
+      "sha256": "0f305403349162fe328624f2997e15cf6246657deb04d0739be8904ce1501b0a",
       "source": "VERSION"
     },
     {
@@ -3138,13 +3138,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "b24f705381fa0bb1ef4e5287c1359fe5e3f9b292fb29ed14dd706a39482fca24",
+      "sha256": "c237d119dcb5eefe635f7e41b267da08538f91dacdca85a3a5213bbb0ae2a346",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6fb050d33be10eed61f359a42322b97224ff9669b59943b94d67daec61a85e32",
+      "sha256": "d2413022eb3509c22f3f9e6255351ad71d039d21bb20921bd0731542203ccb37",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -3162,7 +3162,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c2aa07d55a5a56c987f8a70935d2bf2d97acc2ebb1bfdd0ed851c6cddc7821ec",
+      "sha256": "aef77bd334c2b90e89f07563041033e7f78dc4b3458859543c08b2bce90f712b",
       "source": "skills/analyze-project-claims/references/agent-pool.md"
     },
     {
@@ -3288,19 +3288,19 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3de9e748a4aae57a79cc3b4bf20803e501aacfaf48a9a711ddc1a2014789d2ad",
+      "sha256": "a7b7cf74a04f7f865f380bc75d42d0ed87f3c767653f643da25e0bd0ab5e6489",
       "source": "skills/analyze-project-claims/references/native-agent-coordinator.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "eed309a0057e27d7850295b4031696d48dfdde216affd9760198e8ea5a68aeda",
+      "sha256": "674be4c207acb0dce2374c5e31c7b6b246f2a8ab1d25a983d03f4aaee7f1a3ec",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "56f05a994f61baf73f28f80fb4577bf06db4a303c8f0c1463444675564431bc2",
+      "sha256": "911ce81b1b2edbbbaf72c4651458b6f0e722cb29cfbb277158d7209547c376d1",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -3390,7 +3390,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "de82c8048cde9e3982d5b53c4a7deb5e3fc2915db21189bcaf9204f7e1d1735f",
+      "sha256": "e5d02382e4d21260ec6d5494ae899c54f649657b2ac5ca2b0cda519e5f144c28",
       "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
     },
     {
@@ -3540,7 +3540,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ea95526fb7ec6d2bef5f389b88bec216bdd5230771eea81e3793c2ccfcdc7e0e",
+      "sha256": "36daaf3cb1cbb74eb09bef3459f17309309e6539b8b8411012a2bcd85ef8ad25",
       "source": "skills/analyze-project-claims/scripts/native_agent_coordinator.py"
     },
     {
@@ -3570,7 +3570,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3938cee781dfeef810f1c03d8af6e523da97d72528ce63dd8e7173c1e14d3cb7",
+      "sha256": "cc2f39fed6fa1ecf065a49e216b10ace5c7beace36b38939c1aeb53d2ad6106a",
       "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
     },
     {
@@ -3780,7 +3780,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a78e6e5a2f3acd3dd7cd28a1af8a97da19cf8a747b0eaffd1b3c9c5781b3fbcf",
+      "sha256": "22386daf01b79b8b46f30c3c6ed73db524d83453d7d6863bf16e79f8abd8c13a",
       "source": "tests/test_long_running_subagents.py"
     },
     {
@@ -3792,7 +3792,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "31ed47295621c73522577a384538b3b196b38df96bfb7e5c07b0401159fd0073",
+      "sha256": "8ee6a8141d361a4c44aa3cc91827d728bfb2d9fc715e1e60d45a237cadabdccc",
       "source": "tests/test_native_agent_coordinator.py"
     },
     {

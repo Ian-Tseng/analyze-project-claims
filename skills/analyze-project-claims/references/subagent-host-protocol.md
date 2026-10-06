@@ -388,3 +388,7 @@ three-call maximum in the existing task history unless an explicit budget was
 set, record uncertain calls, recover identities and require new capacity evidence
 before retrying. This guidance does not install a runtime interceptor or change
 the host's own thread limit.
+
+## Optional executable host integration
+
+For a host with an explicit trusted Python provider, use the [native coordinator](native-agent-coordinator.md). It executes result harvesting, bounded identity reuse and verified close attempts through that provider. It installs no background runner and cannot add a missing native close operation. The tool-driven protocol above remains valid.

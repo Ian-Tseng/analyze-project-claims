@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-06T03:23:55.854113Z",
+  "accepted_at_utc": "2026-10-06T00:12:02.289115Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -98,10 +98,7 @@
     "skills/analyze-project-claims/references/agent-pool.md",
     "evaluation/agent-pool/README.md",
     "skills/analyze-project-claims/references/session-recovery.md",
-    "tests/test_automatic_agent_pool.py",
-    "skills/analyze-project-claims/scripts/native_agent_coordinator.py",
-    "skills/analyze-project-claims/references/native-agent-coordinator.md",
-    "tests/test_native_agent_coordinator.py"
+    "tests/test_automatic_agent_pool.py"
   ],
   "components": [
     {
@@ -1296,45 +1293,6 @@
           "target": "Provisional claims may guide investigation; negative results update claims and reports. Review ownership stays coordinated. Prospective +16 budget adjustments require three progressing cap hits among five comparable recorded audits; no global runtime hook or automatic tuner is asserted."
         },
         {
-          "element_id": "native-coordinator-lifecycle",
-          "evidence_locators": [
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/native-agent-coordinator.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_cleanup.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/agent_pool.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/native_agent_coordinator.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
-            },
-            {
-              "locator": "whole-file",
-              "source": "tests/test_native_agent_coordinator.py"
-            }
-          ],
-          "relation_type": "defines",
-          "target": "The opt-in NativeCoordinator and public --adapter CLI execute an explicit trusted host provider. They save terminal/quiescent results before finish, preserve independent claims review, reuse compatible identities within worker/reviewer budgets, recover assignment and saved-result interruptions without blind starts, and require observed closure after close attempts. Tests exercise synthetic host/reviewer cases; no default Codex provider, automatic activation or actual resource reclamation is claimed."
-        },
-        {
           "element_id": "native-host-boundary",
           "evidence_locators": [
             {
@@ -1582,7 +1540,7 @@
             }
           ],
           "relation_type": "defines",
-          "target": "Guidance distinguishes command parsing, front-end exit, writer ownership and reviewer capacity. Owner-requested handoffs preserve existing controller history, pending independent review and cumulative authority; that session-recovery guidance itself implements no host release or migration."
+          "target": "Guidance distinguishes command parsing, front-end exit, writer ownership and reviewer capacity. Owner-requested handoffs preserve existing controller history, pending independent review and cumulative authority; no host release or migration is implemented."
         }
       ]
     },
@@ -2344,16 +2302,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-06T03:11:37.594945Z",
+  "created_at_utc": "2026-10-06T00:10:39.795862Z",
   "integrity": {
-    "canonical_payload_sha256": "76656f21b0b8a0643842d048e1bec9f8b2743c35db7125149a9676e789108498"
+    "canonical_payload_sha256": "afa83b5ab8f55dcb9884ba152fa5e3d65f10998217576a1d1d9dce185ef070a4"
   },
-  "map_id": "component-map-a46cc7ee8ca8",
+  "map_id": "component-map-ae1298a629b9",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.17.0 native lifecycle coordinator candidate: executable provider integration, result harvesting, bounded reuse, safe recovery, and verified closure; preserve current host capability and activation limits.",
-  "origin_scan_id": "20261006T031137594945Z-a21a4eb6",
-  "previous_map_id": "component-map-ae1298a629b9",
+  "objective": "Map the unreleased automatic delegated-pool selection and append-only legacy migration candidate, preserving reviewed history, budgets, identity separation and installed-release boundaries.",
+  "origin_scan_id": "20261006T001039795862Z-e36c5f49",
+  "previous_map_id": "component-map-4d8c6a51a8f2",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2451,11 +2409,9 @@
     "skills/analyze-project-claims/references/lifecycle-verification-receipt.md",
     "skills/analyze-project-claims/references/lifecycle-verification-receipt.schema.json",
     "skills/analyze-project-claims/references/long-running-mode.md",
-    "skills/analyze-project-claims/references/native-agent-coordinator.md",
     "skills/analyze-project-claims/references/review-learning.md",
     "skills/analyze-project-claims/references/scan-record-output-v2.schema.json",
     "skills/analyze-project-claims/references/scan-record-v2.schema.json",
-    "skills/analyze-project-claims/references/session-recovery.md",
     "skills/analyze-project-claims/references/subagent-design-sources.md",
     "skills/analyze-project-claims/references/subagent-host-protocol.md",
     "skills/analyze-project-claims/references/subagent-mode.md",
@@ -2464,7 +2420,6 @@
     "skills/analyze-project-claims/scripts/agent_pool.py",
     "skills/analyze-project-claims/scripts/lifecycle_receipt.py",
     "skills/analyze-project-claims/scripts/long_running_controller.py",
-    "skills/analyze-project-claims/scripts/native_agent_coordinator.py",
     "skills/analyze-project-claims/scripts/subagent_mode.py",
     "tests/test_agent_cleanup.py",
     "tests/test_agent_compatibility.py",
@@ -2473,7 +2428,6 @@
     "tests/test_agent_pool_cli.py",
     "tests/test_analytics_service.py",
     "tests/test_annotation_calibration.py",
-    "tests/test_automatic_agent_pool.py",
     "tests/test_component_evidence_engine.py",
     "tests/test_component_map.py",
     "tests/test_cross_project_reliability.py",
@@ -2491,7 +2445,6 @@
     "tests/test_long_running_plan_revision.py",
     "tests/test_long_running_repair_budget.py",
     "tests/test_long_running_subagents.py",
-    "tests/test_native_agent_coordinator.py",
     "tests/test_natural_project_label_freeze.py",
     "tests/test_natural_project_label_schemas.py",
     "tests/test_natural_project_pilot.py",
@@ -2506,10 +2459,12 @@
     "tests/test_strict_evidence_contract.py",
     "tests/test_update_policy.py",
     "tests/test_zero_finding_gold.py",
-    "validation/README.md"
+    "validation/README.md",
+    "skills/analyze-project-claims/references/session-recovery.md",
+    "tests/test_automatic_agent_pool.py"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "6fb050d33be10eed61f359a42322b97224ff9669b59943b94d67daec61a85e32",
+  "skill_sha256": "62784c455a7866423b57c472ac5d1fef8eee9763a574db84b7b1e782b3a4a912",
   "source_snapshot": [
     {
       "exists": true,
@@ -2520,7 +2475,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "88a3da021ab9179d25ac3a7678a81a0574ab0c750b9ca984cd7dd998b940c1c0",
+      "sha256": "81fee4f875dfa63b2fdb6d4ab9cf7f6b960c54a1a1852194168b6936c5f868ee",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2568,13 +2523,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "64871ecea8f162f5c0299ccaec4f753f8d6f1edbdf1c4017db536820738731c1",
+      "sha256": "f537bbbfddd8e34f6490741c16757ca348b1233a98de4a31c17f0a4025c93c4c",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "8c3766eeb78b54c035b8671f6fbf689cc6e23dfd022cdbf025f7406bbef17b5b",
+      "sha256": "214e187de71aba98e6c6c617066098770e0a522e87fafc9c56dce20cfd2def32",
       "source": "CITATION.cff"
     },
     {
@@ -2592,13 +2547,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "70d1bbf790c067659cc537ae6d927d6fa8a6d12112e3f38f412c45d20a4a1694",
+      "sha256": "ae8ac0c519b92201a09bdafbbf2e905ed6ed54b991487946ae97d49c9edcd577",
       "source": "PUBLISHING.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1a6c3bb5085706e3ea4d33103a6f6e4ea1338087f52222f01c3f3dade510229e",
+      "sha256": "89a78a59d2cfdce9ba3c74c3ab7f05c176cb7382a04cb2312055bcefbf9864f4",
       "source": "README.md"
     },
     {
@@ -2610,7 +2565,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "02d38e98e88f4a8dc2ea40dbb769338601066fc94920b52882a14f21ad97f7ee",
+      "sha256": "aa037454b5e8320521a32b278a3f4aff05fc79009ab5503f5d4a1b9a33b38c47",
       "source": "VERSION"
     },
     {
@@ -3138,13 +3093,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "b24f705381fa0bb1ef4e5287c1359fe5e3f9b292fb29ed14dd706a39482fca24",
+      "sha256": "c9280c23c8da0c9402276676dbbdc1a79104862662decf7257ecc3e3b45adf8a",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6fb050d33be10eed61f359a42322b97224ff9669b59943b94d67daec61a85e32",
+      "sha256": "62784c455a7866423b57c472ac5d1fef8eee9763a574db84b7b1e782b3a4a912",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -3162,7 +3117,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c2aa07d55a5a56c987f8a70935d2bf2d97acc2ebb1bfdd0ed851c6cddc7821ec",
+      "sha256": "0aade412422b58c08132c236a25f620a35f48887cbd45d8699e1f8640e04590c",
       "source": "skills/analyze-project-claims/references/agent-pool.md"
     },
     {
@@ -3288,19 +3243,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3de9e748a4aae57a79cc3b4bf20803e501aacfaf48a9a711ddc1a2014789d2ad",
-      "source": "skills/analyze-project-claims/references/native-agent-coordinator.md"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "eed309a0057e27d7850295b4031696d48dfdde216affd9760198e8ea5a68aeda",
+      "sha256": "f70da480874270620004add13f5c72e07e13b04ec3cf08001be17d7c084e64f0",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "56f05a994f61baf73f28f80fb4577bf06db4a303c8f0c1463444675564431bc2",
+      "sha256": "8c558ec45a904103d27ce2ead9a4d165055b867ac421cc6a8874424c612509ee",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -3390,7 +3339,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "de82c8048cde9e3982d5b53c4a7deb5e3fc2915db21189bcaf9204f7e1d1735f",
+      "sha256": "75e38e09f809202e6391a50f683cc4448081152d8c4438cab0ed9042e3a9162d",
       "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
     },
     {
@@ -3540,12 +3489,6 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ea95526fb7ec6d2bef5f389b88bec216bdd5230771eea81e3793c2ccfcdc7e0e",
-      "source": "skills/analyze-project-claims/scripts/native_agent_coordinator.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
       "sha256": "738005e6d7a10fc6f8112e0b3f02c77e58245e9a1e3bebd319e2320b17b28ceb",
       "source": "skills/analyze-project-claims/scripts/problem_report.py"
     },
@@ -3570,7 +3513,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3938cee781dfeef810f1c03d8af6e523da97d72528ce63dd8e7173c1e14d3cb7",
+      "sha256": "b891f287c30e7f12fa91c155b2abbf02b338ca3eceb6743a036b915f1aeb8492",
       "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
     },
     {
@@ -3780,7 +3723,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a78e6e5a2f3acd3dd7cd28a1af8a97da19cf8a747b0eaffd1b3c9c5781b3fbcf",
+      "sha256": "84a1be1e7b4a8333c69a5c3ee7c3bd9f86b1e29f9c3f5314078df7f41b9e604f",
       "source": "tests/test_long_running_subagents.py"
     },
     {
@@ -3788,12 +3731,6 @@
       "kind": "file",
       "sha256": "f9758a970b1679bd3b110345398df64251a70a1cdc20b91044cd54488009023d",
       "source": "tests/test_managed_fleet.py"
-    },
-    {
-      "exists": true,
-      "kind": "file",
-      "sha256": "31ed47295621c73522577a384538b3b196b38df96bfb7e5c07b0401159fd0073",
-      "source": "tests/test_native_agent_coordinator.py"
     },
     {
       "exists": true,

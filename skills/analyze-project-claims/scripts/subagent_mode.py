@@ -116,7 +116,8 @@ def reviewer_snapshot(config):
     # Include the executed orchestration implementation, not just its guide.
     controller = Path(__file__).with_name('long_running_controller.py')
     cleanup = Path(__file__).with_name('agent_cleanup.py')
-    implementations = [Path(__file__), controller, cleanup, Path(__file__).with_name('agent_pool.py')]
+    implementations = [Path(__file__), controller, cleanup, Path(__file__).with_name('agent_pool.py'),
+                       Path(__file__).with_name('native_agent_coordinator.py')]
     paths = sorted(set(paths + [str(p.resolve()) for p in implementations]))
     files = {}
     for name in paths:

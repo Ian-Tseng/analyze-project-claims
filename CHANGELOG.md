@@ -4,6 +4,18 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-10-06
+
+- Add an opt-in executable native-host coordinator with a public provider CLI,
+  durable result harvesting, role-compatible reuse and verified close handling.
+- Preserve assignment ownership and start acknowledgements across recovery;
+  replay saved results through validation and reserve reviewer capacity when
+  surplus completed workers coexist with running work.
+- Bind the coordinator source to the reviewer contract and add 24 lifecycle
+  regression cases, including the public CLI and independent adverse repros.
+- Keep native provider integration and resource release explicit: installation
+  alone does not activate a provider or create an unavailable close operation.
+
 ## [0.16.0] - 2026-10-06
 
 - Default authorized delegated goals to reusable agent pools; preserve explicit

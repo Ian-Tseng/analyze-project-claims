@@ -51,6 +51,7 @@ of finished agents and concurrent independent work with serialized claims review
 Use durable `next --dispatch-id` intents for new and resumed delegated goals;
 legacy delegated journals migrate automatically at a quiescent boundary and require
 a new global claims review. Preserve explicit `scheduling_mode: serialized` choices.
+Hosts with an explicit trusted Python provider may use the [executable native coordinator](references/native-agent-coordinator.md) for harvesting, bounded reuse and verified close attempts. Installation alone does not activate it or provide a missing host close operation.
 Unknown action scopes conservatively lock all evidence; actual concurrency still
 requires independent scopes and host capacity for a separate reviewer. Inspect every owned agent after results and
 refill eligible capacity promptly, prioritizing reviews and goal dependencies.

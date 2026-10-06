@@ -1,0 +1,160 @@
+{
+  "accepted_map_id": "component-map-ae1298a629b9",
+  "action": "conflict_detected",
+  "artifacts": {
+    "accepted_map": "accepted-map.json",
+    "candidate": "candidates/20261006T031137594945Z-a21a4eb6-component-map-a46cc7ee8ca8.json",
+    "delta": "deltas/20261006T031137594945Z-a21a4eb6.json"
+  },
+  "candidate_map_id": "component-map-a46cc7ee8ca8",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "native-coordinator-lifecycle"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "session-recovery-handoff",
+        "fields": [
+          "target"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".codex-plugin/plugin.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/agent-pool.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/native-agent-coordinator.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/native_agent_coordinator.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_long_running_subagents.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_native_agent_coordinator.py"
+      }
+    ]
+  },
+  "event_id": "20261006T031137594945Z-a21a4eb6",
+  "integrity": {
+    "canonical_payload_sha256": "f1233bc2acc21f70055e018521161d902aa80a0de40cd0cbe63f740cdf02969f"
+  },
+  "map_state_after": "conflict_candidate",
+  "map_state_before": "accepted",
+  "mapper_version": "1.3.0",
+  "recorded_at_utc": "2026-10-06T03:11:37.594945Z",
+  "schema_version": "1.0",
+  "skill_sha256": "6fb050d33be10eed61f359a42322b97224ff9669b59943b94d67daec61a85e32"
+}

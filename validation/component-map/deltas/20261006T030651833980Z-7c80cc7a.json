@@ -1,0 +1,151 @@
+{
+  "accepted_map_id": "component-map-ae1298a629b9",
+  "action": "conflict_detected",
+  "candidate_map_id": "component-map-d7b2836dafd6",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "native-coordinator-lifecycle"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [
+      {
+        "component_id": "long-running-subagents",
+        "element_id": "session-recovery-handoff",
+        "fields": [
+          "target"
+        ]
+      }
+    ],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".codex-plugin/plugin.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/agent-pool.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/native-agent-coordinator.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/subagent-host-protocol.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/native_agent_coordinator.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/scripts/subagent_mode.py"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "tests/test_long_running_subagents.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_native_agent_coordinator.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "a6d1b4aeb31398c19d1f072aac2a64cd98dadbf89ae88d3d1f083b8e1cf0c41a"
+  },
+  "recorded_at_utc": "2026-10-06T03:06:51.833980Z",
+  "scan_id": "20261006T030651833980Z-7c80cc7a",
+  "schema_version": "1.0"
+}

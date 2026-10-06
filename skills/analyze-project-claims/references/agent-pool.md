@@ -175,3 +175,7 @@ AI review accuracy, scientific benefit or general project acceleration.
 No performance threshold belongs in ordinary functional CI. Report measured
 outcomes, including regressions or inconclusive timing, within their workload and
 machine scope. Do not promote more completed task IDs into a speed claim.
+
+## Optional executable host integration
+
+For a host with an explicit trusted Python provider, use the [native coordinator](native-agent-coordinator.md). It executes result harvesting, bounded identity reuse and verified close attempts through that provider. It installs no background runner and cannot add a missing native close operation. The tool-driven protocol above remains valid.

@@ -143,9 +143,9 @@ the active `SKILL.md` digest, mapper identity, quality-loop surfaces, plugin
 adapter, contribution boundary, updater doctor, and release preflight.
 
 ```powershell
-py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile --observation .\validation\component-map-observation-automatic-pooling.json --map-root .\validation\component-map --project-root .
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile --observation .\validation\component-map-observation-native-lifecycle.json --map-root .\validation\component-map --project-root .
 py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py accept --candidate <exact-candidate-from-reconcile> --map-root .\validation\component-map
-py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile --observation .\validation\component-map-observation-automatic-pooling.json --map-root .\validation\component-map --project-root .
+py -3 .\skills\analyze-project-claims\scripts\reconcile_component_map.py reconcile --observation .\validation\component-map-observation-native-lifecycle.json --map-root .\validation\component-map --project-root .
 py -3 .\skills\analyze-project-claims\scripts\record_scan.py preflight --map-root .\validation\component-map --project-root .
 ```
 
