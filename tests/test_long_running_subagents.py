@@ -444,7 +444,7 @@ class CopiedPackageLifecycleTests(unittest.TestCase):
     def test_packaged_contract_pins_canonical_controller_despite_adjacent_decoy(self):
         with tempfile.TemporaryDirectory(prefix="claims-contract-") as temporary:
             package = Path(temporary)
-            for name in ("long_running_controller.py", "subagent_mode.py", "agent_cleanup.py", "agent_pool.py"):
+            for name in ("long_running_controller.py", "subagent_mode.py", "agent_cleanup.py", "agent_pool.py", "native_agent_coordinator.py"):
                 shutil.copy2(SCRIPTS / name, package / name)
             canonical = package / "long_running_controller.py"
             decoy = package / "controller.py"
