@@ -19,8 +19,8 @@ recommends the smallest useful next check.
 
 ## Evidence-guided agents and subagent mode (0.12.0)
 
-For explicitly authorized delegated goals, the optional controller defaults to one work
-unit at a time and routes each substantive outcome to `analyze-project-claims`.
+For explicitly authorized delegated goals, the optional controller uses reusable
+agent pools and routes each substantive outcome to `analyze-project-claims`.
 It tracks provisional claims, evidence links, limitations, dependent reports and
 sampled freshness while preserving pauses and bounded retries. Native subagents
 require an active host; the Python helper does not start a model or wake a session.
@@ -58,7 +58,7 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.15.2
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.16.0
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 

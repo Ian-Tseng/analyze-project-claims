@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-06T00:12:02.289115Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -2304,10 +2304,10 @@
   ],
   "created_at_utc": "2026-10-06T00:10:39.795862Z",
   "integrity": {
-    "canonical_payload_sha256": "afa83b5ab8f55dcb9884ba152fa5e3d65f10998217576a1d1d9dce185ef070a4"
+    "canonical_payload_sha256": "7f3091a453f063d97ba0e063e5cd96d5051c0eaec8199dd79d7a5dd696439428"
   },
   "map_id": "component-map-ae1298a629b9",
-  "map_state": "accepted",
+  "map_state": "drift_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the unreleased automatic delegated-pool selection and append-only legacy migration candidate, preserving reviewed history, budgets, identity separation and installed-release boundaries.",
   "origin_scan_id": "20261006T001039795862Z-e36c5f49",

@@ -42,9 +42,13 @@ historical decisions. Historical `complete` can remain true while
 resolve pending review. Reports are snapshots, so sample status again before
 relying on freshness.
 
-On `IN_FLIGHT`, recover the returned token and top-level `delegation`; do not
-spawn another worker. Resolve actual agent/process state before retrying unknown
-work. Preserve pauses, holds, attempt limits and finite dispatch budgets.
+For pooled goals, `next` without an intent inspects the `inflight` list. Repeat
+`next --dispatch-id INTENT` with the original durable intent to recover its exact
+request and delegation; a recovered `DISPATCH` is not permission to start it again.
+For serialized goals or deferred legacy migration, `IN_FLIGHT` returns the
+original request and top-level `delegation`. Recover that assignment rather than
+spawning another worker. Resolve actual agent/process state before retrying
+unknown work. Preserve pauses, holds, attempt limits and finite dispatch budgets.
 Generated reports and journal files cannot be their own source evidence.
 Operational working claims do not accept a formal component map: substantive
 formal scans retain the skill's verification, reconciliation, audit records and
