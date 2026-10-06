@@ -1,7 +1,7 @@
 # Claims-guided subagent mode
 
-By default this optional mode delegates one substantial work unit at a time, then routes
-its outcome to a separate `analyze-project-claims` reviewer. The coordinator
+This optional mode delegates substantial work through the default reusable agent
+pool and routes each outcome to a separate `analyze-project-claims` reviewer. The coordinator
 continues eligible work automatically and commits the affected working claims,
 evidence links, limitations, and dependent report projections after review.
 `done` records an execution outcome; only reviewed evidence can support a claim.
@@ -14,9 +14,9 @@ specified in [host protocol](subagent-host-protocol.md). This is an optional pac
 Apply [evidence-guided agents](evidence-guided-agents.md) to every participating
 role and include it with controlling files in `reviewer_sources`.
 
-For a new concurrent goal, also read [agent-pool mode](agent-pool.md). Its scoped
-readiness and review rules specialize the global serialized gates below; absence
-of that explicit configuration preserves those gates and existing journals.
+Read [agent-pool mode](agent-pool.md) for default scheduling and automatic migration
+of existing delegated goals. Its scoped readiness and review rules specialize the
+global serialized gates below. `scheduling_mode: serialized` explicitly opts out.
 
 ## Configure a goal
 
@@ -228,7 +228,7 @@ authority = sys.argv[1]
 skill = Path(sys.argv[2]).resolve(strict=True)
 sources = [skill / "SKILL.md"] + [skill / "references" / name for name in (
     "review-learning.md", "evidence-guided-agents.md", "long-running-mode.md", "subagent-mode.md",
-    "subagent-host-protocol.md")]
+    "subagent-host-protocol.md", "agent-pool.md")]
 assert all(path.is_file() for path in sources)
 project = (Path.cwd() / "claims-demo").resolve()
 project.mkdir(exist_ok=False)
@@ -248,7 +248,8 @@ goal = {
         "id": "square", "kind": "work",
         "instruction": "Read spec.json; write only output.json with input squared under key output",
         "required_claims": ["C-PROTOCOL"],
-        "affected_claims": ["C-OUTPUT"]
+        "affected_claims": ["C-OUTPUT"],
+        "read_paths": ["spec.json"], "write_paths": ["output.json"]
     }],
     "subagent_mode": {
         "authorization_ref": authority,
@@ -275,7 +276,7 @@ new path cannot be discovered by hashing an old path.
 ```text
 python3 setup_demo.py "ACTUAL DELEGATION AUTHORITY" /absolute/path/to/active-skill
 python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state init --config claims-demo/goal.json
-python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state next
+python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state next --dispatch-id initial-review
 ```
 
 Replace `/absolute/path/to/active-skill` with the actual path (quote paths containing spaces).
@@ -290,9 +291,10 @@ python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --stat
 python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state check --token TOKEN
 # Native host: send START to this bound agent only on READY; wait for its actual result.
 python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state finish --token TOKEN --result result.json
-# Native host: inspect completion, run agent-cleanup with fresh observations,
-# and close eligible owned agents if supported, preserving pending claims review.
-python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state next
+# Native host: inspect every owned agent and collect its completed result.
+# Prefer rebinding a reusable identity with fresh --observation, then followup_task.
+# Reserve a different identity for claims review; release only surplus eligible agents.
+python3 /absolute/path/to/active-skill/scripts/long_running_controller.py --state claims-demo/state next --dispatch-id next-goal-task
 ```
 
 Substitute values returned by the actual host/controller, never invented IDs.
@@ -308,9 +310,12 @@ After initial clearance, the next eligible request is the worker. Its result
 may be `{"status":"done","evidence":["output.json"]}` only if that outcome
 was observed. Completing it schedules a new claims review automatically.
 The reviewer inspects the real output, updates affected claims and dependent
-claims with current source hashes, locators, limitations and rationale, then
-applies the complete goal-completion gate. No example result substitutes for
-that actual review. `failed` and `uncertain` outcomes also schedule review;
+claims with current source hashes, locators, limitations and rationale. This
+post-worker review has `review_scope: unit` and cannot set `goal_complete`.
+Finish it, then call `next --dispatch-id final-goal-review` and bind an eligible
+reviewer for the final `review_scope: global` request. Only that global review
+can apply the complete goal-completion gate. No example result substitutes for
+those actual reviews. `failed` and `uncertain` outcomes also schedule review;
 they are not evidence of completion or permission to repeat unknown work.
 
 Use the [completed-agent lifecycle check](subagent-host-protocol.md#check-completion-and-release-host-resources) after results and before new dispatch. The `agent-cleanup` command produces a conservative plan; actual host closure is capability-dependent and never deletes evidence or clears pending claims review.

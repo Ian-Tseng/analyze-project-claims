@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-06T00:06:58.191174Z",
+  "accepted_at_utc": null,
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -2302,16 +2302,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-05T23:41:35.396352Z",
+  "created_at_utc": "2026-10-05T23:23:57.379592Z",
   "integrity": {
-    "canonical_payload_sha256": "aa6ca42bc724f9324c9feeb6feab438c7504d9979c4bc43a2b8a3c2ee51f780c"
+    "canonical_payload_sha256": "45348371535c00b7efe0068f4d49c76e11c2699c8be655484e2d00cbeada1437"
   },
-  "map_id": "component-map-4d8c6a51a8f2",
-  "map_state": "accepted",
+  "map_id": "component-map-000e71af5d91",
+  "map_state": "conflict_candidate",
   "mapper_version": "1.3.0",
   "objective": "Map the unreleased automatic delegated-pool selection and append-only legacy migration candidate, preserving reviewed history, budgets, identity separation and installed-release boundaries.",
-  "origin_scan_id": "20261005T234135396352Z-d9b9d5da",
-  "previous_map_id": "component-map-000e71af5d91",
+  "origin_scan_id": "20261005T232357379592Z-51552e4e",
+  "previous_map_id": "component-map-682ba91e2770",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2475,7 +2475,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "81fee4f875dfa63b2fdb6d4ab9cf7f6b960c54a1a1852194168b6936c5f868ee",
+      "sha256": "0bb9dae44a0079a64fe53e440df9eb28661b33f18c40de4cb63c91d43f830680",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2523,13 +2523,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f537bbbfddd8e34f6490741c16757ca348b1233a98de4a31c17f0a4025c93c4c",
+      "sha256": "19d0341854d5be46c6082ba735ab2bee9ff9e90d04d9b5fac58e0ed259dddd5d",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "214e187de71aba98e6c6c617066098770e0a522e87fafc9c56dce20cfd2def32",
+      "sha256": "ef4e0649bf90743e70c488e881690488b5941c19bd0bcd25161a0ccf72474f20",
       "source": "CITATION.cff"
     },
     {
@@ -2547,7 +2547,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ae8ac0c519b92201a09bdafbbf2e905ed6ed54b991487946ae97d49c9edcd577",
+      "sha256": "702732ad91fae1c23a2733e879490d8a4451b5a5a5bf2dbdae02eaa848e3d281",
       "source": "PUBLISHING.md"
     },
     {
@@ -2565,7 +2565,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "aa037454b5e8320521a32b278a3f4aff05fc79009ab5503f5d4a1b9a33b38c47",
+      "sha256": "355a2e14f6a7f2cb387d9d3b75a3550980d020ee1d005b139b62290c1645068a",
       "source": "VERSION"
     },
     {
@@ -3093,7 +3093,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "c9280c23c8da0c9402276676dbbdc1a79104862662decf7257ecc3e3b45adf8a",
+      "sha256": "b850c3c52b4dce9c95efe1150ee8c57467cdf19dfe1fca990dc183e1646589b8",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -3243,13 +3243,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f70da480874270620004add13f5c72e07e13b04ec3cf08001be17d7c084e64f0",
+      "sha256": "be42a127b6ea0099b453a5bc2ae2d0b4ac0417503fe3602c99348c818fb6cabc",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "8c558ec45a904103d27ce2ead9a4d165055b867ac421cc6a8874424c612509ee",
+      "sha256": "4168b5558da1921e4bae0a658ffd6788b61f8b0b4ae7dd8687eb93503cfb5441",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {

@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "b2f92aeac0458996df5e3bfff0bad599c53b2fde65c99e76af4fc0501b22fe5e"
+      "sha256": "62784c455a7866423b57c472ac5d1fef8eee9763a574db84b7b1e782b3a4a912"
     },
     {
       "path": "agents/openai.yaml",
@@ -42,7 +42,7 @@
     },
     {
       "path": "references/agent-pool.md",
-      "sha256": "2eba8c23b69e80a84773305590fa78983559ab1e5db42d5e7228ebe80ebff5b4"
+      "sha256": "0aade412422b58c08132c236a25f620a35f48887cbd45d8699e1f8640e04590c"
     },
     {
       "path": "references/component-evidence-engine.json",
@@ -138,7 +138,7 @@
     },
     {
       "path": "references/long-running-mode.md",
-      "sha256": "db227e93a04b62c5623d7f375392fb9220ea78eadd92577b92cf70b394d70890"
+      "sha256": "080c60065318f043de4934a4691947397fa80ed68d5cbda74de00da64a21a78e"
     },
     {
       "path": "references/managed-skill-policy.schema.json",
@@ -146,7 +146,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "4168b5558da1921e4bae0a658ffd6788b61f8b0b4ae7dd8687eb93503cfb5441"
+      "sha256": "8c558ec45a904103d27ce2ead9a4d165055b867ac421cc6a8874424c612509ee"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -206,11 +206,11 @@
     },
     {
       "path": "references/subagent-host-protocol.md",
-      "sha256": "a707c0f12357f7917a22a2e7e527eb353579a4ff5e56bb17a0a9016b7dbad5a9"
+      "sha256": "75e38e09f809202e6391a50f683cc4448081152d8c4438cab0ed9042e3a9162d"
     },
     {
       "path": "references/subagent-mode.md",
-      "sha256": "dbf425f884699a2b7f78fe038b8c7486006cb22fca07434b32063680ab4b5db8"
+      "sha256": "7a3d1d3e01e73847312a50a7ca3ca5ba2d15d6ed150ee34dd5ecf3db9be078ff"
     },
     {
       "path": "references/update-policy.schema.json",
@@ -294,7 +294,7 @@
     },
     {
       "path": "scripts/agent_pool.py",
-      "sha256": "e0fe4172c7ba2a4e6933fbcaff875edc4095858c030c43fc919843b3c3a4006b"
+      "sha256": "e1377ef17610e565be93660f4d928b759d1d8a605078aa59c742a80165eda390"
     },
     {
       "path": "scripts/evidence_nomination.py",
@@ -310,7 +310,7 @@
     },
     {
       "path": "scripts/long_running_controller.py",
-      "sha256": "d27cf2e7071f50fa59510287989a16c25dfc07d76c452e7c64ea446c263acbd9"
+      "sha256": "05ff27c082753b0cf0b6fc287c97049ac66096dcf460ac0bda6a18f54dcb17dc"
     },
     {
       "path": "scripts/managed_fleet.py",

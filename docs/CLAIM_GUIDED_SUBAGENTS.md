@@ -5,7 +5,10 @@ An authorized host can delegate one substantive work unit, invoke
 regenerate dependent reports before continuing. Provisional hypotheses may guide
 work; only declared execution prerequisites require current support. Negative
 observations revise claims and dependent plans instead of being hidden. Failed and uncertain work also return to claims review.
-Default execution is sequential; new [agent-pool goals](../skills/analyze-project-claims/references/agent-pool.md) support concurrent independent workers and serialized review.
+Default [agent-pool scheduling](../skills/analyze-project-claims/references/agent-pool.md)
+reuses finished agents and supports concurrent independent workers with serialized
+review. Use `next --dispatch-id INTENT` for new and resumed delegated goals; legacy
+delegated goals migrate when quiescent. Explicit serialized mode remains available.
 Both are active-session orchestration; neither installs a scheduler
 or wake a host after its process ends.
 

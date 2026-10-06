@@ -1,0 +1,70 @@
+{
+  "accepted_map_id": "component-map-000e71af5d91",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-4d8c6a51a8f2",
+  "changes": {
+    "added_components": [],
+    "added_elements": [],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": ".codex-plugin/plugin.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CITATION.cff"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "PUBLISHING.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "VERSION"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-version.json"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "9f03c13d40b1169952ced00af6d74441598bacd329b48126463e62f6999ec5be"
+  },
+  "recorded_at_utc": "2026-10-05T23:41:35.396352Z",
+  "scan_id": "20261005T234135396352Z-d9b9d5da",
+  "schema_version": "1.0"
+}
