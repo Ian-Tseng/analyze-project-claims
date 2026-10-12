@@ -84,7 +84,7 @@ class ReviewedEdgeCases(unittest.TestCase):
         junction = f.root / "junction"
         process = subprocess.run(
             ["cmd", "/c", "mklink", "/J", str(junction), str(target)],
-            capture_output=True, text=True, timeout=30,
+            capture_output=True, timeout=30,
             creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         self.assertEqual(process.returncode, 0, process.stdout + process.stderr)
         f.config["evidence"] = ["junction/evidence.txt"]
