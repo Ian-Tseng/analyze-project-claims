@@ -138,7 +138,7 @@
     },
     {
       "path": "references/long-running-mode.md",
-      "sha256": "080c60065318f043de4934a4691947397fa80ed68d5cbda74de00da64a21a78e"
+      "sha256": "1e427a2f9f1e432e229660d65b0bfb0486f556fe3c61f53c21b280e7a215fb20"
     },
     {
       "path": "references/managed-skill-policy.schema.json",
@@ -150,7 +150,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "56f05a994f61baf73f28f80fb4577bf06db4a303c8f0c1463444675564431bc2"
+      "sha256": "48e72837e60a12d4a4946b9b38302740d3aade9d8854d06801bc182f8158a611"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -162,7 +162,7 @@
     },
     {
       "path": "references/review-learning.md",
-      "sha256": "fa314c22dfac34858a1260c28800ae7c1e29a3b6fbe3abf42bd4c4af7351aef4"
+      "sha256": "0863bec272c84f996340f8199d413e43238a68330eff5cef4139cbdbb8715b3f"
     },
     {
       "path": "references/scan-record-output-v2.schema.json",

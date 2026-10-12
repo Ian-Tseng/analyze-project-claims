@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-06T03:23:55.854113Z",
+  "accepted_at_utc": "2026-10-12T15:53:38.777010Z",
   "authority": [
     "skills/analyze-project-claims/SKILL.md",
     "skills/analyze-project-claims/references/component-map-observation.schema.json",
@@ -1138,6 +1138,21 @@
           ],
           "relation_type": "defines",
           "target": "Persisted spawn reservations bound host calls per token; confirmed thread-limit rejections require fresh capacity evidence, while ambiguous calls require identity recovery. Pending claims, review obligations and work budgets remain unchanged. Synthetic tests do not establish host capacity release."
+        },
+        {
+          "element_id": "bounded-validation-handoff-guidance",
+          "evidence_locators": [
+            {
+              "locator": "Preparing bounded validation handoffs",
+              "source": "skills/analyze-project-claims/references/long-running-mode.md"
+            },
+            {
+              "locator": "Preserve the consumer and controller boundary",
+              "source": "skills/analyze-project-claims/references/review-learning.md"
+            }
+          ],
+          "relation_type": "contains",
+          "target": "Prepare complete input descriptors and runners, retain actual meter and provenance boundaries, count review-induced history growth, and close within the original host deadline without changing execution authority."
         },
         {
           "element_id": "claim-gated-review",
@@ -2344,16 +2359,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-06T03:11:37.594945Z",
+  "created_at_utc": "2026-10-12T15:42:46.336330Z",
   "integrity": {
-    "canonical_payload_sha256": "76656f21b0b8a0643842d048e1bec9f8b2743c35db7125149a9676e789108498"
+    "canonical_payload_sha256": "5156cb1406e389121b1521de11e1d67a5e9e2eb5b45bfeb3de56ae4961a917fe"
   },
-  "map_id": "component-map-a46cc7ee8ca8",
+  "map_id": "component-map-248755b4c794",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the v0.17.0 native lifecycle coordinator candidate: executable provider integration, result harvesting, bounded reuse, safe recovery, and verified closure; preserve current host capability and activation limits.",
-  "origin_scan_id": "20261006T031137594945Z-a21a4eb6",
-  "previous_map_id": "component-map-ae1298a629b9",
+  "objective": "Map the 0.17.1 reusable guidance: complete bounded handoffs, accounting and provenance, proportional review overhead, pre-read inventory, dispatch recovery, final source-pin evidence, consumer/controller boundaries; no executable controller or acceptance change.",
+  "origin_scan_id": "20261012T154246336330Z-e5cec792",
+  "previous_map_id": "component-map-a46cc7ee8ca8",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2520,7 +2535,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "88a3da021ab9179d25ac3a7678a81a0574ab0c750b9ca984cd7dd998b940c1c0",
+      "sha256": "6591139584dee90d9a92891444480ac11ac9a8b056da22828bb3b754bc7b6d88",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2568,13 +2583,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "64871ecea8f162f5c0299ccaec4f753f8d6f1edbdf1c4017db536820738731c1",
+      "sha256": "ff09c8bb56232e6177910e159543fc30e60bd0b11f214ef57fb0c5934f7e5f7c",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "8c3766eeb78b54c035b8671f6fbf689cc6e23dfd022cdbf025f7406bbef17b5b",
+      "sha256": "48417e8f96954b5b93e51cbaab65d213210d0aeaf5922779fbcd367953d8bbdc",
       "source": "CITATION.cff"
     },
     {
@@ -2598,7 +2613,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1a6c3bb5085706e3ea4d33103a6f6e4ea1338087f52222f01c3f3dade510229e",
+      "sha256": "f6fbdfb4be7adb731a939728d7ea47ec803e59eea061bf8b1bd689af2af43cf9",
       "source": "README.md"
     },
     {
@@ -2610,7 +2625,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "02d38e98e88f4a8dc2ea40dbb769338601066fc94920b52882a14f21ad97f7ee",
+      "sha256": "cd81ec19767ffb807bada6d48578a18d77a29adb394e09e9cdfcd5ea9eebb6a2",
       "source": "VERSION"
     },
     {
@@ -3138,7 +3153,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "b24f705381fa0bb1ef4e5287c1359fe5e3f9b292fb29ed14dd706a39482fca24",
+      "sha256": "0877d7934626c5121ec058ccd191f1d395fcdaad603defb4803b0fb995cc1c83",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -3276,7 +3291,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "080c60065318f043de4934a4691947397fa80ed68d5cbda74de00da64a21a78e",
+      "sha256": "1e427a2f9f1e432e229660d65b0bfb0486f556fe3c61f53c21b280e7a215fb20",
       "source": "skills/analyze-project-claims/references/long-running-mode.md"
     },
     {
@@ -3294,13 +3309,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "eed309a0057e27d7850295b4031696d48dfdde216affd9760198e8ea5a68aeda",
+      "sha256": "dca78d3530f11f6eda9982d522c2ee32b88f21a1a3ca6c6c0a52c091d4f3fcae",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "56f05a994f61baf73f28f80fb4577bf06db4a303c8f0c1463444675564431bc2",
+      "sha256": "48e72837e60a12d4a4946b9b38302740d3aade9d8854d06801bc182f8158a611",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -3318,7 +3333,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "fa314c22dfac34858a1260c28800ae7c1e29a3b6fbe3abf42bd4c4af7351aef4",
+      "sha256": "0863bec272c84f996340f8199d413e43238a68330eff5cef4139cbdbb8715b3f",
       "source": "skills/analyze-project-claims/references/review-learning.md"
     },
     {
@@ -3756,7 +3771,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "3bc4cb0860d3521235903f0627ff05a3c94ebf94273fd8c8f8af8c28cb6f3242",
+      "sha256": "189d9b7385c6ff8f84dd865920b3354910d9ab4ff4f6a3c7f3dd654819c70691",
       "source": "tests/test_long_running_edges.py"
     },
     {

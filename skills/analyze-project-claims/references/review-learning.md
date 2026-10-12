@@ -59,6 +59,22 @@ For read-only work, return findings and proposed lessons without writing or
 repairing. Existing task authorization continues to apply; this guide neither
 requires repeat confirmation for authorized edits nor grants unrelated writes.
 
+## Preserve the consumer and controller boundary
+
+Before reusing a component pass for a product claim, inspect the actual consumer's
+selection and integration path. A historical CPU fixture or loaded checkpoint does
+not establish that the served application selects it, preserves its provenance,
+or meets runtime and scientific acceptance criteria. Reuse matching evidence at
+its tested scope; test the missing integration rather than repeating unchanged
+component checks.
+
+The active installed skill supplies guidance, while an existing goal remains bound
+to its selected controller and persisted contract. A package upgrade does not
+activate new commands, modes or limits in that journal. Use a supported transition
+when authorized; do not infer migration from current documentation. For finite
+handoffs, apply the [bounded preparation checks](long-running-mode.md#preparing-bounded-validation-handoffs)
+without creating another claims authority or approval loop.
+
 ## Record the lesson where its evidence already lives
 
 Reuse the project's existing audit, decision, or major-revision record and ID.

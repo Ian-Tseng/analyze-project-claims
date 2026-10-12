@@ -4,6 +4,21 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.17.1] - 2026-10-12
+
+- Capture native Windows junction-test command output as bytes so localized
+  diagnostics do not break UTF-8-mode tests; keep the actual rejection checks.
+
+- Clarify complete descriptor/runner preparation, meter lifetimes and genuine
+  provenance before bounded validation handoffs.
+- Account for review-induced history growth and terminal closure without
+  resetting existing limits or adding approval loops.
+- Distinguish tested components and installed guidance from actual product
+  consumers and retained controller contracts.
+
+- Reduce repeated preparation overhead with complete agent handoffs, prospective
+  inventory bounds, exact source-to-test pin checks and dispatch recovery.
+
 ## [0.17.0] - 2026-10-06
 
 - Add an opt-in executable native-host coordinator with a public provider CLI,

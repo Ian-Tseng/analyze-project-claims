@@ -97,6 +97,82 @@ authority. Reviewers cannot issue them. Preserve the host's own goal-state rules
 source/reviewer identities and exposes freshness separately from those decisions.
 Saved reports describe their last sample, not continuous monitoring.
 
+## Preparing bounded validation handoffs
+
+For a task with a one-use acquisition or verification allowance, prepare the
+complete input-descriptor constructor and runner before reserving that allowance.
+A descriptor records the exact input paths, sizes, hashes and provenance; a size
+screen or downstream synthetic pass does not prove original-input verification.
+Exercise the real handoff with explicit fixtures without fabricating a successful
+original verification or consuming the protected allowance. If preparation is
+incomplete at its cutoff, retain the partial result and unused allowance; neither
+state authorizes a retry or renews an expired action window.
+
+Read accounting limits at the consumer that enforces them. Distinguish a Reader
+instance, bounded entrypoint, phase, shared ledger and whole-unit deadline. Do not
+generalize a local meter into a global prohibition, or split/reset the same logical
+operation to evade an aggregate limit. Charge failed, partial and repeated reads
+as required by the actual contract. Creating a missing raw hash can be authorized
+preparation; it need not depend on finding a previously saved hash.
+
+Bind reused descriptors to both normalized target identity and genuine producer
+provenance. Sequence numbers and substring matches are insufficient: a synthetic
+fixture can name a real target path while describing different bytes. Preserve
+conflicts and reject unsupported substitutions. Where current hashing is allowed,
+retain bounded read accounting and file-identity checks around the read. Declared
+hashes remain separate from later integrity and semantic verification.
+
+Before a history-bounded attempt, count the actual supported registration, work
+and review transitions as well as their retained files, results and bytes. Include
+required review growth in the projected pre-use horizon, and remeasure current
+fit before reservation. Historical fit is not a forecast for arbitrary additional
+cycles. Use an existing outcome review for dependent readiness where the contract
+permits; do not add a generic review round merely because a prior step was partial.
+
+When a host assigns a whole-unit deadline, include result serialization, manifest
+validation and terminal closure in that original clock. Reserve closure time and
+stop discretionary inspection once the scoped conclusion is sufficient. Context
+restoration and failed sealing do not reset the clock. Preserve late outcomes and
+actual operation handles; a passing component test cannot make a late unit timely.
+These are preparation and reporting checks, not new execution authority or limits.
+
+## Keep preparation proportional to the delivery bottleneck
+
+When repeated preparation produces no new product evidence, separate time spent
+on the product from controller verification, context loading, review and closure.
+Use observed command durations and outcomes; do not attribute all delay to model
+reasoning or assume a model change will fix it. Prefer the smallest remaining
+check that changes eligibility or resolves a concrete uncertainty. Combine an
+outcome review with exact dependent readiness when the selected contract permits;
+register that scope before the review is dispatched. Never amend an in-flight
+request or introduce an extra approval cycle for already-authorized work.
+
+Give a fresh or reused agent the actual interpreter, working directory, complete
+canonical request, original clock, output boundary and a compact evidence index.
+The index helps navigation but does not replace the full request, source bindings
+or counterevidence. Read required primary evidence; summarize selected fields
+instead of printing whole accumulated journals. A fresh context may reduce loading
+overhead, but is not proven faster merely because one review finishes on time.
+
+Before acquisition, reserve every named source or asset counted by the contract,
+including stat-only entries. Measure unique names separately from returned bytes.
+If the necessary inventory exceeds a cap, retain that result and prepare an
+explicit prospective scope under actual authority. Do not bundle, relabel or split
+logical inputs merely to avoid the cap, and do not redesign the customer product
+solely to satisfy an administrative count. Preserve all earlier limits and charges.
+
+A dispatcher may append an authorized budget-extension transition before dispatch.
+Verify its actual journal chain and receipt instead of assuming one invocation
+means one journal entry or waiting until the numerical ceiling is crossed. If a
+wrapper fails after dispatch, recover the saved raw result and original token;
+never issue another dispatch just to obtain a cleaner wrapper result.
+
+For reuse of frozen test evidence, compare current source membership and hashes
+against both the before and after records of the executed test, including relevant
+harness/dependency extras. Verifying only report hashes is not that comparison.
+Once the exact check is complete, record it and proceed to the missing integration;
+do not repeat unchanged component tests without new evidence requiring them.
+
 ## Base review result
 
 Every review binds both source and semantic request digests. Copy bindings
