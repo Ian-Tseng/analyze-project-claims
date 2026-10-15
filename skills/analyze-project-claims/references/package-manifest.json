@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "6fb050d33be10eed61f359a42322b97224ff9669b59943b94d67daec61a85e32"
+      "sha256": "6ac3088a681134f4734aa555e12b2e15cf0b793c7e8964bd868c7b0ace4af794"
     },
     {
       "path": "agents/openai.yaml",
@@ -45,6 +45,10 @@
       "sha256": "c2aa07d55a5a56c987f8a70935d2bf2d97acc2ebb1bfdd0ed851c6cddc7821ec"
     },
     {
+      "path": "references/check-prior-work.md",
+      "sha256": "97ae258f1e74a1b1a52d56dce7c190168ecd92ae9a7214a2f09f5804660444ae"
+    },
+    {
       "path": "references/component-evidence-engine.json",
       "sha256": "abe5f79e75749c5237c2058bf0096858584f139d103db54e06fe097e8790ccbe"
     },
@@ -70,7 +74,7 @@
     },
     {
       "path": "references/evidence-guided-agents.md",
-      "sha256": "445fa5c45fa63d01e5d615b655e095740cd1bc463fabb2ede98f4cd7dc1788d8"
+      "sha256": "9e6aaf257c41be82a6e78d0c08f67dd502c15c174cc79e535786abe5ba61914f"
     },
     {
       "path": "references/evidence-nomination.md",
@@ -162,7 +166,7 @@
     },
     {
       "path": "references/review-learning.md",
-      "sha256": "0863bec272c84f996340f8199d413e43238a68330eff5cef4139cbdbb8715b3f"
+      "sha256": "481ac6ca680ef3aee8d4ca075c93b8562f44f8baa9d6819b76043f0be5343ed3"
     },
     {
       "path": "references/scan-record-output-v2.schema.json",
