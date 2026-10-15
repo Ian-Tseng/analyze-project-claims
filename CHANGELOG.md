@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+- Add a bounded prior-work reconciliation guide before blocker reports, repeat
+  tasks or renewed requests; preserve accepted scope, consumed authority and
+  unresolved integration or freshness deltas.
+- Align prose-only guidance validation with decision walkthroughs without
+  claiming automated behavioral enforcement.
+
 ## [0.17.1] - 2026-10-12
 
 - Capture native Windows junction-test command output as bytes so localized

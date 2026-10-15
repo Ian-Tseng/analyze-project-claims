@@ -7,6 +7,11 @@ contracts, maintenance, receipt, acceptance, or authorization rules.
 
 ## Recheck within the original scope
 
+Use [check prior work](check-prior-work.md) before reopening completed scope or
+requesting the same evidence or decision again. An applicable recheck covers the
+changed scope and affected dependencies; it need not repeat unaffected accepted
+work. Preserve existing runtime freshness and required validation checks.
+
 1. Identify the changed source, evidence, definition, or decision and its
    dependent active surfaces. Use the existing artifact inventory or claim map;
    do not expand a local edit into unrelated work.

@@ -1,0 +1,77 @@
+{
+  "accepted_map_id": "component-map-248755b4c794",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-0c1465e3d2bd",
+  "changes": {
+    "added_components": [],
+    "added_elements": [
+      {
+        "component_id": "reusable-audit-learning",
+        "element_id": "prior-work-reconciliation"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/check-prior-work.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/evidence-guided-agents.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/review-learning.md"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "a49543d64148ee7c1f015e19db0b4c03959da90ffebac26eaf58bbc3a9a84180"
+  },
+  "recorded_at_utc": "2026-10-15T06:25:09.477091Z",
+  "scan_id": "20261015T062509477091Z-73ab1411",
+  "schema_version": "1.0"
+}

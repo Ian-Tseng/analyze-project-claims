@@ -85,6 +85,11 @@ Use the lightest sufficient mode:
 
 ## Establish authority and scope
 
+Before resuming, reporting blockers, choosing repeated work or requesting user
+input, read [check prior work](references/check-prior-work.md). Reconcile relevant
+completed scope and valid approvals with the exact remaining delta; preserve
+consumed attempts, historical evidence and current execution prerequisites.
+
 Before judging a claim:
 
 1. Identify the question and success condition.
@@ -215,7 +220,11 @@ required for any broader claim.
 
 When repairs are authorized:
 
-1. Add a deterministic regression test and confirm the intended failure.
+1. For executable behavior changes, add a meaningful deterministic regression
+   test and confirm the intended failure. For prose-only guidance, walk through
+   the decision and a plausible exception as described in
+   [review-learning](references/review-learning.md#verify-the-guidance-update);
+   do not label a wording check as behavioral validation.
 2. Repair the active interpretation, monitor, table, or implementation.
 3. Preserve source-hashed protocols and historical artifacts unless a new
    scientific identity is intentionally created.

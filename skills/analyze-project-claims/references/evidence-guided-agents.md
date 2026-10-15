@@ -12,6 +12,11 @@ which decisions depend on it. Test competing explanations rather than only
 seeking confirmation. Inspect inherited source evidence where a decision depends
 on it; another agent's assurance or an old PASS is not proof.
 
+Before reporting a blocker or repeating work, use [check prior work](check-prior-work.md)
+to reconcile applicable completed scope and the remaining delta. Include that
+reconciliation in delegated handoffs when it changes the next action; do not
+substitute an inherited status paragraph for the relevant actual receipts.
+
 When observations support, qualify or contradict a claim, update its scope and
 status, evidence links, counterevidence, limitations and dependent plans/reports.
 Preserve previous assessments as history. An inconclusive check stays uncertain;
