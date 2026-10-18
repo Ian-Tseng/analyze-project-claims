@@ -41,9 +41,13 @@
     {
       "id": "C4",
       "statement": "Updated package is merged, pushed and installed",
-      "status": "untested",
-      "evidence": [],
-      "limit": "Pending exact owner map acceptance and remaining delivery steps"
+      "status": "supported",
+      "evidence": [
+        "Git push of merge commit 8162e08ee0a2630eac5b104e5d3daa0a5c39e7dc",
+        "Native codex plugin add returned version 0.17.2",
+        "Installed verify-package passed; objective guide bytes matched source"
+      ],
+      "limit": "Fresh host activation and practical objective-tracking benefits are not established."
     }
   ],
   "walkthroughs": [
@@ -56,10 +60,12 @@
   "review": {
     "cycle_limit": 32,
     "cycles_used": 2,
-    "result": "Guidance review and exact map acceptance complete; delivery pending",
+    "result": "Requested source merge, push and native installation complete; practical benefit remains untested",
     "correction": "Publishing example used stale observation and removed two elements. New observation derives from current prior-work observation and preserves them. Earlier unaccepted candidate retained as history.",
     "residual_findings": [
-      "Merge, push, install pending"
+      "Hosted CI pending at delivery observation",
+      "Fresh host activation not observed",
+      "Practical benefit untested"
     ]
   },
   "candidate": {
@@ -87,5 +93,18 @@
       "initial_invocation": "Failed before test launch because log directory was absent; corrected and rerun."
     }
   },
-  "authority": "Development review only; not formal evidence acceptance or a release receipt."
+  "authority": "Development review only; not formal evidence acceptance or a release receipt.",
+  "delivery": {
+    "merge_commit": "8162e08ee0a2630eac5b104e5d3daa0a5c39e7dc",
+    "pushed_branch": "main",
+    "installed_version": "0.17.2",
+    "marketplace_ref": "8162e08ee0a2630eac5b104e5d3daa0a5c39e7dc",
+    "previous_marketplace_ref": "v0.17.1",
+    "installation_method": "Native marketplace remove/add and plugin add; no direct installed-file edits",
+    "guidance_sha256": "7eaff2dad967ba45df4d03262b9c99ed8756150ea2288483cbfaf7d6bfe421aa",
+    "fresh_host_activation": "not observed",
+    "github_ci": "in progress at delivery observation",
+    "ci_url": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/39110451990",
+    "tagged_release": "not published"
+  }
 }
