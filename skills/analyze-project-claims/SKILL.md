@@ -111,6 +111,14 @@ dataset/source
 -> claim boundary
 ```
 
+## Label objectives
+
+Use [objective labels](references/objective-labels.md) to record stable objective
+IDs, outcome labels, success criteria, linked claims and dependencies in the
+existing project record. Keep objective progress separate from claim support;
+judge completion against agreed criteria and scoped evidence. One concise entry
+is sufficient for a quick audit.
+
 ## Classify claims
 
 Decompose compound statements into atomic claims. Use these statuses:

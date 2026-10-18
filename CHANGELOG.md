@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.17.2] - 2026-10-18
+
+- Add stable objective labels, claim roles, evidence-based completion criteria,
+  dependency tracking and criterion revision history. Keep investigation outcomes
+  separate from claim support and parent completion from component completion.
+
 - Add a bounded prior-work reconciliation guide before blocker reports, repeat
   tasks or renewed requests; preserve accepted scope, consumed authority and
   unresolved integration or freshness deltas.
