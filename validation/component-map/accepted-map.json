@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-10-15T06:43:01.111994Z",
+  "accepted_at_utc": "2026-10-18T08:10:32.548718Z",
   "authority": [
     ".agents/plugins/marketplace.json",
     ".codex-plugin/plugin.json",
@@ -102,7 +102,8 @@
     "tests/test_strict_evidence_contract.py",
     "tests/test_update_policy.py",
     "tests/test_zero_finding_gold.py",
-    "validation/README.md"
+    "validation/README.md",
+    "skills/analyze-project-claims/references/objective-labels.md"
   ],
   "components": [
     {
@@ -2239,6 +2240,21 @@
           "target": "Links promoted guidance into later relevant invocations and reopens it when its evidence or assumptions change."
         },
         {
+          "element_id": "objective-labels",
+          "evidence_locators": [
+            {
+              "locator": "Label objectives",
+              "source": "skills/analyze-project-claims/SKILL.md"
+            },
+            {
+              "locator": "whole-file",
+              "source": "skills/analyze-project-claims/references/objective-labels.md"
+            }
+          ],
+          "relation_type": "defines",
+          "target": "Defines stable objective IDs, agreed completion criteria, linked claim roles, dependencies and revision history; objective completion is separate from claim support and parent completion requires integrated evidence. Guidance presence does not establish runtime behavior or practical benefit."
+        },
+        {
           "element_id": "prior-work-reconciliation",
           "evidence_locators": [
             {
@@ -2383,16 +2399,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-10-15T06:33:52.111296Z",
+  "created_at_utc": "2026-10-18T08:03:47.025801Z",
   "integrity": {
-    "canonical_payload_sha256": "9be0ae76b6dad37bde7a88b7261c6ffc395b559ef86d7c943abff48dc5db073c"
+    "canonical_payload_sha256": "b7ff26810b45c362e06c48456bbc7d770bb68f90b3c74a3e1ae3730058b4efa7"
   },
-  "map_id": "component-map-81e802404835",
+  "map_id": "component-map-aa9f7331619c",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
-  "objective": "Map the prior-work reconciliation guidance candidate while retaining existing component coverage and historical acceptance boundaries.",
-  "origin_scan_id": "20261015T063352111296Z-2275e0d1",
-  "previous_map_id": "component-map-248755b4c794",
+  "objective": "Map objective-label guidance and v0.17.2 package identity while preserving existing coverage and human acceptance boundaries.",
+  "origin_scan_id": "20261018T080347025801Z-95ccc23b",
+  "previous_map_id": "component-map-81e802404835",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2546,10 +2562,11 @@
     "tests/test_strict_evidence_contract.py",
     "tests/test_update_policy.py",
     "tests/test_zero_finding_gold.py",
-    "validation/README.md"
+    "validation/README.md",
+    "skills/analyze-project-claims/references/objective-labels.md"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "6ac3088a681134f4734aa555e12b2e15cf0b793c7e8964bd868c7b0ace4af794",
+  "skill_sha256": "6b455afc13b27aa2186d1462c5fa6a726307264ab03af5c5a475d0f31f73af68",
   "source_snapshot": [
     {
       "exists": true,
@@ -2560,7 +2577,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6591139584dee90d9a92891444480ac11ac9a8b056da22828bb3b754bc7b6d88",
+      "sha256": "f33ec2ef5e173d9f5763ef33af25e6c3ff5f0fbd2a1518b4529a2300e1c4a84a",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2608,13 +2625,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "da18dd65fd14110d8f0a957ac8a1c00d2633dc2b7ddc80968cc097c9601fb9aa",
+      "sha256": "c51abec97098cd754f4e274981ce3e2b0e39cefb1ad62204ea82962a9e7abd1b",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "48417e8f96954b5b93e51cbaab65d213210d0aeaf5922779fbcd367953d8bbdc",
+      "sha256": "7d32224feda947f641f6efc67a50874c8abcf99065b7779a0b4e6e6a2d3fabb6",
       "source": "CITATION.cff"
     },
     {
@@ -2650,7 +2667,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "cd81ec19767ffb807bada6d48578a18d77a29adb394e09e9cdfcd5ea9eebb6a2",
+      "sha256": "b9b88c3ba0e9b6e35ef2a4d02bc27a2c0206f1a1fcb8b8749abe90df8f9d0f0d",
       "source": "VERSION"
     },
     {
@@ -3178,13 +3195,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "938f1cf424620667807b1ff3db27087b5a3f9d6f229494ae64ef0082667d3dfa",
+      "sha256": "db867b957be88d9c59c13ec3296d16ff22ad27549d9a939dbfe53417ba032f59",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6ac3088a681134f4734aa555e12b2e15cf0b793c7e8964bd868c7b0ace4af794",
+      "sha256": "6b455afc13b27aa2186d1462c5fa6a726307264ab03af5c5a475d0f31f73af68",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -3340,13 +3357,19 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4ba4df62ad6912038792b81db20b46f572a77c30f31ecb734d68e713a6c30202",
+      "sha256": "7eaff2dad967ba45df4d03262b9c99ed8756150ea2288483cbfaf7d6bfe421aa",
+      "source": "skills/analyze-project-claims/references/objective-labels.md"
+    },
+    {
+      "exists": true,
+      "kind": "file",
+      "sha256": "e6530b4823b1fc375cd2e7bfe2fe71032e61765981ed60354a764f0eda2e337f",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "48e72837e60a12d4a4946b9b38302740d3aade9d8854d06801bc182f8158a611",
+      "sha256": "4b465845c4d0bf0842502aa39132f5f614dc6bdab2353cb49bd062d5d47a475f",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
