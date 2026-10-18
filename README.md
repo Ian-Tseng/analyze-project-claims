@@ -57,10 +57,30 @@ update` rediscover the package.
 Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
+The tagged-release example below installs v0.17.1. The objective-label update
+has package version 0.17.2 and is available at the reviewed commit shown below;
+it has not been published as a v0.17.2 tag.
+
 ```powershell
 codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.17.1
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
+
+To install the reviewed v0.17.2 objective-label update, use its exact commit
+instead of the v0.17.1 tag:
+
+```powershell
+codex plugin marketplace add https://github.com/Ian-Tseng/analyze-project-claims.git --ref 8162e08ee0a2630eac5b104e5d3daa0a5c39e7dc
+codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
+```
+
+If this marketplace is already registered with the v0.17.1 source, first run
+`codex plugin marketplace remove ian-tseng-analyze-project-claims`, then run the
+two commands above. A marketplace refresh retains its configured ref; refreshing
+the old tag does not select the new commit. Verify the result with
+`codex plugin list --marketplace ian-tseng-analyze-project-claims --json` and
+check that the installed version is 0.17.2 and enabled. This commit pin selects
+the reviewed package; it does not follow later commits automatically.
 
 Do not install both copies under the same visible name. Review the exact hook
 before trusting it. The plugin manager owns updates. The hook can request at

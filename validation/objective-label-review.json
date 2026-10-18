@@ -9,7 +9,52 @@
       "Exact map accepted by owner and preflight passed",
       "Merged and pushed commit",
       "Native plugin installation verified"
-    ]
+    ],
+    "progress": "completed",
+    "source": "Owner requested objective labels, then merge, push, and installation; exact map accepted in conversation.",
+    "linked_claims": [
+      {
+        "claim_id": "C1",
+        "role": "result claim"
+      },
+      {
+        "claim_id": "C3",
+        "role": "execution prerequisite for accepted mapped delivery"
+      },
+      {
+        "claim_id": "C4",
+        "role": "result claim"
+      },
+      {
+        "claim_id": "C2",
+        "role": "hypothesis being investigated; not a delivery prerequisite"
+      }
+    ],
+    "completion_evidence": {
+      "Reviewed source guidance": [
+        "C1",
+        "walkthroughs"
+      ],
+      "Verified package and regression suite": [
+        "checks.package_integrity",
+        "checks.regression_suite"
+      ],
+      "Exact map accepted by owner and preflight passed": [
+        "candidate.acceptance_event",
+        "checks.formal_preflight"
+      ],
+      "Merged and pushed commit": [
+        "delivery.merge_commit",
+        "C4"
+      ],
+      "Native plugin installation verified": [
+        "delivery.installed_version",
+        "delivery.guidance_sha256",
+        "C4"
+      ]
+    },
+    "dependencies": [],
+    "next_action": "Requested delivery complete; retain separate CI, tagged-release and practical-benefit limits."
   },
   "claims": [
     {
@@ -60,11 +105,10 @@
   "review": {
     "cycle_limit": 32,
     "cycles_used": 2,
-    "result": "Requested source merge, push and native installation complete; practical benefit remains untested",
+    "result": "Both objective-label consistency findings corrected; exact owner-approved map and preflight verified.",
     "correction": "Publishing example used stale observation and removed two elements. New observation derives from current prior-work observation and preserves them. Earlier unaccepted candidate retained as history.",
     "residual_findings": [
-      "Hosted CI pending at delivery observation",
-      "Fresh host activation not observed",
+      "Separate new-session activation not tested; current host discovery observed",
       "Practical benefit untested"
     ]
   },
@@ -106,5 +150,111 @@
     "github_ci": "in progress at delivery observation",
     "ci_url": "https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/39110451990",
     "tagged_release": "not published"
+  },
+  "consistency_rechecks": [
+    {
+      "observed_at_utc": "2026-10-18T08:13:54.503292+00:00",
+      "scope": "Objective-label guidance, installed package, local overlay and delivery record",
+      "checks": {
+        "package_files_compared": 88,
+        "package_differences": [],
+        "overlay_semantic_text_match": true,
+        "map_preflight": "ready",
+        "installed_version": "0.17.2; enabled",
+        "marketplace_checkout": "8162e08ee0a2630eac5b104e5d3daa0a5c39e7dc",
+        "host_discovery": "Current host skill catalog advertises v0.17.2; current audit read that entrypoint. This is not a separate new-session or hook-continuation test.",
+        "ci_observation": "Merge CI: 3 successful jobs; 3 still running; no failure reported at observation."
+      },
+      "findings": [
+        {
+          "id": "OBJ-AUDIT-1",
+          "status": "open",
+          "finding": "README installation example selects v0.17.1 while current source and installed package are v0.17.2. No v0.17.2 tag exists; explain released-tag versus commit-pinned installation before advertising a new stable tag.",
+          "source": "README.md:61",
+          "severity": "documentation clarity"
+        },
+        {
+          "id": "OBJ-AUDIT-2",
+          "status": "corrected",
+          "finding": "Development review objective omitted explicit progress, linked claim roles and criterion-to-evidence mapping required by the new guidance.",
+          "previous_objective": {
+            "id": "O1",
+            "outcome": "Publish and install explicit objective-label guidance",
+            "criteria": [
+              "Reviewed source guidance",
+              "Verified package and regression suite",
+              "Exact map accepted by owner and preflight passed",
+              "Merged and pushed commit",
+              "Native plugin installation verified"
+            ]
+          },
+          "correction": "Added these fields without changing the agreed criteria or claim support."
+        }
+      ],
+      "limits": [
+        "No source or installed release edits made.",
+        "Missing temporary marketplace install receipt prevents receipt-level pin verification; checkout HEAD and native registration were observed.",
+        "CI is a timestamped observation, not a final pass.",
+        "Standalone new-session activation and practical benefit remain untested."
+      ],
+      "cycle_limit": 32,
+      "cycles_used": 1,
+      "stop_reason": "Bounded check complete; source documentation finding retained without expanding into another release."
+    }
+  ],
+  "repair_history": [
+    {
+      "observed_at_utc": "2026-10-18T08:19:40.988266+00:00",
+      "finding_ids": [
+        "OBJ-AUDIT-1",
+        "OBJ-AUDIT-2"
+      ],
+      "previous_review": {
+        "cycle_limit": 32,
+        "cycles_used": 2,
+        "result": "Requested source merge, push and native installation complete; practical benefit remains untested",
+        "correction": "Publishing example used stale observation and removed two elements. New observation derives from current prior-work observation and preserves them. Earlier unaccepted candidate retained as history.",
+        "residual_findings": [
+          "Hosted CI pending at delivery observation",
+          "Fresh host activation not observed",
+          "Practical benefit untested"
+        ]
+      },
+      "changes": [
+        "README distinguishes v0.17.1 tag and exact v0.17.2 commit; documents native replacement of old marketplace source, installed-version check and pin behavior.",
+        "Objective record now includes progress, linked claim roles and criterion evidence."
+      ],
+      "verification": {
+        "kind": "Source review and walkthrough using previously executed native installation commands",
+        "fresh_install_repeated": false,
+        "prior_ci": {
+          "39110451990": "success for merge commit 8162e08",
+          "39110558793": "success for delivery record commit b70b47f"
+        },
+        "package_changes": false,
+        "map_delta": "README sha256 only; no component, element or contract changes",
+        "second_reconciliation": "checked_unchanged",
+        "formal_preflight": "ready"
+      },
+      "candidate": {
+        "path": "validation/component-map/candidates/20261018T081921309450Z-5db5ffea-component-map-950c4eaa875b.json",
+        "sha256": "9f0016eb0a13399e01ebc3f04aa6ce9cd21c41a67a5bd38ed4c026c55a611d3f",
+        "accepted": true,
+        "acceptance_event": "validation/component-map/scan-history/20261018T082008291810Z-76cba056.json",
+        "acceptance_source": "Owner explicitly accepted exact candidate 950c4eaa875b in conversation."
+      },
+      "cycle_limit": 32,
+      "cycles_used": 2,
+      "status": "Repairs verified and exact map accepted; prepared for commit and push."
+    }
+  ],
+  "current_ci": {
+    "merge_commit": "success",
+    "delivery_record_commit": "success",
+    "repair_commit": "Pending hosted validation after push; prior two source commits passed."
+  },
+  "current_findings": {
+    "OBJ-AUDIT-1": "closed: README distinguishes release tag and reviewed commit installation",
+    "OBJ-AUDIT-2": "closed: objective progress, claim roles and criterion evidence recorded"
   }
 }
