@@ -1,0 +1,57 @@
+{
+  "claims": [
+    {
+      "claim_id": "c1",
+      "statement": "The reported run consumed the frozen test split (REPLACE_WITH_SPLIT_NAME).",
+      "role": "execution_prerequisite",
+      "coverage": "direct",
+      "objective_ids": ["o1"],
+      "criteria": [
+        {
+          "check_id": "split-hash",
+          "type": "sha256",
+          "path": "data/test.jsonl",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "description": "Replace with the digest recorded when the split was frozen."
+        },
+        {
+          "check_id": "run-consumed-split",
+          "type": "json_value",
+          "path": "runs/candidate/manifest.json",
+          "pointer": "/inputs/test_split_sha256",
+          "op": "==",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000",
+          "description": "The run's own manifest names the same split digest."
+        }
+      ]
+    },
+    {
+      "claim_id": "c2",
+      "statement": "The candidate improves test accuracy over the matched baseline by at least 0.02.",
+      "role": "result",
+      "coverage": "direct",
+      "objective_ids": ["o1"],
+      "depends_on": ["c1"],
+      "criteria": [
+        {
+          "check_id": "audit-passed",
+          "type": "json_value",
+          "path": "runs/candidate/audit_report.json",
+          "pointer": "/audit_passed",
+          "op": "==",
+          "value": true
+        },
+        {
+          "check_id": "beats-baseline",
+          "type": "json_compare",
+          "path": "runs/candidate/metrics.json",
+          "pointer": "/test/accuracy",
+          "op": ">=",
+          "other_path": "runs/baseline/metrics.json",
+          "other_pointer": "/test/accuracy",
+          "margin": 0.02
+        }
+      ]
+    }
+  ]
+}

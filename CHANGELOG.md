@@ -4,6 +4,16 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+- Add claim gates: `scripts/claim_gates.py` builds one gate per material claim
+  from a claims file or v2 scan record, freezes the gate digest before results
+  are inspected, and evaluates declared evidence (`file_exists`, `sha256`,
+  `json_value`, `json_compare`, `jsonl_count`) under the project root.
+  Prerequisite gates block dependents, failed checks outweigh missing evidence,
+  post-freeze revisions need a recorded reason, and receipts bind evidence-file
+  digests. Outcomes are reviewable claim-status suggestions only. Adds
+  `references/claim-gates.md`, `references/claim-gates.schema.json`,
+  `assets/claim-gates-claims.template.json` and `tests/test_claim_gates.py`.
+
 ## [0.17.2] - 2026-10-18
 
 - Add stable objective labels, claim roles, evidence-based completion criteria,
