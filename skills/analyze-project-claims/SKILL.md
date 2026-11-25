@@ -202,6 +202,17 @@ Use precise audit language:
 Shared-code replay can detect corruption but not every shared implementation
 error.
 
+## Build gates from claims
+
+When a claim will be judged repeatedly or its success condition must be fixed
+before results are seen, read [claim gates](references/claim-gates.md). Use
+`scripts/claim_gates.py` to build one gate per material claim from a claims file
+or v2 scan record, freeze the gate digest, and evaluate declared evidence under
+the project root. Execution-prerequisite gates block dependent gates; a failed
+required check outweighs missing evidence. Revisions after freezing need a
+recorded reason. Gate outcomes are reviewable status suggestions, not acceptance
+or independent replication; record accepted changes in the existing project record.
+
 ## Apply specialized research rules
 
 For finite-state operators, transition authorization, logic-guided RAG,

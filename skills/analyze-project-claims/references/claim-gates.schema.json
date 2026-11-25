@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ian-Tseng/analyze-project-claims/skills/analyze-project-claims/references/claim-gates.schema.json",
+  "title": "Claim gate specification",
+  "description": "Gates built from project claims by scripts/claim_gates.py. The script's validator is authoritative; this schema documents the same contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "source", "gates", "freeze", "revisions"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "kind": {"const": "claim-gates"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claims_path", "claims_sha256"],
+      "properties": {
+        "claims_path": {"type": "string", "minLength": 1},
+        "claims_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "gates": {"type": "array", "minItems": 1, "maxItems": 500, "items": {"$ref": "#/$defs/gate"}},
+    "freeze": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["frozen_at", "spec_sha256"],
+          "properties": {
+            "frozen_at": {"type": "string", "minLength": 1},
+            "spec_sha256": {"$ref": "#/$defs/sha256"}
+          }
+        }
+      ]
+    },
+    "revisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["revised_at", "previous_spec_sha256", "new_spec_sha256", "reason"],
+        "properties": {
+          "revised_at": {"type": "string", "minLength": 1},
+          "previous_spec_sha256": {"$ref": "#/$defs/sha256"},
+          "new_spec_sha256": {"$ref": "#/$defs/sha256"},
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "maxLength": 128, "pattern": "^[a-z][a-z0-9]*(?:[-:.][a-z0-9]+)*$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "relpath": {"type": "string", "minLength": 1, "not": {"pattern": "^[/\\\\]|^[A-Za-z]:"}},
+    "pointer": {"type": "string", "pattern": "^(/.*)?$"},
+    "op": {"enum": ["==", "!=", "<", "<=", ">", ">="]},
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gate_id", "claim_id", "statement", "role", "objective_ids", "coverage", "depends_on", "checks", "status"],
+      "properties": {
+        "gate_id": {"$ref": "#/$defs/id"},
+        "claim_id": {"$ref": "#/$defs/id"},
+        "statement": {"type": "string", "minLength": 1},
+        "role": {"enum": ["execution_prerequisite", "hypothesis", "result"]},
+        "objective_ids": {"type": "array", "items": {"$ref": "#/$defs/id"}},
+        "coverage": {"enum": ["direct", "partial"]},
+        "depends_on": {"type": "array", "items": {"$ref": "#/$defs/id"}, "description": "Gate IDs of execution_prerequisite gates that must PASS first."},
+        "checks": {"type": "array", "maxItems": 64, "items": {"$ref": "#/$defs/check"}},
+        "status": {"enum": ["ready", "needs_criteria"]},
+        "notes": {"type": "string", "minLength": 1}
+      }
+    },
+    "check": {
+      "type": "object",
+      "required": ["check_id", "type"],
+      "properties": {
+        "check_id": {"$ref": "#/$defs/id"},
+        "type": {"enum": ["file_exists", "sha256", "json_value", "json_compare", "jsonl_count"]},
+        "description": {"type": "string", "minLength": 1},
+        "required": {"type": "boolean", "default": true},
+        "path": {"$ref": "#/$defs/relpath"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "pointer": {"$ref": "#/$defs/pointer"},
+        "op": {"$ref": "#/$defs/op"},
+        "value": {},
+        "other_path": {"$ref": "#/$defs/relpath"},
+        "other_pointer": {"$ref": "#/$defs/pointer"},
+        "margin": {"type": "number"}
+      },
+      "allOf": [
+        {"if": {"properties": {"type": {"const": "file_exists"}}}, "then": {"required": ["path"]}},
+        {"if": {"properties": {"type": {"const": "sha256"}}}, "then": {"required": ["path", "sha256"]}},
+        {"if": {"properties": {"type": {"const": "json_value"}}}, "then": {"required": ["path", "pointer", "op", "value"]}},
+        {"if": {"properties": {"type": {"const": "json_compare"}}}, "then": {"required": ["path", "pointer", "op", "other_path", "other_pointer"]}},
+        {"if": {"properties": {"type": {"const": "jsonl_count"}}}, "then": {"required": ["path", "op", "value"]}}
+      ]
+    }
+  }
+}

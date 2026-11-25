@@ -6,11 +6,15 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "6b455afc13b27aa2186d1462c5fa6a726307264ab03af5c5a475d0f31f73af68"
+      "sha256": "b447a1b1e20290782bdc3846eb057ec3392ea0425500f09597ea69204ff942a2"
     },
     {
       "path": "agents/openai.yaml",
       "sha256": "3716ea14e3c3dbd2b520099e8c48824dd4ebf2af16198039b618182a33f3e688"
+    },
+    {
+      "path": "assets/claim-gates-claims.template.json",
+      "sha256": "2a82b3957e754d14860d7ee3c8ea0b0a7260b0d2536984948d5f886714e1f65d"
     },
     {
       "path": "assets/component-map-observation.template.json",
@@ -47,6 +51,14 @@
     {
       "path": "references/check-prior-work.md",
       "sha256": "97ae258f1e74a1b1a52d56dce7c190168ecd92ae9a7214a2f09f5804660444ae"
+    },
+    {
+      "path": "references/claim-gates.md",
+      "sha256": "3ecf06d6dd059521262ba2a658f5eb71816297d47545abc68c3b939b09bae65d"
+    },
+    {
+      "path": "references/claim-gates.schema.json",
+      "sha256": "25ea28c9ac25bff2efd72c9064bb63abaa2f105006a6d107a88cc060a91c3d09"
     },
     {
       "path": "references/component-evidence-engine.json",
@@ -307,6 +319,10 @@
     {
       "path": "scripts/agent_pool.py",
       "sha256": "e1377ef17610e565be93660f4d928b759d1d8a605078aa59c742a80165eda390"
+    },
+    {
+      "path": "scripts/claim_gates.py",
+      "sha256": "4a4d0172a4fe3f9b26e47369372f84fb7e2329859308581a00948dd420bdefac"
     },
     {
       "path": "scripts/evidence_nomination.py",
