@@ -19,25 +19,24 @@ recommends the smallest useful next check.
 
 ## Evidence-guided agents and subagent mode (0.12.0)
 
-For explicitly authorized delegated goals, the optional controller uses reusable
-agent pools and routes each substantive outcome to `analyze-project-claims`.
-It tracks provisional claims, evidence links, limitations, dependent reports and
-sampled freshness while preserving pauses and bounded retries. Native subagents
-require an active host; the Python helper does not start a model or wake a session.
+For explicitly authorized delegated goals, the optional controller routes each
+substantive outcome to `analyze-project-claims`, tracking provisional claims,
+evidence links, limitations, dependent reports and sampled freshness while
+preserving pauses and bounded retries. Native subagents need an active host; the
+Python helper starts no model and wakes no session.
 See [setup, example and evidence limits](docs/CLAIM_GUIDED_SUBAGENTS.md).
-Version 0.12.0 defaults new repair attempts to 32 cycles, supports explicit caps
-and preserves legacy journal limits. Claims guide investigation and are updated
-when results contradict them. See the linked guide for native-host
-requirements and the boundary between tested helpers and host activation.
+Since 0.12.0, new repair attempts default to 32 cycles, with explicit caps and
+legacy journal limits preserved. Claims guide investigation and are updated
+when results contradict them.
 
-Delegated goals default to [agent-pool scheduling](skills/analyze-project-claims/references/agent-pool.md),
-with scoped evidence, per-unit review and safe reuse of finished agents. Resumed
-delegated goals migrate at a quiescent `next --dispatch-id` boundary, preserving
-history and budgets and requiring global review. Explicit serialized choices remain
-available; unknown scopes conservatively prevent overlap. In a [local three-pair CPU-subprocess pilot](evaluation/agent-pool/observed-result.json),
-pooling reduced elapsed time by 23.0% at the median pair, with equal outputs and
-observed worker reuse. This bounded fixture used deterministic reviews; native
-AI-agent speed and general performance remain untested.
+Delegated goals default to [agent-pool scheduling](skills/analyze-project-claims/references/agent-pool.md):
+scoped evidence, per-unit review and safe reuse of finished agents. Resumed goals
+migrate at a quiescent `next --dispatch-id` boundary, keeping history and budgets
+and requiring global review. Serialized scheduling stays available; unknown scopes
+prevent overlap. In a [local three-pair CPU-subprocess pilot](evaluation/agent-pool/observed-result.json),
+pooling cut median-pair elapsed time by 23.0% with equal outputs and observed
+worker reuse. That fixture used deterministic reviews; native AI-agent speed and
+general performance are untested.
 
 ## Install
 
@@ -57,30 +56,24 @@ update` rediscover the package.
 Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
-The tagged-release example below installs v0.17.1. The objective-label update
-has package version 0.17.2 and is available at the reviewed commit shown below;
-it has not been published as a v0.17.2 tag.
-
 ```powershell
 codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.17.1
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
-To install the reviewed v0.17.2 objective-label update, use its exact commit
-instead of the v0.17.1 tag:
+This installs the v0.17.1 tag. The 0.17.2 objective-label update is not tagged
+yet; install it from its reviewed commit instead:
 
 ```powershell
 codex plugin marketplace add https://github.com/Ian-Tseng/analyze-project-claims.git --ref 8162e08ee0a2630eac5b104e5d3daa0a5c39e7dc
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
-If this marketplace is already registered with the v0.17.1 source, first run
-`codex plugin marketplace remove ian-tseng-analyze-project-claims`, then run the
-two commands above. A marketplace refresh retains its configured ref; refreshing
-the old tag does not select the new commit. Verify the result with
-`codex plugin list --marketplace ian-tseng-analyze-project-claims --json` and
-check that the installed version is 0.17.2 and enabled. This commit pin selects
-the reviewed package; it does not follow later commits automatically.
+If the marketplace is already registered at v0.17.1, first run
+`codex plugin marketplace remove ian-tseng-analyze-project-claims`; a refresh
+keeps the old ref. Then check that
+`codex plugin list --marketplace ian-tseng-analyze-project-claims --json` shows
+0.17.2 enabled. The commit pin does not follow later commits.
 
 Do not install both copies under the same visible name. Review the exact hook
 before trusting it. The plugin manager owns updates. The hook can request at
@@ -145,9 +138,7 @@ The [two-command walkthrough](examples/evidence-nomination/minimal/README.md)
 works from this checkout on Windows and POSIX, with a ready synthetic request.
 Review nominations before compiling a candidate; search never accepts evidence.
 See the [reference guide](skills/analyze-project-claims/references/evidence-nomination.md).
-Use the published v0.10.0 tag for this version?s plugin installation. The
-[release page](https://github.com/Ian-Tseng/analyze-project-claims/releases)
-is the authority for available releases. The human usefulness pilot remains
+The human usefulness pilot remains
 deferred; regression checks do not establish reviewer-time improvement.
 
 ## Optional skill-quality loop
@@ -164,13 +155,12 @@ py -3 .\skills\analyze-project-claims\scripts\skill_quality_loop.py --format jso
 py -3 .\skills\analyze-project-claims\scripts\skill_quality_loop.py --format json evaluation-validate --manifest <manifest.json> --result <result.json>
 ```
 
-Replay returns the same intake proposal ID even across analyzer versions;
-versions become analysis revisions. Advisory problem clusters never authorize
-work. The evaluation command is state-free and validates one exact closed
-manifest/result pair; it does not run a model or attest that observations are
-authentic. Conformance must report
-`QUALITY_PROPOSAL_READY`, `replay_deduplicated: true`, and `outbound: NONE`.
-No issue, edit, update, or release is authorized. Read
+Replay returns the same intake proposal ID across analyzer versions, which
+become analysis revisions. Advisory problem clusters never authorize work. The
+state-free evaluation command validates one exact closed manifest/result pair;
+it neither runs a model nor attests that observations are authentic.
+Conformance must report `QUALITY_PROPOSAL_READY`, `replay_deduplicated: true`,
+and `outbound: NONE`; nothing is authorized. Read
 [Skill Quality Loop](docs/SKILL_QUALITY_LOOP.md), the
 [receipt contract](docs/SKILL_OUTCOME_RECEIPT.md), and the
 [reusable design guide](docs/SAFE_MANAGED_SKILL_QUALITY_LOOP.md).
@@ -188,11 +178,11 @@ checked or changed before consent. Say:
 - `diagnose update authority`.
 
 Checks use a 24-hour success lease and one-hour transient retry. Replacement
-requires one clean, unpinned user install with verified source, tree, version,
-and manifest; it activates next use. Pinned, project, duplicate, edited,
-manual, and plugin copies are never blindly replaced. The doctor lists
-competing copies without deleting them. Update, reporting, analytics, and
-contribution consent remain separate.
+needs one clean, unpinned user install with verified source, tree, version and
+manifest, and activates on next use. Pinned, project, duplicate, edited, manual
+and plugin copies are never blindly replaced; the doctor lists competing copies
+without deleting them. Update, reporting, analytics and contribution consent
+stay separate.
 
 ## Optional installation analytics
 
@@ -210,14 +200,13 @@ visibility confirmation. Automatic reports require a private owner API;
 security issues use [SECURITY.md](SECURITY.md).
 
 The schema excludes project content, logs, prompts, paths, attachments, and
-credentials. The owner-gated [Agent Maintainer](docs/AGENT_MAINTAINER.md) may
-use at most three repair-and-recheck cycles inside one isolated attempt, then
-create one map-pending draft from an exact report or enum-only contribution. It
-cannot accept, merge, release, close, or update. See
+credentials. The owner-gated [Agent Maintainer](docs/AGENT_MAINTAINER.md) gets
+at most three repair-and-recheck cycles in one isolated attempt and may then
+open one map-pending draft; it cannot accept, merge, release, close, or update. See
 [Internal Problem Reporting](docs/PROBLEM_REPORTING.md) and the
 [reusable managed-repair guide](docs/GITHUB_AGENT_MAINTAINER_GUIDE.md). New
-producer repositories use a closed policy plus a full-SHA-pinned thin caller;
-copying the legacy analyzer workflow or maintainer service is unsupported. Start
+producer repositories use a closed policy plus a full-SHA-pinned thin caller,
+not copies of the legacy workflow or service. Start
 with the [managed fleet quickstart](docs/MANAGED_FLEET_QUICKSTART.md), then use
 the [operations runbook](docs/MANAGED_FLEET_OPERATIONS.md),
 [repair walkthrough](docs/MANAGED_REPAIR_WALKTHROUGH.md),
@@ -293,16 +282,16 @@ After substantive work, the skill follows the packaged
 [review-and-learning guide](skills/analyze-project-claims/references/review-learning.md):
 recheck affected dependencies, retain evidence-linked lessons, and promote
 validated guidance into project Markdown, decision flows, or reusable workflows.
-Unverified explanations stay provisional. Read-only audits remain read-only,
-and bounded retries cannot be reported as convergence. This workflow does not
-automatically publish feedback or accept evidence on the user's behalf.
+Unverified explanations stay provisional, read-only audits stay read-only, and
+bounded retries are not convergence. Nothing is published or accepted on the
+user's behalf.
 
-Version 0.13.0 adds completed-agent cleanup planning: inspect fresh host state,
-retain unrecorded/live work and release eligible host resources where supported.
+Version 0.13.0 plans completed-agent cleanup: inspect fresh host state, keep
+unrecorded or live work, and release eligible host resources where supported.
 See the [lifecycle contract](skills/analyze-project-claims/references/subagent-host-protocol.md#check-completion-and-release-host-resources).
 
-Version 0.14.0 thread-limit recovery uses durable spawn reservations and a default maximum of
-three host calls per pending token. Confirmed `agent thread limit reached`
-rejections require fresh capacity evidence before retry; ambiguous calls require
-recovery of the existing host identity. See the
+Version 0.14.0 thread-limit recovery uses durable spawn reservations and at most
+three host calls per pending token by default. After a confirmed `agent thread
+limit reached` rejection, retry needs fresh capacity evidence; an ambiguous call
+must recover the existing host identity. See the
 [host recovery protocol](skills/analyze-project-claims/references/subagent-host-protocol.md#recover-agent-thread-limit-reached).
