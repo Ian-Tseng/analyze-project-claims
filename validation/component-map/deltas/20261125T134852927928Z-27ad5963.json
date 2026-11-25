@@ -1,0 +1,113 @@
+{
+  "accepted_map_id": "component-map-950c4eaa875b",
+  "action": "drift_detected",
+  "candidate_map_id": "component-map-ca9cb6f1f73d",
+  "changes": {
+    "added_components": [
+      "claim-gates"
+    ],
+    "added_elements": [
+      {
+        "component_id": "claim-gates",
+        "element_id": "claim-derived-preregistered-gates"
+      },
+      {
+        "component_id": "claim-gates",
+        "element_id": "gate-outcome-claim-boundary"
+      }
+    ],
+    "changed_components": [],
+    "changed_elements": [],
+    "contract_changes": [
+      "objective",
+      "scope",
+      "authority",
+      "skill_sha256"
+    ],
+    "removed_components": [],
+    "removed_elements": [],
+    "source_changes": [
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "CHANGELOG.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "README.md"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/SKILL.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/assets/claim-gates-claims.template.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/claim-gates.md"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/references/claim-gates.schema.json"
+      },
+      {
+        "fields": [
+          "sha256"
+        ],
+        "source": "skills/analyze-project-claims/references/package-manifest.json"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "skills/analyze-project-claims/scripts/claim_gates.py"
+      },
+      {
+        "fields": [
+          "exists",
+          "kind",
+          "sha256",
+          "source"
+        ],
+        "source": "tests/test_claim_gates.py"
+      }
+    ]
+  },
+  "integrity": {
+    "canonical_payload_sha256": "78c7896bc04f9f3963bfdf75f8707d69439e1ab98bf338728c416ee7d238c36d"
+  },
+  "recorded_at_utc": "2026-11-25T13:48:52.927928Z",
+  "scan_id": "20261125T134852927928Z-27ad5963",
+  "schema_version": "1.0"
+}
