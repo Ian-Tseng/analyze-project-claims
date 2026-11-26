@@ -188,10 +188,8 @@ class PolicyStore:
         handle = self.lock_path.open("a+b")
         acquired = False
         try:
-            handle.seek(0, os.SEEK_END)
-            if handle.tell() == 0:
-                handle.write(b"0")
-                handle.flush()
+            # Never write to the lock file: a placeholder write races another
+            # process's Windows byte-range lock and fails with EACCES.
             handle.seek(0)
             try:
                 if os.name == "nt":

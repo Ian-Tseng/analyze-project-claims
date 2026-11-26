@@ -137,10 +137,8 @@ class Controller:
     def locked(self):
         self.root.mkdir(parents=True, exist_ok=True)
         with (self.root / "lock").open("a+b") as lock:
-            lock.seek(0, 2)
-            if lock.tell() == 0:
-                lock.write(b"0")
-                lock.flush()
+            # Never write to the lock file: a placeholder write races another
+            # process's Windows byte-range lock and fails with EACCES.
             lock.seek(0)
             try:
                 if os.name == "nt":

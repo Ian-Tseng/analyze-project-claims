@@ -221,6 +221,13 @@ More than one visible same-name installation makes update-by-name unsafe. Run
 the update doctor, keep one authority, and retry. No copy is removed,
 overwritten, unpinned, or changed automatically.
 
+### `QUALITY_STATE_BUSY`
+
+Another quality-loop command held the local state lock for longer than the
+60-second wait limit. No state was read or changed. Retry after the other
+command finishes. On Windows the lock is polled until this limit instead of
+relying on the runtime's ten-second blocking retry.
+
 ### `PUBLIC_ISSUE_APPROVAL_REQUIRED`
 
 The exact bounded contribution would be public. Review the preview and give a

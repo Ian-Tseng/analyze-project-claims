@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-11-26T11:38:58.153739Z",
+  "accepted_at_utc": "2026-11-26T12:40:00.065884Z",
   "authority": [
     ".agents/plugins/marketplace.json",
     ".codex-plugin/plugin.json",
@@ -2460,16 +2460,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-11-26T05:02:51.879372Z",
+  "created_at_utc": "2026-11-26T12:30:15.009954Z",
   "integrity": {
-    "canonical_payload_sha256": "4dc4d334b3ce0aa52c900ba26b9f438da168ca995d0fc1bae21d24beb7e6adf2"
+    "canonical_payload_sha256": "0460a8c3a5018880f5b57cb3b82609c8e30c9e6dc854dc83e17e9cd9f8dbde73"
   },
-  "map_id": "component-map-a33c98d28b16",
+  "map_id": "component-map-54a86efc8685",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
   "objective": "Map claim-gate building, freezing and evaluation while preserving existing coverage and human acceptance boundaries.",
-  "origin_scan_id": "20261126T050251879372Z-664732dc",
-  "previous_map_id": "component-map-7359ddb5ba5e",
+  "origin_scan_id": "20261126T123015009954Z-5642e902",
+  "previous_map_id": "component-map-4aa4a978e2b7",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2632,7 +2632,7 @@
     "validation/README.md"
   ],
   "skill_name": "analyze-project-claims",
-  "skill_sha256": "b447a1b1e20290782bdc3846eb057ec3392ea0425500f09597ea69204ff942a2",
+  "skill_sha256": "bc35bb4f89484c984d4d3d072cea1ef21a342206eba768baa0a15bfbeb0d38b8",
   "source_snapshot": [
     {
       "exists": true,
@@ -2643,7 +2643,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "546cf58c291c6eba20a4538a8f72a8513702f83e675e0e40904d07fa311dfa34",
+      "sha256": "82529029002b074f8c8c9f907df972386837283094c4854a2fd2db20187e335f",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2691,13 +2691,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ac3fa0e2918dba334cc8470b5a6d9994915a66a4ce0a47850c33a5ba7168be77",
+      "sha256": "9c550950b1cd15114864981675f9cfb24f3a57d264945949e20fe8d1ee7bca68",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "170eeb8354d7c2cc39d27691852b30adcbc66db1e340f9d0673d2f542a1028af",
+      "sha256": "42176157877a8518cf5865c8f55b2a504309f3d8e41a24e913704bb00acb44ec",
       "source": "CITATION.cff"
     },
     {
@@ -2721,7 +2721,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "1159af7657f72694d20a4bf044700081df8b56e464129e39ef6825c81dbd8ef2",
+      "sha256": "64b39911c8110a10e04b64f5753332ac78c178fb4e17307625cb88b5e11a7451",
       "source": "README.md"
     },
     {
@@ -2733,7 +2733,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f5e9382967c9833066a55808829f3750fc8e1181b170cafd222c37048bb49a77",
+      "sha256": "8c4f8ce50ab1421660989085e44e8012b1b9b2ade360d9deb845cba94733cd56",
       "source": "VERSION"
     },
     {
@@ -2865,7 +2865,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "949636e18f7b9aa63c355d45fc9141257a5784c229261570fd82170d69459f86",
+      "sha256": "4989a970666d60b3b99517f058bbdbc81db778a50ac364aa6b6a602501a2cd8f",
       "source": "docs/SKILL_QUALITY_LOOP.md"
     },
     {
@@ -3261,13 +3261,13 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "a58dfd3686fa88ed94cb30112f0bfb76a1ec24822f28945cfd05070b48a6756b",
+      "sha256": "96205d39c8d176258725b57952fea556bc1564270769bfe7d08b613b9aa08c29",
       "source": "skills/analyze-project-claims"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b447a1b1e20290782bdc3846eb057ec3392ea0425500f09597ea69204ff942a2",
+      "sha256": "bc35bb4f89484c984d4d3d072cea1ef21a342206eba768baa0a15bfbeb0d38b8",
       "source": "skills/analyze-project-claims/SKILL.md"
     },
     {
@@ -3447,13 +3447,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b3effc12d8789e167470f027a908e04eb509e6175d34375f7f56ebdc74e227db",
+      "sha256": "cbfe70ef0b20211e7c04ff35674bac0af2dfdfd7e89dd6f015b0fa2a167ed328",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "da022eb5bc2b4d5bb34da80cfb11117a0c074b4100c9f354407bef096b118a31",
+      "sha256": "f97814b02d991eb0d8927a9739f6f20d1400b805860c27478187dbc43f0bd816",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {
@@ -3525,7 +3525,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "7a188eb406d3b6bfd676bcb3725acd2017f907713d88a38fece174afaffb98a2",
+      "sha256": "8208534e35bc75f5b2e9ee635e041034c963c79fb6744394551e04818d83e402",
       "source": "skills/analyze-project-claims/references/skill-quality-loop.md"
     },
     {
@@ -3621,7 +3621,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "65a88162f836be727d71698f7d73296464598f55a12cfb33c24f344c2bc3f6d2",
+      "sha256": "2dff180ca84ff00aaa7a9818729fb751c3801fae096283baf7757ff2355b607a",
       "source": "skills/analyze-project-claims/scripts/_internal/skill_quality"
     },
     {
@@ -3645,7 +3645,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "21ac1aad444cfd9b9c8c00dab1a4b84b7d5c5666731dd152254c8f0116006ec2",
+      "sha256": "a6d182a461f59d3f4321c20de99b490af8607d98119dc93f39c2cb701fc74242",
       "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/store.py"
     },
     {
@@ -3687,7 +3687,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "05ff27c082753b0cf0b6fc287c97049ac66096dcf460ac0bda6a18f54dcb17dc",
+      "sha256": "bd9c702d9138f71a1fc59e3e4b9311299d973df49c9a72a757be1b0c8f062b0f",
       "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
     },
     {
@@ -3723,7 +3723,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f32a44fb103738f0c94731c56f347de12046d0903c22ec5b9e50c1d5e05d314f",
+      "sha256": "cb828417712d848003c64e1b66e7ee29441cb64432db127ec638469c3df89826",
       "source": "skills/analyze-project-claims/scripts/skill_quality_loop.py"
     },
     {
@@ -3735,7 +3735,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "601909435e8023fecbb072f9c9108721f39c058f3ae1732af516697601b5808f",
+      "sha256": "bb4e3480b506b79cd8804b0b5f5e045b1ab6dcd7df6ee329c13f64ffd002478c",
       "source": "skills/analyze-project-claims/scripts/update_policy.py"
     },
     {
@@ -4029,7 +4029,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "6a78f8ca160864247a2913b01fb566048f432a2d7fc0337b79439754f0b7c9ba",
+      "sha256": "8db185edcc5cdacb87da97449fdcee57eb7473da39cb43bb0d539a0ed5cdeb96",
       "source": "tests/test_skill_quality_loop.py"
     },
     {

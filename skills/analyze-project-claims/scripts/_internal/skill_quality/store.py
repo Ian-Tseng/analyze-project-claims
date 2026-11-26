@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import errno
 import hashlib
 import json
 import os
 import tempfile
+import time
 import uuid
 from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
@@ -43,7 +45,15 @@ def _parse_utc(value: str) -> datetime:
     return datetime.fromisoformat(value[:-1] + "+00:00")
 
 
+# msvcrt reports a held byte-range lock as EACCES (non-blocking) or EDEADLOCK.
+_WINDOWS_LOCK_CONTENTION = frozenset(
+    code for code in (errno.EACCES, getattr(errno, "EDEADLOCK", None), getattr(errno, "EDEADLK", None)) if code
+)
+
+
 class QualityStore:
+    lock_timeout_seconds = 60.0
+
     def __init__(self, directory: Path) -> None:
         self.directory = Path(directory)
         self.path = self.directory / "quality-loop-state.json"
@@ -61,22 +71,19 @@ class QualityStore:
         self._ensure_directory()
         handle = self.lock_path.open("a+b")
         try:
-            handle.seek(0, os.SEEK_END)
-            if handle.tell() == 0:
-                handle.write(b"\0")
-                handle.flush()
+            # Never write to the lock file: on Windows a second process that
+            # writes a placeholder byte while the first holds the byte-range
+            # lock fails with EACCES. Locking past end-of-file is valid.
             handle.seek(0)
             if os.name == "nt":
-                import msvcrt
-
-                msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+                self._acquire_windows_lock(handle)
             else:
                 import fcntl
 
                 fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
-            yield
-        finally:
             try:
+                yield
+            finally:
                 handle.seek(0)
                 if os.name == "nt":
                     import msvcrt
@@ -86,8 +93,31 @@ class QualityStore:
                     import fcntl
 
                     fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
-            finally:
-                handle.close()
+        finally:
+            handle.close()
+
+    def _acquire_windows_lock(self, handle: Any) -> None:
+        # msvcrt.LK_LOCK gives up after ten one-second retries and raises
+        # OSError, so queued commands failed under ordinary contention. Poll a
+        # non-blocking lock until an explicit deadline instead.
+        import msvcrt
+
+        deadline = time.monotonic() + self.lock_timeout_seconds
+        delay = 0.02
+        while True:
+            try:
+                msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+                return
+            except OSError as exc:
+                if exc.errno not in _WINDOWS_LOCK_CONTENTION:
+                    raise
+                if time.monotonic() >= deadline:
+                    raise contract.QualityError(
+                        "QUALITY_STATE_BUSY",
+                        "Another quality-loop command held the local state lock past the wait limit.",
+                    ) from None
+                time.sleep(delay)
+                delay = min(delay * 2, 0.25)
 
     @staticmethod
     def _empty() -> dict[str, Any]:

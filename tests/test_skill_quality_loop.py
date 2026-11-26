@@ -154,6 +154,92 @@ class SkillOutcomeReceiptTests(unittest.TestCase):
 
 
 class QualityStoreTests(unittest.TestCase):
+    @unittest.skipUnless(sys.platform == "win32", "msvcrt byte-range locks are Windows-only")
+    def test_windows_lock_waits_past_the_runtime_ten_second_retry(self) -> None:
+        # msvcrt.LK_LOCK raised OSError after about ten seconds of contention;
+        # a queued command must keep waiting while the holder is still working.
+        import threading
+        import time
+
+        with tempfile.TemporaryDirectory(prefix="skill-quality-lock-wait-") as directory:
+            holder = QualityStore(Path(directory))
+            waiter = QualityStore(Path(directory))
+            held = threading.Event()
+
+            def hold() -> None:
+                with holder._lock():
+                    held.set()
+                    time.sleep(11.5)
+
+            thread = threading.Thread(target=hold)
+            thread.start()
+            try:
+                self.assertTrue(held.wait(10))
+                started = time.monotonic()
+                with waiter._lock():
+                    waited = time.monotonic() - started
+            finally:
+                thread.join()
+        self.assertGreater(waited, 10.0)
+
+    @unittest.skipUnless(sys.platform == "win32", "msvcrt byte-range locks are Windows-only")
+    def test_windows_waiter_on_empty_lock_file_does_not_write_into_held_lock(self) -> None:
+        # A holder can lock byte 0 of a still-empty lock file before a second
+        # process checks its size. Writing a placeholder byte then failed with
+        # EACCES (the fresh-directory CI race); waiting must succeed instead.
+        import msvcrt
+        import threading
+
+        with tempfile.TemporaryDirectory(prefix="skill-quality-lock-empty-") as directory:
+            waiter = QualityStore(Path(directory))
+            waiter._ensure_directory()
+            with waiter.lock_path.open("a+b") as holder:
+                holder.seek(0)
+                msvcrt.locking(holder.fileno(), msvcrt.LK_NBLCK, 1)
+
+                def release() -> None:
+                    holder.seek(0)
+                    msvcrt.locking(holder.fileno(), msvcrt.LK_UNLCK, 1)
+
+                timer = threading.Timer(0.5, release)
+                timer.start()
+                try:
+                    with waiter._lock():
+                        pass
+                finally:
+                    timer.join()
+            self.assertEqual(waiter.lock_path.stat().st_size, 0)
+
+    @unittest.skipUnless(sys.platform == "win32", "msvcrt byte-range locks are Windows-only")
+    def test_windows_lock_timeout_reports_state_busy(self) -> None:
+        import threading
+
+        with tempfile.TemporaryDirectory(prefix="skill-quality-lock-busy-") as directory:
+            holder = QualityStore(Path(directory))
+            waiter = QualityStore(Path(directory))
+            waiter.lock_timeout_seconds = 0.3
+            held = threading.Event()
+            release = threading.Event()
+
+            def hold() -> None:
+                with holder._lock():
+                    held.set()
+                    release.wait(10)
+
+            thread = threading.Thread(target=hold)
+            thread.start()
+            try:
+                self.assertTrue(held.wait(10))
+                with self.assertRaises(contract.QualityError) as caught:
+                    with waiter._lock():
+                        pass
+            finally:
+                release.set()
+                thread.join()
+            with waiter._lock():
+                pass
+        self.assertEqual(caught.exception.code, "QUALITY_STATE_BUSY")
+
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory(prefix="skill-quality-")
         self.state_dir = Path(self.temp.name)
@@ -513,10 +599,21 @@ class QualityLoopCliTests(unittest.TestCase):
                 subprocess.Popen(command, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 for _ in range(4)
             ]
+            results = []
+            try:
+                for process in processes:
+                    stdout, stderr = process.communicate(timeout=120)
+                    results.append((process.returncode, stdout, stderr))
+            finally:
+                # Never leave a child holding the lock while the temporary
+                # directory is removed; that masked the real failure before.
+                for process in processes:
+                    if process.poll() is None:
+                        process.kill()
+                        process.communicate()
             outputs = []
-            for process in processes:
-                stdout, stderr = process.communicate(timeout=20)
-                self.assertEqual(process.returncode, 0, stderr)
+            for returncode, stdout, stderr in results:
+                self.assertEqual(returncode, 0, f"stdout={stdout!r} stderr={stderr!r}")
                 outputs.append(json.loads(stdout))
             status = QualityStore(Path(directory)).status()
         self.assertEqual({item["status"] for item in outputs}, {"QUALITY_PROPOSAL_READY"})
@@ -560,10 +657,21 @@ class QualityLoopCliTests(unittest.TestCase):
                 processes.append(
                     subprocess.Popen(command, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 )
+            results = []
+            try:
+                for process in processes:
+                    stdout, stderr = process.communicate(timeout=120)
+                    results.append((process.returncode, stdout, stderr))
+            finally:
+                # Never leave a child holding the lock while the temporary
+                # directory is removed; that masked the real failure before.
+                for process in processes:
+                    if process.poll() is None:
+                        process.kill()
+                        process.communicate()
             outputs = []
-            for process in processes:
-                stdout, stderr = process.communicate(timeout=20)
-                self.assertEqual(process.returncode, 0, stderr)
+            for returncode, stdout, stderr in results:
+                self.assertEqual(returncode, 0, f"stdout={stdout!r} stderr={stderr!r}")
                 outputs.append(json.loads(stdout))
             status = QualityStore(Path(directory)).status()
         self.assertEqual(len({item["proposal_id"] for item in outputs}), len(markers))

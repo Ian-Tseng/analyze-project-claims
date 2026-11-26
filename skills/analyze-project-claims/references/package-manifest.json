@@ -6,7 +6,7 @@
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "b447a1b1e20290782bdc3846eb057ec3392ea0425500f09597ea69204ff942a2"
+      "sha256": "bc35bb4f89484c984d4d3d072cea1ef21a342206eba768baa0a15bfbeb0d38b8"
     },
     {
       "path": "agents/openai.yaml",
@@ -170,7 +170,7 @@
     },
     {
       "path": "references/package-version.json",
-      "sha256": "da022eb5bc2b4d5bb34da80cfb11117a0c074b4100c9f354407bef096b118a31"
+      "sha256": "f97814b02d991eb0d8927a9739f6f20d1400b805860c27478187dbc43f0bd816"
     },
     {
       "path": "references/problem-report-policy.schema.json",
@@ -218,7 +218,7 @@
     },
     {
       "path": "references/skill-quality-loop.md",
-      "sha256": "7a188eb406d3b6bfd676bcb3725acd2017f907713d88a38fece174afaffb98a2"
+      "sha256": "8208534e35bc75f5b2e9ee635e041034c963c79fb6744394551e04818d83e402"
     },
     {
       "path": "references/skill-quality-proposal.schema.json",
@@ -310,7 +310,7 @@
     },
     {
       "path": "scripts/_internal/skill_quality/store.py",
-      "sha256": "21ac1aad444cfd9b9c8c00dab1a4b84b7d5c5666731dd152254c8f0116006ec2"
+      "sha256": "a6d182a461f59d3f4321c20de99b490af8607d98119dc93f39c2cb701fc74242"
     },
     {
       "path": "scripts/agent_cleanup.py",
@@ -338,7 +338,7 @@
     },
     {
       "path": "scripts/long_running_controller.py",
-      "sha256": "05ff27c082753b0cf0b6fc287c97049ac66096dcf460ac0bda6a18f54dcb17dc"
+      "sha256": "bd9c702d9138f71a1fc59e3e4b9311299d973df49c9a72a757be1b0c8f062b0f"
     },
     {
       "path": "scripts/managed_fleet.py",
@@ -362,7 +362,7 @@
     },
     {
       "path": "scripts/skill_quality_loop.py",
-      "sha256": "f32a44fb103738f0c94731c56f347de12046d0903c22ec5b9e50c1d5e05d314f"
+      "sha256": "cb828417712d848003c64e1b66e7ee29441cb64432db127ec638469c3df89826"
     },
     {
       "path": "scripts/subagent_mode.py",
@@ -370,7 +370,7 @@
     },
     {
       "path": "scripts/update_policy.py",
-      "sha256": "601909435e8023fecbb072f9c9108721f39c058f3ae1732af516697601b5808f"
+      "sha256": "bb4e3480b506b79cd8804b0b5f5e045b1ab6dcd7df6ee329c13f64ffd002478c"
     }
   ]
 }
