@@ -56,3 +56,22 @@ Do not describe that outcome as automatic analysis.
 - The v0.8.2 candidate raises only the synchronous local handler timeout to
   five seconds. Fresh installed-plugin activation must be observed before
   describing the regression as resolved.
+
+## 2026-11-26 v0.18.0 Windows plugin installation
+
+- Host: Codex CLI 0.172.0 on Windows NT 10.0.26300.0.
+- Replacement: the marketplace was removed and re-added at `--ref v0.18.0`
+  (previously commit-pinned at `cae3cca`, and before that at `8162e08` as
+  0.17.2), then `codex plugin add` installed
+  `analyze-project-claims@ian-tseng-analyze-project-claims`.
+- `codex plugin list --marketplace ian-tseng-analyze-project-claims --json`
+  showed version 0.18.0, installed and enabled. The old 0.17.2 cache directory
+  was no longer present.
+- The installed `skills/` tree is byte-identical to `git archive v0.18.0
+  skills` (ignoring `__pycache__`), and `verify-package` returned
+  `PACKAGE_VERIFIED` with digest
+  `1ea9c07c89a6a405def9522a013c7876d57d9918619968778dcc59ace31d75b8`.
+- `scripts/claim_gates.py --help` ran from the installed copy and listed
+  `build`, `validate`, `freeze`, and `evaluate`.
+- Not observed: `/hooks` trust of the v0.18.0 handler hash, a live Stop-hook
+  receipt or continuation, and new-thread activation of the replaced plugin.
