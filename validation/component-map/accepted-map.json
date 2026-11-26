@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-11-26T12:00:37.648247Z",
+  "accepted_at_utc": "2026-11-26T12:40:00.065884Z",
   "authority": [
     ".agents/plugins/marketplace.json",
     ".codex-plugin/plugin.json",
@@ -2460,16 +2460,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-11-26T11:52:25.297074Z",
+  "created_at_utc": "2026-11-26T12:30:15.009954Z",
   "integrity": {
-    "canonical_payload_sha256": "0db4e766d1a9df081fcbaf61b89113155589967921f6b708f0a5754bcae116e4"
+    "canonical_payload_sha256": "0460a8c3a5018880f5b57cb3b82609c8e30c9e6dc854dc83e17e9cd9f8dbde73"
   },
-  "map_id": "component-map-4aa4a978e2b7",
+  "map_id": "component-map-54a86efc8685",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
   "objective": "Map claim-gate building, freezing and evaluation while preserving existing coverage and human acceptance boundaries.",
-  "origin_scan_id": "20261126T115225297074Z-afdc5e00",
-  "previous_map_id": "component-map-a33c98d28b16",
+  "origin_scan_id": "20261126T123015009954Z-5642e902",
+  "previous_map_id": "component-map-4aa4a978e2b7",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2691,7 +2691,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "c40abad65798b5c773afad408f2dc22cff122671bbf6c4bcdf0619c64b5e9141",
+      "sha256": "9c550950b1cd15114864981675f9cfb24f3a57d264945949e20fe8d1ee7bca68",
       "source": "CHANGELOG.md"
     },
     {
@@ -3261,7 +3261,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "6375b48384a2e5199cdf56091df36ec70344e4d25b55f750984dde6da567ba43",
+      "sha256": "96205d39c8d176258725b57952fea556bc1564270769bfe7d08b613b9aa08c29",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -3447,7 +3447,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "102fe5a53ef20b1077ad41a7660a2ca56810e589fbbd8c9a4cc89d63fbbdc7aa",
+      "sha256": "cbfe70ef0b20211e7c04ff35674bac0af2dfdfd7e89dd6f015b0fa2a167ed328",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
@@ -3621,7 +3621,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "66f4e2c24d6081280056555993fd33f78d77047fdc20a04eb03d8ba6fe90d287",
+      "sha256": "2dff180ca84ff00aaa7a9818729fb751c3801fae096283baf7757ff2355b607a",
       "source": "skills/analyze-project-claims/scripts/_internal/skill_quality"
     },
     {
@@ -3645,7 +3645,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "a04dbc504d51ef0ffcc80816d10b43412c4c4d2d28ad7c5442a893044ffd523f",
+      "sha256": "a6d182a461f59d3f4321c20de99b490af8607d98119dc93f39c2cb701fc74242",
       "source": "skills/analyze-project-claims/scripts/_internal/skill_quality/store.py"
     },
     {
@@ -3687,7 +3687,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "05ff27c082753b0cf0b6fc287c97049ac66096dcf460ac0bda6a18f54dcb17dc",
+      "sha256": "bd9c702d9138f71a1fc59e3e4b9311299d973df49c9a72a757be1b0c8f062b0f",
       "source": "skills/analyze-project-claims/scripts/long_running_controller.py"
     },
     {
@@ -3735,7 +3735,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "601909435e8023fecbb072f9c9108721f39c058f3ae1732af516697601b5808f",
+      "sha256": "bb4e3480b506b79cd8804b0b5f5e045b1ab6dcd7df6ee329c13f64ffd002478c",
       "source": "skills/analyze-project-claims/scripts/update_policy.py"
     },
     {
@@ -4029,7 +4029,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "ddddb4b599715919c805f4cd83574d128d15a20c3d332892c6d22f6b221bc7e8",
+      "sha256": "8db185edcc5cdacb87da97449fdcee57eb7473da39cb43bb0d539a0ed5cdeb96",
       "source": "tests/test_skill_quality_loop.py"
     },
     {
