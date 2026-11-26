@@ -4,6 +4,8 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.18.0] - 2026-11-26
+
 - Add claim gates: `scripts/claim_gates.py` builds one gate per material claim
   from a claims file or v2 scan record, freezes the gate digest before results
   are inspected, and evaluates declared evidence (`file_exists`, `sha256`,
