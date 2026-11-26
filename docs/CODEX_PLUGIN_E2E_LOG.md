@@ -75,3 +75,19 @@ Do not describe that outcome as automatic analysis.
   `build`, `validate`, `freeze`, and `evaluate`.
 - Not observed: `/hooks` trust of the v0.18.0 handler hash, a live Stop-hook
   receipt or continuation, and new-thread activation of the replaced plugin.
+
+## 2026-11-26 v0.18.1 Windows plugin installation
+
+- Host: Codex CLI 0.172.0 on Windows NT 10.0.26300.0.
+- Replacement: the marketplace was removed and re-added at `--ref v0.18.1`
+  (previously `v0.18.0`), then `codex plugin add` installed
+  `analyze-project-claims@ian-tseng-analyze-project-claims`.
+- `codex plugin list --marketplace ian-tseng-analyze-project-claims --json`
+  showed version 0.18.1, installed and enabled; only the `0.18.1` cache
+  directory remained.
+- The installed `skills/` tree is byte-identical to `git archive v0.18.1
+  skills` (ignoring `__pycache__`), and `verify-package` returned
+  `PACKAGE_VERIFIED` with digest
+  `8d40d743827122900d5b93eff2058dbaca328ac7158e5e980d3c7caa5c800533`.
+- Not observed: `/hooks` trust of the v0.18.1 handler hash, a live Stop-hook
+  receipt or continuation, and new-thread activation of the replaced plugin.
