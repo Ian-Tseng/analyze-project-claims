@@ -1,5 +1,5 @@
 {
-  "accepted_at_utc": "2026-11-25T13:50:49.222797Z",
+  "accepted_at_utc": "2026-11-26T03:46:07.728746Z",
   "authority": [
     ".agents/plugins/marketplace.json",
     ".codex-plugin/plugin.json",
@@ -2460,16 +2460,16 @@
       ]
     }
   ],
-  "created_at_utc": "2026-11-25T13:48:54.074107Z",
+  "created_at_utc": "2026-11-26T03:37:18.054997Z",
   "integrity": {
-    "canonical_payload_sha256": "6feec3d4fa24fefd8e1cd82912dd4a06f0a91ead3c16c132b952397cfc9f631d"
+    "canonical_payload_sha256": "081fe0f105497f254abe40e28fb7dc4e8507bcca72164c59734b9e056deacd25"
   },
-  "map_id": "component-map-ca9cb6f1f73d",
+  "map_id": "component-map-7359ddb5ba5e",
   "map_state": "accepted",
   "mapper_version": "1.3.0",
   "objective": "Map claim-gate building, freezing and evaluation while preserving existing coverage and human acceptance boundaries.",
-  "origin_scan_id": "20261125T134854074107Z-6f491cbf",
-  "previous_map_id": "component-map-950c4eaa875b",
+  "origin_scan_id": "20261126T033718054997Z-e7861ba1",
+  "previous_map_id": "component-map-ca9cb6f1f73d",
   "schema_version": "1.0",
   "scope": [
     ".agents/plugins/marketplace.json",
@@ -2643,7 +2643,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "f33ec2ef5e173d9f5763ef33af25e6c3ff5f0fbd2a1518b4529a2300e1c4a84a",
+      "sha256": "546cf58c291c6eba20a4538a8f72a8513702f83e675e0e40904d07fa311dfa34",
       "source": ".codex-plugin/plugin.json"
     },
     {
@@ -2691,13 +2691,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "72ea01cec5bc6a601adba5223b4e6844b0ac4aaa5f372c6385368517895141cd",
+      "sha256": "ac3fa0e2918dba334cc8470b5a6d9994915a66a4ce0a47850c33a5ba7168be77",
       "source": "CHANGELOG.md"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "7d32224feda947f641f6efc67a50874c8abcf99065b7779a0b4e6e6a2d3fabb6",
+      "sha256": "170eeb8354d7c2cc39d27691852b30adcbc66db1e340f9d0673d2f542a1028af",
       "source": "CITATION.cff"
     },
     {
@@ -2721,7 +2721,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "034807aafe97836a1c3e28d07c060b1818afd6e945a5afc73efc0316fa9b4687",
+      "sha256": "1159af7657f72694d20a4bf044700081df8b56e464129e39ef6825c81dbd8ef2",
       "source": "README.md"
     },
     {
@@ -2733,7 +2733,7 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "b9b88c3ba0e9b6e35ef2a4d02bc27a2c0206f1a1fcb8b8749abe90df8f9d0f0d",
+      "sha256": "f5e9382967c9833066a55808829f3750fc8e1181b170cafd222c37048bb49a77",
       "source": "VERSION"
     },
     {
@@ -3261,7 +3261,7 @@
     {
       "exists": true,
       "kind": "directory",
-      "sha256": "ad6fc05fe985052ff064bf14a0a1452113446f5f29e03160b520000ac3d93b1f",
+      "sha256": "a58dfd3686fa88ed94cb30112f0bfb76a1ec24822f28945cfd05070b48a6756b",
       "source": "skills/analyze-project-claims"
     },
     {
@@ -3447,13 +3447,13 @@
     {
       "exists": true,
       "kind": "file",
-      "sha256": "882cd816a974d16f4b59e1dc12d64a4895badace0db1c48016dbd3688adfe03a",
+      "sha256": "b3effc12d8789e167470f027a908e04eb509e6175d34375f7f56ebdc74e227db",
       "source": "skills/analyze-project-claims/references/package-manifest.json"
     },
     {
       "exists": true,
       "kind": "file",
-      "sha256": "4b465845c4d0bf0842502aa39132f5f614dc6bdab2353cb49bd062d5d47a475f",
+      "sha256": "da022eb5bc2b4d5bb34da80cfb11117a0c074b4100c9f354407bef096b118a31",
       "source": "skills/analyze-project-claims/references/package-version.json"
     },
     {

@@ -57,23 +57,16 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.17.1
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.18.0
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
-This installs the v0.17.1 tag. The 0.17.2 objective-label update is not tagged
-yet; install it from its reviewed commit instead:
-
-```powershell
-codex plugin marketplace add https://github.com/Ian-Tseng/analyze-project-claims.git --ref 8162e08ee0a2630eac5b104e5d3daa0a5c39e7dc
-codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
-```
-
-If the marketplace is already registered at v0.17.1, first run
+This installs the v0.18.0 tag, which includes claim gates. If the marketplace
+is already registered at an older tag or commit, first run
 `codex plugin marketplace remove ian-tseng-analyze-project-claims`; a refresh
 keeps the old ref. Then check that
 `codex plugin list --marketplace ian-tseng-analyze-project-claims --json` shows
-0.17.2 enabled. The commit pin does not follow later commits.
+0.18.0 enabled.
 
 Do not install both copies under the same visible name. Review the exact hook
 before trusting it. The plugin manager owns updates. The hook can request at
