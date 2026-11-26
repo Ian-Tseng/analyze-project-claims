@@ -77,6 +77,7 @@ def _error(exc: contract.QualityError) -> dict[str, Any]:
         "RECEIPT_EXPIRED": "Generate a new receipt; expired receipts are never replayed.",
         "RECEIPT_FUTURE_DATED": "Correct the producer clock and generate a new receipt.",
         "RECEIPT_BUSY": "Retry after the local lease expires.",
+        "QUALITY_STATE_BUSY": "Retry after the other quality-loop command finishes; no state was changed.",
         "CONTRIBUTION_OUTCOME_UNKNOWN": "Search GitHub for the exact contribution ID before any retry.",
         "UPDATE_AUTHORITY_CONFLICT": "Keep exactly one update authority for this installation.",
         "EVALUATION_INPUT_INVALID": "Provide ordinary UTF-8 JSON manifest and result files.",

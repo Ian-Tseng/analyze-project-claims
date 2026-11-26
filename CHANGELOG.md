@@ -4,6 +4,21 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.18.1] - 2026-11-26
+
+- Fix the Windows quality-loop state lock. `msvcrt.LK_LOCK` gives up after ten
+  one-second retries, so a command queued behind another for longer than that
+  exited 2 with `QUALITY_COMMAND_FAILED` (`[Errno 13]`). The lock now polls a
+  non-blocking lock until a 60-second deadline and then reports the new
+  `QUALITY_STATE_BUSY` error; it unlocks only after a successful acquire. Adds
+  Windows regression tests for waiting past ten seconds and for the busy
+  error, and makes the cross-process CLI tests report child stdout and stop
+  remaining children before temporary-directory cleanup.
+- Trim the `SKILL.md` body below 500 lines: shorten the skill-quality section
+  to a pointer to `references/skill-quality-loop.md` (which gains the
+  attempt/cycle authority sentence), remove a duplicated analytics sentence,
+  and compress the update routing list. No rule was removed.
+
 ## [0.18.0] - 2026-11-26
 
 - Add claim gates: `scripts/claim_gates.py` builds one gate per material claim

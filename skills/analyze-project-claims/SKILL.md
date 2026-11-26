@@ -398,36 +398,14 @@ cannot deduplicate, reopen, or authorize. Neither path can prove producer identi
 authorize edits, reports, issues, updates, release, or publication. Never
 inspect transcripts or project content as a fallback.
 
-Keep evaluation independent: a closed evaluation manifest pins baseline,
-candidate, fixtures, environment, model, and every pilot threshold. A separate
-digest-bound result covers every frozen fixture once and recomputes
-`PASS`/`FAIL`/`INCONCLUSIVE`; a direct failed gate dominates an inconclusive
-model cell. Structural validation of either artifact does not prove authentic
-execution or improvement. Attempt, cycle, termination, controller, activation,
-and recurrence claims require their later explicit authorities; receipt intake
-does not implement them.
-
-Portable explicit use:
-
-```text
-<python-3> scripts/skill_quality_loop.py --format json doctor
-<python-3> scripts/skill_quality_loop.py --format json consume --marker <marker>
-<python-3> scripts/skill_quality_loop.py --format json consume
-<python-3> scripts/skill_quality_loop.py --format json proposal-show --proposal-id <id>
-<python-3> scripts/skill_quality_loop.py --format json evaluation-validate --manifest <manifest.json> --result <result.json>
-```
-
-The optional Codex plugin hook requests at most one continuation for a valid
-original turn. It cannot guarantee that this skill is invoked, and another
-hook may veto continuation. Failure leaves the substantive result intact and
-the persisted receipt available for explicit consumption.
-
-Contribution is always separate and consent-gated. Preview sends nothing.
-Public submission requires approval of the exact draft and a second
-draft-specific public-issue confirmation. Approval expires after 24 hours and
-one contribution ID may create at most one issue. On an unknown GitHub outcome,
-reconcile the contribution ID before retrying. Only `Ian-Tseng` may add
-`agent-ready`; that permits one isolated map-pending candidate, never map
+Use `scripts/skill_quality_loop.py` (`doctor`, `consume`, `proposal-show`,
+`evaluation-validate`); the reference lists exact commands, the independent
+evaluation manifest and result, the optional plugin hook, and contribution
+rules. Structural validation does not prove authentic execution or
+improvement. The hook may request one continuation but cannot guarantee
+invocation; on failure use explicit `consume`. Contribution is separate and
+consent-gated: preview sends nothing, a public issue needs a second
+draft-specific confirmation, and `agent-ready` never authorizes map
 acceptance, merge, release, issue closure, or installed update.
 
 ## Operate the managed skill fleet separately
@@ -478,9 +456,8 @@ closed contract.
 Installation analytics are optional owner infrastructure, never a default
 side effect. Do not create identity or send events on install, invocation,
 update, or problem reporting. Explicit opt-in, endpoint configuration, and a
-later check-in are separate actions. Update or reporting consent does not
-authorize analytics. Update consent and reporting consent do not authorize
-analytics.
+later check-in are separate actions.
+Update consent and reporting consent do not authorize analytics.
 
 Route explicit requests to `scripts/installation_analytics.py`. Describe any
 owner aggregate as unique consenting activated installations: never downloads, users, or total installs.
@@ -498,14 +475,9 @@ This applies only to a standalone GitHub-CLI-managed installation. Maintenance
 failure never replaces the analysis. Append its `message` and `action` only
 when `emit` is true. A replacement activates on the next invocation.
 
-Route explicit requests:
-
-- enable automatic updates -> `enable --mode auto`;
-- notify about updates -> `enable --mode notify`;
-- disable updates -> `disable`;
-- show status -> `status`;
-- diagnose ownership -> `doctor`;
-- check now -> `check-now`.
+Route explicit requests: enable automatic updates -> `enable --mode auto`;
+notify -> `enable --mode notify`; disable -> `disable`; status -> `status`;
+diagnose ownership -> `doctor`; check now -> `check-now`.
 
 Plugin-hosted, manual, project-scope, pinned, duplicated, or locally edited
 copies are never blindly replaced. `doctor` shows every same-name visible copy

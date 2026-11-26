@@ -91,6 +91,9 @@ metrics, owner disposition/time, and unauthorized-outbound counts. Its summary
 and classification are recomputed; observed failure dominates
 `INCONCLUSIVE`. A valid artifact does not authenticate its author, prove that
 an evaluation ran, or establish improvement beyond its exact evidence cell.
+Attempt, cycle, termination, controller, activation, and recurrence claims
+require their later explicit authorities; receipt intake does not implement
+them.
 
 ## Contribution
 

@@ -57,16 +57,16 @@ Choose this instead of the standalone install when you want the optional
 `Stop` receipt hook:
 
 ```powershell
-codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.18.0
+codex plugin marketplace add Ian-Tseng/analyze-project-claims --ref v0.18.1
 codex plugin add analyze-project-claims@ian-tseng-analyze-project-claims
 ```
 
-This installs the v0.18.0 tag, which includes claim gates. If the marketplace
+This installs the v0.18.1 tag, which includes claim gates. If the marketplace
 is already registered at an older tag or commit, first run
 `codex plugin marketplace remove ian-tseng-analyze-project-claims`; a refresh
 keeps the old ref. Then check that
 `codex plugin list --marketplace ian-tseng-analyze-project-claims --json` shows
-0.18.0 enabled.
+0.18.1 enabled.
 
 Do not install both copies under the same visible name. Review the exact hook
 before trusting it. The plugin manager owns updates. The hook can request at
