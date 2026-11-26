@@ -1,5 +1,45 @@
 # Claude Code End-to-End Evidence Log
 
+## v0.18.1 public distribution result
+
+**PARTIAL PASS - DISTRIBUTION E2E PASSED; RUNTIME NOT OBSERVED.** On
+2026-11-26 (Asia/Taipei), the immutable public v0.18.1 release repeated the
+v0.18.0 isolated distribution smoke below for both Claude Code and Codex
+targets. Claude Code 2.1.321 was installed on the host but not run in the
+isolated home.
+
+| Field | Observed value |
+| --- | --- |
+| Operating system | Microsoft Windows NT 10.0.26300.0, x64 |
+| GitHub CLI | 2.97.0 (2026-07-31) |
+| Release | `v0.18.1`, published 2026-11-26T14:23:02Z |
+| Release commit | `a684f87aeed58f4a9c5787df043ee82fdd537914` |
+| Release state | GitHub immutable; `gh release verify v0.18.1` passed |
+| Tag protection | Ruleset `Protect version release tags` active; update and deletion rules; no bypass actor |
+| Main CI | [Run 45825338916](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/45825338916): six passing jobs on the exact merge commit |
+| PR CI | [Run 45821806245](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/45821806245): three consecutive attempts, all six jobs passing each time |
+| Scope and pin | user, unpinned, both targets |
+| Package digest | `8d40d743827122900d5b93eff2058dbaca328ac7158e5e980d3c7caa5c800533` |
+
+| Gate | Status | Direct observation |
+| --- | --- | --- |
+| Publish dry-run on released `main` | PASS | `Dry run complete.` with no warnings; the v0.18.0 skill-length warning is cleared. |
+| Empty isolated registries | PASS | Both target-specific user lists returned `[]` before the smoke. |
+| Claude-targeted install | PASS | One canonical v0.18.1 user-scope, unpinned entry under `.claude/skills`. |
+| Codex-targeted control install | PASS | One canonical v0.18.1 user-scope, unpinned entry under `.codex/skills`. |
+| Installed package integrity | PASS | Both installed copies returned `PACKAGE_VERIFIED` with the digest above. |
+| Update rediscovery | PASS | `gh skill update analyze-project-claims --dry-run` returned `All skills are up to date.` |
+| Claude client discovery | NOT OBSERVED | No Claude Code session was started in the isolated home. |
+| Real Claude invocation | NOT OBSERVED | `/analyze-project-claims` was not run. |
+| Live replacement | NOT OBSERVED | An up-to-date dry-run does not install a later version. |
+
+v0.18.1 fixes the Windows quality-loop lock failures behind the intermittent
+`test_cross_process_distinct_receipts_preserve_every_proposal` result recorded
+under v0.18.0: the ten-second `msvcrt.LK_LOCK` retry limit and a
+fresh-directory placeholder-byte write race. Both were reproduced locally
+before the fix. Three consecutive green CI attempts and a 600-round local
+stress run are evidence against recurrence, not proof of absence.
+
 ## v0.18.0 public distribution result
 
 **PARTIAL PASS - DISTRIBUTION E2E PASSED; RUNTIME NOT OBSERVED.** On
