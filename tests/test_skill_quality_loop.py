@@ -183,6 +183,34 @@ class QualityStoreTests(unittest.TestCase):
         self.assertGreater(waited, 10.0)
 
     @unittest.skipUnless(sys.platform == "win32", "msvcrt byte-range locks are Windows-only")
+    def test_windows_waiter_on_empty_lock_file_does_not_write_into_held_lock(self) -> None:
+        # A holder can lock byte 0 of a still-empty lock file before a second
+        # process checks its size. Writing a placeholder byte then failed with
+        # EACCES (the fresh-directory CI race); waiting must succeed instead.
+        import msvcrt
+        import threading
+
+        with tempfile.TemporaryDirectory(prefix="skill-quality-lock-empty-") as directory:
+            waiter = QualityStore(Path(directory))
+            waiter._ensure_directory()
+            with waiter.lock_path.open("a+b") as holder:
+                holder.seek(0)
+                msvcrt.locking(holder.fileno(), msvcrt.LK_NBLCK, 1)
+
+                def release() -> None:
+                    holder.seek(0)
+                    msvcrt.locking(holder.fileno(), msvcrt.LK_UNLCK, 1)
+
+                timer = threading.Timer(0.5, release)
+                timer.start()
+                try:
+                    with waiter._lock():
+                        pass
+                finally:
+                    timer.join()
+            self.assertEqual(waiter.lock_path.stat().st_size, 0)
+
+    @unittest.skipUnless(sys.platform == "win32", "msvcrt byte-range locks are Windows-only")
     def test_windows_lock_timeout_reports_state_busy(self) -> None:
         import threading
 

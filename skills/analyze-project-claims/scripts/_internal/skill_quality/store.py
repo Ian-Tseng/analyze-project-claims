@@ -71,10 +71,9 @@ class QualityStore:
         self._ensure_directory()
         handle = self.lock_path.open("a+b")
         try:
-            handle.seek(0, os.SEEK_END)
-            if handle.tell() == 0:
-                handle.write(b"\0")
-                handle.flush()
+            # Never write to the lock file: on Windows a second process that
+            # writes a placeholder byte while the first holds the byte-range
+            # lock fails with EACCES. Locking past end-of-file is valid.
             handle.seek(0)
             if os.name == "nt":
                 self._acquire_windows_lock(handle)

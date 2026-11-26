@@ -14,6 +14,13 @@ All notable changes to this project are documented here.
   Windows regression tests for waiting past ten seconds and for the busy
   error, and makes the cross-process CLI tests report child stdout and stop
   remaining children before temporary-directory cleanup.
+- Fix a fresh-directory lock race on Windows. Each process that found an empty
+  lock file wrote a placeholder byte; if another process had already locked
+  byte 0, that write failed with `[Errno 13]`. The quality-loop store, update
+  policy and long-running controller locks no longer write to their lock
+  files (locking past end-of-file is valid). A deterministic regression test
+  fails on the previous code; a fresh-directory stress run went from 2 failing
+  rounds in 150 to 0 in 600.
 - Trim the `SKILL.md` body below 500 lines: shorten the skill-quality section
   to a pointer to `references/skill-quality-loop.md` (which gains the
   attempt/cycle authority sentence), remove a duplicated analytics sentence,

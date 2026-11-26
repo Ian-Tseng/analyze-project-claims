@@ -310,7 +310,7 @@
     },
     {
       "path": "scripts/_internal/skill_quality/store.py",
-      "sha256": "a04dbc504d51ef0ffcc80816d10b43412c4c4d2d28ad7c5442a893044ffd523f"
+      "sha256": "a6d182a461f59d3f4321c20de99b490af8607d98119dc93f39c2cb701fc74242"
     },
     {
       "path": "scripts/agent_cleanup.py",
@@ -338,7 +338,7 @@
     },
     {
       "path": "scripts/long_running_controller.py",
-      "sha256": "05ff27c082753b0cf0b6fc287c97049ac66096dcf460ac0bda6a18f54dcb17dc"
+      "sha256": "bd9c702d9138f71a1fc59e3e4b9311299d973df49c9a72a757be1b0c8f062b0f"
     },
     {
       "path": "scripts/managed_fleet.py",
@@ -370,7 +370,7 @@
     },
     {
       "path": "scripts/update_policy.py",
-      "sha256": "601909435e8023fecbb072f9c9108721f39c058f3ae1732af516697601b5808f"
+      "sha256": "bb4e3480b506b79cd8804b0b5f5e045b1ab6dcd7df6ee329c13f64ffd002478c"
     }
   ]
 }
