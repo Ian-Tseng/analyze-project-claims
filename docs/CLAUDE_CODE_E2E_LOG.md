@@ -1,5 +1,59 @@
 # Claude Code End-to-End Evidence Log
 
+## v0.18.0 public distribution result
+
+**PARTIAL PASS - DISTRIBUTION E2E PASSED; RUNTIME NOT OBSERVED.** On
+2026-11-26 (Asia/Taipei), the immutable public v0.18.0 release completed an
+isolated user-scope install, registry listing, package verification, and
+neutral-directory update dry-run for both Claude Code and Codex targets.
+Claude Code 2.1.321 was installed on this machine, but no session was started
+in the isolated home, so client discovery and invocation were not observed.
+
+### Environment and release identity
+
+| Field | Observed value |
+| --- | --- |
+| Operating system | Microsoft Windows NT 10.0.26300.0, x64 |
+| GitHub CLI | 2.97.0 (2026-07-31) |
+| Claude Code on host | 2.1.321 (not run in the isolated home) |
+| Public source | `https://github.com/Ian-Tseng/analyze-project-claims` |
+| Release | `v0.18.0`, published 2026-11-26T04:26:14Z |
+| Release commit | `d78be13204328f5c65a2eaa680745032a95bc67a` |
+| Release state | GitHub immutable; `gh release verify v0.18.0` passed |
+| Tag protection | Ruleset `Protect version release tags` active; update and deletion rules for `refs/tags/v*`; no bypass actor |
+| Main CI | [Run 45753152577](https://github.com/Ian-Tseng/analyze-project-claims/actions/runs/45753152577): six passing jobs, Windows, macOS, and Ubuntu on Python 3.10 and 3.12 |
+| Requested agents | `claude-code` and `codex` |
+| Scope and pin | user, unpinned |
+| Claude path | `<isolated-home>\.claude\skills\analyze-project-claims` |
+| Codex path | `<isolated-home>\.codex\skills\analyze-project-claims` |
+| Package digest | `1ea9c07c89a6a405def9522a013c7876d57d9918619968778dcc59ace31d75b8` |
+
+The smoke root set `USERPROFILE`, `HOME`, `HOMEDRIVE`, and `HOMEPATH` to one
+disposable directory and ran from a neutral consumer directory inside it.
+Before installation, both target-specific user lists returned `[]`. After
+installation, the unfiltered list contained exactly one canonical v0.18.0
+entry per target path.
+
+### Observed gates
+
+| Gate | Status | Direct observation |
+| --- | --- | --- |
+| Publish dry-run on released `main` | PASS | `Dry run complete.` One warning: skill body is 525 lines (recommended max 500). |
+| Empty isolated registries | PASS | Both target-specific user lists returned `[]` before the smoke. |
+| Claude-targeted install | PASS | One canonical v0.18.0 user-scope, unpinned entry appeared under `.claude/skills`. |
+| Codex-targeted control install | PASS | One canonical v0.18.0 user-scope, unpinned entry appeared under `.codex/skills`. |
+| Installed package integrity | PASS | Both installed copies returned `PACKAGE_VERIFIED` with the digest above. |
+| Update rediscovery | PASS | `gh skill update analyze-project-claims --dry-run` returned `All skills are up to date.` |
+| Claude client discovery | NOT OBSERVED | No Claude Code session was started in the isolated home. |
+| Real Claude invocation | NOT OBSERVED | `/analyze-project-claims` was not run. |
+| Live replacement | NOT OBSERVED | An up-to-date dry-run does not install a later version. |
+
+Pre-release CI on PR #39 failed once on Windows / Python 3.12 in
+`test_cross_process_distinct_receipts_preserve_every_proposal` (child exit 2,
+then `WinError 32` on `quality-loop.lock` during temp cleanup) and passed on
+rerun. The same test failed on `main` in run 45627391960, so it is recorded as
+an existing intermittent failure, not a v0.18.0 regression or a fix.
+
 ## v0.7.0 public distribution result
 
 **PARTIAL PASS - DISTRIBUTION E2E PASSED; RUNTIME NOT OBSERVED.** On
